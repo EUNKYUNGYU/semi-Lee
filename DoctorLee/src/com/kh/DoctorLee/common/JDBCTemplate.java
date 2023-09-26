@@ -1,4 +1,4 @@
-package com.kh.jsp.common;
+package com.kh.DoctorLee.common;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,7 +16,6 @@ public class JDBCTemplate {
 		Connection conn = null;
 		Properties prop = new Properties();
 		
-		// 읽어들이고자 하는 파일의 물리적인 경로
 		String fileName = JDBCTemplate.class.getResource("/sql/driver/driver.properties").getPath();
 		System.out.println(fileName);
 		
@@ -30,18 +29,13 @@ public class JDBCTemplate {
 			
 			
 			conn.setAutoCommit(false);
-			//System.out.println(prop.getProperty("driver"));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return conn;
@@ -55,7 +49,7 @@ public class JDBCTemplate {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}// commit
+	}
 	
 	public static void rollback(Connection conn) {
 		try {
@@ -76,7 +70,7 @@ public class JDBCTemplate {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}// close
+	}
 	
 	public static void close(Statement stmt) { 
 		

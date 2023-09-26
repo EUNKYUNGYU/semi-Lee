@@ -90,7 +90,7 @@
         }
 
         /* 섹션 영역 */
-        section{height: 500px; width: inherit;}
+        section{height: 500px; width: inherit; border: 1px solid red;}
 
         /* 푸터 영역 */
         #footer{

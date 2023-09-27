@@ -35,9 +35,10 @@ public class QuizeListController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		ArrayList<Quize> list = new QuizeService().selectList();
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
 		
-		request.getRequestDispatcher("views/quize/quizeList.jsp").forward(request, response);
-		
+		System.out.print(list);
 		
 		
 	}

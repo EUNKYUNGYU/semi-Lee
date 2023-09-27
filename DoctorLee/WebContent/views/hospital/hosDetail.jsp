@@ -5,7 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>병원 상세</title>
     <style>
 		
@@ -96,21 +100,44 @@
 			</p>
 			
 			<div id="hos_info_address">
-			
+				<div class="icon">
+					<i class="fa-solid fa-location-dot"></i>
+				</div>
+				<h4>
+					서울특병수
+				</h4>
 			</div>
 			<div id="hos_info_date">
-			
+				<div class="icon">
+					<i class="fa-solid fa-clock"></i>
+				</div>
+				<h4>
+					- 월~금
+					- 09:00
+				</h4>
 			</div>
 			<div id="hos_info_tel">
-			
-			
+				<div class="icon">
+					<i class="fa-solid fa-phone"></i>
+				</div>
+				<h4>
+					022-303-202
+				</h4>
 			</div>
 			
         </div>
 
         <!-- 진료 예약 -->
         <div id="hos_rsvt">
-
+			<script>
+				$('#hos_rsvt').datePicker({
+					format: 'yyyy-mm-dd',
+					startDate: '-10d',
+					endDate: '+10d'
+					
+				})
+			
+			</script>
 
         </div>
 

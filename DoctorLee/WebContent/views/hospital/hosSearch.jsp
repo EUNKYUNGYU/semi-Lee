@@ -167,7 +167,7 @@
                     </div>
                     <script>
                         function rsvtPage(){
-                            var link = 'http://naver.com';
+                            var link = '<%= contextPath %>/views/hospital/hosDetail.jsp';
                             window.open(link);
                         }
 

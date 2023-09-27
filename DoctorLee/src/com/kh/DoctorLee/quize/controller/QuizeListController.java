@@ -15,7 +15,7 @@ import com.kh.DoctorLee.quize.model.vo.Quize;
 /**
  * Servlet implementation class QuizeListController
  */
-@WebServlet(description = "list.qz", urlPatterns = { "/QuizeListController" })
+@WebServlet("/list.qz")
 public class QuizeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,6 +35,11 @@ public class QuizeListController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		ArrayList<Quize> list = new QuizeService().selectList();
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
+		
+		System.out.print(list);
+		
 		
 	}
 

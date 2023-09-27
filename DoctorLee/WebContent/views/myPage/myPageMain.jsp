@@ -37,7 +37,7 @@
         #mem_info{
             width : 85%;
         }
-        #navi{
+        #mpg_navi{
             list-style:none;
             margin : 0;
             padding : 0;
@@ -48,10 +48,10 @@
             
             
         }
-        #navi > li{
+        #mpg_navi > li{
             text-align : center;
         }
-        #navi a{
+        #mpg_navi a{
             text-decoration: none;
             color : whitesmoke;
             display : block;
@@ -59,7 +59,7 @@
 
 
         }
-        #navi a:hover {
+        #mpg_navi a:hover {
             font-size : 16px;
             color : rgba(245, 245, 245, 0.445)
         }
@@ -72,18 +72,18 @@
         #empty{
             background-color: white;
         }
-        #navi > li >ul{
+        #mpg_navi > li >ul{
             list-style: none;
             padding : 0;
             display : none;
         }
-        #navi > li > a:hover + ul{
+        #mpg_navi > li > a:hover + ul{
             display: block;
         }
-        #navi > li > ul:hover{
+        #mpg_navi > li > ul:hover{
             display: block;
         }
-        #navi >li > ul a{font-size: 13px;}
+        #mpg_navi >li > ul a{font-size: 13px;}
        #my_info > img{
             width : 170px;
             margin-left : 50px;
@@ -133,7 +133,7 @@
                     </div>
                     <br><br><br>
                 </div>
-                <ul id="navi">
+                <ul id="mpg_navi">
                     <li><a href="#">복약관리</a></li>
                     <li><a href="#">회원정보 수정/탈퇴</a>
                         <ul>

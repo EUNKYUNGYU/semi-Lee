@@ -7,6 +7,7 @@ public class Quize {
 	private String quizeContent;
 	private String createDate;
 	private String endDate;
+	private String deadline;
 	private int vote;
 	private String choice1;
 	private String choice2;
@@ -23,23 +24,36 @@ public class Quize {
 	}
 
 
-
-
-
-	public Quize(int quizeNo, String quizeTitle, String quizeContent, String createDate, String endDate, int vote,
-			String choice1, String choice2, String choice3, String choice4, int answer) {
+	public Quize(int quizeNo, String quizeTitle, String quizeContent, String createDate, String endDate,
+			String deadline, int vote, String choice1, String choice2, String choice3, String choice4, int answer) {
 		super();
 		this.quizeNo = quizeNo;
 		this.quizeTitle = quizeTitle;
 		this.quizeContent = quizeContent;
 		this.createDate = createDate;
 		this.endDate = endDate;
+		this.deadline = deadline;
 		this.vote = vote;
 		this.choice1 = choice1;
 		this.choice2 = choice2;
 		this.choice3 = choice3;
 		this.choice4 = choice4;
 		this.answer = answer;
+	}
+
+
+
+
+	public String getDeadline() {
+		return deadline;
+	}
+
+
+
+
+
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
 	}
 
 
@@ -219,15 +233,19 @@ public class Quize {
 	}
 
 
-
-
-
 	@Override
 	public String toString() {
 		return "Quize [quizeNo=" + quizeNo + ", quizeTitle=" + quizeTitle + ", quizeContent=" + quizeContent
-				+ ", createDate=" + createDate + ", endDate=" + endDate + ", vote=" + vote + ", choice1=" + choice1
-				+ ", choice2=" + choice2 + ", choice3=" + choice3 + ", choice4=" + choice4 + ", answer=" + answer + "]";
+				+ ", createDate=" + createDate + ", endDate=" + endDate + ", deadline=" + deadline + ", vote=" + vote
+				+ ", choice1=" + choice1 + ", choice2=" + choice2 + ", choice3=" + choice3 + ", choice4=" + choice4
+				+ ", answer=" + answer + "]";
 	}
+
+
+
+
+
+
 	
 	
 	

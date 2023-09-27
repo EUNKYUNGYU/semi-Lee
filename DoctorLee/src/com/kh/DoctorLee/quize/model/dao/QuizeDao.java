@@ -38,11 +38,12 @@ public class QuizeDao {
 			while(rset.next()) {
 				
 				Quize q = new Quize();
+				q.setQuizeNo(rset.getInt("QUIZE_NO"));
 				q.setQuizeTitle(rset.getString("QUIZE_TITLE"));
 				q.setQuizeContent(rset.getString("QUIZE_CONTENT"));
 				q.setVote(rset.getInt("VOTE"));
 				q.setCreateDate(rset.getString("CREATE_DATE"));
-				q.setEndDate(rset.getString("END_DATE"));
+				q.setDeadline(rset.getString("DEADLINE"));
 				q.setChoice1(rset.getString("CHOICE1"));
 				q.setChoice2(rset.getString("CHOICE2"));
 				q.setChoice3(rset.getString("CHOICE3"));

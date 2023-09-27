@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="com.kh.DoctorLee.quize.model.vo.Quize,
+<%@ page import ="com.kh.DoctorLee.quize.model.vo.QuizeAnswer,
 				 java.util.ArrayList"  %>
     
 <% 
 	String contextPath = request.getContextPath();
-	
+	QuizeAnswer qa = (QuizeAnswer)request.getAttribute("qa");
 %>
 <!DOCTYPE html>
 <html>
@@ -86,15 +86,13 @@
             <div id="board">
       
                 <div id="header">
-                    <div id="title">제목</div>
+                    <div id="title"><%= qa.getQuizeTitle() %></div>
                 </div>
                 <div id="content">
 
-					정답 구간 <br>
-					설명 구간
+					<%= qa.getAnswer() %> <br>
+					<%= qa.getAnswerDetail() %>
                     
-
-                        
                 </div>
                 <div id="footer">
                 	<div id="footer1">

@@ -11,7 +11,7 @@ SELECT
         , QUIZE_CONTENT
         , VOTE
         , CREATE_DATE
-        , END_DATE
+        , TO_CHAR(TRUNC(SYSDATE - END_DATE)) DEADLINE
         , CHOICE1
         , CHOICE2
         , CHOICE3
@@ -21,6 +21,19 @@ SELECT
     ORDER BY
         CREATE_DATE DESC
 
+</entry>
+
+<entry key="selectDetail">
+
+	SELECT 
+        	ANSWER, ANSWER_DETAIL
+    	FROM 
+        	TB_QUIZE_ANSWER
+        JOIN 
+        	TB_QUIZE_BOARD USING(QUIZE_NO) 
+    	WHERE 
+        	QUIZE_NO = ?
+        
 </entry>
 
 

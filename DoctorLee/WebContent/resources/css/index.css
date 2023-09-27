@@ -69,21 +69,22 @@ header{
 }
 
 /* 섹션 영역 */
-#section{width: 50%; border: 1px solid salmon;}
+#section{height: 400px; width: 100%;}
 /* width : 1412px */
 
 #section > div{
     float: left;
+    text-align: center;
 }
 
 #video{
-    height: 100%; 
     width: 50%; 
+    height: 100%;
     text-align: center;
 }
 
 #video > iframe{
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
 #video > a{
@@ -92,21 +93,17 @@ header{
 }
 
 #board{
-    height: 100%; 
     width: 50%;
+    height: 100%;
     text-align: center;
 }
 
-
-#content_1{
-    margin-top: 70px;
-}
-
-#content_1 > img, #content_1 > h4:hover{
+#board> img, #board > h4:hover{
     cursor: pointer;
 }
 
-#content_1 > img{
+#board > img{
+    margin-top: 50px;
     width: 560px;
     height: 315px;
 }

@@ -115,6 +115,7 @@
         </header>
 
         <!-- 섹션 1 -->
+        
 
         <div id="section">
             <div id="video">
@@ -126,7 +127,9 @@
                 <img src="https://cdn.dailycc.net/news/photo/202306/748295_649266_210.jpg" alt="">
                 <h4>인공감미료 아스파탐의 발암물질 지정 - 안정성, 대표음식 등</h4>
             </div>
+            
         </div>
+        <br clear="both">
 
         <!-- 푸터 -->
         <div id="footer">

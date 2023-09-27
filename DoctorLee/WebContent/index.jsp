@@ -128,25 +128,21 @@
         </header>
 
         <!-- 섹션 1 -->
+        
 
-        <section>
+        <div id="section">
             <div id="video">
                 <iframe id="main_video" width="560" height="315" src="https://www.youtube.com/embed/AJyx1VyjE1g?si=4kRxwyXwCDIFjzMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 <br>
                 <a href="#">심리 영상 게시판 가기</a>
             </div>
             <div id="board">
-                <div id="content_1">
-                    <img src="https://cdn.dailycc.net/news/photo/202306/748295_649266_210.jpg" alt="">
-                    <h4>인공감미료 아스파탐의 발암물질 지정 - 안정성, 대표음식 등</h4>
-                </div>
-        </section>
-
-        <!-- 섹션 2 -->
-        <section>
-            
+                <img src="https://cdn.dailycc.net/news/photo/202306/748295_649266_210.jpg" alt="">
+                <h4>인공감미료 아스파탐의 발암물질 지정 - 안정성, 대표음식 등</h4>
             </div>
-        </section>
+            
+        </div>
+        <br clear="both">
 
         <!-- 푸터 -->
         <div id="footer">

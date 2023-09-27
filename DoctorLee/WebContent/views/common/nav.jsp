@@ -1,96 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String contextPath = request.getContextPath();
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../../resources/css/index.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- 폰트어썸 키트 -->
-    <script src="https://kit.fontawesome.com/46331f5575.js" crossorigin="anonymous"></script>
-<title>공통 네비게이터</title>
- <!-- 폰트어썸 키트 -->
-    <script src="https://kit.fontawesome.com/46331f5575.js" crossorigin="anonymous"></script>
-    
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <!-- bxslider -->
-    <script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-	
-	<!-- css -->
-	<link rel="stylesheet" href="resources/css/index.css">
+<title>Insert title here</title>
 <style>
-body::-webkit-scrollbar {
-    display: none;
-}
-
-#wrap{margin: 0 auto;}
-
-header{
-    width: 100vw;
-    height: 600px;
-    position: relative;
-    clear: both;
-}
-
-/* 메인화면 백그라운드 이미지 */
-.bg img{
-    height: 600px;
-    display: block;
-    width: inherit;
-}
-
-/* 메인화면 검색창 아이콘 */
-.icon_search{
-    float: left;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    margin: 0 0 0px 10px;
-    color: #fff;
-
-}
-
-/* 메인화면 검색창 */
-#index_search_bar{
-    position: absolute; left: 50%; top: 50%; 
-    transform: translate(-50%, -50%);
-}
-#index_search_bar>input{
-    width: 1000px;
-    height: 50px;
-    border-radius: 5px;
-    border: none;
-    padding-left: 45px;
-    background: #999;
-}
-#index_search_bar>input::placeholder{color: #fff;}
-
-/* bxslider */
-.bx-wrapper{
-    border: none;
-    box-shadow: none;
-    height: 600px;
-}
-.bx-wrapper .bx-pager.bx-default-pager a {
-    position: relative; bottom: 50px;
-}
-.bx-viewport{
-    height: auto;
-}
-
-@media (max-width: 1000px) {
-    #index_search_bar>input{
-        width: 500px;
-    }
-
-}
-	/* 네비 */
 #wrap > div{
         width: 100%;
     }
@@ -180,7 +95,7 @@ header{
 </style>
 </head>
 <body>
-	<div id="navi">
+<div id="navi">
             <div id="navi1"><a href="#" id="navitext">낭만닥터 이사부</a>
             </div
             ><div id="navi2">

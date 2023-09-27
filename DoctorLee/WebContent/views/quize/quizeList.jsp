@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<% 
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>퀴즈게시판</title>
-
-
-
-
 
 
 <style>
@@ -23,7 +23,7 @@
         }
 
         #quizeboard{
-            background-color: rgb(218, 218, 218);
+            background-color: rgb(235, 233, 233);
             width: 95%;
             height: 45%;
             margin-left: 2.5%;
@@ -92,14 +92,17 @@
 </head>
 <body>
 
-    <%@ include file="../common/navi.jsp" %>
+    
     
     <div id="quizewrap">
         <div id="quize"> 
             <h1>퀴즈게시판</h1>
         </div>
+        
+        
+        
+        
         <div id="quizeboard"> 
-
             <div id="board">
                 <div id="header">
                     <div id="title">제목 넣을 공간</div>
@@ -107,7 +110,7 @@
                     <div id="endDate">~일 남음</div>
                 </div>
                 <div id="content">
-                    퀴즈 내용 <br>
+                   	 퀴즈 내용 <br>
 
                     <form>
                         
@@ -132,7 +135,7 @@
                     </form>
 
                     <div id="footer2">
-                        <a href="#" >정답 확인하기 &gt;</a>
+                        <a href="<%= contextPath %>/quize/controller/list.qz" >정답 확인하기 &gt;</a>
                     </div>
                 </div>
 

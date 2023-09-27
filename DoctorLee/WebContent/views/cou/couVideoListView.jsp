@@ -17,7 +17,7 @@
         float: left;
     }
 
-    #side_menu{width: 30%; border: 1px solid green;}
+    #side_menu{width: 20%; border: 1px solid green;}
     #list{width: 70%; border: 1px solid blue;}
 </style>
 </head>
@@ -28,7 +28,7 @@
     
     <div class="outer">
         <div id="side_menu">
-            <p>side_menu</p>
+            <%@ include file="../common/couNavi.jsp" %>
         </div>
 
         <div id="list">

@@ -98,8 +98,11 @@
         <div id="quize"> 
             <h1>퀴즈게시판</h1>
         </div>
+        
+        
+        
+        
         <div id="quizeboard"> 
-
             <div id="board">
                 <div id="header">
                     <div id="title">제목 넣을 공간</div>

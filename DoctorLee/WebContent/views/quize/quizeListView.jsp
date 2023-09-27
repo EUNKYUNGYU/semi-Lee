@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import ="com.kh.DoctorLee.quize.model.vo.Quize,
+				 java.util.ArrayList"  %>
     
 <% 
 	String contextPath = request.getContextPath();
+	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -99,32 +102,33 @@
             <h1>퀴즈게시판</h1>
         </div>
         
-        
-        
-        
         <div id="quizeboard"> 
             <div id="board">
+        <% if(list.isEmpty()) { %>
+        
+        <% } else { %>
+        <% for(Quize q : list) { %>
                 <div id="header">
-                    <div id="title">제목 넣을 공간</div>
-                    <div id="vote">151명 투표</div>
-                    <div id="endDate">~일 남음</div>
+                    <div id="title"><%= q.getQuizeTitle() %></div>
+                    <div id="vote"><%= q.getVote() %></div>
+                    <div id="endDate"><%= q.getEndDate() %>일 남음</div>
                 </div>
                 <div id="content">
-                   	 퀴즈 내용 <br>
+                   	 <%= q.getQuizeContent() %> <br>
 
                     <form>
                         
                         <input type="radio" name="choice" value="선택지1" id="choice1" checked>
-                        <label for="choice1">선택지1 공간입니다.</label> <br>
+                        <label for="choice1"><%= q.getChoice1() %></label> <br>
     
                         <input type="radio" name="choice" value="선택지2" id="choice2" >
-                        <label for="choice2">선택지2 공간입니다.</label> <br>
+                        <label for="choice2"><%= q.getChoice2() %></label> <br>
     
                         <input type="radio" name="choice" value="선택지3" id="choice3" >
-                        <label for="choice3">선택지3 공간입니다.</label> <br>
+                        <label for="choice3"><%= q.getChoice3() %></label> <br>
     
                         <input type="radio" name="choice" value="선택지4" id="choice4" >
-                        <label for="choice4">선택지4 공간입니다.</label> <br>
+                        <label for="choice4"><%= q.getChoice4() %></label> <br>
 
                         
                     </div>
@@ -141,10 +145,9 @@
 
             </div>
       
-
-
-
         </div>
+        	<% } %>
+        <% } %>
     	
 		
 

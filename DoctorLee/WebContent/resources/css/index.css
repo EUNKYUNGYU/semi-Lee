@@ -69,13 +69,12 @@ header{
 }
 
 /* 섹션 영역 */
-section{height: 500px; width: inherit;}
+section{height: 500px; width: 50%; border: 1px solid salmon;}
 /* width : 1412px */
 
 #video{
     height: 100%; 
     width: 50%; 
-    border: 1px solid aqua;
     text-align: center;
 }
 
@@ -86,6 +85,26 @@ section{height: 500px; width: inherit;}
 #video > a{
  text-decoration: none;  
  font-size: 20px; 
+}
+
+#board{
+    height: 100%; 
+    width: 50%;
+    text-align: center;
+}
+
+
+#content_1{
+    margin-top: 70px;
+}
+
+#content_1 > img, #content_1 > h4:hover{
+    cursor: pointer;
+}
+
+#content_1 > img{
+    width: 560px;
+    height: 315px;
 }
 
 /* 푸터 영역 */

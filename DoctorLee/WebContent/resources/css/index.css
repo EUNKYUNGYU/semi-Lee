@@ -69,8 +69,12 @@ header{
 }
 
 /* 섹션 영역 */
-section{height: 500px; width: 50%; border: 1px solid salmon;}
+#section{width: 50%; border: 1px solid salmon;}
 /* width : 1412px */
+
+#section > div{
+    float: left;
+}
 
 #video{
     height: 100%; 

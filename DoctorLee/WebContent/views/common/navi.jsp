@@ -7,94 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../../resources/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- 폰트어썸 키트 -->
+    <script src="https://kit.fontawesome.com/46331f5575.js" crossorigin="anonymous"></script>
 <title>공통 네비게이터</title>
-<style>
-#wrap > div{
-        width: 100%;
-    }
-#navi > div{
-        height : 100%;
-        display:inline-block;
-        float : left;
-}
-#navi{
-        height : 5%;
-        margin : 0;
-        text-align: center;
-        line-height : 50px;
-        position: fixed;
-        z-index: 9999999999;
-
-}
-#navi1{
-        width:17%;
-}
-#navi2{
-        width:68%;
-}
-#navi3{
-        width : 15%;
-}
-#navi1 > a {
-        text-decoration: none;
-        color: black;
-        font-size: 20px;
-        margin: 5px;
-        font-weight: 800;
-        text-align: center;
-        width : 100%;
-        height : 100%;
-}
-#navi1 > a:hover{
-        font-size : 21px;
-}
-#nav {
-    list-style: none;
-    width : 100%;
-    height : 80%;
-    margin:0;
-    padding:0;
-}
-#nav > li{
-    float : left;
-    height: 100%;
-    width: 20%;
-    text-align: center;
-}
-#nav a{
-    text-decoration: none;
-    color: black;
-    font-weight: 800;
-    display: block;
-    width: 100%;
-    height: 100%;
-    font-size: 14px;
-    line-height : 50px;
-    }
-#navi a:hover {
-        font-size: 16px;
-    }
-
-#navi:hover{background-color: antiquewhite;}
-#nav:hover{background-color: antiquewhite;}
-#nav > li >ul {
-    display:none;
-    padding:0;
-    list-style:none;
-    background-color: #333;
-    
-}
-#nav > li > a:hover + ul {
-        display: block;
-        background-color: #333;
-    }
-#nav > li > ul:hover {
-        display: block;
-        background-color: #333;
-    }
-#nav > li > ul a{font-size: 11px;}
-#nav > li > ul a:hover{font-size: 14px;}
-</style>
 </head>
 <body>
 	<!-- 네비 -->

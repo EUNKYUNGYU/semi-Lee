@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>footer</title>
+<link rel="stylesheet" href="../../resources/css/index.css">
+<!-- 폰트어썸 키트 -->
+    <script src="https://kit.fontawesome.com/46331f5575.js" crossorigin="anonymous"></script>
 <style>
 #footer{
     width: 100vw;

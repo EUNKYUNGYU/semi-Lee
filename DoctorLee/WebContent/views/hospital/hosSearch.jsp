@@ -77,7 +77,6 @@
 </head>
 <body>
     <%@ include file="../common/navi.jsp" %>
-    <%@ include file="../common/footer.jsp" %>
 
         <!-- 병원검색 메인, 검색창-->
         <aside>
@@ -182,13 +181,14 @@
 
 
 
+    <%@ include file="../common/footer.jsp" %>
 
 
 
 
 
 
-
+		<!--
         <!-- 지도 나중에 -->
         <div id="map" style="width: 500px; height: 500px;">
             
@@ -204,5 +204,6 @@
             let map = new kakao.maps.Map(container, options);
 
         </script>
+        -->
 </body>
 </html>

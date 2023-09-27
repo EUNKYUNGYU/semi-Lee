@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -107,10 +111,19 @@
                 <!-- 메인화면 검색창 -->
                 <input type="text" name="index_search" placeholder="검색어를 입력하세요.">
                 <!-- 검색창 아이콘 -->                
-                <div class="icon_search">
+                <div id="icon_search">
                     <i class="fa-solid fa-magnifying-glass fa-xl"></i>
                 </div>
             </form>
+            <script>
+            	$(function(){
+            		
+            		$('#icon_search').click(function(){
+            			location.href = '<%= contextPath %>/views/hospital/hosSearch.jsp';
+            		})
+            	})
+            
+            </script>
 
         </header>
 

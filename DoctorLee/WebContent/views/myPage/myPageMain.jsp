@@ -103,6 +103,7 @@
 </style>
 </head>
 <body>
+	
 	<h2 align="center">마이페이지</h2><br>
     <hr>
     <br><br><br><br><br>
@@ -184,7 +185,9 @@
             </div>
 
         </div>
+        <%@ include file="../common/footer.jsp" %>
     </div>
+    
     <script>
         $(function(){
             $('a').click(function(){

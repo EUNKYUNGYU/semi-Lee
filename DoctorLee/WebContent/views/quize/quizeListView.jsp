@@ -111,7 +111,7 @@
                 <div id="header">
                     <div id="title"><%= q.getQuizeTitle() %></div>
                     <div id="vote"><%= q.getVote() %></div>
-                    <div id="endDate"><%= q.getEndDate() %>일 남음</div>
+                    <div id="deadline"><%= q.getDeadline() %>일 남음</div>
                 </div>
                 <div id="content">
                    	 <%= q.getQuizeContent() %> <br>
@@ -139,7 +139,7 @@
                     </form>
 
                     <div id="footer2">
-                        <a href="<%= contextPath %>/quize/controller/list.qz" >정답 확인하기 &gt;</a>
+                        <a href="<%= contextPath %>/quize/controller/list.qz?qno=<%= q.getQuizeNo() %>" >정답 확인하기 &gt;</a>
                     </div>
                 </div>
 

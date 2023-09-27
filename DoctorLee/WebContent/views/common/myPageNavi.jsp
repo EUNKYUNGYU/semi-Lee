@@ -1,19 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<% 
-	String contextPath = request.getContextPath();
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 네비</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/46331f5575.js" crossorigin="anonymous"></script>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- bxslider -->
+    <script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+	
+	<!-- css -->
+	<link rel="stylesheet" href="resources/css/index.css">
  <style>
         div {
             box-sizing: border-box;
-            border : 1px solid red;
+            
             
         }
         #mp_navi {
@@ -21,7 +29,7 @@
             height: 700px;
             background-color:#1E376F;
         }
-        #navi{
+        #navigator{
             list-style:none;
             margin : 0;
             padding : 0;
@@ -31,10 +39,10 @@
             
             
         }
-        #navi > li{
+        #navigator > li{
             text-align : center;
         }
-        #navi a{
+        #navigator a{
             text-decoration: none;
             color : whitesmoke;
             display : block;
@@ -42,7 +50,7 @@
 
 
         }
-        #navi a:hover {
+        #navigator a:hover {
             font-size : 16px;
             color : rgba(245, 245, 245, 0.445)
         }
@@ -55,18 +63,18 @@
         #empty{
             background-color: white;
         }
-        #navi > li >ul{
+        #navigator > li >ul{
             list-style: none;
             padding : 0;
             display:none;
         }
-        #navi > li > a:hover + ul{
+        #navigator > li > a:hover + ul{
             display: block;
         }
-        #navi > li > ul:hover{
+        #navigator > li > ul:hover{
             display: block;
         }
-        #navi >li > ul a{font-size: 13px;}
+        #navigator >li > ul a{font-size: 13px;}
     </style>
 </head>
 <body>
@@ -94,7 +102,7 @@
                         오늘 예약 : <br>
                     </div>
                 </div>
-                <ul id="navi">
+                <ul id="navigator">
                     <li><a href="#">복약관리</a></li>
                     <li><a href="#">회원정보 수정/탈퇴</a>
                         <ul>

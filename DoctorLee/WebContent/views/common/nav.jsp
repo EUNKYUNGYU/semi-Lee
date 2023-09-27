@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>네비만</title>
 <style>
 #wrap > div{
         width: 100%;

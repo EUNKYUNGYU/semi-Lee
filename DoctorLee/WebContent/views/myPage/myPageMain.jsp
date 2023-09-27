@@ -103,6 +103,7 @@
 </style>
 </head>
 <body>
+	<%@ include file="../common/navi.jsp" %>
 	
 	<h2 align="center">마이페이지</h2><br>
     <hr>

@@ -116,7 +116,12 @@
 
         <!-- 섹션 1 -->
         <section>
-            <article></article>
+            <div id="video">
+            
+                <iframe id="main_video" width="560" height="315" src="https://www.youtube.com/embed/AJyx1VyjE1g?si=4kRxwyXwCDIFjzMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <br>
+                <a href="#">심리 영상 게시판 가기</a>
+            </div>
 
         </section>
 

@@ -72,6 +72,22 @@ header{
 section{height: 500px; width: inherit;}
 /* width : 1412px */
 
+#video{
+    height: 100%; 
+    width: 50%; 
+    border: 1px solid aqua;
+    text-align: center;
+}
+
+#video > iframe{
+    margin-top: 70px;
+}
+
+#video > a{
+ text-decoration: none;  
+ font-size: 20px; 
+}
+
 /* 푸터 영역 */
 #footer{
     width: 100vw;

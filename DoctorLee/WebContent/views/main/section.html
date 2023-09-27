@@ -2,10 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>section</title>
+
+    <style>
+        section{height: 500px; width: 1412px; border: 1px solid red;}
+        /* width : 1412px */
+        #video{
+            height: 100%; 
+            width: 50%; 
+            border: 1px solid aqua;
+            text-align: center;
+        }
+
+        #video > iframe{
+            margin-top: 70px;
+        }
+
+        #video > a{
+         text-decoration: none;  
+         font-size: 20px; 
+        }
+    </style>
 </head>
 <body>
+    <section>
+        <div id="video">
+            
+            <iframe id="main_video" width="560" height="315" src="https://www.youtube.com/embed/AJyx1VyjE1g?si=4kRxwyXwCDIFjzMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <br>
+            <a href="#">심리 영상 게시판 가기</a>
+        </div>
+
+        <div id="board">
+
+        </div>
+    </section>
     
 </body>
 </html>

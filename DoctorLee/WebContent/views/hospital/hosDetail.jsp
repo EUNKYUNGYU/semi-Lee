@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Calender" %>
-<%
-
-
-
-%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -85,8 +79,6 @@
         .hos_rsvt_btn>button:hover{cursor: pointer;}
 
 		.sch_category>li{margin-bottom: 10px;}
-		
-		.hos_rsvt{width: 300px; height: 300px;}
     </style>
 </head>
 <body>
@@ -137,47 +129,15 @@
 
         <!-- 진료 예약 -->
         <div id="hos_rsvt">
-			<table id="">
-				<tr>
-					<th>
-						<%
-						
-						
-						%>
+			<script>
+				$('#hos_rsvt').datePicker({
+					format: 'yyyy-mm-dd',
+					startDate: '-10d',
+					endDate: '+10d'
 					
-					</th>
-				</tr>
-				<tr>
-					<th>일</th>
-					<th>월</th>
-					<th>화</th>
-					<th>수</th>
-					<th>목</th>
-					<th>금</th>
-					<th>토</th>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-				
-				</tr>
-				<tr>
-				
-				</tr>
-				<tr>
-				
-				</tr>
-				<tr>
-				
-				</tr>
-			</table>
+				})
+			
+			</script>
 
         </div>
 

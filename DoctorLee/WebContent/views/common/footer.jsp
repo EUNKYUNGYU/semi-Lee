@@ -141,7 +141,6 @@
 }
 </style>
 </head>
-
 <body>
         <!-- 푸터 -->
         <div id="footer">

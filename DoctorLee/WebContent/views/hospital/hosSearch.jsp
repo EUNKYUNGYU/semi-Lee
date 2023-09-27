@@ -80,8 +80,10 @@
 <body>
     <%@ include file="../common/navi.jsp" %>
 
+	<!-- 병원 검색 메인페이지 -->
 	<div class="sch_wrap">
-        <!-- 병원검색 메인, 검색창-->
+	
+        <!-- 병원 검색창-->
         <aside>
 
             <form action="sch_hos.dy" method="get" id="sch_hos">
@@ -108,7 +110,7 @@
 
         </aside>
 
-        <!-- 병원검색 메인, 병원 리스트 -->
+        <!-- 병원 리스트 -->
         <div id="hos_list">
 
             <div class="hos">
@@ -180,7 +182,8 @@
             </div>
 
         </div>
-        <!-- 병원 리스트 끝 -->
+        
+		<!-- 지도 -->
 
 	</div>
 

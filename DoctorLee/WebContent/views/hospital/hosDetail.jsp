@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>병원 검색</title>
+    <title>병원 상세</title>
     <style>
 		
-		.sch_wrap{margin: 0 auto; padding-top: 100px; padding-left: 50px;}
+		.hos_wrap{margin: 0 auto; padding-top: 100px; padding-left: 50px;}
 		
         /* 병원 검색*/
         aside{
@@ -80,108 +80,48 @@
 <body>
     <%@ include file="../common/navi.jsp" %>
 
-	<div class="sch_wrap">
-        <!-- 병원검색 메인, 검색창-->
-        <aside>
+    <!-- 병원 상세페이지 -->
+	<div class="hos_wrap">
+        
+        <!-- 병원 정보 -->
+        <div id="hos_info">
+			
+			<h3>좋은병원</h3>
+			<span>치과</span>
+			
+			<!-- 현재 대기자 5명 -->
+			
+			<p>
+				병원소개글 .....................................
+			</p>
+			
+			<div id="hos_info_address">
+			
+			</div>
+			<div id="hos_info_date">
+			
+			</div>
+			<div id="hos_info_tel">
+			
+			
+			</div>
+			
+        </div>
 
-            <form action="sch_hos.dy" method="get" id="sch_hos">
-                <h3>병원 검색</h3>
-				<br>
-                <input type="text" name="sch_bar" id="sch_bar">
-				
-                <button type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
+        <!-- 진료 예약 -->
+        <div id="hos_rsvt">
 
-            <ul class="sch_category">
-                <li>
-                    <a href="#none">주변 병원 검색</a>
-                </li>
-                <li>
-                    <a href="#none">진료과로 검색</a>
-                </li>
-                <li>
-                    <a href="#none">질병명으로 검색</a>
-                </li>
-            </ul>
-
-        </aside>
-
-        <!-- 병원검색 메인, 병원 리스트 -->
-        <div id="hos_list">
-
-            <div class="hos">
-
-                <div class="hos_img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
-                </div>
-
-                <div class="hos_info">
-                    <h3>좋은병원</h3>
-                    <p>서울시 아차산로 2384</p>
-
-                    <h4>진료중</h4>
-                    <div class="hos_rsvt_btn">
-                        <button onclick="rsvtPage();">진료예약</button>
-                    </div>
-
-                </div>
-
-            </div>
-            
-            <div class="hos">
-
-                <div class="hos_img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
-                </div>
-
-                <div class="hos_info">
-                    <h3>좋은병원</h3>
-                    <p>서울시 아차산로 2384</p>
-
-                    <h4>진료중</h4>
-                    <div class="hos_rsvt_btn">
-                        <button onclick="rsvtPage();">진료예약</button>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="hos">
-
-                <div class="hos_img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
-                </div>
-
-                <div class="hos_info">
-                    <h3>좋은병원</h3>
-                    <p>서울시 아차산로 2384</p>
-
-                    <h4>진료중</h4>
-                    <div class="hos_rsvt_btn">
-                        <button onclick="rsvtPage();">진료예약</button>
-                    </div>
-                    <script>
-                        function rsvtPage(){
-                            var link = 'http://naver.com';
-                            window.open(link);
-                        }
-
-                        var $hos_status = $('.hos_info').children().eq(3);
-
-                        // db에 진료시간과 맞으면 
-
-
-                    </script>
-                </div>
-
-            </div>
 
         </div>
-        <!-- 병원 리스트 끝 -->
 
+
+		<!-- 병원 리뷰 -->
+		<div id="hos_review">
+		
+		
+		
+		</div>
+		
 	</div>
 
     <%@ include file="../common/footer.jsp" %>

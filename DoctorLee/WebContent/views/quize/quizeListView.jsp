@@ -5,6 +5,7 @@
     
 <% 
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>

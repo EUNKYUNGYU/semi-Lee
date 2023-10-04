@@ -1,6 +1,5 @@
 package com.kh.DoctorLee.common;
 
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +19,7 @@ public class SemiFileRenamePolicy implements FileRenamePolicy {
 		
 		String ext = originName.substring(originName.lastIndexOf("."));
 		
-		String changeName = "KH_" + currentTime + "_" + randomNum + ext;
+		String changeName = "Doctor_" + currentTime + "_" + randomNum + ext;
 		
 		return new File(originFile.getParent(), changeName);
 	}

@@ -23,7 +23,16 @@ public class CouService {
 
 	public int insertVideo(CouVideo cv) {
 		Connection conn = getConnection();
-		return 0;
+		
+		int result = new CouDao().insertVideo(conn, cv);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
 
 }

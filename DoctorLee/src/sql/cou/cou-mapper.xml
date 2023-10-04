@@ -13,5 +13,19 @@
 		 ORDER
 		 	BY  VIDEO_NO DESC 		
 	</entry>
+	
+	<entry key="insertVideo">
+		INSERT
+		  INTO
+		  		TB_COU_VIDEO
+		VALUES 	
+				(
+				SEQ_CVIDEO_NO.NEXTVAL,
+				1,
+				?,
+				?,
+				?
+				)	
+	</entry>
 </properties>
 

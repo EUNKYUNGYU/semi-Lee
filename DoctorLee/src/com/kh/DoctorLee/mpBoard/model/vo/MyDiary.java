@@ -3,7 +3,7 @@ package com.kh.DoctorLee.mpBoard.model.vo;
 import java.sql.Date;
 
 public class MyDiary {
-	private int dairyNO;
+	private int diaryNo;
 	private int memNo;
 	private Date createDate;
 	private String diaryTitle;
@@ -11,19 +11,19 @@ public class MyDiary {
 	public MyDiary() {
 		super();
 	}
-	public MyDiary(int dairyNO, int memNo, Date createDate, String diaryTitle, String diaryContent) {
+	public MyDiary(int diaryNo, int memNo, Date createDate, String diaryTitle, String diaryContent) {
 		super();
-		this.dairyNO = dairyNO;
+		this.diaryNo = diaryNo;
 		this.memNo = memNo;
 		this.createDate = createDate;
 		this.diaryTitle = diaryTitle;
 		this.diaryContent = diaryContent;
 	}
-	public int getDairyNO() {
-		return dairyNO;
+	public int getDiaryNo() {
+		return diaryNo;
 	}
-	public void setDairyNO(int dairyNO) {
-		this.dairyNO = dairyNO;
+	public void setDiaryNo(int diaryNo) {
+		this.diaryNo = diaryNo;
 	}
 	public int getMemNo() {
 		return memNo;
@@ -51,8 +51,9 @@ public class MyDiary {
 	}
 	@Override
 	public String toString() {
-		return "MyDiary [dairyNO=" + dairyNO + ", memNo=" + memNo + ", createDate=" + createDate + ", diaryTitle="
+		return "MyDiary [diaryNo=" + diaryNo + ", memNo=" + memNo + ", createDate=" + createDate + ", diaryTitle="
 				+ diaryTitle + ", diaryContent=" + diaryContent + "]";
 	}
+	
 
 }

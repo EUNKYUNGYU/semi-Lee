@@ -6,24 +6,29 @@
 <meta charset="UTF-8">
 <title>심리 영상 등록 페이지</title>
 <style>
+    .outer{
+        border: 1px solid red;
+        width: 1800px;
+        margin-left: 50px;
+    }
+
     /*영상 등록 폼*/
     .content{
-        margin-left: 200px;
+        height: 1000px;
+        margin-top: 100px;
     }
 
     .content > div{
         float: left;
     }
 
-    #video-list{
-        width: 1260px;
-        margin-left: 10px;
-        margin-top: 120px;
-    }
+    /*내용 영역*/
     .enrollVideo{
-        background-color: #1E376F;
+        width: 1400px;
+        border: 1px solid silver;
+        margin-left: 100px;
         border-radius: 10px;
-        width: 1260px;
+        background-color: #1E376F;
     }
 
     .enrollVideo th, .enrollVideo h3{
@@ -44,44 +49,50 @@
 </style>
 </head>
 <body>
+    <!--상단 네비게이션 메뉴 div-->
+    <%@ include file="../common/nav.jsp"%>
+
+    <!--전체를 감싸는 div-->
     <div class="outer">
-        <%@ include file="../common/nav.jsp"%>
-    
-        <div class="content">
-            <div class="left-menu">
-                <!--상단 네비게이션 메뉴 div-->
+
+        <!--하단 내용 영역을 감싸는 div-->
+        <div class="content" align="center">
+
+            <!--좌측 메뉴 div-->
+            <div id="cou_navi">
                 <%@ include file="../common/couNavi.jsp"%>
             </div>
-        
-        
-            <!--심리 영상 내용 출력 영역 div-->
+
+            <!--비디오 자세히 보기-->
             <div id="video-list">
+                
                 <div class="enrollVideo" align="center">
                     <form action="insertVideo.cou" method="post">
                         <table align="center">
                             <br>
                             <h3>영상 게시하기</h3>
                             <br>
-                                <tr>
-                                    <th width="150">제목</th>
-                                    <td colspan="3"><input type="text" name="title" id="title" required></td>
-                                </tr>
-        
-                                <tr>
-                                    <th>채널명</th>
-                                    <td colspan="3"><input type="text" name="channel" id="channel" required></td>
-                                </tr>
-        
-                                <tr>
-                                    <th>영상 주소</th>
-                                    <td colspan="3"><input type="text" name="address" id="address" required></td>
-                                </tr>
+
+                            <tr>
+                                <th width="150">제목</th>
+                                <td><input type="text" name="title" id="title" required></td>
+                            </tr>
+
+                            <tr>
+                                <th>채널명</th>
+                                <td><input type="text" name="channel" id="channel" required></td>
+                            </tr>
+
+                            <tr>
+                                <th>영상 주소</th>
+                                <td><input type="text" name="address" id="address" required></td>
+                            </tr>
                         </table>
-                        
+
                         <div>
-                            <button type="submit" id="submitBtn" >등록하기</button>
+                            <button type="submit" id="submitBtn">등록하기</button>
                         </div>
-                        <br>
+                        <br><br>
                     </form>
                     
                 </div>

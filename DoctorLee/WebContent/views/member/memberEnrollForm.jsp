@@ -74,6 +74,7 @@
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
+            padding-top : 30px
         }
 
         #p2{

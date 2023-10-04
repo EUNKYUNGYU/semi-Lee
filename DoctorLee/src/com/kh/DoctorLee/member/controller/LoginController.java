@@ -1,6 +1,8 @@
 package com.kh.DoctorLee.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,11 +29,8 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		System.out.println(request.getParameter("memId"));
-		System.out.println(request.getParameter("memPwd"));
-	
+		RequestDispatcher view = request.getRequestDispatcher("views/member/myPage.jsp");
+		view.forward(request, response);
 	
 	}
 

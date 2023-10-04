@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <title>네비만</title>
 <style>
+body{
+	box-sizing: border-box;
+	margin : 0;
+	padding : 0;
+}
 #wrap > div{
         width: 100%;
     }

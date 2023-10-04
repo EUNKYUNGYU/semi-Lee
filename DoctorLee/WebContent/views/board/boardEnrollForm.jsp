@@ -10,11 +10,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판 작성</title>
 <style>
 * {
 	box-sizing: border-box;
-	border: 1px solid palevioletred;
+	border: 1px solid paleturquoise;
 }
 
 #header {
@@ -61,12 +61,15 @@ aside {
 	height: 1800px;
 }
 
-#page {
-	height: 200px;
+#buttonWrap {
+	height: 50px;
+	margin-left : 1200px;
 }
 
-#search {
-	height: 200px;
+#boardTable {
+	width : 1100px;
+   	border-spacing: 10px;
+	
 }
 
 footer {
@@ -86,52 +89,50 @@ footer {
 		<div id="contentWrap">
 
 
-			<header id="boardHeader">게시판이름</header>
+			<header id="boardHeader">게시글작성</header>
+			
 			<article id="boardArticle">
-				게시판 형태
+				<form>
+				
 				<div id="boardContent">
-					<table align="center">
+				
+				<div id="buttonWrap">
+					<button type="submit">게시글 등록</button>
+				</div>
+				
+					<table align="center" id="boardTable">
 						<thead>
 							<tr>
-								<th width="100">게시글 번호</th>
-								<th width="350">제목</th>
-								<th width="150">작성자</th>
-								<th width="150">작성일</th>
-								<th width="100">조회수</th>
-								<th width="100">추천수</th>
+								<th>
+									<select style="width:900px; height:50px" name="category" id="">
+										<option value="20">자유게시판</option>
+                            			<option value="30">정보게시판</option>
+                            			<option value="40">익명게시판</option>
+                        			</select>
+								</th>
 							</tr>
-							<% if(list == null) { %>
-						
+						</thead>
 						<tbody>
 							<tr>
-								<td colspan="6">조회된 게시글이 없습니다.</td>
+								<th colspan="2" height="70">
+									<input style="width:900px; height:50px" type="text" placeholder="제목을 입력해주세요" name="boardTitle">
+								</th>
 							</tr>
-							<% } else { %>
-							<% for(Board b : list) { %>
 							<tr>
-								<td><%= b.getBoardNo() %></td>
-								<td><%= b.getBoardTitle() %></td>
-								<td><%= b.getWriter() %></td>
-								<td><%= b.getCreateDate() %></td>
-								<td><%= b.getViews() %></td>
-								<td>0</td>
+								<th colspan="2" height="70">
+									<input style="width:900px; height:300px" type="text" placeholder="내용을 입력해주세요" name="boardTitle">
+								</th>
 							</tr>
-							<% } %>
-							<% } %>
 						</tbody>
-
-						</thead>
-
 					</table>
 				</div>
+			</form>
 			</article>
-			<div id="page">페이지바 영역</div>
-			<div id="search">검색 영역</div>
+			
 		</div>
 	</section>
+	
 	<footer> 푸터 영역 </footer>
-
-
 
 
 </body>

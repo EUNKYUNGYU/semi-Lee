@@ -7,6 +7,9 @@
 <title>심리 영상 등록 페이지</title>
 <style>
     /*영상 등록 폼*/
+    .video-list{
+        border: 1px solid red;
+    }
     .enrollVideo{
             background-color: #1E376F;
             border-radius: 10px;

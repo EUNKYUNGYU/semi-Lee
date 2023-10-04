@@ -37,5 +37,9 @@ public class DiaryService {
 		
 		return result;
 	}
+	public void selectMyDiary() {
+		Connection conn = JDBCTemplate.getConnection();
+		new DiaryDao().selectMyDiary(conn);
+	}
 
 }

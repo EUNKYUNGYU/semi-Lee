@@ -40,4 +40,12 @@
 				?
 			)
 	</entry>
+	<entry key="selectMyDiaryList">
+		SELECT
+			DIARY_NO,
+			DIARY_TITLE,
+			CREATE_DATE
+		FROM 
+			TB_MY_DIARY
+	</entry>
 </properties>

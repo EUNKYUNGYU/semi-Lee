@@ -21,4 +21,31 @@
 			)
 				
 	</entry>
+	<entry key="insertFamDiary">
+		INSERT
+			INTO
+				TB_FM_DIARY
+				(
+				FAM_DIR_NO,
+				MEM_NO,
+				CREATE_DATE,
+				FAM_DIR_TITLE,
+				FAM_DIR_CONTENT
+				)
+			VALUES(
+				SEQ_TB_FM_DIARY.NEXTVAL,
+				2,
+				SYSDATE,
+				?,
+				?
+			)
+	</entry>
+	<entry key="selectMyDiaryList">
+		SELECT
+			DIARY_NO,
+			DIARY_TITLE,
+			CREATE_DATE
+		FROM 
+			TB_MY_DIARY
+	</entry>
 </properties>

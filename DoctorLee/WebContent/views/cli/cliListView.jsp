@@ -37,7 +37,7 @@
     }
 
     /*우측 클리닉 영역*/
-    #cli-cate, #cli-list{
+    #cli-cate, #cli-part{
         width: 1400px;
         margin-left: 80px;
     }
@@ -48,10 +48,55 @@
         margin-top: 30px;
     }
 
-    #cli-list{
+    #cli-part{
         border: 1px solid saddlebrown;
-        height: 700px;
+        height: auto;
         margin-top: 50px;
+    }
+
+    #cli-list{
+        border: 1px solid red;
+        width: 1300px;
+        list-style: none;
+        height: auto;
+    }
+
+    #cli-inner{
+        border: 1px solid blue;
+        width: 1200px;
+        height: auto;
+    }
+
+    #cli-inner > li {
+        float: left;
+    }
+
+    .cli-box{
+        border: 1px solid red;
+        width: 580px;
+    }
+
+    .cli-img > img{
+        width: 110px;
+        height: 130px;
+        border: 1px solid blue;
+        margin-top: 30px;
+        padding: 10px;
+    }
+
+    .cli-des{
+        border: 1px solid pink;
+        width: 350px;
+        margin-left: 10px;
+        padding: 10px;
+    }
+
+    .cli-content > div {
+        float: left;
+    }
+
+    .cate{
+        opacity: 0;
     }
 </style>
 </head>
@@ -75,16 +120,48 @@
 
                 <!--클리닉 카테고리 영역 div-->
                 <div id="cli-cate">
-                    <p>카테고리</p>
+                    <input type="radio" name="cate" value="피부"> 피부
                 </div>
 
                 <!--클리닉 내용 출력 영역 div-->
-                <div id="cli-list">
-                    <ul>
-                        <div>
-                            <li>
-                                <div></div>
+                <div id="cli-part">
+                    <ul id="cli-list">
+                        <div id="cli-inner">
+                            <li class="cli-box">
+                                <div class="cli-content" align="left">
+                                    <div class="cli-img">
+                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
+                                    </div>
+                                    
+                                    <div class="cli-des">
+                                        <h4>클리닉명</h4>
+                                        <p>클리닉 장소</p>
+                                        <p>별점</p>
+                                        <h4>가격</h4>
+                                    </div>
+                                    <br clear="both">
+                                </div>
                             </li>
+                            
+
+                            <li class="cli-box">
+                                <div class="cli-content" align="left">
+                                    <div class="cli-img">
+                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
+                                    </div>
+                                    
+                                    <div class="cli-des">
+                                        <h4>클리닉명</h4>
+                                        <p>클리닉 장소</p>
+                                        <p>별점</p>
+                                        <h4>가격</h4>
+                                    </div>
+                                    <br clear="both">
+                                </div>
+                            </li>
+                            <br clear="both">
+
+                            
                         </div>
                     </ul>
                 </div>

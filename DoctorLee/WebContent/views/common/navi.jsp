@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String contextPath = request.getContextPath();
+%>
 
 <!DOCTYPE html>
 <html>
@@ -201,7 +204,7 @@ header{
                             <li><a href="#">정보게시판</a></li>
                             <li><a href="#">쪽지</a></li>
                             <li><a href="#">신고하기</a></li>
-                            <li><a href="#">퀴즈게시판</a></li>
+                            <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
                         </ul>
                     </li>
                     <li><a href="#">마이페이지</a>

@@ -13,6 +13,9 @@
 <style>
 .outer{
     /*border: 1px solid red;*/
+    width: 1800px;
+    margin-left: 50px;
+    border: 1px solid red;
 }
 
 #navi{
@@ -25,7 +28,9 @@
 
 /*하단 내용 영역을 감싸는 div*/
 .content{
-    margin-left: 200px;
+    border: 1px solid green;
+    height: 1000px;
+    margin-top: 100px;
 }
 
 #enrollVideo{
@@ -36,7 +41,6 @@
 #video-list{
     width: 1260px;
     margin-left: 10px;
-    margin-top: 120px;
 }
 
 img{
@@ -47,16 +51,28 @@ img{
 .list-img, .list-des:hover{
     cursor: pointer;
 }
+
+/*내용 영역*/
+    .list-content{
+        width: 1400px;
+        border: 1px solid silver;
+        margin-left: 100px;
+    }
 </style>
 </head>
 <body>
 
-    <div class="outer">
+    <!--상단 네비게이션 메뉴 div-->
     <%@ include file="../common/nav.jsp"%>
 
+    <!--전체를 감싸는 div-->
+    <div class="outer">
+
+    <!--하단 내용 영역을 감싸는 div-->
     <div class="content">
+
+        <!--좌측 메뉴 div-->
         <div class="left-menu">
-            <!--상단 네비게이션 메뉴 div-->
             <%@ include file="../common/couNavi.jsp"%>
         </div>
     
@@ -91,30 +107,6 @@ img{
 	            <% } %>
             
             <%} %>
-
-			<!--
-            <div class="list-content" align="center">
-                <hr>
-                <div class="list-img">
-                    <img src="https://img.youtube.com/vi/AJyx1VyjE1g/maxresdefault.jpg" alt="">
-                </div>
-                <div class="list-des">
-                    <h4>✔️유리멘탈 필수 시청✔️멘탈이 강한사람들의 특징? 정신과의사형제의 멘탈 관리 비법 공개! [양브로의 정신세계]</h5>
-                    <h4>양브로의 정신세계</p>
-                </div>
-            </div>
-
-            <div class="list-content" align="center">
-                <hr>
-                <div class="list-img">
-                    <img src="https://img.youtube.com/vi/AJyx1VyjE1g/maxresdefault.jpg" alt="">
-                </div>
-                <div class="list-des">
-                    <h4>✔️유리멘탈 필수 시청✔️멘탈이 강한사람들의 특징? 정신과의사형제의 멘탈 관리 비법 공개! [양브로의 정신세계]</h5>
-                    <h4>양브로의 정신세계</p>
-                </div>
-            </div>
-            -->
 
         </div>
     </div>

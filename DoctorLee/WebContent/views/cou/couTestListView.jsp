@@ -20,6 +20,7 @@
         /*하단 내용 영역을 감싸는 div*/
         .content{
             border: 1px solid green;
+            width: 1800px;
         }
 
         .content > div{

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,13 +114,13 @@
     <br><br><br>
     <h2 align="center">다이어리</h2>
     <br><hr>
-    
+   
     <div id="diary">
         <div id="area">
+        
         	<%@ include file="../common/myPageNavi.jsp" %>
 
         </div>
-    	
     	
     	
     	
@@ -178,12 +179,16 @@
                     
                   </table>
                   <br>
-                  <a href="" align="center">작성하기</a>
+                  <a href="<%=contextPath%>/views/diary/myDiaryEnrollForm.jsp">작성하기</a>
                   
                 <br><br>
         	</div>
+        
+        
+        
         	<div id="fam_diary">
         		<h3>가족 다이어리</h3>
+        		
         		<table id="customers1">
                     <table id="customers">
                     <tr>
@@ -235,8 +240,9 @@
                     
                   </table>
                   <br>
-                  <a href="" align="center">작성하기</a>
+                  <a href="<%=contextPath%>/myEnroll.di">작성하기</a>
                 <br><br>
+                
         	</div>
             <hr>
         	

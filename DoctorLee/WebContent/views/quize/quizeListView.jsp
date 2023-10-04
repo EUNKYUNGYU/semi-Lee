@@ -122,7 +122,7 @@
                 <div id="header">
                     <div id="title"><%= q.getQuizeTitle() %></div>
                     <div id="vote"><%= q.getVote() %></div>
-                    <div id="endDate"><%= q.getEndDate() %>일 남음</div>
+                    <div id="deadline"><%= q.getDeadline() %>일 남음</div>
                 </div>
                 <div id="content">
 <<<<<<< HEAD:DoctorLee/WebContent/views/quize/quizeList.jsp
@@ -154,7 +154,11 @@
                     </form>
 
                     <div id="footer2">
+<<<<<<< HEAD
                         <a href="#" >정답 확인하기 &gt;</a>
+=======
+                        <a href="<%= contextPath %>/quize/controller/list.qz?qno=<%= q.getQuizeNo() %>" >정답 확인하기 &gt;</a>
+>>>>>>> 165e7a4a7a8829564a6320af1d77ee9401a7faaa
                     </div>
                 </div>
 

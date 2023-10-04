@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%
 	String contextPath = request.getContextPath();
 
+=======
+<% 
+	String contextPath = request.getContextPath();
+>>>>>>> 165e7a4a7a8829564a6320af1d77ee9401a7faaa
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -40,7 +45,7 @@
                             <li><a href="#">성향 테스트</a></li>
                             <li><a href="#">고민 나눔</a></li>
                             <li><a href="#">심리 상담 예약</a></li>
-                            <li><a href="#">심리 치료 추천 영상</a></li>
+                            <li><a href="<%=contextPath%>/couVideoList.cou">심리 치료 추천 영상</a></li>
                         </ul>
                     </li>
                     <li><a href="#">클리닉</a></li>
@@ -53,11 +58,12 @@
                     </li>
                     <li><a href="#">커뮤니티</a>
                         <ul>
+                        	<li><a href="#">공지사항</a></li>
                             <li><a href="#">자유게시판</a></li>
                             <li><a href="#">정보게시판</a></li>
-                            <li><a href="#">쪽지</a></li>
-                            <li><a href="#">신고하기</a></li>
-                            <li><a href="#">퀴즈게시판</a></li>
+                            <li><a href="#">익명게시판</a></li>
+                            <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
+                            <li><a href="#">쪽지함</a></li>
                         </ul>
                     </li>
                     <li><a href="#">마이페이지</a>
@@ -71,7 +77,7 @@
                             <li><a href="#">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">건강 관리</a></li>
-                            <li><a href="#">다이어리</a></li>
+                            <li><a href="<%=contextPath%>/views/myPage/diary.jsp">다이어리</a></li>
                             <li><a href="#">가족 계정 추가</a></li>
                         </ul>
                     </li>
@@ -107,20 +113,20 @@
                 })
             </script>
 
-            <form action="" method="get" id="index_search_bar">
+            <form action="hosSch.dy" method="get" id="index_search_bar">
                 <!-- 메인화면 검색창 -->
                 <input type="text" name="index_search" placeholder="검색어를 입력하세요.">
                 <!-- 검색창 아이콘 -->                
-                <div id="icon_search">
+                <button type="submit" id="icon_search">
                     <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-                </div>
+                </button>
             </form>
             <script>
-            	$(function(){
-            		
-            		$('#icon_search').click(function(){
-            			location.href = '<%= contextPath %>/views/hospital/hosSearch.jsp';
-            		})
+            	// 엔터키 이벤트
+            	document.getElementById('index_search_bar').addEventListener('keyup', function(e){
+            		if(e.keyCode == 13){
+            			document.getElementById("icon_search").click();
+            		}
             	})
             
             </script>

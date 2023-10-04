@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.cou.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.close;
-import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
+import static com.kh.DoctorLee.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -20,6 +19,20 @@ public class CouService {
 		
 		return list;
 		
+	}
+
+	public int insertVideo(CouVideo cv) {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().insertVideo(conn, cv);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
 
 }

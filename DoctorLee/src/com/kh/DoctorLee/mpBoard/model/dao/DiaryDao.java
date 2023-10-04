@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.DoctorLee.common.JDBCTemplate;
+import com.kh.DoctorLee.mpBoard.model.vo.FamDiary;
 import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 
 	public class DiaryDao {
@@ -39,6 +40,24 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			return result;
 			
 			
+		}
+		public int insertFamDiary(Connection conn,FamDiary fd) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("insertFamDiary");
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, fd.getFamDirTitle());
+				pstmt.setString(2, fd.getFamDirContent());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(pstmt);
+			}
+			
+			
+			return result;
 		}
 	
 }

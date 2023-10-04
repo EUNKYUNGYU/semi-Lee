@@ -4,9 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>에러페이지</title>
+	<style>
+		h1{
+			color: red;
+			margin-top: 100px;
+			text-align: center;
+			font-size: 33px;
+			font-weight: bold;
+		}
+	</style>
 </head>
 <body>
+	<h1><%= errorMsg %></h1>
 
 </body>
 </html>

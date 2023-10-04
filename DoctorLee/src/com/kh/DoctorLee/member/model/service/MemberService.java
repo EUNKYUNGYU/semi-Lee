@@ -3,6 +3,7 @@ package com.kh.DoctorLee.member.model.service;
 import java.sql.Connection;
 
 import com.kh.DoctorLee.common.JDBCTemplate;
+import com.kh.DoctorLee.member.model.dao.MemberDao;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 public class MemberService {

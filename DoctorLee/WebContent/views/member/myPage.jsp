@@ -217,7 +217,7 @@
                     	이용하시려면 로그인이 필요합니다.
 
                         
-                    <form action="/jsp/login.do" method="post" id="login_form_input">
+                    <form action="<%=contextPath%>/login.me" method="post" id="login_form_input">
                         
                         <div id="id_1" align="center">
                             <input type="text" id="id_1" name="userId" placeholder="아이디" required>
@@ -233,7 +233,7 @@
     
                     </form>
                 
-                    <input type="button" id="loginbtn" value="로그인"></input>
+                    <input type="submit" id="loginbtn" value="로그인"></input>
 
                 </div>
                 
@@ -242,7 +242,7 @@
         </div>
         <div id="content_3">
             <z class="z-test" id="z1" align="center">
-                <a href="#" id="register">회원가입 <br><br>
+                <a href="#" id="register" onclick="enrollPage();">회원가입 <br><br>
                 <span style="font-size: 13px; font-weight: lighter; color: gray;">
                     낭만닥터 이사부의 회원이 <br>
                     되시면 홈페이지에서 제공하는 <br>
@@ -261,13 +261,17 @@
                         하실 수 있습니다. </span>
 
                 </a>
-    
             </z>
         </div>
-        
 
     </div>
     
+    <script>
+        function enrollPage(){
+            location.href = "<%=contextPath%>/enrollForm.me";
+        }
+    </script>
+
 
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

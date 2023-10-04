@@ -17,15 +17,11 @@
 		  		PHONE,
 		  		INUM,
 		  		EMAIL,
-		  		GENDER,
-		  		HEIGHT,
-		  		WEIGHT
+		  		GENDER
 		  		)
 	  VALUES
 	  			(
-	  			SEQ_MNO.NEXTVAL,
-	  			?,
-	  			?,
+	  			SEQ_MEMBER_NO.NEXTVAL,
 	  			?,
 	  			?,
 	  			?,

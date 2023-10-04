@@ -42,8 +42,9 @@ public class MemberInsertController extends HttpServlet {
 		String iNum = request.getParameter("iNum");
 		String email = request.getParameter("email");
 		String gender = request.getParameter("gender");
-		int height = Integer.parseInt(request.getParameter("height"));
-		int weight = Integer.parseInt(request.getParameter("weight"));
+	
+		
+		
 		
 		
 		Member m = new Member();
@@ -55,8 +56,7 @@ public class MemberInsertController extends HttpServlet {
 		m.setiNum(iNum);
 		m.setEmail(email);
 		m.setGender(gender);
-		m.setHeight(height);
-		m.setWeight(weight);
+		
 		
 		int result = new MemberService().insertMember(m);
 	

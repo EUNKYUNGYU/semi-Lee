@@ -14,7 +14,7 @@
         /*전체를 감싸는 div 속성*/
         #content{
             width: 1800px;
-            height: 500px;
+            height: 2800px;
         }
 
        
@@ -25,14 +25,14 @@
         }
 
         #content_1{height: 10%;}
-        .content_2{height: 40%;}
-        #content_3{height: 50%;}
+        .content_2{height: 80%;}
+        #content_3{height: 10%;}
 
         /*-----------------content_2-----------------*/
         
         .content_2{
             width: 1200px;
-            height: 800px;
+            height: 1000px;
             float: left;
             margin-left: 300px;
             
@@ -74,7 +74,7 @@
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
-            padding-top : 30px
+            margin-top: -150px;
         }
 
         #p2{
@@ -176,12 +176,18 @@
                         <br>
                         이름*
                         <br><br>
-                        <input type="text" name="user_name" value="" class="box"> <br>
+                        <input type="text" name="user_name" class="box"> <br>
                         <br>
                         <hr>
                         <br>
                        
   
+   		    닉네임*
+                        <br><br>
+                        <input type="text" name="nickName" class="box"> <br>
+                        <br>
+                        <hr>
+                        <br>
                         성별*
                         <br><br>
                         <label for="man">남자</label>
@@ -198,10 +204,17 @@
                         <br>
                         휴대전화*
                         <br><br>
-                        <input type="text" name="user_phone" placeholder="010-****-****" class="box">
+                        <input type="text" name="user_phone" placeholder="-을 제외하고 입력하세요." class="box">
                         <br><br><br>
                         <hr>
                         <br>
+                  주민등록번호*
+                        <br><br>
+                        <input type="password" name="user_inum" placeholder="-을 제외하고 입력하세요." class="box">
+                        <br><br>
+                        <hr>
+                        <br>
+                        
                         <input type="checkbox">[필수] 이용약관동의
                         <br><br>
                         <div class="auto">
@@ -344,13 +357,13 @@
                         <br>
                         키
                         <br><br>
-                        <input type="password" placeholder="                                                     cm" class="box">
+                        <input type="text" placeholder="                                                     cm" class="box">
                         <br><br>
                         <hr>
                         <br>
                         몸무게
                         <br><br>
-                        <input type="password" placeholder="                                                     kg" class="box">
+                        <input type="text" placeholder="                                                     kg" class="box">
                         <br><br>
                         <hr>
                         <br>
@@ -395,34 +408,30 @@
                         <input type="checkbox" value="견과류">견과류
                         <input type="checkbox" value="기타">기타
                        
-                    </form>
+                    
                 
             </div>
                 
         </div>
       
        
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br>
+       
       
         
-        <hr style="border: 1px solid rgb(226, 226, 226);">
+        <!--<hr style="border: 1px solid rgb(226, 226, 226);">-->
 
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+       
         <div id="content_3" align="center">
             
-            <input type="button" id="cancel" value="취소"></input>
+            <button type="reset" id="cancel">취소</button>
             <button type="submit" id="register">회원가입</button>
         </div>
         
 
     </div>
     
-
+</form>
 
     <br><br><br><br><br><br><br><br>
 </body>

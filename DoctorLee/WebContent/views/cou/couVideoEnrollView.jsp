@@ -7,6 +7,14 @@
 <title>심리 영상 등록 페이지</title>
 <style>
     /*영상 등록 폼*/
+    .content{
+        margin-left: 200px;
+    }
+
+    .content > div{
+        float: left;
+    }
+
     #video-list{
         width: 1260px;
         margin-left: 10px;
@@ -15,7 +23,7 @@
     .enrollVideo{
         background-color: #1E376F;
         border-radius: 10px;
-        width: 1260PX;
+        width: 1260px;
     }
 
     .enrollVideo th, .enrollVideo h3{

@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.cou.model;
+package com.kh.DoctorLee.cou.model.vo;
 
 public class CouVideo {
 	private int videoNo;

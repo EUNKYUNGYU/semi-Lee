@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.cou.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.close;
-import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
+import static com.kh.DoctorLee.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;

@@ -1,1 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectVideoList">
+		SELECT 
+				VIDEO_NO,
+				MEM_NO,
+				VIDEO_TITLE,
+				CHANNEL_NAME,
+				VIDEO_ADDRESS
+		  FROM
+		  		TB_COU_VIDEO
+		 ORDER
+		 	BY  VIDEO_NO DESC 		
+	</entry>
+</properties>
+

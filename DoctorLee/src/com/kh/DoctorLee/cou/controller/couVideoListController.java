@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.cou.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.cou.model.service.CouService;
+import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
 /**
  * Servlet implementation class couVideoListController
@@ -31,9 +33,9 @@ public class couVideoListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		new CouService().selectVideoList();
+		ArrayList<CouVideo> list = new CouService().selectVideoList();
 		
-		
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/cou/couVideoListView.jsp").forward(request, response);
 	}

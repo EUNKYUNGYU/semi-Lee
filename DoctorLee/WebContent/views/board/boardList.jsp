@@ -8,7 +8,7 @@
 <style>
     *{
         box-sizing: border-box;
-        border: 1px solid paleturquoise;
+        border: 1px solid rgb(216, 209, 248);
     }
 
     #header{

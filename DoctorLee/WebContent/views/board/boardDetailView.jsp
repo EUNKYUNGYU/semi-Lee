@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 작성</title>
+<title>게시판 상세보기</title>
 <style>
 * {
 	box-sizing: border-box;
@@ -89,50 +89,15 @@ footer {
 		<div id="contentWrap">
 
 
-			<header id="boardHeader">게시글작성</header>
+			<header id="boardHeader">게시판이름</header>
 			
 			<article id="boardArticle">
-				<form enctype="multipart/form-data"
-        		action="<%= contextPath %>/insert.bo" method="post" id="enroll-form">
 				
 				<div id="boardContent">
-				
-				<div id="buttonWrap">
-					<button type="submit">게시글 등록</button>
+					
+					
 				</div>
 				
-					<table align="center" id="boardTable">
-						<thead>
-							<tr>
-								<th>
-									<select style="width:900px; height:50px" name="category" id="">
-										<option value="20">자유게시판</option>
-                            			<option value="30">정보게시판</option>
-                            			<option value="40">익명게시판</option>
-                        			</select>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th height="70">
-									<input style="width:900px; height:50px" type="text" placeholder="제목을 입력해주세요" name="boardTitle">
-								</th>
-							</tr>
-							<tr>
-								<th>
-									<input style="width:900px; height:300px" type="text" placeholder="내용을 입력해주세요" name="boardContent">
-								</th>
-							</tr>
-							<tr>
-								<th height="70">
-									<input type="file" name="file" >
-								</th>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</form>
 			</article>
 			
 		</div>

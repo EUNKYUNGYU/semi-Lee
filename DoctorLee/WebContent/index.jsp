@@ -36,10 +36,10 @@
                 <ul id="nav">
                     <li><a href="#">심리</a>
                         <ul>
+                            <li><a href="#">성향 테스트</a></li>
                             <li><a href="#">고민 나눔</a></li>
-                            <li><a href="#">상담 예약</a></li>
-                            <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
-                            <li><a href="<%=contextPath%>/couVideoList.cou">심리 영상</a></li>
+                            <li><a href="#">심리 상담 예약</a></li>
+                            <li><a href="<%=contextPath%>/couVideoList.cou">심리 치료 추천 영상</a></li>
                         </ul>
                     </li>
                     <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
@@ -54,19 +54,15 @@
                         <ul>
                         	<li>
                                 <a href="<%= contextPath %>/list.bo">공지사항</a>
-                                <input type="hidden" name="boardType" value="10">
                             </li>
                             <li>
                                 <a href="<%= contextPath %>/list.bo">자유게시판</a>
-                                <input type="hidden" name="boardType" value="20">
                             </li>
                             <li>
                                 <a href="<%= contextPath %>/list.bo">정보게시판</a>
-                                <input type="hidden" name="boardType" value="30">
                             </li>
                             <li>
                                 <a href="<%= contextPath %>/list.bo">익명게시판</a>
-                                <input type="hidden" name="boardType" value="40">
                             </li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
                             <li><a href="#">쪽지함</a></li>
@@ -74,7 +70,6 @@
                     </li>
                     <li><a href="#">마이페이지</a>
                         <ul>
-                        	<li><a href="<%=contextPath%>/views/myPage/myPageMain.jsp">마이페이지</a></li>
                             <li><a href="#">복약관리</a></li>
                             <li><a href="#">회원 정보 수정</a></li>
                             <li><a href="#">회원 탈퇴</a></li>
@@ -84,27 +79,18 @@
                             <li><a href="#">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">건강 관리</a></li>
-                            <li><a href="<%=contextPath %>/myEnroll.di">다이어리</a></li>
+                            <li><a href="<%=contextPath%>/views/myPage/diary.jsp">다이어리</a></li>
                             <li><a href="#">가족 계정 추가</a></li>
                         </ul>
                     </li>
                 </ul>
             </div
             ><div id="navi3">
-                <button id="login" onclick="loginPage();">로그인</button>
-                <button id="createId" onclick="enrollPage();">회원가입</button>
+                <button id="login">로그인</button>
+                <button id="createId">회원가입</button>
             </div
         ></div>
-        
-		<script>
-			function enrollPage(){
-				location.href= "<%=contextPath%>/enrollForm.me";
-			}
-			
-			function loginPage(){
-				location.href="<%=contextPath%>/login.me";
-			}
-		</script>
+
 
         <!-- 헤더 영역 -->
         <header>

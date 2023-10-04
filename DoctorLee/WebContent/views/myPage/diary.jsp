@@ -240,7 +240,7 @@
                     
                   </table>
                   <br>
-                  <a href="<%=contextPath%>/myEnroll.di">작성하기</a>
+                  <a href="<%=contextPath%>/views/diary/famDiaryEnrollForm.jsp">작성하기</a>
                 <br><br>
                 
         	</div>

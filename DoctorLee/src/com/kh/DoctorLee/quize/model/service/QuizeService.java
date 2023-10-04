@@ -1,12 +1,14 @@
 package com.kh.DoctorLee.quize.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.DoctorLee.quize.model.dao.QuizeDao;
 import com.kh.DoctorLee.quize.model.vo.Quize;
+import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
 
 public class QuizeService {
 
@@ -17,6 +19,15 @@ public class QuizeService {
 		close(conn);
 		return list;
 	}
+	
+	public ArrayList<QuizeAnswer> QuizeAnswer(){
+		
+		Connection conn = getConnection();
+		ArrayList<QuizeAnswer> list = new QuizeDao().QuizeAnswer(conn);
+		close(conn);
+		return list;
+	}
+	
 	
 	
 	

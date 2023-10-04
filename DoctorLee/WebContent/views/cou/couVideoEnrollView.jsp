@@ -57,7 +57,7 @@
             <!--심리 영상 내용 출력 영역 div-->
             <div id="video-list">
                 <div class="enrollVideo" align="center">
-                    <form action="insertVideo.cou">
+                    <form action="insertVideo.cou" method="post">
                         <table align="center">
                             <br>
                             <h3>영상 게시하기</h3>
@@ -79,7 +79,7 @@
                         </table>
                         
                         <div>
-                            <button type="submit" id="submitBtn">등록하기</button>
+                            <button type="submit" id="submitBtn" >등록하기</button>
                         </div>
                         <br>
                     </form>

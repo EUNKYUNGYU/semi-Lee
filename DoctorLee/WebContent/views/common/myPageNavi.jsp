@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String contextPath = request.getContextPath();
+	String contextPath1 = request.getContextPath();
 %>
+
     
 
 <!DOCTYPE html>
@@ -124,10 +125,10 @@
                         </ul>
                     </li>
                     <li><a href="#">건강 관리</a></li>
-                    <li><a href="<%=contextPath%>/views/myPage/diary.jsp"">다이어리</a>
+                    <li><a href="<%=contextPath1 %>/views/myPage/diary.jsp">다이어리</a>
                         <ul>
-                            <li><a href="<%=contextPath%>/views/myPage/diary.jsp"">내 다이어리</a></li>
-                            <li><a href="<%=contextPath%>/views/myPage/diary.jsp"">가족 다이어리</a></li>
+                            <li><a href="<%=contextPath1 %>/views/myPage/diary.jsp">내 다이어리</a></li>
+                            <li><a href="<%=contextPath1 %>/views/myPage/diary.jsp">가족 다이어리</a></li>
                         </ul>
                     </li>
 

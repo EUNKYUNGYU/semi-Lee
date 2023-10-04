@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>심리 좌측 메뉴</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
 <style>
     div{
         box-sizing: border-box;

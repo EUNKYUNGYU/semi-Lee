@@ -1,28 +1,23 @@
-package com.kh.DoctorLee.cou.controller;
+package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.cou.model.service.CouService;
-import com.kh.DoctorLee.cou.model.vo.CouVideo;
-
 /**
- * Servlet implementation class couVideoListController
+ * Servlet implementation class FDEnrollDiary
  */
-@WebServlet("/couVideoList.cou")
-public class couVideoListController extends HttpServlet {
+@WebServlet("/famEnroll.di")
+public class FDEnrollDiary extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public couVideoListController() {
+    public FDEnrollDiary() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +26,6 @@ public class couVideoListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		ArrayList<CouVideo> list = new CouService().selectVideoList();
-		
-		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/cou/couVideoListView.jsp").forward(request, response);
 	}
 
 	/**

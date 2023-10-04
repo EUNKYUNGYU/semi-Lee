@@ -52,10 +52,22 @@
                     </li>
                     <li><a href="#">커뮤니티</a>
                         <ul>
-                        	<li><a href="#">공지사항</a></li>
-                            <li><a href="#">자유게시판</a></li>
-                            <li><a href="#">정보게시판</a></li>
-                            <li><a href="#">익명게시판</a></li>
+                        	<li>
+                                <a href="<%= contextPath %>/list.bo">공지사항</a>
+                                <input type="hidden" name="boardType" value="10">
+                            </li>
+                            <li>
+                                <a href="<%= contextPath %>/list.bo">자유게시판</a>
+                                <input type="hidden" name="boardType" value="20">
+                            </li>
+                            <li>
+                                <a href="<%= contextPath %>/list.bo">정보게시판</a>
+                                <input type="hidden" name="boardType" value="30">
+                            </li>
+                            <li>
+                                <a href="<%= contextPath %>/list.bo">익명게시판</a>
+                                <input type="hidden" name="boardType" value="40">
+                            </li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
                             <li><a href="#">쪽지함</a></li>
                         </ul>

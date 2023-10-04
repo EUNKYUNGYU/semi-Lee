@@ -35,6 +35,7 @@ public class BoardListController extends HttpServlet {
 		ArrayList<Board> list = new BoardService().selectBoard();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
+		System.out.println("보드 리스트 controller"+list);
 		
 	}
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>심리 영상 등록 페이지</title>
+<title>심리 전체적인 틀</title>
 <style>
     .outer{
         border: 1px solid red;
@@ -12,14 +12,28 @@
         margin-left: 50px;
     }
 
-    /*영상 등록 폼*/
+    /*상단 네비*/
+    #navi{
+        border: 1px solid pink;
+        height: 100px;
+    }
+
+    /*하단 내용 영역을 감싸는 div*/
     .content{
+        border: 1px solid green;
         height: 1000px;
         margin-top: 100px;
     }
 
     .content > div{
         float: left;
+    }
+
+    /*좌측 메뉴 영역 div*/
+    #cou_navi{
+        border: 1px solid orange;
+        height: 100%;
+        width: 225px;
     }
 
     /*내용 영역*/
@@ -46,9 +60,11 @@
         height: 30px;
         border-radius: 10px;
     }
+    
 </style>
 </head>
 <body>
+
     <!--상단 네비게이션 메뉴 div-->
     <%@ include file="../common/nav.jsp"%>
 
@@ -94,13 +110,12 @@
                         </div>
                         <br><br>
                     </form>
-                    
                 </div>
-    
             </div>
+
         </div>
-    
-        </div>
+
+    </div>
 
 </body>
 </html>

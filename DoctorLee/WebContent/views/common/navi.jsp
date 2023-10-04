@@ -230,9 +230,10 @@ header{
                 <button id="createId" onclick="enrollPage();">회원가입</button>
             </div
         ></div>
+        
 		<script>
 			function enrollPage(){
-				location.href= "<%=contextPath%>/enrollForm.me;
+				location.href= "<%=contextPath%>/enrollForm.me";
 			}
 		</script>
 
@@ -270,5 +271,6 @@ header{
 
         </header>
 
+		
 </body>
 </html>

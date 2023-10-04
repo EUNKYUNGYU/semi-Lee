@@ -21,4 +21,9 @@ public class CouService {
 		
 	}
 
+	public int insertVideo(CouVideo cv) {
+		Connection conn = getConnection();
+		return 0;
+	}
+
 }

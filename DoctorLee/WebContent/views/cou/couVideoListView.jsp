@@ -65,7 +65,7 @@ img{
         <div id="video-list">
 
             <div align="right">
-                <a href="<%=contextPath%>/couVideoEnroll.cou" >등록하기</a>
+                <a href="<%=contextPath%>/couVideoEnroll.cou">등록하기</a>
             </div>
             
             <!-- 동영상이 존재하지 않을 경우 -->

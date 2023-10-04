@@ -55,8 +55,8 @@ img{
         <!--심리 영상 내용 출력 영역 div-->
         <div id="video-list">
 
-            <div id="button" align="right">
-                <button type="button" id="enrollVideo">등록하기</button>
+            <div align="right">
+                <a href="" >등록하기</a>
             </div>
             
 

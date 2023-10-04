@@ -217,7 +217,7 @@
                     	이용하시려면 로그인이 필요합니다.
 
                         
-                    <form action="login.do" method="post" id="login_form_input">
+                    <form action="/jsp/login.do" method="post" id="login_form_input">
                         
                         <div id="id_1" align="center">
                             <input type="text" id="id_1" name="userId" placeholder="아이디" required>

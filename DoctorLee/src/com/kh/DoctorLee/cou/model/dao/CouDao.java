@@ -69,6 +69,10 @@ public class CouDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setString(1, cv.getVideoTitle());
+			pstmt.setString(2, cv.getChannelName());
+			pstmt.setString(3, cv.getVideoAddress());
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

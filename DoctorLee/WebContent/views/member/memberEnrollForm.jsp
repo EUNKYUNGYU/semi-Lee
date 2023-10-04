@@ -145,7 +145,7 @@
             
             <div class="content_2">
                 
-                    <form name="login" action="index.html" method="post" class="formfont">
+                    <form id="enroll-form" action="<%=contextPath%>/insert.me" method="post" class="formfont">
                         <br><br>
                         <span style="font-size: 23px; font-weight: bold;">기본입력사항(필수)</span>
                         <br><br><br>

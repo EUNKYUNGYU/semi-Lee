@@ -1,23 +1,28 @@
-package com.kh.DoctorLee.mpBoard.controller;
+package com.kh.DoctorLee.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.board.model.service.BoardService;
+import com.kh.DoctorLee.board.model.vo.Board;
+
 /**
- * Servlet implementation class MDEnorollDiary
+ * Servlet implementation class BoardListController
  */
-@WebServlet("/myEnroll.di")
-public class MDEnorollDiary extends HttpServlet {
+@WebServlet("/list.bo")
+public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MDEnorollDiary() {
+    public BoardListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +31,11 @@ public class MDEnorollDiary extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/myPage/diary.jsp").forward(request, response);
+	
+		ArrayList<Board> list = new BoardService().selectBoard();
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
+		
 	}
 
 	/**

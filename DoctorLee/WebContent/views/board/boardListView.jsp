@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.DoctorLee.board.model.vo.Board" %>
+<% 
+	String contextPath = request.getContextPath(); 
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,19 +90,23 @@
                     <th width="100">조회수</th>
                     <th width="100">추천수</th>
                 </tr>
-
+				<% if(list.isEmpty()) { %>
                 <tbody>
                     <tr>
                         <td colspan="6">조회된 게시글이 없습니다.</td>
                     </tr>
+                <% } else { %>
+                	<% for(Board b : list) { %>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><%= b.getBoardNo() %></td>
+                        <td><%= b.getBoardTitle() %></td>
+                        <td><%= b.getBoardNo() %></td>
+                        <td><%= b.getBoardNo() %></td>
+                        <td><%= b.getBoardNo() %></td>
+                        <td><%= b.getBoardNo() %></td>
                     </tr>
+                     <% } %>
+                 <% } %>
                 </tbody>
 
             </thead>

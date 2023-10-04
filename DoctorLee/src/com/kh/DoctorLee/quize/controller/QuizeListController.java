@@ -38,9 +38,6 @@ public class QuizeListController extends HttpServlet {
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
 		
-		System.out.print(list);
-		
-		
 	}
 
 	/**

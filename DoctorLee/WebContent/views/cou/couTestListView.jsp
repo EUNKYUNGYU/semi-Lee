@@ -8,7 +8,8 @@
 <style>
         .outer{
             border: 1px solid red;
-            width: 1500px;
+            width: 1800px;
+            margin-left: 50px;
         }
 
         /*상단 네비*/
@@ -20,7 +21,8 @@
         /*하단 내용 영역을 감싸는 div*/
         .content{
             border: 1px solid green;
-            width: 1800px;
+            height: 1000px;
+            margin-top: 100px;
         }
 
         .content > div{
@@ -48,18 +50,20 @@
         /*성향 테스트 목록 컨텐츠*/
         .thumbnail{
             border: 1px solid brown;
-            width: 1265px;
+            width: 1400px;
+            margin-left: 100px;
+            border-radius: 10px;
         }    
 </style>
 </head>
 <body>
+
+    <!--상단 네비게이션 메뉴 div-->
+    <%@ include file="../common/nav.jsp"%>
+
     <!--전체를 감싸는 div-->
     <div class="outer">
 
-        <!--상단 네비게이션 메뉴 div-->
-        <%@ include file="../common/nav.jsp"%>
-
-        <br><br><br><br>
         <!--하단 내용 영역을 감싸는 div-->
         <div class="content" align="center">
 

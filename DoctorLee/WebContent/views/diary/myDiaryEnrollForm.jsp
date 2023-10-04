@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String contextPath = request.getContextPath();
+	String contextPath2 = request.getContextPath();
 
 %>
 <style>
@@ -27,7 +27,7 @@
     <div class="outer">
         <br>
         <h2 align="center">내 다이어리 쓰기</h2>
-        <form action="<%=contextPath%>/myInsert.di" id="enroll-form" method="post">
+        <form action="<%=contextPath2%>/myInsert.di" id="enroll-form" method="post">
             
             <br><br><br>
             <table align="center">

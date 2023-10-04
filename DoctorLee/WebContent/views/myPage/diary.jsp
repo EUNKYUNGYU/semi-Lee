@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
 
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,8 +117,8 @@
    
     <div id="diary">
         <div id="area">
-        	<%@ include file="../common/myPageNavi.jsp" %>
         
+        	<%@ include file="../common/myPageNavi.jsp" %>
 
         </div>
     	
@@ -242,7 +240,7 @@
                     
                   </table>
                   <br>
-                  <a href="<%=contextPath%>/views/diary/famyDiaryEnrollForm.jsp">작성하기</a>
+                  <a href="<%=contextPath%>/myEnroll.di">작성하기</a>
                 <br><br>
                 
         	</div>

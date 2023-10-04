@@ -2,6 +2,7 @@ package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,9 @@ public class MDInsertDiary extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		
+
+		
 	}
 
 	/**
@@ -39,7 +42,6 @@ public class MDInsertDiary extends HttpServlet {
 		doGet(request, response);
 		HttpSession session = request.getSession();
 		
-		request.getRequestDispatcher("views/diary/myDiaryEnrollForm.jsp");
 	}
 
 }

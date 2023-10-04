@@ -63,7 +63,7 @@
 
     #cli-inner{
         border: 1px solid blue;
-        width: 1200px;
+        width: auto;
         height: auto;
     }
 
@@ -74,6 +74,7 @@
     .cli-box{
         border: 1px solid red;
         width: 580px;
+        margin-left: 50px;
     }
 
     .cli-img > img{
@@ -82,6 +83,7 @@
         border: 1px solid blue;
         margin-top: 30px;
         padding: 10px;
+        margin-left: 10px;
     }
 
     .cli-des{
@@ -89,14 +91,36 @@
         width: 350px;
         margin-left: 10px;
         padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .cli-content > div {
         float: left;
     }
 
+    /*카테고리 영역*/
     .cate{
         opacity: 0;
+    }
+
+    .cate > label{
+        padding: 5px 10px;
+    }
+
+    input[type=radio]+label{
+        color: black;
+        border-radius: 10px;
+        text-align: center;
+        padding-top: 10px;
+        padding-left: 10px;
+        display: inline-block;
+        font-size: 20px;
+    }
+
+    input[type=radio]:checked + label{
+        color: blue;
+        text-decoration: underline;
     }
 </style>
 </head>
@@ -119,8 +143,10 @@
             <div id="cli-content">
 
                 <!--클리닉 카테고리 영역 div-->
-                <div id="cli-cate">
-                    <input type="radio" name="cate" value="피부"> 피부
+                <div id="cli-cate" align="left">
+                    <input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label>
+                    <input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label>
+                    <input type="radio" class="cate" name="cate" id="body"><label for="body">몸매 관리</label>
                 </div>
 
                 <!--클리닉 내용 출력 영역 div-->

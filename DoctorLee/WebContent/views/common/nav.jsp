@@ -116,7 +116,7 @@ body{
                             <li><a href="<%=contextPath%>/couVideoList.cou">심리 영상</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">클리닉</a></li>
+                    <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
                     <li><a href="#">건강 메거진</a>
                         <ul>
                             <li><a href="#">의약품 검색</a></li>

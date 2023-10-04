@@ -42,6 +42,14 @@ public class couVideoInsertController extends HttpServlet {
 		cv.setVideoAddress(videoAddress);
 		
 		int result = new CouService().insertVideo(cv); 
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "동영상 등록 성공");
+			response.sendRedirect(request.getContextPath() + "/couVideoList.cou");
+		} else {
+			request.getSession().setAttribute("alertMsg", "동영상 등록 실패");
+			response.sendRedirect(request.getContextPath() + "/couVideoList.cou");
+		}
 	}
 
 	/**

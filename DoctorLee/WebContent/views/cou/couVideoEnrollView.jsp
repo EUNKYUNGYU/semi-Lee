@@ -7,30 +7,32 @@
 <title>심리 영상 등록 페이지</title>
 <style>
     /*영상 등록 폼*/
-    .video-list{
-        border: 1px solid red;
+    #video-list{
+        width: 1260px;
+        margin-left: 10px;
+        margin-top: 120px;
     }
     .enrollVideo{
-            background-color: #1E376F;
-            border-radius: 10px;
-            width: 1260PX;
-        }
+        background-color: #1E376F;
+        border-radius: 10px;
+        width: 1260PX;
+    }
 
-        .enrollVideo th, .enrollVideo h3{
-            color: white;
-        }
+    .enrollVideo th, .enrollVideo h3{
+        color: white;
+    }
 
-        input[type=text]{
-            width: 500px;
-            height: 40px;
-            margin-bottom: 30px;
-        }
+    input[type=text]{
+        width: 500px;
+        height: 40px;
+        margin-bottom: 30px;
+    }
 
-        #submitBtn{
-            width: 100px;
-            height: 30px;
-            border-radius: 10px;
-        }
+    #submitBtn{
+        width: 100px;
+        height: 30px;
+        border-radius: 10px;
+    }
 </style>
 </head>
 <body>
@@ -47,7 +49,7 @@
             <!--심리 영상 내용 출력 영역 div-->
             <div id="video-list">
                 <div class="enrollVideo" align="center">
-                    <form action="enrollVideo.co">
+                    <form action="insertVideo.cou">
                         <table align="center">
                             <br>
                             <h3>영상 게시하기</h3>

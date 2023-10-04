@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,8 +31,24 @@ public class MDInsertDiary extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String diaryTitle = request.getParameter("title");
+		String diaryContent = request.getParameter("content");
 		
-
+		MyDiary md = new MyDiary();
+		
+		md.setDiaryTitle(diaryTitle);
+		md.setDiaryContent(diaryContent);
+		
+		int result = new DiaryService().insertMyDiary(md);
+		
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/myEnroll.di");
+		}else {
+			request.setAttribute("errorMsg", "등록 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp");
+		}
+		
 		
 	}
 
@@ -41,12 +58,10 @@ public class MDInsertDiary extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		String diaryNo = request.getParameter("diaryNo");
-		String diaryTitle = request.getParameter("title");
-		String createDate = request.getParameter("createDate");
 		
-		MyDiary md = new MyDiary();
-		new DiaryService().insertMyDiary(md);
+
+		
+		
 		
 		
 	}

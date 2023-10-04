@@ -8,9 +8,17 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 
 public class DiaryService {
 	
-	public void insertMyDiary(MyDiary md) {
+	public int insertMyDiary(MyDiary md) {
 		Connection conn = JDBCTemplate.getConnection();
-		new DiaryDao().insertMyDiary(conn,md);
+		int result = new DiaryDao().insertMyDiary(conn,md);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+			
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 		
 	}
 

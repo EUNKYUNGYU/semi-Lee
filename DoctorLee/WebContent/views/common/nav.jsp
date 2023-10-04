@@ -146,7 +146,7 @@
                 </ul>
             </div
             ><div id="navi3">
-                <button id="login">로그인</button>
+                <button id="login"  onclick="loginPage();">로그인</button>
                 <button id="createId" onclick="enrollPage();">회원가입</button>
             </div
         ></div>
@@ -154,6 +154,10 @@
 		<script>
 			function enrollPage(){
 				location.href= "<%=contextPath%>/enrollForm.me";
+			}
+			
+			function loginPage(){
+				location.href="<%=contextPath%>/login.me";
 			}
 		</script>
 

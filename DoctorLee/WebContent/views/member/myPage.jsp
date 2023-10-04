@@ -248,13 +248,13 @@
                     되시면 홈페이지에서 제공하는 <br>
                     온라인 서비스를 이용하실 수 있습니다.</span>
             </a>
-                <a href="#" id="find1">아이디 찾기 <br><br>
+                <a href="#" id="find1" onclick="findIdPage();">아이디 찾기 <br><br>
                     <span style="font-size: 13px; font-weight: lighter; color: gray;">
                         성함, 이메일을 통해 <br>
                         아이디를 확인 <br>
                         하실 수 있습니다.</span>
                 </a>
-                <a href="#" id="find2">비밀번호 찾기 <br><br>
+                <a href="#" id="find2" onclick="findPwdPage();">비밀번호 찾기 <br><br>
                     <span style="font-size: 13px; font-weight: lighter; color: gray;">
                         아이디, 이메일을 통해 <br>
                         임시비밀번호로 서비스를 이용 <br>
@@ -270,6 +270,15 @@
         function enrollPage(){
             location.href = "<%=contextPath%>/enrollForm.me";
         }
+        
+        function findIdPage(){
+            location.href = "<%=contextPath%>/findIdForm.me";
+        }
+        
+        function findPwdPage(){
+            location.href = "<%=contextPath%>/findPwdForm.me";
+        }
+        
     </script>
 
 

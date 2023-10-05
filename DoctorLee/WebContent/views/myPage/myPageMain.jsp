@@ -155,8 +155,8 @@
                     <li><a href="#">건강 관리</a></li>
                     <li><a href="#">다이어리</a>
                         <ul>
-                            <li><a href="#">내 다이어리</a></li>
-                            <li><a href="#">가족 다이어리</a></li>
+                            <li><a href="<%=contextPath%>/myEnroll.di">내 다이어리</a></li>
+                            <li><a href="<%=contextPath%>/myEnroll.di">가족 다이어리</a></li>
                         </ul>
                     </li>
 

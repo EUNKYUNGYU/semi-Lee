@@ -35,8 +35,9 @@ public class DiaryListController extends HttpServlet {
 		ArrayList<MyDiary> list = new DiaryService().selectMyDiary();
 		request.setAttribute("list", list);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/diary.jsp");
-		view.forward(request, response);
+		
+		 RequestDispatcher view = request.getRequestDispatcher("/views/myPage/diary.jsp");
+		 view.forward(request, response);
 	}
 
 	/**

@@ -23,6 +23,7 @@ public class Member {
 	public Member() {
 		super();
 	}
+	
 
 
 	public Member(int memNo, String memId, String memPwd, String memName, String nickName, String phone, String iNum,

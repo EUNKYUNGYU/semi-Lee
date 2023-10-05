@@ -79,7 +79,7 @@
                             <li><a href="#">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">건강 관리</a></li>
-                            <li><a href="<%=contextPath%>/views/myPage/diary.jsp">다이어리</a></li>
+                            <li><a href="<%=contextPath%>/list.di">다이어리</a></li>
                             <li><a href="#">가족 계정 추가</a></li>
                         </ul>
                     </li>

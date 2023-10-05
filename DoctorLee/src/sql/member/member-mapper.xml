@@ -7,7 +7,7 @@
 	<entry key="insertMember">
 		INSERT
 		  INTO
-		  		MEMBER
+		  		TB_MEMBER
 		  		(
 		  		MEM_NO,
 		  		MEM_ID,
@@ -17,11 +17,14 @@
 		  		PHONE,
 		  		INUM,
 		  		EMAIL,
-		  		GENDER
+		  		GENDER,
+		  		CREATE_DATE,
+		  		MODIFY_DATE,
+		  		STATUS
 		  		)
 	  VALUES
 	  			(
-	  			SEQ_MEMBER_NO.NEXTVAL,
+	  			30,
 	  			?,
 	  			?,
 	  			?,
@@ -29,7 +32,10 @@
 	  			?,
 	  			?,
 	  			?,
-	  			?
+	  			?,
+	  			SYSDATE,
+	  			SYSDATE,
+	  			'Y'
 	  			)
 		  		
 	</entry>

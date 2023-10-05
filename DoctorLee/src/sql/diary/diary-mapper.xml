@@ -47,5 +47,6 @@
 			CREATE_DATE
 		FROM 
 			TB_MY_DIARY
+		ORDER BY CREATE_DATE DESC
 	</entry>
 </properties>

@@ -53,7 +53,12 @@
             width: 1400px;
             margin-left: 100px;
             border-radius: 10px;
-        }    
+        }
+        
+        .thumbnail > img{
+            width: 300px;
+            height: 300px;
+        }
 </style>
 </head>
 <body>

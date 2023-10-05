@@ -9,6 +9,7 @@
     .outer{
         width: 1800px;
         margin-left: 50px;
+        border: 1px solid red;
     }
 
     #navi{
@@ -23,16 +24,29 @@
     /*영상 등록 폼*/
     .content{
         height: 1000px;
-        margin-top: 100px;
-        margin-left: 400px;
+        margin-top: 50px;
+        border: 1px solid blue;
+    }
+
+    #left-menu{
+        margin-left: 200px;
+    }
+
+    #cou_navi{
+        height: 1000px;
+    }
+
+    #cou-video{
+        background-color: skyblue;
+        font-weight: 800;
     }
 
     /*내용 영역*/
     .enrollVideo{
         width: 1000px;
-        margin-left: 100px;
         border-radius: 10px;
         background-color: #1E376F;
+        margin-left: 100px;
     }
 
     .enrollVideo th, .enrollVideo h3{
@@ -65,7 +79,7 @@
         <div class="content" align="center">
 
             <!--좌측 메뉴 div-->
-            <div id="cou_navi">
+            <div id="left-menu">
                 <%@ include file="../common/couNavi.jsp"%>
             </div>
 

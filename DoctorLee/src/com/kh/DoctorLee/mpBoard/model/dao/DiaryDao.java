@@ -61,12 +61,35 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			
 			return result;
 		}
-		public void selectMyDiary(Connection conn) {
+		public ArrayList<MyDiary> selectMyDiary(Connection conn) {
 			ArrayList<MyDiary> list = new ArrayList();
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			
 			String sql = prop.getProperty("selectMyDiaryList");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					MyDiary md = new MyDiary();
+					md.setDiaryNo(rset.getInt("DIARY_NO"));
+					md.setDiaryTitle(rset.getString("DIARY_TITLE"));
+					md.setCreateDate(rset.getDate("CREATE_DATE"));
+					list.add(md);
+					
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return list;
+			
 			
 		}
 	

@@ -7,28 +7,46 @@
 <title>심리 영상 등록 페이지</title>
 <style>
     .outer{
-        border: 1px solid red;
         width: 1800px;
         margin-left: 50px;
+        border: 1px solid red;
     }
 
-    /*영상 등록 폼*/
-    .content{
-        height: 1000px;
-        margin-top: 100px;
+    #navi{
+        background-color: white;
+        margin-bottom: 100px;
     }
 
     .content > div{
         float: left;
     }
 
+    /*영상 등록 폼*/
+    .content{
+        height: 1000px;
+        margin-top: 50px;
+        border: 1px solid blue;
+    }
+
+    #left-menu{
+        margin-left: 200px;
+    }
+
+    #cou_navi{
+        height: 1000px;
+    }
+
+    #cou-video{
+        background-color: skyblue;
+        font-weight: 800;
+    }
+
     /*내용 영역*/
     .enrollVideo{
-        width: 1400px;
-        border: 1px solid silver;
-        margin-left: 100px;
+        width: 1000px;
         border-radius: 10px;
         background-color: #1E376F;
+        margin-left: 100px;
     }
 
     .enrollVideo th, .enrollVideo h3{
@@ -52,6 +70,8 @@
     <!--상단 네비게이션 메뉴 div-->
     <%@ include file="../common/nav.jsp"%>
 
+    <br><br><br>
+
     <!--전체를 감싸는 div-->
     <div class="outer">
 
@@ -59,7 +79,7 @@
         <div class="content" align="center">
 
             <!--좌측 메뉴 div-->
-            <div id="cou_navi">
+            <div id="left-menu">
                 <%@ include file="../common/couNavi.jsp"%>
             </div>
 

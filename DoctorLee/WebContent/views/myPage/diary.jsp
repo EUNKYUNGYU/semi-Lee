@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.MyDiary" %>
+<%
+	ArrayList<MyDiary> list = (ArrayList<MyDiary>)request.getAttribute("list");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -134,7 +138,13 @@
                       <th>제목</th>
                       <th>생성 날짜</th>
                     </tr>
-                    <tr>
+                    <% if(list.isEmpty()){%>
+                 	<tr>
+                 		<td>공지사항이 존재하지 않습니다.</td>
+                 	</tr>
+                    
+                    <% } else { %>
+                      <!-- <tr> 
                       <td>1</td>
                       <td>ㅎㅇ</td>
                       <td>2023-09-05</td>
@@ -174,8 +184,16 @@
                       <td>ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ</td>
                       <td>2023-09-27</td>
                     </tr>
+                    -->
+                    <% for(MyDiary md : list){ %>
+                    	<tr>
+                    		<td><%= md.getDiaryNo()%></td>
+                    		<td><%= md.getDiaryTitle()%></td>
+                    		<td><%= md.getCreateDate()%></td>
+                    	</tr>
+                    <%} %>
 
-                    
+                    <%} %>
                     
                   </table>
                   <br>

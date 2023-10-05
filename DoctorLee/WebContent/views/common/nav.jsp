@@ -125,7 +125,7 @@ body{
                             <li><a href="#">고민 나눔</a></li>
                             <li><a href="#">상담 예약</a></li>
                             <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
-                            <li><a href="<%=contextPath%>/couVideoList.cou">심리 영상</a></li>
+                            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 영상</a></li>
                         </ul>
                     </li>
                     <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
@@ -156,7 +156,7 @@ body{
                             <li><a href="#">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">건강 관리</a></li>
-                            <li><a href="#">다이어리</a></li>
+                            <li><a href="<%=contextPath%>/list.di">다이어리</a></li>
                             <li><a href="#">가족 계정 추가</a></li>
                         </ul>
                     </li>

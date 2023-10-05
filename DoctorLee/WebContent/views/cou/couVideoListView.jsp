@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.DoctorLee.cou.model.vo.*" %>
+<%@ page import="java.util.ArrayList, com.kh.DoctorLee.cou.model.vo.*, com.kh.DoctorLee.common.model.vo.*" %>
 <% 
 	ArrayList<CouVideo> list = (ArrayList<CouVideo>)request.getAttribute("list");
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +26,7 @@
 
 #navi{
     background-color: white;
+    margin-bottom: 100px;
 }
 
 .content > div{
@@ -28,9 +35,22 @@
 
 /*하단 내용 영역을 감싸는 div*/
 .content{
-    border: 1px solid green;
-    height: 1000px;
-    margin-top: 100px;
+    margin-top: 50px;
+    height: 2350px;
+    border: 1px solid blue;
+}
+
+#cou_navi{
+    height: 2300px;
+}
+
+#cou-video{
+    background-color: skyblue;
+    font-weight: 800;
+}
+
+.left-menu{
+    margin-left: 200px;
 }
 
 #enrollVideo{
@@ -39,8 +59,8 @@
 
 /*비디오 목록*/
 #video-list{
-    width: 1260px;
-    margin-left: 10px;
+    width: 1000px;
+    margin-left: 100px;
 }
 
 img{
@@ -53,17 +73,36 @@ img{
 }
 
 /*내용 영역*/
-    .list-content{
-        width: 1400px;
-        border: 1px solid silver;
-        margin-left: 100px;
-    }
+.list-content{
+    width: 1000px;
+    border-radius: 10px;
+    background-color: bisque;
+    margin-top: 15px;
+}
+
+/*페이징 처리 영역*/
+.paging-area{
+    width: auto;
+}
+
+#button-area> a{
+    text-decoration: none;
+    border: 1px solid navy;
+    border-radius: 10px;
+    background-color: navy;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 </style>
 </head>
 <body>
 
     <!--상단 네비게이션 메뉴 div-->
     <%@ include file="../common/nav.jsp"%>
+
+    <br><br><br>
 
     <!--전체를 감싸는 div-->
     <div class="outer">
@@ -80,7 +119,7 @@ img{
         <!--심리 영상 내용 출력 영역 div-->
         <div id="video-list">
 
-            <div align="right">
+            <div id="button-area" align="right">
                 <a href="<%=contextPath%>/couVideoEnroll.cou">등록하기</a>
             </div>
             
@@ -94,7 +133,7 @@ img{
 				<!-- 동영상이 존재할 경우  -->
 				<% for(CouVideo cv : list) { %>
 	            <div class="list-content" align="center">
-	                <hr>
+                    <br>
 	                <input type="hidden" value="<%= cv.getVideoAddress() %>">
 	                <div class="list-img">
 	                    <img src="https://img.youtube.com/vi/<%= cv.getVideoAddress() %>/maxresdefault.jpg" alt="">
@@ -103,10 +142,30 @@ img{
 	                    <h4><%= cv.getVideoTitle() %></h5>
 	                    <h4><%= cv.getChannelName() %></p>
 	                </div>
+                    <br>
 	            </div>
 	            <% } %>
             
             <%} %>
+
+            <br>
+            <div class="paging-area" align="center">
+                <% if(currentPage != 1) {%>
+                    <button onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=<%=currentPage -1%>'">&lt</button>
+                <% }%>
+                
+                <% for(int i = startPage; i <= endPage; i++) {%>
+                    <% if(currentPage != i) { %>
+                        <button onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=<%=i%>'"><%= i%></button>
+                    <% } else { %>
+                        <button disabled><%= i%></button>    
+                    <% } %>
+                <% } %>
+                
+                <% if(currentPage != maxPage) { %>
+                    <button onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage\<%=currentPage + 1%>'">&gt</button>
+                <% } %>
+            </div>
 
         </div>
     </div>

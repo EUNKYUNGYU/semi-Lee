@@ -153,7 +153,7 @@
                         <br>
                         아이디*
                         <br><br>
-                        <input type="text" name="user_ID" id="r_id1" class="box">
+                        <input type="text" name="memId" id="r_id1" class="box">
                         <input type="button" name="user_IDcheck" value="중복확인" id="r_id2">
                         <br><br>
                         <span style="font-size: 14px;">아이디는 영문 대/소문자, 숫자 조합하여 5 ~ 20자리</span>
@@ -162,7 +162,7 @@
                         <br>
                         비밀번호*
                         <br><br>
-                        <input type="password" name="user_PW1" class="box"><br>
+                        <input type="password" name="memPwd" class="box"><br>
                         <br>
                         <span style="font-size: 14px;">비밀번호는 영문 대/소문자, 숫자, 특수문자(!@#$%^*+=-)가 포함되는 10~16자</span>
                         <br><br>
@@ -170,13 +170,13 @@
                         <br>
                         비밀번호 확인*
                         <br><br>
-                        <input type="password" name="user_PW2" class="box">
+                        <input type="password" name="checkMemPwd" class="box">
                         <br><br>
                         <hr>
                         <br>
                         이름*
                         <br><br>
-                        <input type="text" name="user_name" class="box"> <br>
+                        <input type="text" name="memName" class="box"> <br>
                         <br>
                         <hr>
                         <br>
@@ -198,19 +198,19 @@
                         <br>
                         이메일*
                         <br><br>
-                        <input type="email" name="user_email" placeholder="email@gmail.com" class="box">
+                        <input type="email" name="email" placeholder="email@gmail.com" class="box">
                         <br><br>
                         <hr>
                         <br>
                         휴대전화*
                         <br><br>
-                        <input type="text" name="user_phone" placeholder="-을 제외하고 입력하세요." class="box">
+                        <input type="text" name="phone" placeholder="-을 제외하고 입력하세요." class="box">
                         <br><br><br>
                         <hr>
                         <br>
                   주민등록번호*
                         <br><br>
-                        <input type="password" name="user_inum" placeholder="-을 제외하고 입력하세요." class="box">
+                        <input type="password" name="inum" placeholder="-을 제외하고 입력하세요." class="box">
                         <br><br>
                         <hr>
                         <br>

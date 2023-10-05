@@ -40,13 +40,12 @@
     /*우측 클리닉 영역*/
     #cli-cate, #cli-part{
         width: 1000px;
-        margin-left: 400px;
+        margin-left: 100px;
     }
 
     #cli-cate{
         border: 1px solid rebeccapurple;
         height: 200px;
-        margin-top: 30px;
     }
 
     #cli-part{
@@ -122,6 +121,12 @@
         color: blue;
         text-decoration: underline;
     }
+
+    #cate-inner > ul{
+        list-style: none;
+        border: 1px solid red;
+        display: flex;
+    }
 </style>
 </head>
 <body>
@@ -136,14 +141,28 @@
         <!--하단 내용 영역을 감싸는 div-->
         <div class="content" align="center">
 
+            <!--좌측 메뉴 div-->
+            <div class="left-menu">
+                <%@ include file="../common/cliNavi.jsp"%>
+            </div>
+
             <!--클리닉 출력 영역 div-->
             <div id="cli-content">
 
                 <!--클리닉 카테고리 영역 div-->
                 <div id="cli-cate" align="left">
-                    <input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label>
-                    <input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label>
-                    <input type="radio" class="cate" name="cate" id="body"><label for="body">몸매 관리</label>
+                    <div id="cate-inner" align="center">
+                        <ul>
+                            <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="skin3"><label for="skin3">피부 진료3</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
+                        </ul>
+
+                    </div>
                 </div>
 
                 <!--클리닉 내용 출력 영역 div-->

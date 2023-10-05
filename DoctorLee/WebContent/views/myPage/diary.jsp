@@ -4,6 +4,8 @@
 <%@ page import="com.kh.DoctorLee.mpBoard.model.vo.FamDiary" %>
 <%
 	ArrayList<MyDiary> list = (ArrayList<MyDiary>)request.getAttribute("list");
+%>
+<%
 	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
 %>
 
@@ -18,6 +20,7 @@
     }
 	#diary{width : 1000px;
 		   height : 600px;
+		   margin : auto;
 	}
 	#diary{
 		width : 100%;

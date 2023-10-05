@@ -144,6 +144,7 @@ body{
                     </li>
                     <li><a href="#">마이페이지</a>
                         <ul>
+                        	<li><a href="<%=contextPath%>/myPage.me">마이페이지</a></li>
                             <li><a href="#">복약관리</a></li>
                             <li><a href="#">회원 정보 수정</a></li>
                             <li><a href="#">회원 탈퇴</a></li>

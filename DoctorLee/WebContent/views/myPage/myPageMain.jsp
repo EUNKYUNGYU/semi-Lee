@@ -15,7 +15,7 @@
         #wraper{
             width: 1000px;
             height: 800px;
-            margin: auto;
+           
         }
         #wraper > div{
             width : 100%;

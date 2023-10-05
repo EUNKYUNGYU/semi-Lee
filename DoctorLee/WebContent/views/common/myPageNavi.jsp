@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
+
 <%
 	String contextPath1 = request.getContextPath();
 %>
 
     
 
->>>>>>> 165e7a4a7a8829564a6320af1d77ee9401a7faaa
+
 <!DOCTYPE html>
 <html>
 <head>

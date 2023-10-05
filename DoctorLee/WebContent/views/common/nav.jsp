@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import = "com.kh.DoctorLee.member.model.vo.Member" %>
-
 <%
-	Member loginUser = (Member)session.getAttribute("loginUser");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	String contextPath = request.getContextPath();
 %>
@@ -164,20 +161,14 @@ body{
                 </ul>
             </div
             ><div id="navi3">
-            	<%if(loginUser == null) { %>
+            	
                 <button id="login"  onclick="loginPage();">로그인</button>
                 <button id="createId" onclick="enrollPage();">회원가입</button>
             </div
         ></div>
 		
-		<% }else{ %>
-		<div id="user-info">
-			<b style="font-size: 13px; color: #1E376F;"><%=loginUser.getMemName()%>님</b>
-			<a href="<%=contextPath %>/logout.me">로그아웃</a>
-		</div>
-	    <%} %>
 
-        
+
 		<script>
 			function enrollPage(){
 				location.href= "<%=contextPath%>/enrollForm.me";

@@ -78,6 +78,10 @@ header{
 section{height: 500px; width: 50%;}
 /* width : 1412px */
 
+section > div{
+    float: left;
+}
+
 #video{
     height: 100%; 
     width: 50%; 

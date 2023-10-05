@@ -33,6 +33,7 @@ public class DiaryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		ArrayList<MyDiary> list = new DiaryService().selectMyDiary();
 		request.setAttribute("list", list);
 		ArrayList<FamDiary> famList = new DiaryService().selectFamDiary();

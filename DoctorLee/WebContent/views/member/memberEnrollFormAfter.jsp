@@ -60,7 +60,6 @@
             background-color: white;
             border: 1px solid #1E376F;
             color: #1E376F;
-            margin-right: 40px;
         }
 
         #login{
@@ -100,10 +99,14 @@
         </div>
 
         <div id="content_3" align="center">
-            <button type="reset" class="button" id="home">홈으로</button>
-            <button type="submit" class="button" id="login">로그인</button>
+            <button type="reset" class="button" id="home" onclick="mainPage();">홈으로</button>
         </div>
         
+        <script>
+        	function mainPage(){
+        		location.href = "<%=contextPath%>/mainPage.me";
+        	}
+        </script>
 
     </div>
     

@@ -9,6 +9,7 @@
     .outer{
         width: 1800px;
         margin-left: 50px;
+        border: 1px solid red;
     }
 
     /*상단 네비*/
@@ -21,9 +22,7 @@
     .content{
         border: 1px solid green;
         height: 1000px;
-        margin-top: 100px;
-        margin-left: 200px;
-        width: 1400px;
+        margin-top: 50px;
     }
 
     .content > div{
@@ -33,7 +32,7 @@
     /*우측 클리닉 영역*/
     #cli-cate, #cli-part{
         width: 1350px;
-        margin-left: 25px;
+        margin-left: 200px;
     }
 
     #cli-cate{
@@ -57,7 +56,7 @@
 
     #cli-inner{
         border: 1px solid blue;
-        width: 1100px;
+        width: auto;
         height: auto;
     }
 
@@ -67,7 +66,7 @@
 
     .cli-box{
         border: 1px solid red;
-        width: 450px;
+        width: auto;
         margin-left: 50px;
     }
 

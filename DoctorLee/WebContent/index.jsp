@@ -36,10 +36,10 @@
                 <ul id="nav">
                     <li><a href="#">심리</a>
                         <ul>
-                            <li><a href="#">성향 테스트</a></li>
+                            <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
                             <li><a href="#">고민 나눔</a></li>
                             <li><a href="#">심리 상담 예약</a></li>
-                            <li><a href="<%=contextPath%>/couVideoList.cou">심리 치료 추천 영상</a></li>
+                            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 치료 추천 영상</a></li>
                         </ul>
                     </li>
                     <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>

@@ -7,15 +7,20 @@
 <title>심리 영상 등록 페이지</title>
 <style>
     .outer{
-        border: 1px solid red;
         width: 1800px;
         margin-left: 50px;
+    }
+
+    #navi{
+        background-color: white;
+        margin-bottom: 100px;
     }
 
     /*영상 등록 폼*/
     .content{
         height: 1000px;
         margin-top: 100px;
+        margin-left: 400px;
     }
 
     .content > div{
@@ -24,7 +29,7 @@
 
     /*내용 영역*/
     .enrollVideo{
-        width: 1400px;
+        width: 1000px;
         border: 1px solid silver;
         margin-left: 100px;
         border-radius: 10px;
@@ -51,6 +56,8 @@
 <body>
     <!--상단 네비게이션 메뉴 div-->
     <%@ include file="../common/nav.jsp"%>
+
+    <br><br><br>
 
     <!--전체를 감싸는 div-->
     <div class="outer">

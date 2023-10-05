@@ -6,8 +6,8 @@
 				 java.util.ArrayList"  %>
     
 <% 
-	String contextPath = request.getContextPath();
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
+	String contextPath = request.getContextPath();
 %>
 >>>>>>> 9b356505bb66efe18c8d2ee946ae49081d681282:DoctorLee/WebContent/views/quize/quizeListView.jsp
 <!DOCTYPE html>

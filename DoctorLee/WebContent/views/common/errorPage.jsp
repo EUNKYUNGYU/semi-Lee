@@ -9,8 +9,18 @@
 <head>
 <meta charset="UTF-8">
 <title>에러창</title>
+	<style>
+		h1{
+			color: red;
+			margin-top: 100px;
+			text-align: center;
+			font-size: 33px;
+			font-weight: bold;
+		}
+	</style>
 </head>
 <body>
+	<h1><%= error %></h1>
 
 	<script type="text/javascript">
 	

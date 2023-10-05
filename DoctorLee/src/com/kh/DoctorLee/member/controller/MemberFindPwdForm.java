@@ -8,22 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.kh.DoctorLee.member.model.service.MemberService;
-import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class MemberFindPwdForm
  */
-@WebServlet("/login.me")
-public class LoginController extends HttpServlet {
+@WebServlet("/findPwdForm.me")
+public class MemberFindPwdForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public MemberFindPwdForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +28,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/member/myPage.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/member/memberFindPwdForm.jsp");
 		view.forward(request, response);
 	
 	}

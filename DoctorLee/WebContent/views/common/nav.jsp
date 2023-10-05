@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
+    
+<%@ page import = "com.kh.DoctorLee.member.model.vo.Member" %>
+
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
@@ -9,6 +14,11 @@
 <meta charset="UTF-8">
 <title>네비만</title>
 <style>
+body{
+	box-sizing: border-box;
+	margin : 0;
+	padding : 0;
+}
 #wrap > div{
         width: 100%;
     }
@@ -95,6 +105,13 @@
     }
 #nav > li > ul a{font-size: 11px;}
 #nav > li > ul a:hover{font-size: 14px;}
+
+#user-info a{
+    text-decoration: none;
+    color: gray;
+    font-size: 12px;
+    margin-left: 15px;
+}
 </style>
 </head>
 <body>
@@ -105,13 +122,13 @@
                 <ul id="nav">
                     <li><a href="#">심리</a>
                         <ul>
-                            <li><a href="#">성향 테스트</a></li>
                             <li><a href="#">고민 나눔</a></li>
-                            <li><a href="#">심리 상담 예약</a></li>
-                            <li><a href="<%=contextPath%>/couVideoList.cu">심리 치료 추천 영상</a></li>
+                            <li><a href="#">상담 예약</a></li>
+                            <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
+                            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 영상</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">클리닉</a></li>
+                    <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
                     <li><a href="#">건강 메거진</a>
                         <ul>
                             <li><a href="#">의약품 검색</a></li>
@@ -139,17 +156,35 @@
                             <li><a href="#">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">건강 관리</a></li>
-                            <li><a href="#">다이어리</a></li>
+                            <li><a href="<%=contextPath%>/list.di">다이어리</a></li>
                             <li><a href="#">가족 계정 추가</a></li>
                         </ul>
                     </li>
                 </ul>
             </div
             ><div id="navi3">
-                <button id="login">로그인</button>
-                <button id="createId">회원가입</button>
+            	<%if(loginUser == null) { %>
+                <button id="login"  onclick="loginPage();">로그인</button>
+                <button id="createId" onclick="enrollPage();">회원가입</button>
             </div
         ></div>
+		
+		<% }else{ %>
+		<div id="user-info">
+			<b style="font-size: 13px; color: #1E376F;"><%=loginUser.getMemName()%>님</b>
+			<a href="<%=contextPath %>/logout.me">로그아웃</a>
+		</div>
+	    <%} %>
 
+        
+		<script>
+			function enrollPage(){
+				location.href= "<%=contextPath%>/enrollForm.me";
+			}
+			
+			function loginPage(){
+				location.href="<%=contextPath%>/login.me";
+			}
+		</script>
 </body>
 </html>

@@ -10,11 +10,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>게시판 상세보기</title>
 <style>
 * {
 	box-sizing: border-box;
-	border: 1px solid palevioletred;
+	border: 1px solid rgb(186, 175, 238);
 }
 
 #header {
@@ -24,7 +24,8 @@
 
 section {
 	width: 1800px;
-	height: 2300px;
+	height: auto; 
+	min-height: 800px;
 }
 
 section > div , section > aside{
@@ -34,8 +35,6 @@ section > div , section > aside{
 #contentWrap {
 	width: 1400px;
 }
-
-
 
 aside {
 	width: 300px;
@@ -58,15 +57,19 @@ aside {
 }
 
 #boardArticle {
-	height: 1800px;
+	height: auto; 
+	min-height: 500px;
 }
 
-#page {
-	height: 200px;
+#buttonWrap {
+	height: 50px;
+	margin-left : 1200px;
 }
 
-#search {
-	height: 200px;
+#boardTable {
+	width : 1100px;
+   	border-spacing: 10px;
+	
 }
 
 footer {
@@ -87,51 +90,20 @@ footer {
 
 
 			<header id="boardHeader">게시판이름</header>
+			
 			<article id="boardArticle">
-				게시판 형태
+				
 				<div id="boardContent">
-					<table align="center">
-						<thead>
-							<tr>
-								<th width="100">게시글 번호</th>
-								<th width="350">제목</th>
-								<th width="150">작성자</th>
-								<th width="150">작성일</th>
-								<th width="100">조회수</th>
-								<th width="100">추천수</th>
-							</tr>
-							<% if(list == null) { %>
-						
-						<tbody>
-							<tr>
-								<td colspan="6">조회된 게시글이 없습니다.</td>
-							</tr>
-							<% } else { %>
-							<% for(Board b : list) { %>
-							<tr>
-								<td><%= b.getBoardNo() %></td>
-								<td><%= b.getBoardTitle() %></td>
-								<td><%= b.getWriter() %></td>
-								<td><%= b.getCreateDate() %></td>
-								<td><%= b.getViews() %></td>
-								<td>0</td>
-							</tr>
-							<% } %>
-							<% } %>
-						</tbody>
-
-						</thead>
-
-					</table>
+					
+					
 				</div>
+				
 			</article>
-			<div id="page">페이지바 영역</div>
-			<div id="search">검색 영역</div>
+			
 		</div>
 	</section>
+	
 	<footer> 푸터 영역 </footer>
-
-
 
 
 </body>

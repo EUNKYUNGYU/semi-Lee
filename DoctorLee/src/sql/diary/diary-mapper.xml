@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insertDiary">
+		INSERT
+			INTO
+				TB_MY_DIARY
+				(
+				DIARY_NO,
+				MEM_NO,
+				CREATE_DATE,
+				DIARY_TITLE,
+				DIARY_CONTENT
+				)
+			VALUES(
+				SEQ_MY_DIARY.NEXTVAL,
+				3,
+				DEFAULT,
+				?,
+				?
+			)
+				
+	</entry>
+	<entry key="insertFamDiary">
+		INSERT
+			INTO
+				TB_FM_DIARY
+				(
+				FAM_DIR_NO,
+				MEM_NO,
+				CREATE_DATE,
+				FAM_DIR_TITLE,
+				FAM_DIR_CONTENT
+				)
+			VALUES(
+				SEQ_TB_FM_DIARY.NEXTVAL,
+				2,
+				SYSDATE,
+				?,
+				?
+			)
+	</entry>
+	<entry key="selectMyDiaryList">
+		SELECT
+			DIARY_NO,
+			DIARY_TITLE,
+			CREATE_DATE
+		FROM 
+			TB_MY_DIARY
+		ORDER BY CREATE_DATE DESC
+	</entry>
+	<entry key="selectFamDiaryList">
+		SELECT
+			FAM_DIR_NO,
+			FAM_DIR_TITLE,
+			CREATE_DATE
+		FROM
+			TB_FM_DIARY
+		ORDER BY CREATE_DATE DESC
+			
+	</entry>
+</properties>

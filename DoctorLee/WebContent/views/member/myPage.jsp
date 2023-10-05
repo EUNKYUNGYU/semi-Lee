@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -216,24 +217,24 @@
                     <div class="positioning" id=second>홈페이지의 다양한 정보와 맞춤 서비스를 <br>
                     	이용하시려면 로그인이 필요합니다.
 
-                        
-                    <form action="<%=contextPath%>/login.me" method="post" id="login_form_input">
+                    
+                    <form action="<%=contextPath%>/login2.me" method="post" id="login_form_input">
                         
                         <div id="id_1" align="center">
-                            <input type="text" id="id_1" name="userId" placeholder="아이디" required>
+                            <input type="text" id="id_1" name="memId" placeholder="아이디" required>
                         </div>
                         
                         <div id="pwd_1" align="center">
-                            <input type="password" id="pwd_1" name="userPwd" placeholder="비밀번호" required>
+                            <input type="password" id="pwd_1" name="memPwd" placeholder="비밀번호" required>
                         </div>
 
                         <div id="login_form_etc" align="center">
                             <div><input type="checkbox" name="checkedId" value="checkedId">아이디 저장</div>
                         </div>
     
+                    <input type="submit" id="loginbtn" value="로그인"></input>
                     </form>
                 
-                    <input type="submit" id="loginbtn" value="로그인"></input>
 
                 </div>
                 
@@ -248,13 +249,13 @@
                     되시면 홈페이지에서 제공하는 <br>
                     온라인 서비스를 이용하실 수 있습니다.</span>
             </a>
-                <a href="#" id="find1">아이디 찾기 <br><br>
+                <a href="#" id="find1" onclick="findIdPage();">아이디 찾기 <br><br>
                     <span style="font-size: 13px; font-weight: lighter; color: gray;">
                         성함, 이메일을 통해 <br>
                         아이디를 확인 <br>
                         하실 수 있습니다.</span>
                 </a>
-                <a href="#" id="find2">비밀번호 찾기 <br><br>
+                <a href="#" id="find2" onclick="findPwdPage();">비밀번호 찾기 <br><br>
                     <span style="font-size: 13px; font-weight: lighter; color: gray;">
                         아이디, 이메일을 통해 <br>
                         임시비밀번호로 서비스를 이용 <br>
@@ -270,6 +271,15 @@
         function enrollPage(){
             location.href = "<%=contextPath%>/enrollForm.me";
         }
+        
+        function findIdPage(){
+            location.href = "<%=contextPath%>/findIdForm.me";
+        }
+        
+        function findPwdPage(){
+            location.href = "<%=contextPath%>/findPwdForm.me";
+        }
+        
     </script>
 
 

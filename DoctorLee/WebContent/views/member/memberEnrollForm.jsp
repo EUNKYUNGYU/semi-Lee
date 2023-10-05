@@ -14,7 +14,7 @@
         /*전체를 감싸는 div 속성*/
         #content{
             width: 1800px;
-            height: 500px;
+            height: 2800px;
         }
 
        
@@ -25,14 +25,14 @@
         }
 
         #content_1{height: 10%;}
-        .content_2{height: 40%;}
-        #content_3{height: 50%;}
+        .content_2{height: 80%;}
+        #content_3{height: 10%;}
 
         /*-----------------content_2-----------------*/
         
         .content_2{
             width: 1200px;
-            height: 800px;
+            height: 1000px;
             float: left;
             margin-left: 300px;
             
@@ -74,7 +74,7 @@
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
-            padding-top : 30px
+            margin-top: -150px;
         }
 
         #p2{
@@ -176,86 +176,16 @@
                         <br>
                         이름*
                         <br><br>
-                        <input type="text" name="user_name" value="" class="box"> <br>
+                        <input type="text" name="user_name" class="box"> <br>
                         <br>
                         <hr>
                         <br>
-                        생년월일
+                       
+  
+   		    닉네임*
                         <br><br>
-                        <select name="year" class="box">
-                          <option value="">-- 선택 --</option>
-                          <option value="1985">1985</option>
-                          <option value="1986">1986</option>
-                          <option value="1987">1987</option>
-                          <option value="1988">1988</option>
-                          <option value="1989">1989</option>
-                          <option value="1990">1990</option>
-                          <option value="1991">1991</option>
-                          <option value="1992">1992</option>
-                          <option value="1993">1993</option>
-                          <option value="1994">1994</option>
-                          <option value="1995">1995</option>
-                          <option value="1992">1992</option>
-                          <option value="1993">1993</option>
-                          <option value="1994">1994</option>
-                          <option value="1995">1995</option>
-                          <option value="1996">1996</option>
-                          <option value="1997">1997</option>
-                          <option value="1998">1998</option>
-                          <option value="1999">1999</option>
-                          <option value="2000">2000</option>
-                        </select>
-                        
-                        <select name="month" class="box">
-                          <option value="">-- 선택 --</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                          <option value="11">11</option>
-                          <option value="12">12</option>
-                        </select>
-                        <select name="day" class="box">
-                          <option value="">-- 선택 --</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                          <option value="11">11</option>
-                          <option value="12">12</option>
-                          <option value="13">13</option>
-                          <option value="14">14</option>
-                          <option value="15">15</option>
-                          <option value="16">16</option>
-                          <option value="17">17</option>
-                          <option value="18">18</option>
-                          <option value="19">19</option>
-                          <option value="20">20</option>
-                          <option value="21">21</option>
-                          <option value="22">22</option>
-                          <option value="23">23</option>
-                          <option value="24">24</option>
-                          <option value="25">25</option>
-                          <option value="26">26</option>
-                          <option value="27">27</option>
-                          <option value="28">28</option>
-                          <option value="29">29</option>
-                          <option value="30">30</option>
-                          <option value="31">31</option>
-                        </select>
-                        <br><br>
+                        <input type="text" name="nickName" class="box"> <br>
+                        <br>
                         <hr>
                         <br>
                         성별*
@@ -274,10 +204,17 @@
                         <br>
                         휴대전화*
                         <br><br>
-                        <input type="text" name="user_phone" placeholder="010-****-****" class="box">
+                        <input type="text" name="user_phone" placeholder="-을 제외하고 입력하세요." class="box">
                         <br><br><br>
                         <hr>
                         <br>
+                  주민등록번호*
+                        <br><br>
+                        <input type="password" name="user_inum" placeholder="-을 제외하고 입력하세요." class="box">
+                        <br><br>
+                        <hr>
+                        <br>
+                        
                         <input type="checkbox">[필수] 이용약관동의
                         <br><br>
                         <div class="auto">
@@ -391,9 +328,9 @@
                             ※ 동의를 거부할 수 있으나 거부시 회원 가입이 불가능합니다.<br>
 
                             #개인정보의 위탁 처리<br>
-                            어반레이디는 서비스 향상을 위해 관계법령에 따라 회원의 동의를 얻거나 관련 사항을 공개 또는 고지 후 회원의 개인정보를 외부에 위탁하여 처리하고 있습니다.<br>
-                            어반레이디의 개인정보처리 수탁자와 그 업무의 내용은 다음과 같습니다.<br>
-                            - 수탁자 : ㈜스냅컴퍼니<br>
+			                            어반레이디는 서비스 향상을 위해 관계법령에 따라 회원의 동의를 얻거나 관련 사항을 공개 또는 고지 후 회원의 개인정보를 외부에 위탁하여 처리하고 있습니다.<br>
+			                            어반레이디의 개인정보처리 수탁자와 그 업무의 내용은 다음과 같습니다.<br>
+			                - 수탁자 : ㈜스냅컴퍼니<br>
                             - 알림전송수탁업체 : 주식회사 루나소프트<br>
                             - 위탁 업무 내용 : 신규 서비스(제품) 개발 및 맞춤 서비스 제공, 이벤트 및 광고성 정보 및 참여기회 제공<br>
                             - 수집항목 : 이름, 아이디, 휴대전화번호<br>
@@ -403,11 +340,11 @@
                         <input type="checkbox">[선택] 이메일 수신 동의
                         <br><br>
                         <div class="auto2">
-                            할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑정보를 SMS나 이메일로 받아보실 수 있습니다.
-
-                            단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.
-
-                            선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.
+				                            할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑정보를 SMS나 이메일로 받아보실 수 있습니다.
+				
+				                            단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.
+				
+				                            선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.
                         </div>
                         <br><br>
 
@@ -420,13 +357,13 @@
                         <br>
                         키
                         <br><br>
-                        <input type="password" placeholder="                                                     cm" class="box">
+                        <input type="text" placeholder="                                                     cm" class="box">
                         <br><br>
                         <hr>
                         <br>
                         몸무게
                         <br><br>
-                        <input type="password" placeholder="                                                     kg" class="box">
+                        <input type="text" placeholder="                                                     kg" class="box">
                         <br><br>
                         <hr>
                         <br>
@@ -471,34 +408,30 @@
                         <input type="checkbox" value="견과류">견과류
                         <input type="checkbox" value="기타">기타
                        
-                    </form>
+                    
                 
             </div>
                 
         </div>
       
        
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       <br><br><br>
+       
       
         
-        <hr style="border: 1px solid rgb(226, 226, 226);">
+        <!--<hr style="border: 1px solid rgb(226, 226, 226);">-->
 
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+       
         <div id="content_3" align="center">
             
-            <input type="button" id="cancel" value="취소"></input>
+            <button type="reset" id="cancel">취소</button>
             <button type="submit" id="register">회원가입</button>
         </div>
         
 
     </div>
     
-
+</form>
 
     <br><br><br><br><br><br><br><br>
 </body>

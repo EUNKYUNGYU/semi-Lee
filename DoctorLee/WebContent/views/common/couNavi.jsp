@@ -14,7 +14,6 @@
 
     #cou_navi{
         width: 225px;
-        height: 1000px;
         border: 1px solid black;
     }
 
@@ -85,10 +84,10 @@
         </div>
 
         <ul id="menu" align="center">
-            <li><a href="#">고민 나눔</a></li>
-            <li><a href="#">상담 예약</a></li>
-            <li><a href="#">성향 테스트</a></li>
-            <li><a href="#">심리 영상</a></li>
+            <li><a href="#" id="cou-worry">고민 나눔</a></li>
+            <li><a href="#" id="cou-res">상담 예약</a></li>
+            <li><a href="<%=contextPath%>/couTestList.cou" id="cou-test">성향 테스트</a></li>
+            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1" id="cou-video">심리 영상</a></li>
         </ul>
 
     </div>

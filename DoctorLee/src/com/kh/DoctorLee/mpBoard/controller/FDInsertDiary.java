@@ -49,7 +49,7 @@ public class FDInsertDiary extends HttpServlet {
 		
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/myEnroll.di");
+			response.sendRedirect(request.getContextPath() + "/list.di");
 		}else {
 			request.setAttribute("errorMsg", "등록 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp");

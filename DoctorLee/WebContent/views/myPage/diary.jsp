@@ -216,6 +216,14 @@
                       <th>제목</th>
                       <th>생성 날짜</th>
                     </tr>
+                    <% if(famList.isEmpty()){%>
+                    	<tr>
+                 			<td>공지사항이 존재하지 않습니다.</td>
+                 		</tr>
+                    
+                    <% } else { %>
+                    
+                    <!--  
                     <tr>
                       <td>1</td>
                       <td>ㅎㅇ</td>
@@ -255,7 +263,16 @@
                       <td>8</td>
                       <td>ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ</td>
                       <td>2023-09-27</td>
-                    </tr>
+                    </tr>-->
+                   <% for(FamDiary fd : famList){ %>
+                    	<tr>
+                    		<td><%= fd.getFamDirNo() %></td>
+                    		<td><%= fd.getFamDirTitle() %></td>
+                    		<td><%= fd.getCreateDate()%></td>
+                    	</tr>
+                    <%} %>
+
+                    <%} %>
                     
                     
                   </table>

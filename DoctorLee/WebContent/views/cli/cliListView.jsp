@@ -32,8 +32,8 @@
 
     /*우측 클리닉 영역*/
     #cli-cate, #cli-part{
-        width: 1300px;
-        margin-left: 50px;
+        width: 1350px;
+        margin-left: 25px;
     }
 
     #cli-cate{

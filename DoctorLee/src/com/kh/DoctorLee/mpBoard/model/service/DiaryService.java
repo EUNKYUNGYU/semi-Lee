@@ -48,5 +48,12 @@ public class DiaryService implements DiaryServiceI{
 		
 		return list;
 	}
+	@Override
+	public ArrayList<FamDiary> selectFamDiary(){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<FamDiary> famList = new DiaryDao().selectFamDiary(conn);
+		JDBCTemplate.close(conn);
+		return famList;
+	}
 
 }

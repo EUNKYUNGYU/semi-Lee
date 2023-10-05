@@ -49,4 +49,14 @@
 			TB_MY_DIARY
 		ORDER BY CREATE_DATE DESC
 	</entry>
+	<entry key="selectFamDiaryList">
+		SELECT
+			FAM_DIR_NO,
+			FAM_DIR_TITLE,
+			CREATE_DATE
+		FROM
+			TB_FM_DIARY
+		ORDER BY CREATE_DATE DESC
+			
+	</entry>
 </properties>

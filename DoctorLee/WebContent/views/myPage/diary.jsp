@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.MyDiary" %>
+<%@ page import="com.kh.DoctorLee.mpBoard.model.vo.FamDiary" %>
 <%
 	ArrayList<MyDiary> list = (ArrayList<MyDiary>)request.getAttribute("list");
+	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
 %>
 
 <!DOCTYPE html>

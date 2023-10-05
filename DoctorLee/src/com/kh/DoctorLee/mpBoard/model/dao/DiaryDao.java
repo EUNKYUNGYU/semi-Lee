@@ -92,5 +92,29 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			
 			
 		}
+		public ArrayList<FamDiary> selectFamDiary(Connection conn){
+			ArrayList<FamDiary> famList = new ArrayList();
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectFamDiaryList");
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				rset = pstmt.executeQuery();
+				while(rset.next()) {
+					FamDiary fd = new FamDiary();
+					fd.setFamDirNo(rset.getInt("FAM_DIR_NO"));
+					fd.setFamDirTitle(rset.getString("FAM_DIR_TITLE"));
+					fd.setCreateDate(rset.getDate("CREATE_DATE"));
+					famList.add(fd);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return famList;
+		}
 	
 }

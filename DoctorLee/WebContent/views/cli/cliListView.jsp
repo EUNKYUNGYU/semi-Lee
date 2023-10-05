@@ -22,7 +22,8 @@
         border: 1px solid green;
         height: 1000px;
         margin-top: 100px;
-        margin-left: 400px;
+        margin-left: 200px;
+        width: 1400px;
     }
 
     .content > div{
@@ -31,8 +32,8 @@
 
     /*우측 클리닉 영역*/
     #cli-cate, #cli-part{
-        width: 1400px;
-        margin-left: 80px;
+        width: 1300px;
+        margin-left: 50px;
     }
 
     #cli-cate{
@@ -49,14 +50,14 @@
 
     #cli-list{
         border: 1px solid red;
-        width: 1300px;
+        width: 1200px;
         list-style: none;
         height: auto;
     }
 
     #cli-inner{
         border: 1px solid blue;
-        width: auto;
+        width: 1100px;
         height: auto;
     }
 
@@ -66,7 +67,7 @@
 
     .cli-box{
         border: 1px solid red;
-        width: 580px;
+        width: 450px;
         margin-left: 50px;
     }
 
@@ -128,11 +129,6 @@
 
         <!--하단 내용 영역을 감싸는 div-->
         <div class="content" align="center">
-
-            <!--좌측 메뉴 div-->
-            <div id="cou_navi">
-                <%@ include file="../common/couNavi.jsp"%>
-            </div>
 
             <!--클리닉 출력 영역 div-->
             <div id="cli-content">

@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.DoctorLee.member.model.service.MemberService;
+import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
  * Servlet implementation class LoginController
@@ -28,6 +32,26 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		String memId = request.getParameter("memId");
+		String memPwd = request.getParameter("memPwd");
+		
+		Member loginMem = new MemberService().loginMember(memId,memPwd);
+		
+		if(loginMem == null) {
+			request.setAttribute("errorMsg", "로그인 실패");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+			
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMem", loginMem);
+			session.setAttribute("alertMsg", "로그인 성공");
+		}
+		
+		response.sendRedirect("/jsp");
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/member/myPage.jsp");
 		view.forward(request, response);

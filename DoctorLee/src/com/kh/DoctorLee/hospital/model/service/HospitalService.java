@@ -18,9 +18,9 @@ public class HospitalService {
 		return hos;
 	}
 
-	public ArrayList<Hospital> searchHos(String indexSch){
+	public ArrayList<Hospital> searchHos(String keyword){
 		Connection conn = getConnection();
-		ArrayList<Hospital> hosList = new HospitalDao().searchHos(conn, indexSch);
+		ArrayList<Hospital> hosList = new HospitalDao().searchHos(conn, keyword);
 		close(conn);
 		return hosList;
 	}

@@ -138,6 +138,7 @@
                     <i class="fa-solid fa-magnifying-glass fa-xl"></i>
                 </button>
             </form>
+            
             <script>
             	// 엔터키 이벤트
             	document.getElementById('index_search_bar').addEventListener('keyup', function(e){

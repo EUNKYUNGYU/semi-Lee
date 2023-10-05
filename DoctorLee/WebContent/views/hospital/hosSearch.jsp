@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.*" %>
+<%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.*, com.kh.DoctorLee.common.model.vo.PageInfo" %>
 <%
 
 	ArrayList<Hospital> list = (ArrayList<Hospital>)request.getAttribute("list");
 	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("schList");
 	String indexSch = (String)request.getAttribute("indexSch");
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -148,6 +153,7 @@
         </aside>
 
         <!-- 병원 리스트 -->
+		<% for(int i = 0; i < list.size(); i++) { %>
         <div id="hos_list">
 
             <div class="hos">
@@ -155,8 +161,6 @@
                 <div class="hos_img">
                     <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
                 </div>
-<% if(indexSch.equals("")) { %>
-				<% for(int i = 0; i >= 2; i++) { %>
                 <div class="hos_info">
                     <h3>
 						<%= list.get(i).getHosName() %>
@@ -171,30 +175,10 @@
                     </div>
 
                 </div>
-                <%} %>
-	<% } else { %>
-	
-					<% for(int i = 0; i >= 2; i++) { %>
-                <div class="hos_info">
-                    <h3>
-						<%= hosList.get(i).getHosName() %>
-</h3>
-                    <p>
-						<%= hosList.get(i).getHosAddress() %>
-					</p>
-
-                    <h4>진료중</h4>
-                    <div class="hos_rsvt_btn">
-                        <button onclick="rsvtPage();">진료예약</button>
-                    </div>
-
-                </div>
-                <%} %>
-	
-	<%} %>
 	
 	
             </div>
+                <%} %>
 
                     <script>
                         function rsvtPage(){
@@ -210,6 +194,25 @@
 
             </div>
 
+        </div>
+        
+           <div class="paging_area">
+        	
+        	<% if(currentPage != 1) { %>
+        		<button onclick="location.href='<%= contextPath %>/list.bo?page=<%= currentPage - 1 %>'" class="btn btn-sm btn-info">&lt;</button>
+        	<% } %>
+        
+			<% for(int i = startPage; i <= endPage; i++) { %>
+				<% if(currentPage != i) { %>
+					<button onclick="location.href='<%= contextPath %>/list.bo?page=<%= i %>'" class="btn btn-sm btn-info"><%= i %></button>		
+				<% } else { %>
+					<button disabled class="btn btn-sm btn-info"><%= i %></button>
+				<% } %>
+			<% } %>
+			
+			<% if(currentPage != maxPage) { %>
+				<button onclick="location.href='<%= contextPath %>/list.bo?page=<%= currentPage + 1 %>'" class="btn btn-sm btn-info">&gt;</button>
+			<% } %>
         </div>
         
 		<!-- 지도 -->

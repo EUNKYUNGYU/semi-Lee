@@ -56,7 +56,7 @@ public class HospitalDao {
 		return hos;
 	}
 	
-	public ArrayList<Hospital> searchHos(Connection conn, String indexSch){
+	public ArrayList<Hospital> searchHos(Connection conn, String keyword){
 		ArrayList<Hospital> hosList = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -64,7 +64,7 @@ public class HospitalDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + indexSch + "%");
+			pstmt.setString(1, "%" + keyword + "%");
 			
 			rset = pstmt.executeQuery();
 			

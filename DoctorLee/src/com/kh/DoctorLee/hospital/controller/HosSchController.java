@@ -33,24 +33,16 @@ public class HosSchController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		String indexSch = request.getParameter("index_search");
+		String keyword = request.getParameter("index_search");
 		
-		ArrayList<Hospital> list = new HospitalService().schHosList();
+		ArrayList<Hospital> list = new HospitalService().searchHos(keyword);
 		
 			
 			if(!list.isEmpty()) {
 				
-				if(indexSch.equals("")) {
 				
 					request.setAttribute("list", list);
 					request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
-				} else {
-					
-					ArrayList<Hospital> schList = new HospitalService().searchHos(indexSch);
-					request.setAttribute("schList", schList);
-					response.sendRedirect("views/hospital/hosSearch.jsp");
-					
-				}
 				
 			} else {
 				
@@ -58,7 +50,7 @@ public class HosSchController extends HttpServlet {
 				request.getRequestDispatcher("views/common/errorPage.jsp");
 			}
 			
-			request.setAttribute("indexSch", indexSch);
+			request.setAttribute("indexSch", keyword);
 			
 			
 			System.out.println("?????????");

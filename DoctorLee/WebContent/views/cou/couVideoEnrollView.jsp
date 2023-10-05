@@ -37,6 +37,7 @@
     #cou-video{
         background-color: skyblue;
         font-weight: 800;
+        pointer-events: none;
     }
 
     /*내용 영역*/
@@ -60,7 +61,10 @@
     #submitBtn{
         width: 100px;
         height: 30px;
-        border-radius: 10px;
+        border-radius: 3px;
+        background-color: #1E376F;
+        color: white;
+        font-size: 12px;
     }
 </style>
 </head>

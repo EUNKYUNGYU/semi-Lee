@@ -13,8 +13,8 @@
 
         /*상단 네비*/
         #navi{
-            border: 1px solid pink;
             height: 100px;
+            background-color: white;
         }
 
         .content > div{
@@ -38,6 +38,8 @@
 
         #cou-test{
             background-color: skyblue;
+            pointer-events: none;
+            font-weight: 800;
         }
 
         /*성향 테스트 내용 출력 영역 div*/

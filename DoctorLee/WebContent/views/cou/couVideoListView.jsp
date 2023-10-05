@@ -21,7 +21,6 @@
     /*border: 1px solid red;*/
     width: 1800px;
     margin-left: 50px;
-    border: 1px solid red;
 }
 
 #navi{
@@ -37,7 +36,6 @@
 .content{
     margin-top: 50px;
     height: 2350px;
-    border: 1px solid green;
 }
 
 #cou_navi{
@@ -47,6 +45,7 @@
 #cou-video{
     background-color: skyblue;
     font-weight: 800;
+    pointer-events: none;
 }
 
 .left-menu{
@@ -85,14 +84,13 @@ img{
     width: auto;
 }
 
-#button-area> a{
-    text-decoration: none;
-    border: 1px solid navy;
-    border-radius: 10px;
-    background-color: navy;
-    color: white;
-    padding-left: 5px;
-    padding-right: 5px;
+#button-area> button{
+    width: 100px;
+        height: 30px;
+        border-radius: 3px;
+        background-color: #1E376F;
+        color: white;
+        font-size: 12px;
 }
 
 </style>
@@ -115,12 +113,12 @@ img{
             <%@ include file="../common/couNavi.jsp"%>
         </div>
     
-    
+
         <!--심리 영상 내용 출력 영역 div-->
         <div id="video-list">
 
             <div id="button-area" align="right">
-                <a href="<%=contextPath%>/couVideoEnroll.cou">등록하기</a>
+                <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
             </div>
             
             <!-- 동영상이 존재하지 않을 경우 -->

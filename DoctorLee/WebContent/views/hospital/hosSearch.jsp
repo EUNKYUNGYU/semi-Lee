@@ -85,7 +85,7 @@
 </style>
 </head>
 <body>
-    <%@ include file="../common/navi.jsp" %>
+    <%@ include file="../common/nav.jsp" %>
 
 	<!-- 병원 검색 메인페이지 -->
 	<div class="sch_wrap">

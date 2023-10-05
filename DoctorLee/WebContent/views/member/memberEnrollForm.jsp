@@ -198,7 +198,7 @@
                         <br>
                         이메일*
                         <br><br>
-                        <input type="email" name="email" placeholder="email@gmail.com" class="box">
+                        <input type="email" name="email" placeholder="email@naver.com" class="box">
                         <br><br>
                         <hr>
                         <br>

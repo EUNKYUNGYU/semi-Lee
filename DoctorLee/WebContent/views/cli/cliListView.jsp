@@ -227,6 +227,22 @@
                                     <br clear="both">
                                 </div>
                             </li>
+
+                            <li class="cli-box">
+                                <div class="cli-content" align="left">
+                                    <div class="cli-img">
+                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
+                                    </div>
+                                    
+                                    <div class="cli-des">
+                                        <span>클리닉명</span>
+                                        <p>클리닉 장소</p>
+                                        <p>별점</p>
+                                        <span>가격</span>
+                                    </div>
+                                    <br clear="both">
+                                </div>
+                            </li>
                             
                         </div>
                     </ul>

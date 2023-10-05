@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.member.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,16 +14,16 @@ import com.kh.DoctorLee.member.model.service.MemberService;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberInsertController
+ * Servlet implementation class LoginController2
  */
-@WebServlet("/insert.me")
-public class MemberInsertController extends HttpServlet {
+@WebServlet("/login2.me")
+public class LoginController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInsertController() {
+    public LoginController2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,44 +32,27 @@ public class MemberInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
-		String memName = request.getParameter("memName");
-		String nickName = request.getParameter("nickName");
-		String phone = request.getParameter("phone");
-		String iNum = request.getParameter("iNum");
-		String email = request.getParameter("email");
-		String gender = request.getParameter("gender");
-		int height = Integer.parseInt(request.getParameter("height"));
-		int weight = Integer.parseInt(request.getParameter("weight"));
 		
+		Member loginUser = new MemberService().loginMember(memId,memPwd);
 		
-	
-		
-		Member m = new Member();
-		m.setMemId(memId);
-		m.setMemPwd(memPwd);
-		m.setMemName(memName);
-		m.setNickName(nickName);
-		m.setPhone(phone);
-		m.setINum(iNum);
-		m.setEmail(email);
-		m.setGender(gender);
-		
-		int result = new MemberService().insertMember(m);
-	
-		if(result > 0) {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "회원가입에 성공하셨습니다.");
-			response.sendRedirect(request.getContextPath());
-		} else {
-			request.setAttribute("errorMsg", "회원가입에 실패하였습니다");
+		if(loginUser == null) {
+			request.setAttribute("errorMsg", "로그인 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 			
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("alertMsg", "로그인 성공");
 		}
+		
+		response.sendRedirect("/jsp");
+	
 	}
 
 	/**

@@ -217,7 +217,7 @@
                     	이용하시려면 로그인이 필요합니다.
 
                         
-                    <form action="<%=contextPath%>/login.me" method="post" id="login_form_input">
+                    <form action="<%=contextPath%>/login2.me" method="post" id="login_form_input">
                         
                         <div id="id_1" align="center">
                             <input type="text" id="id_1" name="userId" placeholder="아이디" required>
@@ -231,9 +231,9 @@
                             <div><input type="checkbox" name="checkedId" value="checkedId">아이디 저장</div>
                         </div>
     
+                    <input type="submit" id="loginbtn" value="로그인"></input>
                     </form>
                 
-                    <input type="submit" id="loginbtn" value="로그인"></input>
 
                 </div>
                 

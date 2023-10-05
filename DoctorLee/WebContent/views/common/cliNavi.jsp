@@ -45,6 +45,8 @@
 
     #res-state > li{
         border-bottom: 1px solid black;
+        height: 40px;
+        line-height: 40px;
     }
 
     /*예약하기 버튼*/

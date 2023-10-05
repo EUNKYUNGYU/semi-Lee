@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -216,15 +217,15 @@
                     <div class="positioning" id=second>홈페이지의 다양한 정보와 맞춤 서비스를 <br>
                     	이용하시려면 로그인이 필요합니다.
 
-                        
+                    
                     <form action="<%=contextPath%>/login2.me" method="post" id="login_form_input">
                         
                         <div id="id_1" align="center">
-                            <input type="text" id="id_1" name="userId" placeholder="아이디" required>
+                            <input type="text" id="id_1" name="memId" placeholder="아이디" required>
                         </div>
                         
                         <div id="pwd_1" align="center">
-                            <input type="password" id="pwd_1" name="userPwd" placeholder="비밀번호" required>
+                            <input type="password" id="pwd_1" name="memPwd" placeholder="비밀번호" required>
                         </div>
 
                         <div id="login_form_etc" align="center">

@@ -36,6 +36,9 @@ public class MemberDao {
 		
 		String sql = prop.getProperty("loginMember");
 		
+		//System.out.println(memId);
+		//System.out.println(memPwd);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memId);

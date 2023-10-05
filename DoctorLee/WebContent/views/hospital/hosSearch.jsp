@@ -13,10 +13,10 @@
 
 <title>병원 검색</title>
 <style>
-*{box-sizing: border-box;}
-ul, li, ol{list-style: none;}
-a{text-decoration: none;}
-.sch_wrap{margin: 0 auto; padding-top: 100px; padding-left: 50px;}
+	*{box-sizing: border-box;}
+	ul, li, ol{list-style: none;}
+	a{text-decoration: none;}
+	.sch_wrap{margin: 0 auto; padding-top: 100px; padding-left: 50px;}
 
       /* 병원 검색*/
       aside{

@@ -32,11 +32,9 @@ public class FaDiaryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<FamDiary> famList = new DiaryService().selectFamDiary();
-		request.setAttribute("famList", famList);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/diary.jsp");
-		view.forward(request, response);
+		
+		
 	}
 
 	/**

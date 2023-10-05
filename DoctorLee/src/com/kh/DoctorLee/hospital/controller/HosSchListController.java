@@ -36,13 +36,17 @@ public class HosSchListController extends HttpServlet {
 		String keyword = request.getParameter("sch_bar");
 		
 		ArrayList<Hospital> hosList = new HospitalService().searchHos(keyword);
-		System.out.println("나는 진짜다");
+
 		if(hosList.isEmpty()) {
-			request.setAttribute("hosList", hosList);
-			request.getRequestDispatcher("views/hostpital/hosSearch.jsp").forward(request, response);
-		} else {
+			
 			request.setAttribute("error", "에러");
 			request.getRequestDispatcher("views/common/errorPage.jsp");
+		} else {
+			request.getSession().setAttribute("hosList", hosList);
+			response.sendRedirect("/DoctorLee/hosSearch.jsp");
+			
+			// request.setAttribute("hosList", hosList);
+			// request.getRequestDispatcher("views/hostpital/hosSearch.jsp").forward(request, response);
 		}
 		
 		

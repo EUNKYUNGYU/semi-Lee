@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.*" %>
 <%
-	ArrayList<Hospital> hoslist = (ArrayList<Hospital>)request.getAttribute("hosList");
+
+	ArrayList<Hospital> list = (ArrayList<Hospital>)request.getAttribute("list");
+	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("hosList");
 
 %>
 <!DOCTYPE html>
@@ -154,9 +156,14 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
                 </div>
 
+				<% for(int i = 0; i >= 2; i++) { %>
                 <div class="hos_info">
-                    <h3>좋은병원</h3>
-                    <p>서울시 아차산로 2384</p>
+                    <h3>
+						<%= list.get(i).getHosName() %>
+</h3>
+                    <p>
+						<%= list.get(i).getHosAddress() %>
+					</p>
 
                     <h4>진료중</h4>
                     <div class="hos_rsvt_btn">
@@ -164,42 +171,9 @@
                     </div>
 
                 </div>
-
-            </div>
-            
-            <div class="hos">
-
-                <div class="hos_img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
-                </div>
-
-                <div class="hos_info">
-                    <h3>좋은병원</h3>
-                    <p>서울시 아차산로 2384</p>
-
-                    <h4>진료중</h4>
-                    <div class="hos_rsvt_btn">
-                        <button onclick="rsvtPage();">진료예약</button>
-                    </div>
-
-                </div>
-
+	<% } %>
             </div>
 
-            <div class="hos">
-
-                <div class="hos_img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
-                </div>
-
-                <div class="hos_info">
-                    <h3>좋은병원</h3>
-                    <p>서울시 아차산로 2384</p>
-
-                    <h4>진료중</h4>
-                    <div class="hos_rsvt_btn">
-                        <button onclick="rsvtPage();">진료예약</button>
-                    </div>
                     <script>
                         function rsvtPage(){
                             var link = '<%= contextPath %>/views/hospital/hosDetail.jsp';
@@ -211,7 +185,6 @@
 
 
                     </script>
-                </div>
 
             </div>
 

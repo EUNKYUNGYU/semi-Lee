@@ -24,4 +24,11 @@ public class HospitalService {
 		close(conn);
 		return hosList;
 	}
+	
+	public ArrayList<Hospital> schHosList(String indexSch){
+		Connection conn = getConnection();
+		ArrayList<Hospital> list = new HospitalDao().schHosList(conn, indexSch);
+		close(conn);
+		return list;
+	}
 }

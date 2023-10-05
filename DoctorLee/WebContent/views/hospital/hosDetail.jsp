@@ -21,7 +21,7 @@
 </style>
 </head>
 <body>
-    <%@ include file="../common/navi.jsp" %>
+    <%@ include file="../common/nav.jsp" %>
 <br><br><br><br><br><br><br><br><br>
     <!-- 병원 상세페이지 -->
 	<div class="hos_wrap">

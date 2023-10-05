@@ -19,8 +19,10 @@ public class HospitalDao {
 	
 	public HospitalDao() {
 		
+		String file = HospitalDao.class.getResource("/sql/hospital/hos-mapper.xml").getPath();
+		
 		try {
-			prop.loadFromXML(new FileInputStream("sql/hospital/hos-mapper.xml"));
+			prop.loadFromXML(new FileInputStream(file));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,6 +85,26 @@ public class HospitalDao {
 		}
 		
 		return hosList;
+	}
+	
+	public ArrayList<Hospital> schHosList(Connection conn, String indexSch){
+		ArrayList<Hospital> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("schHosList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
 	}
 
 }

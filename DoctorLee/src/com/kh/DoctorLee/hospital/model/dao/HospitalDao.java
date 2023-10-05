@@ -56,7 +56,7 @@ public class HospitalDao {
 		return hos;
 	}
 	
-	public ArrayList<Hospital> searchHos(Connection conn, String keyword){
+	public ArrayList<Hospital> searchHos(Connection conn, String indexSch){
 		ArrayList<Hospital> hosList = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -64,7 +64,7 @@ public class HospitalDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setString(1, "%" + indexSch + "%");
 			
 			rset = pstmt.executeQuery();
 			
@@ -87,7 +87,7 @@ public class HospitalDao {
 		return hosList;
 	}
 	
-	public ArrayList<Hospital> schHosList(Connection conn, String indexSch){
+	public ArrayList<Hospital> schHosList(Connection conn){
 		ArrayList<Hospital> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -95,6 +95,15 @@ public class HospitalDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Hospital h = new Hospital();
+				h.setHosNo(rset.getInt("HOS_NO"));
+				h.setHosName(rset.getString("HOS_NAME"));
+				h.setHosAddress(rset.getString("HOS_ADDRESS"));
+				
+				list.add(h);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

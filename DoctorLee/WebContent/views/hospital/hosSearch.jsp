@@ -4,8 +4,8 @@
 <%
 
 	ArrayList<Hospital> list = (ArrayList<Hospital>)request.getAttribute("list");
-	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("hosList");
-
+	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("schList");
+	String indexSch = (String)request.getAttribute("indexSch");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -155,7 +155,7 @@
                 <div class="hos_img">
                     <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
                 </div>
-
+<% if(indexSch.equals("")) { %>
 				<% for(int i = 0; i >= 2; i++) { %>
                 <div class="hos_info">
                     <h3>
@@ -171,7 +171,29 @@
                     </div>
 
                 </div>
-	<% } %>
+                <%} %>
+	<% } else { %>
+	
+					<% for(int i = 0; i >= 2; i++) { %>
+                <div class="hos_info">
+                    <h3>
+						<%= hosList.get(i).getHosName() %>
+</h3>
+                    <p>
+						<%= hosList.get(i).getHosAddress() %>
+					</p>
+
+                    <h4>진료중</h4>
+                    <div class="hos_rsvt_btn">
+                        <button onclick="rsvtPage();">진료예약</button>
+                    </div>
+
+                </div>
+                <%} %>
+	
+	<%} %>
+	
+	
             </div>
 
                     <script>

@@ -34,28 +34,37 @@ public class HosSchController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String indexSch = request.getParameter("index_search");
-		ArrayList<Hospital> list = new HospitalService().hosList(indexSch);
 		
-		if(indexSch.equals("")) {
+		ArrayList<Hospital> list = new HospitalService().schHosList();
+		
 			
 			if(!list.isEmpty()) {
 				
-				request.setAttribute("list", list);
-				request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
+				if(indexSch.equals("")) {
+				
+					request.setAttribute("list", list);
+					request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
+				} else {
+					
+					ArrayList<Hospital> schList = new HospitalService().searchHos(indexSch);
+					request.setAttribute("schList", schList);
+					response.sendRedirect("views/hospital/hosSearch.jsp");
+					
+				}
+				
+			} else {
+				
+				request.setAttribute("error", "병원 검색창, 병원 리스트 불러오기 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp");
 			}
 			
+			request.setAttribute("indexSch", indexSch);
 			
-		} else if(indexSch.equals(anObject))
-		
-		
-		
-		
-		if(list.isEmpty()) {
-			request.setAttribute("error", "병원 검색창, 병원 리스트 불러오기 실패");
-			request.getRequestDispatcher("views/common/errorPagr.jsp");
 			
-		} else {
-		}
+			System.out.println("?????????");
+		
+
+	
 	}
 
 	/**

@@ -31,5 +31,20 @@
 		      CREATE_DATE DESC
 	</entry>
 
+<entry key="schHosList">
+	SELECT
+	       HOS_NO
+	       ,HOS_NAME
+	       ,HOS_ADDRESS
+	  FROM
+	       TB_HOSPITAL
+	 WHERE 
+	       STATUS = 'Y'
+	 ORDER
+	    BY
+	       CREATE_DATE DESC
+
+
+</entry>
 
 </properties>

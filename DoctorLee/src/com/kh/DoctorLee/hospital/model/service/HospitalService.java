@@ -18,16 +18,16 @@ public class HospitalService {
 		return hos;
 	}
 
-	public ArrayList<Hospital> searchHos(String keyword){
+	public ArrayList<Hospital> searchHos(String indexSch){
 		Connection conn = getConnection();
-		ArrayList<Hospital> hosList = new HospitalDao().searchHos(conn, keyword);
+		ArrayList<Hospital> hosList = new HospitalDao().searchHos(conn, indexSch);
 		close(conn);
 		return hosList;
 	}
 	
-	public ArrayList<Hospital> schHosList(String indexSch){
+	public ArrayList<Hospital> schHosList(){
 		Connection conn = getConnection();
-		ArrayList<Hospital> list = new HospitalDao().schHosList(conn, indexSch);
+		ArrayList<Hospital> list = new HospitalDao().schHosList(conn);
 		close(conn);
 		return list;
 	}

@@ -14,16 +14,16 @@ import com.kh.DoctorLee.member.model.service.MemberService;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class LoginController2
  */
-@WebServlet("/login.me")
-public class LoginController extends HttpServlet {
+@WebServlet("/login2.me")
+public class LoginController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public LoginController2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,8 +33,25 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/member/myPage.jsp");
-		view.forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+		
+		String memId = request.getParameter("memId");
+		String memPwd = request.getParameter("memPwd");
+		
+		Member loginMem = new MemberService().loginMember(memId,memPwd);
+		
+		if(loginMem == null) {
+			request.setAttribute("errorMsg", "로그인 실패");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+			
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMem", loginMem);
+			session.setAttribute("alertMsg", "로그인 성공");
+		}
+		
+		response.sendRedirect("/jsp");
 	
 	}
 

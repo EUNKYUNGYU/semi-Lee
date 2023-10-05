@@ -65,7 +65,7 @@ img{
 
 /*페이징 처리 영역*/
 .paging-area{
-    width: 1400px;
+    width: auto;
 }
 
 </style>

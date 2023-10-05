@@ -7,7 +7,6 @@
 <title>클리닉 예약 페이지</title>
 <style>
     .outer{
-        border: 1px solid red;
         width: 1800px;
         margin-left: 50px;
     }
@@ -23,17 +22,11 @@
         border: 1px solid green;
         height: 1000px;
         margin-top: 100px;
+        margin-left: 400px;
     }
 
     .content > div{
         float: left;
-    }
-
-    /*좌측 메뉴 영역 div*/
-    #cou_navi{
-        border: 1px solid orange;
-        height: 100%;
-        width: 225px;
     }
 
     /*우측 클리닉 영역*/
@@ -127,6 +120,8 @@
 <body>
     <!--상단 네비게이션 메뉴 div-->
     <%@ include file="../common/nav.jsp"%>
+
+    <br><br><br>
 
     <!--전체를 감싸는 div-->
     <div class="outer">

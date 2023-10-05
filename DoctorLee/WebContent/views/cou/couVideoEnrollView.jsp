@@ -16,6 +16,10 @@
         margin-bottom: 100px;
     }
 
+    .content > div{
+        float: left;
+    }
+
     /*영상 등록 폼*/
     .content{
         height: 1000px;
@@ -23,14 +27,9 @@
         margin-left: 400px;
     }
 
-    .content > div{
-        float: left;
-    }
-
     /*내용 영역*/
     .enrollVideo{
         width: 1000px;
-        border: 1px solid silver;
         margin-left: 100px;
         border-radius: 10px;
         background-color: #1E376F;

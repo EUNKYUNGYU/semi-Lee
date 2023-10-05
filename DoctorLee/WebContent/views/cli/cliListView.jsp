@@ -21,7 +21,7 @@
     /*하단 내용 영역을 감싸는 div*/
     .content{
         border: 1px solid green;
-        height: 1000px;
+        height: 1050px;
         margin-top: 50px;
     }
 
@@ -29,10 +29,18 @@
         float: left;
     }
 
+    #cou_navi{
+        height: 1000px;
+    }
+
+    .left-menu{
+    margin-left: 200px;
+    }
+
     /*우측 클리닉 영역*/
     #cli-cate, #cli-part{
-        width: 1350px;
-        margin-left: 200px;
+        width: 1000px;
+        margin-left: 400px;
     }
 
     #cli-cate{
@@ -49,7 +57,7 @@
 
     #cli-list{
         border: 1px solid red;
-        width: 1200px;
+        width: 900px;
         list-style: none;
         height: auto;
     }
@@ -58,17 +66,15 @@
         border: 1px solid blue;
         width: auto;
         height: auto;
-    }
-
-    #cli-inner > li {
-        float: left;
+        margin-right: 30px;
     }
 
     .cli-box{
         background-color: bisque;
         border-radius: 10px;
-        width: auto;
-        margin-left: 50px;
+        width: 800px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     .cli-img > img{
@@ -160,7 +166,6 @@
                                 </div>
                             </li>
                             
-
                             <li class="cli-box">
                                 <div class="cli-content" align="left">
                                     <div class="cli-img">
@@ -176,7 +181,6 @@
                                     <br clear="both">
                                 </div>
                             </li>
-                            <br clear="both">
 
                             
                         </div>

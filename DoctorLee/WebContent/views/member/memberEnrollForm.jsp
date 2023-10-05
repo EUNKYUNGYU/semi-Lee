@@ -210,7 +210,7 @@
                         <br>
                   주민등록번호*
                         <br><br>
-                        <input type="password" name="inum" placeholder="-을 제외하고 입력하세요." class="box">
+                        <input type="password" name="iNum" placeholder="-을 제외하고 입력하세요." class="box">
                         <br><br>
                         <hr>
                         <br>

@@ -1,29 +1,23 @@
-package com.kh.DoctorLee.mpBoard.controller;
+package com.kh.DoctorLee.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.mpBoard.model.service.DiaryService;
-import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
-
 /**
- * Servlet implementation class DiaryListController
+ * Servlet implementation class LogoutController
  */
-@WebServlet("/list.di")
-public class DiaryListController extends HttpServlet {
+@WebServlet("/Logout.me")
+public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryListController() {
+    public LogoutController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +26,8 @@ public class DiaryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<MyDiary> list = new DiaryService().selectMyDiary();
-		request.setAttribute("list", list);
-		
-		
-		 RequestDispatcher view = request.getRequestDispatcher("/views/myPage/diary.jsp");
-		 view.forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

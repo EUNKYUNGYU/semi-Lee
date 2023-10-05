@@ -19,6 +19,7 @@ public class MyDiary {
 		this.diaryTitle = diaryTitle;
 		this.diaryContent = diaryContent;
 	}
+	
 	public int getDiaryNo() {
 		return diaryNo;
 	}

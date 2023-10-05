@@ -1,13 +1,14 @@
 package com.kh.DoctorLee.mpBoard.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.DoctorLee.common.JDBCTemplate;
 import com.kh.DoctorLee.mpBoard.model.dao.DiaryDao;
 import com.kh.DoctorLee.mpBoard.model.vo.FamDiary;
 import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 
-public class DiaryService {
+public class DiaryService implements DiaryServiceI{
 	
 	public int insertMyDiary(MyDiary md) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -37,9 +38,15 @@ public class DiaryService {
 		
 		return result;
 	}
-	public void selectMyDiary() {
+	@Override
+	public ArrayList<MyDiary> selectMyDiary() {
 		Connection conn = JDBCTemplate.getConnection();
-		new DiaryDao().selectMyDiary(conn);
+		
+		ArrayList<MyDiary> list = new DiaryDao().selectMyDiary(conn);
+		JDBCTemplate.close(conn);
+		
+		
+		return list;
 	}
 
 }

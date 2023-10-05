@@ -41,6 +41,7 @@ public class LoginController2 extends HttpServlet {
 		Member loginUser = new MemberService().loginMember(memId,memPwd);
 		
 		if(loginUser == null) {
+			
 			request.setAttribute("errorMsg", "로그인 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
@@ -49,9 +50,10 @@ public class LoginController2 extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공");
+			
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 		
-		response.sendRedirect("/jsp");
 	
 	}
 

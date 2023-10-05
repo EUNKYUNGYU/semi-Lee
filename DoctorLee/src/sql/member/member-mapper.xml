@@ -47,13 +47,14 @@
 		  		GENDER,
 		  		HEIGHT,
 		  		WEIGHT,
+
 		  		CREATE_DATE,
 		  		MODIFY_DATE,
 		  		STATUS
 		  		)
 	  VALUES
 	  			(
-	  			SEQ_MEMBER_NO.NEXTVAL,
+	  			30,
 	  			?,
 	  			?,
 	  			?,
@@ -62,10 +63,12 @@
 	  			?,
 	  			?,
 	  			?,
+
 	  			?,
 	  			?,
 	  			DEFAULT,
 	  			DEFAULT,
+
 	  			'Y'
 	  			)
 		  		

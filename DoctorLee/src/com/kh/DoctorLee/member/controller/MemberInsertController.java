@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.member.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,11 +42,7 @@ public class MemberInsertController extends HttpServlet {
 		String iNum = request.getParameter("iNum");
 		String email = request.getParameter("email");
 		String gender = request.getParameter("gender");
-		int height = Integer.parseInt(request.getParameter("height"));
-		int weight = Integer.parseInt(request.getParameter("weight"));
 		
-		
-	
 		
 		Member m = new Member();
 		m.setMemId(memId);

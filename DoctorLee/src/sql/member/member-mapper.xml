@@ -44,17 +44,11 @@
 		  		PHONE,
 		  		INUM,
 		  		EMAIL,
-		  		GENDER,
-		  		HEIGHT,
-		  		WEIGHT,
-
-		  		CREATE_DATE,
-		  		MODIFY_DATE,
-		  		STATUS
+		  		GENDER
 		  		)
 	  VALUES
 	  			(
-	  			30,
+	  			SEQ_MEMBER_NO.NEXTVAL,
 	  			?,
 	  			?,
 	  			?,
@@ -62,14 +56,7 @@
 	  			?,
 	  			?,
 	  			?,
-	  			?,
-
-	  			?,
-	  			?,
-	  			DEFAULT,
-	  			DEFAULT,
-
-	  			'Y'
+	  			?
 	  			)
 		  		
 	</entry>

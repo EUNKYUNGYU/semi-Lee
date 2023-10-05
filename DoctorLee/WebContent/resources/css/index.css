@@ -45,8 +45,14 @@ header{
     border: none;
     padding-left: 45px;
     background: #999;
+    position: relative;
 }
 #index_search_bar>input::placeholder{color: #fff;}
+#icon_search{
+
+	position: absolute; 
+}
+#icon_search>i{width: 100%; height: 100%;}
 
 /* bxslider */
 .bx-wrapper{

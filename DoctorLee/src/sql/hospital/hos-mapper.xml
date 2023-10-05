@@ -4,6 +4,32 @@
 <properties>
 	<comment>병원 관련 SQL문</comment>
 
+	<entry key="selectTreatTime">
+		
+		SELECT 
+			   HOS_NO
+			   ,TREAT_BEGIN
+			   ,TREAT_END
+	      FROM
+	           TB_HOSPITAL
+		
+	</entry>
+	
+	<entry key="schHos">
+		SELECT
+		       HOS_NO
+		       ,HOS_NAME
+		       ,HOS_ADDRESS
+		 FROM
+		      TB_HOSPITAL
+		WHERE 
+		      STATUS = 'Y'
+		  AND
+		      HOS_NAME LIKE ?
+		ORDER
+		   BY
+		      CREATE_DATE DESC
+	</entry>
 
 
 </properties>

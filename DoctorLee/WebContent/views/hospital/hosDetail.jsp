@@ -26,7 +26,7 @@
     <!-- 병원 상세페이지 -->
 	<div class="hos_wrap">
         
-        <
+        
         <!-- 병원 정보 -->
         <div id="hos_info">
 			

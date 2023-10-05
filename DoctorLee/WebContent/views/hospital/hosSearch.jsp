@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.*" %>
+<%
+	ArrayList<Hospital> hoslist = (ArrayList<Hospital>)request.getAttribute("hosList");
+
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,7 +13,9 @@
 
 <title>병원 검색</title>
 <style>
-
+*{box-sizing: border-box;}
+ul, li, ol{list-style: none;}
+a{text-decoration: none;}
 .sch_wrap{margin: 0 auto; padding-top: 100px; padding-left: 50px;}
 
       /* 병원 검색*/
@@ -95,7 +102,35 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
+            
+            <script>
+            	
+            	document.getElementById('sch_bar').addEventListener('keyup', function(e){
+            		
+            		if(e.keycode == 13){
+            			$('sch_hos button').click();
+            		}
+            	})
+            
+            /*
+            	$(function(){
+            		$.ajax({
+            			url: 'hosSch.dy',
+            			data: {sch: $('#sch_bar').val()},
+            			success: function(r){
 
+            			},
+            			error: function(){
+            				alert("ajax fail");
+            			}
+            		})	
+            	})
+            */
+            
+            	
+            
+            
+            </script>
             <ul class="sch_category">
                 <li>
                     <a href="#none">주변 병원 검색</a>
@@ -172,7 +207,6 @@
                         }
 
                         var $hos_status = $('.hos_info').children().eq(3);
-						if($hos_status == )	
                         // db에 진료시간과 맞으면 
 
 

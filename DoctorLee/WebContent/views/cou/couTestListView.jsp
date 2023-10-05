@@ -54,7 +54,7 @@
             background-color: bisque;
             width: 1000px;
             border-radius: 10px;
-            margin-top: 15px;
+            margin-bottom: 10px;
         }
         
         .thumbnail > img{

@@ -38,16 +38,16 @@ public class LoginController2 extends HttpServlet {
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
 		
-		Member loginMem = new MemberService().loginMember(memId,memPwd);
+		Member loginUser = new MemberService().loginMember(memId,memPwd);
 		
-		if(loginMem == null) {
+		if(loginUser == null) {
 			request.setAttribute("errorMsg", "로그인 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 			
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginMem", loginMem);
+			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인 성공");
 		}
 		

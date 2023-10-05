@@ -46,6 +46,7 @@ public class MemberInsertController extends HttpServlet {
 		int height = Integer.parseInt(request.getParameter("height"));
 		int weight = Integer.parseInt(request.getParameter("weight"));
 		
+		
 	
 		
 		Member m = new Member();

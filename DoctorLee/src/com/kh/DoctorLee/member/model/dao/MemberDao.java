@@ -54,8 +54,8 @@ public class MemberDao {
 								rset.getString("GENDER"),
 								rset.getInt("HEIGHT"),
 								rset.getInt("WEIGHT"),
-								rset.getDate("CREATEDATE"),
-								rset.getDate("MODIFYDATE"),
+								rset.getDate("CREATE_DATE"),
+								rset.getDate("MODIFY_DATE"),
 								rset.getString("STATUS"));
 			}
 		} catch (SQLException e) {

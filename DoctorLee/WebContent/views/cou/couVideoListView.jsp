@@ -21,6 +21,7 @@
     /*border: 1px solid red;*/
     width: 1800px;
     margin-left: 50px;
+    border: 1px solid red;
 }
 
 #navi{
@@ -34,9 +35,22 @@
 
 /*하단 내용 영역을 감싸는 div*/
 .content{
-    height: 2200px;
-    margin-top: 100px;
-    margin-left: 400px;
+    margin-top: 50px;
+    height: 2350px;
+    border: 1px solid blue;
+}
+
+#cou_navi{
+    height: 2300px;
+}
+
+#cou-video{
+    background-color: skyblue;
+    font-weight: 800;
+}
+
+.left-menu{
+    margin-left: 200px;
 }
 
 #enrollVideo{
@@ -61,11 +75,24 @@ img{
 /*내용 영역*/
 .list-content{
     width: 1000px;
+    border-radius: 10px;
+    background-color: bisque;
+    margin-top: 15px;
 }
 
 /*페이징 처리 영역*/
 .paging-area{
     width: auto;
+}
+
+#button-area> a{
+    text-decoration: none;
+    border: 1px solid navy;
+    border-radius: 10px;
+    background-color: navy;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 </style>
@@ -106,7 +133,7 @@ img{
 				<!-- 동영상이 존재할 경우  -->
 				<% for(CouVideo cv : list) { %>
 	            <div class="list-content" align="center">
-	                <hr>
+                    <br>
 	                <input type="hidden" value="<%= cv.getVideoAddress() %>">
 	                <div class="list-img">
 	                    <img src="https://img.youtube.com/vi/<%= cv.getVideoAddress() %>/maxresdefault.jpg" alt="">
@@ -115,11 +142,13 @@ img{
 	                    <h4><%= cv.getVideoTitle() %></h5>
 	                    <h4><%= cv.getChannelName() %></p>
 	                </div>
+                    <br>
 	            </div>
 	            <% } %>
             
             <%} %>
 
+            <br>
             <div class="paging-area" align="center">
                 <% if(currentPage != 1) {%>
                     <button onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=<%=currentPage -1%>'">&lt</button>

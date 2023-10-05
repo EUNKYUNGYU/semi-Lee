@@ -30,8 +30,9 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, md.getDiaryTitle());
-				pstmt.setString(2, md.getDiaryContent());
+				pstmt.setInt(1, md.getMemNo());
+				pstmt.setString(2, md.getDiaryTitle());
+				pstmt.setString(3, md.getDiaryContent());
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();

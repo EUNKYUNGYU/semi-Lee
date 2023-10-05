@@ -34,11 +34,12 @@ public class MDInsertDiary extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String diaryTitle = request.getParameter("title");
 		String diaryContent = request.getParameter("content");
-		
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		MyDiary md = new MyDiary();
 		
 		md.setDiaryTitle(diaryTitle);
 		md.setDiaryContent(diaryContent);
+		md.setMemNo(memNo);
 		
 		int result = new DiaryService().insertMyDiary(md);
 		

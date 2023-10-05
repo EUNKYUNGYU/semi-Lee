@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
+<%
+Member loginUser = (Member)session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,6 +112,12 @@
 	<h2 align="center">마이페이지</h2><br>
     <hr>
     <br><br><br><br><br>
+    <% if(loginUser == null) { %>
+    <form action="<%= contextPath %>/login.me" method="post">
+    	<button type="submit" width="300" height="300">로그인하러가기</button>
+    	
+    </form>
+    <% } else { %>
     <div id="wraper">
         <div id="myPage">
             
@@ -117,7 +126,7 @@
                     <table id="user" align="center">
                         <tr>
                             <br><br>
-                            <th align="center">xxx님 환영합니다.</th><br>
+                            <th align="center"><%= loginUser.getMemName() %> 환영합니다.</th><br>
                             
 
                         </tr>
@@ -168,7 +177,7 @@
             <div id="mem_info">
                 <div id="my_info">
                     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MTNfMjcz%2FMDAxNjU1MDQ4NDU0NDkw.O3lQE9MMivnCNvAFZne6k5HrLr20MJRuV6pqDZTdDdMg.PeiJfGqE2PdsWhsyVSlYcK1B7MsF0srJe0J8mN0unXEg.JPEG.553812%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5.jpeg&type=a340" alt="이미지">
-                    <h3>일반회원 ) xxx님</h3>
+                    <h3>일반회원 ) <%= loginUser.getMemName() %>님</h3>
                     <p>
                         이메일 : <br>
                         휴대폰 번호 :
@@ -189,6 +198,7 @@
         </div>
         <%@ include file="../common/footer.jsp" %>
     </div>
+    <%} %>
     
     <script>
         $(function(){

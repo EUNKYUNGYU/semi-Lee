@@ -106,12 +106,12 @@ public class Member {
 	}
 
 
-	public String getiNum() {
+	public String getINum() {
 		return iNum;
 	}
 
 
-	public void setiNum(String iNum) {
+	public void setINum(String iNum) {
 		this.iNum = iNum;
 	}
 
@@ -193,7 +193,7 @@ public class Member {
 				+ gender + ", height=" + height + ", weight=" + weight + ", createDate=" + createDate + ", modifyDate="
 				+ modifyDate + ", status=" + status + "]";
 	}
-	
+
 	
 
 }

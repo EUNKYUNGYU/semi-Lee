@@ -36,10 +36,10 @@
                 <ul id="nav">
                     <li><a href="#">심리</a>
                         <ul>
-                            <li><a href="#">성향 테스트</a></li>
+                            <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
                             <li><a href="#">고민 나눔</a></li>
                             <li><a href="#">심리 상담 예약</a></li>
-                            <li><a href="<%=contextPath%>/couVideoList.cou">심리 치료 추천 영상</a></li>
+                            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 치료 추천 영상</a></li>
                         </ul>
                     </li>
                     <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
@@ -86,11 +86,22 @@
                 </ul>
             </div
             ><div id="navi3">
-                <button id="login">로그인</button>
-                <button id="createId">회원가입</button>
+                <button id="login" onclick="loginPage();">로그인</button>
+                <button id="createId" onclick="enrollPage();">회원가입</button>
             </div
         ></div>
 
+		
+		<script>
+			function enrollPage(){
+				location.href= "<%=contextPath%>/enrollForm.me";
+			}
+			
+			function loginPage(){
+				location.href="<%=contextPath%>/login.me";
+			}
+		</script>
+		
 
         <!-- 헤더 영역 -->
         <header>

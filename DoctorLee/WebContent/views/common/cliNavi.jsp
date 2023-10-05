@@ -28,38 +28,17 @@
         height: 100px;
     }
 
-    #menu{
+    #res-state{
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    #menu a{
-        text-decoration: none;
-        color: black;
-        display: block;
-        line-height: 35px;
-        border-bottom: 1px solid black;
+    #res-date > li {
+        border: 1px solid red;
     }
 
-    #menu a:hover{
-        color: red;
-        font-size: 20px;
-    }
 
-    #menu > li > ul{
-        list-style: none;
-        padding: 0;
-        display: none;
-    }
-
-    #menu > li a:hover + ul{
-        display: block;
-    }
-
-    #menu > li > ul:hover{
-        display: block;
-    }
 </style>
 </head>
 <body>
@@ -84,12 +63,21 @@
 
         </div>
 
-        <ul id="menu" align="center">
-            <li><a href="#">고민</a></li>
-            <li><a href="#">상담 예약</a></li>
-            <li><a href="#">성향 테스트</a></li>
-            <li><a href="#">심리 영상</a></li>
-        </ul>
+        <div id="state-aera">
+            <ul id="res-state">
+                <li id="sel-cate">
+                    <p>클리닉카테고리</p>
+                </li>
+
+                <li id="sel-cli">
+                    <p>클리닉명</p>
+                </li>
+
+                <li id="sel-date">
+                    <p>클리닉예약날짜</p>
+                </li>
+            </ul>
+        </div>
 
     </div>
 

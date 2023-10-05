@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
 
 <%
 	String contextPath1 = request.getContextPath();
+	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
 
     
@@ -92,7 +94,7 @@
                     <table id="user" align="center">
                         <tr>
                             <br><br>
-                            <th align="center">xxx님 환영합니다.</th><br>
+                            <th align="center"><%= loginUser.getMemName() %>님 환영합니다.</th><br>
                             
 
                         </tr>

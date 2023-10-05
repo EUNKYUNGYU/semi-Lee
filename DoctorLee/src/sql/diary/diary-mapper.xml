@@ -14,7 +14,7 @@
 				)
 			VALUES(
 				SEQ_MY_DIARY.NEXTVAL,
-				3,
+				?,
 				DEFAULT,
 				?,
 				?

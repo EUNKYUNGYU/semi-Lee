@@ -65,7 +65,8 @@
     }
 
     .cli-box{
-        border: 1px solid red;
+        background-color: bisque;
+        border-radius: 10px;
         width: auto;
         margin-left: 50px;
     }

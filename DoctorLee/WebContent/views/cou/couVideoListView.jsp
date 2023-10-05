@@ -21,7 +21,6 @@
     /*border: 1px solid red;*/
     width: 1800px;
     margin-left: 50px;
-    border: 1px solid red;
 }
 
 #navi{
@@ -37,7 +36,6 @@
 .content{
     margin-top: 50px;
     height: 2350px;
-    border: 1px solid blue;
 }
 
 #cou_navi{

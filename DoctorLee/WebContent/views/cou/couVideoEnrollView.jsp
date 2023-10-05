@@ -9,7 +9,6 @@
     .outer{
         width: 1800px;
         margin-left: 50px;
-        border: 1px solid red;
     }
 
     #navi{
@@ -25,7 +24,6 @@
     .content{
         height: 1000px;
         margin-top: 50px;
-        border: 1px solid blue;
     }
 
     #left-menu{

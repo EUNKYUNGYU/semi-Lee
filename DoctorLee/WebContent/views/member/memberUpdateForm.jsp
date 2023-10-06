@@ -61,7 +61,7 @@
         /*--------------------p태그---------------------*/
         #p1{
         	text-align : center;
-            font-size: 38px;
+            font-size: 40px;
             font-weight: bolder;
             
         }
@@ -247,7 +247,7 @@
 
         <div id="content_3" align="center">
             
-            <input type="button" id="cancel" value="비밀번호 변경"></input>
+            <input type="button" id="cancel" value="비밀번호 변경" onclick="updatePwd();"></input>
             <button type="submit" id="register" onclick="mainPage();">확인</button>
         </div>
         
@@ -257,6 +257,10 @@
 	<script>
 		function mainPage(){
 			location.href = "<%=contextPath%>/myPage.me";
+		}
+		
+		function updatePwd(){
+			location.href = "<%=contextPath%>/updatePwd.me";
 		}
 	</script>
 

@@ -484,13 +484,22 @@
                     $(function(){
                         //li클릭 시 색깔 바뀌는 이벤트
                         $('.content-cli').click(function(){
-                            if($(this).next().css('background-color') == 'salmon'){
-                                $(this).next().siblings().css('background-color', 'salmon');
+                            
+                            /*if($(this).css('background-color') == 'salmon'){
 
-                                $(this).next().css('background-color', 'bisque');
+                                $(this).css('background-color', 'bisque');
                             } else {
-                                $(this).next().css('background-color', 'salmon');
+                                $(this).css('background-color', 'salmon');
+                            }*/
+
+                            console.log(this);
+
+                            if($(this).css('background-color', 'salmon')){
+                                $(this).css('background-color', 'yellow');
+
+                                $(this).siblings().css('background-color', 'salmon');
                             }
+                            
                             
                         })
 

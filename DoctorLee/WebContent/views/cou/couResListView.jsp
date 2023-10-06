@@ -319,13 +319,8 @@
                 <div id="cli-cate" align="left">
                     <div id="cate-inner" align="center">
                         <ul>
-                            <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin3"><label for="skin3">피부 진료3</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin4"><label for="skin4">피부 관리4</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin5"><label for="skin5">피부 진료5</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="body2"><label for="body2">몸매 관리2</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="call"><label for="call">전화</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="meet"><label for="meet">대면</label></li>
                         </ul>
 
                     </div>
@@ -380,7 +375,7 @@
                         <em>
                             <span class="material-symbols-outlined">chevron_right</span>
                         </em>
-                        <span>클리닉을 선택해주세요</span>
+                        <span>상담사를 선택해주세요</span>
                     </div>
 
                     <!--해당 카테고리 클리닉 출력 영역 div-->
@@ -553,7 +548,7 @@
 
                         //돋보기 버튼 클릭 시 상세보기 페이지로 이동
                         $('.cli-img > button').click(function(){
-                            location.href='<%=contextPath%>/cliDetail.cli';
+                            location.href='<%=contextPath%>/couDetail.cou';
                         })
                     })
                 </script>

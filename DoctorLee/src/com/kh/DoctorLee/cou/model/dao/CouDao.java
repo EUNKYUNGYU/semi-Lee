@@ -1,6 +1,6 @@
 package com.kh.DoctorLee.cou.model.dao;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.close;
+import static com.kh.DoctorLee.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;

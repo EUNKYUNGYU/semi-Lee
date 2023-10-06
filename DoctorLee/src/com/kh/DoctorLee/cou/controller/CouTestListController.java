@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class couTestListController
  */
 @WebServlet("/couTestList.cou")
-public class couTestListController extends HttpServlet {
+public class CouTestListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public couTestListController() {
+    public CouTestListController() {
         super();
         // TODO Auto-generated constructor stub
     }

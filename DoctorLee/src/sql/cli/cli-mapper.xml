@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties>
+	<entry key="selectCategoryList">
+		SELECT 
+				CATE_NO,
+				CLI_CATE
+		  FROM
+		  		TB_CLI_CATE		
+	</entry>
+</properties>

@@ -160,7 +160,7 @@ body{
 </head>
 <body>
 <div id="navi">
-            <div id="navi1"><a href="#" id="navitext">낭만닥터 이사부</a>
+            <div id="navi1"><a href="<%=contextPath%>" id="navitext">낭만닥터 이사부</a>
             </div
             ><div id="navi2">
                 <ul id="nav">

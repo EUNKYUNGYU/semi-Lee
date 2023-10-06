@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class couVideoEnrollController
  */
 @WebServlet("/couVideoEnroll.cou")
-public class couVideoEnrollController extends HttpServlet {
+public class CouVideoEnrollController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public couVideoEnrollController() {
+    public CouVideoEnrollController() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -153,6 +153,8 @@
                         <!--클리닉 대표 이미지 div-->
                         <div class="cli-img">
                             <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
+                            <br>
+                            <button>자세히 보기</button>
                         </div>
 
                         <!--클리닉 설명 div-->
@@ -160,7 +162,6 @@
 
                             <div class="cli-top">
                                 <span class="cli-name title">클리닉명</span>
-                                <span class="material-symbols-outlined title">search</span>
                             </div>
 
                             <div class="cli-location">

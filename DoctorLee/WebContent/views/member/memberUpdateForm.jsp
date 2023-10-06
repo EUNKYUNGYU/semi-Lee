@@ -59,22 +59,34 @@
         }
         
         /*--------------------p태그---------------------*/
-        #p1{
+        h1{
         	text-align : center;
-            font-size: 40px;
+            font-size: 38px;
             font-weight: bolder;
+            margin-bottom: 30px;
             
         }
 
-        #p2{
+        p{
             text-align: center;
             font-size: 15px;
             color: #1E376F;
             font-weight: 600;
             padding-top: 30px;
             padding-left: 500px;
+            text-align: left;
             
            
+        }
+
+        #title1{
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        #title2{
+            font-size: 23px;
+            font-weight: bold;
         }
        
         /*-------------텍스트 창--------------*/
@@ -118,11 +130,28 @@
        cursor: pointer;
        }
 
+
+
+       /*------------------hr line--------------------*/
+       #line1{
+        border: 1.8px solid rgb(226, 226, 226); 
+        width: 1280px;
+        margin: auto;
+       
+       }
+
+       #line2{
+        border: 1.8px solid #1E376F; 
+        width: 1280px;
+        margin: auto;
+       }
+
+
     </style>
 </head>
 <body>
 
-	<%@ include file = "../common/myPageNavi.jsp" %>
+	<%@ include file = "../common/couNavi.jsp" %>
 	<%
 		//System.out.println(loginUser);
 		String memName = loginUser.getMemName();
@@ -135,9 +164,9 @@
 	<div id="content">
 
         
-            <p id="p1">마이페이지</p>
-            <hr style="border: 1.8px solid rgb(226, 226, 226); width: 66.5%;">
-            <p id="p2" style="text-align: left;">
+            <h1>마이페이지</h1>
+            <hr id="line1">
+            <p>
                 * 최선의 서비스 제공을 위해서 회원정보를 최신정보로 변경하여 주시기 바랍니다. <br>
                 * 아래 회원정보는 홈페이지 회원가입자에 대한 개인정보이며 정보보호를 위해 암호화하여 관리합니다. <br>
                 * 온라인 회원가입정보와 병원내 진료시스템 개인정보는 별도로 관리되므로 온라인 회원정보가 변경될 경우 <br>
@@ -145,14 +174,14 @@
             </p>
             
             <br>
-            <hr style="border: 1.8px solid #1E376F; width: 66.5%;">
+            <hr id="line2">
            
             
             <div class="content_2">
                 
                     <form name="login" action="index.html" method="post" class="formfont">
                         <br><br>
-                        <span style="font-size: 23px; font-weight: bold;">회원정보수정</span>
+                        <span id="title1">회원정보수정</span>
                         <br><br><br>
                         <hr style="border: 1px solid #1E376F;">
                         <br>
@@ -176,7 +205,7 @@
                         <br><br><br>
                         <hr style="border: 1px solid #1E376F;">                       
                         <br>
-                        <span style="font-size: 23px; font-weight: bold;">건강관리입력사항</span>
+                        <span id="title2">건강관리입력사항</span>
                         <br><br>
                         <hr style="border: 1px solid #1E376F;">
                         <br>
@@ -241,7 +270,7 @@
         </div>
       
        
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         
         <hr style="border: 1px solid rgb(226, 226, 226);">
 

@@ -17,13 +17,13 @@ import com.kh.DoctorLee.cou.model.vo.CouVideo;
  * Servlet implementation class couVideoListController
  */
 @WebServlet("/couVideoList.cou")
-public class couVideoListController extends HttpServlet {
+public class CouVideoListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public couVideoListController() {
+    public CouVideoListController() {
         super();
         // TODO Auto-generated constructor stub
     }

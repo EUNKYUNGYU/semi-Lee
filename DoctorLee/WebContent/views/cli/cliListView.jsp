@@ -44,6 +44,10 @@
         width: 1000px;
     }
 
+    #cli-part{
+        margin-top: 10px;
+    }
+
     /*카테고리 영역*/
     #cli-cate-part{
         width: 1000px;
@@ -207,7 +211,7 @@
     #res-part{
         border: 1px solid;
         height: auto;
-        margin-top: 30px;
+        margin-top: 10px;
     }
 
     /*예약 출력 영역*/

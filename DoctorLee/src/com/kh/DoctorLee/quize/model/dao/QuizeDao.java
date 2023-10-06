@@ -67,13 +67,30 @@ public class QuizeDao {
 	}
 
 	
-	public ArrayList<QuizeAnswer> QuizeAnswer(Connection conn){
-		ArrayList<QuizeAnswer> list = null;
+	public QuizeAnswer detailQuize(Connection conn, int quizeNo){
+		
+		QuizeAnswer answer = new QuizeAnswer();
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("QuizeAnswer");
+		String sql = prop.getProperty("detailQuize");
 		ResultSet rset = null;
 		
-		return list;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				answer.setQuizeTitle(rset.getString("QUIZE_TITLE"));
+				answer.setAnswer(rset.getInt("ANSWER"));
+				answer.setAnswerDetail(rset.getString("ANSWER_DETAIL"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return answer;
 		
 	}
 }

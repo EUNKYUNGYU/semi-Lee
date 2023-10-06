@@ -28,7 +28,7 @@ public class QuizeAnswerController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int quizeNo = (int) request.getAttribute("quizeNo");
-		System.out.println(quizeNo);
+		System.out.println("QuizeAnswerController" + quizeNo);
 	
 	}
 

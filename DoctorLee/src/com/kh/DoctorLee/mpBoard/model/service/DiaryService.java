@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.DoctorLee.common.JDBCTemplate;
+import com.kh.DoctorLee.member.model.vo.Member;
 import com.kh.DoctorLee.mpBoard.model.dao.DiaryDao;
 import com.kh.DoctorLee.mpBoard.model.vo.FamDiary;
 import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;

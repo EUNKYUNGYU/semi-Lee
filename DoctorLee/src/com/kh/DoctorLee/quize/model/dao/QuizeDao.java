@@ -1,5 +1,7 @@
 package com.kh.DoctorLee.quize.model.dao;
 
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,8 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
 import com.kh.DoctorLee.quize.model.vo.Quize;
+import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
 
 public class QuizeDao {
 
@@ -64,4 +66,14 @@ public class QuizeDao {
 		
 	}
 
+	
+	public ArrayList<QuizeAnswer> QuizeAnswer(Connection conn){
+		ArrayList<QuizeAnswer> list = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("QuizeAnswer");
+		ResultSet rset = null;
+		
+		return list;
+		
+	}
 }

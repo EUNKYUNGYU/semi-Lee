@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.quize.controller;
+package com.kh.DoctorLee.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class QuizeAnswerController
+ * Servlet implementation class MemberDeleteController
  */
-@WebServlet("/detailAnser.qz")
-public class QuizeAnswerController extends HttpServlet {
+@WebServlet("/deleteForm.me")
+public class MemberDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuizeAnswerController() {
+    public MemberDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,8 @@ public class QuizeAnswerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int quizeNo = (int) request.getAttribute("quizeNo");
-		System.out.println("QuizeAnswerController" + quizeNo);
-	
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

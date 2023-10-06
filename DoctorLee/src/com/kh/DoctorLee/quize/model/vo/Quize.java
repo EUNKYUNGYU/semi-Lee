@@ -15,16 +15,9 @@ public class Quize {
 	private String choice4;
 	private int answer;
 	
-<<<<<<< HEAD
-=======
-	
-	
-	
-	
 	public Quize() {
 		super();
 	}
-
 
 	public Quize(int quizeNo, String quizeTitle, String quizeContent, String createDate, String endDate,
 			String deadline, int vote, String choice1, String choice2, String choice3, String choice4, int answer) {
@@ -44,38 +37,22 @@ public class Quize {
 	}
 
 
-
-
 	public String getDeadline() {
 		return deadline;
 	}
-
-
-
-
 
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 
 
-
-
-
 	public int getQuizeNo() {
 		return quizeNo;
 	}
 
-
-
-
-
 	public void setQuizeNo(int quizeNo) {
 		this.quizeNo = quizeNo;
 	}
-
-
-
 
 
 	public String getQuizeTitle() {
@@ -83,23 +60,13 @@ public class Quize {
 	}
 
 
-
-
-
 	public void setQuizeTitle(String quizeTitle) {
 		this.quizeTitle = quizeTitle;
 	}
 
-
-
-
-
 	public String getQuizeContent() {
 		return quizeContent;
 	}
-
-
-
 
 
 	public void setQuizeContent(String quizeContent) {
@@ -107,15 +74,9 @@ public class Quize {
 	}
 
 
-
-
-
 	public String getCreateDate() {
 		return createDate;
 	}
-
-
-
 
 
 	public void setCreateDate(String createDate) {
@@ -123,39 +84,23 @@ public class Quize {
 	}
 
 
-
-
-
 	public String getEndDate() {
 		return endDate;
 	}
-
-
-
 
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-
-
-
-
 	public int getVote() {
 		return vote;
 	}
 
 
-
-
-
 	public void setVote(int vote) {
 		this.vote = vote;
 	}
-
-
-
 
 
 	public String getChoice1() {
@@ -243,16 +188,5 @@ public class Quize {
 				+ ", answer=" + answer + "]";
 	}
 
-
-
-
-
-
 	
-	
-	
-	
-	
-	
->>>>>>> 165e7a4a7a8829564a6320af1d77ee9401a7faaa
 }

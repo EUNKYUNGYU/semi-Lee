@@ -72,8 +72,7 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
-				Member m = new Member();
-				pstmt.setInt(1, m.getMemNo());
+				
 				rset = pstmt.executeQuery();
 				
 				
@@ -82,6 +81,7 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 					md.setDiaryNo(rset.getInt("DIARY_NO"));
 					md.setDiaryTitle(rset.getString("DIARY_TITLE"));
 					md.setCreateDate(rset.getDate("CREATE_DATE"));
+					
 					list.add(md);
 					
 					

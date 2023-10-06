@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.DoctorLee.member.model.vo.Member;
 import com.kh.DoctorLee.mpBoard.model.service.DiaryService;
 import com.kh.DoctorLee.mpBoard.model.vo.FamDiary;
 import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
@@ -33,7 +35,9 @@ public class DiaryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
+		
+		
 		ArrayList<MyDiary> list = new DiaryService().selectMyDiary();
 		request.setAttribute("list", list);
 		ArrayList<FamDiary> famList = new DiaryService().selectFamDiary();

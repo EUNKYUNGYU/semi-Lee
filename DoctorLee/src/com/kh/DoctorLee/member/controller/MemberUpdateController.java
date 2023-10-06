@@ -1,23 +1,27 @@
-package com.kh.DoctorLee.quize.controller;
+package com.kh.DoctorLee.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.member.model.vo.Member;
+
 /**
- * Servlet implementation class QuizeAnswerController
+ * Servlet implementation class MemberUpdateController
  */
-@WebServlet("/detailAnser.qz")
-public class QuizeAnswerController extends HttpServlet {
+@WebServlet("/update.me")
+public class MemberUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuizeAnswerController() {
+    public MemberUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +30,23 @@ public class QuizeAnswerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int quizeNo = (int) request.getAttribute("quizeNo");
-		System.out.println("QuizeAnswerController" + quizeNo);
+		
+		request.setCharacterEncoding("UTF_8");
+		
+		String memName = request.getParameter("memName");
+		String nickName = request.getParameter("nickName");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		
+		Member m = new Member();
+		m.setMemName(memName);
+		m.setNickName(nickName);
+		m.setPhone(phone);
+		m.setEmail(email);
+		
+		
+		RequestDispatcher view = request.getRequestDispatcher("views/member/memberUpdateForm.jsp");
+		view.forward(request, response);
 	
 	}
 

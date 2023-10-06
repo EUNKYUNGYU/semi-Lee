@@ -118,17 +118,6 @@
                     <li><img src="https://cdn.pixabay.com/photo/2013/07/18/10/59/human-skeleton-163715_1280.jpg" alt=""></li>
                 </ul>
             </div>
-            <script>
-                // 백그라운드 이미지 슬라이드
-                $(function(){
-                    $('.bxslider').bxSlider({
-                        auto: true, 
-                        speed: 500,
-                        pause: 5000,
-                        mode: 'fade',
-                    });
-                })
-            </script>
 
             <form action="hosSch.dy" method="get" id="index_search_bar">
             
@@ -149,8 +138,41 @@
             		if(e.keyCode == 13){
             			document.getElementById("icon_search").click();
             		}
-            	})
-            
+            	});
+            	
+            	
+          
+                // 백그라운드 이미지 슬라이드
+                $(function(){
+                    $('.bxslider').bxSlider({
+                        auto: true, 
+                        speed: 500,
+                        pause: 5000,
+                        mode: 'fade',
+                    });
+                             		
+            	$.ajax({
+            		url: 'hosSch.dy',
+            		data:{
+		        		index_search: $('#index_search_bar').children().first().val();
+            			
+            		},
+            		success: function(e){
+            			console.log(e);
+        		console.log($.type(el));
+        		
+        		var str = '';
+        		
+				if($.type(el) != str){
+					alert('잘못된 입력');
+        			
+        		}
+            		}
+            	});
+            	
+                                   
+                })
+
             </script>
 
         </header>

@@ -20,5 +20,11 @@
 		      CREATE_DATE DESC
 	</entry>
 
+	<entry key="hosCount">
+		SELECT
+		       COUNT(*)
+		  FROM
+		  	   TB_HOSPITAL
+	</entry>
 
 </properties>

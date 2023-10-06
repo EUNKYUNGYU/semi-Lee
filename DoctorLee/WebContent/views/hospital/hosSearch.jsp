@@ -3,7 +3,6 @@
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.*, com.kh.DoctorLee.common.model.vo.PageInfo" %>
 <%
 	ArrayList<Hospital> list = (ArrayList<Hospital>)request.getAttribute("list");
-	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,30 +15,31 @@
 	*{box-sizing: border-box;}
 	ul, li, ol{list-style: none;}
 	a{text-decoration: none;}
-	.sch_wrap{margin: 0 auto; padding-top: 100px; padding-left: 50px;}
+	.sch_wrap{margin: 0 auto; padding-top: 100px; padding-left: 50px; height: 1000px;}
 
       /* 병원 검색*/
       aside{
           float: left;
-          width: 30%; height: 100%;
+          width: 20%; height: 800px;
       }
       #sch_hos>h3{font-size: 30px;}
 
       #sch_bar{
-          width: 300px; height: 40px;
+          width: 250px; height: 40px;
       }
       #sch_hos>button{
-          width: 40px; height: 40px;
+          width: 35px; height: 40px;
           display: inline-block;
+          margin: 0;
       }
 
       /* 병원 리스트 */
       #hos_list{
-          display: inline-block;
-          width: 50%;
+          float: left;
+          width: 40%;
       }
       .hos{
-          width: 500px; height: 200px;
+          width: 100%; height: 200px;
           position: relative;
           margin: 30px;
           
@@ -80,8 +80,8 @@
           text-shadow: 3px, 4px, 5px, #333;
       }
       .hos_rsvt_btn>button:hover{cursor: pointer;}
-
-	.sch_category>li{margin-bottom: 10px;}
+	#hos_list:hover{cursor: pointer;}
+	  .sch_category>li{margin-bottom: 10px;}
 </style>
 </head>
 <body>
@@ -112,22 +112,9 @@
             		}
             	})
             
-            /*
-            	$(function(){
-            		$.ajax({
-            			url: 'hosSch.dy',
-            			data: {sch: $('#sch_bar').val()},
-            			success: function(r){
-
-            			},
-            			error: function(){
-            				alert("ajax fail");
-            			}
-            		})	
-            	})
-            */
             
             </script>
+            
             <ul class="sch_category">
                 <li>
                     <a href="#none">주변 병원 검색</a>
@@ -141,16 +128,17 @@
             </ul>
 
         </aside>
-
+		
         <!-- 병원 리스트 -->
 		<% for(Hospital h : list) { %>
         <div id="hos_list">
-
             <div class="hos">
-
+				<!-- 병원 이미지 -->
                 <div class="hos_img">
                     <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
                 </div>
+                
+                <!-- 병원 정보 -->
                 <div class="hos_info">
                     <h3>
 						<%= h.getHosName() %>
@@ -163,25 +151,31 @@
                     <div class="hos_rsvt_btn">
                         <button onclick="rsvtPage();">진료예약</button>
                     </div>
-
                 </div>
-	
-           		 </div>
-            </div>
-              <%} %>
+           	</div>
+		</div>
+        <%} %>
 
-                    <script>
-                        function rsvtPage(){
-                            var link = '<%= contextPath %>/views/hospital/hosDetail.jsp';
-                            window.open(link);
-                        }
+       	<script>
+       		$('#hos_list>.hos').on('click', function(){
+       			location.href = '<%= contextPath %>/views/hospital/hosDetail.jsp';
+       		});
+       	
+       	
+            function rsvtPage(){
+                var link = '<%= contextPath %>/views/hospital/hosDetail.jsp';
+                window.open(link);
+            };
 
-                        var $hos_status = $('.hos_info').children().eq(3);
-                        // db에 진료시간과 맞으면 
-
-
-                    </script>
-
+            var $hos_status = $('.hos_info').children().eq(3);
+            
+       	</script>
+		<div id="pageing_bar">
+			
+			<!-- http://localhost:8765/DoctorLee/hosSch.dy?index_search=&hkey=%EB%B3%91 -->
+		
+		
+		</div>
 
         </div>
 

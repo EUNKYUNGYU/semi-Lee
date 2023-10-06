@@ -57,5 +57,31 @@ public class HospitalDao {
 		return list;
 	}
 	
+	// 병원 입점 개수 조회
+	public int hosCount(Connection conn) {
+		int hosCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("hosCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				hosCount = rset.getInt("COUNT(*)");
+			}
+			
+			System.out.println(hosCount);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return hosCount;
+	}
+	
 
 }

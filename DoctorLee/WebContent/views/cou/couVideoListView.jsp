@@ -117,10 +117,11 @@ img{
         <!--심리 영상 내용 출력 영역 div-->
         <div id="video-list">
 
+            <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
                 <div id="button-area" align="right">
                     <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
                 </div>
-
+                <% } %>
 
             <!-- 동영상이 존재하지 않을 경우 -->
             <%if(list.isEmpty()){ %>

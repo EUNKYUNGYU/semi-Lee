@@ -8,6 +8,21 @@
 
 <!--Google Fonts Icon-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+
+<!--fullCalendar-->
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth'
+      });
+      calendar.render();
+    });
+
+</script>
 
 <style>
     .outer{
@@ -22,7 +37,7 @@
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
-        height: 1050px;
+        height: auto;
         margin-top: 50px;
     }
 
@@ -469,7 +484,14 @@
                     $(function(){
                         //li클릭 시 색깔 바뀌는 이벤트
                         $('.content-cli').click(function(){
-                            // $(this).css('background-color', 'bisque');
+                            if($(this).next().css('background-color') == 'salmon'){
+                                $(this).next().siblings().css('background-color', 'salmon');
+
+                                $(this).next().css('background-color', 'bisque');
+                            } else {
+                                $(this).next().css('background-color', 'salmon');
+                            }
+                            
                         })
 
                         //돋보기 버튼 클릭 시 상세보기 페이지로 이동
@@ -495,7 +517,7 @@
                         <!--예약일시 영역 div-->
                         <div id="cli-date" align="left">
                             <div id="date-inner" align="center">
-                            <p>날짜 선택(달력 출력)</p>
+                            <div id="calendar"></div>
                             </div>
 
                             <div id="time-inner">
@@ -505,6 +527,8 @@
                         <br clear="both">
                 </div>
             </div>
+
+            <br><br><br><br><br>
 
             </div>
 

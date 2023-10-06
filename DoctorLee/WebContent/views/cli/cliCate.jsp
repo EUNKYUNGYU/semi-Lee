@@ -4,61 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>클리닉 예약 페이지</title>
+<title>클리닉 아이템</title>
 
 <!--Google Fonts Icon-->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
-<style>
-    .outer{
-        width: 1800px;
-        margin-left: 50px;
-        border: 1px solid red;
-    }
-
-    /*상단 네비*/
-    #navi{
-        border: 1px solid pink;
-        height: 100px;
-    }
-
-    /*하단 내용 영역을 감싸는 div*/
-    .content{
-        border: 1px solid green;
-        height: 1050px;
-        margin-top: 50px;
-    }
-
-    .content > div{
-        float: left;
-    }
-
-    #cou_navi{
-        height: 1000px;
-    }
-
-    .left-menu{
-        margin-left: 200px;
-    }
-
-    /*우측 클리닉 영역*/
-    #cli-cate, #cli-part, #res-part{
-        margin-left: 100px;
-    }
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /><style>
 
     #cli-part{
         width: 1000px;
+        border: 1px solid red;
     }
 
     /*영역 제목*/
     .title-part{
         height: 100px;
-        border: 1px solid black;
+        border: 1px solid blue;
         line-height: 100px;
     }
 
     .title-part span{
         font-size: 26px;
+        border: 1px solid red;
     }
 
     .title-part > span{
@@ -74,7 +39,7 @@
 
     /*해당 카테고리 출력 영역*/
     #content-part{
-        height: auto;
+        height: 850px;
         border: 1px solid green;
     }
 
@@ -119,14 +84,24 @@
 
     /*클리닉 설명*/
     .cli-des{
+        border: 1px solid orange;
         width: auto;
         margin: 10px;
         padding: 10px;
-        height: 132px;
+        height: 134px;
+    }
+
+    .cli-des > div{
+        border: 1px solid brown;
+        margin-top: 5px;
     }
 
     .cli-des > div > span{
         vertical-align: middle;
+    }
+
+    .cli-top{
+        border: 1px solid blue;
     }
 
     .title{
@@ -134,6 +109,7 @@
     }
 
     .cli-name{
+        border: 1px solid green;
         font-weight: 1000;
     }
 
@@ -148,81 +124,11 @@
         margin: 0;
         padding: 0;
     }
-
-    /*카테고리 영역*/
-    .cate{
-        opacity: 0;
-    }
-
-    .cate > label{
-        padding: 5px 10px;
-    }
-
-    input[type=radio]+label{
-        color: black;
-        border-radius: 10px;
-        text-align: center;
-        padding-top: 10px;
-        padding-left: 10px;
-        display: inline-block;
-        font-size: 20px;
-    }
-
-    input[type=radio]:checked + label{
-        color: blue;
-        text-decoration: underline;
-    }
-
-    #cate-inner > ul{
-        list-style: none;
-        border: 1px solid red;
-        display: flex;
-    }
-
-    /*날짜와 시간을 띄울 영역*/
-    #res-part{
-        border: 1px solid khaki;
-        margin-top: 30px;
-    }
 </style>
 </head>
 <body>
-    <!--상단 네비게이션 메뉴 div-->
-    <%@ include file="../common/nav2.jsp"%>
 
-    <br><br><br>
-
-    <!--전체를 감싸는 div-->
-    <div class="outer">
-
-        <!--하단 내용 영역을 감싸는 div-->
-        <div class="content" align="center">
-
-            <!--좌측 메뉴 div-->
-            <div class="left-menu">
-                <%@ include file="../common/cliNavi.jsp"%>
-            </div>
-
-            <!--클리닉 출력 영역 div-->
-            <div id="cli-content">
-
-                <!--클리닉 카테고리 영역 div-->
-                <div id="cli-cate" align="left">
-                    <div id="cate-inner" align="center">
-                        <ul>
-                            <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin3"><label for="skin3">피부 진료3</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
-                        </ul>
-
-                    </div>
-                </div>
-
-                <!--클리닉 내용 출력 영역 div-->
+    <!--클리닉 내용 출력 영역 div-->
     <div id="cli-part">
 
         <!--제목 출력 영역 div-->
@@ -230,7 +136,7 @@
             <em>
                 <span class="material-symbols-outlined">chevron_right</span>
             </em>
-            <span>클리닉을 선택해주세요</span>
+            <span>카테고리를 선택해주세요</span>
         </div>
 
         <!--해당 카테고리 클리닉 출력 영역 div-->
@@ -241,39 +147,6 @@
 
                 <!--클리닉 출력 ul-->
                 <ul class="content-list">
-
-                    <!--클리닉 요소 하나하나 li-->
-                    <li class="content-cli">
-
-                        <!--클리닉 대표 이미지 div-->
-                        <div class="cli-img">
-                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
-                        </div>
-
-                        <!--클리닉 설명 div-->
-                        <div class="cli-des" align="left">
-
-                            <div class="cli-top">
-                                <span class="cli-name title">클리닉명</span>
-                                <span class="material-symbols-outlined title">search</span>
-                            </div>
-
-                            <div class="cli-location">
-                                <span>클리닉 장소</span>
-                            </div>
-
-                            <div class="cli-score">
-                                <span class="material-symbols-outlined">grade</span>
-                                <span>별점</span>
-                            </div>
-
-                            <div class="cli-price">
-                                <span>가격</span>
-                            </div>
-
-                        </div>
-                        <br clear="both">
-                    </li>
 
                     <!--클리닉 요소 하나하나 li-->
                     <li class="content-cli">
@@ -350,6 +223,7 @@
                         </div>
 
                         <!--클리닉 설명 div-->
+                        <!--클리닉 설명 div-->
                         <div class="cli-des" align="left">
 
                             <div class="cli-top">
@@ -377,17 +251,5 @@
             </div>
         </div>
     </div>
-
-                <!--클리닉 예약 날짜 및 시간 띄우기 영역 div-->
-                <div id="res-part">
-                    <p>날짜와 시간을 띄울 곳 <br> 원하는 날짜 선택 시 시간을 선택할 수 있음</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </body>
 </html>

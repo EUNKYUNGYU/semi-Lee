@@ -7,7 +7,9 @@
 %>
 <%
 	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
+	
 %>
+
 
 <!DOCTYPE html>
 <html>
@@ -132,7 +134,12 @@
         </div>
     	
     	
+    	 <% if(loginUser == null) { %>
+   			 <form action="<%= contextPath %>/login.me" method="post">
+    		 	<button type="submit" width="300" height="300">로그인하러가기</button>
     	
+   	 		 </form>
+   	 	<% } else { %>
         <div id="diary1">
             
         	<div id="my_diary">
@@ -295,7 +302,7 @@
         
     </div>
     <%@ include file="../common/footer.jsp" %>
-
+	<%} %>
 
 </body>
 </html>

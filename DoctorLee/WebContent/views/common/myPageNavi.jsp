@@ -3,6 +3,7 @@
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
 
 <%
+	String contextPath = request.getContextPath();
 	String contextPath1 = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
@@ -88,7 +89,7 @@
 <body>
     
         
-            <input type="hidden" name="memNo" value=<%=loginUser.getMemNo() %>>
+            
             <div id="mp_navi">
                 <div id="empty">
                     <table id="user" align="center">
@@ -114,8 +115,8 @@
                     <li><a href="#">복약관리</a></li>
                     <li><a href="#">회원정보 수정/탈퇴</a>
                         <ul>
-                            <li><a href="#">회원 정보 수정</a></li>
-                            <li><a href="#">회원 탈퇴</a></li>
+                            <li><a href="<%=contextPath%>/update.me">회원 정보 수정</a></li>
+                            <li><a href="<%=contextPath%>/deletePwd.me">회원 탈퇴</a></li>
                         </ul>
                     </li>
                     <li><a href="#">관리자 문의</a></li>
@@ -142,6 +143,7 @@
 
             </div>
             <script>
+           
                 $(function(){
                     $('a').click(function(){
                         let $a = $(this).next();

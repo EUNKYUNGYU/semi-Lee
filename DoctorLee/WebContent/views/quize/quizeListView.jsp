@@ -3,7 +3,7 @@
 <%@ page
 	import="com.kh.DoctorLee.quize.model.vo.Quize,
 				 java.util.ArrayList"%>
-
+    
 <% 
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
 	String contextPath = request.getContextPath();
@@ -235,7 +235,60 @@ footer {
 		</div>
 	</section>
 	<footer> 푸터 영역 </footer>
+    
+    <div id="quizewrap">
+        <div id="quize"> 
+            <h1>퀴즈게시판</h1>
+        </div>
+        <div id="quizeboard"> 
 
+            <div id="board">
+        <% if(list.isEmpty()) { %>
+        
+        <% } else { %>
+        <% for(Quize q : list) { %>
+                <div id="header">
+                    <div id="title"><%= q.getQuizeTitle() %></div>
+                    <div id="vote"><%= q.getVote() %></div>
+                    <div id="deadline"><%= q.getDeadline() %>일 남음</div>
+                </div>
+                <div id="content">
+                    퀴즈 내용 <br>
+                   	 <%= q.getQuizeContent() %> <br>
+
+                    <form>
+                        
+                        <input type="radio" name="choice" value="선택지1" id="choice1" checked>
+                        <label for="choice1"><%= q.getChoice1() %></label> <br>
+    
+                        <input type="radio" name="choice" value="선택지2" id="choice2" >
+                        <label for="choice2"><%= q.getChoice2() %></label> <br>
+    
+                        <input type="radio" name="choice" value="선택지3" id="choice3" >
+                        <label for="choice3"><%= q.getChoice3() %></label> <br>
+    
+                        <input type="radio" name="choice" value="선택지4" id="choice4" >
+                        <label for="choice4"><%= q.getChoice4() %></label> <br>
+
+                        
+                    </div>
+                    <div id="footer">
+                        <div id="footer1">
+                            <input type="submit" id="quizeButton" class="btn btn-default">
+                        </div>
+                    </form>
+
+                    <div id="footer2">
+                        <a href="#" >정답 확인하기 &gt;</a>
+                        <a href="<%= contextPath %>/quize/controller/list.qz?qno=<%= q.getQuizeNo() %>" >정답 확인하기 &gt;</a>
+                    </div>
+                </div>
+
+            </div>
+      
+        </div>
+        	<% } %>
+        <% } %>
 
 
 </body>

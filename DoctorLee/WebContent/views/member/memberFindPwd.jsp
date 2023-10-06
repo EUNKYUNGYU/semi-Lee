@@ -110,7 +110,7 @@
 </head>
 <body>
 
-	<%@ include file = "../common/nav.jsp" %>
+	<%@ include file = "../common/nav2.jsp" %>
 	
 	 <div id="content">
 

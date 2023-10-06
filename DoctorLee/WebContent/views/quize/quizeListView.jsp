@@ -6,7 +6,6 @@
     
 <% 
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
-	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -89,7 +88,7 @@ a {
 	color: #1E376F;
 }
 
-input[type=submit] {
+button {
 	background-color: #1E376F;
 	border-radius: 7px;
 	color: white;
@@ -161,7 +160,9 @@ footer {
 </head>
 <body>
 
-	<header id="header"> 헤더 영역 </header>
+	<header id="header">
+		<%@ include file ="../common/nav2.jsp" %>
+	</header>
 	<section>
 		<aside></aside>
 		<div id="contentWrap">
@@ -193,7 +194,7 @@ footer {
 									퀴즈 내용 <br>
 									<%= q.getQuizeContent() %>
 									<br>
-									<form>
+									<form method="post" action="<%= contextPath %>/choice.qz" >
 										<input type="radio" name="choice" value="선택지1" id="choice1"
 											checked> <label for="choice1"><%= q.getChoice1() %></label>
 										<br> <input type="radio" name="choice" value="선택지2"
@@ -206,10 +207,27 @@ footer {
 								</div>
 								<div id="footer">
 									<div id="footer1">
-										<input type="submit" id="quizeButton" class="btn btn-default">
+										<button type="submit" id="quizeButton" class="btn btn-default">제출
 									</div>
 									</form>
-
+									<script>
+										
+										$(function(){
+											
+											$('#quizeButton').click(function(){
+											
+												<% if(loginUser == null){%>
+													alert('로그인 후 이용가능합니다.');
+												<% } else {%>
+												 	alert('이건 로그인한거...');
+												 <% } %>
+											})
+											
+										})
+									
+									
+									
+									</script>
 									<div id="footer2">
 										<a href="<%= contextPath %>/detail.qz?qno=<%= q.getQuizeNo()%>">정답 확인하기 &gt;</a>
 									</div>

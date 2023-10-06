@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.quize.model.service.QuizeService;
-import com.kh.DoctorLee.quize.model.vo.QuizeChoice;
 
 /**
  * Servlet implementation class QuizeChoice
@@ -31,13 +30,27 @@ public class QuizeChoiceController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int quizeNo = Integer.parseInt(request.getParameter("quizeNo"));
 		int choice = Integer.parseInt(request.getParameter("choice"));
 		
-		int result1 = new QuizeService().quizeChoiceInsert(quizeNo, memNo, choice);
+		System.out.println(memNo);
+		System.out.println(quizeNo);
+		System.out.println(choice);
 		
-	
+		int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
+		if(result > 0) {
+			
+			request.setAttribute("alertMsgPoint", "50포인트를 획득하였습니다.");
+			request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
+			
+		} else { // 실패
+			request.setAttribute("alertMsgPoint", "포인트 획득에 실패하셨습니다.");
+			request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
+		}
+
 	
 	}
 

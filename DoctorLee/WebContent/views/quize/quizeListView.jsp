@@ -6,6 +6,7 @@
     
 <% 
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
+	String alertMsgPoint = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
 
 <style>
 * {
-	border: 0.5px solid salmon;
+	border: 0.5px solid skyblue;
 	box-sizing: border-box;
 }
 
@@ -210,9 +211,9 @@ footer {
 								<div id="footer">
 									<div id="footer1">
 										<button type="submit" id="quizeButton" class="btn btn-default">제출
-										<% if(loginUser != null){ %>
 										<input type="hidden" id="memNo" value="<%= loginUser.getMemNo() %>">
 										<input type="hidden" id="quizeNo" value="<%= q.getQuizeNo() %>">
+										<% if(loginUser != null){ %>
 										<% } %>
 									</div>
 									</form>

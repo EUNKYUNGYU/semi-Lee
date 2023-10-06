@@ -121,4 +121,52 @@ public class QuizeDao {
 		return result;
 		
 	}
+	
+	public int quizeChoiceIsRight(Connection conn, int quizeNo, int choice) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("quizeChoiceIsRight");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(2, choice);
+
+			rset = pstmt.executeQuery(sql);
+			if(rset.next()) result = 1;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} 
+		
+		return result;
+	}
+	
+	public int quizeGetPoint(Connection conn, int quizeNo, int memNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("quizeGetPoint");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(2, memNo);
+
+			result = pstmt.executeUpdate(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} 
+		
+		return result;
+		
+	}
+	
 }

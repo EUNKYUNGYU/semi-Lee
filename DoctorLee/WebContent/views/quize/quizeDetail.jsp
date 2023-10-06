@@ -17,7 +17,7 @@
 <style>
         
         *{
-            border: 0.5px solid salmon;
+            border: 0.5px solid skyblue;
             box-sizing: border-box;
         }
         #quizewrap{

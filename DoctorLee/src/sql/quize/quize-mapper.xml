@@ -55,6 +55,37 @@ INSERT
 						
 </entry>
 
+<entry key="quizeChoiceIsRight">
 
+	SELECT 
+        ANSWER
+    FROM 
+        TB_QUIZE_ANSWER
+    WHERE 
+        QUIZE_NO = ?   
+    AND    
+        ANSWER = ?
+
+</entry>
+
+ <entry key="quizeGetPoint">
+ 	
+ 	INSERT 
+ 		INTO 	
+ 			TB_POINT 
+ 					(
+ 					MEM_NO
+ 					, POINT
+ 					) 
+ 			VALUES
+ 					(
+ 					?
+ 					, ?
+ 					)
+ 
+ 
+ 
+ 
+ </entry>
 </properties>
 

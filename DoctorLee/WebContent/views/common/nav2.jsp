@@ -130,6 +130,31 @@ body{
 	margin-top:50px;
 }
 
+#createId,#login{
+    float: right;
+    margin-right: 20px;
+    margin-top: 45px;
+    cursor: pointer;
+}
+
+#login{
+    margin-right: 70px;
+    border: none;
+    border-radius: 3px;
+    font-weight: bolder;
+    width: 80px;
+    height: 30px;
+}
+
+#createId{
+    width: 80px;
+    border: none;
+    width: 80px;
+    height: 30px;
+    border-radius: 3px;
+    font-weight: bolder;
+}
+
 </style>
 </head>
 <body>
@@ -181,20 +206,16 @@ body{
                     </li>
                 </ul>
             </div>
-            <div id="navi3">
-            </div>
-        
-            	<%if(loginUser == null){ %>
-                <button id="login"  onclick="loginPage();">로그인</button>
-                <button id="createId" onclick="enrollPage();">회원가입</button>
-        
         </div>
-		<%}else{ %>
+        <% if(loginUser == null) { %>
+                <button id="login" onclick="loginPage();">로그인</button>
+                <button id="createId" onclick="enrollPage();">회원가입</button>
+		<% } else { %>
 			<div id="mem-info">
 			<b id=loginMemName><%=loginUser.getMemName()%>님</b>
 				<a href="<%=contextPath %>/logout.me">로그아웃</a>
 			</div>
-		<%} %>
+		<% } %>
 
 		<script>
 			function enrollPage(){

@@ -60,7 +60,45 @@
 	  			)
 		  		
 	</entry>
-
+	<entry key="updateMember">
+		UPDATE
+				TB_MEMBER
+		   SET
+				MEM_NAME = ?,
+				NICKNAME = ?,
+				PHONE = ?,
+				EMAIL = ?,
+				MODIFY_DATE = SYSDATE
+		  WHERE
+				MEM_ID = ?
+		    AND
+				STATUS = 'Y'
+				
+	</entry>
+	<entry key="selectMember">
+		SELECT
+				TB_MEMBER
+				
+		FROM
+				MEM_NO,
+				MEM_ID,
+				MEM_PWD,
+				MEM_NAME,
+				NICKNAME,
+				PHONE,
+				INUM,
+				EMAIL,
+				GENDER,
+				HEIGHT,
+				WEIGHT,
+				CREATE_DATE,
+				MODIFY_DATE,
+				STATUS
+		 WHERE
+		 		MEM_ID = ?
+	
+	
+	</entry>
 
 
 </properties>

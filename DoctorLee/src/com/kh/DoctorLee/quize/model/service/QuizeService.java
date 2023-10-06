@@ -32,5 +32,4 @@ public class QuizeService {
 	
 	
 	
->>>>>>> 165e7a4a7a8829564a6320af1d77ee9401a7faaa
 }

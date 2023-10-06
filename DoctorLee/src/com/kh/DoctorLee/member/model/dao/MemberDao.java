@@ -105,6 +105,71 @@ public class MemberDao {
 		
 	}
 	
+	public int updateMember(Connection conn, Member m) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemName());
+			pstmt.setString(2, m.getNickName());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setString(4, m.getEmail());
+			pstmt.setString(5, m.getMemId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
 	
+	public Member selectMember(Connection conn, String memId) {
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				m = new Member(rset.getInt("MEM_NO"),
+							   rset.getString("MEM_ID"),
+							   rset.getString("MEM_PWD"),
+							   rset.getString("MEM_NAME"),
+							   rset.getString("NICKNAME"),
+							   rset.getString("PHONE"),
+							   rset.getString("INUM"),
+							   rset.getString("EMAIL"),
+							   rset.getString("GENDER"),
+							   rset.getInt("HEIGHT"),
+							   rset.getInt("WEIGHT"),
+							   rset.getDate("CREATE_DATE"),
+							   rset.getDate("MODIFY_DATE"),
+							   rset.getString("STATUS"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return m;
+		
+		
+	}
 
 }

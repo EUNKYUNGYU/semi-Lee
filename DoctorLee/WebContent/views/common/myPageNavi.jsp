@@ -3,6 +3,7 @@
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
 
 <%
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	String contextPath = request.getContextPath();
 	String contextPath1 = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");

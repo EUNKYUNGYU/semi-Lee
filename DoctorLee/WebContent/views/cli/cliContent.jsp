@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>클리닉 아이템</title>
-<style>
+
+<!--Google Fonts Icon-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /><style>
+
     #cli-part{
         width: 1000px;
         border: 1px solid red;
@@ -32,17 +35,24 @@
     .content-border{
         margin: 10px;
         border: 1px solid purple;
-        height: auto;
+        height: 500px;
+        overflow: auto;
     }
 
-    /*클리닉 출력 리스트*/
+    /*클리닉 출력 리스트 ul*/
     .content-list{
         list-style: none;
+        border: 1px solid red;
+        padding-left: 20px;
     }
 
-    /*클리닉 출력 요소*/
+    /*클리닉 출력 요소 li*/
     .content-cli{
         border: 1px solid salmon;
+        border-radius: 10px;
+        background-color: salmon;
+        margin-bottom: 10px;
+        width: 800px;
     }
 
     .content-cli > div{
@@ -67,6 +77,21 @@
         width: auto;
         margin: 10px;
         padding: 10px;
+    }
+
+    .cli-top{
+        border: 1px solid blue;
+    }
+
+    .cli-name{
+        border: 1px solid green;
+    }
+
+    /*돋보기 아이콘*/
+    .material-symbols-outlined{
+        font-size: 20px;
+        border: 1px solid red;
+        
     }
 </style>
 </head>
@@ -98,8 +123,11 @@
                         </div>
 
                         <!--클리닉 설명 div-->
-                        <div class="cli-des">
-                            <span>클리닉명</span>
+                        <div class="cli-des" align="left">
+                            <div class="cli-top">
+                                <span class="cli-name">클리닉명</span>
+                                <span class="material-symbols-outlined">search</span>
+                            </div>
                             <p>클리닉 장소</p>
                             <p>별점</p>
                             <span>가격</span>
@@ -107,8 +135,46 @@
                         <br clear="both">
                     </li>
                     
+                    <!--클리닉 요소 하나하나 li-->
                     <li class="content-cli">
-                        
+
+                        <!--클리닉 대표 이미지 div-->
+                        <div class="cli-img">
+                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
+                        </div>
+
+                        <!--클리닉 설명 div-->
+                        <div class="cli-des" align="left">
+                            <div class="cli-top">
+                                <span class="cli-name">클리닉명</span>
+                                <span class="material-symbols-outlined">search</span>
+                            </div>
+                            <p>클리닉 장소</p>
+                            <p>별점</p>
+                            <span>가격</span>
+                        </div>
+                        <br clear="both">
+                    </li>
+
+                    <!--클리닉 요소 하나하나 li-->
+                    <li class="content-cli">
+
+                        <!--클리닉 대표 이미지 div-->
+                        <div class="cli-img">
+                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
+                        </div>
+
+                        <!--클리닉 설명 div-->
+                        <div class="cli-des" align="left">
+                            <div class="cli-top">
+                                <span class="cli-name">클리닉명</span>
+                                <span class="material-symbols-outlined">search</span>
+                            </div>
+                            <p>클리닉 장소</p>
+                            <p>별점</p>
+                            <span>가격</span>
+                        </div>
+                        <br clear="both">
                     </li>
                 </ul>
             </div>

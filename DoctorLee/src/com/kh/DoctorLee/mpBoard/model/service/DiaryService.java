@@ -8,7 +8,7 @@ import com.kh.DoctorLee.mpBoard.model.dao.DiaryDao;
 import com.kh.DoctorLee.mpBoard.model.vo.FamDiary;
 import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 
-public class DiaryService implements DiaryServiceI{
+public class DiaryService {
 	
 	public int insertMyDiary(MyDiary md) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -38,7 +38,7 @@ public class DiaryService implements DiaryServiceI{
 		
 		return result;
 	}
-	@Override
+	
 	public ArrayList<MyDiary> selectMyDiary() {
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -48,7 +48,7 @@ public class DiaryService implements DiaryServiceI{
 		
 		return list;
 	}
-	@Override
+	
 	public ArrayList<FamDiary> selectFamDiary(){
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<FamDiary> famList = new DiaryDao().selectFamDiary(conn);

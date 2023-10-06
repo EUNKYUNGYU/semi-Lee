@@ -88,7 +88,7 @@
 <body>
     
         
-            <input type="hidden" name="memNo" value=<%=loginUser.getMemNo() %>>
+            
             <div id="mp_navi">
                 <div id="empty">
                     <table id="user" align="center">

@@ -24,90 +24,30 @@ public class HospitalDao {
 		try {
 			prop.loadFromXML(new FileInputStream(file));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public Hospital selectTreatTime(Connection conn) {
-		
-		Hospital hos = new Hospital();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectTreatTime");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				hos.setHosNo(rset.getInt("HOS_NO"));
-				hos.setTreatBegin(rset.getString("TREAT_BEGIN"));
-				hos.setTreatEnd(rset.getString("TREAT_END"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally{
-			close(rset);
-			close(pstmt);
-		}
-		
-		return hos;
-	}
-	
-	public ArrayList<Hospital> searchHos(Connection conn, String keyword){
-		ArrayList<Hospital> hosList = new ArrayList();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("schHos");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + keyword + "%");
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				Hospital hos = new Hospital();
-				hos.setHosNo(rset.getInt("HOS_NO"));
-				hos.setHosName(rset.getString("HOS_NAME"));
-				hos.setHosAddress(rset.getString("HOS_ADDRESS"));
-				
-				hosList.add(hos);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return hosList;
-	}
-	
-	public ArrayList<Hospital> schHosList(Connection conn){
+	public ArrayList<Hospital> schToIndex(Connection conn, String schKeyword){
 		ArrayList<Hospital> list = new ArrayList();
-		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("schHosList");
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("schToIndex");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + schKeyword + "%");
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while(rset.next()){
 				Hospital h = new Hospital();
 				h.setHosNo(rset.getInt("HOS_NO"));
 				h.setHosName(rset.getString("HOS_NAME"));
 				h.setHosAddress(rset.getString("HOS_ADDRESS"));
-				
 				list.add(h);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
@@ -115,5 +55,6 @@ public class HospitalDao {
 		
 		return list;
 	}
+	
 
 }

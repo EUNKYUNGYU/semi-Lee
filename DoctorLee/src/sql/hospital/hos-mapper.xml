@@ -4,18 +4,7 @@
 <properties>
 	<comment>병원 관련 SQL문</comment>
 
-	<entry key="selectTreatTime">
-		
-		SELECT 
-			   HOS_NO
-			   ,TREAT_BEGIN
-			   ,TREAT_END
-	      FROM
-	           TB_HOSPITAL
-		
-	</entry>
-	
-	<entry key="schHos">
+	<entry key="schToIndex">
 		SELECT
 		       HOS_NO
 		       ,HOS_NAME
@@ -31,20 +20,5 @@
 		      CREATE_DATE DESC
 	</entry>
 
-<entry key="schHosList">
-	SELECT
-	       HOS_NO
-	       ,HOS_NAME
-	       ,HOS_ADDRESS
-	  FROM
-	       TB_HOSPITAL
-	 WHERE 
-	       STATUS = 'Y'
-	 ORDER
-	    BY
-	       CREATE_DATE DESC
-
-
-</entry>
 
 </properties>

@@ -11,24 +11,11 @@ import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
 public class HospitalService {
 	
-	public Hospital selectTreatTime() {
+	public ArrayList<Hospital> schToIndex(String schKeyword){
 		Connection conn = getConnection();
-		Hospital hos = new HospitalDao().selectTreatTime(conn);
-		close(conn);
-		return hos;
-	}
-
-	public ArrayList<Hospital> searchHos(String keyword){
-		Connection conn = getConnection();
-		ArrayList<Hospital> hosList = new HospitalDao().searchHos(conn, keyword);
-		close(conn);
-		return hosList;
-	}
-	
-	public ArrayList<Hospital> schHosList(){
-		Connection conn = getConnection();
-		ArrayList<Hospital> list = new HospitalDao().schHosList(conn);
+		ArrayList<Hospital> list = new HospitalDao().schToIndex(conn, schKeyword);
 		close(conn);
 		return list;
 	}
+	
 }

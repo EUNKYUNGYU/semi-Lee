@@ -2,14 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.*, com.kh.DoctorLee.common.model.vo.PageInfo" %>
 <%
-
 	ArrayList<Hospital> list = (ArrayList<Hospital>)request.getAttribute("list");
-	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("schList");
-	String indexSch = (String)request.getAttribute("indexSch");
-	
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
 	
 %>
 <!DOCTYPE html>
@@ -134,9 +127,6 @@
             	})
             */
             
-            	
-            
-            
             </script>
             <ul class="sch_category">
                 <li>
@@ -153,7 +143,7 @@
         </aside>
 
         <!-- 병원 리스트 -->
-		<% for(int i = 0; i < list.size(); i++) { %>
+		<% for(Hospital h : list) { %>
         <div id="hos_list">
 
             <div class="hos">
@@ -163,10 +153,10 @@
                 </div>
                 <div class="hos_info">
                     <h3>
-						<%= list.get(i).getHosName() %>
-</h3>
+						<%= h.getHosName() %>
+					</h3>
                     <p>
-						<%= list.get(i).getHosAddress() %>
+						<%= h.getHosAddress() %>
 					</p>
 
                     <h4>진료중</h4>
@@ -176,9 +166,9 @@
 
                 </div>
 	
-	
+           		 </div>
             </div>
-                <%} %>
+              <%} %>
 
                     <script>
                         function rsvtPage(){
@@ -192,32 +182,11 @@
 
                     </script>
 
-            </div>
 
         </div>
-        
-           <div class="paging_area">
-        	
-        	<% if(currentPage != 1) { %>
-        		<button onclick="location.href='<%= contextPath %>/list.bo?page=<%= currentPage - 1 %>'" class="btn btn-sm btn-info">&lt;</button>
-        	<% } %>
-        
-			<% for(int i = startPage; i <= endPage; i++) { %>
-				<% if(currentPage != i) { %>
-					<button onclick="location.href='<%= contextPath %>/list.bo?page=<%= i %>'" class="btn btn-sm btn-info"><%= i %></button>		
-				<% } else { %>
-					<button disabled class="btn btn-sm btn-info"><%= i %></button>
-				<% } %>
-			<% } %>
-			
-			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href='<%= contextPath %>/list.bo?page=<%= currentPage + 1 %>'" class="btn btn-sm btn-info">&gt;</button>
-			<% } %>
-        </div>
-        
+
 		<!-- 지도 -->
 
-	</div>
 
     <%@ include file="../common/footer.jsp" %>
 

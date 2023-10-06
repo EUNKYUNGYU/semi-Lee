@@ -162,6 +162,8 @@ footer {
 
 	<header id="header">
 		<%@ include file ="../common/nav2.jsp" %>
+		<% System.out.println(loginUser);
+		 %>
 	</header>
 	<section>
 		<aside></aside>
@@ -195,38 +197,28 @@ footer {
 									<%= q.getQuizeContent() %>
 									<br>
 									<form method="post" action="<%= contextPath %>/choice.qz" >
-										<input type="radio" name="choice" value="선택지1" id="choice1"
+										<input type="radio" name="choice" value="1" id="choice1"
 											checked> <label for="choice1"><%= q.getChoice1() %></label>
-										<br> <input type="radio" name="choice" value="선택지2"
+										<br> <input type="radio" name="choice" value="2"
 											id="choice2"> <label for="choice2"><%= q.getChoice2() %></label>
-										<br> <input type="radio" name="choice" value="선택지3"
+										<br> <input type="radio" name="choice" value="3"
 											id="choice3"> <label for="choice3"><%= q.getChoice3() %></label>
-										<br> <input type="radio" name="choice" value="선택지4"
+										<br> <input type="radio" name="choice" value="4"
 											id="choice4"> <label for="choice4"><%= q.getChoice4() %></label>
 										<br>
 								</div>
 								<div id="footer">
 									<div id="footer1">
 										<button type="submit" id="quizeButton" class="btn btn-default">제출
+										<% if(loginUser != null){ %>
+										<input type="hidden" id="memNo" value="<%= loginUser.getMemNo() %>">
+										<input type="hidden" id="quizeNo" value="<%= q.getQuizeNo() %>">
+										<% } %>
 									</div>
 									</form>
 									<script>
-										
-										$(function(){
+
 											
-											$('#quizeButton').click(function(){
-											
-												<% if(loginUser == null){%>
-													alert('로그인 후 이용가능합니다.');
-												<% } else {%>
-												 	alert('이건 로그인한거...');
-												 <% } %>
-											})
-											
-										})
-									
-									
-									
 									</script>
 									<div id="footer2">
 										<a href="<%= contextPath %>/detail.qz?qno=<%= q.getQuizeNo()%>">정답 확인하기 &gt;</a>

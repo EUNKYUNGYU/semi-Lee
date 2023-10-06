@@ -75,7 +75,7 @@
                     <li><a href="#">마이페이지</a>
                         <ul>
                         	<li><a href="<%=contextPath%>/myPage.me">마이페이지</a></li>
-                            <li><a href="#">회원 정보 수정</a></li>
+                            <li><a href="<%=contextPath%>/update.me">회원 정보 수정</a></li>
                             <li><a href="#">회원 탈퇴</a></li>
                             <li><a href="#">관리자 문의</a></li>
                             <li><a href="#">자기 게시물 확인</a></li>

@@ -70,7 +70,7 @@
 </head>
 <body>
     <!--상단 네비게이션 메뉴 div-->
-    <%@ include file="../common/nav.jsp"%>
+    <%@ include file="../common/nav2.jsp"%>
 
     <br><br><br>
 

@@ -21,8 +21,19 @@
         line-height: 100px;
     }
 
-    #title-part > span{
+    #title-part span{
         font-size: 26px;
+    }
+
+    #title-part > span{
+        margin-left: 50px;
+    }
+
+    #title-part > em > span{
+        background-color: #1E376F;
+        border-radius: 50%;
+        color: white;
+        margin-left: 100px;
     }
 
     /*해당 카테고리 출력 영역*/
@@ -42,17 +53,16 @@
     /*클리닉 출력 리스트 ul*/
     .content-list{
         list-style: none;
-        border: 1px solid red;
-        padding-left: 20px;
+        padding-left: 15px;
     }
 
     /*클리닉 출력 요소 li*/
     .content-cli{
         border: 1px solid salmon;
         border-radius: 10px;
-        background-color: salmon;
-        margin-bottom: 10px;
-        width: 800px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        width: 898px;
     }
 
     .content-cli > div{
@@ -77,21 +87,41 @@
         width: auto;
         margin: 10px;
         padding: 10px;
+        height: 134px;
+    }
+
+    .cli-des > div{
+        border: 1px solid brown;
+        margin-top: 5px;
+    }
+
+    .cli-des > div > span{
+        vertical-align: middle;
     }
 
     .cli-top{
         border: 1px solid blue;
     }
 
+    .title{
+        vertical-align: middle;
+    }
+
     .cli-name{
         border: 1px solid green;
+        font-weight: 1000;
+    }
+
+    /*별점*/
+    .cli-score > span{
+        vertical-align: middle;
     }
 
     /*돋보기 아이콘*/
     .material-symbols-outlined{
         font-size: 20px;
-        border: 1px solid red;
-        
+        margin: 0;
+        padding: 0;
     }
 </style>
 </head>
@@ -102,6 +132,9 @@
 
         <!--제목 출력 영역 div-->
         <div id="title-part">
+            <em>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </em>
             <span>클리닉을 선택해주세요</span>
         </div>
 
@@ -124,13 +157,25 @@
 
                         <!--클리닉 설명 div-->
                         <div class="cli-des" align="left">
+
                             <div class="cli-top">
-                                <span class="cli-name">클리닉명</span>
-                                <span class="material-symbols-outlined">search</span>
+                                <span class="cli-name title">클리닉명</span>
+                                <span class="material-symbols-outlined title">search</span>
                             </div>
-                            <p>클리닉 장소</p>
-                            <p>별점</p>
-                            <span>가격</span>
+
+                            <div class="cli-location">
+                                <span>클리닉 장소</span>
+                            </div>
+
+                            <div class="cli-score">
+                                <span class="material-symbols-outlined">grade</span>
+                                <span>별점</span>
+                            </div>
+
+                            <div class="cli-price">
+                                <span>가격</span>
+                            </div>
+
                         </div>
                         <br clear="both">
                     </li>
@@ -145,13 +190,25 @@
 
                         <!--클리닉 설명 div-->
                         <div class="cli-des" align="left">
+
                             <div class="cli-top">
-                                <span class="cli-name">클리닉명</span>
-                                <span class="material-symbols-outlined">search</span>
+                                <span class="cli-name title">클리닉명</span>
+                                <span class="material-symbols-outlined title">search</span>
                             </div>
-                            <p>클리닉 장소</p>
-                            <p>별점</p>
-                            <span>가격</span>
+
+                            <div class="cli-location">
+                                <span>클리닉 장소</span>
+                            </div>
+
+                            <div class="cli-score">
+                                <span class="material-symbols-outlined">grade</span>
+                                <span>별점</span>
+                            </div>
+
+                            <div class="cli-price">
+                                <span>가격</span>
+                            </div>
+
                         </div>
                         <br clear="both">
                     </li>
@@ -165,14 +222,27 @@
                         </div>
 
                         <!--클리닉 설명 div-->
+                        <!--클리닉 설명 div-->
                         <div class="cli-des" align="left">
+
                             <div class="cli-top">
-                                <span class="cli-name">클리닉명</span>
-                                <span class="material-symbols-outlined">search</span>
+                                <span class="cli-name title">클리닉명</span>
+                                <span class="material-symbols-outlined title">search</span>
                             </div>
-                            <p>클리닉 장소</p>
-                            <p>별점</p>
-                            <span>가격</span>
+
+                            <div class="cli-location">
+                                <span>클리닉 장소</span>
+                            </div>
+
+                            <div class="cli-score">
+                                <span class="material-symbols-outlined">grade</span>
+                                <span>별점</span>
+                            </div>
+
+                            <div class="cli-price">
+                                <span>가격</span>
+                            </div>
+
                         </div>
                         <br clear="both">
                     </li>

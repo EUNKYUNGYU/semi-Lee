@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.quize.model.vo.Quize;
 import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
+import com.kh.DoctorLee.quize.model.vo.QuizeChoice;
 
 public class QuizeDao {
 
@@ -88,9 +89,36 @@ public class QuizeDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return answer;
+		
+	}
+	
+	public int quizeChoiceInsert(Connection conn, int quizeNo, int memNo, int choice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("quizeChoice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(2, memNo);
+			pstmt.setInt(3, choice);
+			
+			result = pstmt.executeUpdate(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} 
+
+		return result;
 		
 	}
 }

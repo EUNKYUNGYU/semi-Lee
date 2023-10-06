@@ -7,6 +7,7 @@
 	String contextPath = request.getContextPath();
 	String contextPath1 = request.getContextPath();
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	
 %>
 
     
@@ -88,8 +89,16 @@
     </style>
 </head>
 <body>
-    
-        
+    		<script>
+    			var msg = '<%=alertMsg%>';
+    			
+    			if(msg!='null'){
+    				
+    				alert(msg);
+    				
+    			<% session.removeAttribute("alertMsg");%>
+    			}
+    		</script>
             
             <div id="mp_navi">
                 <div id="empty">

@@ -36,6 +36,24 @@ SELECT
         
 </entry>
 
+<entry key="quizeChoice">
+
+INSERT 
+		INTO 
+			TB_QUIZE_CHOICE 
+							(
+							QUIZE_NO
+							, MEM_NO
+							, CHOICE
+							) 
+					VALUES
+							(
+							?
+							,?
+							,?
+							)
+						
+</entry>
 
 
 </properties>

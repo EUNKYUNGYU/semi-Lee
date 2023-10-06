@@ -32,14 +32,18 @@ public class HosSchToIndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String schKeyword = request.getParameter("index_search");
+		String hkey = request.getParameter("hkey");
 		
-		ArrayList<Hospital> list = new HospitalService().schToIndex(schKeyword);
+		ArrayList<Hospital> list = new HospitalService().schToIndex(schKeyword, hkey);
 		
-		System.out.println(list);
+		// System.out.println(list);
 		
 		if(!list.isEmpty()) {
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
+		} else {
+			request.setAttribute("error", "병원이 존재하지 않습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
 

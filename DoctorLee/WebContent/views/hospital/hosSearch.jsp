@@ -21,7 +21,7 @@
       /* 병원 검색*/
       aside{
           float: left;
-          width: 30%; height: auto;
+          width: 30%; height: 100%;
       }
       #sch_hos>h3{font-size: 30px;}
 
@@ -36,7 +36,7 @@
       /* 병원 리스트 */
       #hos_list{
           display: inline-block;
-          width: 50%; height: 700px;
+          width: 50%;
       }
       .hos{
           width: 500px; height: 200px;

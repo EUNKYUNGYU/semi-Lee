@@ -134,6 +134,7 @@
             
                 <!-- 메인화면 검색창 -->
                 <input type="text" name="index_search" placeholder="검색어를 입력하세요.">
+                <input type="hidden" name="hkey" value="병">
                 
                 <!-- 검색창 아이콘 -->                
                 <button type="submit" id="icon_search">

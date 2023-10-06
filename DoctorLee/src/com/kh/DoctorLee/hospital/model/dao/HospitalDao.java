@@ -28,7 +28,7 @@ public class HospitalDao {
 		}
 	}
 	
-	public ArrayList<Hospital> schToIndex(Connection conn, String schKeyword){
+	public ArrayList<Hospital> schToIndex(Connection conn, String schKeyword, String hkey){
 		ArrayList<Hospital> list = new ArrayList();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
@@ -37,6 +37,7 @@ public class HospitalDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + schKeyword + "%");
+			pstmt.setString(2, hkey);
 			rset = pstmt.executeQuery();
 			while(rset.next()){
 				Hospital h = new Hospital();

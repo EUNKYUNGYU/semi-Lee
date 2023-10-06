@@ -14,7 +14,7 @@
 		WHERE 
 		      STATUS = 'Y'
 		  AND
-		      HOS_NAME LIKE ?
+		      HOS_NAME LIKE ? OR HOS_NAME = ?
 		ORDER
 		   BY
 		      CREATE_DATE DESC

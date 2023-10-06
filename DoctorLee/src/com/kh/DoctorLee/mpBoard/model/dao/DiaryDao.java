@@ -72,8 +72,9 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
-				Member m = new Member();
-				pstmt.setInt(1, m.getMemNo());
+				Member loginUser = new Member();
+				pstmt.setInt(1, loginUser.getMemNo());
+				System.out.println(loginUser.getMemNo());
 				rset = pstmt.executeQuery();
 				
 				

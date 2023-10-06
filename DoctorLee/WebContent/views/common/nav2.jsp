@@ -133,8 +133,9 @@ body{
 #createId,#login{
     float: right;
     margin-right: 20px;
-    margin-top: 45px;
+    margin-top: 50px;
     cursor: pointer;
+    
 }
 
 #login{

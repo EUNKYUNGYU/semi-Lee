@@ -88,13 +88,19 @@
                         </ul>
                     </li>
                 </ul>
-            </div
-            ><div id="navi3">
+            </div>
+        </div>
+      
+ 		<% if(loginUser == null) { %>
                 <button id="login" onclick="loginPage();">로그인</button>
                 <button id="createId" onclick="enrollPage();">회원가입</button>
-            </div
-        ></div>
-
+       
+		<% } else { %>
+			<div id="mem-info">
+			<b id=loginMemName><%=loginUser.getMemName()%>님</b>
+				<a href="<%=contextPath %>/logout.me">로그아웃</a>
+			</div>
+		<% } %>
 		
 		<script>
 			function enrollPage(){

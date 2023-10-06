@@ -17,7 +17,8 @@
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
+        initialView: 'dayGridMonth',
+        locale: 'ko'
       });
       calendar.render();
     });
@@ -119,7 +120,7 @@
     #cate-inner > ul{
         list-style: none;
         display: flex;
-        margin-left: 120px;
+        justify-content: space-evenly;
         margin-bottom: 0;
         padding: 0;
     }
@@ -151,6 +152,7 @@
     #content-part{
         height: auto;
         border: 1px solid;
+        /*display: none;*/
     }
 
     /*클리닉 출력 테두리*/
@@ -224,7 +226,6 @@
 
     /*날짜와 시간을 띄울 영역*/
     #res-part{
-        border: 1px solid;
         height: auto;
         margin-top: 10px;
     }
@@ -237,6 +238,7 @@
     .date-title-part{
         height: 100px;
         line-height: 100px;
+        border: 1px solid;
     }
 
     .date-title-part span{
@@ -259,16 +261,22 @@
     }
 
     #cli-date{
-        border-bottom: 1px solid;
+        /*display: none;*/
+        height: 550px;
+        width: 1000px;
     }
     
     #date-inner{
-        width: 590px;
-        border-right: 1px solid;
+        width: 700px;
+        height: 582px;
+        border: 1px solid;
     }
 
     #time-inner{
-        width: 390px;
+        width: 300px;
+        height: 582px;
+        border-right : 1px solid;
+        border-bottom: 1px solid;
     }
 
     #cli-date > div{
@@ -315,14 +323,54 @@
                             <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
                             <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
                             <li><input type="radio" class="cate" name="cate" id="skin3"><label for="skin3">피부 진료3</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="skin4"><label for="skin4">피부 관리4</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="skin5"><label for="skin5">피부 진료5</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="body2"><label for="body2">몸매 관리2</label></li>
                         </ul>
 
                     </div>
                 </div>
         </div>
+
+        <!--
+        <script>
+            $(function(){
+
+                // 카테고리 클릭 시 카테고리 영역은 숨겨지고 클리닉 출력 결과 영역이 나타남
+                $('.cate').click(function(){
+                    $('#content-part').css('display', 'block');
+                    $('#cate-inner').css('display', 'none');
+                })
+
+                // 클리닉 선택 시 클리닉 출력 결과 영역은 사라지고 예약일시 영역이 나타남
+                $('.content-cli').click(function(){
+                    $('#cli-date').css('visivilty', 'visible');
+                    $('#content-part').css('display', 'none');
+                })
+
+                // 카테고리를 선택하세요 영역 클릭 시 카테고리 영역을 제외한 다른 내용 영역은 사라짐
+                $('.category-title-part').click(function(){
+                    $('#cate-inner').css('display', 'block');
+                    $('#content-part').css('display', 'none');
+                    $('#cli-date').css('visivilty', 'none');
+                })
+
+                // 클리닉을 선택하세요 영역 클릭 시 클리닉 결과 영역을 제외한 다른 내용 영역은 사라짐
+                $('.title-part').click(function(){
+                    $('#cate-inner').css('display', 'none');
+                    $('#content-part').css('display', 'block');
+                    $('#cli-date').css('visivilty', 'none');
+                })
+
+                // 예약일시를 선택하세요 영역 클릭 시 예약일시 영역을 제외한 다른 내용 영역은 사라짐
+                $('.date-title-part').click(function(){
+                    $('#cate-inner').css('display', 'none');
+                    $('#content-part').css('display', 'none');
+                    $('#cli-date').css('visivilty', 'visible');
+                })
+            })
+        </script>
+        -->
 
                 <!--클리닉 내용 출력 영역 div-->
                 <div id="cli-part">
@@ -495,7 +543,7 @@
                             console.log(this);
 
                             if($(this).css('background-color', 'salmon')){
-                                $(this).css('background-color', 'yellow');
+                                $(this).css('background-color', 'bisque');
 
                                 $(this).siblings().css('background-color', 'salmon');
                             }

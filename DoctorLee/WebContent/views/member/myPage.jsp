@@ -279,9 +279,7 @@
         function findPwdPage(){
             location.href = "<%=contextPath%>/findPwdForm.me";
         }
-    </script>
 
-    <script>
         function validate(){
             var memId = document.getElementById('memId').value;
 
@@ -293,12 +291,8 @@
                 userId.value= '';
                 return false;
             }
-
-
         }
     </script>
-
-
 
 
 

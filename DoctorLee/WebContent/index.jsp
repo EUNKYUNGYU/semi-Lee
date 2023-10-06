@@ -75,7 +75,7 @@
                     <li><a href="#">마이페이지</a>
                         <ul>
                         	<li><a href="<%=contextPath%>/myPage.me">마이페이지</a></li>
-                            <li><a href="#">회원 정보 수정</a></li>
+                            <li><a href="<%=contextPath%>/update.me">회원 정보 수정</a></li>
                             <li><a href="#">회원 탈퇴</a></li>
                             <li><a href="#">관리자 문의</a></li>
                             <li><a href="#">자기 게시물 확인</a></li>
@@ -88,13 +88,19 @@
                         </ul>
                     </li>
                 </ul>
-            </div
-            ><div id="navi3">
+            </div>
+        </div>
+      
+ 		<% if(loginUser == null) { %>
                 <button id="login" onclick="loginPage();">로그인</button>
                 <button id="createId" onclick="enrollPage();">회원가입</button>
-            </div
-        ></div>
-
+       
+		<% } else { %>
+			<div id="mem-info">
+			<b id=loginMemName><%=loginUser.getMemName()%>님</b>
+				<a href="<%=contextPath %>/logout.me">로그아웃</a>
+			</div>
+		<% } %>
 		
 		<script>
 			function enrollPage(){

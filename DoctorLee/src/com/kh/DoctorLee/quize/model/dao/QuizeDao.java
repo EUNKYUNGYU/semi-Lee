@@ -1,9 +1,19 @@
 package com.kh.DoctorLee.quize.model.dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
+
+import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import com.kh.DoctorLee.quize.model.vo.Quize;
+
 public class QuizeDao {
 
-<<<<<<< HEAD
-=======
 	private Properties prop = new Properties();
 	
 	public QuizeDao() {
@@ -54,5 +64,4 @@ public class QuizeDao {
 		
 	}
 
->>>>>>> 165e7a4a7a8829564a6320af1d77ee9401a7faaa
 }

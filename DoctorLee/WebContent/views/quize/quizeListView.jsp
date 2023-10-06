@@ -1,7 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<<<<<<< HEAD:DoctorLee/WebContent/views/quize/quizeList.jsp
-=======
 <%@ page import ="com.kh.DoctorLee.quize.model.vo.Quize,
 				 java.util.ArrayList"  %>
     
@@ -9,16 +5,11 @@
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
 	String contextPath = request.getContextPath();
 %>
->>>>>>> 9b356505bb66efe18c8d2ee946ae49081d681282:DoctorLee/WebContent/views/quize/quizeListView.jsp
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>퀴즈게시판</title>
-
-
-
-
 
 
 <style>
@@ -108,10 +99,6 @@
         <div id="quize"> 
             <h1>퀴즈게시판</h1>
         </div>
-<<<<<<< HEAD:DoctorLee/WebContent/views/quize/quizeList.jsp
-=======
-        
->>>>>>> 9b356505bb66efe18c8d2ee946ae49081d681282:DoctorLee/WebContent/views/quize/quizeListView.jsp
         <div id="quizeboard"> 
 
             <div id="board">
@@ -125,11 +112,8 @@
                     <div id="deadline"><%= q.getDeadline() %>일 남음</div>
                 </div>
                 <div id="content">
-<<<<<<< HEAD:DoctorLee/WebContent/views/quize/quizeList.jsp
                     퀴즈 내용 <br>
-=======
                    	 <%= q.getQuizeContent() %> <br>
->>>>>>> 9b356505bb66efe18c8d2ee946ae49081d681282:DoctorLee/WebContent/views/quize/quizeListView.jsp
 
                     <form>
                         
@@ -154,11 +138,8 @@
                     </form>
 
                     <div id="footer2">
-<<<<<<< HEAD
                         <a href="#" >정답 확인하기 &gt;</a>
-=======
                         <a href="<%= contextPath %>/quize/controller/list.qz?qno=<%= q.getQuizeNo() %>" >정답 확인하기 &gt;</a>
->>>>>>> 165e7a4a7a8829564a6320af1d77ee9401a7faaa
                     </div>
                 </div>
 
@@ -167,10 +148,6 @@
         </div>
         	<% } %>
         <% } %>
-    	
-		
-
-
 
     </div>
 

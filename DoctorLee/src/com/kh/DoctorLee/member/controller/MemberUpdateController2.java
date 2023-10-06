@@ -14,7 +14,7 @@ import com.kh.DoctorLee.member.model.service.MemberService;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberUpdateController
+ * Servlet implementation class MemberUpdateController2
  */
 @WebServlet("/update2.me")
 public class MemberUpdateController2 extends HttpServlet {

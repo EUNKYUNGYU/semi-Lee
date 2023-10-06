@@ -199,7 +199,7 @@
 </head>
 <body>
 
-	<%@ include file = "../common/nav.jsp" %>
+	<%@ include file = "../common/nav2.jsp" %>
 	
 	 <div id="content">
 
@@ -279,8 +279,26 @@
         function findPwdPage(){
             location.href = "<%=contextPath%>/findPwdForm.me";
         }
-        
     </script>
+
+    <script>
+        function validate(){
+            var memId = document.getElementById('memId').value;
+
+            var regExp = /^[a-zA-Z][a-zA-Z0-9]{4,14}$/;
+
+            if(!regExp.test(userId.value)){
+                alert('아이디를 다시 확인해주세요.');
+                userId.select();
+                userId.value= '';
+                return false;
+            }
+
+
+        }
+    </script>
+
+
 
 
 

@@ -130,7 +130,7 @@
 </head>
 <body>
 
-	<%@ include file = "../common/nav.jsp" %>
+	<%@ include file = "../common/nav2.jsp" %>
 	
 	 <div id="content">
 
@@ -156,7 +156,7 @@
                         <input type="text" name="memId" id="r_id1" class="box">
                         <input type="button" name="user_IDcheck" value="중복확인" id="r_id2">
                         <br><br>
-                        <span style="font-size: 14px;">아이디는 영문 대/소문자, 숫자 조합하여 5 ~ 20자리</span>
+                        <span style="font-size: 14px;">아이디는 영문 대/소문자, 숫자 조합하여 5 ~ 15자리</span>
                         <br><br>
                         <hr>
                         <br>
@@ -191,9 +191,9 @@
                         성별*
                         <br><br>
                         <label for="man">남자</label>
-                        <input type="radio" name="gender" value="m" id="man">
+                        <input type="radio" name="gender" value="M" id="man">
                         <label for="woman">여자</label>
-                        <input type="radio" name="gender" value="m" id="woman"> <br><br>
+                        <input type="radio" name="gender" value="F" id="woman"> <br><br>
                         <hr>
                         <br>
                         이메일*
@@ -414,11 +414,6 @@
                 
         </div>
       
-       
-       
-      
-        
-        <!--<hr style="border: 1px solid rgb(226, 226, 226);">-->
 
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
        
@@ -432,6 +427,21 @@
     </div>
     
 </form>
+
+<script>
+    function validate(){
+        var memId = document.getElementById('memId').value;
+
+        var regExp = /^[a-zA-Z][a-zA-Z0-9]{4,14}$/;
+
+        if(!regExp.test(memId.value)){
+            alert('아이디를 다시 확인해주세요.');
+            memId.select();
+            memId.value= '';
+            return false;
+        }
+    }
+</script>
 
     <br><br><br><br><br><br><br><br>
 </body>

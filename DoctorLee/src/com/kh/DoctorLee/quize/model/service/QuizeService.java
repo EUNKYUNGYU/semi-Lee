@@ -20,17 +20,16 @@ public class QuizeService {
 		return list;
 	}
 	
-	public ArrayList<QuizeAnswer> QuizeAnswer(){
+	public QuizeAnswer detailQuize(int quizeNo){
 		
 		Connection conn = getConnection();
-		ArrayList<QuizeAnswer> list = new QuizeDao().QuizeAnswer(conn);
+		QuizeAnswer answer = new QuizeDao().detailQuize(conn, quizeNo);
 		close(conn);
-		return list;
+		return answer;
 	}
 	
 	
 	
 	
 	
->>>>>>> 165e7a4a7a8829564a6320af1d77ee9401a7faaa
 }

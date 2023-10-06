@@ -23,10 +23,10 @@ SELECT
 
 </entry>
 
-<entry key="selectDetail">
+<entry key="detailQuize">
 
 	SELECT 
-        	ANSWER, ANSWER_DETAIL
+        	ANSWER, ANSWER_DETAIL, QUIZE_TITLE
     	FROM 
         	TB_QUIZE_ANSWER
         JOIN 
@@ -34,13 +34,6 @@ SELECT
     	WHERE 
         	QUIZE_NO = ?
         
-</entry>
-
-<entry key="QuizeAnswer">
-
-	
-
-
 </entry>
 
 

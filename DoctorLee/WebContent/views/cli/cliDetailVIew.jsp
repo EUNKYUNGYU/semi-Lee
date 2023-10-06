@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>클리닉 예약 페이지</title>
-
+<title>클리닉 상세보기</title>
 <!--Google Fonts Icon-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
@@ -163,6 +162,7 @@
     .content-cli > div{
         float: left;
     }
+    
 
     /*클리닉 대표 이미지*/
     .cli-img{
@@ -262,6 +262,7 @@
 </style>
 </head>
 <body>
+
     <!--상단 네비게이션 메뉴 div-->
     <%@ include file="../common/nav2.jsp"%>
 
@@ -334,8 +335,7 @@
 
                                     <!--클리닉 대표 이미지 div-->
                                     <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
+                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
                                     </div>
 
                                     <!--클리닉 설명 div-->
@@ -343,6 +343,7 @@
 
                                         <div class="cli-top">
                                             <span class="cli-name title">클리닉명</span>
+                                            <span class="material-symbols-outlined title">search</span>
                                         </div>
 
                                         <div class="cli-location">
@@ -367,8 +368,7 @@
 
                                     <!--클리닉 대표 이미지 div-->
                                     <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
+                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
                                     </div>
 
                                     <!--클리닉 설명 div-->
@@ -376,6 +376,7 @@
 
                                         <div class="cli-top">
                                             <span class="cli-name title">클리닉명</span>
+                                            <span class="material-symbols-outlined title">search</span>
                                         </div>
 
                                         <div class="cli-location">
@@ -400,8 +401,7 @@
 
                                     <!--클리닉 대표 이미지 div-->
                                     <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
+                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
                                     </div>
 
                                     <!--클리닉 설명 div-->
@@ -409,6 +409,7 @@
 
                                         <div class="cli-top">
                                             <span class="cli-name title">클리닉명</span>
+                                            <span class="material-symbols-outlined title">search</span>
                                         </div>
 
                                         <div class="cli-location">
@@ -433,8 +434,7 @@
 
                                     <!--클리닉 대표 이미지 div-->
                                     <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
+                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
                                     </div>
 
                                     <!--클리닉 설명 div-->
@@ -442,6 +442,7 @@
 
                                         <div class="cli-top">
                                             <span class="cli-name title">클리닉명</span>
+                                            <span class="material-symbols-outlined title">search</span>
                                         </div>
 
                                         <div class="cli-location">
@@ -464,20 +465,6 @@
                         </div>
                     </div>
                 </div>
-
-                <script>
-                    $(function(){
-                        //li클릭 시 색깔 바뀌는 이벤트
-                        $('.content-cli').click(function(){
-                            // $(this).css('background-color', 'bisque');
-                        })
-
-                        //돋보기 버튼 클릭 시 상세보기 페이지로 이동
-                        $('.cli-img > button').click(function(){
-                            location.href='<%=contextPath%>/cliDetail.cli';
-                        })
-                    })
-                </script>
 
                 <!--클리닉 예약 날짜 및 시간 띄우기 영역 div-->
                 <div id="res-part">

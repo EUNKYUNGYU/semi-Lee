@@ -8,6 +8,7 @@ public class MyDiary {
 	private Date createDate;
 	private String diaryTitle;
 	private String diaryContent;
+	
 	public MyDiary() {
 		super();
 	}

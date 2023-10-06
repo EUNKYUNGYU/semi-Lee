@@ -14,7 +14,7 @@
 <style>
 * {
 	box-sizing: border-box;
-	border: 1px solid palevioletred;
+	border: 1px solid skyblue;
 }
 
 #header {
@@ -22,12 +22,12 @@
 	height: 200px;
 }
 
-section {
+#section {
 	width: 1800px;
 	height: 2300px;
 }
 
-section > div , section > aside{
+#section > div , #section > aside{
 	float: left;
 }
 
@@ -48,7 +48,7 @@ aside {
 #boardHeader, #boardArticle, #page, #search {
 	float: left;
 	width: 1400px;
-	padding-left: 10px;
+	padding-left: 100px;
 	padding-right: 10px;
 }
 
@@ -61,6 +61,10 @@ aside {
 	height: 1800px;
 }
 
+#BoardTable{
+	margin-top: 30px;
+	margin-left: 30px;
+	}
 #page {
 	height: 200px;
 }
@@ -73,13 +77,17 @@ footer {
 	width: 1800px;
 	height: 300px;
 }
+th, .tableCenter{
+	text-align : center;
+	}
+
 </style>
 </head>
 <body>
 
 
 	<header id="header"> 헤더 영역 </header>
-	<section>
+	<section id="section">
 		<aside>
 			<%@ include file="../common/cmNavi.jsp"%>
 		</aside>
@@ -88,9 +96,8 @@ footer {
 
 			<header id="boardHeader">게시판이름</header>
 			<article id="boardArticle">
-				게시판 형태
 				<div id="boardContent">
-					<table align="center">
+					<table align="center" id="BoardTable">
 						<thead>
 							<tr>
 								<th width="100">게시글 번호</th>
@@ -109,12 +116,12 @@ footer {
 							<% } else { %>
 							<% for(Board b : list) { %>
 							<tr>
-								<td><%= b.getBoardNo() %></td>
+								<td class="tableCenter"><%= b.getBoardNo() %></td>
 								<td><%= b.getBoardTitle() %></td>
-								<td><%= b.getWriter() %></td>
-								<td><%= b.getCreateDate() %></td>
-								<td><%= b.getViews() %></td>
-								<td>0</td>
+								<td class="tableCenter"><%= b.getWriter() %></td>
+								<td class="tableCenter"><%= b.getCreateDate() %></td>
+								<td class="tableCenter"><%= b.getViews() %></td>
+								<td class="tableCenter">0</td>
 							</tr>
 							<% } %>
 							<% } %>
@@ -123,16 +130,20 @@ footer {
 						</thead>
 
 					</table>
+					
+					<script>
+						
+					
+					
+					</script>
 				</div>
 			</article>
 			<div id="page">페이지바 영역</div>
 			<div id="search">검색 영역</div>
 		</div>
 	</section>
+	
 	<footer> 푸터 영역 </footer>
-
-
-
 
 </body>
 </html>

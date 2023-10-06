@@ -9,247 +9,101 @@
 <!--Google Fonts Icon-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /><style>
 
-    #cli-part{
+    #cli-cate-part{
         width: 1000px;
-        border: 1px solid red;
+        border: 1px solid black;
     }
 
     /*영역 제목*/
-    .title-part{
+    .category-title-part{
         height: 100px;
         border: 1px solid blue;
         line-height: 100px;
     }
 
-    .title-part span{
+    .category-title-part span{
         font-size: 26px;
         border: 1px solid red;
     }
 
-    .title-part > span{
+    .category-title-part > span{
         margin-left: 50px;
     }
 
-    .title-part > em > span{
+    .category-title-part > em > span{
         background-color: #1E376F;
         border-radius: 50%;
         color: white;
         margin-left: 100px;
     }
 
-    /*해당 카테고리 출력 영역*/
-    #content-part{
-        height: 850px;
-        border: 1px solid green;
+    #cli-cate-part{
+        width: 1000px;
     }
 
-    /*클리닉 출력 테두리*/
-    .content-border{
-        margin: 10px;
-        border: 1px solid purple;
-        height: 500px;
-        overflow: auto;
+    .cate{
+        opacity: 0;
     }
 
-    /*클리닉 출력 리스트 ul*/
-    .content-list{
-        list-style: none;
-        padding-left: 15px;
+    .cate > label{
+        padding: 5px 10px;
     }
 
-    /*클리닉 출력 요소 li*/
-    .content-cli{
-        border: 1px solid salmon;
+    input[type=radio]+label{
+        color: black;
         border-radius: 10px;
-        margin-bottom: 5px;
-        margin-top: 5px;
-        width: 898px;
-    }
-
-    .content-cli > div{
-        float: left;
-    }
-
-    /*클리닉 대표 이미지*/
-    .cli-img{
-        border: 1px solid brown;
-        margin: 10px;
-    }
-
-    .cli-img > img{
-        width: 110px;
-        height: 130px;
-        padding: 10px;
-    }
-
-    /*클리닉 설명*/
-    .cli-des{
-        border: 1px solid orange;
-        width: auto;
-        margin: 10px;
-        padding: 10px;
-        height: 134px;
-    }
-
-    .cli-des > div{
-        border: 1px solid brown;
-        margin-top: 5px;
-    }
-
-    .cli-des > div > span{
-        vertical-align: middle;
-    }
-
-    .cli-top{
-        border: 1px solid blue;
-    }
-
-    .title{
-        vertical-align: middle;
-    }
-
-    .cli-name{
-        border: 1px solid green;
-        font-weight: 1000;
-    }
-
-    /*별점*/
-    .cli-score > span{
-        vertical-align: middle;
-    }
-
-    /*돋보기 아이콘*/
-    .material-symbols-outlined{
+        text-align: center;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        display: inline-block;
         font-size: 20px;
-        margin: 0;
-        padding: 0;
     }
+
+    input[type=radio]:checked + label{
+        color: blue;
+        text-decoration: underline;
+    }
+
+    #cate-inner > ul{
+        list-style: none;
+        display: flex;
+        border: 1px solid red;
+        margin: 0;
+    }
+    
+
+    
 </style>
 </head>
 <body>
 
     <!--클리닉 내용 출력 영역 div-->
-    <div id="cli-part">
+    <div id="cli-cate-part">
 
         <!--제목 출력 영역 div-->
-        <div class="title-part">
+        <div class="category-title-part">
             <em>
                 <span class="material-symbols-outlined">chevron_right</span>
             </em>
             <span>카테고리를 선택해주세요</span>
         </div>
 
-        <!--해당 카테고리 클리닉 출력 영역 div-->
-        <div id="content-part" align="center">
+      <!--클리닉 카테고리 영역 div-->
+      <div id="cli-cate" align="left">
+        <div id="cate-inner" align="center">
+            <ul>
+                <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
+                <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
+                <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
+                <li><input type="radio" class="cate" name="cate" id="skin3"><label for="skin3">피부 진료3</label></li>
+                <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
+                <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
+                <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
+            </ul>
 
-            <!--클리닉 출력 테두리 div-->
-            <div class="content-border">
-
-                <!--클리닉 출력 ul-->
-                <ul class="content-list">
-
-                    <!--클리닉 요소 하나하나 li-->
-                    <li class="content-cli">
-
-                        <!--클리닉 대표 이미지 div-->
-                        <div class="cli-img">
-                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
-                        </div>
-
-                        <!--클리닉 설명 div-->
-                        <div class="cli-des" align="left">
-
-                            <div class="cli-top">
-                                <span class="cli-name title">클리닉명</span>
-                                <span class="material-symbols-outlined title">search</span>
-                            </div>
-
-                            <div class="cli-location">
-                                <span>클리닉 장소</span>
-                            </div>
-
-                            <div class="cli-score">
-                                <span class="material-symbols-outlined">grade</span>
-                                <span>별점</span>
-                            </div>
-
-                            <div class="cli-price">
-                                <span>가격</span>
-                            </div>
-
-                        </div>
-                        <br clear="both">
-                    </li>
-                    
-                    <!--클리닉 요소 하나하나 li-->
-                    <li class="content-cli">
-
-                        <!--클리닉 대표 이미지 div-->
-                        <div class="cli-img">
-                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
-                        </div>
-
-                        <!--클리닉 설명 div-->
-                        <div class="cli-des" align="left">
-
-                            <div class="cli-top">
-                                <span class="cli-name title">클리닉명</span>
-                                <span class="material-symbols-outlined title">search</span>
-                            </div>
-
-                            <div class="cli-location">
-                                <span>클리닉 장소</span>
-                            </div>
-
-                            <div class="cli-score">
-                                <span class="material-symbols-outlined">grade</span>
-                                <span>별점</span>
-                            </div>
-
-                            <div class="cli-price">
-                                <span>가격</span>
-                            </div>
-
-                        </div>
-                        <br clear="both">
-                    </li>
-
-                    <!--클리닉 요소 하나하나 li-->
-                    <li class="content-cli">
-
-                        <!--클리닉 대표 이미지 div-->
-                        <div class="cli-img">
-                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
-                        </div>
-
-                        <!--클리닉 설명 div-->
-                        <!--클리닉 설명 div-->
-                        <div class="cli-des" align="left">
-
-                            <div class="cli-top">
-                                <span class="cli-name title">클리닉명</span>
-                                <span class="material-symbols-outlined title">search</span>
-                            </div>
-
-                            <div class="cli-location">
-                                <span>클리닉 장소</span>
-                            </div>
-
-                            <div class="cli-score">
-                                <span class="material-symbols-outlined">grade</span>
-                                <span>별점</span>
-                            </div>
-
-                            <div class="cli-price">
-                                <span>가격</span>
-                            </div>
-
-                        </div>
-                        <br clear="both">
-                    </li>
-                </ul>
-            </div>
         </div>
+    </div>
     </div>
 </body>
 </html>

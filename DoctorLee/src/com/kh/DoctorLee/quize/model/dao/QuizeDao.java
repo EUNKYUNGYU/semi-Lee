@@ -1,5 +1,7 @@
 package com.kh.DoctorLee.quize.model.dao;
 
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,8 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
 import com.kh.DoctorLee.quize.model.vo.Quize;
+import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
 
 public class QuizeDao {
 
@@ -64,4 +66,31 @@ public class QuizeDao {
 		
 	}
 
+	
+	public QuizeAnswer detailQuize(Connection conn, int quizeNo){
+		
+		QuizeAnswer answer = new QuizeAnswer();
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("detailQuize");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				answer.setQuizeTitle(rset.getString("QUIZE_TITLE"));
+				answer.setAnswer(rset.getInt("ANSWER"));
+				answer.setAnswerDetail(rset.getString("ANSWER_DETAIL"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return answer;
+		
+	}
 }

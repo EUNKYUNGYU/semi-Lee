@@ -1,16 +1,20 @@
 package com.kh.DoctorLee.quize.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.quize.model.service.QuizeService;
+import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
+
 /**
  * Servlet implementation class QuizeAnswerController
  */
-@WebServlet("/detailAnser.qz")
+@WebServlet("/detail.qz")
 public class QuizeAnswerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,9 +30,12 @@ public class QuizeAnswerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int quizeNo = (int) request.getAttribute("quizeNo");
-		System.out.println(quizeNo);
+		request.setCharacterEncoding("UTF-8");
+		int quizeNo = Integer.parseInt(request.getParameter("qno"));
+		QuizeAnswer answer = new QuizeService().detailQuize(quizeNo);
+		request.setAttribute("answer", answer);
+		request.getRequestDispatcher("views/quize/quizeDetail.jsp").forward(request, response);
+		System.out.println("QuizeAnswerController" + quizeNo);
 	
 	}
 

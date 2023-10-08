@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
-	String contextPath = request.getContextPath();
-%>    
     
 <!DOCTYPE html>
 <html>
@@ -21,9 +18,7 @@
 	<!-- css -->
 	<link rel="stylesheet" href="resources/css/index.css">
  <style>
-        div {
-            box-sizing: border-box;
-        }
+
         #mp_navi {
             width : 225px;
             height: 700px;
@@ -101,24 +96,10 @@
                 	<br>
                 	<br>
                     <li><a href="#">공지사항</a></li>
-                    <li><a href="#">자유게시판</a>
-                        
-                        <!--
-                        <ul>
-                            <li><a href="#">회원 정보 수정</a></li>
-                            <li><a href="#">회원 탈퇴</a></li>
-                        </ul>
-                          -->
-                    </li>
+                    <li><a href="#">자유게시판</a></li>
                     <li><a href="#">정보게시판</a></li>
                     <li><a href="#">익명게시판</a></li>
                     <li><a href="#">퀴즈게시판</a></li>
-                     <!--
-                        <ul>
-                            <li><a href="#">진료 내역 관리</a></li>
-                            <li><a href="#">처방전</a></li>
-                        </ul>
-                         -->
                     </li>
                 </ul>
 

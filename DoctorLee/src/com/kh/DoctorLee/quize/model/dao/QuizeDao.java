@@ -40,7 +40,7 @@ public class QuizeDao {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				
+			
 				Quize q = new Quize();
 				q.setQuizeNo(rset.getInt("QUIZE_NO"));
 				q.setQuizeTitle(rset.getString("QUIZE_TITLE"));

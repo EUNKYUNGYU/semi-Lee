@@ -43,7 +43,7 @@
 	line-height: 70px;
 }
 
-#content {
+#quizeContent {
 	width: 100%;
 	height: 300px;
 	line-height: 30px;
@@ -98,10 +98,8 @@ button {
 	margin-left: 10px;
 }
 
-* {
-	box-sizing: border-box;
-	border: 1px solid palevioletred;
-}
+
+
 
 #header {
 	width: 1800px;
@@ -184,8 +182,10 @@ footer {
 
 							<div id="board">
 								<% if(list.isEmpty()) { %>
-
+									퀴즈가 존재하지 않습니다.
+									
 								<% } else { %>
+								
 								<% for(Quize q : list) { %>
 								<div id="quizeHeader">
 									<div id="title"><%= q.getQuizeTitle() %></div>
@@ -193,28 +193,28 @@ footer {
 									<div id="deadline"><%= q.getDeadline() %>일 남음
 									</div>
 								</div>
-								<div id="content">
-									퀴즈 내용 <br>
+								<div id="quizeContent">
 									<%= q.getQuizeContent() %>
 									<br>
 									<form method="post" action="<%= contextPath %>/choice.qz" >
-										<input type="radio" name="choice" value="1" id="choice1"
-											checked> <label for="choice1"><%= q.getChoice1() %></label>
-										<br> <input type="radio" name="choice" value="2"
-											id="choice2"> <label for="choice2"><%= q.getChoice2() %></label>
-										<br> <input type="radio" name="choice" value="3"
-											id="choice3"> <label for="choice3"><%= q.getChoice3() %></label>
-										<br> <input type="radio" name="choice" value="4"
-											id="choice4"> <label for="choice4"><%= q.getChoice4() %></label>
-										<br>
+										<input type="radio" name="choice" value="1" id="choice1" checked> 
+										<label for="choice1"><%= q.getChoice1() %></label><br> 
+										
+										<input type="radio" name="choice" value="2" id="choice2"> 
+										<label for="choice2"><%= q.getChoice2() %></label><br> 
+										
+										<input type="radio" name="choice" value="3" id="choice3"> 
+										<label for="choice3"><%= q.getChoice3() %></label><br> 
+										
+										<input type="radio" name="choice" value="4" id="choice4"> 
+										<label for="choice4"><%= q.getChoice4() %></label><br> 
 								</div>
+								
 								<div id="footer">
 									<div id="footer1">
 										<button type="submit" id="quizeButton" class="btn btn-default">제출
 										<input type="hidden" id="memNo" value="<%= loginUser.getMemNo() %>">
 										<input type="hidden" id="quizeNo" value="<%= q.getQuizeNo() %>">
-										<% if(loginUser != null){ %>
-										<% } %>
 									</div>
 									</form>
 									<script>

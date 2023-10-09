@@ -160,6 +160,7 @@
         margin: 10px;
         height: 500px;
         overflow: auto;
+        border: 1px solid red;
     }
 
     /*클리닉 출력 리스트 ul*/
@@ -281,6 +282,20 @@
 
     #cli-date > div{
         float: left;
+    }
+
+    /*시간 출력*/
+    .time-content{
+        background-color: bisque;
+        border-radius: 10px;
+        text-decoration: none;
+        margin-top: 20px;
+        width: 50px;
+        border: 1px solid brown;
+    }
+
+    .time-border > ul{
+        list-style: none;
     }
 </style>
 </head>
@@ -573,12 +588,42 @@
                             </div>
 
                             <div id="time-inner">
-                                <p>시간 선택</p>
+                                <div class="time-border">
+                                    <ul>
+                                        <li class="time-content" align="center">
+                                            <a href="#">11:30</a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#">12:30</a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#">13:30</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <br clear="both">
                 </div>
             </div>
+
+            <script>
+                $(function(){
+                    //li클릭 시 색깔 바뀌는 이벤트
+                    $('.time-content').click(function(){
+
+                        console.log(this);
+
+                        if($(this).css('background-color', 'bisque')){
+                            $(this).css('background-color', 'salmon');
+
+                            $(this).siblings().css('background-color', 'bisque');
+                        }
+                    })
+                })
+            </script>
 
             <br><br><br><br><br>
 

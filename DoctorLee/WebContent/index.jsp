@@ -69,7 +69,7 @@
                                 <a href="<%= contextPath %>/list.bo">익명게시판</a>
                             </li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
-                            <li><a href="#">쪽지함</a></li>
+                            <li><a href="<%= contextPath %>/views/message/messageListView.jsp">쪽지함</a></li>
                         </ul>
                     </li>
                     <li><a href="#">마이페이지</a>

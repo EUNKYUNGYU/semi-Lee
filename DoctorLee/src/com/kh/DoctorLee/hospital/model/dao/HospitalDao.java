@@ -83,5 +83,37 @@ public class HospitalDao {
 		return hosCount;
 	}
 	
+	public Hospital hosDetail(Connection conn, int hno) {
+		Hospital hos = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("hosDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hno);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				hos = new Hospital();
+				hos.setHosName(rset.getString("HOS_NAME"));
+				hos.setHosAddress(rset.getString("HOS_ADDRESS"));
+				hos.setTreatDep(rset.getString("TREAT_NAME"));
+				hos.setTreatDate(rset.getString("TREAT_DATE"));
+				hos.setTreatBegin(rset.getString("TREAT_BEGIN"));
+				hos.setTreatEnd(rset.getString("TREAT_END"));
+				hos.setHosTel(rset.getString("HOS_TEL"));
+				hos.setHosInfo(rset.getString("HOS_INFO"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return hos;
+	}
 
 }

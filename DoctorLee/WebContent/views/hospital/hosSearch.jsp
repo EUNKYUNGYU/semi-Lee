@@ -143,9 +143,6 @@
 	                
 	                <!-- 병원 정보 -->
 	                <div class="hos_info">
-	                	<div id="hno" style="display:none;">
-	                		<%= h.getHosNo() %>
-	                	</div>
 	                    <h3>
 							<%= h.getHosName() %>
 						</h3>
@@ -155,7 +152,7 @@
 	
 	                    <h4>진료중</h4>
 	                    <div class="hos_rsvt_btn">
-	                        <button onclick="rsvtPage();">진료예약</button>
+	                        <button onclick="rsvtPage(<%= h.getHosNo()%>);">진료예약</button>
 	                    </div>
 	                </div>
 	           	</div>
@@ -163,19 +160,14 @@
 	        <%} %>
 		<%} %>
        	<script>
-       		$('#hos_list>.hos').on('click', function(){
-       			location.href = '<%= contextPath %>/views/hospital/hosDetail.dy?hno=' + $(this).children().eq(0).text();
-       		});
        	
-       	
-            function rsvtPage(){
-                var link = '<%= contextPath %>/views/hospital/hosDetail.jsp';
-                window.open(link);
+            function rsvtPage(hno){
+                location.href = '<%= contextPath %>/hosDetail.dy?hno=' + hno;
             };
 
-            var $hos_status = $('.hos_info').children().eq(3);
             
        	</script>
+       	
 		<div id="pageing_bar">
 			<!-- http://localhost:8765/DoctorLee/hosSch.dy?search=&hkey=병원 -->
 			<% if(pInfo.getCurrentPage() != 1){ %>
@@ -192,8 +184,10 @@
 				<button onclick="location.href='<%= contextPath %>/hosSch.dy?search=&hkeyP=<%= pInfo.getCurrentPage() + 1 %>'">&gt;</button>
 			<%} %>
 		</div>
-
-        </div>
+    
+    
+    </div>
+    <!-- hos_wrap 끝 -->
 
 		<!-- 지도 -->
 

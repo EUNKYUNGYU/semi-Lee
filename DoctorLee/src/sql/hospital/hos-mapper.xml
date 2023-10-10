@@ -26,5 +26,25 @@
 		  FROM
 		  	   TB_HOSPITAL
 	</entry>
+	
+	<entry key="hosDetail">
+		SELECT
+		       HOS_NAME
+		       ,HOS_ADDRESS
+		       ,TREAT_NAME
+		       ,TREAT_DATE
+		       ,TREAT_BEGIN
+		       ,TREAT_END
+		       ,HOS_TEL
+		       ,HOS_INFO
+		  FROM
+		        TB_HOSPITAL
+          JOIN
+                TB_TREAT_DEPARTMENT ON (TREAT_DEP = TREAT_NO)
+	     WHERE
+	           HOS_NO = ?
+	       AND
+	           STATUS = 'Y'
+	</entry>
 
 </properties>

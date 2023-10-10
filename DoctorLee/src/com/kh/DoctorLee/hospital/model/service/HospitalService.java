@@ -26,4 +26,13 @@ public class HospitalService {
 		return hosCount;
 	}
 	
+	// 병원 상세 조회
+	public Hospital hosDetail(int hno) {
+		Connection conn = getConnection();
+		Hospital hos = new HospitalDao().hosDetail(conn, hno);
+		close(conn);
+		
+		return hos;
+	}
+	
 }

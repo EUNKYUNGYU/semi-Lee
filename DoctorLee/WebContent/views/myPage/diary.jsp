@@ -149,7 +149,7 @@
         	<div id="my_diary">
         		<h3>내 다이어리</h3>
         		
-                <table id="customers">
+                <table id="customers" class="list-area">
                     <tr>
                       <th>다이어리 번호</th>
                       <th>제목</th>
@@ -228,12 +228,15 @@
         		<h3>가족 다이어리</h3>
         		
         		<table id="customers1">
-                    <table id="customers">
+                    <table id="customers" class="list-area">
+                    <thead>
                     <tr>
                       <th>다이어리 번호</th>
                       <th>제목</th>
                       <th>생성 날짜</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <% if(famList.isEmpty()){%>
                     	<tr>
                  			<td>공지사항이 존재하지 않습니다.</td>
@@ -291,7 +294,7 @@
                     <%} %>
 
                     <%} %>
-                    
+                    </tbody>
                     
                   </table>
                   <br>
@@ -305,10 +308,22 @@
             
         </div>
         
-        
        
         
     </div>
+        
+        	<script>
+        		$(function(){
+        			$('.list-area>tbody>tr').click(function(){
+        				//console.log($(this).children().eq(0).text());
+        				const dno = $(this).children().eq(0).text();
+        				location.href="<%=contextPath%>/detail.di?dno="+ dno;
+        			})
+        		});
+        	</script>
+        	<form>
+        		<input type="hidden" name = "dno" id=dno>
+        	</form>
     <%@ include file="../common/footer.jsp" %>
 	<%} %>
 

@@ -34,7 +34,7 @@
 
             $('.time-content').click(function(){
                 // 달력 클릭 시 선택한 날짜 출력하기
-                $('#pick-date, #sel-date').text((info.dateStr).replaceAll('-', '.') + " / " + $(this).children().text());
+                $('#pick-date, #sel-date').text((info.dateStr).replaceAll('-', '.') + "." + $(this).children().text());
 
             })
 
@@ -416,7 +416,7 @@
                     //console.log($(this).val());
                     //$('.cate').prop('checked', 'true').val()
 
-                    console.log($('.cate').attr('checked', true).val());
+                    //console.log($('.cate').attr('checked', true).val());
 
                     $('#cate-pick, #sel-cate').text($(this).val());
 
@@ -458,12 +458,14 @@
 									<!-- 해당 카테고리에 클리닉이 존재할 경우 -->
 									<% for(Clinic c : cliList) { %>
 
-                                    <% if(c.getCateNo() != $('.cate').attr('checked', true).val()) %>
+                                    <!-- $('.cate').attr('checked', true).val()) : 선택한 카테고리의 값 -->
+                                    <!-- $('.cli-cate > span').text() : 해당 클리닉의 카테고리 값 -->
 		
 	                                <!--클리닉 요소 하나하나 li-->
 	                                <li class="content-cli">
 
-                                        <input type="hidden" value="<%=c.getCliNo()%>">
+                                        <input type="hidden" value="<%=c.getCliNo()%>" name="cliNo">
+                                        <input type="hidden" value="<%=c.getCateNo()%>" name="cliCate">
 	                                
 	                                    <!--클리닉 대표 이미지 div-->
 	                                    <div class="cli-img">
@@ -511,6 +513,8 @@
                     $(function(){
                         //li클릭 시 색깔 바뀌는 이벤트
                         $('.content-cli').click(function(){
+
+                            //console.log($('.cli-cate > span').text());
 
                             if($(this).css('background-color', 'salmon')){
                                 $(this).css('background-color', 'bisque');

@@ -123,7 +123,7 @@
 
         <div id="content">
             <div id="content_1">
-            	
+            	<%@ include file = "../common/myPageNavi.jsp" %>
             </div>
             <div id="content_2">
                 <h1>회원탈퇴</h1>
@@ -152,6 +152,18 @@
                 <button type="submit" id="pwd_1" onclick=" return deleteMember();">신청</button>
                 
             </div>
+            <script>
+            	function deleteMember(){
+            		
+            		const deleteStr = prompt("입력하세요");
+            		
+            		if(deleteStr == '어쩌고'){
+            			return true;
+            		} else {
+            			return false;
+            		}
+            	}
+            </script>
         
         </div>
     </div>

@@ -530,7 +530,7 @@
                             <em>
                                 <span class="material-symbols-outlined">chevron_right</span>
                             </em>
-                            <span>예약일시를 선택해주세요</span>
+                            <span id="pick-date">예약일시를 선택해주세요</span>
                         </div>
 
                         <!--예약일시 영역 div-->
@@ -591,7 +591,7 @@
                     //li클릭 시 색깔 바뀌는 이벤트
                     $('.time-content').click(function(){
 
-                        console.log(this);
+                        //console.log(this);
 
                         if($(this).css('background-color', 'bisque')){
                             $(this).css('background-color', 'salmon');
@@ -599,7 +599,19 @@
                             $(this).siblings().css('background-color', 'bisque');
                         }
                     })
+
+                    // 달력 클릭 시 선택한 날짜 출력하기
+                    $('.fc-daygrid-day-frame fc-scrollgrid-sync-inner').click(function(){
+                        console.log(this);
+                    })
+
+                    // 시간 클릭 시 "예약 일시를 선택해주세요"와 좌측 메뉴에 띄우기
+                    $('.time-content').click(function(){
+                        console.log($(this).children().text());
+                        $('#pick-date, #sel-date').text($(this).children().text());
+                    })
                 })
+
             </script>
 
             <br><br><br><br><br>

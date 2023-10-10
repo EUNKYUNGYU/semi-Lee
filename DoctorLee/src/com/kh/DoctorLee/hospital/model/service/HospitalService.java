@@ -11,9 +11,9 @@ import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
 public class HospitalService {
 	// 메인 검색창, 응답
-	public ArrayList<Hospital> schToIndex(String schKeyword, String hkey){
+	public ArrayList<Hospital> schToIndex(String search, String hkeyH){
 		Connection conn = getConnection();
-		ArrayList<Hospital> list = new HospitalDao().schToIndex(conn, schKeyword, hkey);
+		ArrayList<Hospital> list = new HospitalDao().schToIndex(conn, search, hkeyH);
 		close(conn);
 		return list;
 	}

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.Hospital" %>
+<%
+	ArrayList<Hospital> list = (ArrayList<Hospital>)request.getAttribute("list");
+
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,38 +15,62 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+<script>
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth'
+    });
+    calendar.render();
+  });
+
+</script>
 <title>병원 상세</title>
 <style>
-
-	  .hos_wrap{margin: 0 auto;}
+	  .hos_wrap{margin: 0 auto; width: 1200px;}
 	  
 	  #hos_info, #hos_rsvt, #hos_review{display: inline-block;}
+	  
+	  #hos_info{width: 30%;}
+	  #hos_info>h3{color: #1E376F; display: inline-block;}
+	  #hos_info>span{color: #000; display: inline-block; margin-left: 25px; font-weight: bold;}
+	  #hos_info>p{margin-bottom: 30px;}
+	  #hos_info_address{margin-bottom: 20px;}
+	  #hos_info_date{margin-bottom: 20px;}
+	  #hos_info_tel{margin-bottom: 20px;}
+	  
+	  #hos_info h4{font-size: 15px;}
+	  
+	  #hos_rsvt{width: 30%;}
+	  #calender{height: 300px; width: 100%;}
+	  
+	  #hos_review{width: 30%;}
+	  
 	  
 </style>
 </head>
 <body>
     <%@ include file="../common/nav.jsp" %>
-<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br>
     <!-- 병원 상세페이지 -->
 	<div class="hos_wrap">
-        
         
         <!-- 병원 정보 -->
         <div id="hos_info">
 			
-			<h3>좋은병원</h3>
-			<span>치과</span>
+			<h3>좋은병원</h3><span>치과</span>
 			
 			<!-- 현재 대기자 5명 -->
 			
 			<p>
-				병원소개글 .....................................
+			trororororoororoo
 			</p>
 			
 			<div id="hos_info_address">
 				<div class="icon">
-					<i class="fa-solid fa-location-dot"></i>
+					<b><i class="fa-solid fa-location-dot"></i></b>
 				</div>
 				<h4>
 					서울특병수
@@ -49,7 +78,7 @@
 			</div>
 			<div id="hos_info_date">
 				<div class="icon">
-					<i class="fa-solid fa-clock"></i>
+					<b><i class="fa-solid fa-clock"></i></b>
 				</div>
 				<h4>
 					- 월~금
@@ -58,7 +87,7 @@
 			</div>
 			<div id="hos_info_tel">
 				<div class="icon">
-					<i class="fa-solid fa-phone"></i>
+					<b><i class="fa-solid fa-phone"></i></b>
 				</div>
 				<h4>
 					022-303-202
@@ -70,12 +99,8 @@
         <!-- 진료 예약 -->
         <div id="hos_rsvt">
 				
-			<table id="cal">
-				
-			
-			
-			
-			</table>
+			<div id="calender">
+			</div>
 
 			<form action="" method="post" id="rsvt_form">
 				<table>

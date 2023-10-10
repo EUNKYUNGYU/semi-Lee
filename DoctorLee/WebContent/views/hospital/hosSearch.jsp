@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.*, com.kh.DoctorLee.common.model.vo.PageInfo" %>
 <%
 	ArrayList<Hospital> list = (ArrayList<Hospital>)request.getAttribute("list");
+	PageInfo pInfo = (PageInfo)request.getAttribute("pInfo");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -20,7 +21,7 @@
       /* 병원 검색*/
       aside{
           float: left;
-          width: 20%; height: 800px;
+          width: 30%; height: 800px;
       }
       #sch_hos>h3{font-size: 30px;}
 
@@ -35,7 +36,6 @@
 
       /* 병원 리스트 */
       #hos_list{
-          float: left;
           width: 40%;
       }
       .hos{
@@ -93,7 +93,7 @@
         <!-- 병원 검색창-->
         <aside>
 
-            <form action="sch_hos.dy" method="get" id="sch_hos">
+            <form action="hosSch.dy" method="get" id="sch_hos">
                 <h3>병원 검색</h3>
 				<br>
                 <input type="text" name="sch_bar" id="sch_bar">
@@ -129,36 +129,42 @@
 
         </aside>
 		
+		<% if(list.isEmpty()) {%>
+
+		<%} else {%>
         <!-- 병원 리스트 -->
-		<% for(Hospital h : list) { %>
-        <div id="hos_list">
-            <div class="hos">
-				<!-- 병원 이미지 -->
-                <div class="hos_img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
-                </div>
-                
-                <!-- 병원 정보 -->
-                <div class="hos_info">
-                    <h3>
-						<%= h.getHosName() %>
-					</h3>
-                    <p>
-						<%= h.getHosAddress() %>
-					</p>
-
-                    <h4>진료중</h4>
-                    <div class="hos_rsvt_btn">
-                        <button onclick="rsvtPage();">진료예약</button>
-                    </div>
-                </div>
-           	</div>
-		</div>
-        <%} %>
-
+			<% for(Hospital h : list) { %>
+	        <div id="hos_list">
+	            <div class="hos">
+					<!-- 병원 이미지 -->
+	                <div class="hos_img">
+	                    <img src="https://cdn-icons-png.flaticon.com/512/6743/6743757.png" alt="">
+	                </div>
+	                
+	                <!-- 병원 정보 -->
+	                <div class="hos_info">
+	                	<div id="hno" style="display:none;">
+	                		<%= h.getHosNo() %>
+	                	</div>
+	                    <h3>
+							<%= h.getHosName() %>
+						</h3>
+	                    <p>
+							<%= h.getHosAddress() %>
+						</p>
+	
+	                    <h4>진료중</h4>
+	                    <div class="hos_rsvt_btn">
+	                        <button onclick="rsvtPage();">진료예약</button>
+	                    </div>
+	                </div>
+	           	</div>
+			</div>
+	        <%} %>
+		<%} %>
        	<script>
        		$('#hos_list>.hos').on('click', function(){
-       			location.href = '<%= contextPath %>/views/hospital/hosDetail.jsp';
+       			location.href = '<%= contextPath %>/views/hospital/hosDetail.dy?hno=' + $(this).children().eq(0).text();
        		});
        	
        	
@@ -171,10 +177,20 @@
             
        	</script>
 		<div id="pageing_bar">
-			
-			<!-- http://localhost:8765/DoctorLee/hosSch.dy?index_search=&hkey=%EB%B3%91 -->
-		
-		
+			<!-- http://localhost:8765/DoctorLee/hosSch.dy?search=&hkey=병원 -->
+			<% if(pInfo.getCurrentPage() != 1){ %>
+				<button onclick="location.href='<%= contextPath %>/hosSch.dy?search=&hkeyP=<%= pInfo.getCurrentPage() + 1 %>'">&lt;</button>
+			<%} %>
+			<% for(int i = pInfo.getStartPage(); i <= pInfo.getEndPage(); i++) { %>
+				<% if((pInfo.getCurrentPage() + 1) != i) {%>
+					<button onclick="location.href='<%= contextPath %>/hosSch.dy?search=&hkeyP=<%= i %>'"><%= i %></button>
+				<% } else { %>
+					<button disabled><%= i %></button>
+				<% } %>
+			<% } %>
+			<% if(pInfo.getCurrentPage() != pInfo.getMaxPage()){ %>
+				<button onclick="location.href='<%= contextPath %>/hosSch.dy?search=&hkeyP=<%= pInfo.getCurrentPage() + 1 %>'">&gt;</button>
+			<%} %>
 		</div>
 
         </div>

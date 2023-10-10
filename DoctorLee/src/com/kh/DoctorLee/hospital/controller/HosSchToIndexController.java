@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.hospital.model.service.HospitalService;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
@@ -32,24 +33,28 @@ public class HosSchToIndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// paging
 		int listCount = new HospitalService().hosCount(); // 병원 입점 개수 조회
-		//int currentPage = Integer.parseInt(request.getParameter("page"));
-		//System.out.println(currentPage);
+		int currentPage = Integer.parseInt(request.getParameter("hkeyP"));
+		// localhost:8765/DoctorLee/hosSch.dy?search=&hkey=1
+		int pageLimit = 5;
+		int hosLimit = 3;
+		int maxPage = (int)Math.ceil((double)listCount / hosLimit);
+		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		int endPage = startPage + pageLimit - 1;
+		if(endPage > maxPage) endPage = maxPage;
 		
+		PageInfo pInfo = new PageInfo(listCount, currentPage, pageLimit, hosLimit, maxPage, startPage, endPage);
 		
+		String search = request.getParameter("search");
+		String hkeyH = request.getParameter("hkeyH");
 		
-		String schKeyword = request.getParameter("index_search");
-		String hkey = request.getParameter("hkey");
+		ArrayList<Hospital> list = new HospitalService().schToIndex(search, hkeyH);
 		
-		ArrayList<Hospital> list = new HospitalService().schToIndex(schKeyword, hkey);
+		// 앞단에서 널체크
+		request.setAttribute("list", list);
+		request.setAttribute("pInfo", pInfo);
 		
-		// System.out.println(list);
-		
-		if(!list.isEmpty()) {
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
-		} else {
-			response.sendRedirect(request.getContextPath());
-		}
+		request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
+		// response.sendRedirect(request.getContextPath());
 	}
 
 	/**

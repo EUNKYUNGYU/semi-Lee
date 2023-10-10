@@ -290,10 +290,17 @@
         border-radius: 10px;
         text-decoration: none;
         margin-top: 20px;
-        width: 250px;
+        width: 230px;
         border: 1px solid brown;
         height: 50px;
         line-height: 50px;
+        margin-right: 30px;
+    }
+
+    .time-border{
+        border: 1px solid blue;
+        overflow: auto;
+        height: 580px;
     }
 
     .time-border > ul{
@@ -603,6 +610,31 @@
                                         <li class="time-content" align="center">
                                             <a href="#"><p>13:30</p></a>
                                         </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>11:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>12:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>13:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>11:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>12:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>13:30</p></a>
+                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </div>

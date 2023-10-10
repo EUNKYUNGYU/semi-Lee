@@ -121,7 +121,7 @@ img{
                 <div id="button-area" align="right">
                     <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
                 </div>
-                <% } %>
+            <% } %>
 
             <!-- 동영상이 존재하지 않을 경우 -->
             <%if(list.isEmpty()){ %>

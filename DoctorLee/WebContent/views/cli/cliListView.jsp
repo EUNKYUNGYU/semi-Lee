@@ -192,7 +192,7 @@
     /*클리닉 출력 테두리*/
     .content-border{
         margin: 10px;
-        height: 500px;
+        height: auto;
         overflow: auto;
     }
 

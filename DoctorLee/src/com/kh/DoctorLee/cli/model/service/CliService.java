@@ -22,10 +22,10 @@ public class CliService {
 		return list;
 	}
 	
-	public ArrayList<Clinic> selectCliList(){
+	public ArrayList<Clinic> selectCliList(String cateName){
 		Connection conn = getConnection();
 		
-		ArrayList<Clinic> cliList = new CliDao().selectCliList(conn);
+		ArrayList<Clinic> cliList = new CliDao().selectCliList(conn, cateName);
 		
 		close(conn);
 		

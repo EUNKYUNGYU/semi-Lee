@@ -32,12 +32,15 @@ public class CliListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
+		String cateName = request.getParameter("cliCate");
 		
 		// 카테고리 불러오기
 		ArrayList<Category> list = new CliService().selectCategoryList();
 		
 		// 클리닉 불러오기
-		ArrayList<Clinic> cliList = new CliService().selectCliList();
+		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("cliList", cliList);

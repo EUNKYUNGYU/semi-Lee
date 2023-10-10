@@ -440,6 +440,8 @@
 		
 	                                <!--클리닉 요소 하나하나 li-->
 	                                <li class="content-cli">
+
+                                        <input type="hidden" value="<%=c.getCliNo()%>">
 	                                
 	                                    <!--클리닉 대표 이미지 div-->
 	                                    <div class="cli-img">
@@ -491,8 +493,6 @@
                                 $(this).css('background-color', 'salmon');
                             }*/
 
-                            console.log(this);
-
                             if($(this).css('background-color', 'salmon')){
                                 $(this).css('background-color', 'bisque');
 
@@ -500,7 +500,8 @@
                             }
 
                             // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
-                            //$('#cli-pick').text()
+                            console.log($(this).children().children());
+                            $('#cli-pick').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
                             
                             
                         })

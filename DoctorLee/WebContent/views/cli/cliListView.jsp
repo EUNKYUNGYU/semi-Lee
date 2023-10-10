@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.cli.model.vo.*" %>
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
+	ArrayList<Clinic> cliList = (ArrayList<Clinic>)request.getAttribute("cliList");
 %>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,7 @@
 
 <!--Google Fonts Icon-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
@@ -22,9 +24,15 @@
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        locale: 'ko'
+        locale: 'ko',
+
+        dateClick: function(info){
+            // 달력 클릭 시 선택한 날짜 출력하기
+            $('#pick-date, #sel-date').text(info.dateStr);
+        }
       });
       calendar.render();
+      
     });
 
 </script>
@@ -260,6 +268,7 @@
         margin-left: 100px;
     }
 
+    /*달력*/
     #cli-date-part{
         width: 1000px;
     }
@@ -287,6 +296,18 @@
         float: left;
     }
 
+    /* 일요일 날짜 빨간색 */
+    .fc-day-sun a {
+    color: red;
+    text-decoration: none;
+    }
+
+    /* 토요일 날짜 파란색 */
+    .fc-day-sat a {
+    color: blue;
+    text-decoration: none;
+    }
+
     /*시간 출력*/
     .time-content{
         background-color: bisque;
@@ -301,7 +322,6 @@
     }
 
     .time-border{
-        border: 1px solid blue;
         overflow: auto;
         height: 580px;
     }
@@ -331,6 +351,12 @@
             <!--클리닉 출력 영역 div-->
             <div id="cli-content">
 
+                <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
+                    <div id="button-area" align="right">
+                        <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
+                    </div>
+                <% } %>
+
                 <!--클리닉 내용 출력 영역 div-->
                 <div id="cli-cate-part">
 
@@ -339,7 +365,7 @@
                         <em>
                             <span class="material-symbols-outlined">chevron_right</span>
                         </em>
-                        <span>카테고리를 선택해주세요</span>
+                        <span id="cate-pick">카테고리를 선택해주세요</span>
                     </div>
 
                 <!--클리닉 카테고리 영역 div-->
@@ -347,7 +373,7 @@
                     <div id="cate-inner" align="center">
                         <ul>
                         <%for(int i = 0; i < list.size(); i++){ %>
-                            <li><input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label></li>
+                            <li><input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label></li>
                         <%} %>
                         </ul>
 
@@ -355,10 +381,23 @@
                 </div>
         </div>
 
-        <!--
+        
+
+        
         <script>
             $(function(){
 
+                // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
+                $('.cate').click(function(){
+                    console.log($(this));
+
+                    $('#cate-pick, #sel-cate').text($(this).val());
+                })
+
+                // 카테고리 선택 전 클리닉과 예약일시 숨기기
+
+
+                /*
                 // 카테고리 클릭 시 카테고리 영역은 숨겨지고 클리닉 출력 결과 영역이 나타남
                 $('.cate').click(function(){
                     $('#content-part').css('display', 'block');
@@ -391,9 +430,9 @@
                     $('#content-part').css('display', 'none');
                     $('#cli-date').css('visivilty', 'visible');
                 })
+                */
             })
         </script>
-        -->
 
                 <!--클리닉 내용 출력 영역 div-->
                 <div id="cli-part">
@@ -403,7 +442,7 @@
                         <em>
                             <span class="material-symbols-outlined">chevron_right</span>
                         </em>
-                        <span>클리닉을 선택해주세요</span>
+                        <span id="cli-pick">클리닉을 선택해주세요</span>
                     </div>
 
                     <!--해당 카테고리 클리닉 출력 영역 div-->
@@ -414,138 +453,55 @@
 
                             <!--클리닉 출력 ul-->
                             <ul class="content-list">
+                            
+                            	<!-- 해당 카테고리에 클리닉이 존재하지 않을 경우 -->
+		                        <% if(cliList.isEmpty()) { %>
 
-                                <!--클리닉 요소 하나하나 li-->
-                                <li class="content-cli">
+                                    <p>클리닉이 존재하지 않습니다.</p>
+		                        
+		                        <% } else { %>
 
-                                    <!--클리닉 대표 이미지 div-->
-                                    <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
-                                    </div>
+									<!-- 해당 카테고리에 클리닉이 존재할 경우 -->
+									<% for(Clinic c : cliList) { %>
+		
+	                                <!--클리닉 요소 하나하나 li-->
+	                                <li class="content-cli">
 
-                                    <!--클리닉 설명 div-->
-                                    <div class="cli-des" align="left">
-
-                                        <div class="cli-top">
-                                            <span class="cli-name title">클리닉명</span>
-                                        </div>
-
-                                        <div class="cli-location">
-                                            <span>클리닉 장소</span>
-                                        </div>
-
-                                        <div class="cli-score">
-                                            <span class="material-symbols-outlined">grade</span>
-                                            <span>별점</span>
-                                        </div>
-
-                                        <div class="cli-price">
-                                            <span>가격</span>
-                                        </div>
-
-                                    </div>
-                                    <br clear="both">
-                                </li>
-
-                                <!--클리닉 요소 하나하나 li-->
-                                <li class="content-cli">
-
-                                    <!--클리닉 대표 이미지 div-->
-                                    <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
-                                    </div>
-
-                                    <!--클리닉 설명 div-->
-                                    <div class="cli-des" align="left">
-
-                                        <div class="cli-top">
-                                            <span class="cli-name title">클리닉명</span>
-                                        </div>
-
-                                        <div class="cli-location">
-                                            <span>클리닉 장소</span>
-                                        </div>
-
-                                        <div class="cli-score">
-                                            <span class="material-symbols-outlined">grade</span>
-                                            <span>별점</span>
-                                        </div>
-
-                                        <div class="cli-price">
-                                            <span>가격</span>
-                                        </div>
-
-                                    </div>
-                                    <br clear="both">
-                                </li>
+                                        <input type="hidden" value="<%=c.getCliNo()%>">
+	                                
+	                                    <!--클리닉 대표 이미지 div-->
+	                                    <div class="cli-img">
+	                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
+	                                        <button>자세히 보기</button>
+	                                    </div>
+	
+	                                    <!--클리닉 설명 div-->
+	                                    <div class="cli-des" align="left">
+	
+	                                        <div class="cli-top">
+	                                            <span class="cli-name title"><%= c.getCliName() %></span>
+	                                        </div>
+	
+	                                        <div class="cli-location">
+	                                            <span><%= c.getHosNo() %></span>
+	                                        </div>
+	
+	                                        <div class="cli-score">
+	                                            <span class="material-symbols-outlined">grade</span>
+	                                            <span>별점</span>
+	                                        </div>
+	
+	                                        <div class="cli-price">
+	                                            <span><%= c.getCliPrice() %></span>
+	                                        </div>
+	
+	                                    </div>
+	                                    <br clear="both">
+	                                </li>
+                                	<% } %>
                                 
-                                <!--클리닉 요소 하나하나 li-->
-                                <li class="content-cli">
-
-                                    <!--클리닉 대표 이미지 div-->
-                                    <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
-                                    </div>
-
-                                    <!--클리닉 설명 div-->
-                                    <div class="cli-des" align="left">
-
-                                        <div class="cli-top">
-                                            <span class="cli-name title">클리닉명</span>
-                                        </div>
-
-                                        <div class="cli-location">
-                                            <span>클리닉 장소</span>
-                                        </div>
-
-                                        <div class="cli-score">
-                                            <span class="material-symbols-outlined">grade</span>
-                                            <span>별점</span>
-                                        </div>
-
-                                        <div class="cli-price">
-                                            <span>가격</span>
-                                        </div>
-
-                                    </div>
-                                    <br clear="both">
-                                </li>
-
-                                <!--클리닉 요소 하나하나 li-->
-                                <li class="content-cli">
-
-                                    <!--클리닉 대표 이미지 div-->
-                                    <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
-                                    </div>
-
-                                    <!--클리닉 설명 div-->
-                                    <div class="cli-des" align="left">
-
-                                        <div class="cli-top">
-                                            <span class="cli-name title">클리닉명</span>
-                                        </div>
-
-                                        <div class="cli-location">
-                                            <span>클리닉 장소</span>
-                                        </div>
-
-                                        <div class="cli-score">
-                                            <span class="material-symbols-outlined">grade</span>
-                                            <span>별점</span>
-                                        </div>
-
-                                        <div class="cli-price">
-                                            <span>가격</span>
-                                        </div>
-
-                                    </div>
-                                    <br clear="both">
-                                </li>
+                                <% } %>
+                                
                             </ul>
                         </div>
                     </div>
@@ -555,6 +511,8 @@
                     $(function(){
                         //li클릭 시 색깔 바뀌는 이벤트
                         $('.content-cli').click(function(){
+
+                            console.log($(this).children().eq(0).val());
                             
                             /*if($(this).css('background-color') == 'salmon'){
 
@@ -563,21 +521,24 @@
                                 $(this).css('background-color', 'salmon');
                             }*/
 
-                            console.log(this);
-
                             if($(this).css('background-color', 'salmon')){
                                 $(this).css('background-color', 'bisque');
 
                                 $(this).siblings().css('background-color', 'salmon');
                             }
+
+                            // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
+                            //console.log($(this).children().children());
+                            $('#cli-pick, #sel-cli').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
                             
                             
                         })
 
                         //돋보기 버튼 클릭 시 상세보기 페이지로 이동
                         $('.cli-img > button').click(function(){
-                            location.href='<%=contextPath%>/cliDetail.cli';
+                            location.href='<%=contextPath%>/cliDetail.cli?cno=' + $(this).children().eq(0).val();
                         })
+                        
                     })
                 </script>
 
@@ -591,7 +552,7 @@
                             <em>
                                 <span class="material-symbols-outlined">chevron_right</span>
                             </em>
-                            <span>예약일시를 선택해주세요</span>
+                            <span id="pick-date">예약일시를 선택해주세요</span>
                         </div>
 
                         <!--예약일시 영역 div-->
@@ -648,11 +609,12 @@
             </div>
 
             <script>
+                
                 $(function(){
                     //li클릭 시 색깔 바뀌는 이벤트
                     $('.time-content').click(function(){
 
-                        console.log(this);
+                        //console.log(this);
 
                         if($(this).css('background-color', 'bisque')){
                             $(this).css('background-color', 'salmon');
@@ -660,7 +622,15 @@
                             $(this).siblings().css('background-color', 'bisque');
                         }
                     })
-                })
+
+                    // 시간 클릭 시 "예약 일시를 선택해주세요"와 좌측 메뉴에 띄우기
+                    $('.time-content').click(function(){
+                        console.log($(this).children().text());
+                        $('#pick-date, #sel-date').append(" / " + $(this).children().text());
+                    })
+                });
+                
+
             </script>
 
             <br><br><br><br><br>

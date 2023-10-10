@@ -3,10 +3,9 @@
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
 
 <%
-	String alertMsg1 = (String)session.getAttribute("alertMsg1");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	String contextPath1 = request.getContextPath();
 	Member loginUser1 = (Member)session.getAttribute("loginUser1");
-	
 %>
 
     

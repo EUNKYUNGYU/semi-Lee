@@ -66,4 +66,23 @@ public class MemberService {
 		return updateMem;
 		
 	}
+	
+	public int deleteMember (int memNo, String memPwd) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, memNo, memPwd);
+		
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
 }

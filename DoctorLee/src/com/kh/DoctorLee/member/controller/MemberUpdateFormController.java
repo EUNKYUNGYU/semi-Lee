@@ -14,16 +14,16 @@ import com.kh.DoctorLee.member.model.service.MemberService;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberUpdateController2
+ * Servlet implementation class MemberUpdateFormController
  */
-@WebServlet("/update2.me")
-public class MemberUpdateController2 extends HttpServlet {
+@WebServlet("/updateForm.me")
+public class MemberUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateController2() {
+    public MemberUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +34,7 @@ public class MemberUpdateController2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		System.out.println("넌 할 ㅜㅅ 있어");
 		
 		String memName = request.getParameter("memName");
 		String nickName = request.getParameter("nickName");
@@ -43,18 +44,20 @@ public class MemberUpdateController2 extends HttpServlet {
 		
 		Member m = new Member();
 		m.setMemName(memName);
-		m.setNickName(nickName);
+		m.setNickName(nickName); 
 		m.setPhone(phone);
 		m.setEmail(email);
 		m.setMemId(memId);
+		System.out.println(memId);
 		
 		int result = new MemberService().updateMember(m);
+		System.out.println(result);
 		
 		if(result > 0) {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "회원 정보 수정 성공");
-			
 			Member updateMem = new MemberService().selectMember(memId);
+			
 			session.setAttribute("loginUser", updateMem);
 			
 			response.sendRedirect(request.getContextPath() + "/myPage.me");

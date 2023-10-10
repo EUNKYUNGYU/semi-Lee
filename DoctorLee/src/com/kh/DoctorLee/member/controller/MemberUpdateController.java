@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.DoctorLee.member.model.service.MemberService;
+import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberUpdateController
@@ -29,8 +33,9 @@ public class MemberUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher view = request.getRequestDispatcher("views/member/memberUpdateForm2.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/member/memberUpdateForm.jsp");
 		view.forward(request, response);
+		
 	
 	}
 

@@ -38,7 +38,7 @@
             <table align="center">
                 <tr>
                     <th width="50">제목</th>
-                    <td width="700" ><input type="text" name="title"></td>
+                    <td width="700" ><input type="text" name="title" maxlength="300"></td>
                 </tr>
                 <br><br><br>
                 <tr>
@@ -47,10 +47,21 @@
                 <tr>
                     
                     <td colspan="3">
-                        <textarea name="content" style="resize:none;" rows="20"></textarea>
+                        <textarea name="content" id="content" style="resize:none;" rows="20"></textarea>
+                        <span id="count">0</span>/150
                     </td>
                 </tr>
             </table>
+            <!-- 글자수 function -->
+            <script>
+            $(function(){
+                $('#content').keyup(function(){
+                    console.log($(this).val().length);
+                    $('#count').text($(this).val().length);
+                })
+            })
+            	
+            </script>
             <br><br>
             <div align="center">
                 <button type="submit">작성하기</button>

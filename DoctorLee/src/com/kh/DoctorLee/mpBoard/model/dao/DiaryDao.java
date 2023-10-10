@@ -63,7 +63,7 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			
 			return result;
 		}
-		public ArrayList<MyDiary> selectMyDiary(Connection conn) {
+		public ArrayList<MyDiary> selectMyDiary(Connection conn,int memNo) {
 			ArrayList<MyDiary> list = new ArrayList();
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -71,7 +71,9 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			String sql = prop.getProperty("selectMyDiaryList");
 			
 			try {
+				
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, memNo);
 				
 				rset = pstmt.executeQuery();
 				

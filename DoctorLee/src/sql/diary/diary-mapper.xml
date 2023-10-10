@@ -47,7 +47,9 @@
 			CREATE_DATE
 		FROM 
 			TB_MY_DIARY
+			WHERE MEM_NO = ?
 		ORDER BY CREATE_DATE DESC
+		
 	</entry>
 	<entry key="selectFamDiaryList">
 		SELECT

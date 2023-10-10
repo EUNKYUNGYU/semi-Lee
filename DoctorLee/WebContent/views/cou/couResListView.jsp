@@ -290,8 +290,10 @@
         border-radius: 10px;
         text-decoration: none;
         margin-top: 20px;
-        width: 50px;
+        width: 250px;
         border: 1px solid brown;
+        height: 50px;
+        line-height: 50px;
     }
 
     .time-border > ul{
@@ -591,15 +593,15 @@
                                 <div class="time-border">
                                     <ul>
                                         <li class="time-content" align="center">
-                                            <a href="#">11:30</a>
+                                            <a href="#"><p>11:30</p></a>
                                         </li>
 
                                         <li class="time-content" align="center">
-                                            <a href="#">12:30</a>
+                                            <a href="#"><p>12:30</p></a>
                                         </li>
 
                                         <li class="time-content" align="center">
-                                            <a href="#">13:30</a>
+                                            <a href="#"><p>13:30</p></a>
                                         </li>
                                     </ul>
                                 </div>

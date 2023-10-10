@@ -73,4 +73,15 @@
 		WHERE
 			DIARY_NO = ?
 	</entry>
+	<entry key="updateDiary">
+		UPDATE 
+    		TB_MY_DIARY
+		SET
+    		DIARY_TITLE =?,
+    		DIARY_CONTENT =?,
+    		CREATE_DATE = SYSDATE
+		WHERE 
+    		DIARY_NO = ?
+    
+	</entry>
 </properties>

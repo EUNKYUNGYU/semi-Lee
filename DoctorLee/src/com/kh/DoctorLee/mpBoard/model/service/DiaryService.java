@@ -60,6 +60,18 @@ public class DiaryService {
 		MyDiary md = new DiaryDao().detailMyDiary(conn,diaryNo);
 		JDBCTemplate.close(conn);
 		return md;
+	
+	}
+	public int updateDiary(MyDiary md) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new DiaryDao().updateDiary(conn,md);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

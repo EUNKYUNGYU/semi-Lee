@@ -1,25 +1,27 @@
-package com.kh.DoctorLee.member.controller;
+package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.mpBoard.model.service.DiaryService;
+import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
+
 /**
- * Servlet implementation class MemberUpdateController
+ * Servlet implementation class DiaryDetailView
  */
-@WebServlet("/update.me")
-public class MemberUpdateController extends HttpServlet {
+@WebServlet("/detail.di")
+public class DiaryDetailView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateController() {
+    public DiaryDetailView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,9 +30,10 @@ public class MemberUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		RequestDispatcher view = request.getRequestDispatcher("views/member/memberUpdateForm2.jsp");
-		view.forward(request, response);
+		int diaryNo = Integer.parseInt(request.getParameter("dno"));
+		MyDiary md= new DiaryService().detailMyDiary(diaryNo);
+		request.setAttribute("md", md);
+		request.getRequestDispatcher("views/diary/diaryDetailView.jsp").forward(request, response);
 	
 	}
 

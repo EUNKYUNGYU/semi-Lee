@@ -4,10 +4,8 @@
 
 <%
 	String alertMsg = (String)session.getAttribute("alertMsg");
-	
 	String contextPath1 = request.getContextPath();
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	
+	Member loginUser1 = (Member)session.getAttribute("loginUser1");
 %>
 
     
@@ -89,23 +87,14 @@
     </style>
 </head>
 <body>
-    		<script>
-    			var msg = '<%=alertMsg%>';
-    			
-    			if(msg!='null'){
-    				
-    				alert(msg);
-    				
-    			<% session.removeAttribute("alertMsg");%>
-    			}
-    		</script>
+    		
             
             <div id="mp_navi">
                 <div id="empty">
                     <table id="user" align="center">
                         <tr>
                             <br><br>
-                            <th align="center"><%= loginUser.getMemName() %>님 환영합니다.</th><br>
+                            <th align="center"><%= loginUser1.getMemName() %>님 환영합니다.</th><br>
                             
 
                         </tr>

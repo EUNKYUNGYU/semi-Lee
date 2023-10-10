@@ -14,7 +14,7 @@ Member loginUser = (Member)session.getAttribute("loginUser");
 	<%@ include file="../common/navi.jsp" %>
 	<br><br>
 	<form action="<%= contextPath %>/list.di" id="login-form" method="post">
-    		 	
+    		 	<!-- list controller로 memNo 넘겨주기  -->
     		 	<button name="memNo" value=<%=loginUser.getMemNo()%>>다이어리 보러가기</button>
     	
    	</form>

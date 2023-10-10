@@ -42,7 +42,8 @@
                 <tr>
                     
                     <td colspan="3">
-                        <textarea name="content" style="resize:none;" rows="20"></textarea>
+                       	<textarea name="content" id="content" style="resize:none;" rows="20"></textarea>
+                        <span id="count">0</span>/300
                     </td>
                 </tr>
             </table>
@@ -54,6 +55,12 @@
            
         </form>
         <br><br>
+        $(function(){
+                $('#content').keyup(function(){
+                    console.log($(this).val().length);
+                    $('#count').text($(this).val().length);
+                })
+            })
         
        
     </div>

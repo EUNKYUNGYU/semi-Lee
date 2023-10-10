@@ -151,5 +151,27 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			
 			return md;
 		}
+		public int updateDiary(Connection conn, MyDiary md) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("updateDiary");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, md.getDiaryTitle());
+				pstmt.setString(2, md.getDiaryContent());
+				pstmt.setInt(3, md.getDiaryNo());
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(conn);
+			}
+			
+			
+			
+			return result;
+		}
 	
 }

@@ -28,7 +28,7 @@
         <h2 align="center">내 다이어리 </h2>
         
         <form action="<%=contextPath%>/update.di" id="update-form" method="post">
-        
+        	<input type="hidden" name="dno" value="<%=md.getDiaryNo() %>">
             
             <br><br><br>
             <table align="center">

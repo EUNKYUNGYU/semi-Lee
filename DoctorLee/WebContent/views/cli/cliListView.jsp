@@ -35,7 +35,12 @@
             $('.time-content').click(function(){
                 // 달력 클릭 시 선택한 날짜 출력하기
                 $('#pick-date, #sel-date').text(info.dateStr + " / " + $(this).children().text());
+
             })
+
+            $(this).addClass('day-color');
+
+            $(this).siblings().removeClass('day-color');
             
             
         }
@@ -47,6 +52,12 @@
 </script>
 
 <style>
+
+    .day-color{
+        background-color: red;
+        font-weight: 900;
+    }
+
     .outer{
         width: 1800px;
         margin-left: 50px;

@@ -14,7 +14,7 @@
 				CLI_NO, 
 				HOS_NAME, 
 				CLI_CATE, 
-				CLI_NAME, 
+				CLI_NAME,
 				CLI_PRICE, 
 				ORIGIN_NAME, 
 				CHANGE_NAME, 

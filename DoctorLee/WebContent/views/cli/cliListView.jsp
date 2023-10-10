@@ -34,13 +34,15 @@
 
             $('.time-content').click(function(){
                 // 달력 클릭 시 선택한 날짜 출력하기
-                $('#pick-date, #sel-date').text(info.dateStr + " / " + $(this).children().text());
+                $('#pick-date, #sel-date').text((info.dateStr).replaceAll('-', '.') + " / " + $(this).children().text());
 
             })
 
-            $(this).addClass('day-color');
-
-            $(this).siblings().removeClass('day-color');
+            var days = document.querySelectorAll(".day-color");
+            days.forEach(function(day){
+                day.classList.remove("day-color");
+            })
+            info.dayEl.classList.add("day-color");
             
             
         }
@@ -54,7 +56,7 @@
 <style>
 
     .day-color{
-        background-color: red;
+        background-color: #1E376F !important;
         font-weight: 900;
     }
 
@@ -393,7 +395,9 @@
                     <div id="cate-inner" align="center">
                         <ul>
                         <%for(int i = 0; i < list.size(); i++){ %>
-                            <li><input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label></li>
+                            <li>
+                                <input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label>
+                            </li>
                         <%} %>
                         </ul>
 
@@ -409,14 +413,15 @@
 
                 // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
                 $('.cate').click(function(){
-                    //console.log($(this));
+                    //console.log($(this).val());
+                    //$('.cate').prop('checked', 'true').val()
+
+                    console.log($('.cate').attr('checked', true).val());
 
                     $('#cate-pick, #sel-cate').text($(this).val());
 
                     $('#content-part').css('display', 'block');
                 })
-
-                // 카테고리 선택 전 클리닉과 예약일시 숨기기
 
             })
         </script>
@@ -441,6 +446,8 @@
                             <!--클리닉 출력 ul-->
                             <ul class="content-list">
                             
+                                <!-- 선택한 카테고리와 출력할 클리닉의 카테고리 일치 여부 확인 -->
+
                             	<!-- 해당 카테고리에 클리닉이 존재하지 않을 경우 -->
 		                        <% if(cliList.isEmpty()) { %>
 
@@ -450,6 +457,8 @@
 
 									<!-- 해당 카테고리에 클리닉이 존재할 경우 -->
 									<% for(Clinic c : cliList) { %>
+
+                                    <% if(c.getCateNo() != $('.cate').attr('checked', true).val()) %>
 		
 	                                <!--클리닉 요소 하나하나 li-->
 	                                <li class="content-cli">
@@ -515,6 +524,8 @@
                             
                             // 클리닉 선택 후 예약일시가 보여짐
                             $('#cli-date').css('visibility', 'visible');
+
+                            console.log($('.cli-cate > span').val());
                         })
 
                         //돋보기 버튼 클릭 시 상세보기 페이지로 이동

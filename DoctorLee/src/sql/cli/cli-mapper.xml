@@ -8,4 +8,22 @@
 		  FROM
 		  		TB_CLI_CATE		
 	</entry>
+	
+	<entry key="selectCliList">
+		SELECT 
+				CLI_NO, 
+				HOS_NAME, 
+				CLI_CATE, 
+				CLI_NAME, 
+				CLI_PRICE, 
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				DES_PATH
+		FROM 
+				TB_CLI
+		JOIN 	
+				TB_CLI_CATE USING(CATE_NO)
+		JOIN 
+				TB_HOSPITAL USING(HOS_NO)		
+	</entry>
 </properties>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.cli.model.service.CliService;
 import com.kh.DoctorLee.cli.model.vo.Category;
+import com.kh.DoctorLee.cli.model.vo.Clinic;
 
 /**
  * Servlet implementation class CliListController
@@ -35,7 +36,11 @@ public class CliListController extends HttpServlet {
 		// 카테고리 불러오기
 		ArrayList<Category> list = new CliService().selectCategoryList();
 		
+		// 클리닉 불러오기
+		ArrayList<Clinic> cliList = new CliService().selectCliList();
+		
 		request.setAttribute("list", list);
+		request.setAttribute("cliList", cliList);
 
 		request.getRequestDispatcher("views/cli/cliListView.jsp").forward(request, response);
 	}

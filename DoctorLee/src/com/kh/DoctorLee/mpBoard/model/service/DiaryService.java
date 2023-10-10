@@ -73,5 +73,17 @@ public class DiaryService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public int deleteDiary(int diaryNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new DiaryDao().deleteDiary(conn,diaryNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+			
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 }

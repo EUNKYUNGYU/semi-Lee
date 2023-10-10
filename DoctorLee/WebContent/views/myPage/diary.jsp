@@ -7,7 +7,7 @@
 %>
 <%
 	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
-	Member loginUser2 = (Member)session.getAttribute("loginUser");
+	
 	
 %>
 
@@ -304,7 +304,9 @@
         	</div>
             
         	
-        
+        <% System.out.println(famList); %>
+        <% System.out.println(loginUser); %>
+        <% System.out.println(list); %>
             
         </div>
         

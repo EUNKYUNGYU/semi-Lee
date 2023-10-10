@@ -413,7 +413,10 @@
 
                 // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
                 $('.cate').click(function(){
-                    console.log($(this));
+                    //console.log($(this).val());
+                    //$('.cate').prop('checked', 'true').val()
+
+                    console.log($('.cate').attr('checked', true).val());
 
                     $('#cate-pick, #sel-cate').text($(this).val());
 
@@ -444,7 +447,7 @@
                             <ul class="content-list">
                             
                                 <!-- 선택한 카테고리와 출력할 클리닉의 카테고리 일치 여부 확인 -->
-                                
+
                             	<!-- 해당 카테고리에 클리닉이 존재하지 않을 경우 -->
 		                        <% if(cliList.isEmpty()) { %>
 
@@ -454,6 +457,8 @@
 
 									<!-- 해당 카테고리에 클리닉이 존재할 경우 -->
 									<% for(Clinic c : cliList) { %>
+
+                                    <% if(c.getCateNo() != $('.cate').attr('checked', true).val()) %>
 		
 	                                <!--클리닉 요소 하나하나 li-->
 	                                <li class="content-cli">
@@ -519,6 +524,8 @@
                             
                             // 클리닉 선택 후 예약일시가 보여짐
                             $('#cli-date').css('visibility', 'visible');
+
+                            console.log($('.cli-cate > span').val());
                         })
 
                         //돋보기 버튼 클릭 시 상세보기 페이지로 이동

@@ -40,10 +40,10 @@ public class DiaryService {
 		return result;
 	}
 	
-	public ArrayList<MyDiary> selectMyDiary() {
+	public ArrayList<MyDiary> selectMyDiary(int memNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<MyDiary> list = new DiaryDao().selectMyDiary(conn);
+		ArrayList<MyDiary> list = new DiaryDao().selectMyDiary(conn,memNo);
 		JDBCTemplate.close(conn);
 		
 		

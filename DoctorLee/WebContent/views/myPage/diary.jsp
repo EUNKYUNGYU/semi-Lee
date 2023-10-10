@@ -8,6 +8,7 @@
 <%
 	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
 	Member loginUser2 = (Member)session.getAttribute("loginUser");
+	
 %>
 
 
@@ -19,6 +20,7 @@
 <style>
     div{
         box-sizing : border-box;
+        
     }
 	#diary{width : 1000px;
 		   height : 600px;
@@ -136,14 +138,17 @@
     	
     	 <% if(loginUser == null) { %>
    			 <form action="<%= contextPath %>/login.me" id="login-form" method="post">
-    		 	<button type="submit" width="300" height="300">로그인하러가기</button>
+    		 	<button type="submit" >로그인하러가기</button>
     	
    	 		 </form>
    	 	<% } else { %>
+   	 	
+   	 	<input type="hidden" name="memNo" value=<%=loginUser.getMemNo() %>>
         <div id="diary1">
             
         	<div id="my_diary">
         		<h3>내 다이어리</h3>
+        		
                 <table id="customers">
                     <tr>
                       <th>다이어리 번호</th>
@@ -199,6 +204,7 @@
                     -->
                     <% for(MyDiary md : list){ %>
                     	<tr>
+                    		
                     		<td><%= md.getDiaryNo()%></td>
                     		<td><%= md.getDiaryTitle()%></td>
                     		<td><%= md.getCreateDate()%></td>
@@ -214,9 +220,11 @@
                 <br><br>
         	</div>
         	
-        
-        
+        	
         	<div id="fam_diary">
+        	
+        
+        
         		<h3>가족 다이어리</h3>
         		
         		<table id="customers1">
@@ -291,7 +299,7 @@
                 <br><br>
                 
         	</div>
-            <hr>
+            
         	
         
             

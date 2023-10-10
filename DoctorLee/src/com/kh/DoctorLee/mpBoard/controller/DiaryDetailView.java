@@ -1,7 +1,6 @@
-package com.kh.DoctorLee.cli.controller;
+package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.Category;
-import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.mpBoard.model.service.DiaryService;
+import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 
 /**
- * Servlet implementation class CliListController
+ * Servlet implementation class DiaryDetailView
  */
-@WebServlet("/list.cli")
-public class CliListController extends HttpServlet {
+@WebServlet("/detail.di")
+public class DiaryDetailView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliListController() {
+    public DiaryDetailView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +30,11 @@ public class CliListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String cateName = request.getParameter("cliCate");
-		
-		// 카테고리 불러오기
-		ArrayList<Category> list = new CliService().selectCategoryList();
-		
-		// 클리닉 불러오기
-		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
-		
-		request.setAttribute("list", list);
-		request.setAttribute("cliList", cliList);
-
-		request.getRequestDispatcher("views/cli/cliListView.jsp").forward(request, response);
+		int diaryNo = Integer.parseInt(request.getParameter("dno"));
+		MyDiary md= new DiaryService().detailMyDiary(diaryNo);
+		request.setAttribute("md", md);
+		request.getRequestDispatcher("views/diary/diaryDetailView.jsp").forward(request, response);
+	
 	}
 
 	/**

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.DoctorLee.common.JDBCTemplate;
-import com.kh.DoctorLee.member.model.vo.Member;
 import com.kh.DoctorLee.mpBoard.model.dao.DiaryDao;
 import com.kh.DoctorLee.mpBoard.model.vo.FamDiary;
 import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
@@ -40,10 +39,10 @@ public class DiaryService {
 		return result;
 	}
 	
-	public ArrayList<MyDiary> selectMyDiary() {
+	public ArrayList<MyDiary> selectMyDiary(int memNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<MyDiary> list = new DiaryDao().selectMyDiary(conn);
+		ArrayList<MyDiary> list = new DiaryDao().selectMyDiary(conn,memNo);
 		JDBCTemplate.close(conn);
 		
 		
@@ -55,6 +54,36 @@ public class DiaryService {
 		ArrayList<FamDiary> famList = new DiaryDao().selectFamDiary(conn);
 		JDBCTemplate.close(conn);
 		return famList;
+	}
+	public MyDiary detailMyDiary(int diaryNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		MyDiary md = new DiaryDao().detailMyDiary(conn,diaryNo);
+		JDBCTemplate.close(conn);
+		return md;
+	
+	}
+	public int updateDiary(MyDiary md) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new DiaryDao().updateDiary(conn,md);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int deleteDiary(int diaryNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new DiaryDao().deleteDiary(conn,diaryNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+			
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

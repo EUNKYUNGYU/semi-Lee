@@ -76,14 +76,14 @@
                         <ul>
                         	<li><a href="<%=contextPath%>/myPage.me">마이페이지</a></li>
                             <li><a href="<%=contextPath%>/update.me">회원 정보 수정</a></li>
-                            <li><a href="#">회원 탈퇴</a></li>
+                            <li><a href="<%=contextPath%>/delete.me">회원 탈퇴</a></li>
                             <li><a href="#">관리자 문의</a></li>
                             <li><a href="#">자기 게시물 확인</a></li>
                             <li><a href="#">예약 관리</a></li>
                             <li><a href="#">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">건강 관리</a></li>
-                            <li><a href="<%=contextPath%>/list.di">다이어리</a></li>
+                            <li><a href="<%=contextPath%>/first.di">다이어리</a></li>
                             <li><a href="#">가족 계정 추가</a></li>
                         </ul>
                     </li>

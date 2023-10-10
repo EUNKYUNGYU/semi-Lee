@@ -8,89 +8,58 @@
 <title>회원정보수정</title>
  <style>
         div{
-            box-sizing: border-box;
             
+            box-sizing: border-box;
         }
 
-        /*전체를 감싸는 div 속성*/
-        #content{
-            width: 1800px;
-            height: 500px;
+        #wrap{
+            width: 100%;
+            height: 1800px;
             margin: auto;
         }
 
-       
-
-        /*세부속성*/
-        #content_1, #content_2, #content_3{
+        #wrap > div {
             width: 100%;
         }
 
-        
-        .content_2{height: 40%;}
-        #content_3{height: 50%;}
+        #header{
+            height: 5%;
+        }
 
-        /*-----------------content_2-----------------*/
-        
-        .content_2{
-            width: 1200px;
-            height: 800px;
+        #content{
+            height: 95%;
+        }
+
+        #content > div{
+            height: 100%;
             float: left;
-            margin-left: 300px;
-            
-        }
-        
-        .box{
-            width: 240px;
-            height: 30px;
-            background-color:#ecf1ff;
-            border: 1px solid rgb(138, 138, 138);
-            border-radius: 3px;
-        }
-        
-        #r_id2{
-            width: 100px;
-            height: 30px;
-            background-color: #1E376F;
-            border-radius: 3px;
-            color: white;
-            border: none;
-            font-size: 12px;
-        }
-        
-        /*--------------------p태그---------------------*/
-        h1{
-        	text-align : center;
-            font-size: 38px;
-            font-weight: bolder;
-            margin-bottom: 30px;
-            
         }
 
-        p{
+        #content_1{
+            width: 20%;
+            height: 100%;
+        }
+
+        #content_2{
+            width: 80%;
+            height: 100%;
+        }
+
+        /*-----------------------------------------------*/
+        h1{
             text-align: center;
+        }
+
+        #p1{
+            text-align: left;
             font-size: 15px;
             color: #1E376F;
             font-weight: 600;
             padding-top: 30px;
-            padding-left: 500px;
-            text-align: left;
-            
-           
+            padding-left: 380px;
         }
 
-        #title1{
-            font-size: 23px;
-            font-weight: bold;
-        }
-
-        #title2{
-            font-size: 23px;
-            font-weight: bold;
-        }
-       
-        /*-------------텍스트 창--------------*/
-      
+        /*-----------------------------------------------*/
         #checked_id{
             margin-left: 550px;
             margin-top: -50px;
@@ -125,176 +94,162 @@
             background-color: #1E376F;
             color: white;
         }
-       
-       #register{
-       cursor: pointer;
-       }
 
+        #button{
+            margin-left: 550px;
+            margin-top: 50px;
 
-
-       /*------------------hr line--------------------*/
-       #line1{
-        border: 1.8px solid rgb(226, 226, 226); 
-        width: 1280px;
-        margin: auto;
-       
-       }
-
-       #line2{
-        border: 1.8px solid #1E376F; 
-        width: 1280px;
-        margin: auto;
-       }
-
-
+        }
+        
+        #height, #weight{
+        	text-align: right;
+        }
     </style>
 </head>
 <body>
 
-	<%@ include file = "../common/couNavi.jsp" %>
-	<%
-		//System.out.println(loginUser);
-		String memName = loginUser.getMemName();
-		String nickName = loginUser.getNickName();
-		String phone = loginUser.getPhone();
-		String email = loginUser.getEmail();
-		
-	%>
 	
-	<div id="content">
-
-        
-            <h1>마이페이지</h1>
-            <hr id="line1">
-            <p>
-                * 최선의 서비스 제공을 위해서 회원정보를 최신정보로 변경하여 주시기 바랍니다. <br>
-                * 아래 회원정보는 홈페이지 회원가입자에 대한 개인정보이며 정보보호를 위해 암호화하여 관리합니다. <br>
-                * 온라인 회원가입정보와 병원내 진료시스템 개인정보는 별도로 관리되므로 온라인 회원정보가 변경될 경우 <br>
-                * 콜센터(☎1577-0000)에 연락하시어 진료시스템상 개인정보도 변경해 주십시오.       
-            </p>
-            
-            <br>
-            <hr id="line2">
-           
-            
-            <div class="content_2">
-                
-                    <form name="login" action="index.html" method="post" class="formfont">
-                        <br><br>
-                        <span id="title1">회원정보수정</span>
-                        <br><br><br>
-                        <hr style="border: 1px solid #1E376F;">
-                        <br>
-                        
-                        이름
-                        <br><br>
-                        <input type="text" name="mem_name" value="<%= memName %>" class="box"> <br>
-                        <br>
-                        <hr>
-                        <br>
-                       
-                        이메일
-                        <br><br>
-                        <input type="email" name="email" value="<%= email %>" placeholder="email@gmail.com" class="box">
-                        <br><br>
-                        <hr>
-                        <br>
-                        휴대전화
-                        <br><br>
-                        <input type="text" name="phone" value="<%= phone %>"placeholder="010-****-****" class="box">
-                        <br><br><br>
-                        <hr style="border: 1px solid #1E376F;">                       
-                        <br>
-                        <span id="title2">건강관리입력사항</span>
-                        <br><br>
-                        <hr style="border: 1px solid #1E376F;">
-                        <br>
-                        키
-                        <br><br>
-                        <input type="password" placeholder="                                                     cm" class="box">
-                        <br><br>
-                        <hr>
-                        <br>
-                        몸무게
-                        <br><br>
-                        <input type="password" placeholder="                                                     kg" class="box">
-                        <br><br>
-                        <hr>
-                        <br>
-                        질병
-                        <br><br>
-                        <input type="checkbox" value="암">암
-                        <input type="checkbox" value="간질환">간질환
-                        <input type="checkbox" value="심장질환">심장질환
-                        <input type="checkbox" value="뇌혈관질환">뇌혈관질환
-                        <br>
-                        <input type="checkbox" value="당뇨병">당뇨병
-                        <input type="checkbox" value="고혈압">고혈압
-                        <input type="checkbox" value="호흡기질환">호흡기질환
-                        <input type="checkbox" value="기타">기타
-                        <br><br>
-                        <hr>
-                        <br>
-                        흡입 알레르기
-                        <span style="font-size: 14px;">(중복 선택 가능)</span>
-                        <br><br>
-                        <input type="checkbox" value="곤충류">곤충류
-                        <input type="checkbox" value="진드기류">진드기류
-                        <input type="checkbox" value="목초화분">목초화분
-                        <input type="checkbox" value="비듬&상피세포">비듬&상피세포
-                        <br>
-                        <input type="checkbox" value="잡초화분">잡초화분
-                        <input type="checkbox" value="수목화분">수목화분
-                        <input type="checkbox" value="곰팡이류">곰팡이류
-                        <input type="checkbox" value="기타">기타
-                        <br><br>
-                        <hr>
-                        <br>
-                        음식물 알레르기
-                        <span style="font-size: 14px;">(중복 선택 가능)</span>
-                        <br><br>
-                        <input type="checkbox" value="곡류">곡류
-                        <input type="checkbox" value="해산물">해산물
-                        <input type="checkbox" value="채소류">채소류
-                        <input type="checkbox" value="동물성식품">동물성식품
-                        <br>
-                        <input type="checkbox" value="과일류">과일류
-                        <input type="checkbox" value="견과류">견과류
-                        <input type="checkbox" value="기타">기타
-                       
-                       
-                    </form>
-                
-                </div>
-                
+	
+	
+	<div id="wrap">
+        <div id="header">
+        	<%@ include file = "../common/nav2.jsp" %>
         </div>
-      
-       
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        
-        <hr style="border: 1px solid rgb(226, 226, 226);">
 
-        <div id="content_3" align="center">
+		
+	
+        <div id="content">
+            <div id="content_1">
+            	<%@ include file = "../common/myPageNavi.jsp" %>
+            </div>
             
-            <input type="button" id="cancel" value="비밀번호 변경" onclick="updatePwd();"></input>
-            <button type="submit" id="register" onclick="mainPage();">확인</button>
-        </div>
-        
+            <%
+				//System.out.println(loginUser);
+				String memName = loginUser.getMemName();
+				String nickName = loginUser.getNickName();
+				String phone = loginUser.getPhone();
+				String email = loginUser.getEmail();
+			%>
+            
+            <div id="content_2">
+                <h1>마이페이지</h1>
+                <hr>
+                <p id="p1">
+                    * 최선의 서비스 제공을 위해서 회원정보를 최신정보로 변경하여 주시기 바랍니다. <br>
+                    * 아래 회원정보는 홈페이지 회원가입자에 대한 개인정보이며 정보보호를 위해 암호화하여 관리합니다. <br>
+                    * 온라인 회원가입정보와 병원내 진료시스템 개인정보는 별도로 관리되므로 온라인 회원정보가 변경될 경우 <br>
+                    * 콜센터(☎1577-0000)에 연락하시어 진료시스템상 개인정보도 변경해 주십시오.       
+                </p>
+                
+                <hr>
 
+                <form name="login" action="<%=contextPath %>/update.me" method="post" class="formfont">
+                    <input type="hidden" name="memId" value="<%= loginUser.getMemId() %>" class="box"> <br>
+                    <h2>회원정보수정</h2>
+                    <hr>
+                    <br>
+                    
+                    이름
+                    <br><br>
+                    <input type="text" name="memName" value="<%= memName %>" class="box"> <br>
+                    <br>
+                    <hr>
+                    <br>
+                  닉네임
+                    <br><br>
+                    <input type="text" name="nickName" value="<%= nickName %>" class="box"> <br>
+                    <br>
+                    <hr>
+                    <br>          
+                    
+                    이메일
+                    <br><br>
+                    <input type="email" name="email" value="<%= email %>"placeholder="email@gmail.com" class="box">
+                    <br><br>
+                    <hr>
+                    <br>
+                    휴대전화
+                    <br><br>
+                    <input type="text" name="phone" value="<%= phone %>" placeholder="-를 제외하고 입력하시오." class="box">
+                    <br><br><br>
+                    <hr>                       
+                    <h2>건강관리입력사항 </h2>
+                    <hr>
+                    <br>
+                    키
+                    <br><br>
+                    <input type="text" placeholder="cm" class="box" id="height" name="height">
+                    <br><br>
+                    <hr>
+                    <br>
+                    몸무게
+                    <br><br>
+                    <input type="text" placeholder="kg" class="box" id="weight" name="weight">
+                    <br><br>
+                    <hr>
+                    <br>
+                    질병
+                    <br><br>
+                    <input type="checkbox" value="암">암
+                    <input type="checkbox" value="간질환">간질환
+                    <input type="checkbox" value="심장질환">심장질환
+                    <input type="checkbox" value="뇌혈관질환">뇌혈관질환
+                    <br>
+                    <input type="checkbox" value="당뇨병">당뇨병
+                    <input type="checkbox" value="고혈압">고혈압
+                    <input type="checkbox" value="호흡기질환">호흡기질환
+                    <input type="checkbox" value="기타">기타
+                    <br><br>
+                    <hr>
+                    <br>
+                    흡입 알레르기
+                    <span style="font-size: 14px;">(중복 선택 가능)</span>
+                    <br><br>
+                    <input type="checkbox" value="곤충류">곤충류
+                    <input type="checkbox" value="진드기류">진드기류
+                    <input type="checkbox" value="목초화분">목초화분
+                    <input type="checkbox" value="비듬&상피세포">비듬&상피세포
+                    <br>
+                    <input type="checkbox" value="잡초화분">잡초화분
+                    <input type="checkbox" value="수목화분">수목화분
+                    <input type="checkbox" value="곰팡이류">곰팡이류
+                    <input type="checkbox" value="기타">기타
+                    <br><br>
+                    <hr>
+                    <br>
+                    음식물 알레르기
+                    <span style="font-size: 14px;">(중복 선택 가능)</span>
+                    <br><br>
+                    <input type="checkbox" value="곡류">곡류
+                    <input type="checkbox" value="해산물">해산물
+                    <input type="checkbox" value="채소류">채소류
+                    <input type="checkbox" value="동물성식품">동물성식품
+                    <br>
+                    <input type="checkbox" value="과일류">과일류
+                    <input type="checkbox" value="견과류">견과류
+                    <input type="checkbox" value="기타">기타
+                    <br><br>
+                    <hr>
+                    <span id="button">
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updatePwdForm"></button>
+                        <button type="submit" id="register">확인</button>
+                    </span>
+
+                </form>
+               
+            </div>
+        </div>
     </div>
     
+    
+	<!--비밀번호 변경 모달-->
+	
 	<script>
-		function mainPage(){
-			location.href = "<%=contextPath%>/myPage.me";
-		}
 		
 		function updatePwd(){
 			location.href = "<%=contextPath%>/updatePwd.me";
 		}
 	</script>
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	
 
 </body>
 </html>

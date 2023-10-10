@@ -78,7 +78,6 @@
 	<entry key="selectMember">
 		SELECT
 				TB_MEMBER
-				
 		FROM
 				MEM_NO,
 				MEM_ID,
@@ -99,6 +98,19 @@
 	
 	
 	</entry>
-
+	<entry key="deleteMember">
+		UPDATE
+				TB_MEMBER
+		   SET
+				STATUS = 'N'
+		 WHERE
+		 		MEM_NO = ?
+		   AND
+		 		MEM_PWD = ?
+		   AND
+		 		STATUS = 'Y'
+		 		
+				
+	</entry>
 
 </properties>

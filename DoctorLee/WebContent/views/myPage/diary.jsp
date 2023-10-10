@@ -8,6 +8,10 @@
 <%
 	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
 	Member loginUser2 = (Member)session.getAttribute("loginUser");
+	
+	//System.out.println(list);
+	//System.out.println(famList);
+	//System.out.println(loginUser2);
 %>
 
 
@@ -19,6 +23,7 @@
 <style>
     div{
         box-sizing : border-box;
+        
     }
 	#diary{width : 1000px;
 		   height : 600px;
@@ -136,15 +141,17 @@
     	
     	 <% if(loginUser == null) { %>
    			 <form action="<%= contextPath %>/login.me" id="login-form" method="post">
-    		 	<button type="submit" width="300" height="300">로그인하러가기</button>
-    	
+    		 	<button type="submit" >로그인하러가기</button>
    	 		 </form>
    	 	<% } else { %>
+   	 	
+   	 	<input type="hidden" name="memNo" value=<%=loginUser.getMemNo() %>>
         <div id="diary1">
             
         	<div id="my_diary">
         		<h3>내 다이어리</h3>
-                <table id="customers">
+        		
+                <table id="customers" class="list-area">
                     <tr>
                       <th>다이어리 번호</th>
                       <th>제목</th>
@@ -199,6 +206,7 @@
                     -->
                     <% for(MyDiary md : list){ %>
                     	<tr>
+                    		
                     		<td><%= md.getDiaryNo()%></td>
                     		<td><%= md.getDiaryTitle()%></td>
                     		<td><%= md.getCreateDate()%></td>
@@ -214,18 +222,23 @@
                 <br><br>
         	</div>
         	
-        
-        
+        	
         	<div id="fam_diary">
+        	
+        
+        
         		<h3>가족 다이어리</h3>
         		
         		<table id="customers1">
-                    <table id="customers">
+                    <table id="customers" class="list-area">
+                    <thead>
                     <tr>
                       <th>다이어리 번호</th>
                       <th>제목</th>
                       <th>생성 날짜</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <% if(famList.isEmpty()){%>
                     	<tr>
                  			<td>공지사항이 존재하지 않습니다.</td>
@@ -283,7 +296,7 @@
                     <%} %>
 
                     <%} %>
-                    
+                    </tbody>
                     
                   </table>
                   <br>
@@ -291,16 +304,30 @@
                 <br><br>
                 
         	</div>
-            <hr>
+            
         	
-        
+        <%// System.out.println(famList); %>
+        <% //System.out.println(loginUser); %>
+        <% //System.out.println(list); %>
             
         </div>
-        
         
        
         
     </div>
+        
+        	<script>
+        		$(function(){
+        			$('.list-area>tbody>tr').click(function(){
+        				//console.log($(this).children().eq(0).text());
+        				const dno = $(this).children().eq(0).text();
+        				location.href="<%=contextPath%>/detail.di?dno="+ dno;
+        			})
+        		});
+        	</script>
+        	<form>
+        		<input type="hidden" name = "dno" id=dno>
+        	</form>
     <%@ include file="../common/footer.jsp" %>
 	<%} %>
 

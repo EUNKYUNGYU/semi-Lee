@@ -3,9 +3,9 @@
     
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
 <%
-	Member loginUser = (Member)session.getAttribute("loginUser");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	String contextPath = request.getContextPath();
+	Member loginUser = (Member)session.getAttribute("loginUser");
 
 %>
 <!DOCTYPE html>
@@ -159,6 +159,19 @@ body{
 </style>
 </head>
 <body>
+
+			<script>
+    			var msg = '<%=alertMsg%>';
+    			
+    			if(msg!='null'){
+    				
+    				alert(msg);
+    				
+    			<% session.removeAttribute("alertMsg");%>
+    			}
+    		</script>
+    		
+    		
 <div id="navi">
             <div id="navi1"><a href="<%=contextPath%>" id="navitext">낭만닥터 이사부</a>
             </div
@@ -201,7 +214,7 @@ body{
                             <li><a href="#">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">건강 관리</a></li>
-                            <li><a href="<%=contextPath%>/list.di">다이어리</a></li>
+                            <li><a href="<%=contextPath%>/first.di">다이어리</a></li>
                             <li><a href="#">가족 계정 추가</a></li>
                         </ul>
                     </li>

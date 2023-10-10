@@ -35,16 +35,20 @@ public class DiaryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		System.out.println(memNo);
 		
 		
 		
-		ArrayList<MyDiary> list = new DiaryService().selectMyDiary();
+		
+		ArrayList<MyDiary> list = new DiaryService().selectMyDiary(memNo);
 		request.setAttribute("list", list);
 		ArrayList<FamDiary> famList = new DiaryService().selectFamDiary();
 		request.setAttribute("famList", famList);
 		
-		 RequestDispatcher view = request.getRequestDispatcher("/views/myPage/diary.jsp");
-		 view.forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/diary.jsp");
+		view.forward(request, response);
 	}
 
 	/**

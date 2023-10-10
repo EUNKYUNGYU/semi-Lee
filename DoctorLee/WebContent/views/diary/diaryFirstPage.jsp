@@ -18,6 +18,7 @@ Member loginUser = (Member)session.getAttribute("loginUser");
     		 	<button name="memNo" value=<%=loginUser.getMemNo()%>>다이어리 보러가기</button>
     	
    	</form>
+   	<%@ include file="../common/footer.jsp" %>
 
 </body>
 </html>

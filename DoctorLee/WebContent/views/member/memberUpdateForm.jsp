@@ -140,11 +140,11 @@
                     * 온라인 회원가입정보와 병원내 진료시스템 개인정보는 별도로 관리되므로 온라인 회원정보가 변경될 경우 <br>
                     * 콜센터(☎1577-0000)에 연락하시어 진료시스템상 개인정보도 변경해 주십시오.       
                 </p>
-                <br>
+                
                 <hr>
 
-                <form name="login" action="index.jsp" method="post" class="formfont">
-                    
+                <form name="login" action="<%=contextPath %>/update.me" method="post" class="formfont">
+                    <input type="hidden" name="memId" value="<%= loginUser.getMemId() %>" class="box"> <br>
                     <h2>회원정보수정</h2>
                     <hr>
                     <br>
@@ -155,6 +155,12 @@
                     <br>
                     <hr>
                     <br>
+                  닉네임
+                    <br><br>
+                    <input type="text" name="nickName" value="<%= nickName %>" class="box"> <br>
+                    <br>
+                    <hr>
+                    <br>          
                     
                     이메일
                     <br><br>
@@ -225,8 +231,8 @@
                     <br><br>
                     <hr>
                     <span id="button">
-                        <input type="button" id="cancel" value="비밀번호 변경" onclick="updatePwd();"></input>
-                        <button type="submit" id="register" onclick="mainPage();">확인</button>
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updatePwdForm"></button>
+                        <button type="submit" id="register">확인</button>
                     </span>
 
                 </form>
@@ -234,11 +240,11 @@
             </div>
         </div>
     </div>
-
+    
+    
+	<!--비밀번호 변경 모달-->
+	
 	<script>
-		function mainPage(){
-			location.href = "<%=contextPath%>/myPage.me";
-		}
 		
 		function updatePwd(){
 			location.href = "<%=contextPath%>/updatePwd.me";

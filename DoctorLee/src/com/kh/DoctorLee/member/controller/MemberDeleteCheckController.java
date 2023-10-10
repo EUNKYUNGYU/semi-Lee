@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberDeleteController
+ * Servlet implementation class MemberDeleteCheckController
  */
-@WebServlet("/delete.me")
-public class MemberDeleteController extends HttpServlet {
+@WebServlet("/deletePwd.me")
+public class MemberDeleteCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberDeleteController() {
+    public MemberDeleteCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class MemberDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/member/memberDeleteForm.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/member/memberDeletePwd.jsp");
 		view.forward(request, response);
 	
 	}

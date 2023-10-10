@@ -84,4 +84,12 @@
     		DIARY_NO = ?
     
 	</entry>
+	<entry key="deleteDiary">
+		DELETE
+    		FROM TB_MY_DIARY
+		WHERE 
+			DIARY_NO = ?
+	</entry>
+	
+	
 </properties>

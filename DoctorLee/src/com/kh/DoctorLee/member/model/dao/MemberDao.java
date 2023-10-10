@@ -114,7 +114,7 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, m.getMemName());
 			pstmt.setString(2, m.getNickName());
 			pstmt.setString(3, m.getPhone());
@@ -169,7 +169,28 @@ public class MemberDao {
 		}
 		return m;
 		
+	}
+	
+	public int deleteMember(Connection conn, int memNo, String memPwd) {
 		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, memPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

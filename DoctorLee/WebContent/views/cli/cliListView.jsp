@@ -261,6 +261,7 @@
         margin-left: 100px;
     }
 
+    /*달력*/
     #cli-date-part{
         width: 1000px;
     }
@@ -286,6 +287,18 @@
 
     #cli-date > div{
         float: left;
+    }
+
+    /* 일요일 날짜 빨간색 */
+    .fc-day-sun a {
+    color: red;
+    text-decoration: none;
+    }
+
+    /* 토요일 날짜 파란색 */
+    .fc-day-sat a {
+    color: blue;
+    text-decoration: none;
     }
 
     /*시간 출력*/
@@ -601,8 +614,8 @@
                     })
 
                     // 달력 클릭 시 선택한 날짜 출력하기
-                    $('.fc-daygrid-day-frame fc-scrollgrid-sync-inner').click(function(){
-                        console.log(this);
+                    $('#calendar').click(function(){
+                        
                     })
 
                     // 시간 클릭 시 "예약 일시를 선택해주세요"와 좌측 메뉴에 띄우기

@@ -67,6 +67,24 @@ public class MemberService {
 		
 	}
 	
+	
+	public int updatePwdMember(int memNo, String memPwd, String updatePwd) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().updatePwdMember(conn, memNo, memPwd, updatePwd);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	
 	public int deleteMember (int memNo, String memPwd) {
 		
 		Connection conn = JDBCTemplate.getConnection();
@@ -84,5 +102,16 @@ public class MemberService {
 		
 		return result;
 		
+	}
+	
+	public int idCheck(String checkId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int count = new MemberDao().idCheck(conn, checkId);
+		
+		JDBCTemplate.close(conn);
+		
+		return count;
 	}
 }

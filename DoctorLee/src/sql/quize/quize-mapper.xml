@@ -36,6 +36,18 @@ SELECT
         
 </entry>
 
+ <entry key="increaseVote">
+ 
+ UPDATE 
+ 		TB_QUIZE_BOARD
+ 	SET 
+ 		VOTE = VOTE + 1 
+ 	WHERE 
+ 		QUIZE_NO = ?
+ 
+ 
+ </entry>
+
 <entry key="quizeChoice">
 
 INSERT 
@@ -81,17 +93,7 @@ INSERT
  
  </entry>
  
- <entry key="">
- 
- UPDATE 
- 		TB_QUIZE_BOARD
- 	SET 
- 		VOTE = VOTE + 1 
- 	WHERE 
- 		QUIZE_NO = ?
- 
- 
- </entry>
+
  
  
 </properties>

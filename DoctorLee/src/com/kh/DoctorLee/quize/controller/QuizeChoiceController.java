@@ -30,28 +30,44 @@ public class QuizeChoiceController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 퀴즈의 정답을 제출 했을 때 일어나는 일
+		// 1. 퀴즈의 vote를 1 update함 => increaseVote
 		
-		request.setCharacterEncoding("UTF-8");
+		// 2. 위의 과정이 성공 했다면 해당 quizeNo에 memNo이 선택한 선지의 번호(choice)가 insert됨 => quizeChoiceInsert
+		
+		// 3. memNo이 제출한 선지가 정답인지 판단함
+		// 정답은 TB_QUIZE_ANSWER의 ANSWER컬럼에 저장되어 있음
+		// 따라서 TB_QUIZE_ANSWER에서 ANSWER컬럼을 select했을 때 있다면 정답, 없다면 오답임 => 각 각 result값 1, 0으로 바꿈
+		// => quizeChoiceIsRight (이 과정은 정답인지 오답인지만 확인하는 과정이기 때문에 따로 트랜잭션이 필요하지 않음)
+		
+		// 4. 3번의 결과인 result값이 1이라면 포인트를 획득 => quizeGetPoint
+		//    3번의 결과인 result값이 0이라면 포인트 변화 없음
+		
+		// 정답일 경우 : increaseVote + quizeChoiceInsert + quizeGetPoint를 묶어서 하나의 트랜잭션으로 처리해야 함
+		// 오답일 경우 : increaseVote + quizeChoiceInsert를 묶어서 하나의 트랜잭션으로 처리해야 함
+		
+		// 1번은 성공했지만 2, 3, 4번이 실패했을 경우는 다시 vote를 1감소 시킨다 => decreaseVote
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int quizeNo = Integer.parseInt(request.getParameter("quizeNo"));
 		int choice = Integer.parseInt(request.getParameter("choice"));
-		
-		//int memNo = 2;
-		//int quizeNo = 11;
-		//int choice = 2;
 
 		System.out.println("quizeNo" + quizeNo);
 		System.out.println("memNo" + memNo);
 		System.out.println("choice" + choice);
 		
+		
 		int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
-		System.out.println("QuizeListController" + result);
-		if(result > 0) { // 포인트 획득 성공
+			
+		System.out.println("QuizeListController 결과 값 : " + result);
+		if(result == 2) { // 정답, 포인트 획득 성공
 			request.getSession().setAttribute("alertMsgPoint", "500포인트를 획득하였습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.qz");
-		} else { // 실패
+		} else if(result == 1){ // 오답, 포인트 획득 실패
 			request.getSession().setAttribute("alertMsgPoint", "포인트 획득에 실패하셨습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.qz");
+		} else if(result == 0) { // 실패
+			request.getSession().setAttribute("alertMsgPoint", "제출에 실패하였습니다. 다시 시도해 주십시오.");
 			response.sendRedirect(request.getContextPath() + "/list.qz");
 		}
 

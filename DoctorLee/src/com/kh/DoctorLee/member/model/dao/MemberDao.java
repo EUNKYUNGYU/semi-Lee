@@ -171,6 +171,29 @@ public class MemberDao {
 		
 	}
 	
+	public int updatePwdMember(Connection conn, int memNo, String memPwd, String updatePwd) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updatePwd);
+			pstmt.setInt(2, memNo);
+			pstmt.setString(3, memPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
 	public int deleteMember(Connection conn, int memNo, String memPwd) {
 		
 		int result = 0;

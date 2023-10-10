@@ -77,8 +77,6 @@
 	</entry>
 	<entry key="selectMember">
 		SELECT
-				TB_MEMBER
-		FROM
 				MEM_NO,
 				MEM_ID,
 				MEM_PWD,
@@ -93,11 +91,25 @@
 				CREATE_DATE,
 				MODIFY_DATE,
 				STATUS
-		 WHERE
+		FROM
+				TB_MEMBER
+				
+		WHERE
 		 		MEM_ID = ?
-	
-	
 	</entry>
+	
+	<entry key="updatePwdMember">
+		UPDATE
+				TB_MEMBER
+		   SET
+		   		MEM_PWD = ?,
+		   		MODIFY_DATE = SYSDATE
+		 WHERE
+		 		MEM_NO = ?
+		   AND
+		   		MEM_PWD = ?
+	</entry>
+	
 	<entry key="deleteMember">
 		UPDATE
 				TB_MEMBER

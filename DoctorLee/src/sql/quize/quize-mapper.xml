@@ -23,10 +23,10 @@ SELECT
 
 </entry>
 
-<entry key="selectDetail">
+<entry key="detailQuize">
 
 	SELECT 
-        	ANSWER, ANSWER_DETAIL
+        	ANSWER, ANSWER_DETAIL, QUIZE_TITLE
     	FROM 
         	TB_QUIZE_ANSWER
         JOIN 
@@ -36,14 +36,56 @@ SELECT
         
 </entry>
 
-<entry key="QuizeAnswer">
+<entry key="quizeChoice">
 
-	
+INSERT 
+		INTO 
+			TB_QUIZE_CHOICE 
+							(
+							QUIZE_NO
+							, MEM_NO
+							, CHOICE
+							) 
+					VALUES
+							(
+							?
+							,?
+							,?
+							)
+						
+</entry>
 
+<entry key="quizeChoiceIsRight">
+
+	SELECT 
+        ANSWER
+    FROM 
+        TB_QUIZE_ANSWER
+    WHERE 
+        QUIZE_NO = ?   
+    AND    
+        ANSWER = ?
 
 </entry>
 
-
-
+ <entry key="quizeGetPoint">
+ 	
+ 	INSERT 
+ 		INTO 	
+ 			TB_POINT 
+ 					(
+ 					MEM_NO
+ 					, POINT
+ 					) 
+ 			VALUES
+ 					(
+ 					?
+ 					, ?
+ 					)
+ 
+ 
+ 
+ 
+ </entry>
 </properties>
 

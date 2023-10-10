@@ -160,14 +160,14 @@ body{
 </head>
 <body>
 <div id="navi">
-            <div id="navi1"><a href="#" id="navitext">낭만닥터 이사부</a>
+            <div id="navi1"><a href="<%=contextPath%>" id="navitext">낭만닥터 이사부</a>
             </div
             ><div id="navi2">
                 <ul id="nav">
                     <li><a href="#">심리</a>
                         <ul>
                             <li><a href="#">고민 나눔</a></li>
-                            <li><a href="#">상담 예약</a></li>
+                            <li><a href="<%=contextPath%>/couResList.cou">상담 예약</a></li>
                             <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
                             <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 영상</a></li>
                         </ul>

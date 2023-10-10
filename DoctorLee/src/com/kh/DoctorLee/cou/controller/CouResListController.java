@@ -1,28 +1,23 @@
-package com.kh.DoctorLee.quize.controller;
+package com.kh.DoctorLee.cou.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.quize.model.service.QuizeService;
-import com.kh.DoctorLee.quize.model.vo.Quize;
-
 /**
- * Servlet implementation class QuizeListController
+ * Servlet implementation class CouResListController
  */
-@WebServlet("/list.qz")
-public class QuizeListController extends HttpServlet {
+@WebServlet("/couResList.cou")
+public class CouResListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuizeListController() {
+    public CouResListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +26,7 @@ public class QuizeListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		ArrayList<Quize> list = new QuizeService().selectList();
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/quize/quizeListView2.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("views/cou/couResListView.jsp").forward(request, response);
 	}
 
 	/**

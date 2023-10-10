@@ -98,7 +98,7 @@ img{
 <body>
 
     <!--상단 네비게이션 메뉴 div-->
-    <%@ include file="../common/nav.jsp"%>
+    <%@ include file="../common/nav2.jsp"%>
 
     <br><br><br>
 
@@ -117,10 +117,12 @@ img{
         <!--심리 영상 내용 출력 영역 div-->
         <div id="video-list">
 
-            <div id="button-area" align="right">
-                <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
-            </div>
-            
+            <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
+                <div id="button-area" align="right">
+                    <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
+                </div>
+                <% } %>
+
             <!-- 동영상이 존재하지 않을 경우 -->
             <%if(list.isEmpty()){ %>
             	<div clss=list-content" align="center">

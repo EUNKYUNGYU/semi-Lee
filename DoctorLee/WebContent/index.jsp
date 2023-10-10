@@ -34,16 +34,16 @@
 
         <!-- 네비 -->
         <div id="navi">
-            <div id="navi1"><a href="#" id="navitext">낭만닥터 이사부</a>
+            <div id="navi1"><a href="<%=contextPath%>" id="navitext">낭만닥터 이사부</a>
             </div
             ><div id="navi2">
                 <ul id="nav">
                     <li><a href="#">심리</a>
                         <ul>
-                            <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
                             <li><a href="#">고민 나눔</a></li>
-                            <li><a href="#">심리 상담 예약</a></li>
-                            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 치료 추천 영상</a></li>
+                            <li><a href="<%=contextPath%>/couResList.cou">상담 예약</a></li>
+                            <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
+                            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 영상</a></li>
                         </ul>
                     </li>
                     <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
@@ -69,7 +69,7 @@
                                 <a href="<%= contextPath %>/list.bo">익명게시판</a>
                             </li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
-                            <li><a href="#">쪽지함</a></li>
+                            <li><a href="<%= contextPath %>/views/message/messageListView.jsp">쪽지함</a></li>
                         </ul>
                     </li>
                     <li><a href="#">마이페이지</a>
@@ -103,6 +103,7 @@
 		<% } %>
 		
 		<script>
+			
 			function enrollPage(){
 				location.href= "<%=contextPath%>/enrollForm.me";
 			}

@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.member.model.vo.Member;
-
 /**
  * Servlet implementation class MemberUpdateController
  */
@@ -30,21 +28,7 @@ public class MemberUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF_8");
-		
-		String memName = request.getParameter("memName");
-		String nickName = request.getParameter("nickName");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		
-		Member m = new Member();
-		m.setMemName(memName);
-		m.setNickName(nickName);
-		m.setPhone(phone);
-		m.setEmail(email);
-		
-		
+
 		RequestDispatcher view = request.getRequestDispatcher("views/member/memberUpdateForm.jsp");
 		view.forward(request, response);
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,22 +59,34 @@
         }
         
         /*--------------------p태그---------------------*/
-        #p1{
+        h1{
         	text-align : center;
             font-size: 38px;
             font-weight: bolder;
+            margin-bottom: 30px;
             
         }
 
-        #p2{
+        p{
             text-align: center;
             font-size: 15px;
             color: #1E376F;
             font-weight: 600;
             padding-top: 30px;
             padding-left: 500px;
+            text-align: left;
             
            
+        }
+
+        #title1{
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        #title2{
+            font-size: 23px;
+            font-weight: bold;
         }
        
         /*-------------텍스트 창--------------*/
@@ -113,19 +126,47 @@
             color: white;
         }
        
+       #register{
+       cursor: pointer;
+       }
+
+
+
+       /*------------------hr line--------------------*/
+       #line1{
+        border: 1.8px solid rgb(226, 226, 226); 
+        width: 1280px;
+        margin: auto;
+       
+       }
+
+       #line2{
+        border: 1.8px solid #1E376F; 
+        width: 1280px;
+        margin: auto;
+       }
+
 
     </style>
 </head>
 <body>
 
-	<%@ include file = "../common/myPageNavi.jsp" %>
+	<%@ include file = "../common/couNavi.jsp" %>
+	<%
+		//System.out.println(loginUser);
+		String memName = loginUser.getMemName();
+		String nickName = loginUser.getNickName();
+		String phone = loginUser.getPhone();
+		String email = loginUser.getEmail();
+		
+	%>
 	
 	<div id="content">
 
         
-            <p id="p1">마이페이지</p>
-            <hr style="border: 1.8px solid rgb(226, 226, 226); width: 66.5%;">
-            <p id="p2" style="text-align: left;">
+            <h1>마이페이지</h1>
+            <hr id="line1">
+            <p>
                 * 최선의 서비스 제공을 위해서 회원정보를 최신정보로 변경하여 주시기 바랍니다. <br>
                 * 아래 회원정보는 홈페이지 회원가입자에 대한 개인정보이며 정보보호를 위해 암호화하여 관리합니다. <br>
                 * 온라인 회원가입정보와 병원내 진료시스템 개인정보는 별도로 관리되므로 온라인 회원정보가 변경될 경우 <br>
@@ -133,123 +174,38 @@
             </p>
             
             <br>
-            <hr style="border: 1.8px solid #1E376F; width: 66.5%;">
+            <hr id="line2">
            
             
             <div class="content_2">
                 
                     <form name="login" action="index.html" method="post" class="formfont">
                         <br><br>
-                        <span style="font-size: 23px; font-weight: bold;">회원정보수정</span>
+                        <span id="title1">회원정보수정</span>
                         <br><br><br>
                         <hr style="border: 1px solid #1E376F;">
                         <br>
                         
                         이름
                         <br><br>
-                        <input type="text" name="user_name" value="" class="box"> <br>
+                        <input type="text" name="mem_name" value="<%= memName %>" class="box"> <br>
                         <br>
                         <hr>
                         <br>
-                        생년월일
-                        <br><br>
-                        <select name="year" class="box">
-                          <option value="">-- 선택 --</option>
-                          <option value="1985">1985</option>
-                          <option value="1986">1986</option>
-                          <option value="1987">1987</option>
-                          <option value="1988">1988</option>
-                          <option value="1989">1989</option>
-                          <option value="1990">1990</option>
-                          <option value="1991">1991</option>
-                          <option value="1992">1992</option>
-                          <option value="1993">1993</option>
-                          <option value="1994">1994</option>
-                          <option value="1995">1995</option>
-                          <option value="1992">1992</option>
-                          <option value="1993">1993</option>
-                          <option value="1994">1994</option>
-                          <option value="1995">1995</option>
-                          <option value="1996">1996</option>
-                          <option value="1997">1997</option>
-                          <option value="1998">1998</option>
-                          <option value="1999">1999</option>
-                          <option value="2000">2000</option>
-                        </select>
-                        
-                        <select name="month" class="box">
-                          <option value="">-- 선택 --</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                          <option value="11">11</option>
-                          <option value="12">12</option>
-                        </select>
-                        <select name="day" class="box">
-                          <option value="">-- 선택 --</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                          <option value="11">11</option>
-                          <option value="12">12</option>
-                          <option value="13">13</option>
-                          <option value="14">14</option>
-                          <option value="15">15</option>
-                          <option value="16">16</option>
-                          <option value="17">17</option>
-                          <option value="18">18</option>
-                          <option value="19">19</option>
-                          <option value="20">20</option>
-                          <option value="21">21</option>
-                          <option value="22">22</option>
-                          <option value="23">23</option>
-                          <option value="24">24</option>
-                          <option value="25">25</option>
-                          <option value="26">26</option>
-                          <option value="27">27</option>
-                          <option value="28">28</option>
-                          <option value="29">29</option>
-                          <option value="30">30</option>
-                          <option value="31">31</option>
-                        </select>
-                        <br><br>
-                        <hr>
-                        <br>
-                        성별
-                        <br><br>
-                        <label for="man">남자</label>
-                        <input type="radio" name="gender" value="m" id="man">
-                        <label for="woman">여자</label>
-                        <input type="radio" name="gender" value="m" id="woman"> <br><br>
-                        <hr>
-                        <br>
+                       
                         이메일
                         <br><br>
-                        <input type="email" name="user_email" placeholder="email@gmail.com" class="box">
+                        <input type="email" name="email" value="<%= email %>" placeholder="email@gmail.com" class="box">
                         <br><br>
                         <hr>
                         <br>
                         휴대전화
                         <br><br>
-                        <input type="text" name="user_phone" placeholder="010-****-****" class="box">
+                        <input type="text" name="phone" value="<%= phone %>"placeholder="010-****-****" class="box">
                         <br><br><br>
                         <hr style="border: 1px solid #1E376F;">                       
                         <br>
-                        <span style="font-size: 23px; font-weight: bold;">건강관리입력사항</span>
+                        <span id="title2">건강관리입력사항</span>
                         <br><br>
                         <hr style="border: 1px solid #1E376F;">
                         <br>
@@ -314,20 +270,28 @@
         </div>
       
        
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         
         <hr style="border: 1px solid rgb(226, 226, 226);">
 
         <div id="content_3" align="center">
             
-            <input type="button" id="cancel" value="비밀번호 변경"></input>
-            <button type="submit" id="register">확인</button>
+            <input type="button" id="cancel" value="비밀번호 변경" onclick="updatePwd();"></input>
+            <button type="submit" id="register" onclick="mainPage();">확인</button>
         </div>
         
 
     </div>
     
-
+	<script>
+		function mainPage(){
+			location.href = "<%=contextPath%>/myPage.me";
+		}
+		
+		function updatePwd(){
+			location.href = "<%=contextPath%>/updatePwd.me";
+		}
+	</script>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	

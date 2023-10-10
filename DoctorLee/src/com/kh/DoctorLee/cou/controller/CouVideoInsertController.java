@@ -1,23 +1,27 @@
 package com.kh.DoctorLee.cou.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.cou.model.service.CouService;
+import com.kh.DoctorLee.cou.model.vo.CouVideo;
+
 /**
- * Servlet implementation class couVideoEnrollController
+ * Servlet implementation class couVideoInsertController
  */
-@WebServlet("/couVideoEnroll.cou")
-public class couVideoEnrollController extends HttpServlet {
+@WebServlet("/insertVideo.cou")
+public class CouVideoInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public couVideoEnrollController() {
+    public CouVideoInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +32,24 @@ public class couVideoEnrollController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		request.getRequestDispatcher("views/cou/couVideoEnrollView.jsp").forward(request, response);
+		String videoTitle = request.getParameter("title");
+		String videoChannel = request.getParameter("channel");
+		String videoAddress = request.getParameter("address");
+		
+		CouVideo cv = new CouVideo();
+		cv.setVideoTitle(videoTitle);
+		cv.setChannelName(videoChannel);
+		cv.setVideoAddress(videoAddress);
+		
+		int result = new CouService().insertVideo(cv); 
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "동영상 등록 성공");
+			response.sendRedirect(request.getContextPath() + "/couVideoList.cou?cpage=1");
+		} else {
+			request.getSession().setAttribute("alertMsg", "동영상 등록 실패");
+			response.sendRedirect(request.getContextPath() + "/couVideoList.cou?cpage=1");
+		}
 	}
 
 	/**

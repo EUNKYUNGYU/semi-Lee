@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.quize.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.quize.model.service.QuizeService;
-import com.kh.DoctorLee.quize.model.vo.Quize;
 
 /**
- * Servlet implementation class QuizeListController
+ * Servlet implementation class QuizeChoice
  */
-@WebServlet("/list.qz")
-public class QuizeListController extends HttpServlet {
+@WebServlet("/choice.qz")
+public class QuizeChoiceController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuizeListController() {
+    public QuizeChoiceController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,10 +32,26 @@ public class QuizeListController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		ArrayList<Quize> list = new QuizeService().selectList();
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/quize/quizeListView2.jsp").forward(request, response);
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int quizeNo = Integer.parseInt(request.getParameter("quizeNo"));
+		int choice = Integer.parseInt(request.getParameter("choice"));
 		
+		System.out.println(memNo);
+		System.out.println(quizeNo);
+		System.out.println(choice);
+		
+		int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
+		if(result > 0) {
+			
+			request.setAttribute("alertMsgPoint", "50포인트를 획득하였습니다.");
+			request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
+			
+		} else { // 실패
+			request.setAttribute("alertMsgPoint", "포인트 획득에 실패하셨습니다.");
+			request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
+		}
+
+	
 	}
 
 	/**

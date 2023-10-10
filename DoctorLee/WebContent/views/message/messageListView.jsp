@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>퀴즈게시판</title>
+<title>쪽지함</title>
 
 
 <style>
@@ -26,7 +26,7 @@ body{
 	margin : 0;
 }
 
-#header {
+header {
 	width: 100vw;
 	height: 120px;
 }
@@ -45,7 +45,6 @@ main > section, main > aside, main > div{
 aside {
 	width: 15%;
 	height: auto;
-	float: left;
 	margin : 20px auto;
 	display: flex;
 	justify-content: center;
@@ -77,59 +76,11 @@ article{
 	
 	width: 95%;
 	height: auto;
-	margin : 20px auto;
+	margin : 20px;
 	background-color: rgb(230, 230, 230);
 
 }
 
-#quizeHeader {
-	width: 100%;
-	height: 70px;
-	text-align: center;
-	line-height: 70px;
-}
-
-#quizeHeader>div {
-	float: left;
-}
-
-#title {
-	width: 70%;
-	height: 100%;
-	font-size: 30px;
-}
-
-#vote, #deadline {
-	width: 15%;
-	height: 100%;
-}
-
-#quizeContent {
-	width: 100%;
-	height: 300px;
-	line-height: 30px;
-}
-
-#quizeFooter {
-	width: 100%;
-	height:70px;
-}
-
-#quizeFooter  >div {
-	float: left;
-	line-height: 70px;
-}
-
-#quizeFooter1 {
-	width: 75%;
-	height: 100%;
-}
-
-#quizeFooter2 {
-	width: 25%;
-	height: 100%;
-	text-align: center;
-}
 
 #page, #search{
 	width : 100%;
@@ -161,7 +112,7 @@ button {
 </head>
 <body>
 
-	<header id="header">
+	<header>
 		<%@ include file ="../common/nav2.jsp" %>
 	</header>
 	
@@ -172,46 +123,16 @@ button {
 			<%@ include file ="../common/cmNavi.jsp" %>
 		</aside>
 		
-		<section id="section">
+		<section>
 			
 			<div id="contentTitle">
-				페이지 제목 영역
+				쪽지함
 			</div>
 			
 			<div id="content">
 				
 				<article>
-					<div id="quizeHeader">
-						<div id="title">제목</div>
-						<div id="vote">0명 투표 중</div>
-						<div id="deadline">0일 남음</div>
-					</div>
-					<div id="quizeContent">
-						내용
-						<br>
-						<form method="post" action="<%= contextPath %>/choice.qz" >
-							<input type="radio" name="choice" value="1" id="choice1" checked> 
-							<label for="choice1">1</label><br> 
-										
-							<input type="radio" name="choice" value="2" id="choice2"> 
-							<label for="choice2">2</label><br> 
-										
-							<input type="radio" name="choice" value="3" id="choice3"> 
-							<label for="choice3">3</label><br> 
-										
-							<input type="radio" name="choice" value="4" id="choice4"> 
-							<label for="choice4">4</label><br> 
-							</form>
-						</div>
-						<div id="quizeFooter">
-							<div id="quizeFooter1">
-								<button type="submit" id="quizeButton" class="btn btn-default">제출
-							</div>
-								
-							<div id="quizeFooter2">
-								<a href="#">정답 확인하기 &gt;</a>
-							</div>
-						</div>
+					
 						
 		
 				</article>
@@ -237,7 +158,7 @@ button {
 	
 	
 	<footer>
-		<%@ include file ="../common/footer.jsp" %>
+		푸터 영역
 	</footer>
 
 

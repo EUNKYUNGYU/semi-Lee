@@ -5,7 +5,7 @@
     
 <% 
 	String contextPath = request.getContextPath();
-	QuizeAnswer qa = (QuizeAnswer)request.getAttribute("qa");
+	QuizeAnswer answer = (QuizeAnswer)request.getAttribute("answer");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
 <style>
         
         *{
-            border: 0.5px solid salmon;
+            border: 0.5px solid skyblue;
             box-sizing: border-box;
         }
         #quizewrap{
@@ -86,12 +86,12 @@
             <div id="board">
       
                 <div id="header">
-                    <div id="title"><%= qa.getQuizeTitle() %></div>
+                    <div id="title"><%= answer.getQuizeTitle() %></div>
                 </div>
                 <div id="content">
 
-					<%= qa.getAnswer() %> <br>
-					<%= qa.getAnswerDetail() %>
+					<%= answer.getAnswer() %> <br>
+					<%= answer.getAnswerDetail() %>
                     
                 </div>
                 <div id="footer">

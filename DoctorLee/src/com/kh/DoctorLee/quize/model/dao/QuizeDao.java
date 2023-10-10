@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.quize.model.vo.Quize;
 import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
+import com.kh.DoctorLee.quize.model.vo.QuizeChoice;
 
 public class QuizeDao {
 
@@ -39,7 +40,7 @@ public class QuizeDao {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				
+			
 				Quize q = new Quize();
 				q.setQuizeNo(rset.getInt("QUIZE_NO"));
 				q.setQuizeTitle(rset.getString("QUIZE_TITLE"));
@@ -67,13 +68,105 @@ public class QuizeDao {
 	}
 
 	
-	public ArrayList<QuizeAnswer> QuizeAnswer(Connection conn){
-		ArrayList<QuizeAnswer> list = null;
+	public QuizeAnswer detailQuize(Connection conn, int quizeNo){
+		
+		QuizeAnswer answer = new QuizeAnswer();
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("QuizeAnswer");
+		String sql = prop.getProperty("detailQuize");
 		ResultSet rset = null;
 		
-		return list;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				answer.setQuizeTitle(rset.getString("QUIZE_TITLE"));
+				answer.setAnswer(rset.getInt("ANSWER"));
+				answer.setAnswerDetail(rset.getString("ANSWER_DETAIL"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return answer;
 		
 	}
+	
+	public int quizeChoiceInsert(Connection conn, int quizeNo, int memNo, int choice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("quizeChoice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(2, memNo);
+			pstmt.setInt(3, choice);
+			
+			result = pstmt.executeUpdate(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} 
+
+		return result;
+		
+	}
+	
+	public int quizeChoiceIsRight(Connection conn, int quizeNo, int choice) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("quizeChoiceIsRight");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(2, choice);
+
+			rset = pstmt.executeQuery(sql);
+			if(rset.next()) result = 1;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} 
+		
+		return result;
+	}
+	
+	public int quizeGetPoint(Connection conn, int quizeNo, int memNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("quizeGetPoint");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(2, memNo);
+
+			result = pstmt.executeUpdate(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} 
+		
+		return result;
+		
+	}
+	
 }

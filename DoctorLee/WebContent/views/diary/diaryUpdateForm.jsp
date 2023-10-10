@@ -8,18 +8,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>다이어리 디테일</title>
+<title>다이어리 업데이트</title>
 <style>
-#enroll-form > table{
+	#enroll-form > table{
         border : 1px solid white;
-    }
-#enroll-form input, #enroll-form textarea{
+    	}
+	#enroll-form input, #enroll-form textarea{
         width : 100%;
-    }
-div > a {
-	text-decoration : none;
-}
-
+   	 	}
 
 
 
@@ -27,19 +23,18 @@ div > a {
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
-
-    <div class="outer">
+	 <div class="outer">
         <br>
         <h2 align="center">내 다이어리 </h2>
         
-        <form action="<%=contextPath%>/myInsert.di" id="enroll-form" method="post">
-        
+        <form action="<%=contextPath%>/update.di" id="update-form" method="post">
+        	<input type="hidden" name="dno" value="<%=md.getDiaryNo() %>">
             
             <br><br><br>
             <table align="center">
                 <tr>
                     <th width="50">제목</th>
-                    <td width="700" ><input type="text" name="title" maxlength="300" value=<%=md.getDiaryTitle() %> readonly></td>
+                    <td width="700" ><input type="text" name="title" maxlength="300" value=<%=md.getDiaryTitle() %>></td>
                 </tr>
                 <br><br><br>
                 <tr>
@@ -48,7 +43,7 @@ div > a {
                 <tr>
                     
                     <td colspan="3">
-                        <textarea name="content" id="content" style="resize:none;" rows="20" readonly><%=md.getDiaryContent() %></textarea>
+                        <textarea name="content" id="content" style="resize:none;" rows="20"><%=md.getDiaryContent() %></textarea>
                         
                     </td>
                 </tr>
@@ -60,18 +55,18 @@ div > a {
             </script>
             <br><br>
             <div align="center">
-            	<a href="<%= contextPath %>/updateForm.di?dno=<%=md.getDiaryNo()%>" >수정하기</a>
-                <a href="#">삭제하기</a>
+                <button type="submit">수정하기</button>
+                
                 <button type="button"  onclick="history.back();">뒤로가기</button>
             </div>
            
         </form>
         <br><br>
         
-        
        
     </div>
     <%@ include file="../common/footer.jsp"%>
+	
 
 </body>
 </html>

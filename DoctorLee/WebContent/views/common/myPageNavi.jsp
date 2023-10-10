@@ -4,7 +4,11 @@
 
 <%
 	String contextPath1 = request.getContextPath();
+<<<<<<< HEAD
 	Member loginUser1 = (Member)session.getAttribute("loginUser");
+=======
+	Member loginUser = (Member)session.getAttribute("loginUser");
+>>>>>>> 5dc7e0cae001c0748a8dbad8727d411679a2820f
 %>
 
     
@@ -93,7 +97,7 @@
                     <table id="user" align="center">
                         <tr>
                             <br><br>
-                            <th align="center"><%= loginUser1.getMemName() %>님 환영합니다.</th><br>
+                            <th align="center"><%= loginUser.getMemName() %>님 환영합니다.</th><br>
                             
 
                         </tr>

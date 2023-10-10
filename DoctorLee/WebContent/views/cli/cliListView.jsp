@@ -23,12 +23,28 @@
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
         locale: 'ko',
+        headerToolbar:{
+            left:'prev',
+            center:'title',
+            right:'next'
+        },
 
         dateClick: function(info){
-            // 달력 클릭 시 선택한 날짜 출력하기
-            $('#pick-date, #sel-date').text(info.dateStr);
+
+            $('.time-content').click(function(){
+                // 달력 클릭 시 선택한 날짜 출력하기
+                $('#pick-date, #sel-date').text((info.dateStr).replaceAll('-', '.') + " / " + $(this).children().text());
+
+            })
+
+            var days = document.querySelectorAll(".day-color");
+            days.forEach(function(day){
+                day.classList.remove("day-color");
+            })
+            info.dayEl.classList.add("day-color");
+            
+            
         }
       });
       calendar.render();
@@ -38,6 +54,12 @@
 </script>
 
 <style>
+
+    .day-color{
+        background-color: #1E376F !important;
+        font-weight: 900;
+    }
+
     .outer{
         width: 1800px;
         margin-left: 50px;
@@ -164,7 +186,7 @@
     #content-part{
         height: auto;
         border: 1px solid;
-        /*display: none;*/
+        display: none;
     }
 
     /*클리닉 출력 테두리*/
@@ -206,7 +228,7 @@
 
     /*클리닉 설명*/
     .cli-des{
-        width: auto;
+        width: 500px;
         margin: 10px;
         padding: 10px;
         height: 132px;
@@ -274,8 +296,8 @@
     }
 
     #cli-date{
-        /*display: none;*/
-        height: 550px;
+        visibility: hidden;
+        height: 582px;
         width: 1000px;
     }
     
@@ -373,7 +395,9 @@
                     <div id="cate-inner" align="center">
                         <ul>
                         <%for(int i = 0; i < list.size(); i++){ %>
-                            <li><input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label></li>
+                            <li>
+                                <input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label>
+                            </li>
                         <%} %>
                         </ul>
 
@@ -389,48 +413,16 @@
 
                 // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
                 $('.cate').click(function(){
-                    console.log($(this));
+                    //console.log($(this).val());
+                    //$('.cate').prop('checked', 'true').val()
+
+                    console.log($('.cate').attr('checked', true).val());
 
                     $('#cate-pick, #sel-cate').text($(this).val());
-                })
 
-                // 카테고리 선택 전 클리닉과 예약일시 숨기기
-
-
-                /*
-                // 카테고리 클릭 시 카테고리 영역은 숨겨지고 클리닉 출력 결과 영역이 나타남
-                $('.cate').click(function(){
                     $('#content-part').css('display', 'block');
-                    $('#cate-inner').css('display', 'none');
                 })
 
-                // 클리닉 선택 시 클리닉 출력 결과 영역은 사라지고 예약일시 영역이 나타남
-                $('.content-cli').click(function(){
-                    $('#cli-date').css('visivilty', 'visible');
-                    $('#content-part').css('display', 'none');
-                })
-
-                // 카테고리를 선택하세요 영역 클릭 시 카테고리 영역을 제외한 다른 내용 영역은 사라짐
-                $('.category-title-part').click(function(){
-                    $('#cate-inner').css('display', 'block');
-                    $('#content-part').css('display', 'none');
-                    $('#cli-date').css('visivilty', 'none');
-                })
-
-                // 클리닉을 선택하세요 영역 클릭 시 클리닉 결과 영역을 제외한 다른 내용 영역은 사라짐
-                $('.title-part').click(function(){
-                    $('#cate-inner').css('display', 'none');
-                    $('#content-part').css('display', 'block');
-                    $('#cli-date').css('visivilty', 'none');
-                })
-
-                // 예약일시를 선택하세요 영역 클릭 시 예약일시 영역을 제외한 다른 내용 영역은 사라짐
-                $('.date-title-part').click(function(){
-                    $('#cate-inner').css('display', 'none');
-                    $('#content-part').css('display', 'none');
-                    $('#cli-date').css('visivilty', 'visible');
-                })
-                */
             })
         </script>
 
@@ -454,6 +446,8 @@
                             <!--클리닉 출력 ul-->
                             <ul class="content-list">
                             
+                                <!-- 선택한 카테고리와 출력할 클리닉의 카테고리 일치 여부 확인 -->
+
                             	<!-- 해당 카테고리에 클리닉이 존재하지 않을 경우 -->
 		                        <% if(cliList.isEmpty()) { %>
 
@@ -463,6 +457,8 @@
 
 									<!-- 해당 카테고리에 클리닉이 존재할 경우 -->
 									<% for(Clinic c : cliList) { %>
+
+                                    <% if(c.getCateNo() != $('.cate').attr('checked', true).val()) %>
 		
 	                                <!--클리닉 요소 하나하나 li-->
 	                                <li class="content-cli">
@@ -490,6 +486,10 @@
 	                                            <span class="material-symbols-outlined">grade</span>
 	                                            <span>별점</span>
 	                                        </div>
+
+                                            <div class="cli-cate">
+                                                <span><%=c.getCateNo()%></span>
+                                            </div>
 	
 	                                        <div class="cli-price">
 	                                            <span><%= c.getCliPrice() %></span>
@@ -512,15 +512,6 @@
                         //li클릭 시 색깔 바뀌는 이벤트
                         $('.content-cli').click(function(){
 
-                            console.log($(this).children().eq(0).val());
-                            
-                            /*if($(this).css('background-color') == 'salmon'){
-
-                                $(this).css('background-color', 'bisque');
-                            } else {
-                                $(this).css('background-color', 'salmon');
-                            }*/
-
                             if($(this).css('background-color', 'salmon')){
                                 $(this).css('background-color', 'bisque');
 
@@ -531,7 +522,10 @@
                             //console.log($(this).children().children());
                             $('#cli-pick, #sel-cli').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
                             
-                            
+                            // 클리닉 선택 후 예약일시가 보여짐
+                            $('#cli-date').css('visibility', 'visible');
+
+                            console.log($('.cli-cate > span').val());
                         })
 
                         //돋보기 버튼 클릭 시 상세보기 페이지로 이동
@@ -620,13 +614,10 @@
                             $(this).css('background-color', 'salmon');
 
                             $(this).siblings().css('background-color', 'bisque');
-                        }
-                    })
 
-                    // 시간 클릭 시 "예약 일시를 선택해주세요"와 좌측 메뉴에 띄우기
-                    $('.time-content').click(function(){
-                        console.log($(this).children().text());
-                        $('#pick-date, #sel-date').append(" / " + $(this).children().text());
+                            // 시간 클릭 시 "예약 일시를 선택해주세요"와 좌측 메뉴에 띄우기
+                            $('#pick-date, #sel-date').append(" / " + $(this).children().text());
+                        }
                     })
                 });
                 

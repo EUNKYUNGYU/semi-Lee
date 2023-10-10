@@ -7,8 +7,11 @@
 %>
 <%
 	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
+	Member loginUser2 = (Member)session.getAttribute("loginUser");
 	
-	
+	//System.out.println(list);
+	//System.out.println(famList);
+	//System.out.println(loginUser2);
 %>
 
 
@@ -139,7 +142,6 @@
     	 <% if(loginUser == null) { %>
    			 <form action="<%= contextPath %>/login.me" id="login-form" method="post">
     		 	<button type="submit" >로그인하러가기</button>
-    	
    	 		 </form>
    	 	<% } else { %>
    	 	
@@ -304,9 +306,9 @@
         	</div>
             
         	
-        <% System.out.println(famList); %>
-        <% System.out.println(loginUser); %>
-        <% System.out.println(list); %>
+        <%// System.out.println(famList); %>
+        <% //System.out.println(loginUser); %>
+        <% //System.out.println(list); %>
             
         </div>
         

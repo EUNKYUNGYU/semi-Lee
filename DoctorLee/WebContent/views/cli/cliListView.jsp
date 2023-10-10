@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.DoctorLee.cli.model.vo.*" %>
 <%
-	ArrayList<Category> list = (Array)
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -285,6 +286,29 @@
     #cli-date > div{
         float: left;
     }
+
+    /*시간 출력*/
+    .time-content{
+        background-color: bisque;
+        border-radius: 10px;
+        text-decoration: none;
+        margin-top: 20px;
+        width: 230px;
+        border: 1px solid brown;
+        height: 50px;
+        line-height: 50px;
+        margin-right: 30px;
+    }
+
+    .time-border{
+        border: 1px solid blue;
+        overflow: auto;
+        height: 580px;
+    }
+
+    .time-border > ul{
+        list-style: none;
+    }
 </style>
 </head>
 <body>
@@ -322,13 +346,9 @@
                 <div id="cli-cate" align="left">
                     <div id="cate-inner" align="center">
                         <ul>
-                            <li><input type="radio" class="cate" name="cate" id="skin1"><label for="skin1">피부 관리</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin2"><label for="skin2">피부 진료</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="body1"><label for="body1">몸매 관리</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin3"><label for="skin3">피부 진료3</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin4"><label for="skin4">피부 관리4</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="skin5"><label for="skin5">피부 진료5</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="body2"><label for="body2">몸매 관리2</label></li>
+                        <%for(int i = 0; i < list.size(); i++){ %>
+                            <li><input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label></li>
+                        <%} %>
                         </ul>
 
                     </div>
@@ -581,12 +601,67 @@
                             </div>
 
                             <div id="time-inner">
-                                <p>시간 선택</p>
+                                <div class="time-border">
+                                    <ul>
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>11:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>12:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>13:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>11:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>12:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>13:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>11:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>12:30</p></a>
+                                        </li>
+
+                                        <li class="time-content" align="center">
+                                            <a href="#"><p>13:30</p></a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <br clear="both">
                 </div>
             </div>
+
+            <script>
+                $(function(){
+                    //li클릭 시 색깔 바뀌는 이벤트
+                    $('.time-content').click(function(){
+
+                        console.log(this);
+
+                        if($(this).css('background-color', 'bisque')){
+                            $(this).css('background-color', 'salmon');
+
+                            $(this).siblings().css('background-color', 'bisque');
+                        }
+                    })
+                })
+            </script>
 
             <br><br><br><br><br>
 

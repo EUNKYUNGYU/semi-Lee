@@ -17,7 +17,7 @@ public class CliDao {
 	private Properties prop = new Properties();
 	
 	public CliDao() {
-		String filePath = CliDao.class.getResource("sql/cli/cli-mapper.xml").getPath();
+		String filePath = CliDao.class.getResource("/sql/cli/cli-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));

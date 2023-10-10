@@ -13,6 +13,7 @@
 
 <!--Google Fonts Icon-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
@@ -23,9 +24,15 @@
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        locale: 'ko'
+        locale: 'ko',
+
+        dateClick: function(info){
+            // 달력 클릭 시 선택한 날짜 출력하기
+            $('#pick-date, #sel-date').text(info.dateStr);
+        }
       });
       calendar.render();
+      
     });
 
 </script>
@@ -504,6 +511,8 @@
                     $(function(){
                         //li클릭 시 색깔 바뀌는 이벤트
                         $('.content-cli').click(function(){
+
+                            console.log($(this).children().eq(0).val());
                             
                             /*if($(this).css('background-color') == 'salmon'){
 
@@ -519,7 +528,7 @@
                             }
 
                             // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
-                            console.log($(this).children().children());
+                            //console.log($(this).children().children());
                             $('#cli-pick, #sel-cli').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
                             
                             
@@ -527,7 +536,7 @@
 
                         //돋보기 버튼 클릭 시 상세보기 페이지로 이동
                         $('.cli-img > button').click(function(){
-                            location.href='<%=contextPath%>/cliDetail.cli';
+                            location.href='<%=contextPath%>/cliDetail.cli?cno=' + $(this).children().eq(0).val();
                         })
                         
                     })
@@ -600,6 +609,7 @@
             </div>
 
             <script>
+                
                 $(function(){
                     //li클릭 시 색깔 바뀌는 이벤트
                     $('.time-content').click(function(){
@@ -613,17 +623,13 @@
                         }
                     })
 
-                    // 달력 클릭 시 선택한 날짜 출력하기
-                    $('#calendar').click(function(){
-                        
-                    })
-
                     // 시간 클릭 시 "예약 일시를 선택해주세요"와 좌측 메뉴에 띄우기
                     $('.time-content').click(function(){
                         console.log($(this).children().text());
-                        $('#pick-date, #sel-date').text($(this).children().text());
+                        $('#pick-date, #sel-date').append(" / " + $(this).children().text());
                     })
-                })
+                });
+                
 
             </script>
 

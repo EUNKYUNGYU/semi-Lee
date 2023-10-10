@@ -35,7 +35,7 @@
             <table align="center">
                 <tr>
                     <th width="50">제목</th>
-                    <td width="700" ><input type="text" name="title" maxlength="300"><%=md.getDiaryTitle() %></td>
+                    <td width="700" ><input type="text" name="title" maxlength="300" value=<%=md.getDiaryTitle() %>></td>
                 </tr>
                 <br><br><br>
                 <tr>
@@ -57,6 +57,7 @@
             <br><br>
             <div align="center">
                 <button type="submit">수정하기</button>
+                <button type="submit">삭제하기</button>
                 <button type="button"  onclick="history.back();">뒤로가기</button>
             </div>
            

@@ -127,7 +127,7 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			MyDiary md = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			String sql = prop.getProperty("detialView");
+			String sql = prop.getProperty("detailView");
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, diaryNo);

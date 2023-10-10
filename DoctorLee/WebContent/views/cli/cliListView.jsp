@@ -302,7 +302,6 @@
     }
 
     .time-border{
-        border: 1px solid blue;
         overflow: auto;
         height: 580px;
     }
@@ -348,7 +347,7 @@
                     <div id="cate-inner" align="center">
                         <ul>
                         <%for(int i = 0; i < list.size(); i++){ %>
-                            <li><input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label></li>
+                            <li><input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label></li>
                         <%} %>
                         </ul>
 
@@ -364,7 +363,13 @@
 
                 // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
                 $('.cate').click(function(){
+                    console.log($(this).val());
+
+                    $('#cate-pick').text($(this).val());
                 })
+
+                // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
+
 
                 /*
                 // 카테고리 클릭 시 카테고리 영역은 숨겨지고 클리닉 출력 결과 영역이 나타남
@@ -411,7 +416,7 @@
                         <em>
                             <span class="material-symbols-outlined">chevron_right</span>
                         </em>
-                        <span>클리닉을 선택해주세요</span>
+                        <span id="cli-pick">클리닉을 선택해주세요</span>
                     </div>
 
                     <!--해당 카테고리 클리닉 출력 영역 div-->
@@ -457,11 +462,6 @@
 	                                            <span class="material-symbols-outlined">grade</span>
 	                                            <span>별점</span>
 	                                        </div>
-	                                        
-                                            <div class="cli-cates">
-                                                <span><%=c.getCateNo()%></span>
-                                            </div>
-	                                        
 	
 	                                        <div class="cli-price">
 	                                            <span><%= c.getCliPrice() %></span>
@@ -498,6 +498,9 @@
 
                                 $(this).siblings().css('background-color', 'salmon');
                             }
+
+                            // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
+                            //$('#cli-pick').text()
                             
                             
                         })
@@ -506,6 +509,7 @@
                         $('.cli-img > button').click(function(){
                             location.href='<%=contextPath%>/cliDetail.cli';
                         })
+                        
                     })
                 </script>
 

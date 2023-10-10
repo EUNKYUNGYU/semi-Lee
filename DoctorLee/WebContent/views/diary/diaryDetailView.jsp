@@ -16,6 +16,10 @@
 #enroll-form input, #enroll-form textarea{
         width : 100%;
     }
+div > a {
+	text-decoration : none;
+}
+
 
 
 
@@ -35,7 +39,7 @@
             <table align="center">
                 <tr>
                     <th width="50">제목</th>
-                    <td width="700" ><input type="text" name="title" maxlength="300" value=<%=md.getDiaryTitle() %>></td>
+                    <td width="700" ><input type="text" name="title" maxlength="300" value=<%=md.getDiaryTitle() %> readonly></td>
                 </tr>
                 <br><br><br>
                 <tr>
@@ -44,7 +48,7 @@
                 <tr>
                     
                     <td colspan="3">
-                        <textarea name="content" id="content" style="resize:none;" rows="20"><%=md.getDiaryContent() %></textarea>
+                        <textarea name="content" id="content" style="resize:none;" rows="20" readonly><%=md.getDiaryContent() %></textarea>
                         
                     </td>
                 </tr>
@@ -56,13 +60,14 @@
             </script>
             <br><br>
             <div align="center">
-                <button type="submit">수정하기</button>
-                <button type="submit">삭제하기</button>
+            	<a href="<%= contextPath %>/updateForm.di?dno=<%=md.getDiaryNo()%>" >수정하기</a>
+                <a href="#">삭제하기</a>
                 <button type="button"  onclick="history.back();">뒤로가기</button>
             </div>
            
         </form>
         <br><br>
+        
         
        
     </div>

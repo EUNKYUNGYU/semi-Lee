@@ -61,8 +61,9 @@ div > a {
             <br><br>
             <div align="center">
             	<a href="<%= contextPath %>/updateForm.di?dno=<%=md.getDiaryNo()%>" >수정하기</a>
-                <a href="#">삭제하기</a>
+                <a href="<%= contextPath %>/delete.di?dno=<%=md.getDiaryNo()%>">삭제하기</a>
                 <button type="button"  onclick="history.back();">뒤로가기</button>
+                
             </div>
            
         </form>

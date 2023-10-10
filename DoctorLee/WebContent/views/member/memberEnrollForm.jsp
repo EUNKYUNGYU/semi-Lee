@@ -154,7 +154,7 @@
                         아이디*
                         <br><br>
                         <input type="text" name="memId" id="r_id1" class="box">
-                        <input type="button" name="user_IDcheck" value="중복확인" id="r_id2">
+                        <input type="button" value="중복확인" id="r_id2" onclick="idCheck();">
                         <br><br>
                         <span style="font-size: 14px;">아이디는 영문 대/소문자, 숫자 조합하여 5 ~ 15자리</span>
                         <br><br>
@@ -429,6 +429,46 @@
 </form>
 
 <script>
+	function idCheck(){
+		const $memId = $('#enroll-form input[name=memId]');
+		
+		$.ajax({
+			url : 'idCheck.me',
+			data : {checkId : $memId.val()},
+			success : function(result){
+				//console.log(result);
+				if(result == 'NNNNN'){
+					alert('이미 존재하거나 탈퇴한 회원의 아이디 입니다.');
+				
+					$userId.val('').focus();	
+					
+				}
+				else{
+					
+					if(confirm('사용가능한 아이디 입니다. 사용하시겠습니까?')){
+						// 이후 변경 불가능 
+						$userId.attr('readonly', true);
+						
+						// submit버튼을 활성화
+						$('#enroll-form button[type=submit]').removeAttr('disabled');
+					}
+					else{
+						$userId.focus();
+					}
+				}
+			},
+			error : function(){
+				console.log('아이디 중복체크 통신 실패');
+			}
+			
+		});
+	}
+
+</script>
+
+<!-- 
+<script>
+	
     function validate(){
         var memId = document.getElementById('memId').value;
 
@@ -442,6 +482,7 @@
         }
     }
 </script>
+-->
 
     <br><br><br><br><br><br><br><br>
 </body>

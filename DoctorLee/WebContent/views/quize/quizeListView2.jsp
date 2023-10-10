@@ -5,7 +5,7 @@
     
 <% 
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
-	String alertMsgPoint = (String)session.getAttribute("alertMsg");
+	String alertMsgPoint = (String)session.getAttribute("alertMsgPoint");
 %>
 
 <!DOCTYPE html>
@@ -13,7 +13,8 @@
 <head>
 <meta charset="UTF-8">
 <title>퀴즈게시판</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
+</script>
 
 <style>
 
@@ -34,7 +35,6 @@ body{
 main {
 	width: 100%;
 	height: auto; 
-	min-height: 1000px;
 	line-height: 30px;
 }
 
@@ -74,12 +74,10 @@ aside {
 }
 
 article{
-	
 	width: 95%;
 	height: auto;
 	margin : 20px auto;
 	background-color: rgb(230, 230, 230);
-
 }
 
 #quizeHeader {
@@ -108,6 +106,7 @@ article{
 	width: 100%;
 	height: 300px;
 	line-height: 30px;
+	padding: 20px;
 }
 
 #quizeFooter {
@@ -142,20 +141,23 @@ footer {
 	height: auto;
 }
 
+form{
+	padding: 20px 0px;
+}
+
 a {
 	text-decoration: none;
 	color: #1E376F;
 }
 
 button {
-	background-color: #1E376F;s
+	background-color: #1E376F;
 	border-radius: 7px;
 	color: white;
 	width: 60px;
 	height: 30px;
 	margin-left: 10px;
 }
-
 
 </style>
 </head>
@@ -175,47 +177,92 @@ button {
 		<section id="section">
 			
 			<div id="contentTitle">
-				페이지 제목 영역
+				퀴즈 게시판
 			</div>
 			
+			<% if(list.isEmpty()) { %>
+				<div id="content">
+					퀴즈가 존재하지 않습니다.
+				</div>
+									
+			<% } else { %>
+			
+			<!-- 퀴즈가 있을 경우 반복문으로 출력 -->			
+			<% for(Quize q : list) { %>
 			<div id="content">
 				
 				<article>
 					<div id="quizeHeader">
-						<div id="title">제목</div>
-						<div id="vote">0명 투표 중</div>
-						<div id="deadline">0일 남음</div>
+						<div id="title"><%= q.getQuizeTitle() %></div>
+						<div id="vote"><%= q.getVote() %>명 투표 중</div>
+						<div id="deadline"><%= q.getDeadline() %>일 남음</div>
 					</div>
-					<div id="quizeContent">
-						내용
+					
+					<form method="post"  action="<%= contextPath %>/choice.qz">
+						<div id="quizeContent">
+						<%= q.getQuizeContent() %>
 						<br>
-						<form method="post" action="<%= contextPath %>/choice.qz" >
-							<input type="radio" name="choice" value="1" id="choice1" checked> 
-							<label for="choice1">1</label><br> 
-										
-							<input type="radio" name="choice" value="2" id="choice2"> 
-							<label for="choice2">2</label><br> 
-										
-							<input type="radio" name="choice" value="3" id="choice3"> 
-							<label for="choice3">3</label><br> 
-										
-							<input type="radio" name="choice" value="4" id="choice4"> 
-							<label for="choice4">4</label><br> 
-							</form>
-						</div>
-						<div id="quizeFooter">
-							<div id="quizeFooter1">
-								<button type="submit" id="quizeButton" class="btn btn-default">제출
-							</div>
+						
+								<input type="radio" name="choice" value="1" id="choice1" checked> 
+								<label for="choice1"><%= q.getChoice1() %></label><br> 
+											
+								<input type="radio" name="choice" value="2" id="choice2"> 
+								<label for="choice2"><%= q.getChoice2() %></label><br> 
+											
+								<input type="radio" name="choice" value="3" id="choice3"> 
+								<label for="choice3"><%= q.getChoice3() %></label><br> 
+											
+								<input type="radio" name="choice" value="4" id="choice4"> 
+								<label for="choice4"><%= q.getChoice4() %></label><br> 
 								
-							<div id="quizeFooter2">
-								<a href="#">정답 확인하기 &gt;</a>
-							</div>
+						</div>
+							
+						<div id="quizeFooter">
+							
+						<!-- 로그인을 했을 때만 정답 제출 가능 -->
+						<% if(loginUser != null) { %>
+							<div id="quizeFooter1">
+								<button type="submit" id="quizeButton1" class="quizeButton1">제출
+								<input type="hidden" id="memNo" name="memNo" value="<%= loginUser.getMemNo() %>">
+								<input type="hidden" id="quizeNo" name="quizeNo" value="<%= q.getQuizeNo() %>">
+								
+							</div>		
+							<!-- 로그인 안 했을 경우 제출 버튼 눌렀을 시 '로그인 후 이용 가능한 기능입니다' alert창 나옴 -->
+						<% } else { %>
+							<div id="quizeFooter1">
+								<button type="button" id="quizeButton2" class="quizeButton2">제출
+							</div>	
+					   	<% } %>
+						</form>
+				   	
+							
+						<!-- 정답을 제출하지 않았을 경우 정답 확인하기 버튼을 눌렀을 때 확인 불가능 -->
+						<div id="quizeFooter2">
+							<a href="<%= contextPath %>/detail.qz?qno=<%= q.getQuizeNo()%>">정답 확인하기 &gt;</a>
 						</div>
 						
-		
+					</div>
+
 				</article>
+				<% } %>
+			<% } %>
 			</div>
+			
+			}
+			
+			<script>
+			  $(function(){
+			  		var alertMsgPoint =  '<%= alertMsgPoint %>';		
+				  $('.quizeButton1').click(function(){
+			    	  alert(alertMsgPoint);
+			      });   			
+			   				
+			      $('.quizeButton2').click(function(){
+			    	  alert('로그인 후 이용 가능한 기능입니다');
+			      });   
+							
+			 });
+			</script>
 			
 			<div id="page">
 				페이지바 영역
@@ -234,7 +281,7 @@ button {
 		</aside>
 		
 	</main>
-	
+	<br clear="both">
 	
 	<footer>
 		<%@ include file ="../common/footer.jsp" %>

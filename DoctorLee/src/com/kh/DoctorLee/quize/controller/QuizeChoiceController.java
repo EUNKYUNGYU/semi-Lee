@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.member.model.vo.Member;
 import com.kh.DoctorLee.quize.model.service.QuizeService;
 
 /**
@@ -36,19 +37,22 @@ public class QuizeChoiceController extends HttpServlet {
 		int quizeNo = Integer.parseInt(request.getParameter("quizeNo"));
 		int choice = Integer.parseInt(request.getParameter("choice"));
 		
-		System.out.println(memNo);
-		System.out.println(quizeNo);
-		System.out.println(choice);
+		//int memNo = 2;
+		//int quizeNo = 11;
+		//int choice = 2;
+
+		System.out.println("quizeNo" + quizeNo);
+		System.out.println("memNo" + memNo);
+		System.out.println("choice" + choice);
 		
 		int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
-		if(result > 0) {
-			
-			request.setAttribute("alertMsgPoint", "50포인트를 획득하였습니다.");
-			request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
-			
+		System.out.println("QuizeListController" + result);
+		if(result > 0) { // 포인트 획득 성공
+			request.getSession().setAttribute("alertMsgPoint", "500포인트를 획득하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.qz");
 		} else { // 실패
-			request.setAttribute("alertMsgPoint", "포인트 획득에 실패하셨습니다.");
-			request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
+			request.getSession().setAttribute("alertMsgPoint", "포인트 획득에 실패하셨습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.qz");
 		}
 
 	

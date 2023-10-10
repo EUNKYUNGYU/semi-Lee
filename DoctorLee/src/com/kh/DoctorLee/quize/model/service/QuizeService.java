@@ -31,9 +31,10 @@ public class QuizeService {
 	public int quizeChoice(int quizeNo, int memNo, int choice) {
 		
 		Connection conn = getConnection();
+		
 		int result1 = 0;
 		int result2 = 0;
-		int result3 = 1;
+		int result3 = 0;
 		
 		/*
 		result1 = new QuizeDao().quizeChoiceInsert(conn, quizeNo, memNo, choice);
@@ -73,25 +74,32 @@ public class QuizeService {
 			// 에러 메세지 띄워주기
 			rollback(conn);
 		}*/
+		
+		result1 = new QuizeDao().quizeChoiceInsert(conn, quizeNo, memNo, choice);
+		
 		if(result1 > 0) {
-			
+			System.out.println("퀴즈 정답 제출 성공하면 1 실패하면 0 : "+result1);
 			result2 = new QuizeDao().quizeChoiceIsRight(conn, quizeNo, choice);
 			
 			if(result2 > 0) {
-				
+				System.out.println("퀴즈 정답 맞으면 1 틀리면 0 :" + result2);
 				result3 = new QuizeDao().quizeGetPoint(conn, quizeNo, memNo);
+				commit(conn);
 				
 				if(result3 > 0) {
-					
+					System.out.println("퀴즈 포인트 획득하면 1 실패하면 0 : " + result2);
 					// 이건 정답이고 포인트 획득 자체도 성공적으로 된 경우
 					// 알럿창으로 포인트 획득 했다고 띄워주기
-					commit(conn);
 					
 				} 
-			}}else if(result1 * result2 * result3 == 0) rollback(conn);
+			}
+		
+		}
+		
+		if((result1 * result3) * result2 == 0) rollback(conn);
 		
 		
 		
-		return (result1 * result2 * result3);
+		return ((result1 * result3) * result2);
 	}
 }

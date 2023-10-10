@@ -1,22 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 리스트</title>
-<script src="https://kit.fontawesome.com/46331f5575.js" crossorigin="anonymous"></script>
-    
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<title>커뮤니티 사이드바</title>
 
-    <!-- bxslider -->
-    <script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-	
-	<!-- css -->
-	<link rel="stylesheet" href="resources/css/index.css">
  <style>
 
         #mp_navi {

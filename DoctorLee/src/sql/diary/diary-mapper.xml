@@ -61,4 +61,16 @@
 		ORDER BY CREATE_DATE DESC
 			
 	</entry>
+	<entry key="detailView">
+		SELECT
+			DIARY_NO,
+			MEM_NO,
+			CREATE_DATE,
+			DIARY_TITLE,
+			DIARY_CONTENT
+		FROM 
+			TB_MY_DIARY
+		WHERE
+			DIARY_NO = ?
+	</entry>
 </properties>

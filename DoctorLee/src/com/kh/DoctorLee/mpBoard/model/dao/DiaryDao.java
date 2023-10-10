@@ -123,5 +123,33 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			}
 			return famList;
 		}
+		public MyDiary detailMyDiary(Connection conn,int diaryNo) {
+			MyDiary md = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("detialView");
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, diaryNo);
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					md = new MyDiary();
+					md.setDiaryNo(rset.getInt("DIARY_NO"));
+					md.setMemNo(rset.getInt("MEM_NO"));
+					md.setCreateDate(rset.getDate("CREATE_DATE"));
+					md.setDiaryTitle(rset.getString("DIARY_TITLE"));
+					md.setDiaryContent(rset.getString("DIARY_CONTENT"));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			
+			return md;
+		}
 	
 }

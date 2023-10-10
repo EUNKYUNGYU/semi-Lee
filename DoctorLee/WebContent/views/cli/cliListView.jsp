@@ -331,6 +331,12 @@
             <!--클리닉 출력 영역 div-->
             <div id="cli-content">
 
+                <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
+                    <div id="button-area" align="right">
+                        <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
+                    </div>
+                <% } %>
+
                 <!--클리닉 내용 출력 영역 div-->
                 <div id="cli-cate-part">
 
@@ -363,12 +369,12 @@
 
                 // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
                 $('.cate').click(function(){
-                    console.log($(this).val());
+                    console.log($(this));
 
-                    $('#cate-pick').text($(this).val());
+                    $('#cate-pick, #sel-cate').text($(this).val());
                 })
 
-                // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
+                // 카테고리 선택 전 클리닉과 예약일시 숨기기
 
 
                 /*
@@ -501,7 +507,7 @@
 
                             // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
                             console.log($(this).children().children());
-                            $('#cli-pick').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
+                            $('#cli-pick, #sel-cli').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
                             
                             
                         })

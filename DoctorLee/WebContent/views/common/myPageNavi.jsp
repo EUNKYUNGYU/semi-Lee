@@ -4,11 +4,7 @@
 
 <%
 	String contextPath1 = request.getContextPath();
-<<<<<<< HEAD
 	Member loginUser1 = (Member)session.getAttribute("loginUser");
-=======
-	Member loginUser = (Member)session.getAttribute("loginUser");
->>>>>>> 5dc7e0cae001c0748a8dbad8727d411679a2820f
 %>
 
     

@@ -70,7 +70,7 @@
         }
        
         /*-----------버튼---------*/
-        #register{
+        .register{
             background-color: #1E376F;
             color: white;
             border: 1px solid #1E376F;
@@ -235,8 +235,9 @@
                     <br><br>
                     <hr>
                     <span id="button">
-                        <button type="button" data-toggle="modal" data-target="#updatePwdForm"></button>
-                        <button type="submit" id="register">확인</button>
+                        <button type="button" class="register" data-toggle="modal" data-target="#updatePwdForm">비밀번호 변경</button>
+                        <button type="button" class="register" data-toggle="modal" data-target="deleteMemberForm">회원탈퇴</button>
+                        <button type="submit" class="register">확인</button>
                     </span>
 
                 </form>
@@ -293,6 +294,33 @@
 									}
 									
 								</script>
+								
+			<!-- 회원탈퇴 모달 -->
+            <div class="modal" id="deleteMemberForm">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+              
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">비밀번호 확인</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+              
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form method="post" action="<%=contextPath%>/deleteMember.me">
+                            <div class="form-group">
+                                <label for="deletePwd">비밀번호:</label>
+                                <input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" id="memPwd" name="memPwd" required>
+                          </div>
+                          
+                          <button type="submit" class="btn btn-danger btn-danger" onclick="return deleteMember();">회원탈퇴</button>
+                          
+               
+                          <button type="submit">확인</button>
+                        </form>
+                      
+                    </div>
 								
 								
 

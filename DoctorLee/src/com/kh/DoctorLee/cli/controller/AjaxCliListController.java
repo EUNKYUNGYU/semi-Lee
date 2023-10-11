@@ -33,11 +33,15 @@ public class AjaxCliListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		// 값 뽑기
-		String cateName = request.getParameter("cateName");
+		int cateNo = Integer.parseInt(request.getParameter("cateNo"));
+		
+		System.out.println(cateNo);
 		
 		// 클리닉 불러오기
-		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
+		ArrayList<Clinic> cliList = new CliService().selectCliList(cateNo);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		

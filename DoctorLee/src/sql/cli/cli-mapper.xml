@@ -26,6 +26,6 @@
 		JOIN 
 				TB_HOSPITAL USING(HOS_NO)
 	    WHERE
-	    		CLI_CATE = ?				
+	    		CATE_NO = ?				
 	</entry>
 </properties>

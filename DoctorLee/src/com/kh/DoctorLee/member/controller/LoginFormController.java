@@ -33,7 +33,7 @@ public class LoginFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
@@ -53,6 +53,7 @@ request.setCharacterEncoding("UTF-8");
 			
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
+		
 		
 	
 	}

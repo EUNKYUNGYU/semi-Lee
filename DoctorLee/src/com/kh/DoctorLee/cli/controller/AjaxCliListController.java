@@ -1,29 +1,29 @@
-package com.kh.DoctorLee.member.controller;
+package com.kh.DoctorLee.cli.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.DoctorLee.member.model.service.MemberService;
-import com.kh.DoctorLee.member.model.vo.Member;
+import com.google.gson.Gson;
+import com.kh.DoctorLee.cli.model.service.CliService;
+import com.kh.DoctorLee.cli.model.vo.Clinic;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class AjaxCliListController
  */
-@WebServlet("/login.me")
-public class LoginController extends HttpServlet {
+@WebServlet("/ajaxList.cli")
+public class AjaxCliListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public AjaxCliListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,13 +33,15 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 값 뽑기
+		String cateName = request.getParameter("cateName");
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/member/myPage.jsp");
-		view.forward(request, response);
+		// 클리닉 불러오기
+		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
 		
+		response.setContentType("application/json; charset=UTF-8");
 		
-		
-	
+		new Gson().toJson(cliList, response.getWriter());
 	}
 
 	/**

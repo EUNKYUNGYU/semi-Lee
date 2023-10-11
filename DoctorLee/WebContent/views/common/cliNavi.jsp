@@ -50,23 +50,21 @@
     }
 
     /*예약하기 버튼*/
-    #res-btn{
+    #resBtn{
+        font-size: 20px;
+        color: white;
+        line-height: 40px;
         background-color: #1E376F;
         height: 40px;
+        width: 225px;
+        border: none;
     }
 
     #res-bnt:hover{
         cursor: pointer;
     }
 
-    #resBtn{
-        font-size: 20px;
-        text-decoration: none;
-        color: white;
-        line-height: 40px;
-    }
-
-
+    
 
 
 </style>
@@ -113,9 +111,9 @@
         </div>
 
         <div id="res-btn" align="center">
-            <a id="resBtn" href="#">
+            <button type="submit" id="resBtn">
                 예약하기
-            </a>
+            </button>
         </div>
         
     </div>

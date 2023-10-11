@@ -46,32 +46,43 @@ public class QuizeChoiceController extends HttpServlet {
 		// 정답일 경우 : increaseVote + quizeChoiceInsert + quizeGetPoint를 묶어서 하나의 트랜잭션으로 처리해야 함
 		// 오답일 경우 : increaseVote + quizeChoiceInsert를 묶어서 하나의 트랜잭션으로 처리해야 함
 		
-		// 1번은 성공했지만 2, 3, 4번이 실패했을 경우는 다시 vote를 1감소 시킨다 => decreaseVote
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int quizeNo = Integer.parseInt(request.getParameter("quizeNo"));
 		int choice = Integer.parseInt(request.getParameter("choice"));
 
-		System.out.println("quizeNo" + quizeNo);
-		System.out.println("memNo" + memNo);
-		System.out.println("choice" + choice);
+		System.out.println("quizeChoiceController에서 quizeNo " + quizeNo);
+		System.out.println("quizeChoiceController에서 memNo " + memNo);
+		System.out.println("quizeChoiceController에서 choice " + choice);
+
+		int resultExist = new QuizeService().quizeAnswerExist(memNo, quizeNo);
 		
-		
-		int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
+		if(resultExist ==  0) { // 답안 제출 한적 있음, 정답 화면 보여주기
 			
-		System.out.println("QuizeListController 결과 값 : " + result);
-		if(result == 2) { // 정답, 포인트 획득 성공
-			request.getSession().setAttribute("alertMsgPoint", "500포인트를 획득하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.qz");
-		} else if(result == 1){ // 오답, 포인트 획득 실패
-			request.getSession().setAttribute("alertMsgPoint", "포인트 획득에 실패하셨습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.qz");
-		} else if(result == 0) { // 실패
-			request.getSession().setAttribute("alertMsgPoint", "제출에 실패하였습니다. 다시 시도해 주십시오.");
+			System.out.println("답 제출 한 적 있는지 " + resultExist);
+			int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
+			
+			System.out.println("quizeChoiceService의 return값 : " + result);
+			
+			System.out.println(result);
+			if(result == 2) { // 정답, 포인트 획득 성공
+				request.getSession().setAttribute("alertMsg", "500포인트를 획득하였습니다.");
+				response.sendRedirect(request.getContextPath() + "/list.qz");
+			} else if(result == 1){ // 오답, 포인트 획득 실패
+				request.getSession().setAttribute("alertMsg", "포인트 획득에 실패하셨습니다.");
+				response.sendRedirect(request.getContextPath() + "/list.qz");
+			} else if(result == 0) { // 실패
+				request.getSession().setAttribute("alertMsg", "제출에 실패하였습니다. 다시 시도해 주십시오.");
+				response.sendRedirect(request.getContextPath() + "/list.qz");
+			}
+			
+			System.out.println("----------------------------");
+			
+		}  else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
+			request.getSession().setAttribute("alertMsg", "이미 답을 제출 하셨습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.qz");
 		}
-
-	
+		
 	}
 
 	/**

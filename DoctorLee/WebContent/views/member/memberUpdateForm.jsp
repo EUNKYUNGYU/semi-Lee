@@ -132,6 +132,8 @@
 				String nickName = loginUser.getNickName();
 				String phone = loginUser.getPhone();
 				String email = loginUser.getEmail();
+				int height = loginUser.getHeight();
+				int weight = loginUser.getWeight();
 			%>
             
             <div id="content_2">
@@ -181,13 +183,13 @@
                     <br>
                     키
                     <br><br>
-                    <input type="text" placeholder="cm" class="box" id="height" name="height">
+                    <input type="text" value="<%= height %>" class="box" id="height" name="height" required>
                     <br><br>
                     <hr>
                     <br>
                     몸무게
                     <br><br>
-                    <input type="text" placeholder="kg" class="box" id="weight" name="weight">
+                    <input type="text" value="<%= weight %>" class="box" id="weight" name="weight" required>
                     <br><br>
                     <hr>
                     <br>
@@ -235,7 +237,7 @@
                     <hr>
                     <span id="button">
                         <button type="button" class="register" id="updatePwdButton" data-toggle="modal" data-target="#updatePwdForm">비밀번호 변경</button>
-                        <button type="button" class="register" id="deleteMemberButton" data-toggle="modal" data-target="deleteMemberForm">회원탈퇴</button>
+                        <button type="button" class="register" id="deleteMemberButton" data-toggle="modal" data-target="#deleteMemberForm">회원탈퇴</button>
                         <button type="submit" class="register">확인</button>
                     </span>
 
@@ -293,35 +295,50 @@
 									}
 									
 								</script>
-								
-			<!-- 회원탈퇴 모달 -->
-            <div class="modal" id="deleteMemberForm">
+							</form>
+						</div>
+					</div>
+				</div>	
+			</div>	
+		<!-- 회원탈퇴 -->
+		<div class="modal" id="deleteMemberForm">
                 <div class="modal-dialog">
-                  <div class="modal-content">
-              
-                    <!-- Modal Header -->
+                <div class="modal-content">
+            
+                    <!-- 모달 헤더 -->
                     <div class="modal-header">
-                      <h4 class="modal-title">비밀번호 확인</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">비밀번호 확인</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-              
-                    <!-- Modal body -->
+                    
+                    <!-- 모달 바디 -->
                     <div class="modal-body">
-                        <form method="post" action="<%=contextPath%>/deleteMember.me">
+                        <form method="post" action="<%= contextPath %>/delete.me">
                             <div class="form-group">
-                                <label for="deletePwd">비밀번호:</label>
-                                <input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" id="memPwd" name="memPwd" required>
-                          </div>
-                          
-                          <button type="submit" class="btn btn-danger btn-danger" onclick="return deleteMember();">회원탈퇴</button>
-                          
-               
-                          <button type="submit">확인</button>
-                        </form>
-                      
-                    </div>
-								
-								
+                                    <label for="memPwd">비밀번호:</label>
+                                    <input type="password" class="form-control" placeholder="비밀번호를 입력해주세요." id="memPwd" name="memPwd" required>
+                              </div>
 
+                              <button type="submit" onclick="return deleteMember();" class="btn btn-sm btn-secondary">회원탈퇴</button>
+						 </form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+								<script>
+									function deleteMember(){
+										
+										const deleteStr = propmt('다시');
+										
+										if(deleteStr = 'ddd'){
+											return true;
+										} else{
+											return false;
+										}
+										
+									}
+								</script>
+		 
 </body>
 </html>

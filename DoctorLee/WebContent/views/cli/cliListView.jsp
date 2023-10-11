@@ -410,72 +410,57 @@
 
         
         <script>
-            $(function(){
-
-                // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
-                $('.cate').click(function(){
-                    //console.log($(this).val());
-
-                    console.log($('input[name=cate]:checked').val());
-
-                    $('#cate-pick, #sel-cate').text($(this).val());
-
-                    $('#content-part').css('display', 'block');
-                })
-
-            })
-
             function sendCliCate(){
                 // 카테고리 선택 시 해당하는 카테고리의 클리닉 출력
                 $.ajax({
                         url : 'ajaxList.cli',
-                        data : {
-                            cateName : $('input[name=cate]:checked').val()
-                        },
+                        data : {cateNo : $('input[name=cate]:checked').attr('id')},
                         success : function(result){
-                            //console.log($('input[name=cate]:checked').val());
+
+                            console.log(result);
+                            console.log($('input[name=cate]:checked').attr('id'));
 
                             let resultStr = '';
 
                             for(let i in result){
+
+                                console.log($('input[name=cate]:checked').attr('id'));
+
                                 resultStr += '<li class="content-cli">'
                                     +'<div class="cli-img">' 
                                         + '<img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>' 
                                         +'<button>자세히 보기</button>'
                                     + '</div>'
-                                    
-                                    +'<div class="cli-des" align="left">'
 
-                                        +'<div class="cli-des" align="left">'
+                                    +'<div class="cli-des" align="left">'
                                             +'<div class="cli-top">'
                                                 +'<span class="cli-name title">'
                                                     +result[i].cliName
                                                 +'</span>'
                                             +'</div>'
-                                        +'</div>'
 
-                                        +'<div class="cli-location">'
-                                                +'<span>'
-                                                    +result[i].hosNo
-                                                +'</span>'
-                                        +'</div>'
+                                            +'<div class="cli-location">'
+                                                    +'<span>'
+                                                        +result[i].hosNo
+                                                    +'</span>'
+                                            +'</div>'
 
-                                        +'<div class="cli-score">'
-                                                +'<span class="material-symbols-outlined">grade</span>'
-                                                +'<span>' + '별점' +'</span>'
-                                        +'</div>'
+                                            +'<div class="cli-score">'
+                                                    +'<span class="material-symbols-outlined">grade</span>'
+                                                    +'<span>' + '별점' +'</span>'
+                                            +'</div>'
 
-                                        +'<div class="cli-cate">'
-                                                +'<span>'
-                                                    +result[i].cateNo
-                                                +'</span>'
-                                        +'</div>'
+                                            +'<div class="cli-cate">'
+                                                    +'<span>'
+                                                        +result[i].cateName
+                                                    +'</span>'
+                                            +'</div>'
 
-                                        +'<div class="cli-price">'
-                                                +'<span>'
-                                                    +result[i].cliPrice
-                                                +'</span>'
-                                        +'</div>'
+                                            +'<div class="cli-price">'
+                                                    +'<span>'
+                                                        +result[i].cliPrice
+                                                    +'</span>'
+                                            +'</div>'
                                     
                                     +'</div>' 
                                     
@@ -488,9 +473,45 @@
                         error : function(){
                             console.log('실패');
                             resultStr = '<p>' + '클리닉이 존재하지 않습니다.' + '</p>'
+                            $('.content-list').html(resultStr);
                         }
                     })
+                    // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
+                    $('#cate-pick, #sel-cate').text($('input[name=cate]:checked').val());
+
+                    $('#content-part').css('display', 'block');
             }
+
+            $(function(){
+                        //li클릭 시 색깔 바뀌는 이벤트
+                        $('.content-cli').click(function(){
+
+                            //console.log($('.cli-cate > span').text());
+
+                            if($(this).css('background-color', 'salmon')){
+                                $(this).css('background-color', 'bisque');
+
+                                $(this).siblings().css('background-color', 'salmon');
+                            }
+
+                            // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
+                            //console.log($(this).children().children());
+                            $('#cli-pick, #sel-cli').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
+                            
+                            // 클리닉 선택 후 예약일시가 보여짐
+                            $('#cli-date').css('visibility', 'visible');
+
+                            console.log($('.cli-cate > span').val());
+                        })
+
+                        //돋보기 버튼 클릭 시 상세보기 페이지로 이동
+                        $('.cli-img > button').click(function(){
+                            location.href='<%=contextPath%>/cliDetail.cli?cno=' + $(this).children().eq(0).val();
+                        })
+                        
+                    })
+
+            
         </script>
 
                 <!--클리닉 내용 출력 영역 div-->
@@ -521,34 +542,7 @@
                 </div>
 
                 <script>
-                    $(function(){
-                        //li클릭 시 색깔 바뀌는 이벤트
-                        $('.content-cli').click(function(){
-
-                            //console.log($('.cli-cate > span').text());
-
-                            if($(this).css('background-color', 'salmon')){
-                                $(this).css('background-color', 'bisque');
-
-                                $(this).siblings().css('background-color', 'salmon');
-                            }
-
-                            // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
-                            //console.log($(this).children().children());
-                            $('#cli-pick, #sel-cli').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
-                            
-                            // 클리닉 선택 후 예약일시가 보여짐
-                            $('#cli-date').css('visibility', 'visible');
-
-                            console.log($('.cli-cate > span').val());
-                        })
-
-                        //돋보기 버튼 클릭 시 상세보기 페이지로 이동
-                        $('.cli-img > button').click(function(){
-                            location.href='<%=contextPath%>/cliDetail.cli?cno=' + $(this).children().eq(0).val();
-                        })
-                        
-                    })
+                    
                 </script>
 
                 <!--클리닉 예약 날짜 및 시간 띄우기 영역 div-->

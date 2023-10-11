@@ -53,7 +53,7 @@ public class CliDao {
 		return list;
 	}
 	
-	public ArrayList<Clinic> selectCliList(Connection conn, String cateName){
+	public ArrayList<Clinic> selectCliList(Connection conn, int cateNo){
 		
 		ArrayList<Clinic> cliList = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -64,9 +64,9 @@ public class CliDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, cateName);
+			pstmt.setInt(1, cateNo);
 			
-			System.out.println(cateName);
+			//System.out.println(cateName);
 			
 			rset = pstmt.executeQuery();
 			
@@ -74,7 +74,7 @@ public class CliDao {
 				Clinic c = new Clinic();
 				c.setCliNo(rset.getInt("CLI_NO"));
 				c.setHosNo(rset.getString("HOS_NAME"));
-				c.setCateNo(rset.getString("CLI_CATE"));
+				c.setCateName(rset.getString("CLI_CATE"));
 				c.setCliName(rset.getString("CLI_NAME"));
 				c.setCliPrice(rset.getString("CLI_PRICE"));
 				c.setOriginName(rset.getString("ORIGIN_NAME"));

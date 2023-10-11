@@ -14,7 +14,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -38,15 +37,12 @@
         		 url: 'hosRsvt.mem',
         		 type: 'post',
         		 data: {
-        			 rsvtDate: info.dateStr
-        			 /*,
+        			 rsvtDate: info.dateStr,
         			 rsvtH: $('select[name=rsvtH] option:selected').text(),
         			 rsvtM: $('select[name=rsvtM] option:selected').text(),
         			 rsvtName: $('input[name=rsvtName]').val(),
         		     rsvtInfo: $('input[name=rsvtInfo]').val(),
         		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val()
-        		     hno:
-        		     */
         		 },
         		 success: function(result){
         			 console.log(result);
@@ -102,9 +98,15 @@
 			
 			<h3><%= hos.getHosName() %></h3><span><%= hos.getTreatDep() %></span>
 			<!-- 현재 대기자 5명 -->
-			<p>
-				<%= hos.getHosInfo() %>
-			</p>
+			<% if(hos.getHosInfo() == null){ %>
+				<p style="color: grey; font-size: 15px;">
+					해당 병원의 소개글이 없습니다.
+				</p>
+			<%} else {%>
+				<p>
+					<%= hos.getHosInfo() %>
+				</p>
+			<%} %>
 			<div id="hos_info_address">
 				<div class="icon">
 					<b><i class="fa-solid fa-location-dot"></i></b>
@@ -150,7 +152,7 @@
 						<td>
 							<select name="rsvtH">
 								<% for(int i = 8; i <= 22; i++) { %>
-									<option>
+									<option value="<%= i %>">
 										<%= i %>시
 									</option>
 								<% } %>
@@ -189,46 +191,69 @@
 
 				<div id="rsvt_btn">
 					<% if(loginUser != null) { %>
-						<button type="submit" class="btn btn-primary">예약접수</button>
+						<a href="<%= contextPath %>/hosRsvt.mem?hno=<%= hos.getHosNo() %>" 
+						class="btn btn-primary"
+						data-toggle="modal" data-target="#rsvtModal">예약접수</a>
 					<%} else{ %>
-						<button type="submit" class="btn btn-primary" disabled>예약접수</button>
+						<a href="#none" onclick="alert('로그인 후 이용 가능한 서비스');" class="btn btn-primary">예약접수</a>
 					<%} %>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guestRsvtModal">
 					  비회원 진료예약
 					</button>
 					
 				</div>
 				
 			</form>
-			<!-- Button to Open the Modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  Open modal
-</button>
 
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
+			<!-- 회원 예약 확인 팝업 -->
+			<div class="modal" id="rsvtModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			
+			      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title">Modal Heading</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      </div>
+			
+			      <!-- Modal body -->
+			      <div class="modal-body">
+			        Modal body..
+			      </div>
+			
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			      </div>
+			
+			    </div>
+			  </div>
+			</div>
+			
+			<!-- 비회원 예약 모달 -->
+			<div class="modal" id="guestRsvtModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			
+			      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title">Modal Heading</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      </div>
+			
+			      <!-- Modal body -->
+			      <div class="modal-body">
+			        Modal body..
+			      </div>
+			
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			      </div>
+			
+			    </div>
+			  </div>
+			</div>
 			
 			</div>
 			<!-- 진료 예약 끝 -->

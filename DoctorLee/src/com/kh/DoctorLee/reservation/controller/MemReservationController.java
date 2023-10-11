@@ -38,7 +38,8 @@ public class MemReservationController extends HttpServlet {
 		String rsvtName = request.getParameter("rsvtName");
 		String rsvtInfo = request.getParameter("rsvtInfo");
 		int rsvtDoc = Integer.parseInt(request.getParameter("rsvtDoc")); // value or text?
-		
+		int hno = Integer.parseInt(request.getParameter("hno"));
+		System.out.println(hno);
 		
 		String rsvtTime = rsvtH + rsvtM;
 		
@@ -51,6 +52,9 @@ public class MemReservationController extends HttpServlet {
 		
 		int result = new ReservationService().insertRsvt(rsvt);
 		
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
+		}
 		
 		
 	

@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
-
+import static com.kh.DoctorLee.common.JDBCTemplate.*;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 
 public class ReservationDao {
@@ -36,9 +36,17 @@ public class ReservationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rsvt.getRsvtHos());
+			pstmt.setInt(2, rsvt.getRsvtDoc());
+			pstmt.setInt(3, rsvt.getRsvtMem());
+			pstmt.setString(4, rsvt.getRsvtDate());
+			pstmt.setString(5, rsvt.getRsvtTime());
+			pstmt.setString(6, rsvt.getMemInfo());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;

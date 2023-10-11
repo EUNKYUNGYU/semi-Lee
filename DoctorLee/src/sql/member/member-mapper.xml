@@ -44,11 +44,15 @@
 		  		PHONE,
 		  		INUM,
 		  		EMAIL,
-		  		GENDER
+		  		GENDER,
+		  		HEIGHT,
+		  		WEIGHT
 		  		)
 	  VALUES
 	  			(
 	  			SEQ_MEMBER_NO.NEXTVAL,
+	  			?,
+	  			?,
 	  			?,
 	  			?,
 	  			?,

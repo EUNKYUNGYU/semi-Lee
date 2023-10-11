@@ -132,6 +132,8 @@
 				String nickName = loginUser.getNickName();
 				String phone = loginUser.getPhone();
 				String email = loginUser.getEmail();
+				int height = loginUser.getHeight();
+				int weight = loginUser.getWeight();
 			%>
             
             <div id="content_2">
@@ -181,13 +183,13 @@
                     <br>
                     키
                     <br><br>
-                    <input type="text" placeholder="cm" class="box" id="height" name="height">
+                    <input type="text" value="<%= height %>" class="box" id="height" name="height" required>
                     <br><br>
                     <hr>
                     <br>
                     몸무게
                     <br><br>
-                    <input type="text" placeholder="kg" class="box" id="weight" name="weight">
+                    <input type="text" value="<%= weight %>" class="box" id="weight" name="weight" required>
                     <br><br>
                     <hr>
                     <br>

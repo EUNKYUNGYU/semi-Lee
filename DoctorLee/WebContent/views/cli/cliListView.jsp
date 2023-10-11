@@ -223,6 +223,10 @@
         padding: 10px;
     }
 
+    .cli-no{
+        display: none;
+    }
+
     /*클리닉 설명*/
     .cli-des{
         width: 500px;
@@ -526,11 +530,13 @@
                                                         +'<span class="cli-name title">'
                                                             +result[i].cliName
                                                         +'</span>'
+                                                    +'</div>'
 
+                                                    +'<div class="cliNo">'
                                                         +'<span class="cli-no">'
                                                             +result[i].cliNo
                                                         +'</span>'
-                                                    +'</div>'
+                                                    +'</div>'    
         
                                                     +'<div class="cli-location">'
                                                             +'<span>'
@@ -565,8 +571,8 @@
 
                                     //자세히보기 버튼 클릭 시 상세보기 페이지로 이동
                                     $('.cli-img > button').click(function(){
-                                        //location.href='<%=contextPath%>/cliDetail.cli?cno=' + $('[type=hidden]').val();
-                                        console.log($(this));
+                                        location.href='<%=contextPath%>/cliDetail.cli?cno=' + $('.cli-no').text();
+                                        //console.log($('.cli-no').text());
                                     })
 
                                         //li클릭 시 색깔 바뀌는 이벤트
@@ -580,7 +586,9 @@
 
                                         // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
                                         //console.log($(this).children().children());
-                                        $('#cli-pick, #sel-cli').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(4).text());
+                                        $('#cli-pick, #sel-cli').text($(this).children().children().eq(3).text() + " : " + $(this).children().children().eq(5).text());
+
+                                        console.log($(this).children().children().eq(3).text());
                                         
                                         // 클리닉 선택 후 예약일시가 보여짐
                                         $('#cli-date').css('visibility', 'visible');

@@ -92,5 +92,40 @@ public class CliDao {
 		
 		return cliList;
 	}
+	
+	public Clinic selectCli(Connection conn, int cliNo) {
+		
+		Clinic c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCli");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cliNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Clinic();
+				c.setHosNo(rset.getString("HOS_NAME"));
+				c.setCateName(rset.getString("CLI_CATE"));
+				c.setCliName(rset.getString("CLI_NAME"));
+				c.setCliPrice(rset.getString("CLI_PRICE"));
+				c.setOriginName(rset.getString("ORIGIN_NAME"));
+				c.setChangeName(rset.getString("CHANGE_NAME"));
+				c.setDesPath(rset.getString("DES_PATH"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return c;
+	}
 
 }

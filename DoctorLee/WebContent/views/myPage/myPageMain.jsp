@@ -114,7 +114,7 @@ Member loginUser = (Member)session.getAttribute("loginUser");
     <br><br><br><br><br>
     <% if(loginUser == null) { %>
     <form action="<%= contextPath %>/login.me" method="post">
-    	<button type="submit" width="300" height="300">로그인하러가기</button>
+    	<button type="submit">로그인하러가기</button>
     	
     </form>
     <% } else { %>

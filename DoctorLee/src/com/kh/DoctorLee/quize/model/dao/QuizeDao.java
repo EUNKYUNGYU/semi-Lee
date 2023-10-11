@@ -162,6 +162,7 @@ public class QuizeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		} 
 		
@@ -189,6 +190,30 @@ public class QuizeDao {
 		
 		return result;
 		
+	}
+	
+	public int quizeAnswerExist(Connection conn, int memNo, int quizeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("quizeAnswerExist");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2,  quizeNo);
+
+			rset = pstmt.executeQuery();
+			if(rset.next()) result = 1;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} 
+		
+		return result;
 	}
 	
 

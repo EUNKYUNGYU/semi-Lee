@@ -143,9 +143,9 @@
             <hr style="border: 1.8px solid #1E376F;">
            
             
+            <form id="enroll-form" action="<%=contextPath%>/insert.me" method="post" class="formfont">
             <div class="content_2">
                 
-               <form id="enroll-form" action="<%=contextPath%>/insert.me" method="post" class="formfont">
                         <br><br>
                         <span style="font-size: 23px; font-weight: bold;">기본입력사항(필수)</span>
                         <br><br><br>
@@ -153,7 +153,7 @@
                         <br>
                         아이디*
                         <br><br>
-                        <input type="text" name="memId" id="r_id1" class="box" required>
+                        <input type="text" name="memId" id="memId" class="box" required>
                         <input type="button" value="중복확인" id="r_id2" onclick="idCheck();">
                         <br><br>
                         <span style="font-size: 14px;">아이디는 영문 대/소문자, 숫자 조합하여 5 ~ 15자리</span>
@@ -162,7 +162,7 @@
                         <br>
                         비밀번호*
                         <br><br>
-                        <input type="password" name="memPwd" class="box" required><br>
+                        <input type="password" name="memPwd" id="memPwd" class="box" required><br>
                         <br>
                         <span style="font-size: 14px;">비밀번호는 영문 대/소문자, 숫자, 특수문자(!@#$%^*+=-)가 포함되는 10~16자</span>
                         <br><br>
@@ -170,19 +170,19 @@
                         <br>
                         비밀번호 확인*
                         <br><br>
-                        <input type="password" name="checkMemPwd" class="box" required>
+                        <input type="password" name="memPwd2"  id="memPwd2" class="box" required>
                         <br><br>
                         <hr>
                         <br>
                         이름*
                         <br><br>
-                        <input type="text" name="memName" class="box" required> <br>
+                        <input type="text" name="memName" id="memName" class="box" required> <br>
                         <br>
                         <hr>
                         <br>
                        
   
-   		    닉네임*
+   		     닉네임*
                         <br><br>
                         <input type="text" name="nickName" class="box" required> <br>
                         <br>
@@ -198,19 +198,19 @@
                         <br>
                         이메일*
                         <br><br>
-                        <input type="email" name="email" placeholder="email@naver.com" class="box" required>
+                        <input type="email" name="email" id="email" placeholder="email@naver.com" class="box" required>
                         <br><br>
                         <hr>
                         <br>
                         휴대전화*
                         <br><br>
-                        <input type="text" name="phone" placeholder="-을 제외하고 입력하세요." class="box" required>
+                        <input type="text" name="phone" id="phone" placeholder="-을 제외하고 입력하세요." class="box" required>
                         <br><br><br>
                         <hr>
                         <br>
                   주민등록번호*
                         <br><br>
-                        <input type="password" name="iNum" placeholder="-을 제외하고 입력하세요." class="box" required>
+                        <input type="password" name="iNum" id="iNum" placeholder="-을 제외하고 입력하세요." class="box" required>
                         <br><br>
                         <hr>
                         <br>
@@ -415,9 +415,9 @@
         </div>
         
 
+		</form>
     </div>
     
-</form>
 
 <script>
 
@@ -466,6 +466,7 @@
         var email = document.getElementById('email');
         var phone = document.getElementById('phone');
         var iNum = document.getElementById('iNum');
+        
 
         // 아이디
         var regExp = /^[a-zA-Z][a-zA-Z0-9]{4,14}$/;
@@ -511,7 +512,7 @@
         }
         
         // 주민번호
-		var regExp = /^\d{2}(0[1-9]|1[0-2])([1-9]|[1-2][0-9]|3[0-1])-[1,4]\d{6}$/;       
+		var regExp = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])[1-4]\d{6}$/;    
 		if(!regExp.test(iNum.value)){
         	alert('주민번호를 다시 확인해주세요.')
         	return false;

@@ -155,7 +155,7 @@
             <script>
             	function deleteMember(){
             		
-            		const deleteStr = prompt("입력하세요");
+            		const deleteStr = prompt("비밀번호를 입력하세요");
             		
             		if(deleteStr == '어쩌고'){
             			return true;

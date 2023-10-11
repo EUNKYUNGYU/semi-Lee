@@ -218,7 +218,7 @@
                     	이용하시려면 로그인이 필요합니다.
 
                     
-                    <form action="<%=contextPath%>/login2.me" method="post" id="login_form_input">
+                    <form action="<%=contextPath%>/loginForm.me" method="post" id="login_form_input">
                         
                         <div id="id_1" align="center">
                             <input type="text" id="id_1" name="memId" placeholder="아이디" required>

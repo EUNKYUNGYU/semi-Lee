@@ -3,7 +3,6 @@
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.cli.model.vo.*" %>
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
-	ArrayList<Clinic> cliList = (ArrayList<Clinic>)request.getAttribute("cliList");
 %>
 <!DOCTYPE html>
 <html>
@@ -370,6 +369,8 @@
                 <%@ include file="../common/cliNavi.jsp"%>
             </div>
 
+            <form action="<%=contextPath%>/enrollRes.cli" method="post"></form>
+
             <!--클리닉 출력 영역 div-->
             <div id="cli-content">
 
@@ -396,7 +397,7 @@
                         <ul>
                         <%for(int i = 0; i < list.size(); i++){ %>
                             <li>
-                                <input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>"><%= list.get(i).getCliCate() %></label>
+                                <input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>" onclick="sendCliCate();"><%= list.get(i).getCliCate() %></label>
                             </li>
                         <%} %>
                         </ul>
@@ -414,9 +415,8 @@
                 // 카테고리 선택 시 "카테고리를 선택해주세요"에 해당 카테고리를 띄우기
                 $('.cate').click(function(){
                     //console.log($(this).val());
-                    //$('.cate').prop('checked', 'true').val()
 
-                    //console.log($('.cate').attr('checked', true).val());
+                    console.log($('input[name=cate]:checked').val());
 
                     $('#cate-pick, #sel-cate').text($(this).val());
 
@@ -424,6 +424,73 @@
                 })
 
             })
+
+            function sendCliCate(){
+                // 카테고리 선택 시 해당하는 카테고리의 클리닉 출력
+                $.ajax({
+                        url : 'ajaxList.cli',
+                        data : {
+                            cateName : $('input[name=cate]:checked').val()
+                        },
+                        success : function(result){
+                            //console.log($('input[name=cate]:checked').val());
+
+                            let resultStr = '';
+
+                            for(let i in result){
+                                resultStr += '<li class="content-cli">'
+                                    +'<div class="cli-img">' 
+                                        + '<img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>' 
+                                        +'<button>자세히 보기</button>'
+                                    + '</div>'
+                                    
+                                    +'<div class="cli-des" align="left">'
+
+                                        +'<div class="cli-des" align="left">'
+                                            +'<div class="cli-top">'
+                                                +'<span class="cli-name title">'
+                                                    +result[i].cliName
+                                                +'</span>'
+                                            +'</div>'
+                                        +'</div>'
+
+                                        +'<div class="cli-location">'
+                                                +'<span>'
+                                                    +result[i].hosNo
+                                                +'</span>'
+                                        +'</div>'
+
+                                        +'<div class="cli-score">'
+                                                +'<span class="material-symbols-outlined">grade</span>'
+                                                +'<span>' + '별점' +'</span>'
+                                        +'</div>'
+
+                                        +'<div class="cli-cate">'
+                                                +'<span>'
+                                                    +result[i].cateNo
+                                                +'</span>'
+                                        +'</div>'
+
+                                        +'<div class="cli-price">'
+                                                +'<span>'
+                                                    +result[i].cliPrice
+                                                +'</span>'
+                                        +'</div>'
+                                    
+                                    +'</div>' 
+                                    
+                                    +'<br clear="both">'
+                                        
+                                    +'</li>'
+                            }
+                            $('.content-list').html(resultStr);
+                        },
+                        error : function(){
+                            console.log('실패');
+                            resultStr = '<p>' + '클리닉이 존재하지 않습니다.' + '</p>'
+                        }
+                    })
+            }
         </script>
 
                 <!--클리닉 내용 출력 영역 div-->
@@ -446,63 +513,7 @@
                             <!--클리닉 출력 ul-->
                             <ul class="content-list">
                             
-                                <!-- 선택한 카테고리와 출력할 클리닉의 카테고리 일치 여부 확인 -->
 
-                            	<!-- 해당 카테고리에 클리닉이 존재하지 않을 경우 -->
-		                        <% if(cliList.isEmpty()) { %>
-
-                                    <p>클리닉이 존재하지 않습니다.</p>
-		                        
-		                        <% } else { %>
-
-									<!-- 해당 카테고리에 클리닉이 존재할 경우 -->
-									<% for(Clinic c : cliList) { %>
-
-                                    <!-- $('.cate').attr('checked', true).val()) : 선택한 카테고리의 값 -->
-                                    <!-- $('.cli-cate > span').text() : 해당 클리닉의 카테고리 값 -->
-		
-	                                <!--클리닉 요소 하나하나 li-->
-	                                <li class="content-cli">
-
-                                        <input type="hidden" value="<%=c.getCliNo()%>" name="cliNo">
-                                        <input type="hidden" value="<%=c.getCateNo()%>" name="cliCate">
-	                                
-	                                    <!--클리닉 대표 이미지 div-->
-	                                    <div class="cli-img">
-	                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-	                                        <button>자세히 보기</button>
-	                                    </div>
-	
-	                                    <!--클리닉 설명 div-->
-	                                    <div class="cli-des" align="left">
-	
-	                                        <div class="cli-top">
-	                                            <span class="cli-name title"><%= c.getCliName() %></span>
-	                                        </div>
-	
-	                                        <div class="cli-location">
-	                                            <span><%= c.getHosNo() %></span>
-	                                        </div>
-	
-	                                        <div class="cli-score">
-	                                            <span class="material-symbols-outlined">grade</span>
-	                                            <span>별점</span>
-	                                        </div>
-
-                                            <div class="cli-cate">
-                                                <span><%=c.getCateNo()%></span>
-                                            </div>
-	
-	                                        <div class="cli-price">
-	                                            <span><%= c.getCliPrice() %></span>
-	                                        </div>
-	
-	                                    </div>
-	                                    <br clear="both">
-	                                </li>
-                                	<% } %>
-                                
-                                <% } %>
                                 
                             </ul>
                         </div>
@@ -609,6 +620,8 @@
             <script>
                 
                 $(function(){
+                    
+
                     //li클릭 시 색깔 바뀌는 이벤트
                     $('.time-content').click(function(){
 
@@ -629,6 +642,8 @@
             </script>
 
             <br><br><br><br><br>
+
+            </form>
 
             </div>
 

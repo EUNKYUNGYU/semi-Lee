@@ -3,11 +3,8 @@
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
 
 <%
-	String alertMsg = (String)session.getAttribute("alertMsg");
-	
 	String contextPath1 = request.getContextPath();
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	
+	Member loginUser1 = (Member)session.getAttribute("loginUser");
 %>
 
     
@@ -89,16 +86,7 @@
     </style>
 </head>
 <body>
-    		<script>
-    			var msg = '<%=alertMsg%>';
-    			
-    			if(msg!='null'){
-    				
-    				alert(msg);
-    				
-    			<% session.removeAttribute("alertMsg");%>
-    			}
-    		</script>
+    		
             
             <div id="mp_navi">
                 <div id="empty">
@@ -125,7 +113,7 @@
                     <li><a href="#">복약관리</a></li>
                     <li><a href="#">회원정보 수정/탈퇴</a>
                         <ul>
-                            <li><a href="<%=contextPath1%>/update.me">회원 정보 수정</a></li>
+                            <li><a href="<%=contextPath1%>/updateForm.me">회원 정보 수정</a></li>
                             <li><a href="<%=contextPath1%>/deletePwd.me">회원 탈퇴</a></li>
                         </ul>
                     </li>

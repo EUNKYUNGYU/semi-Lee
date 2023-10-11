@@ -1,7 +1,6 @@
-package com.kh.DoctorLee.cli.controller;
+package com.kh.DoctorLee.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.Category;
-import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.member.model.service.MemberService;
 
 /**
- * Servlet implementation class CliListController
+ * Servlet implementation class AjaxIdCheckController
  */
-@WebServlet("/list.cli")
-public class CliListController extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class AjaxIdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliListController() {
+    public AjaxIdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +29,20 @@ public class CliListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		String cateName = request.getParameter("cliCate");
+		String checkId = request.getParameter("checkId");
 		
-		// 카테고리 불러오기
-		ArrayList<Category> list = new CliService().selectCategoryList();
+		int count = new MemberService().idCheck(checkId);
 		
-		// 클리닉 불러오기
-		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
+		//응답
+		response.setContentType("text/html; charset=UTF-8");
 		
-		request.setAttribute("list", list);
-		request.setAttribute("cliList", cliList);
-
-		request.getRequestDispatcher("views/cli/cliListView.jsp").forward(request, response);
+		if(count > 0 ) {
+			response.getWriter().print("NNNNN");
+		} else {
+			response.getWriter().print("NNNNY");
+		}
+	
 	}
 
 	/**

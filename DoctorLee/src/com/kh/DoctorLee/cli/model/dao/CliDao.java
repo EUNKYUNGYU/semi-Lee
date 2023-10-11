@@ -53,7 +53,7 @@ public class CliDao {
 		return list;
 	}
 	
-	public ArrayList<Clinic> selectCliList(Connection conn){
+	public ArrayList<Clinic> selectCliList(Connection conn, String cateName){
 		
 		ArrayList<Clinic> cliList = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -63,6 +63,10 @@ public class CliDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, cateName);
+			
+			System.out.println(cateName);
 			
 			rset = pstmt.executeQuery();
 			

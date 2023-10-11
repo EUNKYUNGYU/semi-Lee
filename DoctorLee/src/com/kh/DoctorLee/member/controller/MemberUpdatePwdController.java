@@ -2,7 +2,6 @@ package com.kh.DoctorLee.member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +13,16 @@ import com.kh.DoctorLee.member.model.service.MemberService;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberUpdateController2
+ * Servlet implementation class MemberUpdatePwdController
  */
-@WebServlet("/update2.me")
-public class MemberUpdateController2 extends HttpServlet {
+@WebServlet("/updatePwd.me")
+public class MemberUpdatePwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateController2() {
+    public MemberUpdatePwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,41 +31,33 @@ public class MemberUpdateController2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// 인코딩
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		
-		String memName = request.getParameter("memName");
-		String nickName = request.getParameter("nickName");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		String memId = request.getParameter("memId");
+		Member loginUser = ((Member)session.getAttribute("loginUser"));
 		
-		Member m = new Member();
-		m.setMemName(memName);
-		m.setNickName(nickName);
-		m.setPhone(phone);
-		m.setEmail(email);
-		m.setMemId(memId);
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
+		String memId = loginUser.getMemId();
+		int num = Integer.parseInt(request.getParameter("memNo"));
 		
-		int result = new MemberService().updateMember(m);
+		// 값 뽑기
+		String memPwd = request.getParameter("memPwd");
+		String updatePwd = request.getParameter("updatePwd");
+		
+		// 서비스 넘기기
+		int result = new MemberService().updatePwdMember(memNo, memPwd, updatePwd);
+	
 		
 		if(result > 0) {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "회원 정보 수정 성공");
-			
-			Member updateMem = new MemberService().selectMember(memId);
-			session.setAttribute("loginUser", updateMem);
-			
-			response.sendRedirect(request.getContextPath() + "/myPage.me");
-			
+			session.setAttribute("alertMsg", "비밀번호 변경 성공");
+			session.setAttribute("loginUser", new MemberService().selectMember(memId));
 		} else {
-			request.setAttribute("errorMsg", "다시 수정 해주세요.");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-			
+			session.setAttribute("alertMsg", "비밀번호 변경 실패");
 		}
 		
-	
+		// 돌려줄 페이지
+		response.sendRedirect(request.getContextPath() + "/updateForm.me");
 	}
 
 	/**

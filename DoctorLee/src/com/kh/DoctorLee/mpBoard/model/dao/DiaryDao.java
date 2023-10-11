@@ -123,5 +123,73 @@ import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
 			}
 			return famList;
 		}
+		public MyDiary detailMyDiary(Connection conn,int diaryNo) {
+			MyDiary md = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("detailView");
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, diaryNo);
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					md = new MyDiary();
+					md.setDiaryNo(rset.getInt("DIARY_NO"));
+					md.setMemNo(rset.getInt("MEM_NO"));
+					md.setCreateDate(rset.getDate("CREATE_DATE"));
+					md.setDiaryTitle(rset.getString("DIARY_TITLE"));
+					md.setDiaryContent(rset.getString("DIARY_CONTENT"));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			
+			return md;
+		}
+		public int updateDiary(Connection conn, MyDiary md) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("updateDiary");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, md.getDiaryTitle());
+				pstmt.setString(2, md.getDiaryContent());
+				pstmt.setInt(3, md.getDiaryNo());
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(conn);
+			}
+			
+			
+			
+			return result;
+		}
+		public int deleteDiary(Connection conn,int diaryNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("deleteDiary");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, diaryNo);
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(pstmt);
+			}
+			
+			
+			return result;
+		}
 	
 }

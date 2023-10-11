@@ -1043,10 +1043,69 @@ ORDER BY
 	B.CREATE_DATE DESC;        
 
 
+ 	INSERT 
+ 		INTO 	
+ 			TB_POINT 
+ 					(
+ 					MEM_NO
+ 					, POINT
+ 					) 
+ 			VALUES
+ 					(
+ 					2
+ 					, 500
+ 					);
+                    
+    rollback;
+ 
+INSERT 
+		INTO 
+			TB_QUIZE_CHOICE 
+							(
+							QUIZE_NO
+							, MEM_NO
+							, CHOICE
+							) 
+					VALUES
+							(
+							11
+							,2
+							,2
+							);
+
+	SELECT 
+        ANSWER
+    FROM 
+        TB_QUIZE_ANSWER
+    WHERE 
+        QUIZE_NO = 11  
+        
+    AND    
+        ANSWER = 2;
+        
+DELETE FROM TB_POINT;
+DELETE FROM TB_QUIZE_CHOICE;
+
+COMMIT;
+
+DROP TABLE TB_POINT;
+
+CREATE TABLE TB_POINT(
+    MEM_NO NUMBER NOT NULL,
+    POINT NUMBER NOT NULL
+    );
 
 
+COMMENT ON COLUMN TB_POINT.MEM_NO IS '회원 번호';
+COMMENT ON COLUMN TB_POINT.POINT IS '회원 포인트';
 
+ALTER   TABLE TB_MEMBER ADD	 POINT 	NUMBER  DEFAULT 0 NOT NULL;
 
+UPDATE TB_MEMBER SET POINT = POINT + 500 WHERE MEM_NO = 2;
+UPDATE TB_MEMBER SET POINT = 0 WHERE MEM_NO = 2;
+
+ROLLBACK;
+COMMIT;
 
 
 

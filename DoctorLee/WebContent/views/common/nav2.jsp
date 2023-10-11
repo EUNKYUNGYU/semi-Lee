@@ -3,9 +3,9 @@
     
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
 <%
-	Member loginUser = (Member)session.getAttribute("loginUser");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	String contextPath = request.getContextPath();
+	Member loginUser = (Member)session.getAttribute("loginUser");
 
 %>
 <!DOCTYPE html>
@@ -13,6 +13,13 @@
 <head>
 <meta charset="UTF-8">
 <title>네비만</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+	
 <style>
 body{
 	box-sizing: border-box;
@@ -159,6 +166,19 @@ body{
 </style>
 </head>
 <body>
+
+			<script>
+    			var msg = '<%=alertMsg%>';
+    			
+    			if(msg!='null'){
+    				
+    				alert(msg);
+    				
+    			<% session.removeAttribute("alertMsg");%>
+    			}
+    		</script>
+    		
+    		
 <div id="navi">
             <div id="navi1"><a href="<%=contextPath%>" id="navitext">낭만닥터 이사부</a>
             </div

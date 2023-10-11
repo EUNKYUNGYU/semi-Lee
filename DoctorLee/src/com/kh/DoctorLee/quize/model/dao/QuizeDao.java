@@ -98,6 +98,29 @@ public class QuizeDao {
 		
 	}
 	
+	public int increaseVote(Connection conn, int quizeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseVote");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quizeNo);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} 
+		
+		return result;
+		
+	}
+	
 	public int quizeChoiceInsert(Connection conn, int quizeNo, int memNo, int choice) {
 		
 		int result = 0;
@@ -110,7 +133,7 @@ public class QuizeDao {
 			pstmt.setInt(2, memNo);
 			pstmt.setInt(3, choice);
 			
-			result = pstmt.executeUpdate(sql);
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,8 +155,8 @@ public class QuizeDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, quizeNo);
 			pstmt.setInt(2, choice);
-
-			rset = pstmt.executeQuery(sql);
+			
+			rset = pstmt.executeQuery();
 			if(rset.next()) result = 1;
 			
 		} catch (SQLException e) {
@@ -153,10 +176,9 @@ public class QuizeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, quizeNo);
-			pstmt.setInt(2, memNo);
+			pstmt.setInt(1, memNo);
 
-			result = pstmt.executeUpdate(sql);
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -168,5 +190,7 @@ public class QuizeDao {
 		return result;
 		
 	}
+	
+
 	
 }

@@ -36,6 +36,18 @@ SELECT
         
 </entry>
 
+ <entry key="increaseVote">
+ 
+ UPDATE 
+ 		TB_QUIZE_BOARD
+ 	SET 
+ 		VOTE = VOTE + 1 
+ 	WHERE 
+ 		QUIZE_NO = ?
+ 
+ 
+ </entry>
+
 <entry key="quizeChoice">
 
 INSERT 
@@ -63,6 +75,7 @@ INSERT
         TB_QUIZE_ANSWER
     WHERE 
         QUIZE_NO = ?   
+        
     AND    
         ANSWER = ?
 
@@ -70,22 +83,18 @@ INSERT
 
  <entry key="quizeGetPoint">
  	
- 	INSERT 
- 		INTO 	
- 			TB_POINT 
- 					(
- 					MEM_NO
- 					, POINT
- 					) 
- 			VALUES
- 					(
- 					?
- 					, ?
- 					)
- 
- 
+	UPDATE 
+			TB_MEMBER 
+					SET 
+						POINT = POINT + 500
+					 WHERE 
+					 	MEM_NO = ?
  
  
  </entry>
+ 
+
+ 
+ 
 </properties>
 

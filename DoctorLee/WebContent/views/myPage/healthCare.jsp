@@ -22,7 +22,17 @@
 			<button type="submit">로그인하러가기</button>
 		</form>
 	<% } else { %>
-	
+		<div id="wraper">
+			<div id="healthCare">
+				<div id="area">
+					<%@ include file="../common/myPageNavi.jsp" %>
+
+				</div>
+				<div id="healthCare_main"></div>
+
+			</div>
+
+		</div>
 	
 	<%} %>
 

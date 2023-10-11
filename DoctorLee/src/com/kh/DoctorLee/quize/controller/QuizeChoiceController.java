@@ -54,25 +54,35 @@ public class QuizeChoiceController extends HttpServlet {
 		System.out.println("quizeChoiceController에서 quizeNo " + quizeNo);
 		System.out.println("quizeChoiceController에서 memNo " + memNo);
 		System.out.println("quizeChoiceController에서 choice " + choice);
+
+		int resultExist = new QuizeService().quizeAnswerExist(memNo, quizeNo);
 		
-		
-		int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
+		if(resultExist ==  0) { // 답안 제출 한적 있음, 정답 화면 보여주기
 			
-		System.out.println("quizeChoiceService의 return값 : " + result);
-		
-		System.out.println(result);
-		if(result == 2) { // 정답, 포인트 획득 성공
-			request.getSession().setAttribute("alertMsg", "500포인트를 획득하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.qz");
-		} else if(result == 1){ // 오답, 포인트 획득 실패
-			request.getSession().setAttribute("alertMsg", "포인트 획득에 실패하셨습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.qz");
-		} else if(result == 0) { // 실패
-			request.getSession().setAttribute("alertMsg", "제출에 실패하였습니다. 다시 시도해 주십시오.");
+			System.out.println("답 제출 한 적 있는지 " + resultExist);
+			int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
+			
+			System.out.println("quizeChoiceService의 return값 : " + result);
+			
+			System.out.println(result);
+			if(result == 2) { // 정답, 포인트 획득 성공
+				request.getSession().setAttribute("alertMsg", "500포인트를 획득하였습니다.");
+				response.sendRedirect(request.getContextPath() + "/list.qz");
+			} else if(result == 1){ // 오답, 포인트 획득 실패
+				request.getSession().setAttribute("alertMsg", "포인트 획득에 실패하셨습니다.");
+				response.sendRedirect(request.getContextPath() + "/list.qz");
+			} else if(result == 0) { // 실패
+				request.getSession().setAttribute("alertMsg", "제출에 실패하였습니다. 다시 시도해 주십시오.");
+				response.sendRedirect(request.getContextPath() + "/list.qz");
+			}
+			
+			System.out.println("----------------------------");
+			
+		}  else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
+			request.getSession().setAttribute("alertMsg", "이미 답을 제출 하셨습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.qz");
 		}
-
-		System.out.println("----------------------------");
+		
 	}
 
 	/**

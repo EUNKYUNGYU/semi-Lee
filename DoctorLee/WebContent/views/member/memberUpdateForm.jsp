@@ -183,13 +183,13 @@
                     <br>
                     키
                     <br><br>
-                    <input type="text" placeholder=<%=height %>"cm" class="box" id="height" name="height">
+                    <input type="text" value="<%= height %>" class="box" id="height" name="height" required>
                     <br><br>
                     <hr>
                     <br>
                     몸무게
                     <br><br>
-                    <input type="text" placeholder=<%=weight %>"kg" class="box" id="weight" name="weight">
+                    <input type="text" value="<%= weight %>" class="box" id="weight" name="weight" required>
                     <br><br>
                     <hr>
                     <br>

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.hospital.model.vo.Hospital" %>
+<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList" %>
 <%
 	Hospital hos = (Hospital)request.getAttribute("hos");
-
+	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,7 +13,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
     <script>
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -22,19 +27,37 @@
           initialView: 'dayGridMonth',
           locale: 'ko',
           firstDay: 1,
-          titleFormat: function (date) {
-            year = date.date.year;
-            month = date.date.month + 1;
-
-            return year + "년 " + month + "월";
-          },
           headerToolbar: {
         	  left: 'prev',
         	  center: 'title',
         	  right: 'next'
           },
-          expandRows: true
+          dateClick: function(info){
+        	 $.ajax({
+        		 url: 'hosRsvt.mem',
+        		 type: 'post',
+        		 data: {
+        			 rsvtDate: info.dateStr,
+        			 rsvtH: $('select[name=rsvtH] option:selected').text(),
+        			 rsvtM: $('select[name=rsvtM] option:selected').text(),
+        			 rsvtName: $('input[name=rsvtName]').val(),
+        		     rsvtInfo: $('input[name=rsvtInfo]').val(),
+        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val()
+        		 },
+        		 success: function(result){
+        			 console.log(result);
+        			 // console.log(typeof(info.dateStr));
+        			 // console.log(new Date());
+        			 console.log(rsvtM);
+        		 },
+        		 error: function(){
+        			 alert('현재 예약 불가');
+        		 }
+        	 });
+          },
+
         });
+          
         calendar.render();
       });
 
@@ -74,13 +97,16 @@
         <div id="hos_info">
 			
 			<h3><%= hos.getHosName() %></h3><span><%= hos.getTreatDep() %></span>
-			
 			<!-- 현재 대기자 5명 -->
-			
-			<p>
-				<%= hos.getHosInfo() %>
-			</p>
-			
+			<% if(hos.getHosInfo() == null){ %>
+				<p style="color: grey; font-size: 15px;">
+					해당 병원의 소개글이 없습니다.
+				</p>
+			<%} else {%>
+				<p>
+					<%= hos.getHosInfo() %>
+				</p>
+			<%} %>
 			<div id="hos_info_address">
 				<div class="icon">
 					<b><i class="fa-solid fa-location-dot"></i></b>
@@ -118,43 +144,46 @@
         <div id="hos_rsvt">
 				
 			<div id="calendar"></div>
-			<form action="" method="post" id="rsvt_form">
-				<table>
+			
+			<form action="hosRsvt.mem" method="post" id="rsvt_form">
+				<table id="rsvt_form">
 					<tr>
 						<th>예약시간</th>
 						<td>
-							<select name="rsvt_time">
+							<select name="rsvtH">
 								<% for(int i = 8; i <= 22; i++) { %>
-									<option>
+									<option value="<%= i %>">
 										<%= i %>시
 									</option>
 								<% } %>
+							</select>
+							<select name="rsvtM">
+								<option>00분</option>
+								<option>30분</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>예약자명</th>
 						<td>
-							<input type="text" name="">
-						</td>
-					</tr>
-					<tr>
-						<th>연락처</th>
-						<td>
-							<input type="text" name="">
+							<input type="text" name="rsvtName">
 						</td>
 					</tr>
 					<tr>
 						<th>특이사항</th>
 						<td>
-							<input type="text" name="">
+							<input type="text" name="rsvtInfo">
 						</td>
 					</tr>
 					<tr>
 						<th>의료진</th>
 						<td>
-							<select name="rsvt_doc">
-								<option>길동이</option>
+							<select name="rsvtDoc">
+								<% for(Doctor d : docList){ %>
+									<option value="<%= d.getDocNo() %>">
+										<%= d.getDocName() %>
+									</option>
+								<%} %>
 							</select>
 						</td>
 					</tr>			
@@ -162,18 +191,69 @@
 
 				<div id="rsvt_btn">
 					<% if(loginUser != null) { %>
-						<button type="submit" class="btn btn-primary">예약접수</button>
+						<a href="<%= contextPath %>/hosRsvt.mem?hno=<%= hos.getHosNo() %>" 
+						class="btn btn-primary"
+						data-toggle="modal" data-target="#rsvtModal">예약접수</a>
 					<%} else{ %>
-						<button type="submit" class="btn btn-primary" disabled>예약접수</button>
+						<a href="#none" onclick="alert('로그인 후 이용 가능한 서비스');" class="btn btn-primary">예약접수</a>
 					<%} %>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guestRsvtModal">
 					  비회원 진료예약
 					</button>
 					
 				</div>
 				
 			</form>
+
+			<!-- 회원 예약 확인 팝업 -->
+			<div class="modal" id="rsvtModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
 			
+			      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title">Modal Heading</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      </div>
+			
+			      <!-- Modal body -->
+			      <div class="modal-body">
+			        Modal body..
+			      </div>
+			
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			      </div>
+			
+			    </div>
+			  </div>
+			</div>
+			
+			<!-- 비회원 예약 모달 -->
+			<div class="modal" id="guestRsvtModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			
+			      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title">Modal Heading</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      </div>
+			
+			      <!-- Modal body -->
+			      <div class="modal-body">
+			        Modal body..
+			      </div>
+			
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			      </div>
+			
+			    </div>
+			  </div>
+			</div>
 			
 			</div>
 			<!-- 진료 예약 끝 -->

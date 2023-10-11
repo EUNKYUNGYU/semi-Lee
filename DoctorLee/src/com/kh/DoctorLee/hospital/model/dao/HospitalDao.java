@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
 public class HospitalDao {
@@ -116,4 +117,32 @@ public class HospitalDao {
 		return hos;
 	}
 
+	public ArrayList<Doctor> selectDoc(Connection conn, int hno) {
+		ArrayList<Doctor> docList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDoc");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hno);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Doctor doc = new Doctor();
+				doc.setDocNo(rset.getInt("DOCTOR_NO"));
+				doc.setDocName(rset.getString("DOCTOR_NAME"));
+				doc.setTreatDep(rset.getString("TREAT_NAME"));
+				docList.add(doc);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return docList;
+	}
 }

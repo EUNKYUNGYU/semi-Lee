@@ -28,6 +28,9 @@ public class CliDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		// 값 뽑기
+		int cliNo = Integer.parseInt(request.getParameter(""));
+		
 		request.getRequestDispatcher("views/cli/cliDetailView.jsp").forward(request, response);
 	}
 

@@ -128,10 +128,17 @@
                         </ul>
                     </li>
                     <li><a href="#">건강 관리</a></li>
+<<<<<<< HEAD
+                    <li><a href="<%=contextPath1%>/list.di">다이어리</a>
+                        <ul>
+                            <li><a href="<%=contextPath1%>/list.di">내 다이어리</a></li>
+                            <li><a href="<%=contextPath1%>/list.di">가족 다이어리</a></li>
+=======
                     <li><a href="<%=contextPath1 %>/first.di">다이어리</a>
                         <ul>
                             <li><a href="<%=contextPath1 %>/first.di">내 다이어리</a></li>
                             <li><a href="<%=contextPath1 %>/first.di">가족 다이어리</a></li>
+>>>>>>> 8abdc157477c1366994c98f53342bef427a6ea2e
                         </ul>
                     </li>
 

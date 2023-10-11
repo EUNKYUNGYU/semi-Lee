@@ -13,14 +13,14 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
     <script>
-
+		var subHno = location.search.substr(5);
+    
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -42,20 +42,23 @@
         			 rsvtM: $('select[name=rsvtM] option:selected').text(),
         			 rsvtName: $('input[name=rsvtName]').val(),
         		     rsvtInfo: $('input[name=rsvtInfo]').val(),
-        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val()
+        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').text(),
+        		     hno: subHno
         		 },
         		 success: function(result){
         			 console.log(result);
         			 // console.log(typeof(info.dateStr));
         			 // console.log(new Date());
-        			 console.log(rsvtM);
+        			 
+        			 $()
+        		 
         		 },
         		 error: function(){
         			 alert('현재 예약 불가');
+						console.log(subHno);
         		 }
         	 });
-          },
-
+          }
         });
           
         calendar.render();
@@ -145,7 +148,7 @@
 				
 			<div id="calendar"></div>
 			
-			<form action="hosRsvt.mem" method="post" id="rsvt_form">
+			<form action="" method="post" id="rsvt_form">
 				<table id="rsvt_form">
 					<tr>
 						<th>예약시간</th>
@@ -180,7 +183,7 @@
 						<td>
 							<select name="rsvtDoc">
 								<% for(Doctor d : docList){ %>
-									<option value="<%= d.getDocNo() %>">
+									<option>
 										<%= d.getDocName() %>
 									</option>
 								<%} %>
@@ -191,7 +194,7 @@
 
 				<div id="rsvt_btn">
 					<% if(loginUser != null) { %>
-						<a href="<%= contextPath %>/hosRsvt.mem?hno=<%= hos.getHosNo() %>" 
+						<a href="<%= contextPath %>/hosRsvt.mem" 
 						class="btn btn-primary"
 						data-toggle="modal" data-target="#rsvtModal">예약접수</a>
 					<%} else{ %>
@@ -212,7 +215,11 @@
 			
 			      <!-- Modal Header -->
 			      <div class="modal-header">
-			        <h4 class="modal-title">Modal Heading</h4>
+			        <h4 class="modal-title">
+			        예약번호 : <%=  %>
+					</h4>
+						<%= loginUser.getMemName() %>
+					님의 예약이 완료되었습니다.
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			      </div>
 			

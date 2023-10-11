@@ -36,12 +36,12 @@ public class ReservationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, rsvt.getRsvtHos());
-			pstmt.setInt(2, rsvt.getRsvtDoc());
-			pstmt.setInt(3, rsvt.getRsvtMem());
-			pstmt.setString(4, rsvt.getRsvtDate());
-			pstmt.setString(5, rsvt.getRsvtTime());
-			pstmt.setString(6, rsvt.getMemInfo());
+			pstmt.setString(1, rsvt.getRsvtDate());
+			pstmt.setString(2, rsvt.getRsvtTime());
+			pstmt.setString(3, rsvt.getMemInfo());
+			pstmt.setString(4, rsvt.getRsvtHos());
+			pstmt.setString(5, rsvt.getRsvtMem());
+			pstmt.setString(6, rsvt.getRsvtDoc());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,4 +52,17 @@ public class ReservationDao {
 		return result;
 	}
 
+	public Reservation selectRsvt(Connection conn, String rsvtName) {
+		Reservation rsvtResult = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectRsvt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rsvtResult;
+	}
 }

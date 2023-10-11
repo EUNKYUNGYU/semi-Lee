@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.member.model.vo.Member;
 import com.kh.DoctorLee.reservation.model.service.ReservationService;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 
@@ -37,20 +38,22 @@ public class MemReservationController extends HttpServlet {
 		String rsvtM = request.getParameter("rsvtM");
 		String rsvtName = request.getParameter("rsvtName");
 		String rsvtInfo = request.getParameter("rsvtInfo");
-		int rsvtDoc = Integer.parseInt(request.getParameter("rsvtDoc")); // value or text?
-		int hno = Integer.parseInt(request.getParameter("hno"));
-		System.out.println(hno);
-		
+		String rsvtDoc = request.getParameter("rsvtDoc");
+		String hno = request.getParameter("hno");
 		String rsvtTime = rsvtH + rsvtM;
+		// System.out.println(hno);
 		
 		Reservation rsvt = new Reservation();
 		rsvt.setRsvtDate(rsvtDate);
 		rsvt.setRsvtTime(rsvtTime);
-		rsvt.setRsvtMem(Integer.parseInt(rsvtName));
-		rsvt.setMemInfo(rsvtInfo);
 		rsvt.setRsvtDoc(rsvtDoc);
+		rsvt.setRsvtMem(rsvtName);
+		rsvt.setMemInfo(rsvtInfo);
+		rsvt.setRsvtHos(hno);
 		
 		int result = new ReservationService().insertRsvt(rsvt);
+		
+		Reservation rsvtResult = new ReservationService().selectRsvt(rsvtName);
 		
 		if(result > 0) {
 			response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);

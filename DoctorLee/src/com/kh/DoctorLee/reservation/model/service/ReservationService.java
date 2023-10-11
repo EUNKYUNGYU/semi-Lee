@@ -17,4 +17,13 @@ public class ReservationService {
 		close(conn);
 		return result;
 	}
+	
+	// 예약 확인 
+	public Reservation selectRsvt(String rsvtName) {
+		Connection conn = getConnection();
+		Reservation rsvtResult = new ReservationDao().selectRsvt(conn, rsvtName);
+		close(conn);
+		return rsvtResult;
+				
+	}
 }

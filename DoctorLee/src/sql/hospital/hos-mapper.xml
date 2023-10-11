@@ -29,7 +29,8 @@
 	
 	<entry key="hosDetail">
 		SELECT
-		       HOS_NAME
+			   HOS_NO
+		       ,HOS_NAME
 		       ,HOS_ADDRESS
 		       ,TREAT_NAME
 		       ,TREAT_DATE

@@ -13,7 +13,9 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
     <script>
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -22,19 +24,35 @@
           initialView: 'dayGridMonth',
           locale: 'ko',
           firstDay: 1,
-          titleFormat: function (date) {
-            year = date.date.year;
-            month = date.date.month + 1;
-
-            return year + "년 " + month + "월";
-          },
           headerToolbar: {
         	  left: 'prev',
         	  center: 'title',
         	  right: 'next'
           },
-          expandRows: true
+          dateClick: function(info){
+        	 $.ajax({
+        		 url: 'hosRsvt.dy',
+        		 type: 'post',
+        		 data: {
+        			 rsvtDate: info.dateStr,
+        			 rsvtH: $('select[name=rsvtH] option: selected').text(),
+        			 rsvtM: $('select[name=rsvtM] option: selected').text(),
+        			 rsvtName: $('input[name=rsvtName]').val(),
+        			 rsvtTel: $('input[name=rsvtTel]').val(),
+        		     rsvtInfo: $('input[name=rsvtInfo]').val(),
+        		     rsvtDoc: $('select[name=rsvtDoc] option: selected').text()
+        		 },
+        		 success: function(result){
+        			 
+        		 },
+        		 error: function(){
+        			 
+        		 }
+        	 });
+          },
+          selectable: true
         });
+          
         calendar.render();
       });
 
@@ -74,13 +92,10 @@
         <div id="hos_info">
 			
 			<h3><%= hos.getHosName() %></h3><span><%= hos.getTreatDep() %></span>
-			
 			<!-- 현재 대기자 5명 -->
-			
 			<p>
 				<%= hos.getHosInfo() %>
 			</p>
-			
 			<div id="hos_info_address">
 				<div class="icon">
 					<b><i class="fa-solid fa-location-dot"></i></b>
@@ -118,42 +133,47 @@
         <div id="hos_rsvt">
 				
 			<div id="calendar"></div>
+			
 			<form action="" method="post" id="rsvt_form">
 				<table>
 					<tr>
 						<th>예약시간</th>
 						<td>
-							<select name="rsvt_time">
+							<select name="rsvtH">
 								<% for(int i = 8; i <= 22; i++) { %>
 									<option>
 										<%= i %>시
 									</option>
 								<% } %>
 							</select>
+							<select name="rsvtM">
+								<option>00분</option>
+								<option>30분</option>
+							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>예약자명</th>
 						<td>
-							<input type="text" name="">
+							<input type="text" name="rsvtName">
 						</td>
 					</tr>
 					<tr>
 						<th>연락처</th>
 						<td>
-							<input type="text" name="">
+							<input type="text" name="rsvtTel">
 						</td>
 					</tr>
 					<tr>
 						<th>특이사항</th>
 						<td>
-							<input type="text" name="">
+							<input type="text" name="rsvtInfo">
 						</td>
 					</tr>
 					<tr>
 						<th>의료진</th>
 						<td>
-							<select name="rsvt_doc">
+							<select name="rsvtDoc">
 								<option>길동이</option>
 							</select>
 						</td>
@@ -164,7 +184,7 @@
 					<% if(loginUser != null) { %>
 						<button type="submit" class="btn btn-primary">예약접수</button>
 					<%} else{ %>
-						<button type="submit" class="btn btn-primary" disabled>예약접수</button>
+						<button type="submit" class="btn btn-primary">예약접수</button>
 					<%} %>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 					  비회원 진료예약

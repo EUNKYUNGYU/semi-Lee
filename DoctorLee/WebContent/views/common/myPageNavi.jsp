@@ -127,7 +127,7 @@
                             <li><a href="#">처방전</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">건강 관리</a></li>
+                    <li><a href="<%=contextPath1%>/main.hc">건강 관리</a></li>
 
 
                     <li><a href="<%=contextPath1 %>/first.di">다이어리</a>

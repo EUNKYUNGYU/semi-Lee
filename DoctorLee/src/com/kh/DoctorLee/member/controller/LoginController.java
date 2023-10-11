@@ -33,8 +33,13 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		RequestDispatcher view = request.getRequestDispatcher("views/member/myPage.jsp");
 		view.forward(request, response);
+		
+		
+		
+		
 	
 	}
 

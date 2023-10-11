@@ -121,7 +121,9 @@ public class MemberDao {
 			pstmt.setString(2, m.getNickName());
 			pstmt.setString(3, m.getPhone());
 			pstmt.setString(4, m.getEmail());
-			pstmt.setString(5, m.getMemId());
+			pstmt.setInt(5, m.getHeight());
+			pstmt.setInt(6, m.getWeight());
+			pstmt.setString(7, m.getMemId());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

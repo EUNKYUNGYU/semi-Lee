@@ -41,6 +41,8 @@ public class MemberUpdateController extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String memId = request.getParameter("memId");
+		int height = Integer.parseInt(request.getParameter("height"));
+		int weight = Integer.parseInt(request.getParameter("weight"));
 		
 		Member m = new Member();
 		m.setMemName(memName);
@@ -48,6 +50,8 @@ public class MemberUpdateController extends HttpServlet {
 		m.setPhone(phone);
 		m.setEmail(email);
 		m.setMemId(memId);
+		m.setHeight(height);
+		m.setWeight(weight);
 		
 		System.out.println(memId);
 		

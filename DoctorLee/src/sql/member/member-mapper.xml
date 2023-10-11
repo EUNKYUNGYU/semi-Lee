@@ -72,6 +72,8 @@
 				NICKNAME = ?,
 				PHONE = ?,
 				EMAIL = ?,
+				HEIGHT = ?,
+				WEIGHT = ?,
 				MODIFY_DATE = SYSDATE
 		  WHERE
 				MEM_ID = ?

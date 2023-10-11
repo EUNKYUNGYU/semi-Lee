@@ -42,8 +42,6 @@
                 day.classList.remove("day-color");
             })
             info.dayEl.classList.add("day-color");
-            
-            
         }
       });
       calendar.render();
@@ -519,7 +517,7 @@
                                         
                                         resultStr += '<li class="content-cli">'
                                             +'<div class="cli-img">' 
-                                                + '<img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>' 
+                                                +'<img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>' 
                                                 +'<button>자세히 보기</button>'
                                             + '</div>'
         
@@ -527,6 +525,10 @@
                                                     +'<div class="cli-top">'
                                                         +'<span class="cli-name title">'
                                                             +result[i].cliName
+                                                        +'</span>'
+
+                                                        +'<span class="cli-no">'
+                                                            +result[i].cliNo
                                                         +'</span>'
                                                     +'</div>'
         
@@ -563,7 +565,8 @@
 
                                     //자세히보기 버튼 클릭 시 상세보기 페이지로 이동
                                     $('.cli-img > button').click(function(){
-                                        location.href='<%=contextPath%>/cliDetail.cli?cno=' + $(this).children().eq(0).val();
+                                        //location.href='<%=contextPath%>/cliDetail.cli?cno=' + $('[type=hidden]').val();
+                                        console.log($(this));
                                     })
 
                                         //li클릭 시 색깔 바뀌는 이벤트

@@ -129,6 +129,7 @@
                     </li>
                     <li><a href="#">건강 관리</a></li>
 
+
                     <li><a href="<%=contextPath1 %>/first.di">다이어리</a>
                         <ul>
                             <li><a href="<%=contextPath1 %>/first.di">내 다이어리</a></li>

@@ -5,7 +5,6 @@
     
 <% 
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
-	String alertMsgPoint = (String)session.getAttribute("alertMsgPoint");
 %>
 
 <!DOCTYPE html>
@@ -122,6 +121,7 @@ article{
 #quizeFooter1 {
 	width: 75%;
 	height: 100%;
+	padding: 20px;
 }
 
 #quizeFooter2 {
@@ -248,14 +248,10 @@ button {
 			<% } %>
 			</div>
 			
-			}
+			
 			
 			<script>
 			  $(function(){
-			  		var alertMsgPoint =  '<%= alertMsgPoint %>';		
-				  $('.quizeButton1').click(function(){
-			    	  alert(alertMsgPoint);
-			      });   			
 			   				
 			      $('.quizeButton2').click(function(){
 			    	  alert('로그인 후 이용 가능한 기능입니다');

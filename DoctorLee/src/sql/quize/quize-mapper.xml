@@ -93,8 +93,14 @@ INSERT
  
  </entry>
  
+ <entry key="quizeAnswerExist"></entry>
 
- 
+ 	SELECT 
+ 			? 
+ 		FROM 
+ 			TB_QUIZE_CHOICE 
+ 		WHERE 
+ 			QUIZE_NO = ? 
  
 </properties>
 

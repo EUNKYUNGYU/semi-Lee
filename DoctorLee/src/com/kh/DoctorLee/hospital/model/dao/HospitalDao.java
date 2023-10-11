@@ -24,58 +24,54 @@ public class HospitalDao {
 		try {
 			prop.loadFromXML(new FileInputStream(file));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public Hospital selectTreatTime(Connection conn) {
-		
-		Hospital hos = new Hospital();
-		PreparedStatement pstmt = null;
+	public ArrayList<Hospital> schToIndex(Connection conn, String search, String hkeyH){
+		ArrayList<Hospital> list = new ArrayList();
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectTreatTime");
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("schToIndex");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, hkeyH);
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				hos.setHosNo(rset.getInt("HOS_NO"));
-				hos.setTreatBegin(rset.getString("TREAT_BEGIN"));
-				hos.setTreatEnd(rset.getString("TREAT_END"));
+			while(rset.next()){
+				Hospital h = new Hospital();
+				h.setHosNo(rset.getInt("HOS_NO"));
+				h.setHosName(rset.getString("HOS_NAME"));
+				h.setHosAddress(rset.getString("HOS_ADDRESS"));
+				list.add(h);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		
-		return hos;
+		
+		return list;
 	}
 	
-	public ArrayList<Hospital> searchHos(Connection conn, String keyword){
-		ArrayList<Hospital> hosList = new ArrayList();
-		PreparedStatement pstmt = null;
+	// 병원 입점 개수 조회
+	public int hosCount(Connection conn) {
+		int hosCount = 0;
 		ResultSet rset = null;
-		String sql = prop.getProperty("schHos");
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("hosCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + keyword + "%");
-			
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				Hospital hos = new Hospital();
-				hos.setHosNo(rset.getInt("HOS_NO"));
-				hos.setHosName(rset.getString("HOS_NAME"));
-				hos.setHosAddress(rset.getString("HOS_ADDRESS"));
-				
-				hosList.add(hos);
+			if(rset.next()) {
+				hosCount = rset.getInt("COUNT(*)");
 			}
+			
+			System.out.println(hosCount);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,36 +80,40 @@ public class HospitalDao {
 			close(pstmt);
 		}
 		
-		return hosList;
+		return hosCount;
 	}
 	
-	public ArrayList<Hospital> schHosList(Connection conn){
-		ArrayList<Hospital> list = new ArrayList();
+	public Hospital hosDetail(Connection conn, int hno) {
+		Hospital hos = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("schHosList");
+		String sql = prop.getProperty("hosDetail");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hno);
+			
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				Hospital h = new Hospital();
-				h.setHosNo(rset.getInt("HOS_NO"));
-				h.setHosName(rset.getString("HOS_NAME"));
-				h.setHosAddress(rset.getString("HOS_ADDRESS"));
+			if(rset.next()) {
+				hos = new Hospital();
+				hos.setHosName(rset.getString("HOS_NAME"));
+				hos.setHosAddress(rset.getString("HOS_ADDRESS"));
+				hos.setTreatDep(rset.getString("TREAT_NAME"));
+				hos.setTreatDate(rset.getString("TREAT_DATE"));
+				hos.setTreatBegin(rset.getString("TREAT_BEGIN"));
+				hos.setTreatEnd(rset.getString("TREAT_END"));
+				hos.setHosTel(rset.getString("HOS_TEL"));
+				hos.setHosInfo(rset.getString("HOS_INFO"));
 				
-				list.add(h);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
-		return list;
+		return hos;
 	}
 
 }

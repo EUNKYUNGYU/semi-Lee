@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.hospital.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.kh.DoctorLee.hospital.model.service.HospitalService;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
 /**
- * Servlet implementation class HosSchController
+ * Servlet implementation class HosDetailController
  */
-@WebServlet("/hosSch.dy")
-public class HosSchController extends HttpServlet {
+@WebServlet("/hosDetail.dy")
+public class HosDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HosSchController() {
+    public HosDetailController() {
         super();
     }
 
@@ -30,39 +29,26 @@ public class HosSchController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
+		//http://localhost:8765/DoctorLee/views/hospital/hosDetail.dy?hno=4
+		int hno = Integer.parseInt(request.getParameter("hno"));
 		
-		String keyword = request.getParameter("index_search");
+		Hospital hos = new HospitalService().hosDetail(hno);
 		
-		ArrayList<Hospital> list = new HospitalService().searchHos(keyword);
+		if(hos != null) {
+			request.setAttribute("hos", hos);
+			
+			request.getRequestDispatcher("views/hospital/hosDetail.jsp").forward(request, response);
+		} else {
+			
+		}
 		
-			
-			if(!list.isEmpty()) {
-				
-				
-					request.setAttribute("list", list);
-					request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
-				
-			} else {
-				
-				request.setAttribute("error", "병원 검색창, 병원 리스트 불러오기 실패");
-				request.getRequestDispatcher("views/common/errorPage.jsp");
-			}
-			
-			request.setAttribute("indexSch", keyword);
-			
-			
-			System.out.println("?????????");
-		
-
-	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

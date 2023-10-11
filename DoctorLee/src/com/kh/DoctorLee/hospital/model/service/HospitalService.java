@@ -10,25 +10,29 @@ import com.kh.DoctorLee.hospital.model.dao.HospitalDao;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
 public class HospitalService {
-	
-	public Hospital selectTreatTime() {
+	// 메인 검색창, 응답
+	public ArrayList<Hospital> schToIndex(String search, String hkeyH){
 		Connection conn = getConnection();
-		Hospital hos = new HospitalDao().selectTreatTime(conn);
-		close(conn);
-		return hos;
-	}
-
-	public ArrayList<Hospital> searchHos(String keyword){
-		Connection conn = getConnection();
-		ArrayList<Hospital> hosList = new HospitalDao().searchHos(conn, keyword);
-		close(conn);
-		return hosList;
-	}
-	
-	public ArrayList<Hospital> schHosList(){
-		Connection conn = getConnection();
-		ArrayList<Hospital> list = new HospitalDao().schHosList(conn);
+		ArrayList<Hospital> list = new HospitalDao().schToIndex(conn, search, hkeyH);
 		close(conn);
 		return list;
 	}
+	
+	// 병원 개수 조회
+	public int hosCount() {
+		Connection conn = getConnection();
+		int hosCount = new HospitalDao().hosCount(conn);
+		close(conn);
+		return hosCount;
+	}
+	
+	// 병원 상세 조회
+	public Hospital hosDetail(int hno) {
+		Connection conn = getConnection();
+		Hospital hos = new HospitalDao().hosDetail(conn, hno);
+		close(conn);
+		
+		return hos;
+	}
+	
 }

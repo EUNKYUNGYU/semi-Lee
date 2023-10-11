@@ -21,15 +21,5 @@
 </head>
 <body>
 	<h1><%= error %></h1>
-
-	<script type="text/javascript">
-	
-		$(function(){
-			alert('<%= error %>');	
-		})
-		
-		
-	
-	</script>
 </body>
 </html>

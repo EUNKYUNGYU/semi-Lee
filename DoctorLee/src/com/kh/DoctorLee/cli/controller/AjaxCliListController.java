@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.hospital.controller;
+package com.kh.DoctorLee.cli.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.hospital.model.service.HospitalService;
-import com.kh.DoctorLee.hospital.model.vo.Hospital;
+import com.google.gson.Gson;
+import com.kh.DoctorLee.cli.model.service.CliService;
+import com.kh.DoctorLee.cli.model.vo.Clinic;
 
 /**
- * Servlet implementation class HosSchListController
+ * Servlet implementation class AjaxCliListController
  */
-@WebServlet("/sch_hos.dy")
-public class HosSchListController extends HttpServlet {
+@WebServlet("/ajaxList.cli")
+public class AjaxCliListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HosSchListController() {
+    public AjaxCliListController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,26 +33,17 @@ public class HosSchListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
+		// 값 뽑기
+		String cateName = request.getParameter("cateName");
 		
-		String keyword = request.getParameter("sch_bar");
+		// 클리닉 불러오기
+		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
 		
-		ArrayList<Hospital> list = new HospitalService().searchHos(keyword);
+		response.setContentType("application/json; charset=UTF-8");
+		
+		new Gson().toJson(cliList, response.getWriter());
+	}
 
-		if(list.isEmpty()) {
-			
-			request.setAttribute("error", "에러");
-			request.getRequestDispatcher("views/common/errorPage.jsp");
-		} else {
-			request.setAttribute("list", list);
-			response.sendRedirect("views/hospital/hosSearch.jsp");
-			
-			// request.setAttribute("hosList", hosList);
-			// request.getRequestDispatcher("views/hostpital/hosSearch.jsp").forward(request, response);
-		}
-		
-		
-	}	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

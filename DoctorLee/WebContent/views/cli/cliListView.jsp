@@ -32,12 +32,12 @@
         dateClick: function(info){
 
             // 현재 날짜를 기준으로 과거 날짜 선택 불가
-            var clickedDate = info.date.getTime();
-            var today = new Date().getTime();
+            var clickedDate = info.date;
+            var today = new Date();
 
             if(clickedDate < today){
                 return false;
-            } 
+            }
 
             $('.time-content').click(function(){
                 // 달력 클릭 시 선택한 날짜 출력하기

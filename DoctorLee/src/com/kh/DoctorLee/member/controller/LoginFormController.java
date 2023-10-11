@@ -14,16 +14,16 @@ import com.kh.DoctorLee.member.model.service.MemberService;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginController2
+ * Servlet implementation class LoginFormController
  */
-@WebServlet("/login2.me")
-public class LoginController2 extends HttpServlet {
+@WebServlet("/loginForm.me")
+public class LoginFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController2() {
+    public LoginFormController() {
         super();
         // TODO Auto-generated constructor stub
     }

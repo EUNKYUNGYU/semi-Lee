@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.DoctorLee.hospital.model.dao.HospitalDao;
+import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
 public class HospitalService {
@@ -33,6 +34,14 @@ public class HospitalService {
 		close(conn);
 		
 		return hos;
+	}
+	
+	// 의료진 조회
+	public ArrayList<Doctor> selectDoc(int hno) {
+		Connection conn = getConnection();
+		ArrayList<Doctor> docList = new HospitalDao().selectDoc(conn, hno);
+		close(conn);
+		return docList;
 	}
 	
 }

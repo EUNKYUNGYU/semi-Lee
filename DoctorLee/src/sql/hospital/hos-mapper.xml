@@ -47,5 +47,19 @@
 	       AND
 	           STATUS = 'Y'
 	</entry>
+	
+	<entry key="selectDoc">
+		SELECT
+		      DOCTOR_NO
+		      ,DOCTOR_NAME
+		      ,TREAT_NAME
+		 FROM
+		      TB_DOCTOR
+		 JOIN
+		      TB_TREAT_DEPARTMENT ON (TREAT_DEP = TREAT_NO)
+		WHERE
+		      HOS_NO = ?
+	
+	</entry>
 
 </properties>

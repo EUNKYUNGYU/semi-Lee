@@ -69,7 +69,11 @@
                                 <a href="<%= contextPath %>/list.bo">익명게시판</a>
                             </li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
-                            <li><a href="#">쪽지함</a></li>
+                            <% if(loginUser != null){ %>
+                            <li><a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver">쪽지함</a></li>
+                        	<% } else { %>
+                        	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');">쪽지함</a></li>
+                        	<% } %>
                         </ul>
                     </li>
                     <li><a href="#">마이페이지</a>
@@ -81,7 +85,7 @@
                             <li><a href="#">자기 게시물 확인</a></li>
                             <li><a href="#">예약 관리</a></li>
                             <li><a href="#">병원 즐겨찾기</a></li>
-                            <li><a href="#">진료 내역 관리</a></li>
+                            <li><a href="<%=contextPath%>/main.bm">진료 내역 관리</a></li>
                             <li><a href="<%=contextPath%>/main.hc">건강 관리</a></li>
                             <li><a href="<%=contextPath%>/first.di">다이어리</a></li>
                             <li><a href="#">가족 계정 추가</a></li>

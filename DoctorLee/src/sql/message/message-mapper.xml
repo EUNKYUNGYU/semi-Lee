@@ -1,1 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+
+<entry key="selectList">
+
+	SELECT 
+        MEM_ID, MESSAGE_CONTENT, SEND_DATE, READ_STATUS
+    FROM 
+        TB_MESSAGE 
+    JOIN 
+        TB_MEMBER ON(MEM_NO = SENDER)
+    WHERE 
+        ? = ?
+    AND 
+        TB_MESSAGE.STATUS = 'Y'
+        ORDER BY SEND_DATE DESC
+
+</entry>
+</properties>
+
+

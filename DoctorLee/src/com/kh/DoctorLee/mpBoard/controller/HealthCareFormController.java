@@ -1,27 +1,25 @@
-package com.kh.DoctorLee.cli.controller;
+package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.Clinic;
-
 /**
- * Servlet implementation class CliDetailController
+ * Servlet implementation class HealthCareFormController
  */
-@WebServlet("/cliDetail.cli")
-public class CliDetailController extends HttpServlet {
+@WebServlet("/main.hc")
+public class HealthCareFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliDetailController() {
+    public HealthCareFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +28,8 @@ public class CliDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		// 값 뽑기
-		int cliNo = Integer.parseInt(request.getParameter("cno"));
-		
-		// Service 요청
-		Clinic c = new CliService().selectCli(cliNo);
-		
-		request.setAttribute("c", c);
-		
-		request.getRequestDispatcher("views/cli/cliDetailView.jsp").forward(request, response);
+		 RequestDispatcher view = request.getRequestDispatcher("views/myPage/healthCare.jsp");
+		 view.forward(request, response);
 	}
 
 	/**

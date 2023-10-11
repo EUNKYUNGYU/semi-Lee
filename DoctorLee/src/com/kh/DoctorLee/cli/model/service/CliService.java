@@ -31,5 +31,14 @@ public class CliService {
 		
 		return cliList;
 	}
+	
+	public Clinic selectCli(int cliNo) {
+		Connection conn = getConnection();
+		
+		Clinic c = new CliDao().selectCli(conn, cliNo);
+		
+		close(conn);
+		return c;
+	}
 
 }

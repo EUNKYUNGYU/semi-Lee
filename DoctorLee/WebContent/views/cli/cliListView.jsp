@@ -32,18 +32,11 @@
         dateClick: function(info){
 
             // 현재 날짜를 기준으로 과거 날짜 선택 불가
-            var clickedDate = getDateWithoutTime(info.date);
-            var nowDate = getDateWithoutTime(new Date());
+            var clickedDate = info.date;
+            var today = new Date();
 
-            if(clickedDate >= nowDate){
-                alert("FuterDate");
-            } else {
-                alert("Past Date");
-            }
-
-            function getDateWithoutTime(dt){
-                dt.setHours(0, 0, 0, 0);
-                return dt;
+            if(clickedDate < today){
+                return false;
             }
 
             $('.time-content').click(function(){

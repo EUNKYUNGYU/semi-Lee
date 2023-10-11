@@ -4,6 +4,7 @@
 <%
 Member loginUser = (Member)session.getAttribute("loginUser");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,9 +105,11 @@ Member loginUser = (Member)session.getAttribute("loginUser");
        p {
         margin-left : 50px;
        }
+
 </style>
 </head>
 <body>
+ 	
 	<%@ include file="../common/navi.jsp" %>
 	
 	<h2 align="center">마이페이지</h2><br>
@@ -154,15 +157,15 @@ Member loginUser = (Member)session.getAttribute("loginUser");
                     <li><a href="#">관리자 문의</a></li>
                     <li><a href="#">자기 게시글 확인</a></li>
                     <li><a href="#">예약 관리</a></li>
-                    <li><a href="#">병원즐겨찾기</a></li>
+                    <li><a href="<%=contextPath%>/main.bm">병원즐겨찾기</a></li>
                     <li><a href="#">진료 내역 관리</a>
                         <ul>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">처방전</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">건강 관리</a></li>
-                    <li><a href="#">다이어리</a>
+                    <li><a href="<%=contextPath%>/main.hc">건강 관리</a></li>
+                    <li><a href="<%=contextPath%>/first.di">다이어리</a>
                         <ul>
                             <li><a href="<%=contextPath%>/first.di">내 다이어리</a></li>
                             <li><a href="<%=contextPath%>/first.di">가족 다이어리</a></li>
@@ -179,8 +182,9 @@ Member loginUser = (Member)session.getAttribute("loginUser");
                     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MTNfMjcz%2FMDAxNjU1MDQ4NDU0NDkw.O3lQE9MMivnCNvAFZne6k5HrLr20MJRuV6pqDZTdDdMg.PeiJfGqE2PdsWhsyVSlYcK1B7MsF0srJe0J8mN0unXEg.JPEG.553812%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5.jpeg&type=a340" alt="이미지">
                     <h3>일반회원 ) <%= loginUser.getMemName() %>님</h3>
                     <p>
-                        이메일 : <br>
-                        휴대폰 번호 :
+                    <br>
+                        이메일 :  <%= loginUser.getEmail() %>      <br>
+                        휴대폰 번호 : <%= loginUser.getPhone() %>
                     </p>
                     
                 </div>
@@ -189,7 +193,8 @@ Member loginUser = (Member)session.getAttribute("loginUser");
                     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MTNfMjcz%2FMDAxNjU1MDQ4NDU0NDkw.O3lQE9MMivnCNvAFZne6k5HrLr20MJRuV6pqDZTdDdMg.PeiJfGqE2PdsWhsyVSlYcK1B7MsF0srJe0J8mN0unXEg.JPEG.553812%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5.jpeg&type=a340" alt="이미지">
                     <h3>가족회원 ) xxx님</h3>
                     <p>
-                        이메일 : <br>
+                    <br>
+                        이메일 : 
                         휴대폰 번호 :
                     </p>
                 </div>

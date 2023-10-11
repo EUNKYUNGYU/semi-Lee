@@ -357,13 +357,13 @@
                         <br>
                         키
                         <br><br>
-                        <input type="text" placeholder="                                                     cm" class="box" name="height">
+                        <input type="text" placeholder="                                                     cm" class="box" name="height" required>
                         <br><br>
                         <hr>
                         <br>
                         몸무게
                         <br><br>
-                        <input type="text" placeholder="                                                     kg" class="box" name="weight">
+                        <input type="text" placeholder="                                                     kg" class="box" name="weight" required>
                         <br><br>
                         <hr>
                         <br>

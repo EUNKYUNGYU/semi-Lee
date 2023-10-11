@@ -54,7 +54,7 @@ public class MemberUpdateController extends HttpServlet {
 		m.setWeight(weight);
 		
 		System.out.println(memId);
-		
+		System.out.println(m);
 		int result = new MemberService().updateMember(m);
 		System.out.println(result);
 		

@@ -15,7 +15,7 @@
 	}
 	#healthCare{
 		width : 1000px;
-		height : 1200px;
+		height : 900px;
 		margin : auto;
 	}
 	#diary{
@@ -96,9 +96,77 @@
 							</tbody>
 						</table>
 						<br><br><hr><br>
-						<h3 align="center"><%=loginUser.getMemName() %>님의 건강상태</h3>
+						<h3 align="center"><%=loginUser.getMemName() %>님의 건강상태</h3> <br>
+						<h5 align="center" id="healthCareInfo">정보</h5>
+						
 						<hr>
 						<br>
+						<% if(standard < heavy){ %>
+							<script>
+								$(function(){
+									//document.getElementById('healthCareInfo').innerHTML = '과체중입니다.';
+									$('#healthCareInfo').html('과체중입니다.');
+								})
+							</script>
+						
+						<% }else{ %>
+						
+							<% if(standard > thin) { %>
+								<script>
+									$(function(){
+										//document.getElementById('healthCareInfo').innerHTML = '저체중입니다.';
+										$('#healthCareInfo').html('저체중입니다.');
+									})
+									
+								</script>
+								
+							
+							<%} else{ %>
+								<script>
+									$(function(){
+										//document.getElementById('healthCareInfo').innerHTML = '정상체중입니다';
+										$('#healthCareInfo').html('정상체중입니다.');
+									})
+								</script>
+							
+							<%} %>
+						<%} %>
+						<h3 align="center"><%=loginUser.getMemName() %>님을 위한 운동 추천!</h3>
+						<p id="recommendHealth" align="center">추천 운동</p>
+						<% if(standard < heavy){ %>
+							<script>
+								$(function(){
+									//document.getElementById('healthCareInfo').innerHTML = '과체중입니다.';
+									$('recommendHealth').html('유산소 운동(줄넘기,산책,뜀걸음...등등)');
+								})
+							</script>
+						
+						<% }else{ %>
+						
+							<% if(standard > thin) { %>
+								<script>
+									$(function(){
+										//document.getElementById('healthCareInfo').innerHTML = '저체중입니다.';
+										$('recommendHealth').html('근력 운동(턱걸이,벤치/레그 프레스..등등) 위주로 해주시면됩니다.');
+									})
+									
+								</script>
+								
+							
+							<%} else{ %>
+								<script>
+									$(function(){
+										//document.getElementById('healthCareInfo').innerHTML = '정상체중입니다';
+										$('#recommendHealth').html('유산소 운동과 근력운동을 밸런스 있게 해주세요!');
+									})
+								</script>
+							
+							<%} %>
+						<%} %>
+						<br><hr><br>
+						<h3 align="center"><%=loginUser.getMemName()%>님을 위한 추천 음식</h3>
+						
+						
 						
 						
 						

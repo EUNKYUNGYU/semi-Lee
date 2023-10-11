@@ -145,7 +145,7 @@
             
             <div class="content_2">
                 
-                    <form id="enroll-form" action="<%=contextPath%>/insert.me" method="post" class="formfont">
+               <form id="enroll-form" action="<%=contextPath%>/insert.me" method="post" class="formfont">
                         <br><br>
                         <span style="font-size: 23px; font-weight: bold;">기본입력사항(필수)</span>
                         <br><br><br>
@@ -153,7 +153,7 @@
                         <br>
                         아이디*
                         <br><br>
-                        <input type="text" name="memId" id="r_id1" class="box">
+                        <input type="text" name="memId" id="r_id1" class="box" required>
                         <input type="button" value="중복확인" id="r_id2" onclick="idCheck();">
                         <br><br>
                         <span style="font-size: 14px;">아이디는 영문 대/소문자, 숫자 조합하여 5 ~ 15자리</span>
@@ -162,7 +162,7 @@
                         <br>
                         비밀번호*
                         <br><br>
-                        <input type="password" name="memPwd" class="box"><br>
+                        <input type="password" name="memPwd" class="box" required><br>
                         <br>
                         <span style="font-size: 14px;">비밀번호는 영문 대/소문자, 숫자, 특수문자(!@#$%^*+=-)가 포함되는 10~16자</span>
                         <br><br>
@@ -170,13 +170,13 @@
                         <br>
                         비밀번호 확인*
                         <br><br>
-                        <input type="password" name="checkMemPwd" class="box">
+                        <input type="password" name="checkMemPwd" class="box" required>
                         <br><br>
                         <hr>
                         <br>
                         이름*
                         <br><br>
-                        <input type="text" name="memName" class="box"> <br>
+                        <input type="text" name="memName" class="box" required> <br>
                         <br>
                         <hr>
                         <br>
@@ -184,7 +184,7 @@
   
    		    닉네임*
                         <br><br>
-                        <input type="text" name="nickName" class="box"> <br>
+                        <input type="text" name="nickName" class="box" required> <br>
                         <br>
                         <hr>
                         <br>
@@ -198,19 +198,19 @@
                         <br>
                         이메일*
                         <br><br>
-                        <input type="email" name="email" placeholder="email@naver.com" class="box">
+                        <input type="email" name="email" placeholder="email@naver.com" class="box" required>
                         <br><br>
                         <hr>
                         <br>
                         휴대전화*
                         <br><br>
-                        <input type="text" name="phone" placeholder="-을 제외하고 입력하세요." class="box">
+                        <input type="text" name="phone" placeholder="-을 제외하고 입력하세요." class="box" required>
                         <br><br><br>
                         <hr>
                         <br>
                   주민등록번호*
                         <br><br>
-                        <input type="password" name="iNum" placeholder="-을 제외하고 입력하세요." class="box">
+                        <input type="password" name="iNum" placeholder="-을 제외하고 입력하세요." class="box" required>
                         <br><br>
                         <hr>
                         <br>
@@ -337,16 +337,7 @@
                             - 보유기간 : 회원 탈퇴 시 혹은 법정 보유 기간<br>
                         </div>
                         <br><br>
-                        <input type="checkbox">[선택] 이메일 수신 동의
-                        <br><br>
-                        <div class="auto2">
-				                            할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑정보를 SMS나 이메일로 받아보실 수 있습니다.
-				
-				                            단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.
-				
-				                            선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.
-                        </div>
-                        <br><br>
+                        
 
                         <hr style="border: 1px solid #1E376F;">                       
                         <br>
@@ -357,13 +348,13 @@
                         <br>
                         키
                         <br><br>
-                        <input type="text" placeholder="                                                     cm" class="box" name="height" required>
+                        <input type="text" placeholder="   cm" class="box" name="height" required>
                         <br><br>
                         <hr>
                         <br>
                         몸무게
                         <br><br>
-                        <input type="text" placeholder="                                                     kg" class="box" name="weight" required>
+                        <input type="text" placeholder="   kg" class="box" name="weight" required>
                         <br><br>
                         <hr>
                         <br>
@@ -420,7 +411,7 @@
         <div id="content_3" align="center">
             
             <button type="reset" id="cancel">취소</button>
-            <button type="submit" id="register">회원가입</button>
+            <button type="submit" id="register"  onclick="return checkAll();">회원가입</button>
         </div>
         
 
@@ -429,6 +420,8 @@
 </form>
 
 <script>
+
+	// 아이디 중복체크
 	function idCheck(){
 		const $memId = $('#enroll-form input[name=memId]');
 		
@@ -464,25 +457,69 @@
 		});
 	}
 
-</script>
+	// 유효성 검사
+	function checkAll(){
+        var memId = document.getElementById('memId');
+        var memPwd = document.getElementById('memPwd');
+        var memPwd2 = document.getElementById('memPwd2');
+        var memName = document.getElementById('memName');
+        var email = document.getElementById('email');
+        var phone = document.getElementById('phone');
+        var iNum = document.getElementById('iNum');
 
-<!-- 
-<script>
-	
-    function validate(){
-        var memId = document.getElementById('memId').value;
-
+        // 아이디
         var regExp = /^[a-zA-Z][a-zA-Z0-9]{4,14}$/;
-
         if(!regExp.test(memId.value)){
             alert('아이디를 다시 확인해주세요.');
             memId.select();
             memId.value= '';
             return false;
         }
-    }
+        
+        // 비밀번호
+        var regExp = /^[a-zA-z0-9(!@#$%^*+=-]{10,16}$/;
+        if(!regExp.test(memPwd.value)){
+        	alert('비밀번호를 다시 확인해주세요.');
+        	return false;
+        }
+        
+        // 비밀번호 체크
+        if(memPwd.value != memPwd2.value){
+        	alert('비밀번호가 일치하지 않습니다.')
+        	return false;
+        }
+        
+        // 이름
+        var regExp = /^[가-힣a-zA-Z]{2,15}$/;
+        if(!regExp.test(memName.value)){
+        	alert('이름을 다시 확인해주세요.');
+        	return false;
+        }
+        
+        // 이메일
+        var regExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+        if(!regExp.test(email.value)){
+        	alert('이메일을 다시 확인해주세요.')
+        	return false;
+        }
+        
+        // 휴대폰
+        var regExp = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+        if(!regExp.test(phone.value)){
+        	alert('휴대전화를 다시 확인해주세요.')
+        	return false;
+        }
+        
+        // 주민번호
+		var regExp = /^\d{2}(0[1-9]|1[0-2])([1-9]|[1-2][0-9]|3[0-1])-[1,4]\d{6}$/;       
+		if(!regExp.test(iNum.value)){
+        	alert('주민번호를 다시 확인해주세요.')
+        	return false;
+        }
+	}
+	
 </script>
--->
+
 
     <br><br><br><br><br><br><br><br>
 </body>

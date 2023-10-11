@@ -31,22 +31,25 @@
           },
           dateClick: function(info){
         	 $.ajax({
-        		 url: 'hosRsvt.dy',
+        		 url: 'hosRsvt.mem',
         		 type: 'post',
         		 data: {
         			 rsvtDate: info.dateStr,
-        			 rsvtH: $('select[name=rsvtH] option: selected').text(),
-        			 rsvtM: $('select[name=rsvtM] option: selected').text(),
+        			 rsvtH: $('select[name=rsvtH] option:selected').text(),
+        			 rsvtM: $('select[name=rsvtM] option:selected').text(),
         			 rsvtName: $('input[name=rsvtName]').val(),
         			 rsvtTel: $('input[name=rsvtTel]').val(),
         		     rsvtInfo: $('input[name=rsvtInfo]').val(),
-        		     rsvtDoc: $('select[name=rsvtDoc] option: selected').text()
+        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').text()
         		 },
         		 success: function(result){
-        			 
+        			 console.log(result);
+        			 // console.log(typeof(info.dateStr));
+        			 // console.log(new Date());
+        			 console.log(rsvtM);
         		 },
         		 error: function(){
-        			 
+        			 alert('예약 실패');
         		 }
         	 });
           },
@@ -135,7 +138,7 @@
 			<div id="calendar"></div>
 			
 			<form action="" method="post" id="rsvt_form">
-				<table>
+				<table id="rsvt_form">
 					<tr>
 						<th>예약시간</th>
 						<td>
@@ -184,7 +187,7 @@
 					<% if(loginUser != null) { %>
 						<button type="submit" class="btn btn-primary">예약접수</button>
 					<%} else{ %>
-						<button type="submit" class="btn btn-primary">예약접수</button>
+						<button type="submit" class="btn btn-primary" disabled>예약접수</button>
 					<%} %>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 					  비회원 진료예약

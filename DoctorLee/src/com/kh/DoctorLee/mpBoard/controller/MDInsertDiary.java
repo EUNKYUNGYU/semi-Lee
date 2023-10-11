@@ -44,7 +44,7 @@ public class MDInsertDiary extends HttpServlet {
 		int result = new DiaryService().insertMyDiary(md);
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/list.di");
+			response.sendRedirect(request.getContextPath() + "/first.di");
 		}else {
 			request.setAttribute("errorMsg", "등록 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp");

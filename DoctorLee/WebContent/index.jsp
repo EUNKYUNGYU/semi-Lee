@@ -69,7 +69,11 @@
                                 <a href="<%= contextPath %>/list.bo">익명게시판</a>
                             </li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
-                            <li><a href="#">쪽지함</a></li>
+                            <% if(loginUser != null){ %>
+                            <li><a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver">쪽지함</a></li>
+                        	<% } else { %>
+                        	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');">쪽지함</a></li>
+                        	<% } %>
                         </ul>
                     </li>
                     <li><a href="#">마이페이지</a>

@@ -79,6 +79,14 @@ img{
     margin-top: 15px;
 }
 
+.list-des{
+    margin-top: 10px;
+}
+
+.video-title{
+    font-weight: 900;
+}
+
 /*페이징 처리 영역*/
 .paging-area{
     width: auto;
@@ -139,8 +147,8 @@ img{
 	                    <img src="https://img.youtube.com/vi/<%= cv.getVideoAddress() %>/maxresdefault.jpg" alt="">
 	                </div>
 	                <div class="list-des">
-	                    <h4><%= cv.getVideoTitle() %></h5>
-	                    <h4><%= cv.getChannelName() %></p>
+	                    <p class="video-title"><%= cv.getVideoTitle() %></p>
+	                    <p><%= cv.getChannelName() %></p>
 	                </div>
                     <br>
 	            </div>

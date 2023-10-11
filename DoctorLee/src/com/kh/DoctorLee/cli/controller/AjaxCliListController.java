@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.Category;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
 
 /**
- * Servlet implementation class CliListController
+ * Servlet implementation class AjaxCliListController
  */
-@WebServlet("/list.cli")
-public class CliListController extends HttpServlet {
+@WebServlet("/ajaxList.cli")
+public class AjaxCliListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliListController() {
+    public AjaxCliListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +32,16 @@ public class CliListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-//		String cateName = request.getParameter("cateNo");
-		
-		// 카테고리 불러오기
-		ArrayList<Category> list = new CliService().selectCategoryList();
+		// 값 뽑기
+		String cateName = request.getParameter("cateNo");
 		
 		// 클리닉 불러오기
-//		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
+		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
 		
-		request.setAttribute("list", list);
-//		request.setAttribute("cliList", cliList);
-
-		request.getRequestDispatcher("views/cli/cliListView.jsp").forward(request, response);
+		response.setContentType("application/json; charset=UTF-8");
+		
+		new Gson().toJson(cliList, response.getWriter());
 	}
 
 	/**

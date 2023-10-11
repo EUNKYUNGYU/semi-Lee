@@ -229,7 +229,7 @@ button {
 								<input type="hidden" id="quizeNo" name="quizeNo" value="<%= q.getQuizeNo() %>">
 								
 							</div>		
-							<!-- 로그인 안 했을 경우 제출 버튼 눌렀을 시 '로그인 후 이용 가능한 기능입니다' alert창 나옴 -->
+							<!-- 로그인 안 했을 경우 제출 버튼 눌렀을 시 '로그인 후 이용 가능합니다.' alert창 나옴 -->
 						<% } else { %>
 							<div id="quizeFooter1">
 								<button type="button" id="quizeButton2" class="quizeButton2">제출
@@ -241,7 +241,7 @@ button {
 						<!-- 정답을 제출하지 않았을 경우 정답 확인하기 버튼을 눌렀을 때 확인 불가능 -->
 						<% if(loginUser == null) { %>
 						<div id="quizeFooter2">
-							<a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');">정답 확인하기 &gt;</a>
+							<a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능합니다.');">정답 확인하기 &gt;</a>
 						</div>
 						<% } else { %>
 						<div id="quizeFooter2">

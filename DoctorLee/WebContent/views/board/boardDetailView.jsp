@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 상세보기</title>
+<title>게시글 상세보기</title>
 <style>
 * {
 	box-sizing: border-box;

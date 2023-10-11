@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쪽지함</title>
+<title>쪽지 상세보기</title>
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
@@ -19,6 +19,7 @@
 <style>
 
 * {
+	border: 0.5px solid skyblue;
 	box-sizing: border-box;
 }
 
@@ -26,7 +27,7 @@ body{
 	margin : 0;
 }
 
-header {
+#header {
 	width: 100vw;
 	height: 120px;
 }
@@ -82,21 +83,40 @@ article{
 	height: 50px;
 	padding: 7px;
 }
-#buttonWrap{
-	height: 50px;
-}
 
-#buttonWrap > div{
-	float: left;
-}
+#buttonWrap{height: 50px;}
 
-#buttonWrap1{
-	width: 10%;
-}
+#buttonWrap > div{float: left;}
 
-#buttonWrap2{
-	width: 30%;
-}
+#buttonWrap1{width: 10%;}
+
+#buttonWrap2{width: 30%;}
+
+#MessageTitleWrap{height: 50px;}
+
+#MessageTitleWrap > div{float: left;}
+
+#MessageTitle1{width: 10%; font-weight: bold;}
+
+#MessageTitle2{width: 30%;}
+
+#senderWrap{height: 50px;}
+
+#senderWrap > div{float: left;}
+
+#senderWrap1{width: 10%; font-weight: bold;}
+
+#senderWrap2{width: 30%;}
+
+#sendDateWrap{height: 50px;}
+
+#sendDateWrap > div{float: left;}
+
+#sendDateWrap1{width: 10%; font-weight: bold;}
+
+#sendDateWrap2{width: 30%;}
+
+#messageContentWrap{height: auto; min-height: 400px;}
 
 #page, #search{
 	width : 100%;
@@ -124,7 +144,7 @@ table{
 </head>
 <body>
 
-	<header>
+	<header id="header">
 		<%@ include file ="../common/nav2.jsp" %>
 	</header>
 	<main>
@@ -135,52 +155,55 @@ table{
 		<section id="section">
 			
 			<div id="contentTitle">
-				쪽지함
+				&lt;&nbsp;&nbsp;쪽지함
 			</div>
 			
 			<div id="content">
 				<article>
-					<div id="typeWrap">
-						<a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver" class="messageList">받은 쪽지함&nbsp;&nbsp;</a>
-						<a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=sender" class="messageList">보낸 쪽지함</a>
-					</div>
 					
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
 							<button type="button" class="btn btn-light">삭제
 						</div>
 						<div id="buttonWrap2">
-							<button type="button" class="btn btn-primary">쪽지 보내기
+							<button type="button" class="btn btn-primary">보내기
+						</div>
+					</div>
+					<div id="MessageTitleWrap">
+						<div id="MessageTitle1">
+							쪽지 제목
+						</div>
+						<div id="MessageTitle2">
+							제목입니다~~
+						</div>
+					</div>
+					<div id="senderWrap">
+						<div id="senderWrap1">
+							보낸 사람 
+						</div>
+						<div id="senderWrap2">
+							동이 
+						</div>
+					</div>
+					<div id="sendDateWrap">
+						<div id="sendDateWrap1">
+							받은 시간
+						</div>
+						<div id="sendDateWrap2">
+							2023-08-25 [14:23] 
 						</div>
 					</div>
 					<hr>
-					<table class="table table-hover">
-					  <thead>
-					    <tr>
-					      <th scope="col"><input type="checkbox"></th>
-					      <th scope="col">보낸 사람</th>
-					      <th scope="col">제목</th>
-					      <th scope="col">날짜</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					  <% if(list == null) { %>
-					    <tr>
-						  <th colspan="4" style="text-align: center">받은 메세지가 없습니다</th>
-						</tr>
-						    
-					  <% } else { %>
-					  	<% for(Message m : list){ %>
-						    <tr>
-						      <th><input type="checkbox"></th>
-						      <td scope="row"><%= m.getReceiver() %></td>
-						      <td><%= m.getMessageTitle()%></td>
-						      <td><%= m.getSendDate() %></td>
-						    </tr>
-						  <% } %>
-  					  <% } %>
-					  </tbody>
-					</table>
+					<div id="messageContentWrap">
+						<p> 읽은 쪽지!
+
+							어쩌구 저쩌구
+							동이가 쪽지를 보냈어요~~~
+							받은 쪽지 상세보기 화면입니다!
+
+							받은 쪽지 화면이에요~~~~~~
+					</div>
+					<hr>
 				</article>
 			</div>
 			

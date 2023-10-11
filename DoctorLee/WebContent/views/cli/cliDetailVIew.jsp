@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.DoctorLee.cli.model.vo.*" %>    
+<%
+	Clinic c = (Clinic)request.getAttribute("c");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,9 +114,9 @@
 
                 <!--클리닉 간단 정보 출력 영역 div-->
                 <div id="cli-top" >
-                    <h4>클리닉명</h4>
-                    <p>클리닉 장소</p>
-                    <p>클리닉 가격</p>
+                    <h4><%= c.getCliName() %></h4>
+                    <p><%= c.getHosNo() %></p>
+                    <p><%= c.getCliPrice() %></p>
 
                 </div>
 

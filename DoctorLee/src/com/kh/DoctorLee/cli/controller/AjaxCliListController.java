@@ -34,13 +34,12 @@ public class AjaxCliListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 값 뽑기
-		String cateName = request.getParameter("cateName");
+		int cateNo = Integer.parseInt(request.getParameter("cateNo"));
 		
-		// 클리닉 불러오기
-		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
+		// Service 요청
+		ArrayList<Clinic> cliList = new CliService().selectCliList(cateNo);
 		
 		response.setContentType("application/json; charset=UTF-8");
-		
 		new Gson().toJson(cliList, response.getWriter());
 	}
 

@@ -22,14 +22,23 @@ public class CliService {
 		return list;
 	}
 	
-	public ArrayList<Clinic> selectCliList(String cateName){
+	public ArrayList<Clinic> selectCliList(int cateNo){
 		Connection conn = getConnection();
 		
-		ArrayList<Clinic> cliList = new CliDao().selectCliList(conn, cateName);
+		ArrayList<Clinic> cliList = new CliDao().selectCliList(conn, cateNo);
 		
 		close(conn);
 		
 		return cliList;
+	}
+	
+	public Clinic selectCli(int cliNo) {
+		Connection conn = getConnection();
+		
+		Clinic c = new CliDao().selectCli(conn, cliNo);
+		
+		close(conn);
+		return c;
 	}
 
 }

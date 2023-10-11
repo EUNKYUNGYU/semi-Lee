@@ -32,19 +32,12 @@
         dateClick: function(info){
 
             // 현재 날짜를 기준으로 과거 날짜 선택 불가
-            var clickedDate = getDateWithoutTime(info.date);
-            var nowDate = getDateWithoutTime(new Date());
+            var clickedDate = info.date.getTime();
+            var today = new Date().getTime();
 
-            if(clickedDate >= nowDate){
-                alert("FuterDate");
-            } else {
-                alert("Past Date");
-            }
-
-            function getDateWithoutTime(dt){
-                dt.setHours(0, 0, 0, 0);
-                return dt;
-            }
+            if(clickedDate < today){
+                return false;
+            } 
 
             $('.time-content').click(function(){
                 // 달력 클릭 시 선택한 날짜 출력하기

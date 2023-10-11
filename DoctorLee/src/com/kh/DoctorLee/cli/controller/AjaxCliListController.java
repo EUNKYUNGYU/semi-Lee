@@ -34,7 +34,7 @@ public class AjaxCliListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 값 뽑기
-		String cateName = request.getParameter("cateNo");
+		String cateName = request.getParameter("cateName");
 		
 		// 클리닉 불러오기
 		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);

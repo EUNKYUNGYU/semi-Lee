@@ -430,7 +430,7 @@
                 $.ajax({
                         url : 'ajaxList.cli',
                         data : {
-                            cateNo : $('input[name=cate]:checked').val()
+                            cateName : $('input[name=cate]:checked').val()
                         },
                         success : function(result){
                             //console.log($('input[name=cate]:checked').val());
@@ -620,6 +620,8 @@
             <script>
                 
                 $(function(){
+                    
+
                     //li클릭 시 색깔 바뀌는 이벤트
                     $('.time-content').click(function(){
 

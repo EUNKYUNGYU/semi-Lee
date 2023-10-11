@@ -45,7 +45,6 @@ public class MessageDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memNo);
-			System.out.println(prop.getProperty("selectList"));
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

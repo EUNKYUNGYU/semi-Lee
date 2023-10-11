@@ -33,7 +33,7 @@ public class DeleteDiaryController extends HttpServlet {
 		int result = new DiaryService().deleteDiary(diaryNo);
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/list.di");
+			response.sendRedirect(request.getContextPath() + "/first.di");
 		} else {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}

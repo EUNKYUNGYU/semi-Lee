@@ -34,7 +34,7 @@ public class MemberUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("넌 할 수 있어");
+		
 		
 		String memName = request.getParameter("memName");
 		String nickName = request.getParameter("nickName");

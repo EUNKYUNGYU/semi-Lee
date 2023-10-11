@@ -9,7 +9,7 @@ public class Hospital {
 	private String hosPwd; // HOS_PWD	VARCHAR2(100 BYTE)
 	private String hosName; // HOS_NAME	VARCHAR2(1000 BYTE)
 	private String hosAddress; // HOS_ADDRESS	VARCHAR2(300 BYTE)
-	private int treatDep; // TREAT_DEP	NUMBER                       (참조할)진료과 번호
+	private String treatDep; // TREAT_DEP	NUMBER                       (참조할)진료과 번호
 	private String treatDate; // TREAT_DATE	VARCHAR2(70 BYTE)            진료 날짜
 	private String treatBegin; // TREAT_BEGIN	VARCHAR2(40 BYTE)    진료 시작 시간
 	private String treatEnd; // TREAT_END	VARCHAR2(40 BYTE)         진료 마감 시간
@@ -23,7 +23,7 @@ public class Hospital {
 		super();
 	}
 
-	public Hospital(int hosNo, String hosId, String hosPwd, String hosName, String hosAddress, int treatDep,
+	public Hospital(int hosNo, String hosId, String hosPwd, String hosName, String hosAddress, String treatDep,
 			String treatDate, String treatBegin, String treatEnd, String hosTel, String hosInfo, Date createDate,
 			Date modifyDate, String status) {
 		super();
@@ -83,11 +83,11 @@ public class Hospital {
 		this.hosAddress = hosAddress;
 	}
 
-	public int getTreatDep() {
+	public String getTreatDep() {
 		return treatDep;
 	}
 
-	public void setTreatDep(int treatDep) {
+	public void setTreatDep(String treatDep) {
 		this.treatDep = treatDep;
 	}
 

@@ -34,16 +34,16 @@
 
         <!-- 네비 -->
         <div id="navi">
-            <div id="navi1"><a href="<%=contextPath%>" id="navitext">낭만닥터 이사부</a>
+            <div id="navi1"><a href="#" id="navitext">낭만닥터 이사부</a>
             </div
             ><div id="navi2">
                 <ul id="nav">
                     <li><a href="#">심리</a>
                         <ul>
-                            <li><a href="#">고민 나눔</a></li>
-                            <li><a href="<%=contextPath%>/couResList.cou">상담 예약</a></li>
                             <li><a href="<%=contextPath%>/couTestList.cou">성향 테스트</a></li>
-                            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 영상</a></li>
+                            <li><a href="#">고민 나눔</a></li>
+                            <li><a href="#">심리 상담 예약</a></li>
+                            <li><a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 치료 추천 영상</a></li>
                         </ul>
                     </li>
                     <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
@@ -69,7 +69,7 @@
                                 <a href="<%= contextPath %>/list.bo">익명게시판</a>
                             </li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
-                            <li><a href="<%= contextPath %>/views/message/messageListView.jsp">쪽지함</a></li>
+                            <li><a href="#">쪽지함</a></li>
                         </ul>
                     </li>
                     <li><a href="#">마이페이지</a>
@@ -103,7 +103,6 @@
 		<% } %>
 		
 		<script>
-			
 			function enrollPage(){
 				location.href= "<%=contextPath%>/enrollForm.me";
 			}
@@ -125,25 +124,19 @@
                     <li><img src="https://cdn.pixabay.com/photo/2013/07/18/10/59/human-skeleton-163715_1280.jpg" alt=""></li>
                 </ul>
             </div>
-            <script>
-                // 백그라운드 이미지 슬라이드
-                $(function(){
-                    $('.bxslider').bxSlider({
-                        auto: true, 
-                        speed: 500,
-                        pause: 5000,
-                        mode: 'fade',
-                    });
-                })
-            </script>
 
             <form action="hosSch.dy" method="get" id="index_search_bar">
+            
                 <!-- 메인화면 검색창 -->
-                <input type="text" name="index_search" placeholder="검색어를 입력하세요.">
+                <input type="text" name="search" placeholder="검색어를 입력하세요.">
+                <input type="hidden" name="hkeyP" value="1">
+				<input type="hidden" name="hkeyH" value="병원">
+                
                 <!-- 검색창 아이콘 -->                
                 <button type="submit" id="icon_search">
                     <i class="fa-solid fa-magnifying-glass fa-xl"></i>
                 </button>
+                
             </form>
             
             <script>
@@ -152,8 +145,20 @@
             		if(e.keyCode == 13){
             			document.getElementById("icon_search").click();
             		}
-            	})
-            
+            	});
+            	
+                // 백그라운드 이미지 슬라이드
+                $(function(){
+                    $('.bxslider').bxSlider({
+                        auto: true, 
+                        speed: 500,
+                        pause: 5000,
+                        mode: 'fade',
+                    });
+                             		
+                                   
+                })
+
             </script>
 
         </header>

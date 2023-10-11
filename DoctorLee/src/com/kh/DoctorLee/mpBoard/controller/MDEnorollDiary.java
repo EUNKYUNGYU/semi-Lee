@@ -1,6 +1,8 @@
 package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +28,8 @@ public class MDEnorollDiary extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/myPage/diary.jsp").forward(request, response);
+		 RequestDispatcher view = request.getRequestDispatcher("views/diary/myDiaryEnrollForm.jsp");
+		 view.forward(request, response);
 	}
 
 	/**

@@ -22,20 +22,9 @@ header{
     width: inherit;
 }
 
-/* 메인화면 검색창 아이콘 */
-#icon_search{
-    float: left;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    margin: 0 0 0 10px;
-    color: #fff;
-
-}
-
 /* 메인화면 검색창 */
 #index_search_bar{
-    position: absolute; left: 50%; top: 50%; 
+    position: absolute; left: 50%; top: 50%;
     transform: translate(-50%, -50%);
 }
 #index_search_bar>input{
@@ -48,11 +37,18 @@ header{
     position: relative;
 }
 #index_search_bar>input::placeholder{color: #fff;}
-#icon_search{
 
-	position: absolute; 
+/* 메인화면 검색창 아이콘 */
+#icon_search{
+    float: left;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin: 0 0 0 10px;
+    color: #fff;
+    border: none;
+
 }
-#icon_search>i{width: 100%; height: 100%;}
 
 /* bxslider */
 .bx-wrapper{

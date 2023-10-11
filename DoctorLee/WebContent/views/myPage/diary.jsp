@@ -7,7 +7,7 @@
 %>
 <%
 	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
-	Member loginUser2 = (Member)session.getAttribute("loginUser");
+	Member loginUser = (Member)session.getAttribute("loginUser");
 	
 	//System.out.println(list);
 	//System.out.println(famList);
@@ -217,7 +217,7 @@
                     
                   </table>
                   <br>
-                  <a href="<%=contextPath%>/views/diary/myDiaryEnrollForm.jsp">작성하기</a>
+                  <a href="<%=contextPath%>/myEnroll.di">작성하기</a>
                   
                 <br><br>
         	</div>
@@ -300,7 +300,7 @@
                     
                   </table>
                   <br>
-                  <a href="<%=contextPath%>/views/diary/famDiaryEnrollForm.jsp">작성하기</a>
+                  <a href="<%=contextPath%>/famEnroll.di">작성하기</a>
                 <br><br>
                 
         	</div>

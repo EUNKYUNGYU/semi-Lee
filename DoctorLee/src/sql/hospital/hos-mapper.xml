@@ -4,18 +4,7 @@
 <properties>
 	<comment>병원 관련 SQL문</comment>
 
-	<entry key="selectTreatTime">
-		
-		SELECT 
-			   HOS_NO
-			   ,TREAT_BEGIN
-			   ,TREAT_END
-	      FROM
-	           TB_HOSPITAL
-		
-	</entry>
-	
-	<entry key="schHos">
+	<entry key="schToIndex">
 		SELECT
 		       HOS_NO
 		       ,HOS_NAME
@@ -25,26 +14,37 @@
 		WHERE 
 		      STATUS = 'Y'
 		  AND
-		      HOS_NAME LIKE ?
+		      HOS_NAME LIKE ? OR HOS_NAME = ?
 		ORDER
 		   BY
 		      CREATE_DATE DESC
 	</entry>
 
-<entry key="schHosList">
-	SELECT
-	       HOS_NO
-	       ,HOS_NAME
-	       ,HOS_ADDRESS
-	  FROM
-	       TB_HOSPITAL
-	 WHERE 
-	       STATUS = 'Y'
-	 ORDER
-	    BY
-	       CREATE_DATE DESC
-
-
-</entry>
+	<entry key="hosCount">
+		SELECT
+		       COUNT(*)
+		  FROM
+		  	   TB_HOSPITAL
+	</entry>
+	
+	<entry key="hosDetail">
+		SELECT
+		       HOS_NAME
+		       ,HOS_ADDRESS
+		       ,TREAT_NAME
+		       ,TREAT_DATE
+		       ,TREAT_BEGIN
+		       ,TREAT_END
+		       ,HOS_TEL
+		       ,HOS_INFO
+		  FROM
+		        TB_HOSPITAL
+          JOIN
+                TB_TREAT_DEPARTMENT ON (TREAT_DEP = TREAT_NO)
+	     WHERE
+	           HOS_NO = ?
+	       AND
+	           STATUS = 'Y'
+	</entry>
 
 </properties>

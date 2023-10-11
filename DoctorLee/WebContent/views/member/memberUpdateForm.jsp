@@ -79,9 +79,8 @@
             height: 50px;
             font-size: 17px;
             margin-top: 80px;
-            
-            
         }
+        
         #cancel{
             background-color: white;
             color: #1E376F;
@@ -235,8 +234,8 @@
                     <br><br>
                     <hr>
                     <span id="button">
-                        <button type="button" class="register" data-toggle="modal" data-target="#updatePwdForm">비밀번호 변경</button>
-                        <button type="button" class="register" data-toggle="modal" data-target="deleteMemberForm">회원탈퇴</button>
+                        <button type="button" class="register" id="updatePwdButton" data-toggle="modal" data-target="#updatePwdForm">비밀번호 변경</button>
+                        <button type="button" class="register" id="deleteMemberButton" data-toggle="modal" data-target="deleteMemberForm">회원탈퇴</button>
                         <button type="submit" class="register">확인</button>
                     </span>
 

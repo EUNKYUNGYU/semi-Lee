@@ -26,10 +26,17 @@
 		
 	}
 	#text-area{
-		height : 300px;
+		height : 600px;
 		border : 1px solid black;
 		width : 700px;
 		margin-left : 610px;
+	}
+	#text-area > tbody > tr>td:hover {
+		font-size : 20px;
+	}
+	#text-area td,#text-area th{
+		border : 1px solid black;
+		padding : 0px;
 	}
  </style>
 <!DOCTYPE html>
@@ -63,7 +70,7 @@
 			<%}else {%>
 				<% for(Hospital hos : hosList) { %>
 					<tr>
-						<td align="center"><%= hos.getHosName() %></td>
+						<td align="center" class="searched"><%= hos.getHosName() %></td>
 					</tr>
 			<%}%>
 		

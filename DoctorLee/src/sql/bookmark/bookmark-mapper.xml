@@ -8,5 +8,6 @@
 			TB_HOSPITAL
 		WHERE 
 			HOS_NAME LIKE '%'||?||'%'
+		
 	</entry>
 </properties>

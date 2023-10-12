@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import= "java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.MedManagement" %>
+
+<%
+	ArrayList<MedManagement> list = (ArrayList<MedManagement>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -159,55 +165,35 @@
                 <table id="table1" align="center">
                     <thead>
                       <tr>
-                        <th class=th1>병원명</th>
-                        <th class=th1>의료진</th>
-                        <th class=th1>약처방</th>
-                        <th class=th1>처방전발급일</th>
-                        <th class=th1>진료일자</th>
-                        <th class=th1>복용횟수</th>
+                        <th>의료진</th>
+                        <th>약처방</th>
+                        <th>처방전발급일</th>
+                        <th>진료일자</th>
+                        <th>복용횟수</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>코모키</td>
-                        <td>김진</td>
-                        <td>페니토닌</td>
-                        <td>2023-04-07</td>
-                        <td>2023-04-07</td>
-                        <td>1</td>
-                      </tr>
-                      <tr>
-                        <td>메이퓨어의원</td>
-                        <td>홍박사</td>
-                        <td>없음</td>
-                        <td>2022-12-23</td>
-                        <td>2022-12-23</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td>메이퓨어의원</td>
-                        <td>홍박사</td>
-                        <td>없음</td>
-                        <td>2022-12-23</td>
-                        <td>2022-12-23</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td>메이퓨어의원</td>
-                        <td>홍박사</td>
-                        <td>없음</td>
-                        <td>2022-12-23</td>
-                        <td>2022-12-23</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td>메이퓨어의원</td>
-                        <td>홍박사</td>
-                        <td>없음</td>
-                        <td>2022-12-23</td>
-                        <td>2022-12-23</td>
-                        <td>0</td>
-                      </tr>
+                     <!-- 복약관리 리스트가 없을때 -->
+                     <%if(list.isEmpty()) { %>
+                     <tr>
+                     	<td>복약관리 리스트가 존재하지 않습니다.</td>
+                     </tr>
+                     <%} else { %>
+                     <!-- 리스트 있을때 -->
+                     	<%for(MedManagement mm : list) { %>
+                     		<tr>
+                     		<td><%=mm.getPreNo() %></td>
+                     		<td><%=mm.getRsvtNo() %></td>
+                     		<td><%=mm.getMemNo() %></td>
+                     		<td><%=mm.getHosName() %></td>
+                     		<td><%=mm.getDoctorName() %></td>
+                     		<td><%=mm.getMediName() %></td>
+                     		<td><%=mm.getTreateDate() %></td>
+                     		<td><%=mm.getPreDate() %></td>
+                     		</tr>
+                     	
+                     	<%} %>
+                     <%} %>
                      
                    </tbody>
                   </table> 

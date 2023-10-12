@@ -330,14 +330,14 @@
 
     /* 일요일 날짜 빨간색 */
     .fc-day-sun a {
-    color: red;
-    text-decoration: none;
+        color: red;
+        text-decoration: none;
     }
 
     /* 토요일 날짜 파란색 */
     .fc-day-sat a {
-    color: blue;
-    text-decoration: none;
+        color: blue;
+        text-decoration: none;
     }
 
     /*시간 출력*/

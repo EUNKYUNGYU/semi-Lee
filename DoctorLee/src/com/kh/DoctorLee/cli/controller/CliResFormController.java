@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.mpBoard.controller;
+package com.kh.DoctorLee.cli.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.hospital.model.vo.Hospital;
-import com.kh.DoctorLee.mpBoard.model.service.BookmarkService;
+import com.kh.DoctorLee.cli.model.service.CliService;
+import com.kh.DoctorLee.cli.model.vo.CliResDate;
+import com.kh.DoctorLee.cli.model.vo.Clinic;
 
 /**
- * Servlet implementation class SelectHosiptalController
+ * Servlet implementation class CliResFormController
  */
-@WebServlet("/selectHos.mk")
-public class SelectHosiptalController extends HttpServlet {
+@WebServlet("/cliRes.cli")
+public class CliResFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectHosiptalController() {
+    public CliResFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +32,22 @@ public class SelectHosiptalController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String hosName  = request.getParameter("hosName");
+
+		// 값 뽑기
+		int cliNo = Integer.parseInt(request.getParameter("cno"));
 		
-		ArrayList<Hospital> hosList = new BookmarkService().selectHospital(hosName);
-		request.setAttribute("hosList", hosList);
+		// Service 요청
+		// 클리닉 정보 불러오기
+		Clinic c = new CliService().selectCli(cliNo);
 		
-		request.getRequestDispatcher("views/myPage/bookmarkSearch.jsp").forward(request, response);
+		// 클리닉 예약 가능 날짜 불러오기
+		ArrayList<CliResDate> dateList = new CliService().selectCliDateList(cliNo);
+		
+		System.out.print(dateList);
+		
+		// 응답화면 요청
+		request.setAttribute("c", c);
+		request.getRequestDispatcher("views/cli/cliResView.jsp").forward(request, response);
 	}
 
 	/**

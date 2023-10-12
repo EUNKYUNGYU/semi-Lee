@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.mpBoard;
+package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

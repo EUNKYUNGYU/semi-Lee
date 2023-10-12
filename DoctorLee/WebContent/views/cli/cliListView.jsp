@@ -36,6 +36,8 @@
 
         dateClick: function(info){
 
+            $('.time-border').css('display', 'block');
+
             $('.time-content').click(function(){
                 // 달력 클릭 시 선택한 날짜 출력하기
                 $('#pick-date, #sel-date').text((info.dateStr).replaceAll('-', '.') + "." + $(this).children().text());
@@ -351,6 +353,7 @@
     .time-border{
         overflow: auto;
         height: 580px;
+        display: none;
     }
 
     .time-border > ul{
@@ -582,11 +585,31 @@
                                         //li클릭 시 색깔 바뀌는 이벤트
                                         $('.content-cli').click(function(){
                         
-                                        if($(this).css('background-color', 'salmon')){
+                                        
                                             $(this).css('background-color', 'bisque');
 
                                             $(this).siblings().css('background-color', 'salmon');
-                                        }
+
+                                            console.log($('.cli-no').text());
+                                        
+
+                                        // 클리닉 선택 시 클리닉 예약 가능한 날짜를 fullcalendar에 띄우기
+                                        $.ajax({
+                                                url:'ajaxCalendar.cli',
+                                                data:{cliNo:$('.cli-no').text()},
+                                                success:function(result){
+
+                                                    console.log('성공');
+
+                                                    for(let i in result){
+                                                        
+                                                    }
+                                                    
+                                                },
+                                                error:function(){
+                                                    console.log('실패');
+                                                }
+                                            })
 
                                         // 카테고리 선택 후 클리닉 선택 시 "클리닉을 선택해주세요"에 해당 클리닉명과 병원명을 띄우기
                                         //console.log($(this).children().children());

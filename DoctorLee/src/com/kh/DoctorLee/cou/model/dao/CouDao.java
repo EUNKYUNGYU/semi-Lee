@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.DoctorLee.cli.model.vo.CliResDate;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 

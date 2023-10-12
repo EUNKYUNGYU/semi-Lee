@@ -69,7 +69,7 @@
                                 <a href="<%= contextPath %>/list.bo">익명게시판</a>
                             </li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
-                            <% if(loginUser != null){ %>
+                               <% if(loginUser != null){ %>
                             <li><a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver">쪽지함</a></li>
                         	<% } else { %>
                         	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');">쪽지함</a></li>
@@ -82,7 +82,7 @@
                             <li><a href="<%=contextPath%>/updateForm.me">회원 정보 수정</a></li>
                             <li><a href="<%=contextPath%>/delete.me">회원 탈퇴</a></li>
                             <li><a href="#">관리자 문의</a></li>
-                            <li><a href="#">자기 게시물 확인</a></li>
+                            <li><a href="#">나의 게시글</a></li>
                             <li><a href="#">예약 관리</a></li>
                             <li><a href="#">병원 즐겨찾기</a></li>
                             <li><a href="<%=contextPath%>/main.bm">진료 내역 관리</a></li>

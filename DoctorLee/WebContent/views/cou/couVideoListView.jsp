@@ -171,21 +171,27 @@ img{
                     <!--영상 번호-->
                     <input type="hidden" value="<%= cv.getVideoNo() %>">
 
-                    <div class="emoji" align="right">
-                        <span class="material-symbols-outlined edit">
-                            edit
-                        </span>
+                    <!--채널명-->
+                    <input type="hidden" value="<%= cv.getChannelName() %>">
 
-                        <span class="material-symbols-outlined delete" data-toggle="modal" data-target="#myModal">
-                            delete
-                        </span>
-                    </div>
+                    <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
+                        <div class="emoji" align="right">
+                            <span class="material-symbols-outlined edit">
+                                edit
+                            </span>
+
+                            <span class="material-symbols-outlined delete" data-toggle="modal" data-target="#myModal">
+                                delete
+                            </span>
+                        </div>
+                    <% } %>
+
 	                <div class="list-img">
 	                    <img src="https://img.youtube.com/vi/<%= cv.getVideoAddress() %>/maxresdefault.jpg" alt="">
 	                </div>
 	                <div class="list-des">
 	                    <p class="video-title"><%= cv.getVideoTitle() %></p>
-	                    <p><%= cv.getChannelName() %></p>
+	                    <p class="video-channel"><%= cv.getChannelName() %></p>
 	                </div>
                     <br>
 	            </div>
@@ -220,11 +226,27 @@ img{
     <script>
         $(function(){
 
-            // 클릭 시 해당 영상 주소로 이동
-            $('.list-img, .list-des').click(function(){
+            // 썸네일 클릭 시 해당 영상 주소로 이동
+            $('.list-img').click(function(){
                 const address = $(this).parent().children().eq(1).val();
                 
+                // console.log(this);
                 location.href = 'https://www.youtube.com/watch?v='+address;
+            })
+
+            // 영상 제목 클릭 시 해당 영상 주소로 이동
+            $('.video-title').click(function(){
+                const address = $(this).parents().children().eq(3).val();
+                
+                // console.log($(this).parents().children().eq(3).val());
+                location.href = 'https://www.youtube.com/watch?v='+address;
+            })
+
+            // 채널명 클릭 시 해당 채널로 이동
+            $('.video-channel').click(function(){
+                const address = $(this).parents().children().eq(5).val();
+                console.log(address);
+                location.href = 'https://www.youtube.com/results?search_query='+address; 
             })
 
             // 클릭 시 영상 수정 페이지로 이동
@@ -238,10 +260,15 @@ img{
 
             // 클릭 시 영상 삭제
             $('.delete').click(function(){
-                confirm('영상을 삭제하겠습니까?');
 
-                if(true){
+                const videoNo = $('.list-content').children().eq(2).val();
+
+                var result  = confirm('영상을 삭제하겠습니까?');
+
+                if(result){
                     location.href='<%=contextPath%>/deleteVideo.cou?cvno='+videoNo;
+                } else {
+
                 }
             })
         })

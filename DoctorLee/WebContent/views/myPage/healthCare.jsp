@@ -56,6 +56,7 @@
 		int standard = loginUser.getHeight()-loginUser.getWeight();// 로그인한 유저의 키 빼기 몸무게의 변수
 		//System.out.println(standard);
 	%>
+	
 	<h2 align="center"><%=loginUser.getMemName() %>님의 건강 관리 페이지 </h2>
 	<br>
 	<hr>

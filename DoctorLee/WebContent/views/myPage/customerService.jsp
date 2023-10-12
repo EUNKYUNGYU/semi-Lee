@@ -1,18 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import= "java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.MedManagement" %>
-
-<%
-	ArrayList<MedManagement> list = (ArrayList<MedManagement>)request.getAttribute("list");
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>복약관리</title>
+<title>고객센터</title>
 <style>
- 	div{
+	
+        div{
             
             box-sizing: border-box;
         }
@@ -50,8 +45,7 @@
             height: 100%;
         }
 
-        
-        #table1 {
+        table {
                 border-collapse: collapse;
                 width: 950px;
                 margin-left: 100;
@@ -112,15 +106,39 @@
                 }
                         
                 #count{
-                    margin-left: 250px;
+                    margin-left: 240px;
                     margin-top: 100px;
                 }
       
                 #date1{
                  margin-left: 635px;
                 }
+        
+                #inqbtn{
+                    margin-top: 30px;
+                    
+                }
 
-         /*--------------------p태그---------------------*/
+                #inq1:hover{
+                    background-color: #1E376F;
+                    color: white;
+                }
+                #inq2:hover{
+                    background-color: #1E376F;
+                    color: white;
+                }
+                #inq1, #inq2{
+                    width: 150px;
+                    height: 50px;
+                    border-radius: 3px;
+                    border: 1px solid #1E376F;
+                    background-color: white;
+                }
+
+                #inq1{
+                    margin-right: 80px;
+                }
+        /*--------------------p태그---------------------*/
         #p1{
             text-align: center;
             font-size: 38px;
@@ -132,39 +150,42 @@
             color: #1E376F;
             font-weight: 600;
             padding-top: 30px;
-            padding-left: 150px;
+            padding-left: 200px;
+            
+           
         }
-       
-       
-    </style>
+</style>
 </head>
 <body>
-
-<div id="wrap">
+	 <div id="wrap">
         <div id="header">
-           <%@ include file = "../common/nav2.jsp" %>
+        	<%@ include file = "../common/nav2.jsp" %>
         </div>
 
         <div id="content">
-        
             <div id="content_1">
- 				<%@ include file = "../common/myPageNavi.jsp" %>       
+            	<%@ include file = "../common/myPageNavi.jsp" %>
             </div>
-            
             <div id="content_2">
                 <p id="p1">마이페이지</p>
             
-                <div id="p2" style="text-align: left;">복약관리</div>
-                <hr>
+                <p id="p2">고객센터</p>
                 <br>
+                <hr>
+                <div id="inqbtn" align="center">
+                    <input type="button" value="1:1 문의" id="inq1">
+                    <input type="button" value="관리자 문의" id="inq2">
+                </div>
 
-                <span id="count">⋅ Total 2
+                <div id="count">⋅ Total 2
                     <input type="date" id="date1"> ~
                     <input type="date" id="date2">
-                </span>
-                <table id="table1" align="center">
+                </div>
+
+                <table align="center">
                     <thead>
                       <tr>
+                        <th>병원명</th>
                         <th>의료진</th>
                         <th>약처방</th>
                         <th>처방전발급일</th>
@@ -173,34 +194,52 @@
                       </tr>
                     </thead>
                     <tbody>
-                     <!-- 복약관리 리스트가 없을때 -->
-                     <%if(list.isEmpty()) { %>
-                     <tr>
-                     	<td>복약관리 리스트가 존재하지 않습니다.</td>
-                     </tr>
-                     <%} else { %>
-                     <!-- 리스트 있을때 -->
-                     	<%for(MedManagement mm : list) { %>
-                     		<tr>
-                     		<td><%=mm.getPreNo() %></td>
-                     		<td><%=mm.getRsvtNo() %></td>
-                     		<td><%=mm.getMemNo() %></td>
-                     		<td><%=mm.getHosName() %></td>
-                     		<td><%=mm.getDoctorName() %></td>
-                     		<td><%=mm.getMediName() %></td>
-                     		<td><%=mm.getTreateDate() %></td>
-                     		<td><%=mm.getPreDate() %></td>
-                     		</tr>
-                     	
-                     	<%} %>
-                     <%} %>
+                      <tr>
+                        <td>코모키</td>
+                        <td>김진</td>
+                        <td>페니토닌</td>
+                        <td>2023-04-07</td>
+                        <td>2023-04-07</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>메이퓨어의원</td>
+                        <td>홍박사</td>
+                        <td>없음</td>
+                        <td>2022-12-23</td>
+                        <td>2022-12-23</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <td>메이퓨어의원</td>
+                        <td>홍박사</td>
+                        <td>없음</td>
+                        <td>2022-12-23</td>
+                        <td>2022-12-23</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <td>메이퓨어의원</td>
+                        <td>홍박사</td>
+                        <td>없음</td>
+                        <td>2022-12-23</td>
+                        <td>2022-12-23</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <td>메이퓨어의원</td>
+                        <td>홍박사</td>
+                        <td>없음</td>
+                        <td>2022-12-23</td>
+                        <td>2022-12-23</td>
+                        <td>0</td>
+                      </tr>
                      
-                   </tbody>
+                    </tbody>
                   </table> 
-            </div>
- 		</div>
- </div>
-    
 
+            </div>
+        </div>
+     </div>
 </body>
 </html>

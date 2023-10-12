@@ -47,5 +47,50 @@ public class CouService {
 		
 		return result;
 	}
+	
+	// 비디오 영상 수정하기 위한 내용 조회하기
+	public CouVideo selectCouVideo(int videoNo) {
+		Connection conn = getConnection();
+		
+		CouVideo c = new CouDao().selectCouVideo(conn, videoNo);
+		
+		close(conn);
+		
+		return c;
+	}
+	
+	// 비디오 내용 수정
+	public int updateCouVideo(CouVideo c) {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().updateCouVideo(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 비디오 삭제
+	public int deleteVideo(int videoNo) {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().deleteVideo(conn, videoNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 
 }

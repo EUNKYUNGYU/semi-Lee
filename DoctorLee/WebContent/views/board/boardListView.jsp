@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.util.ArrayList, com.kh.DoctorLee.board.model.vo.Board"%>
+<%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList"%>
+    
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 %>
@@ -11,102 +11,128 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 리스트 전체보기</title>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
 <style>
+
 * {
-	box-sizing: border-box;
 	border: 1px solid skyblue;
+	box-sizing: border-box;
 }
+
+body{margin : 0;}
 
 #header {
-	width: 1800px;
-	height: 200px;
+	width: 100vw;
+	height: 120px;
 }
 
-#section {
-	width: 1800px;
-	height: 2300px;
+main {
+	width: 100%;
+	height: auto; 
+	min-height: 1000px;
+	line-height: 30px;
 }
 
-#section > div , #section > aside{
+main > section, main > aside, main > div{float: left;}
+
+#aside {
+	width: 20%;
+	height: auto;
+	margin : 20px auto;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+}
+
+#section{
+	width: 60%;
+	height: auto; 
+	min-height: 1000px;
 	float: left;
+	padding: 20px;
 }
 
-#contentWrap {
-	width: 1400px;
+#contentTitle{
+	width : 100%;
+	height : 100px;
+	padding: 20px;
+	font-size : 30px;
+	line-height : 200%;
+}
+
+#content{
+	width : 100%;
+	height : auto;
+}
+
+article{
+	width: 95%;
+	height: auto;
+	margin : 20px;
 }
 
 
-
-aside {
-	width: 300px;
-	height: 100%;
-	float: left;
-	padding-left: 15px;
-	padding-right: 15px;
-}
-
-#boardHeader, #boardArticle, #page, #search {
-	float: left;
-	width: 1400px;
-	padding-left: 100px;
-	padding-right: 10px;
-}
-
-#boardHeader {
-	height: 100px;
-	font-size: 50px;
-}
-
-#boardArticle {
-	height: 1800px;
-}
-
-#BoardTable{
-	margin-top: 30px;
-	margin-left: 30px;
-	}
-#page {
-	height: 200px;
-}
-
-#search {
-	height: 200px;
+#page, #search{
+	width : 100%;
+	height : 100px;
+	padding: 20px;
 }
 
 footer {
-	width: 1800px;
-	height: 300px;
+	width: 100%;
+	height: auto;
 }
-th, .tableCenter{
-	text-align : center;
-	}
+
+.messageList {
+	text-decoration: none;
+	color: black;
+	
+}
+
+table{
+	background-color: rgb(232, 238, 253);
+	border-radius: 7px;
+}
+
+.notReadStyle{color: skyblue;}
 
 </style>
 </head>
 <body>
 
-
-	<header id="header"> 헤더 영역 </header>
-	<section id="section">
-		<aside>
-			<%@ include file="../common/cmNavi.jsp"%>
+	<header id="header">
+		<%@ include file ="../common/nav2.jsp" %>
+	</header>
+	<main>
+		<aside id="aside">
+			<%@ include file ="../common/cmNavi.jsp" %>	
 		</aside>
-		<div id="contentWrap">
-
-
-			<header id="boardHeader">게시판이름</header>
-			<article id="boardArticle">
-				<div id="boardContent">
-					<table align="center" id="BoardTable">
-						<thead>
-							<tr>
-								<th width="100">게시글 번호</th>
-								<th width="350">제목</th>
-								<th width="150">작성자</th>
-								<th width="150">작성일</th>
-								<th width="100">조회수</th>
-								<th width="100">추천수</th>
-							</tr>
+		
+		<section id="section">
+			
+			<div id="contentTitle">
+				게시판
+			</div>
+			
+			<div id="content">
+				<article>
+					<hr>
+					<table align="center" id="BoardTable" class="table table-hover">
+					  <thead>
+					    <tr>
+					      <th scope="col" width="15%"></th>
+					      <th scope="col" width="40%" style="text-align: center">제목</th>
+					      <th scope="col" width="10%">작성자</th>
+					      <th scope="col" width="15%" style="text-align: center">작성일</th>
+					      <th scope="col" width="10%" style="text-align: center">조회수</th>
+					      <th scope="col" width="10%" style="text-align: center">추천수</th>
+					    </tr>
+					  </thead>
+					  
 							<% if(list == null) { %>
 						
 						<tbody>
@@ -116,34 +142,44 @@ th, .tableCenter{
 							<% } else { %>
 							<% for(Board b : list) { %>
 							<tr>
-								<td class="tableCenter"><%= b.getBoardNo() %></td>
-								<td><%= b.getBoardTitle() %></td>
+								<td class="tableCenter" align="center"><%= b.getBoardNo() %></td>
+								<td scope="row"><%= b.getBoardTitle() %></td>
 								<td class="tableCenter"><%= b.getWriter() %></td>
-								<td class="tableCenter"><%= b.getCreateDate() %></td>
-								<td class="tableCenter"><%= b.getViews() %></td>
-								<td class="tableCenter">0</td>
+								<td class="tableCenter" align="center"><%= b.getCreateDate() %></td>
+								<td class="tableCenter" align="center"><%= b.getViews() %></td>
+								<td class="tableCenter" align="center">0</td>
 							</tr>
 							<% } %>
 							<% } %>
 						</tbody>
-
-						</thead>
-
 					</table>
-					
-					<script>
-						
-					
-					
-					</script>
-				</div>
-			</article>
-			<div id="page">페이지바 영역</div>
-			<div id="search">검색 영역</div>
-		</div>
-	</section>
+				</article>
+			</div>
+			
+			
+			<div id="page">
+				페이지바 영역
+			</div>
+		
+			<div id="search">
+				검색 영역
+			</div>
+		
+		</section>
+		
+		<aside id="aside">
+			오른쪽 사이드바 : 
+			<br> 지금은 여백
+			<br> 나중에 광고 넣을 수도 있음
+		</aside>
+		
+	</main>
+	<br clear="both">
 	
-	<footer> 푸터 영역 </footer>
+	<footer>
+		<%@ include file ="../common/footer.jsp" %>
+	</footer>
+
 
 </body>
 </html>

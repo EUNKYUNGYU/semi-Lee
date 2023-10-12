@@ -31,7 +31,7 @@ public class BookmarkDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, hosName);
-			System.out.println(hosName);
+			//System.out.println(hosName);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

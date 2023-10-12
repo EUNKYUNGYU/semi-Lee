@@ -50,20 +50,30 @@
 			<h3>검색하실 병원 이름을 입력해주세요</h3> <br>	
 			<input type="text" name="hosName" id="hosName">
 			<button type="submit" id="search">검색</button><br><br>
-			<div id="text-area">검색된 목록</div>
-		</div>
-		<script>
-		<% if(hosList == null){ %>
-			$(function(){
-				$('#text-area').html('검색된 목록이 없습니다.');
-			})
-		<%}else {%>
-			<% for(Hospital hos : hosList) { %>
-				$('#text-area').html(<%=hos.getHosName()%>)
+			<table id="text-area">
+				<thead>
+				<tr>
+					<th>검색된 병원 이름</th>
+				</tr>
+				<tbody>
+			<% if(hosList.isEmpty()){ %>
+				<tr>
+					<td>검색된 목록이 없습니다.</td>
+				</tr>
+			<%}else {%>
+				<% for(Hospital hos : hosList) { %>
+					<tr>
+						<td align="center"><%= hos.getHosName() %></td>
+					</tr>
 			<%}%>
 		
 		
-		<%}%>
-		</script>
+			<%}%>
+				</tbody>
+			</table>
+		
+		</div>
+		
+		
 </body>
 </html>

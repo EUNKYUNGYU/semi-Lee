@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,10 +32,12 @@ public class SelectHosiptalController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String searchContent  = request.getParameter("saerchContent");
-		new BookmarkService().selectHospital(searchContent);
+		String hosName  = request.getParameter("hosName");
 		
-		request.getRequestDispatcher("views/myPage/bookmarkEnrollForm.jsp").forward(request, response);
+		ArrayList<Hospital> hosList = new BookmarkService().selectHospital(hosName);
+		request.setAttribute("hosList", hosList);
+		
+		request.getRequestDispatcher("views/myPage/bookmarkSearch.jsp").forward(request, response);
 	}
 
 	/**

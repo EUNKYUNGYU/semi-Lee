@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
- 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>안녕 나는 즐겨찾기 추가 페이지야</title>
-
-<style>
-	h3 {
+<%@ page import= "java.util.ArrayList,com.kh.DoctorLee.hospital.model.vo.Hospital"%>
+<%
+ 	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("hosList");
+ %>
+ <style>
+ 	h3 {
 		text-align : center;
 	}
 	#hosName{
@@ -35,44 +31,39 @@
 		width : 700px;
 		margin-left : 610px;
 	}
-	
-</style>
-
+ </style>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>검색 후 화면</title>
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
-	<% //System.out.println(hosList); %>
+	<% System.out.println(hosList); %>
 	
 	<h2 align="center">병원 즐겨찾기 페이지 </h2> <br><hr>
-		<form action="<%=contextPath %>/selectHos.mk" id="insert-form" method="post">
+		
 		<div id="search-form">	
 			<br>
 			
 			<h3>검색하실 병원 이름을 입력해주세요</h3> <br>	
 			<input type="text" name="hosName" id="hosName">
 			<button type="submit" id="search">검색</button><br><br>
-			<div id="text-area">
-				
-				
-			</div>
+			<div id="text-area">검색된 목록</div>
 		</div>
-				
-					
-			
-				
-			
-			</form>
-			
-			
-			
+		<script>
+		<% if(hosList == null){ %>
+			$(function(){
+				$('#text-area').html('검색된 목록이 없습니다.');
+			})
+		<%}else {%>
+			<% for(Hospital hos : hosList) { %>
+				$('#text-area').html(<%=hos.getHosName()%>)
+			<%}%>
 		
 		
-	
-	
-	
-	
-	<%@ include file="../common/footer.jsp" %>
-	
-
+		<%}%>
+		</script>
 </body>
 </html>

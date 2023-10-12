@@ -40,7 +40,7 @@
 <body>
 	<%@ include file="../common/navi.jsp" %>
 	<h2 align="center">병원 즐겨찾기 페이지 </h2> <br><hr>
-	
+		<form>
 		<div id="search-form">	
 			<br>
 			<h3>검색하실 병원 이름을 입력해주세요</h3> <br>	
@@ -51,13 +51,18 @@
 			<script>
 				$(function(){
 					$('#search').click(function(){
-						location.href="<%=contextPath%>/selectHos.mk"
+						const searchContent = document.getElementById('hosName');
+						//console.log(searchContent.value); hosName 텍스트창의 검색 내용을 controller로 보내기 
+						location.href="<%=contextPath%>/selectHos.mk";
 						$('#text-area').html('검색된 내용');
 					})
 				})
 			
 			
 			</script>
+			
+				<input type="hidden" name = "searchContent" id=searchContent>
+			</form>
 			
 			
 		

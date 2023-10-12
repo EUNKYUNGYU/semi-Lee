@@ -171,5 +171,25 @@ public class CouDao {
 		return result;
 	}
 	
-
+	public int deleteVideo(Connection conn, int videoNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteVideo");
+		 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, videoNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

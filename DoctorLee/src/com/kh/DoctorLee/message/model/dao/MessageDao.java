@@ -115,11 +115,51 @@ public class MessageDao {
 		return m;
 	}
 	
-	public int insertMessage(Connection conn) {
+	public int searchMember(Connection conn, String receiverId) {
+		
+		System.out.println("searchMember Dao " + receiverId);
+		int receiverNo = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("searchMember");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, receiverId);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				receiverNo = rset.getInt("MEM_NO");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return receiverNo;
+		
+	}
+			
+			
+	public int insertMessage(Connection conn, Message m) {
 		
 		int result = 0;
-		
-		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMessage");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, m.getSenderNo());
+			pstmt.setInt(2, m.getReceiverNo());
+			pstmt.setString(3, m.getMessageTitle());
+			pstmt.setString(4, m.getMessageContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 	

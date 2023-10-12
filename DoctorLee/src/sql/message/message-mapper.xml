@@ -44,6 +44,16 @@ SELECT
 
 </entry>
 
+<entry key="searchMember">
+
+    SELECT 
+        	MEM_NO
+        FROM 
+            TB_MEMBER
+        WHERE 
+             MEM_ID = ?
+
+</entry>
 
 <entry key="insertMessage">
 

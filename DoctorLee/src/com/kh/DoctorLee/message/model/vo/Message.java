@@ -10,13 +10,19 @@ public class Message {
 	private String messageTitle;
 	private String readStatus;
 	private String status;
+	private int senderNo;
+	private int receiverNo;
 	
 	public Message() {
 		super();
 	}
 
+
+
+
+	
 	public Message(int messageNo, String sender, String receiver, String sendDate, String messageContent,
-			String messageTitle, String readStatus, String status) {
+			String messageTitle, String readStatus, String status, int senderNo, int receiverNo) {
 		super();
 		this.messageNo = messageNo;
 		this.sender = sender;
@@ -26,6 +32,37 @@ public class Message {
 		this.messageTitle = messageTitle;
 		this.readStatus = readStatus;
 		this.status = status;
+		this.senderNo = senderNo;
+		this.receiverNo = receiverNo;
+	}
+
+
+	
+
+
+	public int getSenderNo() {
+		return senderNo;
+	}
+
+
+
+
+
+	public void setSenderNo(int senderNo) {
+		this.senderNo = senderNo;
+	}
+
+
+
+
+
+	public int getReceiverNo() {
+		return receiverNo;
+	}
+
+
+	public void setReceiverNo(int receiverNo) {
+		this.receiverNo = receiverNo;
 	}
 
 
@@ -94,12 +131,21 @@ public class Message {
 		this.status = status;
 	}
 
+
+
+
+
 	@Override
 	public String toString() {
 		return "Message [messageNo=" + messageNo + ", sender=" + sender + ", receiver=" + receiver + ", sendDate="
-				+ sendDate + ", messageContent=" + messageContent + ", readStatus=" + readStatus + ", status=" + status
-				+ "]";
+				+ sendDate + ", messageContent=" + messageContent + ", messageTitle=" + messageTitle + ", readStatus="
+				+ readStatus + ", status=" + status + ", senderNo=" + senderNo + ", receiverNo=" + receiverNo + "]";
 	}
+
+
+
+	
+
 	
 
 }

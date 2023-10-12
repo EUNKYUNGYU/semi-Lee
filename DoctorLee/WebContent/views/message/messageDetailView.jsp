@@ -167,7 +167,7 @@ table{
 							<button type="button" class="btn btn-light">삭제
 						</div>
 						<div id="buttonWrap2">
-							<button type="button" class="btn btn-primary">보내기
+							<a href="<%= contextPath %>/insert.ms?sender=<%= loginUser.getMemNo() %>" class="btn btn-primary">답장하기</a>
 						</div>
 					</div>
 					<div id="messageTitleWrap">

@@ -16,49 +16,6 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
-<!--fullCalendar-->
-<script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        locale: 'ko',
-        headerToolbar:{
-            left:'prev',
-            center:'title',
-            right:'next'
-        },
-        validRange: function(nowDate) {
-            return {
-            start: nowDate
-            };
-        },
-        events:[
-            
-        ],
-
-        dateClick: function(info){
-
-            $('.time-border').css('display', 'block');
-
-            $('.time-content').click(function(){
-                // 달력 클릭 시 선택한 날짜 출력하기
-                $('#pick-date, #sel-date').text((info.dateStr).replaceAll('-', '.') + "." + $(this).children().text());
-            })
-
-            var days = document.querySelectorAll(".day-color");
-            days.forEach(function(day){
-                day.classList.remove("day-color");
-            })
-            info.dayEl.classList.add("day-color");
-        }
-      });
-      calendar.render();
-      
-    });
-
-</script>
-
 <style>
 
     .day-color{

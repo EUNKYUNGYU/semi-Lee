@@ -39,11 +39,7 @@ public class CliListController extends HttpServlet {
 		// 카테고리 불러오기
 		ArrayList<Category> list = new CliService().selectCategoryList();
 		
-		// 클리닉 불러오기
-//		ArrayList<Clinic> cliList = new CliService().selectCliList(cateName);
-		
 		request.setAttribute("list", list);
-//		request.setAttribute("cliList", cliList);
 
 		request.getRequestDispatcher("views/cli/cliListView.jsp").forward(request, response);
 	}

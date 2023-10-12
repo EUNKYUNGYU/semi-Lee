@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.cli.model.vo.*" %>    
+<%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %>    
 <%
 	Clinic c = (Clinic)request.getAttribute("c");
+	ArrayList<CliResDate> dateList = (ArrayList<CliResDate>)request.getAttribute("dateList");
 %>    
 <!DOCTYPE html>
 <html>
@@ -27,12 +28,9 @@
         },
         validRange: function(nowDate) {
             return {
-            start: nowDate
+                start: nowDate
             };
         },
-        events:[
-            
-        ],
 
         dateClick: function(info){
 
@@ -49,6 +47,23 @@
                 day.classList.remove("day-color");
             })
             info.dayEl.classList.add("day-color");
+        },
+
+        events: function(start, end, timezone, callback){
+            url: 'ajaxCalendar.cli',
+            data:{cliNo: <%=c.getCliNo()%>},
+
+            success: function(result){
+                var events = [];
+
+                $(reulst).find('event').each(function(){
+                    events.push({
+                        title: '예약가능',
+                        start:<%= result[i].cliDate
+                    })
+                })
+            }
+            
         }
       });
       calendar.render();

@@ -43,10 +43,9 @@ public class CliResFormController extends HttpServlet {
 		// 클리닉 예약 가능 날짜 불러오기
 		ArrayList<CliResDate> dateList = new CliService().selectCliDateList(cliNo);
 		
-		System.out.print(dateList);
-		
 		// 응답화면 요청
 		request.setAttribute("c", c);
+		request.setAttribute("dateList", dateList);
 		request.getRequestDispatcher("views/cli/cliResView.jsp").forward(request, response);
 	}
 

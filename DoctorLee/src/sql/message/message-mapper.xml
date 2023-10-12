@@ -5,7 +5,7 @@
 <entry key="selectList">
 
 	SELECT 
-        MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS
+        MESSAGE_NO, MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS
     FROM 
         TB_MESSAGE 
     JOIN 
@@ -18,7 +18,54 @@
 
 </entry>
 
+<entry key="updateReadStatus">
 
+	UPDATE 
+			TB_MESSAGE 
+		SET 
+			READ_STATUS = 'Y' 
+		WHERE 
+			MESSAGE_NO = ?
+
+</entry>
+
+
+<entry key="selectMessage">
+
+SELECT 
+        MESSAGE_TITLE, MEM_ID, SEND_DATE, MESSAGE_CONTENT
+        
+    FROM
+        TB_MESSAGE
+    JOIN 
+        TB_MEMBER ON(MEM_NO = RECEIVER)
+    WHERE 
+        MESSAGE_NO = ?
+
+</entry>
+
+
+<entry key="insertMessage">
+
+	INSERT INTO
+	            TB_MESSAGE 
+	                    (
+	                    MESSAGE_NO
+	                    , SENDER
+	                    , RECEIVER
+	                    , MESSAGE_TITLE
+	                    , MESSAGE_CONTENT
+	                    )
+	            VALUES 
+	                    (
+	                    SEQ_MESSAGE.NEXTVAL
+	                    , ?
+	                    , ?
+	                    , ?
+	                    , ?
+	                    )
+
+</entry>
 </properties>
 
 

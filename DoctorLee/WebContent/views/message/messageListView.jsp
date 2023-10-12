@@ -4,6 +4,7 @@
     
 <% 
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
+	System.out.println(list);
 %>
 
 <!DOCTYPE html>
@@ -120,6 +121,8 @@ table{
 	border-radius: 7px;
 }
 
+.notReadStyle{color: skyblue;}
+
 </style>
 </head>
 <body>
@@ -163,7 +166,7 @@ table{
 					      <th scope="col">날짜</th>
 					    </tr>
 					  </thead>
-					  <tbody>
+					  <tbody id="messageList">
 					  <% if(list == null) { %>
 					    <tr>
 						  <th colspan="4" style="text-align: center">받은 메세지가 없습니다</th>
@@ -171,10 +174,14 @@ table{
 						    
 					  <% } else { %>
 					  	<% for(Message m : list){ %>
-						    <tr>
+						<% if(m.getReadStatus().equals("N")){%>
+							<tr class="notReadStyle">
+						<% } else { %>
+						     <tr>
+						<% } %>
 						      <th><input type="checkbox"></th>
 						      <td scope="row"><%= m.getReceiver() %></td>
-						      <td><%= m.getMessageTitle()%></td>
+						      <td name="<%= m.getMessageNo() %>"><%= m.getMessageTitle()%></td>
 						      <td><%= m.getSendDate() %></td>
 						    </tr>
 						  <% } %>
@@ -183,6 +190,21 @@ table{
 					</table>
 				</article>
 			</div>
+			
+			
+			<script>
+        		$(function(){
+        			
+        			$('tr > td').click(function(){
+        				
+        				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name');
+        				console.log(mNo);
+        			
+        			});
+        			
+        		})
+		
+			</script>
 			
 			<div id="page">
 				페이지바 영역

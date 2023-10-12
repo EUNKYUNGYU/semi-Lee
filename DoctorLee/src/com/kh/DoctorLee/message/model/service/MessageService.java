@@ -18,5 +18,18 @@ public class MessageService {
 		return list;
 	}
 	
+	public int updateReadStatus(int messageNo) {
+		Connection conn = getConnection();
+		int result = new MessageDao().updateReadStatus(conn, messageNo);
+		close(conn);
+		return result;
+	}
 	
+	public Message selectMessage(int messageNo){
+		
+		Connection conn = getConnection();
+		Message m = new MessageDao().selectMessage(conn, messageNo);
+		close(conn);
+		return m;
+	}
 }

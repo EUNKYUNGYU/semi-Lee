@@ -81,7 +81,7 @@
                 <ul id="navigator">
                 	<li><a href="#" class="btn btn-default">게시글 작성</a></li>
                     <li><a href="#" class="btn btn-default">내가 쓴 글 확인</a>
-                    <li><a href="#" class="btn btn-default">쪽지함</a></li>
+      				<li><a href="#" class="btn btn-default">쪽지함</a></li>
                 	<br>
                 	<br>
                     <li><a href="#">공지사항</a></li>

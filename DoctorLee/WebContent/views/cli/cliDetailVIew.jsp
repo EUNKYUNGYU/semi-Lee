@@ -42,6 +42,12 @@
         margin-left: 200px;
     }
 
+    /*클리닉 예약하기 버튼 영역*/
+    #res-btn{
+        border: 1px solid blue;
+        margin-bottom: 10px;
+    }
+
     /*클리닉 정보 출력 영역 div*/
     #cli-content {
         width: 1000px;
@@ -68,7 +74,6 @@
     }
     
     /*클리닉 상세 정보 출력 영역 div*/
-
     #cli-middle{
         border: 1px solid royalblue;
         height: 500px;
@@ -104,20 +109,23 @@
         <!--하단 내용 영역을 감싸는 div-->
         <div class="content" align="center">
 
-            <!--좌측 메뉴 div-->
-            <div class="left-menu">
-                <%@ include file="../common/cliNavi.jsp"%>
-            </div>
-
             <!--클리닉 출력 영역 div-->
             <div id="cli-content" align="left">
+
+                <input type="hidden" name="cliNo" value="<%=c.getCliNo()%>">
+
+                <% if(loginUser != null){ %>
+                    <!--클리닉 예약하기 페이지로 이동하는 버튼-->
+                    <div id="res-btn" align="right">
+                        <button type="button" id="resBtn">예약하기</button>
+                    </div>
+                <% } %>
 
                 <!--클리닉 간단 정보 출력 영역 div-->
                 <div id="cli-top" >
                     <h4><%= c.getCliName() %></h4>
                     <p><%= c.getHosNo() %></p>
                     <p><%= c.getCliPrice() %></p>
-
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->
@@ -136,6 +144,15 @@
         </div>
 
     </div>
+
+    <script>
+        $(function(){
+            $('#resBtn').click(function(){
+                location.href='<%=contextPath%>/cliRes.cli?cno=<%=c.getCliNo()%>';
+                // console.log($(this).parents().children().eq(1).val());
+            })
+        })
+    </script>
 
 </body>
 </html>

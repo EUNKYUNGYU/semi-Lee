@@ -4,6 +4,7 @@
     
 <% 
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
+	Message m = (Message)request.getAttribute("m");
 %>
 
 <!DOCTYPE html>
@@ -92,29 +93,29 @@ article{
 
 #buttonWrap2{width: 30%;}
 
-#MessageTitleWrap{height: 50px;}
+#messageTitleWrap{height: 50px;}
 
-#MessageTitleWrap > div{float: left;}
+#messageTitleWrap > div{float: left;}
 
-#MessageTitle1{width: 10%; font-weight: bold;}
+#messageTitleText{width: 10%; font-weight: bold;}
 
-#MessageTitle2{width: 30%;}
+#messageTitle{width: 30%;}
 
 #senderWrap{height: 50px;}
 
 #senderWrap > div{float: left;}
 
-#senderWrap1{width: 10%; font-weight: bold;}
+#senderText{width: 10%; font-weight: bold;}
 
-#senderWrap2{width: 30%;}
+#sender{width: 30%;}
 
 #sendDateWrap{height: 50px;}
 
 #sendDateWrap > div{float: left;}
 
-#sendDateWrap1{width: 10%; font-weight: bold;}
+#sendDateText{width: 10%; font-weight: bold;}
 
-#sendDateWrap2{width: 30%;}
+#sendDate{width: 30%;}
 
 #messageContentWrap{height: auto; min-height: 400px;}
 
@@ -166,42 +167,36 @@ table{
 							<button type="button" class="btn btn-light">삭제
 						</div>
 						<div id="buttonWrap2">
-							<button type="button" class="btn btn-primary">보내기
+							<a href="<%= contextPath %>/insert.ms?sender=<%= loginUser.getMemNo() %>" class="btn btn-primary">답장하기</a>
 						</div>
 					</div>
-					<div id="MessageTitleWrap">
-						<div id="MessageTitle1">
+					<div id="messageTitleWrap">
+						<div id="messageTitleText">
 							쪽지 제목
 						</div>
-						<div id="MessageTitle2">
-							제목입니다~~
+						<div id="messageTitle">
+							<%= m.getMessageTitle() %>
 						</div>
 					</div>
 					<div id="senderWrap">
-						<div id="senderWrap1">
+						<div id="senderText">
 							보낸 사람 
 						</div>
-						<div id="senderWrap2">
-							동이 
+						<div id="sender">
+							<%= m.getSender() %>
 						</div>
 					</div>
 					<div id="sendDateWrap">
-						<div id="sendDateWrap1">
+						<div id="sendDateText">
 							받은 시간
 						</div>
-						<div id="sendDateWrap2">
-							2023-08-25 [14:23] 
+						<div id="sendDate">
+							<%= m.getSendDate() %>
 						</div>
 					</div>
 					<hr>
 					<div id="messageContentWrap">
-						<p> 읽은 쪽지!
-
-							어쩌구 저쩌구
-							동이가 쪽지를 보냈어요~~~
-							받은 쪽지 상세보기 화면입니다!
-
-							받은 쪽지 화면이에요~~~~~~
+						<%= m.getMessageContent() %>
 					</div>
 					<hr>
 				</article>

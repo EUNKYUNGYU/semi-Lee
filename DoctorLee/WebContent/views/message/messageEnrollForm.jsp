@@ -80,25 +80,25 @@ article{width: 95%; height: auto; margin : 20px;}
 
 #buttonWrap1{width: 10%;}
 
-#MessageTitleWrap{height: 50px;}
+#messageTitleWrap{height: 50px;}
 
-#MessageTitleWrap > div{float: left;}
+#messageTitleWrap > div{float: left;}
 
-#MessageTitle1{width: 10%; font-weight: bold;}
+#messageTitleText{width: 10%; font-weight: bold;}
 
-#MessageTitle2{width: 90%;}
+#messageTitleDiv{width: 90%;}
 
 #messageTitle{width: 50%; border: none; border-bottom: 1px solid #CCC; outline:none; padding:0;}
 
-#ReceiverWrap{height: 50px;}
+#receiverWrap{height: 50px;}
 
-#ReceiverWrap > div{float: left;}
+#receiverWrap > div{float: left;}
 
-#ReceiverWrap1{width: 10%; font-weight: bold;}
+#receiverText{width: 10%; font-weight: bold;}
 
-#ReceiverWrap2{width: 90%;}
+#receiver{width: 90%;}
 
-#receiver{width: 50%; border: none; border-bottom: 1px solid #CCC; outline:none; padding:0;}
+#messageReceiver{width: 50%; border: none; border-bottom: 1px solid #CCC; outline:none; padding:0;}
 
 #messageContentWrap{width: 100%; height: auto; min-height: 350px;}
 
@@ -138,34 +138,35 @@ table{background-color: rgb(232, 238, 253); border-radius: 7px;}
 			
 			<div id="content">
 				<article>
-					
+					<form method="post" action="<%= contextPath %>/insert.ms">
+					<input type="hidden" name="sender" value="<%= loginUser.getMemNo() %>">
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
-							<button type="button" class="btn btn-primary">보내기
+							<button type="submit" class="btn btn-primary">보내기</a>
 						</div>
 					</div>
-					<div id="MessageTitleWrap">
-						<div id="MessageTitle1">
+					<div id="messageTitleWrap">
+						<div id="messageTitleText">
 							쪽지 제목
 						</div>
-						<div id="MessageTitle2">
-							<input id="messageTitle" type="text" placeholder="제목을 입력해주세요">
+						<div id="messageTitleDiv">
+							<input type="text" id="messageTitle" name="messageTitle" placeholder="제목을 입력해주세요">
 						</div>
 					</div>
-					<div id="ReceiverWrap">
-						<div id="ReceiverWrap1">
+					<div id="receiverWrap">
+						<div id="receiverText">
 							받는 사람
 						</div>
-						<div id="ReceiverWrap2">
-							<input id="receiver" type="text" placeholder="받을 사람의 ID를 입력해주세요">
+						<div id="receiver">
+							<input id="messageReceiver" name="receiverId" type="text" placeholder="받을 사람의 ID를 입력해주세요">
 						</div>
 					</div>
 					
 					<hr>
 					<div id="messageContentWrap">
-						<textarea id="messageContent"></textarea>
+						<textarea id="messageContent" name="messageContent"></textarea>
 					</div>
-					
+					</form>
 					<hr>
 					<div id="messageLenWrap">
 						<div id="messageLen">

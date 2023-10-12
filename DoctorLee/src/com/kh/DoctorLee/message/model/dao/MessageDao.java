@@ -31,7 +31,7 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = "SELECT "
-					+ "MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS " 
+					+ "MESSAGE_NO, MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS " 
 					+ "FROM " 
 					+ "TB_MESSAGE "
 					+ "JOIN " 
@@ -50,8 +50,9 @@ public class MessageDao {
 			while(rset.next()) {
 				
 				Message msg = new Message();
+				msg.setMessageNo(rset.getInt("MESSAGE_NO"));
 				msg.setReceiver(rset.getString("MEM_ID"));
-				msg.setMessageContent(rset.getString("MESSAGE_TITLE"));
+				msg.setMessageTitle(rset.getString("MESSAGE_TITLE"));
 				msg.setSendDate(rset.getString("SEND_DATE"));
 				msg.setReadStatus(rset.getString("READ_STATUS"));
 				list.add(msg);
@@ -67,6 +68,100 @@ public class MessageDao {
 		
 	}
 	
+	public int updateReadStatus(Connection conn, int messageNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReadStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, messageNo);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	public Message selectMessage(Connection conn, int messageNo) {
+		Message m = new Message();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMessage");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, messageNo);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				m.setMessageTitle(rset.getString("MESSAGE_TITLE"));
+				m.setSender(rset.getString("MEM_ID"));
+				m.setSendDate(rset.getString("SEND_DATE"));
+				m.setMessageContent(rset.getString("MESSAGE_CONTENT"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public int searchMember(Connection conn, String receiverId) {
+		
+		System.out.println("searchMember Dao " + receiverId);
+		int receiverNo = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("searchMember");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, receiverId);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				receiverNo = rset.getInt("MEM_NO");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return receiverNo;
+		
+	}
+			
+			
+	public int insertMessage(Connection conn, Message m) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMessage");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, m.getSenderNo());
+			pstmt.setInt(2, m.getReceiverNo());
+			pstmt.setString(3, m.getMessageTitle());
+			pstmt.setString(4, m.getMessageContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 }

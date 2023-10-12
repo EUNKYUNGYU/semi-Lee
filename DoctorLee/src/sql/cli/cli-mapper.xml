@@ -31,6 +31,7 @@
 	
 	<entry key="selectCli">
 		SELECT
+				CLI_NO,
 				HOS_NAME,
 				CLI_CATE,
 				CLI_NAME,

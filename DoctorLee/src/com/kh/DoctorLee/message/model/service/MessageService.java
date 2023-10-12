@@ -18,5 +18,38 @@ public class MessageService {
 		return list;
 	}
 	
+	public int updateReadStatus(int messageNo) {
+		Connection conn = getConnection();
+		int result = new MessageDao().updateReadStatus(conn, messageNo);
+		close(conn);
+		return result;
+	}
+	
+	public Message selectMessage(int messageNo){
+		
+		Connection conn = getConnection();
+		Message m = new MessageDao().selectMessage(conn, messageNo);
+		close(conn);
+		return m;
+	}
+	
+	public int searchMember(String receiverId) {
+		System.out.println("searchMember Service " + receiverId);
+		Connection conn = getConnection();
+		int receiverNo = new MessageDao().searchMember(conn, receiverId);
+		close(conn);
+		return receiverNo;
+		
+	}
+	
+	public int insertMessage(Message m) {
+		
+		Connection conn = getConnection();
+		int result = new MessageDao().insertMessage(conn, m);
+		close(conn);
+		return result;
+		
+	}
+	
 	
 }

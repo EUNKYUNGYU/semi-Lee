@@ -99,14 +99,15 @@
 				<hr>
 				<div id="insertBk">
 					<img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fcdn.crowdpic.net%2Fdetail-thumb%2Fthumb_d_A32B41EB090AC3DCA70DEA8131E49CDB.jpg&type=l340_165" alt="즐겨찾기 이미지" ><br>
-					<a href="#">즐겨찾기 추가</a>
-					<a href="#" id="deletebk">즐겨찾기 삭제</a>
+					<a href="<%=contextPath%>/enrollForm.bk">즐겨찾기 추가</a>
+					<a href="#">즐겨찾기 삭제</a>
 					
 				</div>
 					
 				
 			</div>
 		</div>
+		
 	
 	<% } %>
 	<%@ include file="../common/footer.jsp" %>

@@ -31,7 +31,7 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = "SELECT "
-					+ "MEM_ID, MESSAGE_CONTENT, SEND_DATE, READ_STATUS " 
+					+ "MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS " 
 					+ "FROM " 
 					+ "TB_MESSAGE "
 					+ "JOIN " 
@@ -51,7 +51,7 @@ public class MessageDao {
 				
 				Message msg = new Message();
 				msg.setReceiver(rset.getString("MEM_ID"));
-				msg.setMessageContent(rset.getString("MESSAGE_CONTENT"));
+				msg.setMessageContent(rset.getString("MESSAGE_TITLE"));
 				msg.setSendDate(rset.getString("SEND_DATE"));
 				msg.setReadStatus(rset.getString("READ_STATUS"));
 				list.add(msg);

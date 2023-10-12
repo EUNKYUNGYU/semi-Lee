@@ -51,7 +51,7 @@
         }
 
         
-        #table1 {
+        #list-area {
                 border-collapse: collapse;
                 width: 950px;
                 margin-left: 100;
@@ -162,7 +162,7 @@
                     <input type="date" id="date1"> ~
                     <input type="date" id="date2">
                 </span>
-                <table id="table1" align="center">
+                <table id="list-area" align="center">
                     <thead>
                       <tr>
                         <th>의료진</th>
@@ -201,6 +201,19 @@
  		</div>
  </div>
     
+    <script>
+    	$(function(){
+    		$('.list-area>tbody>tr').click(function(){
+    			
+    			const nno = $(this).children().eq(0).text();
+    			
+    			location.href= "<%=contextPath%>/detail.medi?nno=" + nno;
+    			location.href = "<%=contextPath%>/datail.medi";
+    			
+    		})
+    		
+    	});
+    </script>
 
 </body>
 </html>

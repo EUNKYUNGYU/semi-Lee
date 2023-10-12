@@ -14,10 +14,6 @@
 				PRE_DATE
 		  FROM
 		  		TB_MED_MAN
-		  JOIN
-		  		MEMBER USING (MEM_NO)
-		 WHERE 
-		   		MEMBER.STATUS = 'Y'
 		 ORDER
 		 	BY
 		 		TREATE_DATE DESC

@@ -47,4 +47,15 @@
 		 WHERE
 		 		CLI_NO = ? 								
 	</entry>
+	
+	<entry key="selectCliDateList">
+		SELECT
+				DATE_NO,
+				CLI_NO,
+				CLI_DATE
+		  FROM
+		  		TB_CLI_DATE
+		 WHERE
+		 		CLI_NO = ? 				
+	</entry>
 </properties>

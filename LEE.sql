@@ -1192,8 +1192,6 @@ INSERT INTO
                     , RECEIVER
                     , MESSAGE_TITLE
                     , MESSAGE_CONTENT
-                    , READ_STATUS
-                    , STATUS
                     )
             VALUES 
                     (
@@ -1202,9 +1200,17 @@ INSERT INTO
                     , 2
                     , '메세지 제목15'
                     , 'user05이 user01한테 보낸 메세지 내용입니다.'
-                    , 'N'
-                    , 'Y'
                     );
+                    
+    SELECT 
+        MEM_NO
+            FROM 
+                TB_MEMBER
+            WHERE 
+                MEM_ID = 'user02';
+                
+                
+            
 
 
 

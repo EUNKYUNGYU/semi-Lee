@@ -38,5 +38,29 @@
 				?
 				)	
 	</entry>
+	
+	<entry key="selectCouVideo">
+		SELECT
+				VIDEO_NO,
+				MEM_NO,
+				VIDEO_TITLE,
+				CHANNEL_NAME,
+				VIDEO_ADDRESS
+		  FROM
+		  		TB_COU_VIDEO
+		 WHERE
+		 		VIDEO_NO = ? 				
+	</entry>
+	
+	<entry key="updateCouVideo">
+		UPDATE
+		  		TB_COU_VIDEO
+		   SET
+		  		VIDEO_TITLE = ?,
+		  		CHANNEL_NAME = ?,
+		  		VIDEO_ADDRESS = ?
+		WHERE
+				VIDEO_NO = ?				
+	</entry>
 </properties>
 

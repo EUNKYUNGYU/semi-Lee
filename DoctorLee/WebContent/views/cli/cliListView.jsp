@@ -442,10 +442,6 @@
                     </div>
                 </div>
 
-                <script>
-                    
-                </script>
-
                 <!--클리닉 예약 날짜 및 시간 띄우기 영역 div-->
                 <div id="res-part">
                     <!--클리닉 예약일시 출력 영역 div-->
@@ -598,12 +594,7 @@
                                                 url:'ajaxCalendar.cli',
                                                 data:{cliNo:$('.cli-no').text()},
                                                 success:function(result){
-
-                                                    console.log('성공');
-
-                                                    for(let i in result){
-                                                        
-                                                    }
+                                                    // 객체로 추가하기
                                                     
                                                 },
                                                 error:function(){

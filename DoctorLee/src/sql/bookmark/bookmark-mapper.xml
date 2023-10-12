@@ -2,6 +2,12 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectHospital">
-	
+		SELECT
+			HOS_NAME
+		FROM
+			TB_HOSPITAL
+		WHERE 
+			HOS_NAME LIKE '%'||?||'%'
+		
 	</entry>
 </properties>

@@ -4,7 +4,6 @@
     
 <% 
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
-	System.out.println(list);
 %>
 
 <!DOCTYPE html>
@@ -153,7 +152,7 @@ table{
 							<button type="button" class="btn btn-light">삭제
 						</div>
 						<div id="buttonWrap2">
-							<button type="button" class="btn btn-primary">쪽지 보내기
+							<a href="<%= contextPath %>/views/message/messageEnrollForm.jsp" class="btn btn-primary">쪽지 보내기</a>
 						</div>
 					</div>
 					<hr>

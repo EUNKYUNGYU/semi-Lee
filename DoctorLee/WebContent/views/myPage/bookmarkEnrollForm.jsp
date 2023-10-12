@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,30 +41,24 @@
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
+	<% //System.out.println(hosList); %>
+	
 	<h2 align="center">병원 즐겨찾기 페이지 </h2> <br><hr>
-		<form>
+		<form action="<%=contextPath %>/selectHos.mk" id="insert-form" method="post">
 		<div id="search-form">	
 			<br>
+			
 			<h3>검색하실 병원 이름을 입력해주세요</h3> <br>	
 			<input type="text" name="hosName" id="hosName">
-			<button type="button" id="search">검색</button><br><br>
-			<div id="text-area"></div>
+			<button type="submit" id="search">검색</button><br><br>
+			<div id="text-area">
+				
+				
+			</div>
 		</div>
-			<script>
-				$(function(){
-					$('#search').click(function(){
-						const searchContent = document.getElementById('hosName');
-						//console.log(searchContent.value); hosName 텍스트창의 검색 내용을 controller로 보내기 
-						location.href="<%=contextPath%>/selectHos.mk";
-						$('#text-area').html('검색된 내용');
-					})
-				})
-			
-			
-			</script>
-			
-				<input type="hidden" name = "searchContent" id=searchContent>
+				
 			</form>
+			
 			
 			
 		

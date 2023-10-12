@@ -32,4 +32,24 @@ public class MessageService {
 		close(conn);
 		return m;
 	}
+	
+	public int searchMember(String receiverId) {
+		System.out.println("searchMember Service " + receiverId);
+		Connection conn = getConnection();
+		int receiverNo = new MessageDao().searchMember(conn, receiverId);
+		close(conn);
+		return receiverNo;
+		
+	}
+	
+	public int insertMessage(Message m) {
+		
+		Connection conn = getConnection();
+		int result = new MessageDao().insertMessage(conn, m);
+		close(conn);
+		return result;
+		
+	}
+	
+	
 }

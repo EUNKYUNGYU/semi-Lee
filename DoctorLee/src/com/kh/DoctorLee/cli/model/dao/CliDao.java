@@ -111,6 +111,7 @@ public class CliDao {
 			
 			if(rset.next()) {
 				c = new Clinic();
+				c.setCliNo(rset.getInt("CLI_NO"));
 				c.setHosNo(rset.getString("HOS_NAME"));
 				c.setCateName(rset.getString("CLI_CATE"));
 				c.setCliName(rset.getString("CLI_NAME"));

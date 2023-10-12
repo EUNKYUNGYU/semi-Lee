@@ -62,5 +62,13 @@
 		WHERE
 				VIDEO_NO = ?				
 	</entry>
+	
+	<entry key="deleteVideo">
+		DELETE
+		  FROM
+		  		TB_COU_VIDEO
+		 WHERE
+		 		VIDEO_NO = ? 		
+	</entry>
 </properties>
 

@@ -75,5 +75,22 @@ public class CouService {
 		
 		return result;
 	}
+	
+	// 비디오 삭제
+	public int deleteVideo(int videoNo) {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().deleteVideo(conn, videoNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 
 }

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.DoctorLee.cli.model.vo.CliResDate;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
@@ -171,5 +172,25 @@ public class CouDao {
 		return result;
 	}
 	
-
+	public int deleteVideo(Connection conn, int videoNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteVideo");
+		 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, videoNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

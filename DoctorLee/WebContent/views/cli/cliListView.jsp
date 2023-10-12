@@ -33,6 +33,9 @@
             start: nowDate
             };
         },
+        events:[
+            
+        ],
 
         dateClick: function(info){
 
@@ -389,7 +392,7 @@
                     </div>
                 <% } %>
 
-                <!--클리닉 내용 출력 영역 div-->
+                <!--카테고리 내용 출력 영역 div-->
                 <div id="cli-cate-part">
 
                     <!--제목 출력 영역 div-->
@@ -510,7 +513,11 @@
 
             <script>
                 $(function(){
-                    $('.cate').click(function(){
+                    $('.cate').click(function(){   
+
+                        // 카테고리 클릭 시 예약일시 영역 숨기기
+                        $('#cli-date').css('visibility', 'hidden');
+
                     
                         // 카테고리 선택 시 해당하는 카테고리의 클리닉 출력
                         $.ajax({
@@ -581,7 +588,6 @@
                                         //li클릭 시 색깔 바뀌는 이벤트
                                         $('.content-cli').click(function(){
                         
-                                        
                                             $(this).css('background-color', 'bisque');
 
                                             $(this).siblings().css('background-color', 'salmon');

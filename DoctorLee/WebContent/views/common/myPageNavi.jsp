@@ -93,7 +93,7 @@
                     <table id="user" align="center">
                         <tr>
                             <br><br>
-                            <th align="center"><%= loginUser1.getMemName() %>님 환영합니다.</th><br>
+                            <div align="center"><%= loginUser1.getMemName() %>님 환영합니다.</div><br>
                             
 
                         </tr>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <ul id="navigator">
-                    <li><a href="#">복약관리</a></li>
+                    <li><a href="<%=contextPath1%>/list.medi">복약관리</a></li>
                     <li><a href="#">회원정보 수정/탈퇴</a>
                         <ul>
                             <li><a href="<%=contextPath1%>/updateForm.me">회원 정보 수정</a></li>

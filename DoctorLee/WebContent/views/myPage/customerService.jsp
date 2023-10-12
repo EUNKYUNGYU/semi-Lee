@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>복약관리</title>
+<title>고객센터</title>
 <style>
- 	div{
+	
+        div{
             
             box-sizing: border-box;
         }
@@ -44,8 +45,7 @@
             height: 100%;
         }
 
-        
-        #table1 {
+        table {
                 border-collapse: collapse;
                 width: 950px;
                 margin-left: 100;
@@ -106,15 +106,39 @@
                 }
                         
                 #count{
-                    margin-left: 250px;
+                    margin-left: 240px;
                     margin-top: 100px;
                 }
       
                 #date1{
                  margin-left: 635px;
                 }
+        
+                #inqbtn{
+                    margin-top: 30px;
+                    
+                }
 
-         /*--------------------p태그---------------------*/
+                #inq1:hover{
+                    background-color: #1E376F;
+                    color: white;
+                }
+                #inq2:hover{
+                    background-color: #1E376F;
+                    color: white;
+                }
+                #inq1, #inq2{
+                    width: 150px;
+                    height: 50px;
+                    border-radius: 3px;
+                    border: 1px solid #1E376F;
+                    background-color: white;
+                }
+
+                #inq1{
+                    margin-right: 80px;
+                }
+        /*--------------------p태그---------------------*/
         #p1{
             text-align: center;
             font-size: 38px;
@@ -126,45 +150,47 @@
             color: #1E376F;
             font-weight: 600;
             padding-top: 30px;
-            padding-left: 150px;
+            padding-left: 200px;
+            
+           
         }
-       
-       
-    </style>
+</style>
 </head>
 <body>
-
-<div id="wrap">
+	 <div id="wrap">
         <div id="header">
-           <%@ include file = "../common/nav2.jsp" %>
+        	<%@ include file = "../common/nav2.jsp" %>
         </div>
 
         <div id="content">
-        
             <div id="content_1">
- 				<%@ include file = "../common/myPageNavi.jsp" %>       
+            	<%@ include file = "../common/myPageNavi.jsp" %>
             </div>
-            
             <div id="content_2">
                 <p id="p1">마이페이지</p>
             
-                <div id="p2" style="text-align: left;">복약관리</div>
-                <hr>
+                <p id="p2">고객센터</p>
                 <br>
+                <hr>
+                <div id="inqbtn" align="center">
+                    <input type="button" value="1:1 문의" id="inq1">
+                    <input type="button" value="관리자 문의" id="inq2">
+                </div>
 
-                <span id="count">⋅ Total 2
+                <div id="count">⋅ Total 2
                     <input type="date" id="date1"> ~
                     <input type="date" id="date2">
-                </span>
-                <table id="table1" align="center">
+                </div>
+
+                <table align="center">
                     <thead>
                       <tr>
-                        <th class=th1>병원명</th>
-                        <th class=th1>의료진</th>
-                        <th class=th1>약처방</th>
-                        <th class=th1>처방전발급일</th>
-                        <th class=th1>진료일자</th>
-                        <th class=th1>복용횟수</th>
+                        <th>병원명</th>
+                        <th>의료진</th>
+                        <th>약처방</th>
+                        <th>처방전발급일</th>
+                        <th>진료일자</th>
+                        <th>복용횟수</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -209,12 +235,11 @@
                         <td>0</td>
                       </tr>
                      
-                   </tbody>
+                    </tbody>
                   </table> 
-            </div>
- 		</div>
- </div>
-    
 
+            </div>
+        </div>
+     </div>
 </body>
 </html>

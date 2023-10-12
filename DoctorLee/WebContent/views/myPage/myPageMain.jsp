@@ -147,7 +147,7 @@ Member loginUser = (Member)session.getAttribute("loginUser");
                     <br><br><br>
                 </div>
                 <ul id="mpg_navi">
-                    <li><a href="#">복약관리</a></li>
+                    <li><a href="<%=contextPath%>/list.medi">복약관리</a></li>
                     <li><a href="#">회원정보 수정/탈퇴</a>
                         <ul>
                             <li><a href="#">회원 정보 수정</a></li>

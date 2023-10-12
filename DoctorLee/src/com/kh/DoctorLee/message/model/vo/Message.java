@@ -7,6 +7,7 @@ public class Message {
 	private String receiver;
 	private String sendDate;
 	private String messageContent;
+	private String messageTitle;
 	private String readStatus;
 	private String status;
 	
@@ -15,15 +16,26 @@ public class Message {
 	}
 
 	public Message(int messageNo, String sender, String receiver, String sendDate, String messageContent,
-			String readStatus, String status) {
+			String messageTitle, String readStatus, String status) {
 		super();
 		this.messageNo = messageNo;
 		this.sender = sender;
 		this.receiver = receiver;
 		this.sendDate = sendDate;
 		this.messageContent = messageContent;
+		this.messageTitle = messageTitle;
 		this.readStatus = readStatus;
 		this.status = status;
+	}
+
+
+
+	public String getMessageTitle() {
+		return messageTitle;
+	}
+
+	public void setMessageTitle(String messageTitle) {
+		this.messageTitle = messageTitle;
 	}
 
 	public int getMessageNo() {

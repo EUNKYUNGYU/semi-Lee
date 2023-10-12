@@ -1,6 +1,6 @@
 package com.kh.DoctorLee.cou.model.dao;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -111,6 +111,63 @@ public class CouDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+	
+	public CouVideo selectCouVideo(Connection conn, int videoNo) {
+		
+		CouVideo c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouVideo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, videoNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new CouVideo();
+				c.setVideoNo(rset.getInt("VIDEO_NO"));
+				c.setMemNo(rset.getInt("MEM_NO"));
+				c.setVideoTitle(rset.getString("VIDEO_TITLE"));
+				c.setChannelName(rset.getString("CHANNEL_NAME"));
+				c.setVideoAddress(rset.getString("VIDEO_ADDRESS"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return c;
+	}
+	
+	public int updateCouVideo(Connection conn, CouVideo c) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateCouVideo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, c.getVideoTitle());
+			pstmt.setString(2, c.getChannelName());
+			pstmt.setString(3, c.getVideoAddress());
+			pstmt.setInt(4, c.getVideoNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 	

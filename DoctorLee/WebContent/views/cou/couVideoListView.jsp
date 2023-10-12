@@ -16,6 +16,18 @@
 <meta charset="UTF-8">
 <title>심리: 영상 목록 페이지</title>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+<!--Google Fonts Icon-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+<!--w3c bootstrap-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
 <style>
 .outer{
     /*border: 1px solid red;*/
@@ -79,6 +91,14 @@ img{
     margin-top: 15px;
 }
 
+.list-des{
+    margin-top: 10px;
+}
+
+.video-title{
+    font-weight: 900;
+}
+
 /*페이징 처리 영역*/
 .paging-area{
     width: auto;
@@ -91,6 +111,16 @@ img{
         background-color: #1E376F;
         color: white;
         font-size: 12px;
+}
+
+/*수정 및 삭제 아이콘*/
+.emoji{
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.edit, .delete:hover{
+    cursor: pointer;
 }
 
 </style>
@@ -134,13 +164,28 @@ img{
 				<% for(CouVideo cv : list) { %>
 	            <div class="list-content" align="center">
                     <br>
+
+                    <!--영상 주소-->
 	                <input type="hidden" value="<%= cv.getVideoAddress() %>">
+
+                    <!--영상 번호-->
+                    <input type="hidden" value="<%= cv.getVideoNo() %>">
+
+                    <div class="emoji" align="right">
+                        <span class="material-symbols-outlined edit">
+                            edit
+                        </span>
+
+                        <span class="material-symbols-outlined delete" data-toggle="modal" data-target="#myModal">
+                            delete
+                        </span>
+                    </div>
 	                <div class="list-img">
 	                    <img src="https://img.youtube.com/vi/<%= cv.getVideoAddress() %>/maxresdefault.jpg" alt="">
 	                </div>
 	                <div class="list-des">
-	                    <h4><%= cv.getVideoTitle() %></h5>
-	                    <h4><%= cv.getChannelName() %></p>
+	                    <p class="video-title"><%= cv.getVideoTitle() %></p>
+	                    <p><%= cv.getChannelName() %></p>
 	                </div>
                     <br>
 	            </div>
@@ -174,10 +219,30 @@ img{
 
     <script>
         $(function(){
-            $('.list-content').click(function(){
-                const address = $(this).children().eq(1).val();
 
+            // 클릭 시 해당 영상 주소로 이동
+            $('.list-img, .list-des').click(function(){
+                const address = $(this).parent().children().eq(1).val();
+                
                 location.href = 'https://www.youtube.com/watch?v='+address;
+            })
+
+            // 클릭 시 영상 수정 페이지로 이동
+            $('.edit').click(function(){
+                console.log('수정');
+
+                const videoNo = $('.list-content').children().eq(2).val();
+
+                location.href = '<%=contextPath%>/updateVideo.cou?cvno='+videoNo;
+            })
+
+            // 클릭 시 영상 삭제
+            $('.delete').click(function(){
+                confirm('영상을 삭제하겠습니까?');
+
+                if(true){
+                    location.href='<%=contextPath%>/deleteVideo.cou?cvno='+videoNo;
+                }
             })
         })
     </script>

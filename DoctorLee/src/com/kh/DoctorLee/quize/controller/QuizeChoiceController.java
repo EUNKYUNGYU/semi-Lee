@@ -66,10 +66,10 @@ public class QuizeChoiceController extends HttpServlet {
 			
 			System.out.println(result);
 			if(result == 2) { // 정답, 포인트 획득 성공
-				request.getSession().setAttribute("alertMsg", "500포인트를 획득하였습니다.");
+				request.getSession().setAttribute("alertMsg", "정답입니다! \n500포인트를 획득하였습니다.");
 				response.sendRedirect(request.getContextPath() + "/list.qz");
 			} else if(result == 1){ // 오답, 포인트 획득 실패
-				request.getSession().setAttribute("alertMsg", "포인트 획득에 실패하셨습니다.");
+				request.getSession().setAttribute("alertMsg", "오답입니다");
 				response.sendRedirect(request.getContextPath() + "/list.qz");
 			} else if(result == 0) { // 실패
 				request.getSession().setAttribute("alertMsg", "제출에 실패하였습니다. 다시 시도해 주십시오.");

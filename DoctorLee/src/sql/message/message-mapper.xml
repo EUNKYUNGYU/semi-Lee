@@ -5,7 +5,7 @@
 <entry key="selectList">
 
 	SELECT 
-        MEM_ID, MESSAGE_CONTENT, SEND_DATE, READ_STATUS
+        MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS
     FROM 
         TB_MESSAGE 
     JOIN 
@@ -17,6 +17,8 @@
         ORDER BY SEND_DATE DESC
 
 </entry>
+
+
 </properties>
 
 

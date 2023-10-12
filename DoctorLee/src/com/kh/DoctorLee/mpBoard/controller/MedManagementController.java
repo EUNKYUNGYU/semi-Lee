@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.DoctorLee.mpBoard.model.service.MedManagementService;
+import com.kh.DoctorLee.mpBoard.model.vo.MedManagement;
 
 /**
  * Servlet implementation class MedManagementController
@@ -29,9 +33,11 @@ public class MedManagementController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/myPage/medManagement.jsp");
+		ArrayList<MedManagement> list = new MedManagementService().selectMedManagementList();
+		request.setAttribute("list", list);
+		
+		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/medManagement.jsp");
 		view.forward(request, response);
-	
 	}
 
 	/**

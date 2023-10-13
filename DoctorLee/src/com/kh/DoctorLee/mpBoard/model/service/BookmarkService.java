@@ -30,6 +30,7 @@ public class BookmarkService {
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 	public ArrayList<Bookmark> selectBookmark(int memNo){
@@ -37,6 +38,17 @@ public class BookmarkService {
 		ArrayList<Bookmark> list = new BookmarkDao().selectBookmark(conn,memNo);
 		JDBCTemplate.close(conn);
 		return list;
+	}
+	public int deleteBookmark(String hosName,int memNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new BookmarkDao().deleteBookmark(conn,hosName,memNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

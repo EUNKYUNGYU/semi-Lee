@@ -174,6 +174,7 @@ public class CliDao {
 			
 			pstmt.setInt(1, cliNo);
 			pstmt.setString(2, resDate);
+			pstmt.setInt(3, cliNo);
 			
 			rset = pstmt.executeQuery();
 			

@@ -40,7 +40,7 @@ public class AjaxTimeController extends HttpServlet {
 		// Service 요청
 		ArrayList<CliResTime> timeList = new CliService().selectCliTimeList(cliNo, resDate);
 		
-		System.out.println(timeList);
+//		System.out.println(timeList);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(timeList, response.getWriter());

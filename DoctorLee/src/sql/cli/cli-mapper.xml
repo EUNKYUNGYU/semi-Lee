@@ -69,7 +69,19 @@
 		 WHERE
 		 		CLI_NO = ?
 		 AND
-		 		CLI_DATE = ?		 				
+		 		CLI_DATE = ?
+		 AND
+		 		CLI_TIME NOT IN(
+		 						SELECT
+		 								RES_TIME
+		 						  FROM
+		 						  		TB_CLI_RES
+		 						 WHERE
+		 						 		CLI_NO = ? 				
+		 						)
+		ORDER 
+		   BY  TIME_NO
+						 						 				 				
 	</entry>
 	
 	<entry key="insertCliRes">

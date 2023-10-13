@@ -272,10 +272,10 @@
                             <input type="text" id="userPhone" value="<%=loginUser.getPhone()%>"" readonly>
                             
                             <span>예약일 : </span>
-                            <input type="text" id="resDate" name="resDate" readonly required>
+                            <input type="text" id="resDate" name="resDate" required readonly>
 
                             <span>예약시간 : </span>
-                            <input type="text" id="resTime" name="resTime" readonly required>
+                            <input type="text" id="resTime" name="resTime" required readonly>
                         </div>
 
                         <div id="res-part" align="center">

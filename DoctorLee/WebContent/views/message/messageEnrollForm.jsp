@@ -19,7 +19,6 @@
 <style>
 
 * {
-	border: 0.5px solid skyblue;
 	box-sizing: border-box;
 }
 
@@ -43,14 +42,18 @@ main > section, main > aside, main > div{
 	float: left;
 }
 
-#aside {
-	width: 20%;
+.aside {
 	height: auto;
+	float: left;
 	margin : 20px auto;
 	display: flex;
 	justify-content: center;
 	padding: 0;
 }
+
+#aside1{width :25%}
+
+#aside2{width :15%}
 
 #section{
 	width: 60%;
@@ -65,16 +68,17 @@ main > section, main > aside, main > div{
 	height : 100px;
 	padding: 20px;
 	font-size : 30px;
+	font-weight: bold;
 	line-height : 200%;
 }
 
-#content{width : 100%; height : auto;}
+#content{width : 100%; height : auto; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 20px;}
 
 article{width: 95%; height: auto; margin : 20px;}
 
 #typeWrap{height: 50px; padding: 7px;}
 
-#buttonWrap{height: 50px;}
+#buttonWrap{height: 60px;}
 
 #buttonWrap > div{float: left;}
 
@@ -110,7 +114,7 @@ article{width: 95%; height: auto; margin : 20px;}
 
 #messageLenMax{width: 5%;}
 
-#page, #search{width : 100%; height : 100px; padding: 20px;}
+#back{width : 100%; height : 100px; padding: 40px 20px;}
 
 footer {width: 100%; height: auto;}
 
@@ -126,14 +130,14 @@ table{background-color: rgb(232, 238, 253); border-radius: 7px;}
 		<%@ include file ="../common/nav2.jsp" %>
 	</header>
 	<main>
-		<aside id="aside">
+		<aside id="aside1" class="aside">
 			<%@ include file ="../common/cmNavi.jsp" %>	
 		</aside>
 		
 		<section id="section">
 			
 			<div id="contentTitle">
-				&lt;&nbsp;&nbsp;쪽지함
+				쪽지쓰기
 			</div>
 			
 			<div id="content">
@@ -178,26 +182,18 @@ table{background-color: rgb(232, 238, 253); border-radius: 7px;}
 					</div>
 					
 				</article>
+			<div id="back" align="right">
+				<a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver" id="backButton" class="btn btn-light">돌아가기</a>
+			</div>
 			</div>
 			
-			<div id="page">
-				페이지바 영역
-			</div>
-		
-			<div id="search">
-				검색 영역
-			</div>
-		
 		</section>
 		
-		<aside id="aside">
-			오른쪽 사이드바 : 
-			<br> 지금은 여백
-			<br> 나중에 광고 넣을 수도 있음
+		<aside id="aside2" class="aside">
 		</aside>
 		
 	</main>
-	
+	<br clear="both">
 	
 	<footer>
 		<%@ include file ="../common/footer.jsp" %>

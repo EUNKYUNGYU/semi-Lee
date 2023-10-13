@@ -39,14 +39,17 @@ main {
 
 main > section, main > aside, main > div{float: left;}
 
-#aside {
-	width: 20%;
+.aside {
 	height: auto;
 	margin : 20px auto;
 	display: flex;
 	justify-content: center;
 	padding: 0;
 }
+
+#aside1{width :25%}
+
+#aside2{width :15%}
 
 #section{
 	width: 60%;
@@ -61,6 +64,7 @@ main > section, main > aside, main > div{float: left;}
 	height : 100px;
 	padding: 20px;
 	font-size : 30px;
+	font-weight: bold;
 	line-height : 200%;
 }
 
@@ -108,7 +112,7 @@ table{
 		<%@ include file ="../common/nav2.jsp" %>
 	</header>
 	<main>
-		<aside id="aside">
+		<aside id="aside1" class="aside">
 			<%@ include file ="../common/cmNavi.jsp" %>	
 		</aside>
 		
@@ -167,10 +171,7 @@ table{
 		
 		</section>
 		
-		<aside id="aside">
-			오른쪽 사이드바 : 
-			<br> 지금은 여백
-			<br> 나중에 광고 넣을 수도 있음
+		<aside id="aside2" class="aside">
 		</aside>
 		
 	</main>

@@ -42,14 +42,18 @@ main > section, main > aside, main > div{
 	float: left;
 }
 
-#aside {
-	width: 20%;
+.aside {
 	height: auto;
+	float: left;
 	margin : 20px auto;
 	display: flex;
 	justify-content: center;
 	padding: 0;
 }
+
+#aside1{width :25%}
+
+#aside2{width :15%}
 
 #section{
 	width: 60%;
@@ -64,6 +68,7 @@ main > section, main > aside, main > div{
 	height : 100px;
 	padding: 20px;
 	font-size : 30px;
+	font-weight: bold;
 	line-height : 200%;
 }
 
@@ -130,7 +135,7 @@ table{
 		<%@ include file ="../common/nav2.jsp" %>
 	</header> 
 	<main>
-		<aside id="aside">
+		<aside id="aside1" class="aside">
 			<%@ include file ="../common/cmNavi.jsp" %>	
 		</aside>
 		
@@ -200,12 +205,7 @@ table{
         				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name');
         				console.log(mNo);
         			});
-	        			$('.checkMsg').on('change', function(){
-	        				
-	        				if(($(this).prop('checked')) == true){
-	        					console.log($(this).val());
-	        					console.log($(this));
-	        				}
+	        			
 	        				
 	        			
 	        			
@@ -228,10 +228,7 @@ table{
 		
 		</section>
 		
-		<aside id="aside">
-			오른쪽 사이드바 : 
-			<br> 지금은 여백
-			<br> 나중에 광고 넣을 수도 있음
+		<aside id="aside2" class="aside">
 		</aside>
 		
 	</main>

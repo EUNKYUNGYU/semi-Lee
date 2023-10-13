@@ -34,21 +34,29 @@ public class QuizeAnswerExistController extends HttpServlet {
 		// 제출 값이 있다면 정답 확인 가능하게
 		// 제출 값이 없다면 정답 확인 불가능하게
 		
+		String due = request.getParameter("due"); // due가 true일 경우 제출 기한이 남음, false일 경우 제출 기한이 지남
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int qno = Integer.parseInt(request.getParameter("qno"));
-		System.out.println(memNo);
-		System.out.println(qno);
 		
-		int result = new QuizeService().quizeAnswerExist(memNo, qno);
-		
-		if(result > 0) { // 답안 제출 한적 있음, 정답 화면 보여주기
+		if(due.equals("true")) { // 제출 기한이 남은 경우
+			
+			int result = new QuizeService().quizeAnswerExist(memNo, qno);
+			
+			if(result > 0) { // 답안 제출 한적 있음, 정답 화면 보여주기
+				int qno1 = Integer.parseInt(request.getParameter("qno"));
+				QuizeAnswer answer = new QuizeService().detailQuize(qno1);
+				request.setAttribute("answer", answer);
+				request.getRequestDispatcher("views/quize/quizeDetail.jsp").forward(request, response);
+			} else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
+				request.getSession().setAttribute("alertMsg", "답을 먼저 제출해주십시오");
+				response.sendRedirect(request.getContextPath() + "/list.qz");
+			}
+			
+		} else { // 제출 기한이 지난 경우 답 제출 한 적 없어도, 정답 화면 보여주기
 			int qno1 = Integer.parseInt(request.getParameter("qno"));
 			QuizeAnswer answer = new QuizeService().detailQuize(qno1);
 			request.setAttribute("answer", answer);
 			request.getRequestDispatcher("views/quize/quizeDetail.jsp").forward(request, response);
-		} else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
-			request.getSession().setAttribute("alertMsg", "답을 먼저 제출한 후 확인 가능합니다.");
-			response.sendRedirect(request.getContextPath() + "/list.qz");
 		}
 		
 	}

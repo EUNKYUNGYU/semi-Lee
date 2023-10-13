@@ -4,14 +4,12 @@ import java.sql.Date;
 
 public class MedManagement {
 	
-	private int preNo;
-	private int rsvtNo;
-	private int memNo;
 	private String hosName;
+	private Date treatDate;
+	private Date preDate;
 	private String doctorName;
 	private String mediName;
-	private Date treateDate;
-	private Date preDate;
+	private int medManNo;
 	
 	
 	public MedManagement() {
@@ -19,47 +17,15 @@ public class MedManagement {
 	}
 
 
-	public MedManagement(int preNo, int rsvtNo, int memNo, String hosName, String doctorName, String mediName,
-			Date treateDate, Date preDate) {
+	public MedManagement(String hosName, Date treateDate, Date preDate, String doctorName, String mediName,
+			int medManNo) {
 		super();
-		this.preNo = preNo;
-		this.rsvtNo = rsvtNo;
-		this.memNo = memNo;
 		this.hosName = hosName;
+		this.treatDate = treateDate;
+		this.preDate = preDate;
 		this.doctorName = doctorName;
 		this.mediName = mediName;
-		this.treateDate = treateDate;
-		this.preDate = preDate;
-	}
-
-
-	public int getPreNo() {
-		return preNo;
-	}
-
-
-	public void setPreNo(int preNo) {
-		this.preNo = preNo;
-	}
-
-
-	public int getRsvtNo() {
-		return rsvtNo;
-	}
-
-
-	public void setRsvtNo(int rsvtNo) {
-		this.rsvtNo = rsvtNo;
-	}
-
-
-	public int getMemNo() {
-		return memNo;
-	}
-
-
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
+		this.medManNo = medManNo;
 	}
 
 
@@ -70,6 +36,26 @@ public class MedManagement {
 
 	public void setHosName(String hosName) {
 		this.hosName = hosName;
+	}
+
+
+	public Date getTreateDate() {
+		return treatDate;
+	}
+
+
+	public void setTreateDate(Date treateDate) {
+		this.treatDate = treateDate;
+	}
+
+
+	public Date getPreDate() {
+		return preDate;
+	}
+
+
+	public void setPreDate(Date preDate) {
+		this.preDate = preDate;
 	}
 
 
@@ -93,32 +79,23 @@ public class MedManagement {
 	}
 
 
-	public Date getTreateDate() {
-		return treateDate;
+	public int getMedManNo() {
+		return medManNo;
 	}
 
 
-	public void setTreateDate(Date treateDate) {
-		this.treateDate = treateDate;
-	}
-
-
-	public Date getPreDate() {
-		return preDate;
-	}
-
-
-	public void setPreDate(Date preDate) {
-		this.preDate = preDate;
+	public void setMedManNo(int medManNo) {
+		this.medManNo = medManNo;
 	}
 
 
 	@Override
 	public String toString() {
-		return "MedManagement [preNo=" + preNo + ", rsvtNo=" + rsvtNo + ", memNo=" + memNo + ", hosName=" + hosName
-				+ ", doctorName=" + doctorName + ", mediName=" + mediName + ", treateDate=" + treateDate + ", preDate="
-				+ preDate + "]";
+		return "MedManagement [hosName=" + hosName + ", treatDate=" + treatDate + ", preDate=" + preDate
+				+ ", doctorName=" + doctorName + ", mediName=" + mediName + ", medManNo=" + medManNo + "]";
 	}
-
+	
+	
+	
 	
 }

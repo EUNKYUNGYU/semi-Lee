@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.kh.DoctorLee.cli.model.dao.CliDao;
 import com.kh.DoctorLee.cli.model.vo.Category;
 import com.kh.DoctorLee.cli.model.vo.CliResDate;
+import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
 
 public class CliService {
@@ -51,6 +52,17 @@ public class CliService {
 		close(conn);
 		
 		return list;
+	}
+	
+	// 클리닉 예약 가능한 시간 가져오기
+	public ArrayList<CliResTime> selectCliTimeList(int cliNo){
+		Connection conn = getConnection();
+		
+		ArrayList<CliResTime> timeList = new CliDao().selectCliTimeList(conn, cliNo);
+		
+		close(conn);
+		
+		return timeList;
 	}
 
 }

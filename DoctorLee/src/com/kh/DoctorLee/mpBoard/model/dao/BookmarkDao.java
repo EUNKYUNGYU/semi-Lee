@@ -74,14 +74,16 @@ public class BookmarkDao {
 		}
 		return hos;
 	}
-	public int insertBookmark(Connection conn,String hosnameWord) {
+	public int insertBookmark(Connection conn,String hosnameWord,int memNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertBookmark");
 		
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, hosnameWord);
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, hosnameWord);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

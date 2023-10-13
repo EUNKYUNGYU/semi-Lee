@@ -32,7 +32,9 @@ public class CliResController extends HttpServlet {
 		
 		// 값 뽑기
 		int cliNo = Integer.parseInt(request.getParameter("cno"));
-		//String userName = request.getParameter("")
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		
+		
 	}
 
 	/**

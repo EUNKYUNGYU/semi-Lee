@@ -31,6 +31,15 @@
                 start: nowDate
             };
         },
+        events:[
+            <% for(CliResDate cd : dateList) {%>
+            {
+                title:'예약 가능',
+                start:'<%=cd.getCliDate()%>',
+                color:'#1E376F'
+            },
+            <% }%>
+        ],
 
         dateClick: function(info){
 
@@ -38,8 +47,7 @@
 
             // 달력 클릭 시 선택한 날짜 출력하기
             $('#resDate').val((info.dateStr).replaceAll('-', '.'));
-
-            
+            $('#resTime').val();
 
             var days = document.querySelectorAll(".day-color");
             days.forEach(function(day){
@@ -56,7 +64,7 @@
 
                     for(let i in result){
                         resultStr += '<li class="time-content" align="center">'
-                                        +'<a href="#">'
+                                        +'<a>'
                                             +'<p>'
                                                 +result[i].cliTime
                                             +'</p>'
@@ -77,7 +85,7 @@
                     console.log('실패');
                 }
             })
-        },
+        }
       });
       calendar.render();
       
@@ -87,10 +95,6 @@
 
 
 <style>
-	#calendar{
-		border: 1px solid purple;
-	}
-
     .outer{
         width: 1800px;
         margin-left: 50px;
@@ -247,10 +251,12 @@
                             <input type="text" id="cliName" value="<%= c.getCliName() %>" readonly>
                             <input type="text" id="hosNo" value="<%= c.getHosNo() %>" readonly>
                             <input type="text" id="cliPrice" value="<%= c.getCliPrice() %>" readonly>
+                            <input type="hidden" name="userNo" value="<%=loginUser.getMemNo()%>">
                             <input type="text" id="userName" value="<%= loginUser.getMemName()%>" readonly>
                             <input type="text" id="userPhone" value="<%=loginUser.getPhone()%>"" readonly>
-                            <input type="text" id="resDate" value="예약일" readonly>
-                            <input type="text" id="resTime" value="예약시간" readonly>
+                            <input type="text" id="resDate" name="resDate" value="예약일"  readonly>
+                            <input type="hidden" name="resDateNo" value="">
+                            <input type="text" id="resTime" name="resTime" value="예약시간" readonly>
                         </div>
 
                         <div id="res-part" align="center">

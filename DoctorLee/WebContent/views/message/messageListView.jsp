@@ -178,8 +178,8 @@ table{
 						<% } else { %>
 						     <tr>
 						<% } %>
-							<form action="<%= contextPath %>/delete.ms" method="get">
-						      <th><input type="checkbox" class="chkMsg" name="checkMsg" value=""></th>
+							<form action="#" method="get">
+						      <th><input type="checkbox" class="checkMsg" name="checkMsg" value="<%= m.getMessageNo() %>"><ladel></ladel></th>
 						    </form>
 						      <td scope="row"><%= m.getReceiver() %></td>
 						      <td name="<%= m.getMessageNo() %>"><%= m.getMessageTitle()%></td>
@@ -194,25 +194,30 @@ table{
 			
 			
 			<script>
-        		$(function(){
-        			
-        			$('tr > td').click(function(){
-        				
+				$(function(){
+					$('tr > td').click(function(){
         				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name');
         				console.log(mNo);
-        			
         			});
-        			
-        			$(".chkMsg:checked").each(function(idx){
+					
+					
+	        		$(function(){
+	        			
+	            		
+	        			$('.checkMsg').on('change', function(){
+	        				
+	        				if(($(this).prop('unchecked')) == f){
+	        					console.log($(this).val());
+	        				}
+	        				
+	        			
+	        			});
+					
+					
+					
+				})
+				
 
-        			    console.log(idx + "번째 = " + $(this).val());
-        			    
-        			});
-        			
-        			$('input[type=checkbox]:checked').attr('name')
-        			console.log($('#checkMsg').is(':checked'));
-        			
-        		})
 		
 			</script>
 			

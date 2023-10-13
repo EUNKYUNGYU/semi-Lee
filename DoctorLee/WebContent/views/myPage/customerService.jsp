@@ -131,13 +131,13 @@
                     margin-right: 80px;
                 }
         /*--------------------p태그---------------------*/
-        #p1{
+        #p11{
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
         }
 
-        #p2{
+        #p21{
             font-size: 23px;
             color: #1E376F;
             font-weight: 600;
@@ -159,13 +159,13 @@
             	<%@ include file = "../common/myPageNavi.jsp" %>
             </div>
             <div id="content_2">
-                <p id="p1">마이페이지</p>
+                <p id="p11">마이페이지</p>
             
-                <p id="p2">고객센터</p>
+                <p id="p21">고객센터</p>
                 <br>
                 <hr>
                 <div id="inqbtn" align="center">
-                    <input type="button" value="1:1 문의" id="inq1">
+                    <input type="button" value="1:1 문의" id="inq1" onclick="personalInqPage();">
                     <input type="button" value="관리자 문의" id="inq2" onclick="adminInqPage();">
                 </div>
 
@@ -200,6 +200,11 @@
      </div>
      
      <script>
+     	
+     	function personalInqPage(){
+    	 	location.href="<%=contextPath%>/personalInq.mp";
+     	}
+     
      	function adminInqPage(){
      		location.href = "<%=contextPath%>/adminInq.mp";
      	}

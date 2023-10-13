@@ -1,17 +1,17 @@
 package com.kh.DoctorLee.cli.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
  * Servlet implementation class CliDetailController
@@ -41,10 +41,16 @@ public class CliDetailController extends HttpServlet {
 		Clinic c = new CliService().selectCli(cliNo);
 		
 		// 리뷰 버튼을 예약한 사용자에게만 보이게
-		ArrayList<CliRes> list = new CliService().selectResMem(cliNo);
+		HttpSession session = request.getSession(); 
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		int result = new CliService().selectResMem(cliNo, loginUser);
+		
+		System.out.println(result);
 		
 		request.setAttribute("c", c);
-		request.setAttribute("list", list);
+		request.setAttribute("result", result);
 		
 		request.getRequestDispatcher("views/cli/cliDetailView.jsp").forward(request, response);
 	}

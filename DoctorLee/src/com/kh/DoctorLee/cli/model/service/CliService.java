@@ -1,6 +1,9 @@
 package com.kh.DoctorLee.cli.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+import static com.kh.DoctorLee.common.JDBCTemplate.commit;
+import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
+import static com.kh.DoctorLee.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -11,6 +14,7 @@ import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.CliResDate;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.member.model.vo.Member;
 
 public class CliService {
 
@@ -83,14 +87,14 @@ public class CliService {
 	}
 	
 	// 클리닉 예약자 정보 불러오기
-	public ArrayList<CliRes> selectResMem(int cliNo){
+	public int selectResMem(int cliNo, Member loginUser){
 		Connection conn = getConnection();
 		
-		ArrayList<CliRes> list = new CliDao().selectResMem(conn, cliNo);
+		int result = new CliDao().selectResMem(conn, cliNo, loginUser);
 		
 		close(conn);
 		
-		return list;
+		return result;
 	}
 
 }

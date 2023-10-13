@@ -96,24 +96,24 @@
                  margin-left: 635px;
                 }
 
-                #p1{
-            text-align: center;
-            font-size: 38px;
-            font-weight: bolder;
-        }
+                #p11{
+			            text-align: center;
+			            font-size: 38px;
+			            font-weight: bolder;
+			        }
 
-            #p2{
-            font-size: 23px;
-            color: #1E376F;
-            font-weight: 600;
-            padding-top: 30px;
-            padding-left: 150px;
-        }
+            #p21{
+		            font-size: 23px;
+		            color: #1E376F;
+		            font-weight: 600;
+		            padding-top: 30px;
+		            padding-left: 150px;
+		        }
         
         #deletebtn{
             text-decoration: none;
-            color: #1E376F;
-        	
+            color: white;
+        	margin-left: 1500px;
         }
 </style>
 </head>
@@ -128,9 +128,9 @@
             	<%@ include file = "../common/myPageNavi.jsp" %> 
             </div>
             <div id="content_2">
-                <p id="p1">마이페이지</p>
+                <p id="p11">마이페이지</p>
             
-                <p id="p2" style="text-align: left;">복약관리</p>
+                <p id="p21" style="text-align: left;">복약관리</p>
                 <hr>
                 <br>
 
@@ -177,7 +177,7 @@
                   </table>
                </div>
             </div>
-			<a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" id="deletebtn" class="btn btn-sm btn-primary">삭제</a>
+			<a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" id="deletebtn" class="btn btn-sm btn-primary">삭제하기</a>
         </div>
 </body>
 </html>

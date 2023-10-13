@@ -117,7 +117,7 @@
                             <li><a href="<%=contextPath1%>/deletePwd.me">회원 탈퇴</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">관리자 문의</a></li>
+                    <li><a href="<%=contextPath1%>/customerService.mp">고객센터</a></li>
                     <li><a href="#">자기 게시글 확인</a></li>
                     <li><a href="#">예약 관리</a></li>
                     <li><a href="#">병원즐겨찾기</a></li>

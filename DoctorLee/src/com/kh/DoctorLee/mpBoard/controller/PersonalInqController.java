@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.mpBoard.model.service.MedManagementService;
-import com.kh.DoctorLee.mpBoard.model.vo.MedManagement;
-
 /**
- * Servlet implementation class MedManagementDetailController
+ * Servlet implementation class PersonalInqController
  */
-@WebServlet("/detail.medi")
-public class MedManagementDetailController extends HttpServlet {
+@WebServlet("/personalInq.mp")
+public class PersonalInqController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MedManagementDetailController() {
+    public PersonalInqController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +29,8 @@ public class MedManagementDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int medManNo = Integer.parseInt(request.getParameter("nno"));
-		//System.out.println(medManNo);
-		
-		MedManagement mm = new MedManagementService().selectMedManagement(medManNo);
-		request.setAttribute("mm", mm);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/medManagementDetail.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/myPage/personalInq.jsp");
 		view.forward(request, response);
-		
 	}
 
 	/**

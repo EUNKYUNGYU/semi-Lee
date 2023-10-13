@@ -81,7 +81,7 @@
 		
 		
 			<%}%>
-			<% //System.out.println(loginUser.getMemNo()); %>
+			<% System.out.println(loginUser.getMemNo()); %>
 				</tbody>
 			</table>
 		
@@ -90,15 +90,15 @@
 			$(function(){
 				$('#text-area > tbody > tr').click(function(){
 					const hn = $(this).children().eq(0).text();
-					
-					location.href="<%=contextPath%>/insert.bm?hn=" + hn ;
+					const mno = <%= loginUser.getMemNo()%>;
+					location.href="<%=contextPath%>/insert.bm?hn=" + hn+"&mno="+mno;
 					
 				})
 			});
 		</script>
 		<form>
 			<input type="hidden" name = "hn" id=hn>
-			
+			<input type="hidden" name = "mno" id=mno>
 		</form>
 		<%@ include file="../common/footer.jsp" %>
 		

@@ -3,7 +3,7 @@
 <%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %>    
 <%
 	Clinic c = (Clinic)request.getAttribute("c");
-	ArrayList<CliResDate> dateList = (ArrayList<CliResDate>)request.getAttribute("dateList");
+    ArrayList<CliResDate> dateList = (ArrayList<CliResDate>)request.getAttribute("dateList");
 %>    
 <!DOCTYPE html>
 <html>
@@ -31,6 +31,7 @@
                 start: nowDate
             };
         },
+
         events:[
             <% for(CliResDate cd : dateList) {%>
             {
@@ -298,6 +299,10 @@
                 })
             })
         </script>
+
+     
+     
+
     
 </body>
 </html>

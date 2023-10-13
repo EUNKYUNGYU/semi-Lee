@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.cli.model.vo.*" %>    
+<%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %>    
 <%
 	Clinic c = (Clinic)request.getAttribute("c");
+    int result = (int)request.getAttribute("result");
 %>    
 <!DOCTYPE html>
 <html>
@@ -94,6 +95,48 @@
         margin-top: 30px;
         margin-left: 10px;
     }
+
+    /*모달*/
+    .modal{
+        margin-top: 100px;
+    }
+
+        /*모달 별점*/
+        #myform fieldset{
+            display: inline-block;
+            direction: rtl;
+            border:0;
+        }
+        #myform fieldset legend{
+            text-align: right;
+        }
+        #myform input[type=radio]{
+            display: none;
+        }
+        #myform label{
+            font-size: 3em;
+            color: transparent;
+            text-shadow: 0 0 0 #f0f0f0;
+        }
+        #myform label:hover{
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+        #myform label:hover ~ label{
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+        #myform input[type=radio]:checked ~ label{
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+        #reviewContents {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: solid 1.5px #D3D3D3;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: none;
+        }
 </style>
 </head>
 <body>
@@ -136,8 +179,8 @@
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
                     <h4>후기</h4>
-                    <% if(loginUser != null) {%>
-                        <button>후기 작성</button>
+                    <% if(loginUser != null && result > 0) {%>
+                        <button data-toggle="modal" data-target="#myModal">후기 작성</button>
                     <% } %>    
                 </div>
 
@@ -146,6 +189,54 @@
         </div>
 
     </div>
+
+    <!--리뷰 작성 모달창-->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">리뷰 작성하기</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <form action="cliRev.cli" method="post" id="myform">
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div id="scope">
+                        <h6>별점</h6>
+                        <fieldset>
+                            <input type="radio" name="reviewStar" value="5" id="rate1"><label
+                                for="rate1">★</label>
+                            <input type="radio" name="reviewStar" value="4" id="rate2"><label
+                                for="rate2">★</label>
+                            <input type="radio" name="reviewStar" value="3" id="rate3"><label
+                                for="rate3">★</label>
+                            <input type="radio" name="reviewStar" value="2" id="rate4"><label
+                                for="rate4">★</label>
+                            <input type="radio" name="reviewStar" value="1" id="rate5"><label
+                                for="rate5">★</label>
+                        </fieldset>
+                    </div>
+
+                    <div id="rev">
+                        <h6>리뷰 작성</h6>
+                        <textarea name="revContent" id="revContent" cols="30" rows="10" style="resize: none;"></textarea>
+                    </div>
+                </div>
+            </form>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+
 
     <script>
         $(function(){

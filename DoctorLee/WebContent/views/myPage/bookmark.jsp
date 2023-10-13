@@ -75,8 +75,8 @@
 		<div id="bookmark">
 			<div id="area">
 				<%@ include file="../common/myPageNavi.jsp" %>
+			 <% //System.out.println(loginUser1);%>
 			</div>
-			
 			<div id="bookmark_main">
 				<h3 align="center"><%=loginUser.getMemName() %>님의 즐겨찾기</h3>
 				<br><hr><br><br>

@@ -70,8 +70,6 @@ public class CliDao {
 			
 			pstmt.setInt(1, cateNo);
 			
-			//System.out.println(cateName);
-			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -134,13 +132,13 @@ public class CliDao {
 	}
 	
 	// 클리닉 예약 가능 날짜 가져오기
-	public ArrayList<CliResDate> selectCliDateList(Connection conn, int cliNo){
-		
-		ArrayList<CliResDate> list = new ArrayList();
+	public ArrayList<CliResTime> selectResDate(Connection conn, int cliNo){
+
+		ArrayList<CliResTime> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectCliDateList");
+		String sql = prop.getProperty("selectResDate");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -150,27 +148,22 @@ public class CliDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				CliResDate c = new CliResDate();
-				c.setDateNo(rset.getInt("DATE_NO"));
-				c.setCliNo(rset.getInt("CLI_NO"));
-				c.setCliDate(rset.getDate("CLI_DATE"));
-				
-				list.add(c);
+				CliResTime ct = new CliResTime();
+				ct.setCliDate(rset.getString("CLI_DATE"));
+				list.add(ct);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
-		
 		return list;
-		
 	}
 	
 	// 클리닉 예약 가능 시간 가져오기
-	public ArrayList<CliResTime> selectCliTimeList(Connection conn, int cliNo){
-		
-		ArrayList<CliResTime> timeList = new ArrayList();
+	public ArrayList<CliResTime> selectCliTimeList(Connection conn, int cliNo, String resDate){
+		ArrayList<CliResTime> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -180,6 +173,8 @@ public class CliDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, cliNo);
+			pstmt.setString(2, resDate);
+			pstmt.setInt(3, cliNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -188,7 +183,9 @@ public class CliDao {
 				c.setTimeNo(rset.getInt("TIME_NO"));
 				c.setCliNo(rset.getInt("CLI_NO"));
 				c.setCliTime(rset.getString("CLI_TIME"));
-				timeList.add(c);
+				c.setCliDate(rset.getString("CLI_DATE"));
+				
+				list.add(c);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -196,7 +193,7 @@ public class CliDao {
 			close(rset);
 			close(pstmt);
 		}
-		return timeList;
+		return list;
 	}
 	
 	// 클리닉 예약

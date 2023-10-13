@@ -208,6 +208,15 @@
 					  비회원 진료예약
 					</button>
 					<script>
+					/*
+						var rsvtH = $('select[name=rsvtH] option:selected').text();
+						var rsvtm = $('select[name=rsvtM] option:selected').text();
+						
+						rsvtH = rsvtH.replaceAll('\n', '');
+						rsvtM = rsvtM.replaceAll('\t', '');
+						var rsvt_time = rsvtH + rsvtM;
+					*/
+					
 					function loginUserIsNull(){
 						alert('로그인 후 이용 가능한 서비스');
 						location.href = '<%= contextPath %>/login.me';
@@ -216,12 +225,10 @@
 					
 					function rsvt(){
 						
-						
-						
 			        	 $.ajax({
 			        		 url: 'hosRsvt.mem',
 			        		 type: 'post',
-			        		 // async : false,
+			        		 // async : true,
 			        		 data: {
 			        			 rsvtDate: window.rsvt_date,
 			        			 rsvtH: $('select[name=rsvtH] option:selected').text(),
@@ -237,8 +244,20 @@
 			        			 // console.log(new Date());
 			        			 // console.log(rsvt_date);
 			        			 //console.log(rsvtDate);
-			        			 $('#rsvtModal .modal-body').children().eq(0).append(result.rsvtNo);
-			        			 $('#rsvtModal .modal-body').children().eq(1).append(result.rsvtName);
+			        			 // var rsvtTime = result['rsvtTime'].replaceAll('\t', '');
+			        			 // console.log(rsvtTime);
+			        			 if(result != null){
+				        			 $('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtName']);
+				        			 $('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo']);
+				        			 $('#rsvtModal .modal-body').children().eq(1).append(result['rsvt_date'] + "," + result['rsvtTime']);
+			        			 }/*
+			        			 if(result['rsvtInfo'] != ""){
+			        				 $('#rsvtModal .modal-body').children().eq(3).append(result['rsvtInfo']);
+			        			 } else{
+			        				 $('#rsvtModal .modal-body').children().eq(3).remove();
+			        			 }
+			        			 */
+			        			 
 			        		 },
 			        		 error: function(){
 			        			 alert('현재 예약 불가');
@@ -253,7 +272,6 @@
 					</script>
 				</div>
 				
-		<!-- 	</form> -->
 
 			<!-- 회원 예약 확인 팝업 -->
 			<div class="modal" id="rsvtModal">
@@ -262,7 +280,9 @@
 			
 			      <!-- Modal Header -->
 			      <div class="modal-header">
-			        <h4 class="modal-title">예약이 완료되었습니다.</h4>
+			        <h4 class="modal-title">
+			        	<b></b>님의 예약이 완료되었습니다.
+			        </h4>
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			      </div>
 			
@@ -272,11 +292,8 @@
 			        		예약번호 : 
 			        	</h5>
 			        	<h6>
-			        		예약자명 : 
+			        		예약시간 :
 			        	</h6>
-			        	<p>
-			        		병원 몇시 예약, 의료진 <br>
-			        	</p>
 			        	<span>
 			        		특이사항 : 
 			        	</span>

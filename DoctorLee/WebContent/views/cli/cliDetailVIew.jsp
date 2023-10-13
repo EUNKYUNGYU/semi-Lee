@@ -137,6 +137,11 @@
             font-size: 16px;
             resize: none;
         }
+
+        /*모달 리뷰 내용*/
+        #revContent{
+            width: 450px;
+        }
 </style>
 </head>
 <body>
@@ -226,13 +231,13 @@
                         <textarea name="revContent" id="revContent" cols="30" rows="10" style="resize: none;"></textarea>
                     </div>
                 </div>
+            
+      
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">등록하기</button>
+                </div>
             </form>
-      
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-      
           </div>
         </div>
       </div>

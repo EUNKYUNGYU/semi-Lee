@@ -1,7 +1,6 @@
-package com.kh.DoctorLee.cli.controller;
+package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.CliResDate;
+import com.kh.DoctorLee.mpBoard.model.service.BookmarkService;
 
 /**
- * Servlet implementation class AjaxCalendarController
+ * Servlet implementation class DeleteBookmarkController
  */
-@WebServlet("/ajaxCalendar.cli")
-public class AjaxCalendarController extends HttpServlet {
+@WebServlet("/del.bm")
+public class DeleteBookmarkController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxCalendarController() {
+    public DeleteBookmarkController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +29,14 @@ public class AjaxCalendarController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// 값 뽑기
-		int cliNo = Integer.parseInt(request.getParameter("cliNo"));
-		
-		// Service 요청
-		ArrayList<CliResDate> list = new CliService().selectCliDateList(cliNo);
-		
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(list, response.getWriter());
+		String hosName = request.getParameter("cn");
+		int memNo = Integer.parseInt(request.getParameter("mno"));
+		int result = new BookmarkService().deleteBookmark(hosName,memNo);
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/first.bm");
+		} else {
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

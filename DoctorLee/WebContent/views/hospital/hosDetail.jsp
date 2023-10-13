@@ -201,7 +201,7 @@
 			        			 console.log(result);
 			        			 // console.log(typeof(info.dateStr));
 			        			 // console.log(new Date());
-			        			 $('#rsvtModal .modal-body').chlidren().eq(0).text('예약번호 : ' + result['rsvtNo'])
+			        			 $('.modal-body').children().eq(0).append(result['rsvtNo'])
 			        		 },
 			        		 error: function(){
 			        			 alert('현재 예약 불가');

@@ -10,7 +10,7 @@
 		       TB_RESERVATION
 	    VALUES	
 	    	  (
-	    	  RSVT_NO.NEXTVAL
+	    	  SEQ_RSVT_NO.NEXTVAL
 	    	  ,?
 	    	  ,?
 	    	  ,?
@@ -20,7 +20,7 @@
 	    	  )	  
 	
 	</entry>
-	<entry key="selectrsvt">
+	<entry key="selectRsvt">
 		SELECT
 		       RSVT_NO
 		       ,RSVT_DATE

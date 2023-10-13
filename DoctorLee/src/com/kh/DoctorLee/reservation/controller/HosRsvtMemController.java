@@ -63,7 +63,7 @@ public class HosRsvtMemController extends HttpServlet {
 		
 		if(result > 0) {
 			request.setAttribute("rsvt", rsvt);
-			response.sendRedirect(request.getContextPath() + "hosDetail.jsp");
+			response.sendRedirect(request.getContextPath() + "/hosDetail.jsp");
 			response.setContentType("application/json; charset=UTF-8");
 			response.getWriter().print(jsonR);
 		}

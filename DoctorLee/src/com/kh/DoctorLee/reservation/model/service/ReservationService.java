@@ -27,4 +27,10 @@ public class ReservationService {
 		
 	}
 	
+	public String selectRsvtDate(String rsvtDate, String rsvtTime) {
+		Connection conn = getConnection();
+		String checkDate = new ReservationDao().selectRsvtDate(conn, rsvtDate, rsvtTime);
+		close(conn);
+		return checkDate;
+	}
 }

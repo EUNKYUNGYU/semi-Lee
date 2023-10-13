@@ -34,48 +34,64 @@ public class HosRsvtMemController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String rsvtDate = request.getParameter("rsvtDate");
-		String rsvtH = request.getParameter("rsvtH");
-		String rsvtM = request.getParameter("rsvtM");
-		String rsvtTime = rsvtH + rsvtM;
+		// String rsvtH = request.getParameter("rsvtH");
+		// String rsvtM = request.getParameter("rsvtM");
+		// String rsvtTime = rsvtH + rsvtM;
 		String rsvtName = request.getParameter("rsvtName");
 		String rsvtInfo = request.getParameter("rsvtInfo");
 		String rsvtDoc = request.getParameter("rsvtDoc");
 		String rsvtHos = request.getParameter("hno");
+		String rsvtTime = request.getParameter("rsvt_time");
 		
-		Reservation rsvt = new Reservation();
-		rsvt.setRsvtDate(rsvtDate);
-		rsvt.setRsvtTime(rsvtTime);
-		rsvt.setRsvtMem(rsvtName);
-		rsvt.setMemInfo(rsvtInfo);
-		rsvt.setRsvtDoc(rsvtDoc);
-		rsvt.setRsvtHos(rsvtHos);
-		System.out.println(rsvtDate);
+		// 겹치는 날짜 있는지 확인
 		
-		int result = new ReservationService().insertRsvt(rsvt); // 예약 insert
+		// rsvtTime = rsvtTime.replaceAll("\n\t", "");
 		
-		if(result > 0) { // insert 성공
-			Reservation selectRsvt = new ReservationService().selectRsvt(rsvtName);
+		String checkDate = new ReservationService().selectRsvtDate(rsvtDate, rsvtTime);
+
+		if(checkDate.equals(rsvtDate + rsvtTime)) { // 예약 못함
+			response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + rsvtHos);
 			
-			if(selectRsvt != null) { // 조회 성공
+		} else {
+		
+			Reservation rsvt = new Reservation();
+			rsvt.setRsvtDate(rsvtDate);
+			rsvt.setRsvtTime(rsvtTime);
+			rsvt.setRsvtMem(rsvtName);
+			rsvt.setMemInfo(rsvtInfo);
+			rsvt.setRsvtDoc(rsvtDoc);
+			rsvt.setRsvtHos(rsvtHos);
+			System.out.println(rsvtDate);
+			
+			
+			
+			int result = new ReservationService().insertRsvt(rsvt); // 예약 insert
+			
+			if(result > 0) { // insert 성공
+				Reservation selectRsvt = new ReservationService().selectRsvt(rsvtName);
 				
-				JSONObject jsonR = new JSONObject();
-				jsonR.put("rsvtNo", selectRsvt.getRsvtNo());
-				jsonR.put("rsvt_date", selectRsvt.getRsvtDate());
-				jsonR.put("rsvtTime", selectRsvt.getRsvtTime());
-				jsonR.put("rsvtName", selectRsvt.getRsvtMem());
-				jsonR.put("rsvtInfo", selectRsvt.getMemInfo());
-				jsonR.put("rsvtHos", selectRsvt.getRsvtHos());
-				jsonR.put("rsvtDoc", selectRsvt.getRsvtDoc());
-				System.out.println(jsonR);
-				
-				response.setContentType("application/json; charset=UTF-8");
-				response.getWriter().print(jsonR);
-				
-				response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + rsvt.getRsvtHos());
+				if(selectRsvt != null) { // 조회 성공
+					
+					// selectRsvt.getRsvtTime().replaceAll("\n\t", "");
+					
+					JSONObject jsonR = new JSONObject();
+					jsonR.put("rsvtNo", selectRsvt.getRsvtNo());
+					jsonR.put("rsvt_date", selectRsvt.getRsvtDate());
+					jsonR.put("rsvtTime", selectRsvt.getRsvtTime());
+					jsonR.put("rsvtName", selectRsvt.getRsvtMem());
+					jsonR.put("rsvtInfo", selectRsvt.getMemInfo());
+					jsonR.put("rsvtHos", selectRsvt.getRsvtHos());
+					jsonR.put("rsvtDoc", selectRsvt.getRsvtDoc());
+					System.out.println(jsonR);
+					
+					response.setContentType("application/json; charset=UTF-8");
+					response.getWriter().print(jsonR);
+					
+					// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + rsvt.getRsvtHos());
+				}
 			}
-		}
 			
-		
+		}
 		
 		
 	

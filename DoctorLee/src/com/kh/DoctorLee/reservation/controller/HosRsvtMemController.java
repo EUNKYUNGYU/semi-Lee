@@ -8,22 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.kh.DoctorLee.reservation.model.service.ReservationService;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class MemReservationController
+ * Servlet implementation class HosRsvtMemController
  */
 @WebServlet("/hosRsvt.mem")
-public class MemReservationController extends HttpServlet {
+public class HosRsvtMemController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemReservationController() {
+    public HosRsvtMemController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,25 +36,36 @@ public class MemReservationController extends HttpServlet {
 		String rsvtDate = request.getParameter("rsvtDate");
 		String rsvtH = request.getParameter("rsvtH");
 		String rsvtM = request.getParameter("rsvtM");
+		String rsvtTime = rsvtH + rsvtM;
 		String rsvtName = request.getParameter("rsvtName");
 		String rsvtInfo = request.getParameter("rsvtInfo");
-		int rsvtDoc = Integer.parseInt(request.getParameter("rsvtDoc")); // value or text?
-		int hno = Integer.parseInt(request.getParameter("hno"));
-		System.out.println(hno);
-		
-		String rsvtTime = rsvtH + rsvtM;
+		String rsvtDoc = request.getParameter("rsvtDoc");
 		
 		Reservation rsvt = new Reservation();
 		rsvt.setRsvtDate(rsvtDate);
 		rsvt.setRsvtTime(rsvtTime);
-		rsvt.setRsvtMem(Integer.parseInt(rsvtName));
+		rsvt.setRsvtMem(rsvtName);
 		rsvt.setMemInfo(rsvtInfo);
 		rsvt.setRsvtDoc(rsvtDoc);
 		
-		int result = new ReservationService().insertRsvt(rsvt);
+		int result = new ReservationService().insertRsvt(rsvt); // ¿¹¾à insert
+		
+		rsvt = new ReservationService().selectRsvt(rsvtName);
+		
+		JSONObject jsonR = new JSONObject();
+		jsonR.put("rsvtNo", rsvt.getRsvtNo());
+		jsonR.put("rsvtDate", rsvt.getRsvtDate());
+		jsonR.put("rsvtTime", rsvt.getRsvtTime());
+		jsonR.put("rsvtName", rsvt.getRsvtMem());
+		jsonR.put("rsvtInfo", rsvt.getMemInfo());
+		jsonR.put("rsvtHos", rsvt.getRsvtHos());
+		jsonR.put("rsvtDoc", rsvt.getRsvtDoc());
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
+			request.setAttribute("rsvt", rsvt);
+			response.sendRedirect(request.getContextPath() + "hosDetail.jsp");
+			response.setContentType("application/json; charset=UTF-8");
+			response.getWriter().print(jsonR);
 		}
 		
 		

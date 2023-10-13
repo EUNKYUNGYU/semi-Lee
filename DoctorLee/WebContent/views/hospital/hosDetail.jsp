@@ -201,7 +201,7 @@
 			        			 console.log(result);
 			        			 // console.log(typeof(info.dateStr));
 			        			 // console.log(new Date());
-			        			 $('#rsvtModal')
+			        			 $('#rsvtModal .modal-body').chlidren().eq(0).text('예약번호 : ' + result['rsvtNo'])
 			        		 },
 			        		 error: function(){
 			        			 alert('현재 예약 불가');
@@ -221,13 +221,25 @@
 			
 			      <!-- Modal Header -->
 			      <div class="modal-header">
-			        <h4 class="modal-title">Modal Heading</h4>
+			        <h4 class="modal-title">예약이 완료되었습니다.</h4>
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			      </div>
 			
 			      <!-- Modal body -->
 			      <div class="modal-body">
-			        Modal body..
+			        	<h5>
+			        		예약번호 : 
+			        	</h5>
+			        	<h6>
+			        		예약자명 : 
+			        	</h6>
+			        	<p>
+			        		병원 몇시 예약, 의료진
+			        	</p>
+
+			        	<span>
+			        		특이사항 : 
+			        	</span>
 			      </div>
 			
 			      <!-- Modal footer -->

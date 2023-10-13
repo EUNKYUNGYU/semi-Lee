@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "com.kh.DoctorLee.mpBoard.model.vo.MedManagement" %>
+<%
+	MedManagement mm = (MedManagement)request.getAttribute("mm");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +11,6 @@
 <title>복약관리상세조회</title>
 <style>
 	div{
-            border:  1px solid blue;
             box-sizing: border-box;
         }
 
@@ -89,11 +92,6 @@
                 width: 40%;
                 }
 
-                #count{
-                    margin-left: 250px;
-                    margin-top: 100px;
-                }
-      
                 #date1{
                  margin-left: 635px;
                 }
@@ -110,6 +108,12 @@
             font-weight: 600;
             padding-top: 30px;
             padding-left: 150px;
+        }
+        
+        #deletebtn{
+            text-decoration: none;
+            color: #1E376F;
+        	
         }
 </style>
 </head>
@@ -130,13 +134,12 @@
                 <hr>
                 <br>
 
-                <span id="count">⋅ Total 2</span>
                 <table id="detail-area" align="center">
                     <thead>
                       <tr>
-                        <th>병원명:코모키</th>
-                        <th>진료일자:2023-04-07</th>
-                        <th>처방전발급일:2023-04-07</th>
+                        <th>병원명:<%=mm.getHosName() %></th>
+                        <th>진료일자:<%=mm.getTreateDate() %></th>
+                        <th>처방전발급일:<%=mm.getPreDate() %></th>
                       </tr>
                       
                       <tr>
@@ -174,6 +177,7 @@
                   </table>
                </div>
             </div>
+			<a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" id="deletebtn" class="btn btn-sm btn-info">삭제</a>
         </div>
 </body>
 </html>

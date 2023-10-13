@@ -21,4 +21,28 @@ public class MedManagementService {
 		
 	}
 
+	public MedManagement selectMedManagement(int medManNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MedManagement mm = new MedManagementDao().selectMedManagement(conn, medManNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return mm;
+	}
+	
+	public int deleteMedManagement(int medManNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MedManagementDao().deleteMedManagement(conn, medManNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
 }

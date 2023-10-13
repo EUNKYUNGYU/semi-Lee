@@ -31,39 +31,60 @@
                 start: nowDate
             };
         },
+        events:[
+            <% for(CliResDate cd : dateList) {%>
+            {
+                title:'예약 가능',
+                start:'<%=cd.getCliDate()%>',
+                color:'#1E376F'
+            },
+            <% }%>
+        ],
 
         dateClick: function(info){
 
             $('.time-border').css('display', 'block');
 
-            $('.time-content').click(function(){
-                // 달력 클릭 시 선택한 날짜 출력하기
-                $('#resDate').val((info.dateStr).replaceAll('-', '.'));
-                $('#resTime').val($(this).children().text());
-            })
+            // 달력 클릭 시 선택한 날짜 출력하기
+            $('#resDate').val((info.dateStr).replaceAll('-', '.'));
+            $('#resTime').val(null);
 
             var days = document.querySelectorAll(".day-color");
             days.forEach(function(day){
                 day.classList.remove("day-color");
             })
             info.dayEl.classList.add("day-color");
-        },
 
-        events: function(start, end, timezone, callback){
-            url: 'ajaxCalendar.cli',
-            data:{cliNo: <%=c.getCliNo()%>},
+            // 날짜 클릭 시 시간 출력
+            $.ajax({
+                url:'ajaxTime.cli',
+                data:{cliNo:<%=c.getCliNo()%>},
+                success:function(result){
+                    let resultStr = '';
 
-            success: function(result){
-                var events = [];
+                    for(let i in result){
+                        resultStr += '<li class="time-content" align="center">'
+                                        +'<a>'
+                                            +'<p>'
+                                                +result[i].cliTime
+                                            +'</p>'
+                                        +'</a>'
+                                    + '</li>'
+                    }
+                    $('.time-list').html(resultStr);
 
-                $(reulst).find('event').each(function(){
-                    events.push({
-                        title: '예약가능',
-                        start:<%= result[i].cliDate
+                    $('.time-content').click(function(){
+                        $('#resTime').val($(this).children().text());
+
+                        $(this).css('background-color', 'salmon');
+
+                        $(this).siblings().css('background-color', 'bisque');
                     })
-                })
-            }
-            
+                },
+                error:function(){
+                    console.log('실패');
+                }
+            })
         }
       });
       calendar.render();
@@ -74,7 +95,7 @@
 
 
 <style>
-        .outer{
+    .outer{
         width: 1800px;
         margin-left: 50px;
     }
@@ -216,43 +237,8 @@
                             <!--클리닉 예약 시간 출력 영역 div-->
                             <div id="time-inner">
                                 <div class="time-border">
-                                    <ul>
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-                                        
+                                    <ul class="time-list">
+                                        <h5>시간을 선택하세요</h5>
                                     </ul>
                                 </div>
                             </div>
@@ -262,13 +248,31 @@
                         <!--클리닉 예약 정보 작성 영역 div-->
                         <div id="cli-bottom">
                             <h4>예약 정보</h4>
+
+                            <input type="hidden" name="cliNo" value="<%=c.getCliNo()%>">
+
+                            <span>클리닉명 : </span>
                             <input type="text" id="cliName" value="<%= c.getCliName() %>" readonly>
+
+                            <span>병원명 :</span>
                             <input type="text" id="hosNo" value="<%= c.getHosNo() %>" readonly>
+
+                            <span>가격 : </span>
                             <input type="text" id="cliPrice" value="<%= c.getCliPrice() %>" readonly>
+
+                            <input type="hidden" name="userNo" value="<%=loginUser.getMemNo()%>">
+                            
+                            <span>예약자명 :</span>
                             <input type="text" id="userName" value="<%= loginUser.getMemName()%>" readonly>
-                            <input type="text" id="userPhone" value="<%= loginUser.getPhone()%>"" readonly>
-                            <input type="text" id="resDate" value="예약일" readonly>
-                            <input type="text" id="resTime" value="예약시간" readonly>
+                            
+                            <span>예약자 전화번호 : </span>
+                            <input type="text" id="userPhone" value="<%=loginUser.getPhone()%>"" readonly>
+                            
+                            <span>예약일 : </span>
+                            <input type="text" id="resDate" name="resDate" readonly required>
+
+                            <span>예약시간 : </span>
+                            <input type="text" id="resTime" name="resTime" readonly required>
                         </div>
 
                         <div id="res-part" align="center">
@@ -286,13 +290,10 @@
             $(function(){
                 //li클릭 시 색깔 바뀌는 이벤트
                 $('.time-content').click(function(){
-                        if($(this).css('background-color', 'bisque')){
+                    if($(this).css('background-color', 'bisque')){
                         $(this).css('background-color', 'salmon');
 
                         $(this).siblings().css('background-color', 'bisque');
-
-                        // 시간 클릭 시 "예약 일시를 선택해주세요"와 좌측 메뉴에 띄우기
-                        $('#pick-date, #sel-date').append(" / " + $(this).children().text());
                     }
                 })
             })

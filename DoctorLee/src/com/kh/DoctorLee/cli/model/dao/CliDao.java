@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.DoctorLee.cli.model.vo.Category;
+import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.CliResDate;
+import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
 
 public class CliDao {
@@ -162,6 +164,97 @@ public class CliDao {
 		
 		return list;
 		
+	}
+	
+	// 클리닉 예약 가능 시간 가져오기
+	public ArrayList<CliResTime> selectCliTimeList(Connection conn, int cliNo){
+		
+		ArrayList<CliResTime> timeList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCliTimeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cliNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CliResTime c = new CliResTime();
+				c.setTimeNo(rset.getInt("TIME_NO"));
+				c.setCliNo(rset.getInt("CLI_NO"));
+				c.setCliTime(rset.getString("CLI_TIME"));
+				timeList.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return timeList;
+	}
+	
+	// 클리닉 예약
+	public int insertCliRes(Connection conn, CliRes c) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCliRes");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, c.getMemNo());
+			pstmt.setInt(2, c.getCliNo());
+			pstmt.setString(3, c.getResDate());
+			pstmt.setString(4, c.getResTime());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 클리닉 예약자 정보 불러오기
+	public ArrayList<CliRes> selectResMem(Connection conn, int cliNo){
+		
+		ArrayList<CliRes> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectResMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cliNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CliRes c = new CliRes();
+				c.setCliNo(rset.getInt("CLI_NO"));
+				c.setMemNo(rset.getInt("MEM_NO"));
+				
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

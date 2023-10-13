@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
-    
+<%@ page import="com.kh.DoctorLee.member.model.vo.Member,com.kh.DoctorLee.hospital.model.vo.Hospital" %>
+<%@ page import="java.util.ArrayList,com.kh.DoctorLee.mpBoard.model.vo.Bookmark" %>
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	Hospital hos = (Hospital)request.getAttribute("hos");
+	ArrayList<Bookmark> list = (ArrayList<Bookmark>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,16 +37,16 @@
 		width : 20%;
 		float : left;
 	}
-	#bkInfo{
+	#bk-info{
 		width : 60%;
 		margin : auto;
 	}
-	#bkInfo td, #bkInfo th{
+	#bk-info td, #bk-info th{
 		
 		padding : 8px;
 		text-align : center;
 	}
-	#bkInfo th {
+	#bk-info th {
 		font-size : 23px;
 		color : skyblue;
 	}
@@ -64,6 +66,7 @@
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
+	<%// System.out.println(list); %>
 	<% if(loginUser == null) {%>
 		<form action="<%=contextPath %>/login.me" method="post">
 			<button type="submit">로그인하러가기</button>
@@ -77,25 +80,41 @@
 			<div id="bookmark_main">
 				<h3 align="center"><%=loginUser.getMemName() %>님의 즐겨찾기</h3>
 				<br><hr><br><br>
-				<table id="bkInfo">
+				<table id="bk-info">
+					<% if(list == null){ %>
 					<thead>
 						<tr>
 							<th>병원이름</th>
 						</tr>
+						
 					</thead>
 					<tbody>
-						<tr>
-							<td>강남 성심 병원 </td>
-							
-						</tr>
-						<tr>
-							<td>성모 병원</td>							
-						</tr>
-						<tr>
-							<td>...</td>
-						</tr>
+						
+							<tr>
+							<th>즐겨찾기 목록이 없습니다</th>
+							</tr>
+						
 					</tbody>
+					<%} else{ %>
+					<thead>
+						<tr>
+							<th>병원이름</th>
+						</tr>
+						
+					</thead>
+					<% for(Bookmark bk : list){ %>
+					<tbody>
+						
+						
+						<tr>
+							<td><%= bk.getHospitalName() %></td>
+						</tr>
+						
+					</tbody>
+					<%} %>
 				</table>
+					
+				<%} %>
 				<hr>
 				<div id="insertBk">
 					<img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fcdn.crowdpic.net%2Fdetail-thumb%2Fthumb_d_A32B41EB090AC3DCA70DEA8131E49CDB.jpg&type=l340_165" alt="즐겨찾기 이미지" ><br>

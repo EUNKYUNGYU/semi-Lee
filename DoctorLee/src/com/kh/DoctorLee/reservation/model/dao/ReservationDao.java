@@ -1,14 +1,17 @@
 package com.kh.DoctorLee.reservation.model.dao;
 
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 
 public class ReservationDao {
@@ -28,7 +31,7 @@ public class ReservationDao {
 		}
 	}
 	
-	// 예약 insert
+	// �삁�빟 insert
 	public int insertRsvt(Connection conn, Reservation rsvt) {
 		int result = 0;
 		PreparedStatement pstmt =  null;
@@ -36,12 +39,12 @@ public class ReservationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, rsvt.getRsvtHos());
-			pstmt.setInt(2, rsvt.getRsvtDoc());
-			pstmt.setInt(3, rsvt.getRsvtMem());
-			pstmt.setString(4, rsvt.getRsvtDate());
-			pstmt.setString(5, rsvt.getRsvtTime());
-			pstmt.setString(6, rsvt.getMemInfo());
+			pstmt.setString(1, rsvt.getRsvtDate());
+			pstmt.setString(2, rsvt.getRsvtTime());
+			pstmt.setString(3, rsvt.getMemInfo());
+			pstmt.setString(4, rsvt.getRsvtHos());
+			pstmt.setString(5, rsvt.getRsvtMem());
+			pstmt.setString(6, rsvt.getRsvtDoc());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,6 +53,37 @@ public class ReservationDao {
 		}
 		
 		return result;
+	}
+	
+	// 예약 조회
+	public Reservation selectRsvt(Connection conn, String rsvtName) {
+		Reservation selectRsvt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRsvt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rsvtName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				selectRsvt = new Reservation();
+				selectRsvt.setRsvtNo(rset.getInt("RSVT_NO"));
+				selectRsvt.setRsvtDate(rset.getString("RSVT_DATE"));
+				selectRsvt.setRsvtTime(rset.getString("RSVT_TIME"));
+				selectRsvt.setMemInfo(rset.getString("MEM_INFO"));
+				selectRsvt.setRsvtHos(rset.getString("RSVT_HOS"));
+				selectRsvt.setRsvtMem(rset.getString("RSVT_MEM"));
+				selectRsvt.setRsvtDoc(rset.getString("RSVT_DOC"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return selectRsvt;
 	}
 
 }

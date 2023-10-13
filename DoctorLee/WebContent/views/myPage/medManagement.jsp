@@ -158,18 +158,16 @@
                 <hr>
                 <br>
 
-                <span id="count">⋅ Total 2
-                    <input type="date" id="date1"> ~
-                    <input type="date" id="date2">
-                </span>
-                <table id="list-area" align="center">
+                
+                <table class="list-area" align="center">
                     <thead>
                       <tr>
+                        <th>병원명</th>
                         <th>의료진</th>
                         <th>약처방</th>
-                        <th>처방전발급일</th>
                         <th>진료일자</th>
-                        <th>복용횟수</th>
+                        <th>처방전발급일</th>
+                        <th>번호</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -182,14 +180,12 @@
                      <!-- 리스트 있을때 -->
                      	<%for(MedManagement mm : list) { %>
                      		<tr>
-                     		<td><%=mm.getPreNo() %></td>
-                     		<td><%=mm.getRsvtNo() %></td>
-                     		<td><%=mm.getMemNo() %></td>
                      		<td><%=mm.getHosName() %></td>
                      		<td><%=mm.getDoctorName() %></td>
                      		<td><%=mm.getMediName() %></td>
                      		<td><%=mm.getTreateDate() %></td>
                      		<td><%=mm.getPreDate() %></td>
+                     		<td><%=mm.getMedManNo() %></td>
                      		</tr>
                      	
                      	<%} %>
@@ -205,15 +201,18 @@
     	$(function(){
     		$('.list-area>tbody>tr').click(function(){
     			
-    			const nno = $(this).children().eq(0).text();
+    			const nno = ($(this).children().eq(5).text());
+    			
+    			//console.log(this);
     			
     			location.href= "<%=contextPath%>/detail.medi?nno=" + nno;
-    			location.href = "<%=contextPath%>/datail.medi";
+    			//location.href = "<%=contextPath%>/detail.medi";
     			
     		})
     		
     	});
     </script>
-
+	 
+	 <br><br><br><br><br><br><br><br><br>
 </body>
 </html>

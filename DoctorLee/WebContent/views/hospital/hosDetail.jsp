@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList" %>
+<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*" %>
 <%
 	Hospital hos = (Hospital)request.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
+	Reservation rsvt = (Reservation)request.getAttribute("rsvt");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -22,6 +23,7 @@
     <script>
 
     document.addEventListener('DOMContentLoaded', function() {
+    	
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
@@ -33,34 +35,16 @@
         	  right: 'next'
           },
           dateClick: function(info){
-        	 $.ajax({
-        		 url: 'hosRsvt.mem',
-        		 type: 'post',
-        		 data: {
-        			 rsvtDate: info.dateStr,
-        			 rsvtH: $('select[name=rsvtH] option:selected').text(),
-        			 rsvtM: $('select[name=rsvtM] option:selected').text(),
-        			 rsvtName: $('input[name=rsvtName]').val(),
-        		     rsvtInfo: $('input[name=rsvtInfo]').val(),
-        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val()
-        		 },
-        		 success: function(result){
-        			 console.log(result);
-        			 // console.log(typeof(info.dateStr));
-        			 // console.log(new Date());
-        			 console.log(rsvtM);
-        		 },
-        		 error: function(){
-        			 alert('현재 예약 불가');
-        		 }
-        	 });
-          },
+        	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+        	  
+			},
 
         });
           
         calendar.render();
       });
 
+    	var calendarDateStr = info.dateStr;
     </script>
 <style>
 	  .hos_wrap{margin: auto;}
@@ -191,16 +175,41 @@
 
 				<div id="rsvt_btn">
 					<% if(loginUser != null) { %>
-						<a href="<%= contextPath %>/hosRsvt.mem?hno=<%= hos.getHosNo() %>" 
+						<button onclick="rsvt();"
 						class="btn btn-primary"
-						data-toggle="modal" data-target="#rsvtModal">예약접수</a>
-					<%} else{ %>
-						<a href="#none" onclick="alert('로그인 후 이용 가능한 서비스');" class="btn btn-primary">예약접수</a>
-					<%} %>
+						data-toggle="modal" data-target="#rsvtModal">예약접수</button>
+					<% } else{ %>
+						<button onclick="alert('로그인 후 이용 가능한 서비스');" class="btn btn-primary">예약접수</button>
+					<% } %>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guestRsvtModal">
 					  비회원 진료예약
 					</button>
+					<script>
+					function rsvt(){
+			        	 $.ajax({
+			        		 url: 'hosRsvt.mem',
+			        		 type: 'post',
+			        		 data: {
+			        			 rsvtDate: calendarDateStr,
+			        			 rsvtH: $('select[name=rsvtH] option:selected').text(),
+			        			 rsvtM: $('select[name=rsvtM] option:selected').text(),
+			        			 rsvtName: $('input[name=rsvtName]').val(),
+			        		     rsvtInfo: $('input[name=rsvtInfo]').val(),
+			        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val()
+			        		 },
+			        		 success: function(result){
+			        			 console.log(result);
+			        			 // console.log(typeof(info.dateStr));
+			        			 // console.log(new Date());
+			        			 $('#rsvtModal .modal-body').chlidren().eq(0).text('예약번호 : ' + result['rsvtNo'])
+			        		 },
+			        		 error: function(){
+			        			 alert('현재 예약 불가');
+			        		 }
+			        	 });
+					}
 					
+					</script>
 				</div>
 				
 			</form>
@@ -212,13 +221,25 @@
 			
 			      <!-- Modal Header -->
 			      <div class="modal-header">
-			        <h4 class="modal-title">Modal Heading</h4>
+			        <h4 class="modal-title">예약이 완료되었습니다.</h4>
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			      </div>
 			
 			      <!-- Modal body -->
 			      <div class="modal-body">
-			        Modal body..
+			        	<h5>
+			        		예약번호 : 
+			        	</h5>
+			        	<h6>
+			        		예약자명 : 
+			        	</h6>
+			        	<p>
+			        		병원 몇시 예약, 의료진
+			        	</p>
+
+			        	<span>
+			        		특이사항 : 
+			        	</span>
 			      </div>
 			
 			      <!-- Modal footer -->

@@ -5,18 +5,17 @@
 	<comment>복약관리 관련 SQL문</comment>
 	<entry key="selectMedManagementList">
 		SELECT
-				PRE_NO,
-				RSVT_NO,
 				HOS_NAME,
 				DOCTOR_NAME,
 				MEDI_NAME,
-				TREATE_DATE,
-				PRE_DATE
+				TREAT_DATE,
+				PRE_DATE,
+				MED_MAN_NO
 		  FROM
 		  		TB_MED_MAN
 		 ORDER
 		 	BY
-		 		TREATE_DATE DESC
+		 		TREAT_DATE DESC
 	</entry>
 	
 </properties>

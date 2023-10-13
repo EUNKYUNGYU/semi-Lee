@@ -128,7 +128,7 @@ table{
 
 	<header>
 		<%@ include file ="../common/nav2.jsp" %>
-	</header>
+	</header> 
 	<main>
 		<aside id="aside">
 			<%@ include file ="../common/cmNavi.jsp" %>	
@@ -178,7 +178,9 @@ table{
 						<% } else { %>
 						     <tr>
 						<% } %>
-						      <th><input type="checkbox"></th>
+							<form action="<%= contextPath %>/delete.ms" method="get">
+						      <th><input type="checkbox" class="chkMsg" name="checkMsg" value=""></th>
+						    </form>
 						      <td scope="row"><%= m.getReceiver() %></td>
 						      <td name="<%= m.getMessageNo() %>"><%= m.getMessageTitle()%></td>
 						      <td><%= m.getSendDate() %></td>
@@ -200,6 +202,15 @@ table{
         				console.log(mNo);
         			
         			});
+        			
+        			$(".chkMsg:checked").each(function(idx){
+
+        			    console.log(idx + "번째 = " + $(this).val());
+        			    
+        			});
+        			
+        			$('input[type=checkbox]:checked').attr('name')
+        			console.log($('#checkMsg').is(':checked'));
         			
         		})
 		
@@ -223,6 +234,7 @@ table{
 		
 	</main>
 	
+	<br clear="both">
 	
 	<footer>
 		<%@ include file ="../common/footer.jsp" %>

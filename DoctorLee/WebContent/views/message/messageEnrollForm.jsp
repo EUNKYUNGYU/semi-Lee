@@ -139,7 +139,7 @@ table{background-color: rgb(232, 238, 253); border-radius: 7px;}
 			<div id="content">
 				<article>
 					<form method="post" action="<%= contextPath %>/insert.ms">
-					<input type="hidden" name="sender" value="<%= loginUser.getMemNo() %>">
+					<input type="hidden" name="senderNo" value="<%= loginUser.getMemNo() %>">
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
 							<button type="submit" class="btn btn-primary">보내기</a>

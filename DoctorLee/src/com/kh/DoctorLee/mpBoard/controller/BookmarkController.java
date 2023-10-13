@@ -32,7 +32,10 @@ public class BookmarkController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Bookmark> list = new BookmarkService().selectBookmark();
+		request.setCharacterEncoding("UTF-8");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		ArrayList<Bookmark> list = new BookmarkService().selectBookmark(memNo);
+		
 		request.setAttribute("list", list);
 		RequestDispatcher view = request.getRequestDispatcher("views/myPage/bookmark.jsp");
 		view.forward(request, response);

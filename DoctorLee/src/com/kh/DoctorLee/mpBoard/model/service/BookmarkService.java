@@ -32,9 +32,9 @@ public class BookmarkService {
 		}
 		return result;
 	}
-	public ArrayList<Bookmark> selectBookmark(){
+	public ArrayList<Bookmark> selectBookmark(int memNo){
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Bookmark> list = new BookmarkDao().selectBookmark(conn);
+		ArrayList<Bookmark> list = new BookmarkDao().selectBookmark(conn,memNo);
 		JDBCTemplate.close(conn);
 		return list;
 	}

@@ -76,6 +76,39 @@ SELECT
 	                    )
 
 </entry>
+
+<entry key="deleteMessage">
+
+	UPDATE 
+			TB_MESSAGE 
+		SET
+			STATUS = 'N'
+		WHERE
+			MESSAGE_NO = ?
+
+</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </properties>
 
 

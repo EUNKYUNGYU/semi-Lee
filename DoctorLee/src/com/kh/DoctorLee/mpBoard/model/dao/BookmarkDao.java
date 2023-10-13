@@ -92,7 +92,7 @@ public class BookmarkDao {
 		
 		return result;
 	}
-	public ArrayList<Bookmark> selectBookmark(Connection conn){
+	public ArrayList<Bookmark> selectBookmark(Connection conn,int memNo){
 		ArrayList<Bookmark> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -101,7 +101,7 @@ public class BookmarkDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setString(1, hosnameWord);
-			
+			pstmt.setInt(1, memNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

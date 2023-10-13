@@ -33,6 +33,6 @@
 		FROM
 			TB_BOOKMARK
 		WHERE
-			MEM_NO = 31
+			MEM_NO = ?
 	</entry>
 </properties>

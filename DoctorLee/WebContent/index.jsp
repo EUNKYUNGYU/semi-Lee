@@ -84,7 +84,7 @@
                             <li><a href="<%=contextPath%>/customerService.mp">고객센터</a></li>
                             <li><a href="#">나의 게시글</a></li>
                             <li><a href="#">예약 관리</a></li>
-                            <li><a href="<%=contextPath%>/main.bm">병원 즐겨찾기</a></li>
+                            <li><a href="<%=contextPath%>/first.bm">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="<%=contextPath%>/main.hc">건강 관리</a></li>
                             <li><a href="<%=contextPath%>/first.di">다이어리</a></li>

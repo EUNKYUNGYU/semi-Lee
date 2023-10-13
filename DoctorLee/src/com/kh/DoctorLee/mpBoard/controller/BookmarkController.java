@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.DoctorLee.mpBoard.model.service.BookmarkService;
+import com.kh.DoctorLee.mpBoard.model.vo.Bookmark;
 
 /**
  * Servlet implementation class BookmarkController
@@ -28,6 +32,8 @@ public class BookmarkController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<Bookmark> list = new BookmarkService().selectBookmark();
+		request.setAttribute("list", list);
 		RequestDispatcher view = request.getRequestDispatcher("views/myPage/bookmark.jsp");
 		view.forward(request, response);
 	}

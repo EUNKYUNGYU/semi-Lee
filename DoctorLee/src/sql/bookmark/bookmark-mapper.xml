@@ -18,4 +18,21 @@
 		WHERE
 			HOS_NAME = ?
 	</entry>
+	<entry key="insertBookmark">
+		INSERT INTO
+			TB_BOOKMARK
+		VALUES(
+			31,
+			?,
+			SYSDATE
+		)
+	</entry>
+	<entry key="selectBookmark">
+		SELECT
+			HOS_NAME
+		FROM
+			TB_BOOKMARK
+		WHERE
+			MEM_NO = 31
+	</entry>
 </properties>

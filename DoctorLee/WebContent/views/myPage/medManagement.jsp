@@ -158,11 +158,8 @@
                 <hr>
                 <br>
 
-                <span id="count">⋅ Total 2
-                    <input type="date" id="date1"> ~
-                    <input type="date" id="date2">
-                </span>
-                <table id="list-area" align="center">
+                
+                <table class="list-area" align="center">
                     <thead>
                       <tr>
                         <th>병원명</th>
@@ -199,21 +196,23 @@
             </div>
  		</div>
  </div>
-    <!--
+    
     <script>
     	$(function(){
     		$('.list-area>tbody>tr').click(function(){
     			
-    			const nno = $(this).children().eq(0).text();
+    			const nno = ($(this).children().eq(5).text());
+    			
+    			//console.log(this);
     			
     			location.href= "<%=contextPath%>/detail.medi?nno=" + nno;
-    			location.href = "<%=contextPath%>/datail.medi";
+    			//location.href = "<%=contextPath%>/detail.medi";
     			
     		})
     		
     	});
     </script>
-	 -->
+	 
 	 <br><br><br><br><br><br><br><br><br>
 </body>
 </html>

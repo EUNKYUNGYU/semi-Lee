@@ -33,14 +33,14 @@ public class BookmarkInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String hosnameWord = request.getParameter("hn");
-		//int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int memNo = Integer.parseInt(request.getParameter("mno"));
 		
 		Hospital hos = new BookmarkService().selectHosWord(hosnameWord);
-		int result = new BookmarkService().insertBookmark(hosnameWord);
-		ArrayList<Bookmark> list = new BookmarkService().selectBookmark();
-		request.setAttribute("list", list);
+		int result = new BookmarkService().insertBookmark(hosnameWord,memNo);
+		
+		//request.setAttribute("list", list);
 		request.setAttribute("hos", hos);
-		request.getRequestDispatcher("views/myPage/bookmark.jsp").forward(request, response);
+		request.getRequestDispatcher("views/myPage/bookmarkFirst.jsp").forward(request, response);
 	}
 
 	/**

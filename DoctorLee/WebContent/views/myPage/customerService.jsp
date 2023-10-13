@@ -77,33 +77,25 @@
                 /* 테이블 비율 */
                 th:nth-child(1),
                 td:nth-child(1) {
-                width: 16%;
+                width: 30%;
                 }
 
                 th:nth-child(2),
                 td:nth-child(2) {
-                width: 16%;
+                width: 30%;
                 }
 
                 th:nth-child(3),
                 td:nth-child(3) {
-                width: 16%;
+                width: 30%;
                 }
 
                 th:nth-child(4),
-                td:nth-child(3) {
-                width: 16%;
+                td:nth-child(4) {
+                width: 30%;
                 }
 
-                th:nth-child(5),
-                td:nth-child(3) {
-                width: 16%;
-                }
-
-                th:nth-child(6),
-                td:nth-child(3) {
-                width: 16%;
-                }
+                
                         
                 #count{
                     margin-left: 240px;
@@ -174,23 +166,16 @@
                 <hr>
                 <div id="inqbtn" align="center">
                     <input type="button" value="1:1 문의" id="inq1">
-                    <input type="button" value="관리자 문의" id="inq2">
-                </div>
-
-                <div id="count">⋅ Total 2
-                    <input type="date" id="date1"> ~
-                    <input type="date" id="date2">
+                    <input type="button" value="관리자 문의" id="inq2" onclick="adminInqPage();">
                 </div>
 
                 <table align="center">
                     <thead>
                       <tr>
-                        <th>병원명</th>
-                        <th>의료진</th>
-                        <th>약처방</th>
-                        <th>처방전발급일</th>
-                        <th>진료일자</th>
-                        <th>복용횟수</th>
+                        <th>번호</th>
+                        <th>문의</th>
+                        <th>제목</th>
+                        <th>작성일</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -199,47 +184,25 @@
                         <td>김진</td>
                         <td>페니토닌</td>
                         <td>2023-04-07</td>
+                      </tr>
+                      
+                      <tr>
+                        <td>코모키</td>
+                        <td>김진</td>
+                        <td>페니토닌</td>
                         <td>2023-04-07</td>
-                        <td>1</td>
                       </tr>
-                      <tr>
-                        <td>메이퓨어의원</td>
-                        <td>홍박사</td>
-                        <td>없음</td>
-                        <td>2022-12-23</td>
-                        <td>2022-12-23</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td>메이퓨어의원</td>
-                        <td>홍박사</td>
-                        <td>없음</td>
-                        <td>2022-12-23</td>
-                        <td>2022-12-23</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td>메이퓨어의원</td>
-                        <td>홍박사</td>
-                        <td>없음</td>
-                        <td>2022-12-23</td>
-                        <td>2022-12-23</td>
-                        <td>0</td>
-                      </tr>
-                      <tr>
-                        <td>메이퓨어의원</td>
-                        <td>홍박사</td>
-                        <td>없음</td>
-                        <td>2022-12-23</td>
-                        <td>2022-12-23</td>
-                        <td>0</td>
-                      </tr>
-                     
                     </tbody>
                   </table> 
 
             </div>
         </div>
      </div>
+     
+     <script>
+     	function adminInqPage(){
+     		location.href = "<%=contextPath%>/adminInq.mp";
+     	}
+     </script>
 </body>
 </html>

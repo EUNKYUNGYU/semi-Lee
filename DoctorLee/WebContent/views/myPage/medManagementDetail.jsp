@@ -177,7 +177,7 @@
                   </table>
                </div>
             </div>
-			<a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" id="deletebtn" class="btn btn-sm btn-info">삭제</a>
+			<a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" id="deletebtn" class="btn btn-sm btn-primary">삭제</a>
         </div>
 </body>
 </html>

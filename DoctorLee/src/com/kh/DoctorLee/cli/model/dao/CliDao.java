@@ -16,6 +16,7 @@ import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.CliResDate;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.member.model.vo.Member;
 
 public class CliDao {
 	
@@ -225,9 +226,9 @@ public class CliDao {
 	}
 	
 	// 클리닉 예약자 정보 불러오기
-	public ArrayList<CliRes> selectResMem(Connection conn, int cliNo){
+	public int selectResMem(Connection conn, int cliNo, Member loginUser){
 		
-		ArrayList<CliRes> list = new ArrayList();
+		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -237,15 +238,12 @@ public class CliDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, cliNo);
+			pstmt.setInt(2, loginUser.getMemNo());
 			
 			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
-				CliRes c = new CliRes();
-				c.setCliNo(rset.getInt("CLI_NO"));
-				c.setMemNo(rset.getInt("MEM_NO"));
-				
-				list.add(c);
+			if(rset.next()) {
+				result = rset.getInt("COUNT(*)");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -254,7 +252,7 @@ public class CliDao {
 			close(pstmt);
 		}
 		
-		return list;
+		return result;
 	}
 
 }

@@ -87,11 +87,12 @@
 	
 	<entry key="selectResMem">
 		SELECT
-				CLI_NO,
-				MEM_NO
+				COUNT(*)
 		FROM
 				TB_CLI_RES
 		WHERE
-				CLI_NO = ?				
+				CLI_NO = ?
+		  AND
+		  		MEM_NO = ?						
 	</entry>
 </properties>

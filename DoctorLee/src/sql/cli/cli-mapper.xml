@@ -59,4 +59,15 @@
 		 WHERE
 		 		CLI_NO = ? 				
 	</entry>
+	
+	<entry key="selectCliTimeList">
+		SELECT
+				TIME_NO,
+				CLI_NO,
+				CLI_TIME
+		  FROM
+		  		TB_CLI_TIME
+		 WHERE
+		 		CLI_NO = ? 				
+	</entry>
 </properties>

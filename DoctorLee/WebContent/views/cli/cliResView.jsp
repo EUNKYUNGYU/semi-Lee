@@ -36,11 +36,10 @@
 
             $('.time-border').css('display', 'block');
 
-            $('.time-content').click(function(){
-                // 달력 클릭 시 선택한 날짜 출력하기
-                $('#resDate').val((info.dateStr).replaceAll('-', '.'));
-                $('#resTime').val($(this).children().text());
-            })
+            // 달력 클릭 시 선택한 날짜 출력하기
+            $('#resDate').val((info.dateStr).replaceAll('-', '.'));
+
+            
 
             var days = document.querySelectorAll(".day-color");
             days.forEach(function(day){
@@ -56,8 +55,23 @@
                     let resultStr = '';
 
                     for(let i in result){
-                        resultStr +=
+                        resultStr += '<li class="time-content" align="center">'
+                                        +'<a href="#">'
+                                            +'<p>'
+                                                +result[i].cliTime
+                                            +'</p>'
+                                        +'</a>'
+                                    + '</li>'
                     }
+                    $('.time-list').html(resultStr);
+
+                    $('.time-content').click(function(){
+                        $('#resTime').val($(this).children().text());
+
+                        $(this).css('background-color', 'salmon');
+
+                        $(this).siblings().css('background-color', 'bisque');
+                    })
                 },
                 error:function(){
                     console.log('실패');
@@ -219,43 +233,8 @@
                             <!--클리닉 예약 시간 출력 영역 div-->
                             <div id="time-inner">
                                 <div class="time-border">
-                                    <ul>
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-                                        
+                                    <ul class="time-list">
+                                        <h5>시간을 선택하세요</h5>
                                     </ul>
                                 </div>
                             </div>
@@ -289,13 +268,10 @@
             $(function(){
                 //li클릭 시 색깔 바뀌는 이벤트
                 $('.time-content').click(function(){
-                        if($(this).css('background-color', 'bisque')){
+                    if($(this).css('background-color', 'bisque')){
                         $(this).css('background-color', 'salmon');
 
                         $(this).siblings().css('background-color', 'bisque');
-
-                        // 시간 클릭 시 예약 일시를 선택해주세요 와 좌측 메뉴에 띄우기
-                        $('#pick-date, #sel-date').append(" / " + $(this).children().text());
                     }
                 })
             })

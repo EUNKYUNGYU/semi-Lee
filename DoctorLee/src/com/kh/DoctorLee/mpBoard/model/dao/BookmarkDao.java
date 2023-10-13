@@ -49,4 +49,28 @@ public class BookmarkDao {
 		return list;
 		
 	}
+	public Hospital selectHosWord(Connection conn,String hosnameWord) {
+		Hospital hos = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectWord");
+		
+		try {
+			//System.out.println(hosnameWord);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, hosnameWord);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				hos = new Hospital();
+				hos.setHosName(rset.getString("HOS_NAME"));
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return hos;
+	}
 }

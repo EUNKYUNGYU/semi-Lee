@@ -15,5 +15,11 @@ public class BookmarkService {
 		
 		return list;
 	}
+	public Hospital selectHosWord(String hosnameWord) {
+		Connection conn = JDBCTemplate.getConnection();
+		Hospital hos = new BookmarkDao().selectHosWord(conn,hosnameWord);
+		JDBCTemplate.close(conn);
+		return hos;
+	}
 
 }

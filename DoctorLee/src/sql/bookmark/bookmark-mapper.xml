@@ -10,4 +10,12 @@
 			HOS_NAME LIKE '%'||?||'%'
 		
 	</entry>
+	<entry key="selectWord">
+		SELECT
+			HOS_NAME
+		FROM
+			TB_HOSPITAL
+		WHERE
+			HOS_NAME = ?
+	</entry>
 </properties>

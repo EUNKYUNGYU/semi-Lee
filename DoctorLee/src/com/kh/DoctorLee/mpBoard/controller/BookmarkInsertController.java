@@ -1,23 +1,27 @@
-package com.kh.DoctorLee.cli.controller;
+package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.hospital.model.vo.Hospital;
+import com.kh.DoctorLee.mpBoard.model.service.BookmarkService;
+
 /**
- * Servlet implementation class CliResController
+ * Servlet implementation class BookmarkInsertController
  */
-@WebServlet("/enrollRes.cli")
-public class CliResController extends HttpServlet {
+@WebServlet("/insert.bm")
+public class BookmarkInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliResController() {
+    public BookmarkInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +30,10 @@ public class CliResController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// POST 방식 => 인코딩
-		request.setCharacterEncoding("UTF-8");
-		
-		// 값 뽑기
-		int cliNo = Integer.parseInt(request.getParameter("cno"));
-		//String userName = request.getParameter("")
+		String hosnameWord = request.getParameter("hn");
+		Hospital hos = new BookmarkService().selectHosWord(hosnameWord);
+		request.setAttribute("hos", hos);
+		request.getRequestDispatcher("views/myPage/bookmark.jsp").forward(request, response);
 	}
 
 	/**

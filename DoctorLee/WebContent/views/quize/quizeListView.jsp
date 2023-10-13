@@ -197,7 +197,11 @@ button {
 					<div id="quizeHeader">
 						<div id="title"><%= q.getQuizeTitle() %></div>
 						<div id="vote"><%= q.getVote() %>명 투표 중</div>
+						<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
+						<div id="deadline">기한 지남</div>
+						<% } else { %>
 						<div id="deadline"><%= q.getDeadline() %>일 남음</div>
+						<% } %>
 					</div>
 					
 					<form method="post"  action="<%= contextPath %>/choice.qz">

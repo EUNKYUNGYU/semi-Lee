@@ -54,6 +54,12 @@
         margin-left: 200px;
     }
 
+    #cou-res{
+        background-color: skyblue;
+        font-weight: 800;
+        pointer-events: none;
+    }
+
     /*우측 클리닉 영역*/
     #cli-part, #res-part{
         margin-left: 100px;
@@ -354,14 +360,6 @@
                 <!--클리닉 내용 출력 영역 div-->
                 <div id="cli-part">
 
-                    <!--제목 출력 영역 div-->
-                    <div class="title-part">
-                        <em>
-                            <span class="material-symbols-outlined">chevron_right</span>
-                        </em>
-                        <span>상담사를 선택해주세요</span>
-                    </div>
-
                     <!--해당 카테고리 클리닉 출력 영역 div-->
                     <div id="content-part" align="center">
 
@@ -377,7 +375,7 @@
                                     <!--클리닉 대표 이미지 div-->
                                     <div class="cli-img">
                                         <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
+                                        <button>예약하기</button>
                                     </div>
 
                                     <!--클리닉 설명 div-->
@@ -410,7 +408,7 @@
                                     <!--클리닉 대표 이미지 div-->
                                     <div class="cli-img">
                                         <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
+                                        <button>예약하기</button>
                                     </div>
 
                                     <!--클리닉 설명 div-->
@@ -443,7 +441,7 @@
                                     <!--클리닉 대표 이미지 div-->
                                     <div class="cli-img">
                                         <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
+                                        <button>예약하기</button>
                                     </div>
 
                                     <!--클리닉 설명 div-->
@@ -476,7 +474,7 @@
                                     <!--클리닉 대표 이미지 div-->
                                     <div class="cli-img">
                                         <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
+                                        <button>예약하기</button>
                                     </div>
 
                                     <!--클리닉 설명 div-->

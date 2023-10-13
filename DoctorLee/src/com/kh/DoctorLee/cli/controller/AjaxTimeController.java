@@ -35,9 +35,12 @@ public class AjaxTimeController extends HttpServlet {
 
 		// 값 뽑기 
 		int cliNo = Integer.parseInt(request.getParameter("cliNo"));
+		String resDate = (request.getParameter("resDate")).replace(".", "-");
 		
 		// Service 요청
-		ArrayList<CliResTime> timeList = new CliService().selectCliTimeList(cliNo);
+		ArrayList<CliResTime> timeList = new CliService().selectCliTimeList(cliNo, resDate);
+		
+		System.out.println(timeList);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(timeList, response.getWriter());

@@ -48,26 +48,27 @@ public class CliService {
 	}
 	
 	// 클리닉 예약 가능 날짜 가져오기
-	public ArrayList<CliResDate> selectCliDateList(int cliNo){
+	public ArrayList<CliResTime> selectResDate(int cliNo){
 		Connection conn = getConnection();
 		
-		ArrayList<CliResDate> list = new CliDao().selectCliDateList(conn, cliNo);
+		ArrayList<CliResTime> list = new CliDao().selectResDate(conn, cliNo);
 		
 		close(conn);
 		
 		return list;
 	}
 	
-	// 클리닉 예약 가능한 시간 가져오기
-	public ArrayList<CliResTime> selectCliTimeList(int cliNo){
+	// 클리닉 예약 가능 시간 가져오기
+	public ArrayList<CliResTime> selectCliTimeList(int cliNo, String resDate){
 		Connection conn = getConnection();
 		
-		ArrayList<CliResTime> timeList = new CliDao().selectCliTimeList(conn, cliNo);
+		ArrayList<CliResTime> list = new CliDao().selectCliTimeList(conn, cliNo, resDate);
 		
 		close(conn);
 		
-		return timeList;
+		return list;
 	}
+
 	
 	// 클리닉 예약하기
 	public int insertCliRes(CliRes c) {

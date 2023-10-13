@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.CliResDate;
+import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
 
 /**
@@ -41,11 +41,13 @@ public class CliResFormController extends HttpServlet {
 		Clinic c = new CliService().selectCli(cliNo);
 		
 		// 클리닉 예약 가능 날짜 불러오기
-		ArrayList<CliResDate> dateList = new CliService().selectCliDateList(cliNo);
+		ArrayList<CliResTime> list = new CliService().selectResDate(cliNo);
+		System.out.println(list);
+		
 		
 		// 응답화면 요청
 		request.setAttribute("c", c);
-		request.setAttribute("dateList", dateList);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/cli/cliResView.jsp").forward(request, response);
 	}
 

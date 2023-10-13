@@ -193,10 +193,8 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
                     	<% for(CustomerService cs : list) {%>
                       <tr>
                         <td><%=cs.getInqNo() %></td>
-                        <td><%=cs.getMemNo() %></td>
                         <td><%=cs.getInqType() %></td>
                         <td><%=cs.getInqTitle() %></td>
-                        <td><%=cs.getInqContent() %></td>
                         <td><%=cs.getCreateDate() %></td>
                       </tr>
                     <%} %>

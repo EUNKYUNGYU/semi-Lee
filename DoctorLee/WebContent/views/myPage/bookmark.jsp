@@ -58,6 +58,16 @@
 		margin-left : 350px;
 		
 	}
+	.delete {
+		margin : auto;
+		padding : 0;
+		float : left;
+		display : inline-block;
+		
+	}
+	.delete:hover{
+		cursor : pointer;
+	}
 	
 	
 	
@@ -75,8 +85,8 @@
 		<div id="bookmark">
 			<div id="area">
 				<%@ include file="../common/myPageNavi.jsp" %>
+			 <% //System.out.println(loginUser1);%>
 			</div>
-			
 			<div id="bookmark_main">
 				<h3 align="center"><%=loginUser.getMemName() %>님의 즐겨찾기</h3>
 				<br><hr><br><br>
@@ -107,7 +117,8 @@
 						
 						
 						<tr>
-							<td><%= bk.getHospitalName() %></td>
+							<td><input type="radio" value="<%= bk.getHospitalName() %>" name="bookmark"><%= bk.getHospitalName() %></td>
+							
 						</tr>
 						
 					</tbody>
@@ -119,7 +130,7 @@
 				<div id="insertBk">
 					<img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fcdn.crowdpic.net%2Fdetail-thumb%2Fthumb_d_A32B41EB090AC3DCA70DEA8131E49CDB.jpg&type=l340_165" alt="즐겨찾기 이미지" ><br>
 					<a href="<%=contextPath%>/enrollForm.bk">즐겨찾기 추가</a>
-					<a href="#">즐겨찾기 삭제</a>
+					<button type="submit" id="deleteBtn">즐겨찾기 삭제</button>
 					
 				</div>
 					
@@ -129,6 +140,26 @@
 		
 	
 	<% } %>
+		<script>
+			$(function(){
+				$('#deleteBtn').click(function(){
+					str='';
+					$('input[name=bookmark]').filter(':checked').each(function(){
+						str += $(this).val() + '';
+						const cn = str;
+						const mno = <%=loginUser.getMemNo()%>;
+						console.log(cn);
+						console.log(mno);
+						location.href="<%=contextPath%>/del.bm?cn="+cn+"&mno="+mno;
+					});
+					
+				});
+			})
+		</script>
+		<form>
+			<input type="hidden" name = "cn" id=cn>
+			<input type="hidden" name = "mno" id=mno>
+		</form>
 	<%@ include file="../common/footer.jsp" %>
 	
 

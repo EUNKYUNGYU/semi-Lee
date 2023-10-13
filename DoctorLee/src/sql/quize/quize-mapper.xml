@@ -11,7 +11,7 @@ SELECT
         , QUIZE_CONTENT
         , VOTE
         , CREATE_DATE
-        , TO_CHAR(TRUNC(SYSDATE - END_DATE)) DEADLINE
+        , TO_CHAR(TRUNC(END_DATE - SYSDATE)) DEADLINE
         , CHOICE1
         , CHOICE2
         , CHOICE3
@@ -96,13 +96,15 @@ INSERT
  <entry key="quizeAnswerExist">
  
   	SELECT 
- 			? 
+ 			CHOICE
  		FROM 
  			TB_QUIZE_CHOICE 
  		WHERE 
- 			QUIZE_NO = ? 
+ 			MEM_NO = ?
+ 		AND
+ 			QUIZE_NO = ?
  
- 
+
  </entry>
 
 

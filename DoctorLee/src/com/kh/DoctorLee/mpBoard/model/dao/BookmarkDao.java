@@ -74,14 +74,16 @@ public class BookmarkDao {
 		}
 		return hos;
 	}
-	public int insertBookmark(Connection conn,String hosnameWord) {
+	public int insertBookmark(Connection conn,String hosnameWord,int memNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertBookmark");
 		
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, hosnameWord);
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, hosnameWord);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,7 +94,7 @@ public class BookmarkDao {
 		
 		return result;
 	}
-	public ArrayList<Bookmark> selectBookmark(Connection conn){
+	public ArrayList<Bookmark> selectBookmark(Connection conn,int memNo){
 		ArrayList<Bookmark> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -101,7 +103,7 @@ public class BookmarkDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setString(1, hosnameWord);
-			
+			pstmt.setInt(1, memNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -117,5 +119,21 @@ public class BookmarkDao {
 		}
 		return list;
 		
+	}
+	public int deleteBookmark(Connection conn,String hosName,int memNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteBookmark");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, hosName);
+			pstmt.setInt(2, memNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 }

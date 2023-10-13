@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.mpBoard.model.service.MedManagementService;
-import com.kh.DoctorLee.mpBoard.model.vo.MedManagement;
-
 /**
- * Servlet implementation class MedManagementDetailController
+ * Servlet implementation class BookmarkFirstController
  */
-@WebServlet("/detail.medi")
-public class MedManagementDetailController extends HttpServlet {
+@WebServlet("/first.bm")
+public class BookmarkFirstController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MedManagementDetailController() {
+    public BookmarkFirstController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +28,8 @@ public class MedManagementDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int medManNo = Integer.parseInt(request.getParameter("nno"));
-		//System.out.println(medManNo);
-		
-		MedManagement mm = new MedManagementService().selectMedManagement(medManNo);
-		request.setAttribute("mm", mm);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/medManagementDetail.jsp");
-		view.forward(request, response);
-		
+		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/bookmarkFirst.jsp");
+		 view.forward(request, response);
 	}
 
 	/**

@@ -2,27 +2,25 @@ package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.mpBoard.model.service.MedManagementService;
-import com.kh.DoctorLee.mpBoard.model.vo.MedManagement;
+import com.kh.DoctorLee.mpBoard.model.service.BookmarkService;
 
 /**
- * Servlet implementation class MedManagementDetailController
+ * Servlet implementation class DeleteBookmarkController
  */
-@WebServlet("/detail.medi")
-public class MedManagementDetailController extends HttpServlet {
+@WebServlet("/del.bm")
+public class DeleteBookmarkController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MedManagementDetailController() {
+    public DeleteBookmarkController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +29,14 @@ public class MedManagementDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int medManNo = Integer.parseInt(request.getParameter("nno"));
-		//System.out.println(medManNo);
-		
-		MedManagement mm = new MedManagementService().selectMedManagement(medManNo);
-		request.setAttribute("mm", mm);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/medManagementDetail.jsp");
-		view.forward(request, response);
-		
+		String hosName = request.getParameter("cn");
+		int memNo = Integer.parseInt(request.getParameter("mno"));
+		int result = new BookmarkService().deleteBookmark(hosName,memNo);
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/first.bm");
+		} else {
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

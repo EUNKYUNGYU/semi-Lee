@@ -43,28 +43,19 @@
             height: 100%;
         }
 
-        #p11{
+        #p1{
             font-size: 38px;
             font-weight: bolder;
             text-align: center;
         }
 
-        #p21{
+        #p2{
             margin-left: 200px;
             font-size: 23px;
             font-weight: 600;
             margin-top: 35px;
            
            
-        }
-        
-         #texttitle{
-            padding: 20px;
-            font-size: 15px;
-            margin-left: 200px;
-            width: 600px;
-            height: 10px;
-            overflow: hidden;
         }
         
         #textcontent{
@@ -112,14 +103,13 @@
             	<%@ include file = "../common/myPageNavi.jsp" %>
             </div>
             <div id="content_2">
-                <p id="p11">마이페이지</p>
+                <p id="p1">마이페이지</p>
                 <hr>
-                <p id="p21">관리자 문의하기</p>
+                <p id="p2">1:1 문의하기</p>
                 
                 <br>
                 <hr>
-				<br>
-                <textarea id="texttitle" cols="40" rows="10" style="resize: none;" maxlength="50" placeholder="제목을 입력해주세요."></textarea>
+
                 <textarea id="textcontent" cols="40" rows="10" style="resize: none;" maxlength="1000" placeholder="내용을 입력해주세요."></textarea>
                 <br>
                 <span id="count">0</span>/ 1000자

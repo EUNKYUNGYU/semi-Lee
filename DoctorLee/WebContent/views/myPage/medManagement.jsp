@@ -121,13 +121,13 @@
                 }
 
          /*--------------------p태그---------------------*/
-        #p1{
+        #p11{
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
         }
 
-        #p2{
+        #p21{
             font-size: 23px;
             color: #1E376F;
             font-weight: 600;
@@ -152,9 +152,9 @@
             </div>
             
             <div id="content_2">
-                <p id="p1">마이페이지</p>
+                <p id="p11">마이페이지</p>
             
-                <div id="p2" style="text-align: left;">복약관리</div>
+                <div id="p21" style="text-align: left;">복약관리</div>
                 <hr>
                 <br>
 

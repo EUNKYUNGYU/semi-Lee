@@ -50,20 +50,21 @@
         },
 
         events: function(start, end, timezone, callback){
-            url: 'ajaxCalendar.cli',
-            data:{cliNo: <%=c.getCliNo()%>},
-
-            success: function(result){
-                var events = [];
-
-                $(reulst).find('event').each(function(){
-                    events.push({
-                        title: '예약가능',
-                        start:<%= result[i].cliDate
-                    })
-                })
-            }
-            
+            var events = [];
+            $.ajax({
+                url:'ajaxCalendar.cli',
+                data:{cliNo:<%=c.getCliNo()%>},
+                success:function(doc){
+                    
+                    $(doc).find('event').each(function(){
+                        events.push({
+                            title: $(this).attr('title'),
+                            start: $(this).attr('start')
+                        });
+                    });
+                    callback(events);
+                }
+            })
         }
       });
       calendar.render();

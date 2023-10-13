@@ -4,5 +4,23 @@
 
 	<comment>고객센터 관련 SQL문</comment>
 
+	<entry key="selectCustomerServiceList">
+		SELECT
+				INQ_NO,
+				MEM_NO,
+				INQ_TYPE,
+				INQ_TITLE,
+				INQ_CONTENT,
+				CREATE_DATE,
+		FROM
+				TB_CUS_SER
+		WHERE
+				DEL_STATUS = 'Y'
+		ORDER
+		   BY
+		   		CREATE_DATE DESC
+		
+	
+	</entry>
 	
 </properties>

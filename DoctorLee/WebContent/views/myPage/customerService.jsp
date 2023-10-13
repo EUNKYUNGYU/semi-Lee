@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.CustomerService"  %>
+<%
+ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -179,19 +183,24 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <%if(list.isEmpty()) { %>
+                    <!-- 없을때 -->
+                    <tr>
+                    	<td>문의글이 없습니다.</td>
+                    </tr>
+                    <%} else { %>
+                    <!-- 있을때 -->
+                    	<% for(CustomerService cs : list) {%>
                       <tr>
-                        <td>코모키</td>
-                        <td>김진</td>
-                        <td>페니토닌</td>
-                        <td>2023-04-07</td>
+                        <td><%=cs.getInqNo() %></td>
+                        <td><%=cs.getMemNo() %></td>
+                        <td><%=cs.getInqType() %></td>
+                        <td><%=cs.getInqTitle() %></td>
+                        <td><%=cs.getInqContent() %></td>
+                        <td><%=cs.getCreateDate() %></td>
                       </tr>
-                      
-                      <tr>
-                        <td>코모키</td>
-                        <td>김진</td>
-                        <td>페니토닌</td>
-                        <td>2023-04-07</td>
-                      </tr>
+                    <%} %>
+                    	<%} %>
                     </tbody>
                   </table> 
 

@@ -3,6 +3,7 @@
 <%@ page import= "java.util.ArrayList,com.kh.DoctorLee.hospital.model.vo.Hospital"%>
 <%
  	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("hosList");
+	
  %>
  <style>
  	h3 {
@@ -55,7 +56,7 @@
 			<br>
 			
 			<h3>검색하실 병원 이름을 입력해주세요</h3> <br>	
-			<input type="text" name="hosName" id="hosName">
+			<input type="text" name="hosName" id="hosName" >
 			<button type="submit" id="search">검색</button><br><br>
 			<table id="text-area">
 				<thead>
@@ -80,6 +81,18 @@
 			</table>
 		
 		</div>
+		<script>
+			$(function(){
+				$('#text-area > tbody > tr').click(function(){
+					const hn = $(this).children().eq(0).text();
+					location.href="<%=contextPath%>/insert.bm?hn=" + hn;
+				})
+			});
+		</script>
+		<form>
+			<input type="hidden" name = "hn" id=hn>
+		</form>
+		<%@ include file="../common/footer.jsp" %>
 		
 		
 </body>

@@ -179,7 +179,7 @@ table{
 						     <tr>
 						<% } %>
 							<form action="#" method="get">
-						      <th><input type="checkbox" class="checkMsg" name="checkMsg" value="<%= m.getMessageNo() %>"><ladel></ladel></th>
+						      <th><input type="checkbox" class="checkMsg" value="<%= m.getMessageNo() %>"></th>
 						    </form>
 						      <td scope="row"><%= m.getReceiver() %></td>
 						      <td name="<%= m.getMessageNo() %>"><%= m.getMessageTitle()%></td>
@@ -195,23 +195,20 @@ table{
 			
 			<script>
 				$(function(){
+					
 					$('tr > td').click(function(){
         				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name');
         				console.log(mNo);
         			});
-					
-					
-	        		$(function(){
-	        			
-	            		
 	        			$('.checkMsg').on('change', function(){
 	        				
-	        				if(($(this).prop('unchecked')) == f){
+	        				if(($(this).prop('checked')) == true){
 	        					console.log($(this).val());
+	        					console.log($(this));
 	        				}
 	        				
 	        			
-	        			});
+	        			
 					
 					
 					

@@ -75,7 +75,8 @@ article{
 	width: 95%;
 	height: auto;
 	margin : 20px auto;
-	background-color: rgb(230, 230, 230);
+	border: 1px solid rgb(230, 230, 230); border-radius: 10px;
+	padding: 20px 20px 0px 20px;
 }
 
 #quizeHeader {
@@ -128,8 +129,8 @@ article{
 #quizeFooter2 {
 	width: 25%;
 	height: 100%;
-	text-align: center;
-	line-height: 70px;
+	line-height: 85px;
+	padding-left: 80px;
 }
 
 #page, #search{
@@ -152,14 +153,7 @@ a {
 	color: #1E376F;
 }
 
-button {
-	background-color: #1E376F;
-	border-radius: 10px;
-	color: white;
-	width: 60px;
-	height: 30px;
-	margin-left: 10px;
-}
+
 
 </style>
 </head>
@@ -208,6 +202,7 @@ button {
 						<div id="quizeContent">
 						<%= q.getQuizeContent() %>
 						<br>
+						<br>
 						
 								<input type="radio" name="choice" value="1" id="choice1" checked> 
 								<label for="choice1"><%= q.getChoice1() %></label><br> 
@@ -228,15 +223,25 @@ button {
 						<!-- 로그인을 했을 때만 정답 제출 가능 -->
 						<% if(loginUser != null) { %>
 							<div id="quizeFooter1">
+							
+						<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
+							<a class="btn btn-primary" href='javascript:void(0);' onclick="alert('제출기한');">정답 확인하기 &gt;</a>
+						
+						<% } else { %>
+
+
+
+							
 								<button type="submit" id="quizeButton1" class="quizeButton1">제출
 								<input type="hidden" id="memNo" name="memNo" value="<%= loginUser.getMemNo() %>">
 								<input type="hidden" id="quizeNo" name="quizeNo" value="<%= q.getQuizeNo() %>">
+						<% } %>
 								
 							</div>		
 							<!-- 로그인 안 했을 경우 제출 버튼 눌렀을 시 '로그인 후 이용 가능합니다.' alert창 나옴 -->
 						<% } else { %>
 							<div id="quizeFooter1">
-								<button type="button" id="quizeButton2" class="quizeButton2">제출
+								<button type="button" id="quizeButton2" class="quizeButton2 btn btn-primary" >제출
 							</div>	
 					   	<% } %>
 						</form>
@@ -263,7 +268,9 @@ button {
 			
 			<script>
 			  $(function(){
-			   				
+			   			
+				  
+				  
 			      $('.quizeButton2').click(function(){
 			    	  alert('로그인 후 이용 가능한 기능입니다');
 			      });   

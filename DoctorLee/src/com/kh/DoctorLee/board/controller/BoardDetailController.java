@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.kh.DoctorLee.board.model.service.BoardService;
 import com.kh.DoctorLee.board.model.vo.Board;
 
 /**
- * Servlet implementation class BoardListController
+ * Servlet implementation class BoardDetailView
  */
-@WebServlet("/list.bo")
-public class BoardListController extends HttpServlet {
+@WebServlet("/detail.bo")
+public class BoardDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListController() {
+    public BoardDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +31,16 @@ public class BoardListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		ArrayList<Board> list = new BoardService().selectList();
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
-		System.out.println("보드 리스트 controller"+list);
+		request.setCharacterEncoding("UTF-8");
 		
+		Board b = new Board();
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		Board b = new BoardService().selectBoard(boardNo);
+		
+		if(b)
+ 	
 	}
 
 	/**

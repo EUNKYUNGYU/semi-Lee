@@ -30,13 +30,13 @@ public class BoardDao {
 	}
 	
 	
-	public ArrayList<Board> selectBoard(Connection conn){
+	public ArrayList<Board> selectList(Connection conn){
 		
 		
 		ArrayList<Board> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectBoard");
+		String sql = prop.getProperty("selectList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -62,6 +62,16 @@ public class BoardDao {
 		}
 		
 		return list;
+		
+	}
+	
+	public Board selectBoard(Connection conn, int boardNo) {
+		
+		Board b = new Board();
+		
+		
+		return b;
+		
 		
 	}
 

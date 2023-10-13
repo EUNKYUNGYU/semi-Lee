@@ -93,7 +93,7 @@ footer {
 			
 			<article id="boardArticle">
 				<form enctype="multipart/form-data"
-        		action="<%= contextPath %>/insert.bo" method="post" id="enroll-form">
+        		action="#" method="post" id="enroll-form">
 				
 				<div id="boardContent">
 				

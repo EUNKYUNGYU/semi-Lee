@@ -4,7 +4,7 @@
 <%
 	Hospital hos = (Hospital)request.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
-	Reservation rsvt = (Reservation)request.getAttribute("rsvt");
+	Reservation rsvt = (Reservation)request.getAttribute("selectRsvt");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -21,7 +21,9 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
     <script>
-
+		var hosNo = location.search.substring(5);
+        var rsvt_date = '';
+		
     document.addEventListener('DOMContentLoaded', function() {
     	
         var calendarEl = document.getElementById('calendar');
@@ -36,15 +38,14 @@
           },
           dateClick: function(info){
         	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-        	  
-			},
+        	  rsvt_date = info.dateStr;
+			}
 
         });
           
         calendar.render();
       });
-
-    	var calendarDateStr = info.dateStr;
+      // var rsvt_date = calendar.dateClick['dateStr'];
     </script>
 <style>
 	  .hos_wrap{margin: auto;}
@@ -129,7 +130,7 @@
 				
 			<div id="calendar"></div>
 			
-			<form action="hosRsvt.mem" method="post" id="rsvt_form">
+			<!-- <form action="hosRsvt.mem" method="post" id="rsvt_form"> -->
 				<table id="rsvt_form">
 					<tr>
 						<th>예약시간</th>
@@ -150,7 +151,7 @@
 					<tr>
 						<th>예약자명</th>
 						<td>
-							<input type="text" name="rsvtName">
+							<input type="text" name="rsvtName" required>
 						</td>
 					</tr>
 					<tr>
@@ -179,32 +180,45 @@
 						class="btn btn-primary"
 						data-toggle="modal" data-target="#rsvtModal">예약접수</button>
 					<% } else{ %>
-						<button onclick="alert('로그인 후 이용 가능한 서비스');" class="btn btn-primary">예약접수</button>
+						<button onclick="loginUserIsNull();" class="btn btn-primary">예약접수</button>
 					<% } %>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guestRsvtModal">
 					  비회원 진료예약
 					</button>
 					<script>
+					function loginUserIsNull(){
+						alert('로그인 후 이용 가능한 서비스');
+						location.href = '<%= contextPath %>/login.me';
+						
+					};
+					
 					function rsvt(){
 			        	 $.ajax({
 			        		 url: 'hosRsvt.mem',
 			        		 type: 'post',
 			        		 data: {
-			        			 rsvtDate: calendarDateStr,
+			        			 rsvtDate: rsvt_date,
 			        			 rsvtH: $('select[name=rsvtH] option:selected').text(),
 			        			 rsvtM: $('select[name=rsvtM] option:selected').text(),
 			        			 rsvtName: $('input[name=rsvtName]').val(),
 			        		     rsvtInfo: $('input[name=rsvtInfo]').val(),
-			        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val()
+			        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val(),
+			        		     hno: hosNo
 			        		 },
 			        		 success: function(result){
 			        			 console.log(result);
 			        			 // console.log(typeof(info.dateStr));
 			        			 // console.log(new Date());
-			        			 $('.modal-body').children().eq(0).append(result['rsvtNo'])
+			        			 // console.log(rsvt_date);
+			        			 console.log(hosNo);
+			        			 $('.modal-body').children().eq(0).append(result['rsvtNo']);
+			        			 $('.modal-body').children().eq(1).append(result['rsvtName']);
 			        		 },
 			        		 error: function(){
 			        			 alert('현재 예약 불가');
+			        			 // console.log(hosNo);
+			        			 // console.log(rsvt_date);
+			        			 console.log(hosNo);
 			        		 }
 			        	 });
 					}
@@ -212,7 +226,7 @@
 					</script>
 				</div>
 				
-			</form>
+		<!-- 	</form> -->
 
 			<!-- 회원 예약 확인 팝업 -->
 			<div class="modal" id="rsvtModal">

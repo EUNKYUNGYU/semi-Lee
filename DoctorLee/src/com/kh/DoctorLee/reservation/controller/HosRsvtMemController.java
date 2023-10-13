@@ -33,13 +33,14 @@ public class HosRsvtMemController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String rsvtDate = request.getParameter("rsvtDate");
+		String rsvtDate = request.getParameter("rsvt_date");
 		String rsvtH = request.getParameter("rsvtH");
 		String rsvtM = request.getParameter("rsvtM");
 		String rsvtTime = rsvtH + rsvtM;
 		String rsvtName = request.getParameter("rsvtName");
 		String rsvtInfo = request.getParameter("rsvtInfo");
 		String rsvtDoc = request.getParameter("rsvtDoc");
+		String rsvtHos = request.getParameter("hno");
 		
 		Reservation rsvt = new Reservation();
 		rsvt.setRsvtDate(rsvtDate);
@@ -47,26 +48,32 @@ public class HosRsvtMemController extends HttpServlet {
 		rsvt.setRsvtMem(rsvtName);
 		rsvt.setMemInfo(rsvtInfo);
 		rsvt.setRsvtDoc(rsvtDoc);
+		rsvt.setRsvtHos(rsvtHos);
 		
 		int result = new ReservationService().insertRsvt(rsvt); // 예약 insert
 		
-		rsvt = new ReservationService().selectRsvt(rsvtName);
-		
-		JSONObject jsonR = new JSONObject();
-		jsonR.put("rsvtNo", rsvt.getRsvtNo());
-		jsonR.put("rsvtDate", rsvt.getRsvtDate());
-		jsonR.put("rsvtTime", rsvt.getRsvtTime());
-		jsonR.put("rsvtName", rsvt.getRsvtMem());
-		jsonR.put("rsvtInfo", rsvt.getMemInfo());
-		jsonR.put("rsvtHos", rsvt.getRsvtHos());
-		jsonR.put("rsvtDoc", rsvt.getRsvtDoc());
-		
-		if(result > 0) {
-			request.setAttribute("rsvt", rsvt);
-			response.sendRedirect(request.getContextPath() + "/hosDetail.jsp");
-			response.setContentType("application/json; charset=UTF-8");
-			response.getWriter().print(jsonR);
+		if(result > 0) { // insert 성공
+			Reservation selectRsvt = new ReservationService().selectRsvt(rsvtName);
+			
+			if(selectRsvt != null) { // 조회 성공
+				
+				JSONObject jsonR = new JSONObject();
+				jsonR.put("rsvtNo", selectRsvt.getRsvtNo());
+				jsonR.put("rsvt_date", selectRsvt.getRsvtDate());
+				jsonR.put("rsvtTime", selectRsvt.getRsvtTime());
+				jsonR.put("rsvtName", selectRsvt.getRsvtMem());
+				jsonR.put("rsvtInfo", selectRsvt.getMemInfo());
+				jsonR.put("rsvtHos", selectRsvt.getRsvtHos());
+				jsonR.put("rsvtDoc", selectRsvt.getRsvtDoc());
+				
+				response.setContentType("application/json; charset=UTF-8");
+				response.getWriter().print(jsonR);
+				
+				response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + rsvt.getRsvtHos());
+			}
 		}
+			
+		
 		
 		
 	

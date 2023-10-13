@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.reservation.model.service.ReservationService;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 
 /**
@@ -41,7 +42,21 @@ public class HosRsvtMemController extends HttpServlet {
 		Reservation rsvt = new Reservation();
 		rsvt.setRsvtDate(rsvtDate);
 		rsvt.setRsvtTime(rsvtTime);
-		rsvt.setRsvtMem(rsvtMem);
+		rsvt.setRsvtMem(rsvtName);
+		rsvt.setMemInfo(rsvtInfo);
+		rsvt.setRsvtDoc(rsvtDoc);
+		
+		int result = new ReservationService().insertRsvt(rsvt); // ¿¹¾à insert
+		
+		rsvt = new ReservationService().selectRsvt(rsvtName);
+		
+		if(result > 0) {
+			request.setAttribute("rsvt", rsvt);
+			response.sendRedirect(request.getContextPath() + "hosDetail.jsp");
+		}
+		response.setContentType("");
+		
+		
 	
 	}
 

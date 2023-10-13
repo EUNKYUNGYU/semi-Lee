@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList" %>
+<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*" %>
 <%
 	Hospital hos = (Hospital)request.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
+	Reservation rsvt = (Reservation)request.getAttribute("rsvt");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -200,6 +201,7 @@
 			        			 console.log(result);
 			        			 // console.log(typeof(info.dateStr));
 			        			 // console.log(new Date());
+			        			 $('#rsvtModal')
 			        		 },
 			        		 error: function(){
 			        			 alert('현재 예약 불가');

@@ -26,7 +26,13 @@ public class CliResController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		// POST 방식 => 인코딩
+		request.setCharacterEncoding("UTF-8");
+		
+		// 값 뽑기
+		int cliNo = Integer.parseInt(request.getParameter("cno"));
+		String userName = request.getParameter("")
 	}
 
 	/**

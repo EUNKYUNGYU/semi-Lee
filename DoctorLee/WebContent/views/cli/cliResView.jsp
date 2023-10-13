@@ -47,25 +47,23 @@
                 day.classList.remove("day-color");
             })
             info.dayEl.classList.add("day-color");
-        },
 
-        events: function(start, end, timezone, callback){
-            var events = [];
+            // 날짜 클릭 시 시간 출력
             $.ajax({
-                url:'ajaxCalendar.cli',
+                url:'ajaxTime.cli',
                 data:{cliNo:<%=c.getCliNo()%>},
-                success:function(doc){
-                    
-                    $(doc).find('event').each(function(){
-                        events.push({
-                            title: $(this).attr('title'),
-                            start: $(this).attr('start')
-                        });
-                    });
-                    callback(events);
+                success:function(result){
+                    let resultStr = '';
+
+                    for(let i in result){
+                        resultStr +=
+                    }
+                },
+                error:function(){
+                    console.log('실패');
                 }
             })
-        }
+        },
       });
       calendar.render();
       
@@ -75,7 +73,11 @@
 
 
 <style>
-        .outer{
+	#calendar{
+		border: 1px solid purple;
+	}
+
+    .outer{
         width: 1800px;
         margin-left: 50px;
     }
@@ -267,7 +269,7 @@
                             <input type="text" id="hosNo" value="<%= c.getHosNo() %>" readonly>
                             <input type="text" id="cliPrice" value="<%= c.getCliPrice() %>" readonly>
                             <input type="text" id="userName" value="<%= loginUser.getMemName()%>" readonly>
-                            <input type="text" id="userPhone" value="<%= loginUser.getPhone()%>"" readonly>
+                            <input type="text" id="userPhone" value="<%=loginUser.getPhone()%>"" readonly>
                             <input type="text" id="resDate" value="예약일" readonly>
                             <input type="text" id="resTime" value="예약시간" readonly>
                         </div>
@@ -292,7 +294,7 @@
 
                         $(this).siblings().css('background-color', 'bisque');
 
-                        // 시간 클릭 시 "예약 일시를 선택해주세요"와 좌측 메뉴에 띄우기
+                        // 시간 클릭 시 예약 일시를 선택해주세요 와 좌측 메뉴에 띄우기
                         $('#pick-date, #sel-date').append(" / " + $(this).children().text());
                     }
                 })

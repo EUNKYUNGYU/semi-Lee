@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.message.model.service.MessageService;
-import com.kh.DoctorLee.message.model.vo.Message;
 
 /**
- * Servlet implementation class MessageDetailController
+ * Servlet implementation class MessageDeleteController
  */
-@WebServlet("/detail.ms")
-public class MessageDetailController extends HttpServlet {
+@WebServlet("/delete.ms")
+public class MessageDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MessageDetailController() {
+    public MessageDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +29,23 @@ public class MessageDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		int messageNo = Integer.parseInt(request.getParameter("messageNo"));
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
+		System.out.println("메세지 삭제 컨트롤러: " + messageNo);
+		int result = new MessageService().deleteMessage(messageNo);
 		
-		int result = new MessageService().updateReadStatus(messageNo);
 		if(result > 0) {
-			
-			Message m = new MessageService().selectMessage(messageNo);
-			request.setAttribute("m", m);
-			request.setAttribute("messageNo", messageNo);
-			request.getRequestDispatcher("views/message/messageDetailView.jsp").forward(request, response);
-			
+			request.getSession().setAttribute("alertMsg", "메세지 삭제에 성공했습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + memberNo + "&type=sender");
 		} else {
-			request.getSession().setAttribute("alertMsg", "쪽지 조회에 실패 했습니다. 다시 시도해주십시오.");
-			response.sendRedirect(request.getContextPath() + "/list.ms");
+			request.getSession().setAttribute("alertMsg", "메세지 삭제에 실패했습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + memberNo + "&type=sender");
 		}
+		
 	
 	}
 

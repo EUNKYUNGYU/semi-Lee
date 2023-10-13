@@ -33,7 +33,7 @@ public class HosRsvtMemController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String rsvtDate = request.getParameter("rsvt_date");
+		String rsvtDate = request.getParameter("rsvtDate");
 		String rsvtH = request.getParameter("rsvtH");
 		String rsvtM = request.getParameter("rsvtM");
 		String rsvtTime = rsvtH + rsvtM;
@@ -49,6 +49,7 @@ public class HosRsvtMemController extends HttpServlet {
 		rsvt.setMemInfo(rsvtInfo);
 		rsvt.setRsvtDoc(rsvtDoc);
 		rsvt.setRsvtHos(rsvtHos);
+		System.out.println(rsvtDate);
 		
 		int result = new ReservationService().insertRsvt(rsvt); // ¿¹¾à insert
 		
@@ -65,6 +66,7 @@ public class HosRsvtMemController extends HttpServlet {
 				jsonR.put("rsvtInfo", selectRsvt.getMemInfo());
 				jsonR.put("rsvtHos", selectRsvt.getRsvtHos());
 				jsonR.put("rsvtDoc", selectRsvt.getRsvtDoc());
+				System.out.println(jsonR);
 				
 				response.setContentType("application/json; charset=UTF-8");
 				response.getWriter().print(jsonR);

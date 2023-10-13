@@ -101,6 +101,7 @@ public class MessageDao {
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {
+				
 				m.setMessageTitle(rset.getString("MESSAGE_TITLE"));
 				m.setSender(rset.getString("MEM_ID"));
 				m.setSendDate(rset.getString("SEND_DATE"));
@@ -147,6 +148,7 @@ public class MessageDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertMessage");
+		System.out.println("메세지 Dao insertMessage : " + m);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, m.getSenderNo());
@@ -161,6 +163,26 @@ public class MessageDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public int deleteMessage(Connection conn, int messageNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMessage");
+		System.out.println("메세지 삭제 Dao: " + messageNo);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, messageNo);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
 	}
 	
 	

@@ -70,4 +70,28 @@
 		 WHERE
 		 		CLI_NO = ? 				
 	</entry>
+	
+	<entry key="insertCliRes">
+		INSERT
+		  INTO
+		  		TB_CLI_RES
+		VALUES
+				(
+				SEQ_CLI_RES_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				?
+				)  		
+	</entry>
+	
+	<entry key="selectResMem">
+		SELECT
+				CLI_NO,
+				MEM_NO
+		FROM
+				TB_CLI_RES
+		WHERE
+				CLI_NO = ?				
+	</entry>
 </properties>

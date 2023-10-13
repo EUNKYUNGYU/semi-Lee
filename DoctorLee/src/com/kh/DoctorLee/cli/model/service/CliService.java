@@ -1,13 +1,13 @@
 package com.kh.DoctorLee.cli.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.close;
-import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
+import static com.kh.DoctorLee.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.DoctorLee.cli.model.dao.CliDao;
 import com.kh.DoctorLee.cli.model.vo.Category;
+import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.CliResDate;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
@@ -63,6 +63,34 @@ public class CliService {
 		close(conn);
 		
 		return timeList;
+	}
+	
+	// 클리닉 예약하기
+	public int insertCliRes(CliRes c) {
+		Connection conn = getConnection();
+		
+		int result = new CliDao().insertCliRes(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 클리닉 예약자 정보 불러오기
+	public ArrayList<CliRes> selectResMem(int cliNo){
+		Connection conn = getConnection();
+		
+		ArrayList<CliRes> list = new CliDao().selectResMem(conn, cliNo);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

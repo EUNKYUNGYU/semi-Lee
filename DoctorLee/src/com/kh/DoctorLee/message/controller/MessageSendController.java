@@ -33,19 +33,19 @@ public class MessageSendController extends HttpServlet {
 	
 		request.setCharacterEncoding("UTF-8");
 		
-		int sender = Integer.parseInt(request.getParameter("sender"));
+		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
 		String messageTitle = request.getParameter("messageTitle");
 		String receiverId = request.getParameter("receiverId");
 		String messageContent = request.getParameter("messageContent");
 		
-		System.out.println("searchMember 컨트롤러 " + sender + messageTitle + receiverId + messageContent);
+		System.out.println("searchMember 컨트롤러 " + senderNo + messageTitle + receiverId + messageContent);
 		
 		int receiverNo = new MessageService().searchMember(receiverId);
 		if(receiverNo > 0) {
 			
 			Message m = new Message();
 			
-			m.setSenderNo(sender);
+			m.setSenderNo(senderNo);
 			m.setMessageTitle(messageTitle);
 			m.setReceiverNo(receiverNo);
 			m.setMessageContent(messageContent);
@@ -54,16 +54,16 @@ public class MessageSendController extends HttpServlet {
 			
 			int result = new MessageService().insertMessage(m);
 			if(result > 0) {
-				request.setAttribute("alertMsg", "메세지를 보냈습니다.");
-				response.sendRedirect(request.getContextPath() + "/list.ms");
+				request.getSession().setAttribute("alertMsg", "메세지를 보냈습니다.");
+				response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + senderNo + "&type=sender");
 				
 			} else {
-				request.setAttribute("alertMsg", "메세지 보내기에 실패했습니다. 다시 시도해주십시오.");
-				response.sendRedirect(request.getContextPath() + "/list.ms");
+				request.getSession().setAttribute("alertMsg", "메세지 보내기에 실패했습니다. 다시 시도해주십시오.");
+				response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + senderNo + "&type=sender");
 			}
 		} else {
 			request.setAttribute("alertMsg", "메세지 보내기에 실패했습니다. 다시 시도해주십시오.");
-			response.sendRedirect(request.getContextPath() + "/list.ms");
+			response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + senderNo + "&type=sender");
 		}
 		
 		

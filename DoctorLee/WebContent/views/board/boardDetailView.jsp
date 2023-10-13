@@ -82,6 +82,8 @@ article{width: 95%; height: auto; margin: 20px auto; border: 1px solid rgb(230, 
 
 #submitWrap > a{color : gray; font-size : 12px; padding:0 10px;}
 
+#page, #search{width : 100%; height : 100px; padding: 20px;}
+
 footer {width: 100%; height: auto;}
 
 a {text-decoration: none;}
@@ -158,13 +160,11 @@ a {text-decoration: none;}
 				
 				</article>
 			</div>
+			
 			<div id="page">
-				페이지바 영역
+				글쓰기 / 맨위로 가기 버튼 만들 공간
 			</div>
 		
-			<div id="search">
-				검색 영역
-			</div>
 		
 		</section>
 		

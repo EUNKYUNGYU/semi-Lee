@@ -17,5 +17,24 @@
 		 	BY
 		 		TREAT_DATE DESC
 	</entry>
-	
+	<entry key="selectMedManagement">
+		SELECT
+				HOS_NAME,
+				DOCTOR_NAME,
+				MEDI_NAME,
+				TREAT_DATE,
+				PRE_DATE,
+				MED_MAN_NO
+		  FROM
+		  		TB_MED_MAN
+		  WHERE
+		   		MED_MAN_NO = ?
+	</entry>
+	<entry key="deleteMedManagement">
+		DELETE
+		  FROM
+		  		TB_MED_MAN
+		  WHERE
+		  		MED_MAN_NO = ?
+	</entry>
 </properties>

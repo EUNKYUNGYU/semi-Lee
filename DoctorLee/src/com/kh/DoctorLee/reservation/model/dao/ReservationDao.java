@@ -31,6 +31,31 @@ public class ReservationDao {
 		}
 	}
 	
+	// 날짜 확인 조회
+	public String checkRsvtDate(Connection conn, String checkRsvtDate) {
+		String result = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkRsvtDate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkRsvtDate);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result = rset.getString("RSVT_DATE");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 	// insert하기 전에 date겹치는지 확인
 	public String selectRsvtDate(Connection conn, String rsvtDate, String rsvtTime) {
 		String checkDate = "";

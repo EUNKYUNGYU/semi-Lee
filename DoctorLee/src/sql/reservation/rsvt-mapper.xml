@@ -65,4 +65,14 @@
 		       RSVT_MEM = ?
 	</entry>
 	
+	<entry key="checkRsvtDate">
+		SELECT
+		       RSVT_DATE
+		  FROM
+		       TB_RESERVATION
+	     WHERE
+	           RSVT_DATE = ?
+	
+	</entry>
+	
 </properties>

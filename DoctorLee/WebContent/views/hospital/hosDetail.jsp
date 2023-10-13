@@ -216,6 +216,7 @@
 						rsvtM = rsvtM.replaceAll('\t', '');
 						var rsvt_time = rsvtH + rsvtM;
 					*/
+					
 					function loginUserIsNull(){
 						alert('로그인 후 이용 가능한 서비스');
 						location.href = '<%= contextPath %>/login.me';

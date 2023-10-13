@@ -8,6 +8,14 @@ import com.kh.DoctorLee.reservation.model.dao.ReservationDao;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 public class ReservationService {
 
+	// 날짜 확인 조회
+	public String checkRsvtDate(String checkRsvtDate) {
+		Connection conn = getConnection();
+		String result = new ReservationDao().checkRsvtDate(conn, checkRsvtDate);
+		close(conn);
+		return result;
+	}
+	
 	// �삁�빟 insert
 	public int insertRsvt(Reservation rsvt) {
 		Connection conn = getConnection();

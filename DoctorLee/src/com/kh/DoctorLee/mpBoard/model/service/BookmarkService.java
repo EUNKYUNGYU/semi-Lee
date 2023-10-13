@@ -22,9 +22,9 @@ public class BookmarkService {
 		JDBCTemplate.close(conn);
 		return hos;
 	}
-	public int insertBookmark(String hosnameWord){
+	public int insertBookmark(String hosnameWord,int memNo){
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new BookmarkDao().insertBookmark(conn,hosnameWord);
+		int result = new BookmarkDao().insertBookmark(conn,hosnameWord,memNo);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		}else {

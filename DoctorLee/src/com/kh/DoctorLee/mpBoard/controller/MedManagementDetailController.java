@@ -27,6 +27,8 @@ public class MedManagementDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int medManNo = Integer.parseInt(request.getParameter("medManNo"));
+		
 		
 		request.getRequestDispatcher("views/myPage/medManagementDetail.jsp").forward(request, response);
 		

@@ -10,7 +10,7 @@
 		       TB_RESERVATION
 	    VALUES	
 	    	  (
-	    	  RSVT_NO.NEXTVAL
+	    	  SEQ_RSVT_NO.NEXTVAL
 	    	  ,?
 	    	  ,?
 	    	  ,?
@@ -19,6 +19,20 @@
 	    	  ,?
 	    	  )	  
 	
+	</entry>
+	<entry key="selectRsvt">
+		SELECT
+		       RSVT_NO
+		       ,RSVT_DATE
+		       ,RSVT_TIME
+		       ,MEM_INFO
+		       ,RSVT_HOS
+		       ,RSVT_MEM
+		       ,RSVT_DOC
+		 FROM
+		       TB_RESERVATION
+		WHERE
+		       RSVT_MEM = ?
 	</entry>
 	
 </properties>

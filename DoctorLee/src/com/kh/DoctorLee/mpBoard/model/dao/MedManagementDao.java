@@ -19,7 +19,7 @@ private Properties prop = new Properties();
 	
 	public MedManagementDao() {
 		
-		String file = MemberDao.class.getResource("/sql/member/medi-mapper.xml").getPath();
+		String file = MemberDao.class.getResource("/sql/medi/medi-mapper.xml").getPath();
 		//System.out.println(file);
 		
 		try {
@@ -37,21 +37,22 @@ private Properties prop = new Properties();
 		
 		String sql = prop.getProperty("selectMedManagementList");
 		
+		
 		try {
 			pstmt =conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				MedManagement mm = new MedManagement();
-				mm.setPreNo(rset.getInt("PRE_NO"));
-				mm.setRsvtNo(rset.getInt("RSVT_NO"));
 				mm.setHosName(rset.getString("HOS_NAME"));
 				mm.setDoctorName(rset.getString("DOCTOR_NAME"));
 				mm.setMediName(rset.getString("MEDI_NAME"));
-				mm.setTreateDate(rset.getDate("TREATE_DATE"));
+				mm.setTreateDate(rset.getDate("TREAT_DATE"));
 				mm.setPreDate(rset.getDate("PRE_DATE"));
+				mm.setMedManNo(rset.getInt("MED_MAN_NO"));
 				
 				list.add(mm);
+				
 			}
 			
 		} catch (SQLException e) {
@@ -61,9 +62,6 @@ private Properties prop = new Properties();
 			JDBCTemplate.close(pstmt);
 		}
 		 return list;
-		
-		
-		
 		
 	}
 	

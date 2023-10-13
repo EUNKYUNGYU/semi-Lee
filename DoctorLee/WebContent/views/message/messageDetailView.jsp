@@ -5,6 +5,8 @@
 <% 
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
 	Message m = (Message)request.getAttribute("m");
+	int messageNo = (int)request.getAttribute("messageNo");
+	System.out.println("메세지 디테일 뷰" +messageNo);
 %>
 
 <!DOCTYPE html>
@@ -20,7 +22,6 @@
 <style>
 
 * {
-	border: 0.5px solid skyblue;
 	box-sizing: border-box;
 }
 
@@ -164,10 +165,17 @@ table{
 					
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
-							<button type="button" class="btn btn-light">삭제
+							<form action="<%= contextPath %>/delete.ms" method="post">
+								<input type="hidden" name="messageNo" value="<%= messageNo%>">
+								</input>
+								<input type="hidden" name="memberNo" value="<%= loginUser.getMemNo() %>">
+								</input>
+								<input type="submit" class="btn btn-light" value="삭제">
+								</input> 
+							</form>
 						</div>
 						<div id="buttonWrap2">
-							<a href="<%= contextPath %>/insert.ms?sender=<%= loginUser.getMemNo() %>" class="btn btn-primary">답장하기</a>
+							<a href="<%= contextPath %>/views/message/messageEnrollForm.jsp" class="btn btn-primary">답장하기</a>
 						</div>
 					</div>
 					<div id="messageTitleWrap">

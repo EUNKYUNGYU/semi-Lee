@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member,com.kh.DoctorLee.hospital.model.vo.Hospital" %>
-    
+<%@ page import="java.util.ArrayList,com.kh.DoctorLee.mpBoard.model.vo.Bookmark" %>
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	Hospital hos = (Hospital)request.getAttribute("hos");
+	ArrayList<Bookmark> list = (ArrayList<Bookmark>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -65,6 +66,7 @@
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
+	<%// System.out.println(list); %>
 	<% if(loginUser == null) {%>
 		<form action="<%=contextPath %>/login.me" method="post">
 			<button type="submit">로그인하러가기</button>
@@ -79,7 +81,7 @@
 				<h3 align="center"><%=loginUser.getMemName() %>님의 즐겨찾기</h3>
 				<br><hr><br><br>
 				<table id="bk-info">
-					<% if(hos == null){ %>
+					<% if(list == null){ %>
 					<thead>
 						<tr>
 							<th>병원이름</th>
@@ -100,15 +102,18 @@
 						</tr>
 						
 					</thead>
+					<% for(Bookmark bk : list){ %>
 					<tbody>
 						
-						<% for(int i = 1; i <= 1 ; i++){ %>
+						
 						<tr>
-							<td><%= hos.getHosName() %></td>
+							<td><%= bk.getHospitalName() %></td>
 						</tr>
+						
 					</tbody>
-				</table>
 					<%} %>
+				</table>
+					
 				<%} %>
 				<hr>
 				<div id="insertBk">

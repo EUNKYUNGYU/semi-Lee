@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.cli.model.vo.*" %>    
+<%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %>    
 <%
 	Clinic c = (Clinic)request.getAttribute("c");
+    ArrayList<CliRes> list = (ArrayList<CliRes>)request.getAttribute("list");
 %>    
 <!DOCTYPE html>
 <html>
@@ -136,7 +137,9 @@
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
                     <h4>후기</h4>
-                    <button>후기 작성</button>
+                    <% if(loginUser != null) {%>
+                        <button>후기 작성</button>
+                    <% } %>    
                 </div>
 
             </div>

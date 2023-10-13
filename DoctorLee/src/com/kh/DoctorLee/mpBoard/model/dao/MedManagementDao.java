@@ -65,5 +65,56 @@ private Properties prop = new Properties();
 		
 	}
 	
+	public MedManagement selectMedManagement(Connection conn, int medManNo) {
+		
+		MedManagement mm = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMedManagement");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, medManNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				mm = new MedManagement();
+				mm.setHosName(rset.getString("HOS_NAME"));
+				mm.setDoctorName(rset.getString("DOCTOR_NAME"));
+				mm.setMediName(rset.getString("MEDI_NAME"));
+				mm.setTreateDate(rset.getDate("TREAT_DATE"));
+				mm.setPreDate(rset.getDate("PRE_DATE"));
+				mm.setMedManNo(rset.getInt("MED_MAN_NO"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return mm;
+	}
+	
+	public int deleteMedManagement(Connection conn, int medManNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMedManagement");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, medManNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 }

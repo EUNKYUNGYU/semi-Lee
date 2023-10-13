@@ -43,9 +43,18 @@ public class MessageService {
 	}
 	
 	public int insertMessage(Message m) {
-		
+		System.out.println("메세지 서비스 insertMessage : " + m);
 		Connection conn = getConnection();
 		int result = new MessageDao().insertMessage(conn, m);
+		close(conn);
+		return result;
+		
+	}
+	
+	public int deleteMessage(int messageNo) {
+		System.out.println("메세지 삭제 Service: " + messageNo);
+		Connection conn = getConnection();
+		int result = new MessageDao().deleteMessage(conn, messageNo);
 		close(conn);
 		return result;
 		

@@ -43,7 +43,7 @@ main > section, main > aside, main > div{
 }
 
 #aside {
-	width: 15%;
+	width: 20%;
 	height: auto;
 	margin : 20px auto;
 	display: flex;
@@ -52,7 +52,7 @@ main > section, main > aside, main > div{
 }
 
 #section{
-	width: 70%;
+	width: 60%;
 	height: auto; 
 	min-height: 1000px;
 	float: left;

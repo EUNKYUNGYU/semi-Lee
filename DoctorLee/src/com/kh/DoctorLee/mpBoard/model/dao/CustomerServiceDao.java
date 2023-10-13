@@ -19,7 +19,7 @@ private Properties prop = new Properties();
 	
 	public CustomerServiceDao() {
 		
-		String file = MemberDao.class.getResource("/sql/myPage/customerService-mapper.xml").getPath();
+		String file = MemberDao.class.getResource("/sql/customerService/customerService-mapper.xml").getPath();
 		//System.out.println(file);
 		
 		try {

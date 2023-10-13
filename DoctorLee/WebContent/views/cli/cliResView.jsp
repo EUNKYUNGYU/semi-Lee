@@ -3,7 +3,7 @@
 <%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %>    
 <%
 	Clinic c = (Clinic)request.getAttribute("c");
-    ArrayList<CliResDate> dateList = (ArrayList<CliResDate>)request.getAttribute("dateList");
+    ArrayList<CliResTime> list = (ArrayList<CliResTime>)request.getAttribute("list");
 %>    
 <!DOCTYPE html>
 <html>
@@ -33,10 +33,10 @@
         },
 
         events:[
-            <% for(CliResDate cd : dateList) {%>
+            <% for(CliResTime ct : list) {%>
             {
                 title:'예약 가능',
-                start:'<%=cd.getCliDate()%>',
+                start:'<%=ct.getCliDate()%>',
                 color:'#1E376F'
             },
             <% }%>
@@ -59,7 +59,9 @@
             // 날짜 클릭 시 시간 출력
             $.ajax({
                 url:'ajaxTime.cli',
-                data:{cliNo:<%=c.getCliNo()%>},
+                data:{
+                    cliNo:<%=c.getCliNo()%>,
+                    resDate:$('#resDate').val()},
                 success:function(result){
                     let resultStr = '';
 

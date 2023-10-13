@@ -49,26 +49,39 @@
 		 		CLI_NO = ? 								
 	</entry>
 	
-	<entry key="selectCliDateList">
-		SELECT
-				DATE_NO,
-				CLI_NO,
-				CLI_DATE
-		  FROM
-		  		TB_CLI_DATE
+	<entry key="selectResDate">
+		SELECT 
+		        DISTINCT CLI_DATE 
+		  FROM 
+		        TB_CLI_TIME
 		 WHERE
-		 		CLI_NO = ? 				
+		        CLI_NO = ?
 	</entry>
 	
 	<entry key="selectCliTimeList">
 		SELECT
 				TIME_NO,
 				CLI_NO,
-				CLI_TIME
+				CLI_TIME,
+				CLI_DATE
 		  FROM
 		  		TB_CLI_TIME
 		 WHERE
-		 		CLI_NO = ? 				
+		 		CLI_NO = ?
+		 AND
+		 		CLI_DATE = ?
+		 AND
+		 		CLI_TIME NOT IN(
+		 						SELECT
+		 								RES_TIME
+		 						  FROM
+		 						  		TB_CLI_RES
+		 						 WHERE
+		 						 		CLI_NO = ? 				
+		 						)
+		ORDER 
+		   BY  TIME_NO
+						 						 				 				
 	</entry>
 	
 	<entry key="insertCliRes">

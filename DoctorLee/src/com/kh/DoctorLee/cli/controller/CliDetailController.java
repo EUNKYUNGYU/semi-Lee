@@ -47,8 +47,6 @@ public class CliDetailController extends HttpServlet {
 		
 		int result = new CliService().selectResMem(cliNo, loginUser);
 		
-		System.out.println(result);
-		
 		request.setAttribute("c", c);
 		request.setAttribute("result", result);
 		

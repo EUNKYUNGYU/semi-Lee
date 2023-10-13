@@ -20,7 +20,7 @@ private Properties prop = new Properties();
 	public MedManagementDao() {
 		
 		String file = MemberDao.class.getResource("/sql/medi/medi-mapper.xml").getPath();
-		//System.out.println(file);
+		System.out.println(file);
 		
 		try {
 			prop.loadFromXML(new FileInputStream(file));

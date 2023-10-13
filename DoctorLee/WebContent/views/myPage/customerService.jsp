@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.CustomerService"  %>
+<%
+ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,13 +135,13 @@
                     margin-right: 80px;
                 }
         /*--------------------p태그---------------------*/
-        #p1{
+        #p11{
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
         }
 
-        #p2{
+        #p21{
             font-size: 23px;
             color: #1E376F;
             font-weight: 600;
@@ -159,13 +163,13 @@
             	<%@ include file = "../common/myPageNavi.jsp" %>
             </div>
             <div id="content_2">
-                <p id="p1">마이페이지</p>
+                <p id="p11">마이페이지</p>
             
-                <p id="p2">고객센터</p>
+                <p id="p21">고객센터</p>
                 <br>
                 <hr>
                 <div id="inqbtn" align="center">
-                    <input type="button" value="1:1 문의" id="inq1">
+                    <input type="button" value="1:1 문의" id="inq1" onclick="personalInqPage();">
                     <input type="button" value="관리자 문의" id="inq2" onclick="adminInqPage();">
                 </div>
 
@@ -179,19 +183,24 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <%if(list.isEmpty()) { %>
+                    <!-- 없을때 -->
+                    <tr>
+                    	<td>문의글이 없습니다.</td>
+                    </tr>
+                    <%} else { %>
+                    <!-- 있을때 -->
+                    	<% for(CustomerService cs : list) {%>
                       <tr>
-                        <td>코모키</td>
-                        <td>김진</td>
-                        <td>페니토닌</td>
-                        <td>2023-04-07</td>
+                        <td><%=cs.getInqNo() %></td>
+                        <td><%=cs.getMemNo() %></td>
+                        <td><%=cs.getInqType() %></td>
+                        <td><%=cs.getInqTitle() %></td>
+                        <td><%=cs.getInqContent() %></td>
+                        <td><%=cs.getCreateDate() %></td>
                       </tr>
-                      
-                      <tr>
-                        <td>코모키</td>
-                        <td>김진</td>
-                        <td>페니토닌</td>
-                        <td>2023-04-07</td>
-                      </tr>
+                    <%} %>
+                    	<%} %>
                     </tbody>
                   </table> 
 
@@ -200,6 +209,11 @@
      </div>
      
      <script>
+     	
+     	function personalInqPage(){
+    	 	location.href="<%=contextPath%>/personalInq.mp";
+     	}
+     
      	function adminInqPage(){
      		location.href = "<%=contextPath%>/adminInq.mp";
      	}

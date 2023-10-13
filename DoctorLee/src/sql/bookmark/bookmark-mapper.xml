@@ -35,4 +35,12 @@
 		WHERE
 			MEM_NO = ?
 	</entry>
+	<entry key="deleteBookmark">
+		DELETE
+			FROM TB_BOOKMARK
+		WHERE
+			HOS_NAME = ?
+		AND
+			MEM_NO = ?
+	</entry>
 </properties>

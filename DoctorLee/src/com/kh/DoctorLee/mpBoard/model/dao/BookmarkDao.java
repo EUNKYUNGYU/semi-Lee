@@ -120,4 +120,20 @@ public class BookmarkDao {
 		return list;
 		
 	}
+	public int deleteBookmark(Connection conn,String hosName,int memNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteBookmark");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, hosName);
+			pstmt.setInt(2, memNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 }

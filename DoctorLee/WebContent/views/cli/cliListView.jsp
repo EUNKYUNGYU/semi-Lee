@@ -343,6 +343,7 @@
                                                     +'<div class="cli-price">'
                                                             +'<span>'
                                                                 +result[i].cliPrice
+                                                                +'원'
                                                             +'</span>'
                                                     +'</div>'
                                             

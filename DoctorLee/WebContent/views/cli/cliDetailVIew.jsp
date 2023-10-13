@@ -136,7 +136,9 @@
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
                     <h4>후기</h4>
-                    <button>후기 작성</button>
+                    <% if(loginUser != null) {%>
+                        <button>후기 작성</button>
+                    <% } %>    
                 </div>
 
             </div>

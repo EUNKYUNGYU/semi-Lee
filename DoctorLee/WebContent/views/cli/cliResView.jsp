@@ -248,6 +248,9 @@
                         <!--클리닉 예약 정보 작성 영역 div-->
                         <div id="cli-bottom">
                             <h4>예약 정보</h4>
+
+                            <input type="hidden" name="cliNo" value="<%=c.getCliNo()%>">
+
                             <span>클리닉명 : </span>
                             <input type="text" id="cliName" value="<%= c.getCliName() %>" readonly>
 

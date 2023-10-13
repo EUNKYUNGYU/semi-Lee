@@ -47,7 +47,7 @@
 
             // 달력 클릭 시 선택한 날짜 출력하기
             $('#resDate').val((info.dateStr).replaceAll('-', '.'));
-            $('#resTime').val();
+            $('#resTime').val(null);
 
             var days = document.querySelectorAll(".day-color");
             days.forEach(function(day){
@@ -248,15 +248,28 @@
                         <!--클리닉 예약 정보 작성 영역 div-->
                         <div id="cli-bottom">
                             <h4>예약 정보</h4>
+                            <span>클리닉명 : </span>
                             <input type="text" id="cliName" value="<%= c.getCliName() %>" readonly>
+
+                            <span>병원명 :</span>
                             <input type="text" id="hosNo" value="<%= c.getHosNo() %>" readonly>
+
+                            <span>가격 : </span>
                             <input type="text" id="cliPrice" value="<%= c.getCliPrice() %>" readonly>
+
                             <input type="hidden" name="userNo" value="<%=loginUser.getMemNo()%>">
+                            
+                            <span>예약자명 :</span>
                             <input type="text" id="userName" value="<%= loginUser.getMemName()%>" readonly>
+                            
+                            <span>예약자 전화번호 : </span>
                             <input type="text" id="userPhone" value="<%=loginUser.getPhone()%>"" readonly>
-                            <input type="text" id="resDate" name="resDate" value="예약일"  readonly>
-                            <input type="hidden" name="resDateNo" value="">
-                            <input type="text" id="resTime" name="resTime" value="예약시간" readonly>
+                            
+                            <span>예약일 : </span>
+                            <input type="text" id="resDate" name="resDate" readonly required>
+
+                            <span>예약시간 : </span>
+                            <input type="text" id="resTime" name="resTime" readonly required>
                         </div>
 
                         <div id="res-part" align="center">

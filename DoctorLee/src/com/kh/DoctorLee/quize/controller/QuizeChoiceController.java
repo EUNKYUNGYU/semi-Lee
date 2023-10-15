@@ -72,13 +72,13 @@ public class QuizeChoiceController extends HttpServlet {
 			} else if(result == 0) { // 실패
 				request.getSession().setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
 			}
-			response.sendRedirect(request.getContextPath() + "/list.qz");
+			response.sendRedirect(request.getContextPath() + "/list.qz?cpage=1");
 			
 			System.out.println("----------------------------");
 			
 		}  else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
 			request.getSession().setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.qz");
+			response.sendRedirect(request.getContextPath() + "/list.qz?cpage=1");
 		}
 		
 	}

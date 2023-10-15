@@ -3,23 +3,41 @@
 <properties>
 
 
+
+
+<entry key="selectListCount">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_QUIZE_BOARD 
+ 
+</entry>
+
+
 <entry key="selectList">
 
-SELECT 
-        QUIZE_NO
-        , QUIZE_TITLE
-        , QUIZE_CONTENT
-        , VOTE
-        , CREATE_DATE
-        , TO_CHAR(TRUNC(END_DATE - SYSDATE)) DEADLINE
-        , CHOICE1
-        , CHOICE2
-        , CHOICE3
-        , CHOICE4
-	FROM
-        TB_QUIZE_BOARD 
-    ORDER BY
-        CREATE_DATE DESC
+	 SELECT *
+ 		FROM(
+			SELECT ROWNUM RNUM, A.*
+	  			FROM(
+		  			SELECT 	
+					        QUIZE_NO
+					        , QUIZE_TITLE
+					        , QUIZE_CONTENT
+					        , VOTE
+					        , CREATE_DATE
+					        , TO_CHAR(TRUNC(END_DATE - SYSDATE)) DEADLINE
+					        , CHOICE1
+					        , CHOICE2
+					        , CHOICE3
+					        , CHOICE4
+						FROM
+			        		TB_QUIZE_BOARD 
+			    		ORDER BY
+			        		DEADLINE DESC) A )
+ 		WHERE 
+ 			RNUM BETWEEN ? AND ?
 
 </entry>
 

@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList"%>
+<%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
     
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 
 <!DOCTYPE html>
@@ -162,7 +169,25 @@ table{
 			
 			
 			<div id="page">
-				페이지바 영역
+				<%if(currentPage != 1) {%>
+		        <button class="btn btn-default"
+		        onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage - 1%>'">&lt;</button>
+		        <% }%>
+		         
+		       
+		         	<% for(int i = startPage; i <= endPage; i++){%>
+		         		<% if(currentPage != i) { %>
+		         		<button class="btn btn-default" 
+		         		onclick="location.href='<%= contextPath%>/list.bo?cpage=<%= i %>'"><%= i %></button>
+		         		<% } else { %>
+		         		<button disabled class="btn btn-default"><%= i %></button>
+		         		<% } %>
+		         	<% } %>
+		        
+		        <%if(currentPage != maxPage) { %>
+		        <button class="btn btn-default" 
+		        onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage + 1%>'">&gt;</button>
+		        <% } %>
 			</div>
 		
 			<div id="search">

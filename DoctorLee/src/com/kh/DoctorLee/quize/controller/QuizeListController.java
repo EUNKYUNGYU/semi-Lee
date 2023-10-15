@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.quize.model.service.QuizeService;
 import com.kh.DoctorLee.quize.model.vo.Quize;
 
@@ -34,8 +35,24 @@ public class QuizeListController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		ArrayList<Quize> list = new QuizeService().selectList();
+		int listCount = new QuizeService().selectListCount();
+		int currentPage = Integer.parseInt(request.getParameter("cpage"));
+		int pageLimit = 10;
+		int boardLimit = 5;
+		int maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		int endPage= startPage + pageLimit - 1;
+		System.out.println("listCount" + listCount);
+		if(endPage > maxPage ) endPage = maxPage;
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,boardLimit, maxPage, startPage, endPage);
+		
+		
+		ArrayList<Quize> list = new QuizeService().selectList(pi);
+		
+		
 		request.setAttribute("list", list);
+		request.setAttribute("pi", pi);
 		request.getRequestDispatcher("views/quize/quizeListView.jsp").forward(request, response);
 		
 	}

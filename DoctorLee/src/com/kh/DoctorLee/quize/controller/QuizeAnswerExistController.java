@@ -49,7 +49,7 @@ public class QuizeAnswerExistController extends HttpServlet {
 				request.getRequestDispatcher("views/quize/quizeDetail.jsp").forward(request, response);
 			} else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
 				request.getSession().setAttribute("alertMsg", "답을 먼저 제출해주십시오");
-				response.sendRedirect(request.getContextPath() + "/list.qz");
+				response.sendRedirect(request.getContextPath() + "/list.qz?cpage=1");
 			}
 			
 		} else { // 제출 기한이 지난 경우 답 제출 한 적 없어도, 정답 화면 보여주기

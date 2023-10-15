@@ -2,19 +2,35 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
 <properties>
 
+<entry key="selectListCount">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_MESSAGE 
+	 	WHERE 
+	 		STATUS = 'Y'
+ 
+</entry>
 <entry key="selectList">
 
-	SELECT 
+	 SELECT *
+ 		FROM(
+			SELECT ROWNUM RNUM, A.*
+	  			FROM(
+		  				SELECT 
         MESSAGE_NO, MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS
     FROM 
         TB_MESSAGE 
     JOIN 
         TB_MEMBER ON(MEM_NO = SENDER)
     WHERE 
-        ? = ?
+        SENDER = 2
     AND 
         TB_MESSAGE.STATUS = 'Y'
-        ORDER BY SEND_DATE DESC
+        ORDER BY SEND_DATE DESC) A )
+ 		WHERE 
+ 			RNUM BETWEEN 1 AND 5;   
 
 </entry>
 
@@ -40,7 +56,9 @@ SELECT
     JOIN 
         TB_MEMBER ON(MEM_NO = RECEIVER)
     WHERE 
-        MESSAGE_NO = ?
+        MESSAGE_NO = ? 
+    AND 
+        TB_MESSAGE.STATUS = 'Y'
 
 </entry>
 

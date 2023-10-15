@@ -1,19 +1,28 @@
 package com.kh.DoctorLee.message.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.message.model.dao.MessageDao;
 import com.kh.DoctorLee.message.model.vo.Message;
 
 public class MessageService {
-
-	public ArrayList<Message> selectList(String type, int memNo){
+	
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new MessageDao().selectListCount(conn);
+		close(conn);
+		return listCount;
+	}
+	
+	public ArrayList<Message> selectList(String type, int memNo, PageInfo pi){
 		
 		Connection conn = getConnection();
-		ArrayList<Message> list = new MessageDao().selectList(conn, type, memNo);
+		ArrayList<Message> list = new MessageDao().selectList(conn, type, memNo, pi);
 		close(conn);
 		return list;
 	}

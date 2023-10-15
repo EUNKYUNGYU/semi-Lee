@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="com.kh.DoctorLee.quize.model.vo.Quize,java.util.ArrayList"%>
+	import="com.kh.DoctorLee.quize.model.vo.Quize,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
     
 <% 
 	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
-%>
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+	%>
 
 <!DOCTYPE html>
 <html>
@@ -141,6 +148,7 @@ article{
 	width : 100%;
 	height : 100px;
 	padding: 20px;
+	text-align: center;
 }
 
 footer {
@@ -287,7 +295,9 @@ a {
 			<% } %>
 			</div>
 			
+			
 			<script>
+			
 			  $(function(){
 				  
 			      $('.quizeButton2').click(function(){
@@ -295,12 +305,28 @@ a {
 			      });   
 							
 			 });
+			  
 			</script>
 			
 			<div id="page">
-				페이지바 영역
+				<%if(currentPage != 1) {%>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.qz?cpage=<%= currentPage - 1%>'">&lt;</button>
+		        <% }%>
+		         
+		       
+		        <% for(int i = startPage; i <= endPage; i++){%>
+		         	<% if(currentPage != i) { %>
+		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.qz?cpage=<%= i %>'"><%= i %></button>
+		         	
+		         	<% } else { %>
+		         		<button disabled class="btn btn-default"><%= i %></button>
+		         		<% } %>
+		         <% } %>
+		        
+		        <%if(currentPage != maxPage) { %>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.qz?cpage=<%= currentPage + 1%>'">&gt;</button>
+		        <% } %>
 			</div>
-		
 			<div id="search">
 				검색 영역
 			</div>

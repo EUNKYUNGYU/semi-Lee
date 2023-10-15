@@ -35,7 +35,6 @@ public class MessageDetailController extends HttpServlet {
 		
 		int messageNo = Integer.parseInt(request.getParameter("messageNo"));
 		
-		
 		int result = new MessageService().updateReadStatus(messageNo);
 		if(result > 0) {
 			

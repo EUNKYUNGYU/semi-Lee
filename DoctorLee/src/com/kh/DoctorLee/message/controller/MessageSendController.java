@@ -55,15 +55,15 @@ public class MessageSendController extends HttpServlet {
 			int result = new MessageService().insertMessage(m);
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "메세지를 보냈습니다.");
-				response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + senderNo + "&type=sender");
+				response.sendRedirect(request.getContextPath() + "/list.ms?cpage=1&memNo=" + senderNo + "&type=sender");
 				
 			} else {
 				request.getSession().setAttribute("alertMsg", "메세지 보내기에 실패했습니다. 다시 시도해주십시오.");
-				response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + senderNo + "&type=sender");
+				response.sendRedirect(request.getContextPath() + "/list.ms?cpage=1&memNo=" + senderNo + "&type=sender");
 			}
 		} else {
 			request.setAttribute("alertMsg", "메세지 보내기에 실패했습니다. 다시 시도해주십시오.");
-			response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + senderNo + "&type=sender");
+			response.sendRedirect(request.getContextPath() + "/list.ms?cpage=1&memNo=" + senderNo + "&type=sender");
 		}
 		
 		

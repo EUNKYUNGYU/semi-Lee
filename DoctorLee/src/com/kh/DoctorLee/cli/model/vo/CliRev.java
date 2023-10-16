@@ -4,6 +4,7 @@ public class CliRev {
 	private int revNo;
 	private int cliNo;
 	private int memNo;
+	private String nickName;
 	private String revContent;
 	private String createDate;
 	private int cliScope;
@@ -12,11 +13,13 @@ public class CliRev {
 		super();
 	}
 	
-	public CliRev(int revNo, int cliNo, int memNo, String revContent, String createDate, int cliScope) {
+	public CliRev(int revNo, int cliNo, int memNo, String nickName, String revContent, String createDate,
+			int cliScope) {
 		super();
 		this.revNo = revNo;
 		this.cliNo = cliNo;
 		this.memNo = memNo;
+		this.nickName = nickName;
 		this.revContent = revContent;
 		this.createDate = createDate;
 		this.cliScope = cliScope;
@@ -46,6 +49,14 @@ public class CliRev {
 		this.memNo = memNo;
 	}
 	
+	public String getNickName() {
+		return nickName;
+	}
+	
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	
 	public String getRevContent() {
 		return revContent;
 	}
@@ -72,8 +83,7 @@ public class CliRev {
 	
 	@Override
 	public String toString() {
-		return "CliRev [revNo=" + revNo + ", cliNo=" + cliNo + ", memNo=" + memNo + ", revContent=" + revContent
-				+ ", createDate=" + createDate + ", cliScope=" + cliScope + "]";
+		return "CliRev [revNo=" + revNo + ", cliNo=" + cliNo + ", memNo=" + memNo + ", nickName=" + nickName
+				+ ", revContent=" + revContent + ", createDate=" + createDate + ", cliScope=" + cliScope + "]";
 	}
-	
 }

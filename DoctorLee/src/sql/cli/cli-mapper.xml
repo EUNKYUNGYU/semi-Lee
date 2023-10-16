@@ -132,4 +132,24 @@
 		  WHERE 
 				CLI_NO = ?
 	</entry>
+	
+	<entry key="selectCliRevList">
+		SELECT 
+				REV_NO, 
+				CLI_NO, 
+				NICKNAME, 
+				REV_CONTENT, 
+				CR.CREATE_DATE, 
+				CLI_SCOPE
+		  FROM 
+		  		TB_CLI_REV CR
+		  JOIN
+		  		TB_MEMBER
+		  USING
+		  		(MEM_NO)		
+		  WHERE 
+				CLI_NO = ?
+		ORDER 
+		   BY   REV_NO DESC
+	</entry>
 </properties>

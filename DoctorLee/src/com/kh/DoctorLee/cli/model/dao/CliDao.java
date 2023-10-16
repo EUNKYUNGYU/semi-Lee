@@ -305,5 +305,42 @@ public class CliDao {
 		}
 		return scope;
 	}
+	
+	// 클리닉 리뷰 가져오기
+	public ArrayList<CliRev> selectCliRevList(Connection conn, int cliNo){
+		
+		ArrayList<CliRev> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCliRevList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cliNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CliRev c = new CliRev();
+				c.setRevNo(rset.getInt("REV_NO"));
+				c.setCliNo(rset.getInt("CLI_NO"));
+				c.setNickName(rset.getString("NICKNAME"));
+				c.setRevContent(rset.getString("REV_CONTENT"));
+				c.setCreateDate(rset.getString("CREATE_DATE"));
+				c.setCliScope(rset.getInt("CLI_SCOPE"));
+				
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
 }

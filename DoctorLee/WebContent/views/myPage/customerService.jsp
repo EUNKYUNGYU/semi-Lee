@@ -173,7 +173,7 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
                     <input type="button" value="관리자 문의" id="inq2" onclick="adminInqPage();">
                 </div>
 
-                <table align="center">
+                <table class="list-area" align="center">
                     <thead>
                       <tr>
                         <th>번호</th>
@@ -215,6 +215,17 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
      	function adminInqPage(){
      		location.href = "<%=contextPath%>/adminInq.mp";
      	}
+     	
+     	$(function(){
+     		$('.list-area>tbody>tr').click(function(){
+     			
+     			const nno = ($(this).children().eq(0).text());
+     			
+     			location.href= "<%=contextPath%>/detail.cs?nno=" + nno;
+     			//location.href= "<%=contextPath%>/detail.cs";
+     		
+     		})
+     	});
      </script>
 </body>
 </html>

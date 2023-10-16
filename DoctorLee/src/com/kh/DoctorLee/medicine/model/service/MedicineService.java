@@ -14,5 +14,11 @@ public class MedicineService {
 		ArrayList<Medicine> medList = new MedicineDao().selectMedicine(conn,medName);
 		return medList;
 	}
+	public Medicine detailMedicine(String medName) {
+		Connection conn = JDBCTemplate.getConnection();
+		Medicine med = new MedicineDao().detailMedicine(conn,medName);
+		return med;
+	}
+	
 
 }

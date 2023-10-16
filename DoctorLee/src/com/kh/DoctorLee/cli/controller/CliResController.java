@@ -58,7 +58,6 @@ public class CliResController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/list.cli");
 		} else {
 			request.getSession().setAttribute("alertMsg", "클리닉 예약 실패");
-			response.sendRedirect(request.getContextPath() + "/list.cli");
 		}
 		
 	}

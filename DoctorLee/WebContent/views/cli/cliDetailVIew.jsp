@@ -205,7 +205,7 @@
                     
                     <div id="rev-border">
                         <ul id="rev-list">
-                            <li class="rev-content">
+                            <!-- <li class="rev-content">
                                 <p>회원</p>
                                 <p>별점</p>
                                 <p>리뷰내용</p>
@@ -215,7 +215,7 @@
                                 <p>회원</p>
                                 <p>별점</p>
                                 <p>리뷰내용</p>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
 
                     <div id="rev">
                         <h6>리뷰 작성</h6>
-                        <textarea name="revContent" id="revContent" cols="30" rows="10" style="resize: none;"></textarea>
+                        <textarea name="revContent" id="revContent" cols="30" rows="10" style="resize: none;" required></textarea>
                     </div>
                 </div>
             
@@ -308,12 +308,43 @@
                     success:function(result){
                         alert('리뷰 등록 성공');
 
-                        $('#myModal').attr('style', 'display:none');
+                        $('#close').on('click');
                     },
                     error:function(){
                         console('리뷰 등록 실패');
                     }
                 })
+            })
+
+            function selectRevList(){
+                $.ajax({
+                    url: 'ajaxRevList.cli',
+                    data : {
+                        cno: <%=c.getCliNo()%>
+                    },
+                    success : function(result){
+
+                        let resultStr = '';
+                        for(let i in result){
+                            resultStr += '<li class="rev-content">'
+                                + '<p>' + result[i].nickName + '<p>'
+                                + '<p>' + result[i].cliScope + '<p>'
+                                + '<p>' + result[i].revContent + '<p>'
+                                + '<P>' + result[i].createDate + '<p>'
+                                + '</li>'
+                        }
+                        $('#rev-list').html(resultStr);
+                    },
+                    error : function(){
+                        console.log('리뷰 불러오기 실패');
+                    }
+                })
+            }
+
+            $(function(){
+                selectRevList();
+
+                setInterval(selectRevList, 1000);
             })
         })
     </script>

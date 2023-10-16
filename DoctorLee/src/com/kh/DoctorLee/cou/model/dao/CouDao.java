@@ -193,4 +193,38 @@ public class CouDao {
 		
 		return result;
 	}
+	
+	// 비디오 랜덤 추출
+	public ArrayList<CouVideo> selectRandVideo(Connection conn) {
+		
+		ArrayList<CouVideo> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRandVideo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				CouVideo c = new CouVideo();
+				c.setVideoNo(rset.getInt("VIDEO_NO"));
+				c.setMemNo(rset.getInt("MEM_NO"));
+				c.setVideoTitle(rset.getString("VIDEO_TITLE"));
+				c.setChannelName(rset.getString("CHANNEL_NAME"));
+				c.setVideoAddress(rset.getString("VIDEO_ADDRESS"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		System.out.println(list + "dao");
+		return list;
+	}
 }

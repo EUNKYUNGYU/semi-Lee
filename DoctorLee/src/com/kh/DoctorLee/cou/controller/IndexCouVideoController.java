@@ -1,6 +1,7 @@
-package com.kh.DoctorLee.mpBoard.controller;
+package com.kh.DoctorLee.cou.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.mpBoard.model.service.DiaryService;
-import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
+import com.kh.DoctorLee.cou.model.service.CouService;
+import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
 /**
- * Servlet implementation class DiaryDetailView
+ * Servlet implementation class IndexCouVideoController
  */
-@WebServlet("/detail.di")
-public class DiaryDetailView extends HttpServlet {
+@WebServlet("/indexVideo.cou")
+public class IndexCouVideoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryDetailView() {
+    public IndexCouVideoController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,12 +31,12 @@ public class DiaryDetailView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		int diaryNo = Integer.parseInt(request.getParameter("dno"));
-		MyDiary md= new DiaryService().detailMyDiary(diaryNo);
-		request.setAttribute("md", md);
-		request.getRequestDispatcher("views/diary/diaryDetailView.jsp").forward(request, response);
-	
+		ArrayList<CouVideo> list = new CouService().selectRandVideo();
+		
+		System.out.println(list + "con");
+		
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/views/common/section.jsp").forward(request, response);
 	}
 
 	/**

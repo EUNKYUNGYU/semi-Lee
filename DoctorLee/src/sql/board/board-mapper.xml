@@ -2,6 +2,17 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+	<entry key="selectListCount">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_BOARD 
+	 	WHERE 
+	 		STATUS = 'Y'
+ 
+	</entry>
+
 	<entry key="selectList">
 
 	SELECT
@@ -10,15 +21,14 @@
 		,TO_CHAR(CREATE_DATE,'YYYY/MM/DD') CREATE_DATE
 		,VIEWS
 		,FILE_NO
-		,BOARD_NAME 
+		,BOARD_NAME
 	FROM
 		TB_BOARD B
 	JOIN 
 		TB_BOARD_TYPE USING(BOARD_TYPE)
 	WHERE
-			B.STATUS = 'Y'
-	ORDER BY
-			B.CREATE_DATE DESC
+			B.STATUS = 'Y' 
+
 
 	</entry>
 

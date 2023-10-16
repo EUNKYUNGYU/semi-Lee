@@ -12,6 +12,35 @@
 	 		STATUS = 'Y'
  
 </entry>
+
+<entry key="selectListCountreciever">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_MESSAGE 
+	 	WHERE 
+	 		STATUS = 'Y'
+	 	AND
+	 		RECEIVER = ?
+ 
+</entry>
+
+<entry key="selectListCountsender">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_MESSAGE 
+	 	WHERE 
+	 		STATUS = 'Y'
+	 	AND
+	 		SENDER = ?
+ 
+</entry>
+
+
+
 <entry key="selectList">
 
 	 SELECT *

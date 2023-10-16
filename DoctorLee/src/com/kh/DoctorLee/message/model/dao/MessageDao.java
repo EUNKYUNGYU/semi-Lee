@@ -61,6 +61,34 @@ public class MessageDao {
 		
 	}
 	
+	/* 뭐가 더 나은지...?
+	 	public int selectListCount(Connection conn, String type, int memNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String str = "selectListCount" + type;
+		String sql = prop.getProperty("str");
+					 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
+	 */
+	
 	public ArrayList<Message> selectList(Connection conn, String type, int memNo, PageInfo pi){
 		ArrayList<Message> list = new ArrayList();
 		PreparedStatement pstmt = null;

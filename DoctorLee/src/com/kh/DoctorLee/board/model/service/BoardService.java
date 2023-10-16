@@ -31,16 +31,6 @@ public class BoardService {
 		
 	}
 	
-	/*
-	public Board selectBoard(String type, int boardNo) {
-		
-		Connection conn = getConnection();
-		Board b = new BoardDao().selectBoard(conn, type, boardNo);
-		close(conn);
-		return b;
-		
-	}
-	*/
 	public int insertBoard(Board b, int memNo) {
 		
 		Connection conn = getConnection();
@@ -55,7 +45,9 @@ public class BoardService {
 	public Board selectBoard(int boardNo) {
 
 		Connection conn = getConnection();
+		System.out.println("보드 디테일 Service boardNo:  " + boardNo);
 		Board b = new BoardDao().selectBoard(conn, boardNo);
+		System.out.println("보드 디테일 Service b:  " + b);
 		close(conn);
 		return b;
 		

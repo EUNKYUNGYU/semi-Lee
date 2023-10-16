@@ -84,7 +84,8 @@ public class BoardDao {
 				
 				Board b = new Board();
 				b.setBoardNo(rset.getInt("BOARD_NO"));
-				// BOARD_TYPE이 NUMBER라서 setBoardType에 담지 못해서 setBoardName으로 했음
+				// BOARD_TYPE이 NUMBER라서 (int)setBoardType에 담지 못해서 setBoardName으로 했음 
+				// => (String)BoardTypeStr 만들었음 수정해야 함
 				b.setBoardName(rset.getString("BOARD_TYPE")); 
 				b.setWriter(rset.getString("NICKNAME"));
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
@@ -138,17 +139,20 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, boardNo);
+			pstmt.setInt(3, boardNo);
 			rset = pstmt.executeQuery();
-			if(rset != null) {
+			if(rset.next()) {
 				b.setWriter(rset.getString("NICKNAME"));
+				b.setBoardName(rset.getString("BOARD_NAME"));
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
 				b.setBoardContent(rset.getString("BOARD_CONTENT"));
 				b.setCreateDate(rset.getString("CREATE_DATE"));
 				b.setViews(rset.getInt("VIEWS"));
 				b.setLikes(rset.getInt("LIKES"));
-				b.setLikes(rset.getInt("COMMENTS"));
+				b.setComments(rset.getInt("COMMENTS"));
 			}
-			
+			System.out.println("보드 디테일 Dao b:  " + b);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

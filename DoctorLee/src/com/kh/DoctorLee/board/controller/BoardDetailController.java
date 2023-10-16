@@ -34,12 +34,19 @@ public class BoardDetailController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		System.out.println("board 디테일 controller boardNo" + boardNo);
 		String type = String.valueOf(request.getParameter("type"));
 		
-		Board b = new BoardService().selectBoard(type, boardNo);
+		Board b = new BoardService().selectBoard(boardNo);
+		System.out.println("board 디테일 controller b" + b);
 		
-		if(b != null) {
+		if(b != null) { // 게시글 조회에 성공 했을 경우
+			request.setAttribute("b", b);
+			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
 			
+		} else {
+			request.getSession().setAttribute("alertMsg", "게시글 조회에 실패 했습니다. 다시 시도해주십시오.");
+			response.sendRedirect(request.getContextPath() + "/list.bo");
 		}
  	
 	}

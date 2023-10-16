@@ -115,4 +115,19 @@ public class MedicineDao {
 		}
 		return count;
 	}
+	public int updateMedicine(Connection conn, String medName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMedicine");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
 }

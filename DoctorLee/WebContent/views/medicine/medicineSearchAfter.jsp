@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList,com.kh.DoctorLee.medicine.model.vo.Medicine" %>
+<%@ page import = "java.util.ArrayList,com.kh.DoctorLee.medicine.model.vo.Medicine,com.kh.DoctorLee.member.model.vo.Member" %>
 <%
 	ArrayList<Medicine> medList = (ArrayList<Medicine>)request.getAttribute("medList");
+	Member loginUser = (Member)session.getAttribute("loginUser");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -46,6 +48,15 @@
 	#tr> button{
 		float :left;
 	}
+	.insert-med {
+		margin-left : 900px;
+		margin-bottom : 100px;
+	}
+	#search-form{
+		margin-bottom : 50px;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -78,10 +89,14 @@
 				<%}%>
 				
 				<%}%>
+				<br><br>
+				
 				</tbody>
 			</table>
 			</form>
-		
+			<%if(loginUser.getMemId().equals("admin")){ %>
+					<a href="<%=contextPath%>/enrollForm.med" class="insert-med">약품 추가하기 </a>
+				<%} %>
 		</div>
 		
 		<script>

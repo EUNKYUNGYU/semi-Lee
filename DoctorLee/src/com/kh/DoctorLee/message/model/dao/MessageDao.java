@@ -28,15 +28,24 @@ public class MessageDao {
 		}
 	}
 	
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, String type, int memNo) {
 		
 		int listCount = 0;
 		PreparedStatement pstmt = null;
-		
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectListCount");
+		String sql = "SELECT " + 
+					 "COUNT(*) " + 
+					 "FROM " + 
+					 "TB_MESSAGE " + 
+					 "WHERE " + 
+					 "STATUS = 'Y' " +
+					 " AND " + 
+					 type +
+					 " = ?";  
+					 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				listCount = rset.getInt("COUNT(*)");
@@ -57,7 +66,6 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = 
-				
 					"SELECT * "
 					+ "FROM ( "
 					+ "SELECT ROWNUM RNUM, A.* "
@@ -81,6 +89,7 @@ public class MessageDao {
 			
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
+			System.out.println("메세지 디에이오 startRow" + startRow + "endRow" + endRow);
 			pstmt.setInt(1, memNo);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);

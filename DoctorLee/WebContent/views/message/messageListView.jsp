@@ -6,10 +6,13 @@
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
+	String type = String.valueOf(request.getAttribute("type"));
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
+	System.out.println("메세지 리스트뷰에서 type" + type);
 %>
 
 <!DOCTYPE html>
@@ -173,7 +176,11 @@ table{
 					  <thead>
 					    <tr>
 					      <th scope="col"><input type="checkbox" id="allCk"></th>
-					      <th scope="col">보낸 사람</th>
+					      <% if(type.equals("receiver")) { %>
+					      	<th scope="col">보낸 사람</th>
+					      <% } else { %>
+					      	<th scope="col">받는 사람</th>
+					      <% } %>
 					      <th scope="col">제목</th>
 					      <th scope="col">날짜</th>
 					    </tr>
@@ -192,11 +199,11 @@ table{
 						     <tr>
 						<% } %>
 						      <th><input type="checkbox" class="checkMsg" value="<%= m.getMessageNo() %>"></th>
-						    </form>
 						      <td scope="row"><%= m.getReceiver() %></td>
 						      <td name="<%= m.getMessageNo() %>"><%= m.getMessageTitle()%></td>
 						      <td><%= m.getSendDate() %></td>
 						    </tr>
+						    </form>
 						  <% } %>
   					  <% } %>
 					  </tbody>
@@ -209,8 +216,8 @@ table{
 				$(function(){
 					
 					// 제목 클릭 했을 시 메세지 상세보기 페이지로 이동
-					$('tr > td').eq(1).click(function(){
-        				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name');
+					$('tr > td').click(function(){
+        				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name') + '&type=<%= type %>';
         			});
 	        			
 					// #allCk 체크시 체크 박스 전체 체크, 해제시 전체 해제
@@ -248,21 +255,22 @@ table{
 			
 			<div id="page">
 				<%if(currentPage != 1) {%>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage - 1%>&memNo=<%= loginUser.getMemNo() %>&type=receiver'">&lt;</button>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage - 1%>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'">&lt;</button>
 		        <% }%>
 		         
 		       
 		        <% for(int i = startPage; i <= endPage; i++){%>
 		         	<% if(currentPage != i) { %>
-		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.ms?cpage=<%= i %>&memNo=<%= loginUser.getMemNo() %>&type=receiver'"><%= i %></button>
+		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.ms?cpage=<%= i %>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'"><%= i %></button>
 		         	
 		         	<% } else { %>
 		         		<button disabled class="btn btn-default"><%= i %></button>
 		         		<% } %>
 		         <% } %>
 		        
+		        <% System.out.println(maxPage); %>
 		        <%if(currentPage != maxPage) { %>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage + 1%>&memNo=<%= loginUser.getMemNo() %>&type=receiver'">&gt;</button>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage + 1%>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'">&gt;</button>
 		        <% } %>
 			</div>
 		

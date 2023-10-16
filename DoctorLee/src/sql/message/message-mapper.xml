@@ -25,12 +25,12 @@
     JOIN 
         TB_MEMBER ON(MEM_NO = SENDER)
     WHERE 
-        SENDER = 2
+        SENDER = ?
     AND 
         TB_MESSAGE.STATUS = 'Y'
         ORDER BY SEND_DATE DESC) A )
  		WHERE 
- 			RNUM BETWEEN 1 AND 5;   
+ 			RNUM BETWEEN ? AND ?;   
 
 </entry>
 

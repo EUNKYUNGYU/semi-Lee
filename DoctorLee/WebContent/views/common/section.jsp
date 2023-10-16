@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.cou.model.vo.*" %>    
 <%
-    ArrayList<CouVideo> list = (ArrayList<CouVideo>)request.getAttribute("list");
+    ArrayList<CouVideo> list = (ArrayList<CouVideo>)request.getAttribute("c");
 %>    
 <!DOCTYPE html>
 <html>
@@ -69,7 +69,7 @@
         <div id="content_1">
 
             <div id="video">
-
+                       
             </div>
 
             <div id="board">

@@ -41,7 +41,7 @@ public class CliListController extends HttpServlet {
 		
 		request.setAttribute("list", list);
 
-		request.getRequestDispatcher("views/cli/cliListView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/cli/cliListView.jsp").forward(request, response);
 	}
 
 	/**

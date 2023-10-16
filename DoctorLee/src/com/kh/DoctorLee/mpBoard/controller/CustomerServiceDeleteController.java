@@ -1,7 +1,6 @@
-package com.kh.DoctorLee.cou.controller;
+package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.cou.model.service.CouService;
-import com.kh.DoctorLee.cou.model.vo.CouVideo;
+import com.kh.DoctorLee.mpBoard.model.service.CustomerServiceService;
 
 /**
- * Servlet implementation class IndexCouVideoController
+ * Servlet implementation class CustomerServiceDeleteController
  */
-@WebServlet("/indexVideo.cou")
-public class IndexCouVideoController extends HttpServlet {
+@WebServlet("/delete.cs")
+public class CustomerServiceDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IndexCouVideoController() {
+    public CustomerServiceDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +30,18 @@ public class IndexCouVideoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Service 요청
-		ArrayList<CouVideo> list = new CouService().selectRandomVideo();
-		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/common/section.jsp").forward(request, response);
+		int customerServiceNo = Integer.parseInt(request.getParameter("nno"));
+		int result = new CustomerServiceService().deleteCustomerService(customerServiceNo);
+	
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "삭제성공");
+			response.sendRedirect(request.getContextPath() + "/customerService.mp");
+			
+		} else {
+			request.setAttribute("errorMsg", "실패");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**

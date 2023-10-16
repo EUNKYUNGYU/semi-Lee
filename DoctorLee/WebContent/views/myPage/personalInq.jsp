@@ -123,11 +123,23 @@
                 <textarea id="textcontent" cols="40" rows="10" style="resize: none;" maxlength="1000" placeholder="내용을 입력해주세요."></textarea>
                 <br>
                 <span id="count">0</span>/ 1000자
-                <button type="submit" id="pwd_1">확인</button>
+                <button type="submit" id="pwd_1" onclick="insertPersonalPage();">확인</button>
                 
             </div>
         
         </div>
     </div>
+    <script>
+    		
+    	function insertPersonalPage(){
+    		location.href="<%=contextPath%>/insertPersonal.cs"
+    	}
+    
+	    $(function(){
+			$('#textcontent').keyup(function(){
+				$('#count').text($(this).val().length);
+			})
+		})
+    </script>
 </body>
 </html>

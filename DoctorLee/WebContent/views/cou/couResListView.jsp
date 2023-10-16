@@ -11,19 +11,6 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
-<!--fullCalendar-->
-<script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'ko'
-      });
-      calendar.render();
-    });
-
-</script>
 
 <style>
     .outer{
@@ -349,8 +336,8 @@
                 <div id="cli-cate" align="left">
                     <div id="cate-inner" align="center">
                         <ul>
-                            <li><input type="radio" class="cate" name="cate" id="call"><label for="call">전화</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="meet"><label for="meet">대면</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="call" value="1"><label for="call">전화</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="meet" value="2"><label for="meet">대면</label></li>
                         </ul>
 
                     </div>
@@ -512,6 +499,8 @@
                         $('.cli-img > button').click(function(){
                             location.href='<%=contextPath%>/couDetail.cou';
                         })
+
+                        $
                     })
                 </script>
 

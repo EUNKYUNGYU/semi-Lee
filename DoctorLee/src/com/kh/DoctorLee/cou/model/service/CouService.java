@@ -92,5 +92,16 @@ public class CouService {
 		
 		return result;
 	}
+	
+	// 비디오 랜덤 출력하기
+	public ArrayList<CouVideo> selectRandVideo() {
+		Connection conn = getConnection();
+		
+		ArrayList<CouVideo> list = new CouDao().selectRandVideo(conn);
+		System.out.println(list + "ser");
+		close(conn);
+		
+		return list;
+	}
 
 }

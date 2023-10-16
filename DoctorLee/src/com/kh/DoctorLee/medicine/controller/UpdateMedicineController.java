@@ -1,23 +1,26 @@
-package com.kh.DoctorLee.mpBoard.controller;
+package com.kh.DoctorLee.medicine.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.medicine.model.service.MedicineService;
+
 /**
- * Servlet implementation class PersonalInqController
+ * Servlet implementation class UpdateMedicineController
  */
-@WebServlet("/insertPersonal.cs")
-public class PersonalInqController extends HttpServlet {
+@WebServlet("/update.med")
+public class UpdateMedicineController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PersonalInqController() {
+    public UpdateMedicineController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +29,9 @@ public class PersonalInqController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		String medName = request.getParameter("mname");
+		int result = new MedicineService().updateMedicine(medName);
 	}
 
 	/**

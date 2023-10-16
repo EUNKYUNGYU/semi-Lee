@@ -1218,7 +1218,7 @@ INSERT INTO
             
             
             
-            	 SELECT *
+SELECT *
  		FROM(
 			SELECT ROWNUM RNUM, A.*
 	  			FROM(
@@ -1265,19 +1265,80 @@ WHERE B.STATUS = 'Y'
 AND BOARD_TYPE = 20
 ORDER BY B.CREATE_DATE DESC;
         
+SELECT BOARD_NO, BOARD_TYPE, NICKNAME, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD')CREATE_DATE, VIEWS, B.STATUS, FILE_NO
+ 		FROM(
+			SELECT ROWNUM RNUM, A.*
+	  			FROM(
+                    SELECT    
+                             BOARD_NO, BOARD_TYPE, NICKNAME, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD')CREATE_DATE, VIEWS, B.STATUS, FILE_NO
+                      FROM 
+                             TB_BOARD B
+                     JOIN 
+                             TB_MEMBER ON(WRITER = MEM_NO)
+                        JOIN 
+                             TB_BOARD_TYPE USING(BOARD_TYPE)
+                        WHERE
+                             B.STATUS = 'Y'
+                     AND 
+                             BOARD_TYPE = 20
+                        ORDER BY 
+                                B.CREATE_DATE DESC
+                    ) A )
+ 		WHERE 
+ 			RNUM BETWEEN 1 AND 15;       
+        
+        
+        
+        
 DROP TABLE TB_BOARD_TYPE;
 ALTER TABLE TB_BOARD_TYPE MODIFY BOARD_TYPE VARCHAR2(2);
+ALTER TABLE TB_BOARD DROP COLUMN FILE_NO;
+
             
 COMMIT;
 
 
-	 	SELECT 
-	 		COUNT(*) 
-	 	FROM 
-	 		TB_BOARD 
-	 	WHERE 
-	 		STATUS = 'Y'
-        AND 
-            BOARD_TYPE = 20;
+INSERT 
+        INTO 
+            TB_BOARD 
+            (
+            BOARD_NO
+            , BOARD_TYPE
+            , WRITER
+            , BOARD_TITLE
+            , BOARD_CONTENT
+            )
+    VALUES 
+            (
+            SEQ_BOARD_NO.NEXTVAL
+            , 10
+            , 2
+            , '공지사항 글써보기2'
+            , '공지사항 테스트용입니다. '
+            );
+
+SELECT    
+          BOARD_NO
+         , BOARD_TYPE
+         , NICKNAME
+         , BOARD_TITLE
+         , BOARD_CONTENT
+         , TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD HH24:MI')CREATE_DATE
+         , VIEWS
+         , BOARD_CONTENT
+         , (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = 2) AS L_COUNT
+         , (SELECT COUNT(*) FROM TB_COMMENT WHERE BOARD_NO = 2) AS C_COUNT
+         , B.STATUS
+    FROM 
+         TB_BOARD B
+    JOIN 
+          TB_MEMBER ON(WRITER = MEM_NO)
+    JOIN 
+        TB_BOARD_TYPE USING(BOARD_TYPE)
+    WHERE
+          B.STATUS = 'Y';
+        
+
+                      
 
 

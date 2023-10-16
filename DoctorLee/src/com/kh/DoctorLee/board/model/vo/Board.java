@@ -9,6 +9,8 @@ public class Board {
 	private String boardContent;
 	private String createDate;
 	private int views;
+	private int likes;
+	private int comments;
 	private String status;
 	private String fileNo;
 	private String boardName;
@@ -21,8 +23,10 @@ public class Board {
 
 
 
+
+
 	public Board(int boardNo, int boardType, String writer, String boardTitle, String boardContent, String createDate,
-			int views, String status, String fileNo, String boardName) {
+			int views, int likes, int comments, String status, String fileNo, String boardName) {
 		super();
 		this.boardNo = boardNo;
 		this.boardType = boardType;
@@ -31,10 +35,47 @@ public class Board {
 		this.boardContent = boardContent;
 		this.createDate = createDate;
 		this.views = views;
+		this.likes = likes;
+		this.comments = comments;
 		this.status = status;
 		this.fileNo = fileNo;
 		this.boardName = boardName;
 	}
+
+
+
+	
+
+
+	public int getLikes() {
+		return likes;
+	}
+
+
+
+
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
+
+
+
+
+	public int getComments() {
+		return comments;
+	}
+
+
+
+
+
+	public void setComments(int comments) {
+		this.comments = comments;
+	}
+
+
 
 
 
@@ -152,9 +193,11 @@ public class Board {
 
 
 
-	public void setBoardName(String board) {
+	public void setBoardName(String boardName) {
 		this.boardName = boardName;
 	}
+
+
 
 
 
@@ -162,9 +205,12 @@ public class Board {
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardType=" + boardType + ", writer=" + writer + ", boardTitle="
 				+ boardTitle + ", boardContent=" + boardContent + ", createDate=" + createDate + ", views=" + views
-				+ ", status=" + status + ", fileNo=" + fileNo + ", boardName=" + boardName + "]";
+				+ ", likes=" + likes + ", comments=" + comments + ", status=" + status + ", fileNo=" + fileNo
+				+ ", boardName=" + boardName + "]";
 	}
-	
+
+
+
 	
 	
 	

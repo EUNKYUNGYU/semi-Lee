@@ -37,6 +37,17 @@ public class MedicineService {
 		return count;
 		
 	}
+	public int updateMedicine(String medName) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MedicineDao().updateMedicine(conn,medName);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 	
 
 }

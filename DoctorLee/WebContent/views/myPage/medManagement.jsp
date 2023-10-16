@@ -160,7 +160,7 @@
 
                 
                 <table class="list-area" align="center">
-                    <thead>
+                    <thead id="thead1">
                       <tr>
                         <th>병원명</th>
                         <th>의료진</th>

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.medicine.model.vo.Medicine" %>
+<%@ page import="com.kh.DoctorLee.medicine.model.vo.Medicine,com.kh.DoctorLee.member.model.vo.Member" %>
 <%
 	Medicine med = (Medicine)request.getAttribute("med");
+	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
 <style>
 	#medName-area {
@@ -50,9 +51,14 @@
 
 		<div id= "cauction-area" align="center">주의사항 : <%=med.getCauction() %></div>
 	</div>
+	
 
 	
 	<button type="button"  onclick="history.back();" class="back">뒤로가기</button>
+				<%if(loginUser.getMemId().equals("admin")){ %>
+					<a href="<%=contextPath%>/updateForm.med?mname=<%=med.getMedName() %>" class="update-med">수정하기 </a>
+					<a href="<%=contextPath%>/delete.med?mname=<%=med.getMedName() %>" class="delete-med">삭제하기</a>
+				<%} %>
 	
 	
 	<%@ include file="../common/footer.jsp" %>

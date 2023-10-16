@@ -85,6 +85,8 @@ main > section, main > aside, main > div{
 }
 
 article{width: 95%; height: auto; margin : 20px;}
+
+#writeWrap{text-align: right;}
 					
 #page, #search{
 	width : 100%;
@@ -125,7 +127,15 @@ footer {
 		<section id="section">
 			
 			<div id="contentTitle">
-				자유게시판
+				<% if("10".equals(type)) { %>
+					공지사항
+				<% } else if("20".equals(type)) { %>
+					자유게시판 
+				<% } else if("30".equals(type)) { %>
+					정보게시판 
+				<% } else if("40".equals(type)) { %>
+					익명게시판
+				<% } %>
 			</div>
 			
 			<div id="content">
@@ -150,7 +160,11 @@ footer {
 						<% for(Board b : list) { %>
 					      <td scope="row" style="text-align: center"><%= b.getBoardNo() %></td>
 					      <td scope="row" style="text-align: center"><%= b.getBoardTitle() %></td>
-					      <td scope="row" width="10%"><%= b.getWriter() %></td>
+					      <% if("40".equals(type)){ %>
+					      	<td scope="row" width="10%">익명</td>
+					      <% } else { %>
+					      	<td scope="row" width="10%"><%= b.getWriter() %></td>
+					      <% } %>
 					      <td scope="row" width="20%" style="text-align: center"><%= b.getCreateDate() %></td>
 					      <td scope="row" width="10%" style="text-align: center"><%= b.getViews() %></td>
 					      <td scope="row" width="10%" style="text-align: center">0</td>
@@ -159,18 +173,42 @@ footer {
 						<% } %>
 					  </tbody>
 					</table>
+					
+					<script>
+					
+						$(function(){
+						
+							$('tr > td').eq(1).click()
+							
+							
+							
+							
+							
+						})
+						
+						
+					
+					</script>
+					
+					<!-- 로그인 했을 경우에만 글 쓰기 버튼 보이게하기 --> 
+					<% if(loginUser != null) { %>
+						<div id="writeWrap">
+						<a id="writeButton" class="btn btn-primary" href="<%= contextPath %>/views/board/boardEnrollForm.jsp" >글 쓰기</a>
+						</div>
+					<% } %>
 				</article>
 			</div>
 			
+			
 			<div id="page">
 				<%if(currentPage != 1) {%>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage - 1%>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'">&lt;</button>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage - 1%>&type=<%= type%>'">&lt;</button>
 		        <% }%>
 		         
 		       
 		        <% for(int i = startPage; i <= endPage; i++){%>
 		         	<% if(currentPage != i) { %>
-		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.ms?cpage=<%= i %>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'"><%= i %></button>
+		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.bo?cpage=<%= i %>&type=<%= type%>'"><%= i %></button>
 		         	
 		         	<% } else { %>
 		         		<button disabled class="btn btn-default"><%= i %></button>
@@ -179,7 +217,7 @@ footer {
 		        
 		        <% System.out.println(maxPage); %>
 		        <%if(currentPage != maxPage) { %>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage + 1%>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'">&gt;</button>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage + 1%>&type=<%= type%>'">&gt;</button>
 		        <% } %>
 			</div>
 		

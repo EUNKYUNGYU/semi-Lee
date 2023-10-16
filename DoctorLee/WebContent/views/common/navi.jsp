@@ -157,8 +157,8 @@ header{
         font-size: 16px;
     }
 
-#navi:hover{background-color: antiquewhite;}
-#nav:hover{background-color: antiquewhite;}
+#navi:hover{background-color: #cadafc;}
+#nav:hover{background-color: #cadafc;}
 #nav > li >ul {
     display:none;
     padding:0;
@@ -168,11 +168,13 @@ header{
 }
 #nav > li > a:hover + ul {
         display: block;
-        background-color: #333;
+        background-color: #c6c6c6;
+        border-radius: 3px;
     }
 #nav > li > ul:hover {
         display: block;
-        background-color: #333;
+        background-color: #c6c6c6;
+        border-radius: 3px;
     }
 #nav > li > ul a{font-size: 11px;}
 #nav > li > ul a:hover{font-size: 14px;}

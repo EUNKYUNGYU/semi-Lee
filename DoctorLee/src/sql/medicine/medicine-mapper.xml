@@ -40,4 +40,14 @@
 			MED_NAME = ?
 		
 	</entry>
+	<entry key="updateMedicine">
+		UPDATE 
+			TB_MED
+		SET
+			?,
+			?,
+			?
+		WHERE
+			MED_NAME = ?
+	</entry>
 </properties>

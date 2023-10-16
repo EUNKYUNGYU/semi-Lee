@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-	<entry key="selectBoard">
+	<entry key="selectList">
 
 	SELECT
 		BOARD_NO

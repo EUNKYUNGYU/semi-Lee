@@ -108,4 +108,48 @@
 		  AND
 		  		MEM_NO = ?						
 	</entry>
+	
+	<entry key="insertCliRev">
+		INSERT
+		  INTO
+		  		TB_CLI_REV
+		VALUES
+				(
+				SEQ_CLI_REV_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				SYSDATE,
+				?
+				)		
+	</entry>
+	
+	<entry key="selectCliScope">
+		SELECT 
+				ROUND(AVG(CLI_SCOPE),1)
+		  FROM 
+				TB_CLI_REV
+		  WHERE 
+				CLI_NO = ?
+	</entry>
+	
+	<entry key="selectCliRevList">
+		SELECT 
+				REV_NO, 
+				CLI_NO, 
+				NICKNAME, 
+				REV_CONTENT, 
+				CR.CREATE_DATE, 
+				CLI_SCOPE
+		  FROM 
+		  		TB_CLI_REV CR
+		  JOIN
+		  		TB_MEMBER
+		  USING
+		  		(MEM_NO)		
+		  WHERE 
+				CLI_NO = ?
+		ORDER 
+		   BY   REV_NO DESC
+	</entry>
 </properties>

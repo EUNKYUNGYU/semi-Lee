@@ -28,11 +28,15 @@ main {width: 100%; height: auto;  line-height: 30px;}
 
 main > section, main > aside, main > div{float: left;}
 
-#aside {width: 20%; height: auto; float: left; margin: 20px auto; display: flex; justify-content: center; padding: 0;}
+.aside {height: auto; float: left; margin: 20px auto; display: flex; justify-content: center; padding: 0;}
+
+#aside1{width :25%}
+
+#aside2{width :15%}
 
 #section{width: 60%; height: auto;  min-height: 1000px; float: left; padding: 20px;s}
 
-#contentTitle{width : 100%; height : 100px; padding: 20px; font-size : 30px; line-height : 200%;}
+#contentTitle{width : 100%; height : 100px; padding: 20px; font-size : 30px; font-weight: bold; line-height : 200%;}
 
 #content{width : 100%; height : auto;}
 
@@ -98,7 +102,7 @@ a {text-decoration: none;}
 	
 	<main>
 	
-		<aside id="aside">
+		<aside id="aside1" class="aside">
 			<%@ include file ="../common/cmNavi.jsp" %>
 		</aside>
 		
@@ -168,10 +172,7 @@ a {text-decoration: none;}
 		
 		</section>
 		
-		<aside id="aside">
-			오른쪽 사이드바 : 
-			<br> 지금은 여백
-			<br> 나중에 광고 넣을 수도 있음
+		<aside id="aside2" class="aside">
 		</aside>
 		
 	</main>

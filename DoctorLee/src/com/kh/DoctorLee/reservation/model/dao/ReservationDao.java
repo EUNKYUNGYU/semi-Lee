@@ -31,6 +31,57 @@ public class ReservationDao {
 		}
 	}
 	
+	// 날짜 확인 조회
+	public String checkRsvtDate(Connection conn, String checkRsvtDate) {
+		String result = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkRsvtDate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkRsvtDate);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result = rset.getString("RSVT_DATE");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	// insert하기 전에 date겹치는지 확인
+	public String selectRsvtDate(Connection conn, String rsvtDate, String rsvtTime) {
+		String checkDate = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRsvtDate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rsvtDate);
+			pstmt.setString(2, rsvtTime);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				checkDate = rset.getString("RSVT_DATE") + rset.getString("RSVT_TIME");
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return checkDate;
+	}
+	
 	// �삁�빟 insert
 	public int insertRsvt(Connection conn, Reservation rsvt) {
 		int result = 0;
@@ -72,9 +123,9 @@ public class ReservationDao {
 				selectRsvt.setRsvtDate(rset.getString("RSVT_DATE"));
 				selectRsvt.setRsvtTime(rset.getString("RSVT_TIME"));
 				selectRsvt.setMemInfo(rset.getString("MEM_INFO"));
-				selectRsvt.setRsvtHos(rset.getString("RSVT_HOS"));
+				selectRsvt.setRsvtHos(rset.getString("HOS_NAME"));
 				selectRsvt.setRsvtMem(rset.getString("RSVT_MEM"));
-				selectRsvt.setRsvtDoc(rset.getString("RSVT_DOC"));
+				selectRsvt.setRsvtDoc(rset.getString("DOCTOR_NAME"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

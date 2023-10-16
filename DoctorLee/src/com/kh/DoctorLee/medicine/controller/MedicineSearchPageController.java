@@ -1,28 +1,25 @@
-package com.kh.DoctorLee.board.controller;
+package com.kh.DoctorLee.medicine.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.board.model.service.BoardService;
-import com.kh.DoctorLee.board.model.vo.Board;
-
 /**
- * Servlet implementation class BoardListController
+ * Servlet implementation class MedicineSearchPageController
  */
-@WebServlet("/list.bo")
-public class BoardListController extends HttpServlet {
+@WebServlet("/search.med")
+public class MedicineSearchPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListController() {
+    public MedicineSearchPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +28,8 @@ public class BoardListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		ArrayList<Board> list = new BoardService().selectList();
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
-		System.out.println("보드 리스트 controller"+list);
-		
+		RequestDispatcher view = request.getRequestDispatcher("/views/medicine/medicineSearch.jsp");
+		view.forward(request, response);
 	}
 
 	/**

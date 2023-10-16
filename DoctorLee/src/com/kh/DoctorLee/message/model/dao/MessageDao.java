@@ -1,5 +1,7 @@
 package com.kh.DoctorLee.message.model.dao;
 
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.message.model.vo.Message;
 
 public class MessageDao {
@@ -26,11 +28,49 @@ public class MessageDao {
 		}
 	}
 	
-	public ArrayList<Message> selectList(Connection conn, String type, int memNo){
+	public int selectListCount(Connection conn, String type, int memNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "SELECT " + 
+					 "COUNT(*) " + 
+					 "FROM " + 
+					 "TB_MESSAGE " + 
+					 "WHERE " + 
+					 "STATUS = 'Y' " +
+					 " AND " + 
+					 type +
+					 " = ?";  
+					 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
+	
+	public ArrayList<Message> selectList(Connection conn, String type, int memNo, PageInfo pi){
 		ArrayList<Message> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = "SELECT "
+		String sql = 
+					"SELECT * "
+					+ "FROM ( "
+					+ "SELECT ROWNUM RNUM, A.* "
+					+ "FROM( "
+					+ "SELECT "
 					+ "MESSAGE_NO, MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS " 
 					+ "FROM " 
 					+ "TB_MESSAGE "
@@ -38,13 +78,22 @@ public class MessageDao {
 					+ "TB_MEMBER ON(MEM_NO = SENDER) " 
 					+ "WHERE " 
 					+ type
-					+ " = ?" 
+					+ " = ? " 
 					+ "AND " 
 					+ "TB_MESSAGE.STATUS = 'Y' " 
-					+ "ORDER BY SEND_DATE DESC";
+					+ "ORDER BY SEND_DATE DESC ) A ) "
+					+ "WHERE " 
+					+ "RNUM BETWEEN ? AND ? ";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			System.out.println("메세지 디에이오 startRow" + startRow + "endRow" + endRow);
 			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -107,6 +156,7 @@ public class MessageDao {
 				m.setSendDate(rset.getString("SEND_DATE"));
 				m.setMessageContent(rset.getString("MESSAGE_CONTENT"));
 			}
+			System.out.println("메세지 디테일 Dao m : " + m);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

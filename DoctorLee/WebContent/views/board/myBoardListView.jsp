@@ -19,7 +19,6 @@
 <style>
 
 * {
-	border: 1px solid skyblue;
 	box-sizing: border-box;
 }
 
@@ -43,17 +42,21 @@ main > section, main > aside, main > div{
 	float: left;
 }
 
-#aside {
-	width: 15%;
+.aside {
 	height: auto;
+	float: left;
 	margin : 20px auto;
 	display: flex;
 	justify-content: center;
 	padding: 0;
 }
 
+#aside1{width :25%}
+
+#aside2{width :15%}
+
 #section{
-	width: 70%;
+	width: 60%;
 	height: auto; 
 	min-height: 1000px;
 	float: left;
@@ -65,6 +68,7 @@ main > section, main > aside, main > div{
 	height : 100px;
 	padding: 20px;
 	font-size : 30px;
+	font-weight: bold;
 	line-height : 200%;
 }
 
@@ -128,7 +132,7 @@ footer {
 		<%@ include file ="../common/nav2.jsp" %>
 	</header>
 	<main>
-		<aside id="aside">
+		<aside id="aside1" class="aside">
 			<%@ include file ="../common/cmNavi.jsp" %>	
 		</aside>
 		
@@ -144,17 +148,15 @@ footer {
 						<div id="userThubnail">사진</div>
 						<div id="userInforWrap">
 							<div id="userId">유저 ID</div>
-							<div id="userBoard">작성글&nbsp;6&nbsp;&nbsp;댓글단 글 &nbsp;20&nbsp;&nbsp;추천한 글&nbsp;14</div>
+							<div id="userBoard">
+								<a href="" class="messageList">작성글6&nbsp;&nbsp;</a>
+								<a href="" class="messageList">댓글단 글25&nbsp;&nbsp;</a>
+								<a href="" class="messageList">추천한 글13</a>							
+							</div>
 						</div>
 					</div>
 					<br>
 					
-					<div id="typeWrap">
-						<a href="" class="messageList">작성글&nbsp;&nbsp;</a>
-						<a href="" class="messageList">댓글단 글&nbsp;&nbsp;</a>
-						<a href="" class="messageList">추천한 글</a>
-					</div>
-					<hr>
 					
 					<table id="boardTable" class="table table-hover">
 					  <thead>
@@ -200,10 +202,7 @@ footer {
 		
 		</section>
 		
-		<aside id="aside">
-			오른쪽 사이드바 : 
-			<br> 지금은 여백
-			<br> 나중에 광고 넣을 수도 있음
+		<aside id="aside2" class="aside">
 		</aside>
 		
 	</main>

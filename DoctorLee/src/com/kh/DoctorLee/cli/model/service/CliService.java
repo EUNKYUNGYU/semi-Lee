@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import com.kh.DoctorLee.cli.model.dao.CliDao;
 import com.kh.DoctorLee.cli.model.vo.Category;
 import com.kh.DoctorLee.cli.model.vo.CliRes;
-import com.kh.DoctorLee.cli.model.vo.CliResDate;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
+import com.kh.DoctorLee.cli.model.vo.CliRev;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
 import com.kh.DoctorLee.member.model.vo.Member;
 
@@ -96,6 +96,45 @@ public class CliService {
 		close(conn);
 		
 		return result;
+	}
+	
+	// 클리닉 리뷰 작성
+	public int insertCliRev(CliRev c) {
+		Connection conn = getConnection();
+		
+		int result = new CliDao().insertCliRev(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 클리닉 평점 가져오기
+	public Double selectCliScope(int cliNo) {
+		Connection conn = getConnection();
+		
+		Double scope = new CliDao().selectCliScope(conn, cliNo);
+		
+		close(conn);
+		
+		return scope;
+	}
+	
+	// 클리닉 리뷰 가져오기
+	public ArrayList<CliRev> selectCliRevList(int cliNo){
+		Connection conn = getConnection();
+		
+		ArrayList<CliRev> list = new CliDao().selectCliRevList(conn, cliNo);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

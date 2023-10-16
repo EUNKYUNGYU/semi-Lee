@@ -1,21 +1,32 @@
 package com.kh.DoctorLee.quize.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+import static com.kh.DoctorLee.common.JDBCTemplate.commit;
+import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
+import static com.kh.DoctorLee.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.quize.model.dao.QuizeDao;
 import com.kh.DoctorLee.quize.model.vo.Quize;
 import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
-import com.kh.DoctorLee.quize.model.vo.QuizeChoice;
 
 public class QuizeService {
 
-	public ArrayList<Quize> selectList(){
+	
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new QuizeDao().selectListCount(conn);
+		close(conn);
+		return listCount;
+	}
+	
+	public ArrayList<Quize> selectList(PageInfo pi){
 		
 		Connection conn = getConnection();
-		ArrayList<Quize> list = new QuizeDao().selectList(conn);
+		ArrayList<Quize> list = new QuizeDao().selectList(conn, pi);
 		close(conn);
 		return list;
 	}

@@ -49,7 +49,7 @@
                     <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
                     <li><a href="#">건강 매거진</a>
                         <ul>
-                            <li><a href="#">의약품 검색</a></li>
+                            <li><a href="<%=contextPath%>/search.med">의약품 검색</a></li>
                             <li><a href="#">건강 관리 방법</a></li>
                             <li><a href="#">긴급 상황 대비 메뉴얼</a></li>
                         </ul>
@@ -68,9 +68,9 @@
                             <li>
                                 <a href="<%= contextPath %>/list.bo">익명게시판</a>
                             </li>
-                            <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
-                               <% if(loginUser != null){ %>
-                            <li><a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver">쪽지함</a></li>
+                            <li><a href="<%= contextPath %>/list.qz?cpage=1">퀴즈게시판</a></li>
+                            <% if(loginUser != null){ %>
+                            <li><a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=receiver">쪽지함</a></li>
                         	<% } else { %>
                         	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');">쪽지함</a></li>
                         	<% } %>

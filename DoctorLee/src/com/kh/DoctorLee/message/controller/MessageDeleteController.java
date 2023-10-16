@@ -31,7 +31,6 @@ public class MessageDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		
 		int messageNo = Integer.parseInt(request.getParameter("messageNo"));
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
@@ -40,10 +39,10 @@ public class MessageDeleteController extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "메세지 삭제에 성공했습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + memberNo + "&type=sender");
+			response.sendRedirect(request.getContextPath() + "/list.ms?cpage=1&memNo=" + memberNo + "&type=sender");
 		} else {
 			request.getSession().setAttribute("alertMsg", "메세지 삭제에 실패했습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.ms?memNo=" + memberNo + "&type=sender");
+			response.sendRedirect(request.getContextPath() + "/list.ms?cpage=1&memNo=" + memberNo + "&type=sender");
 		}
 		
 	

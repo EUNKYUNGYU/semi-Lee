@@ -299,6 +299,10 @@
                         $(this).siblings().css('background-color', 'bisque');
                     }
                 })
+
+                // if($('#resDate').val() == null || $('#resTime').val || null){
+                //     $('button[type=submit]').('disabled');
+                // }
             })
         </script>
 

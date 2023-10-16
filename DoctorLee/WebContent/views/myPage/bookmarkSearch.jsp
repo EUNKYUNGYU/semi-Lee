@@ -57,7 +57,7 @@
 		
 		<div id="search-form">	
 			<br>
-			
+			<form action="<%=contextPath %>/selectHos.mk" id="insert-form" method="post">
 			<h3>검색하실 병원 이름을 입력해주세요</h3> <br>	
 			<input type="text" name="hosName" id="hosName" >
 			<button type="submit" id="search">검색</button><br><br>
@@ -86,6 +86,7 @@
 			</table>
 		
 		</div>
+		</form>
 		<script>
 			$(function(){
 				$('#text-area > tbody > tr').click(function(){

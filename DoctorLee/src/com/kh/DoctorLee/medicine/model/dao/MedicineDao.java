@@ -31,7 +31,7 @@ public class MedicineDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(2, medName);
+			pstmt.setString(1, medName);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

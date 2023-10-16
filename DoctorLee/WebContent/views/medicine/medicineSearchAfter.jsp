@@ -46,6 +46,7 @@
 	#tr> button{
 		float :left;
 	}
+</style>
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
@@ -56,6 +57,7 @@
 			<br>
 			
 			<h3>검색하실 약품 이름을 입력해주세요</h3> <br>	
+			<form action="<%=contextPath%>/select.med" id="search-form" method="post">
 			<input type="text" name="medName" id="medName" >
 			<button type="submit" id="search">검색</button><br><br>
 			<table id="text-area">
@@ -64,11 +66,21 @@
 					<th>검색된 약품 이름</th>
 				</tr>
 				<tbody>
+				<% if(medList.isEmpty()){%>
 				<tr>
-					<td></td>
+					<td>검색된 목록이 없습니다.</td>
 				</tr>
+				<% } else {%>
+				<% for (Medicine med : medList){ %>
+					<tr>
+						<td align = "center"><%= med.getMedName() %></td>
+					</tr>
+				<%}%>
+				
+				<%}%>
 				</tbody>
 			</table>
+			</form>
 		
 		</div>
 		

@@ -35,7 +35,7 @@ public class SelectMedicineController extends HttpServlet {
 		String medName = request.getParameter("medName");
 		ArrayList<Medicine> medList = new MedicineService().selectMedicine(medName);
 		request.setAttribute("medList", medList);
-		request.getRequestDispatcher("views/medicine/medicineSearchAfter.jsp");
+		request.getRequestDispatcher("views/medicine/medicineSearchAfter.jsp").forward(request, response);;
 	}
 
 	/**

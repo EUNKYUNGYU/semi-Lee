@@ -191,7 +191,7 @@
                </div>
             </div>
             <span><a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" class="deletebtn" id="csdelete2">삭제하기</a></span>
-            <span><a href="#" class="deletebtn" id="csdelete">목록가기</a></span>
+            <span><a href="<%=contextPath%>/list.medi" class="deletebtn" id="csdelete">목록가기</a></span>
         </div>
 </body>
 </html>

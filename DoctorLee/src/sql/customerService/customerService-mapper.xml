@@ -19,7 +19,22 @@
 		ORDER
 		   BY
 		   		CREATE_DATE DESC
-		
+	</entry>
+	
+	<entry key="selectCustomerService">
+		SELECT
+				INQ_NO,
+				MEM_NO,
+				INQ_TYPE,
+				INQ_TITLE,
+				INQ_CONTENT,
+				CREATE_DATE,
+				DEL_STATUS
+		FROM
+				TB_CUS_SER
+		WHERE
+				INQ_NO = ?
+				
 	
 	</entry>
 	

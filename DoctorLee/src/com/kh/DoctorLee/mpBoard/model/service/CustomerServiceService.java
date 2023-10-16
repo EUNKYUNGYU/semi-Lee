@@ -20,5 +20,17 @@ public class CustomerServiceService {
 		return list;
 		
 	}
-
+	
+	public CustomerService selectCustomerService(int customerServiceNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		CustomerService cs = new CustomerServiceDao().selectCustomerService(conn, customerServiceNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return cs;
+		
+	}
+	
 }

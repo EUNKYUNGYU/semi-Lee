@@ -49,4 +49,31 @@ public class MedicineDao {
 		
 		return medList;
 	}
+	public Medicine detailMedicine(Connection conn,String medName) {
+		Medicine med = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMedicineDetail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, medName);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				med = new Medicine();
+				med.setMedName(rset.getString("MED_NAME"));
+				med.setPreInfo(rset.getString("PRE_INFO"));
+				med.setCauction(rset.getString("CAUCTION"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return med;
+		
+	}
 }

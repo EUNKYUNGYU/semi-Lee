@@ -60,7 +60,7 @@
 			<form action="<%=contextPath%>/select.med" id="search-form" method="post">
 			<input type="text" name="medName" id="medName" >
 			<button type="submit" id="search">검색</button><br><br>
-			<table id="text-area">
+			<table id="text-area" class="medList-area">
 				<thead>
 				<tr>
 					<th>검색된 약품 이름</th>
@@ -84,6 +84,18 @@
 		
 		</div>
 		
+		<script>
+			$(function(){
+				$('.medList-area>tbody>tr').click(function(){
+					const mname = $(this).children().eq(0).text();
+					//console.log(mname);
+    				location.href="<%=contextPath%>/detail.med?mname="+ mname;
+				})
+			});
+		</script>
+		<form>
+			<input type="hidden" name = "mname" id=mname>
+		</form>
 		<%@ include file="../common/footer.jsp" %>
 
 </body>

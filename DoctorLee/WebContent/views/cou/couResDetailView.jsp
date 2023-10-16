@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.DoctorLee.cou.model.vo.Cou" %>    
+<%
+    Cou c = (Cou)request.getAttribute("c");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,8 +114,8 @@
 
                 <!--클리닉 간단 정보 출력 영역 div-->
                 <div id="cli-top" >
-                    <h4>상담사명</h4>
-                    <p>클리닉 장소</p>
+                    <h4><%= c.getCouName() %></h4>
+                    <p><%= c.getHosName() %></p>
                     <p>클리닉 가격</p>
 
                 </div>

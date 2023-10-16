@@ -60,7 +60,40 @@ private Properties prop = new Properties();
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+	
+	public CustomerService selectCustomerService(Connection conn, int customerServiceNo) {
 		
+		CustomerService cs = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCustomerService");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, customerServiceNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				cs = new CustomerService();
+				cs.setInqNo(rset.getInt("INQ_NO"));
+				cs.setMemNo(rset.getInt("MEM_NO"));
+				cs.setInqType(rset.getInt("INQ_TYPE"));
+				cs.setInqTitle(rset.getString("INQ_TITLE"));
+				cs.setInqContent(rset.getString("INQ_CONTENT"));
+				cs.setCreateDate(rset.getDate("CREATE_DATE"));
+				cs.setDelStatus(rset.getString("DEL_STATUS"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return cs;
 	}
 	
 }

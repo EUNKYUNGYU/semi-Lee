@@ -4,6 +4,7 @@
 <%
 	Clinic c = (Clinic)request.getAttribute("c");
     int result = (int)request.getAttribute("result");
+    Double scope = (Double)request.getAttribute("scope");
 %>    
 <!DOCTYPE html>
 <html>
@@ -102,29 +103,29 @@
     }
 
         /*모달 별점*/
-        #myform fieldset{
+        #scope fieldset{
             display: inline-block;
             direction: rtl;
             border:0;
         }
-        #myform fieldset legend{
+        #scope fieldset legend{
             text-align: right;
         }
-        #myform input[type=radio]{
+        #scope input[type=radio]{
             display: none;
         }
-        #myform label{
+        #scope label{
             font-size: 3em;
             color: transparent;
             text-shadow: 0 0 0 #f0f0f0;
         }
-        #myform label:hover{
+        #scope label:hover{
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
-        #myform label:hover ~ label{
+        #scope label:hover ~ label{
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
-        #myform input[type=radio]:checked ~ label{
+        #scope input[type=radio]:checked ~ label{
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
         #reviewContents {
@@ -142,6 +143,19 @@
         #revContent{
             width: 450px;
         }
+      
+    /*리뷰 출력*/
+    #rev-border{
+        border: 1px solid red;
+    }
+
+    #rev-list{
+        list-style: none;
+    }
+    
+    .rev-content{
+        border: 1px solid purple;
+    }
 </style>
 </head>
 <body>
@@ -173,6 +187,7 @@
                 <div id="cli-top" >
                     <h4><%= c.getCliName() %></h4>
                     <p><%= c.getHosNo() %></p>
+                    <p><%= scope %></p>
                     <p><%= c.getCliPrice() %></p>
                 </div>
 
@@ -186,7 +201,23 @@
                     <h4>후기</h4>
                     <% if(loginUser != null && result > 0) {%>
                         <button data-toggle="modal" data-target="#myModal">후기 작성</button>
-                    <% } %>    
+                    <% } %>  
+                    
+                    <div id="rev-border">
+                        <ul id="rev-list">
+                            <li class="rev-content">
+                                <p>회원</p>
+                                <p>별점</p>
+                                <p>리뷰내용</p>
+                            </li>
+
+                            <li class="rev-content">
+                                <p>회원</p>
+                                <p>별점</p>
+                                <p>리뷰내용</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
@@ -205,13 +236,13 @@
               <h4 class="modal-title">리뷰 작성하기</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-      
-            <form action="cliRev.cli" method="post" id="myform">
+
                 <!-- Modal body -->
                 <div class="modal-body">
 
                     <div id="scope">
                         <h6>별점</h6>
+                        <input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
                         <fieldset>
                             <input type="radio" name="reviewStar" value="5" id="rate1"><label
                                 for="rate1">★</label>
@@ -235,19 +266,54 @@
       
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" data-dismiss="modal">등록하기</button>
+                <button id="insertRev" class="btn btn-primary">등록하기</button>
                 </div>
-            </form>
-          </div>
+
+            </div>
         </div>
       </div>
 
 
     <script>
         $(function(){
+
+            // 예약 버튼 클릭 시 예약하기 페이지로 이동
             $('#resBtn').click(function(){
                 location.href='<%=contextPath%>/cliRes.cli?cno=<%=c.getCliNo()%>';
                 // console.log($(this).parents().children().eq(1).val());
+            })
+
+            // 리뷰: 별점 버튼 클릭
+            // $('input[name=reviewStar]').click(function(){
+            //     console.log($('input[name=reviewStar]:checked').val());
+            //     console.log($('#revContent').val());
+            // })
+
+            // $('#insertRev').click(function(){
+            //     console.log($('#revContent').text());
+            // })
+
+
+            // 등록하기 버튼 클릭 시 리뷰 작성
+            $('#insertRev').click(function(){
+                $.ajax({
+                    url:'cliRevInsert.cli',
+                    type:'post',
+                    data:{
+                        cno: <%=c.getCliNo()%>,
+                        memNo:<%=loginUser.getMemNo()%>,
+                        cliScope: $('input[name=reviewStar]:checked').val(),
+                        revContent: $('#revContent').val()
+                    },
+                    success:function(result){
+                        alert('리뷰 등록 성공');
+
+                        $('#myModal').attr('style', 'display:none');
+                    },
+                    error:function(){
+                        console('리뷰 등록 실패');
+                    }
+                })
             })
         })
     </script>

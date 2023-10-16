@@ -20,4 +20,24 @@
 			MED_NAME = ?
 		
 	</entry>
+	<entry key="insertMedicine">
+		INSERT
+			INTO
+		TB_MED
+			VALUES(
+				SEQ_TB_MED.NEXTVAL,
+				?,
+				?,
+				?
+			)
+	</entry>
+	<entry key="medCheck">
+		SELECT
+			MED_NAME
+		FROM
+			TB_MED
+		WHERE
+			MED_NAME = ?
+		
+	</entry>
 </properties>

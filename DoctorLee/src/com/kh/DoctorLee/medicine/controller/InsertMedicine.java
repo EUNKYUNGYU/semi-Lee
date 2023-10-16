@@ -1,7 +1,6 @@
-package com.kh.DoctorLee.cli.controller;
+package com.kh.DoctorLee.medicine.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.Category;
-import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.medicine.model.service.MedicineService;
+import com.kh.DoctorLee.medicine.model.vo.Medicine;
 
 /**
- * Servlet implementation class CliListController
+ * Servlet implementation class InsertMedicine
  */
-@WebServlet("/list.cli")
-public class CliListController extends HttpServlet {
+@WebServlet("/insert.med")
+public class InsertMedicine extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliListController() {
+    public InsertMedicine() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +31,27 @@ public class CliListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		String medName = request.getParameter("medName");
+		String preInfo = request.getParameter("preInfo");
+		String cauction = request.getParameter("cauction");
 		
-//		String cateName = request.getParameter("cateNo");
+		Medicine med = new Medicine();
 		
-		// 카테고리 불러오기
-		ArrayList<Category> list = new CliService().selectCategoryList();
+		med.setMedName(medName);
+		med.setPreInfo(preInfo);
+		med.setCauction(cauction);
 		
-		//System.out.println(list);
+		int result = new MedicineService().insertMedicine(med);
 		
-		request.setAttribute("list", list);
-
-		request.getRequestDispatcher("/views/cli/cliListView.jsp").forward(request, response);
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/search.med");
+		}else {
+			request.setAttribute("errorMsg", "등록 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp");
+		}
+		
+		
+		
 	}
 
 	/**

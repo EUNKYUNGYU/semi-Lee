@@ -71,18 +71,49 @@
 		 		VIDEO_NO = ? 		
 	</entry>
 	
-	<entry key="selectRandVideo">
+	<entry key="selectRandomVideo">
 		SELECT
-		  		VIDEO_NO,
-		  		MEM_NO,
-		  		VIDEO_TITLE,
-		  		CHANNEL_NAME,
-		  		VIDEO_ADDRESS
-		  FROM
-		  		TB_COU_VIDEO
-		 ORDER
-		    BY
-		  		DBMS_RANDOM.VALUE		
+							   VIDEO_NO,
+							   MEM_NO,
+							   VIDEO_TITLE,
+							   CHANNEL_NAME,
+							   VIDEO_ADDRESS
+						  FROM
+							   TB_COU_VIDEO		
+	</entry>
+	
+	<entry key="selectCouList">
+		SELECT 
+				COU_NO, 
+				HOS_NAME, 
+				COU_NAME, 
+				PHONE,
+				ORIGIN_NAME,
+				CHANGE_NAME,
+				PROFILE_PATH
+		FROM 
+				TB_COU
+		JOIN
+				TB_HOSPITAL USING(HOS_NO)		
+		ORDER
+		   BY	COU_NAME	
+	</entry>
+	
+	<entry key="selectCou">
+		SELECT
+				COU_NO, 
+				HOS_NAME, 
+				COU_NAME, 
+				PHONE,
+				ORIGIN_NAME,
+				CHANGE_NAME,
+				PROFILE_PATH
+		FROM
+				TB_COU
+		JOIN
+				TB_HOSPITAL USING(HOS_NO)		
+		WHERE
+				COU_NO = ?				
 	</entry>
 </properties>
 

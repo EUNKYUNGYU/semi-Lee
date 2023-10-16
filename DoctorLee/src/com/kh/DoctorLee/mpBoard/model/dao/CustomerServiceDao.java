@@ -96,4 +96,43 @@ private Properties prop = new Properties();
 		return cs;
 	}
 	
+	public int deleteCustomerService(Connection conn, int customerServiceNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCustomerService");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, customerServiceNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertAdminInq(Connection conn, CustomerService cs) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAdminInq");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cs.getMemNo());
+			pstmt.setInt(2, cs.getInqType());
+			pstmt.setString(3, cs.getInqTitle());
+			pstmt.setString(4, cs.getInqContent());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
 }

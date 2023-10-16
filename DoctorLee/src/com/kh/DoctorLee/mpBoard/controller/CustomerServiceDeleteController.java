@@ -2,24 +2,25 @@ package com.kh.DoctorLee.mpBoard.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.mpBoard.model.service.CustomerServiceService;
+
 /**
- * Servlet implementation class PersonalInqController
+ * Servlet implementation class CustomerServiceDeleteController
  */
-@WebServlet("/personalInq.mp")
-public class PersonalInqController extends HttpServlet {
+@WebServlet("/delete.cs")
+public class CustomerServiceDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PersonalInqController() {
+    public CustomerServiceDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,8 +30,18 @@ public class PersonalInqController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/myPage/personalInq.jsp");
-		view.forward(request, response);
+		int customerServiceNo = Integer.parseInt(request.getParameter("nno"));
+		int result = new CustomerServiceService().deleteCustomerService(customerServiceNo);
+	
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "삭제성공");
+			response.sendRedirect(request.getContextPath() + "/customerService.mp");
+			
+		} else {
+			request.setAttribute("errorMsg", "실패");
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**

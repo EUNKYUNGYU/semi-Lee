@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.cou.model.vo.*" %>    
 <%
-    ArrayList<CouVideo> list = (ArrayList<CouVideo>)request.getAttribute("c");
+    CouVideo cv = (CouVideo)request.getAttribute("c");
 %>    
 <!DOCTYPE html>
 <html>

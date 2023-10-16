@@ -195,9 +195,9 @@ public class CouDao {
 	}
 	
 	// 비디오 랜덤 추출
-	public ArrayList<CouVideo> selectRandomVideo(Connection conn) {
+	public CouVideo selectRandomVideo(Connection conn) {
 		
-		ArrayList<CouVideo> list = new ArrayList();
+		CouVideo c = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -209,13 +209,11 @@ public class CouDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				CouVideo c = new CouVideo();
 				c.setVideoNo(rset.getInt("VIDEO_NO"));
 				c.setMemNo(rset.getInt("MEM_NO"));
 				c.setVideoTitle(rset.getString("VIDEO_TITLE"));
 				c.setChannelName(rset.getString("CHANNEL_NAME"));
 				c.setVideoAddress(rset.getString("VIDEO_ADDRESS"));
-				list.add(c);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -224,7 +222,7 @@ public class CouDao {
 			close(pstmt);
 		}
 		
-		return list;
+		return c;
 	}
 	
 	// 상담사 목록 출력

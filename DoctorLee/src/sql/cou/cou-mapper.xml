@@ -79,7 +79,8 @@
 							   CHANNEL_NAME,
 							   VIDEO_ADDRESS
 						  FROM
-							   TB_COU_VIDEO		
+							   TB_COU_VIDEO	
+							   	
 	</entry>
 	
 	<entry key="selectCouList">

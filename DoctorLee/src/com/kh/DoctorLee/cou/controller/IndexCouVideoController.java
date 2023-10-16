@@ -33,9 +33,9 @@ public class IndexCouVideoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Service 요청
-		ArrayList<CouVideo> list = new CouService().selectRandomVideo();
+		CouVideo c = new CouService().selectRandomVideo();
 		
-		request.setAttribute("list", list);
+		request.setAttribute("c", c);
 		request.getRequestDispatcher("/views/common/section.jsp").forward(request, response);
 	}
 

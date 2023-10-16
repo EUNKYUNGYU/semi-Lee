@@ -99,14 +99,14 @@ public class CouService {
 	}
 	
 	// 비디오 랜덤 출력하기
-	public ArrayList<CouVideo> selectRandomVideo() {
+	public CouVideo selectRandomVideo() {
 		Connection conn = getConnection();
 		
-		ArrayList<CouVideo> list = new CouDao().selectRandomVideo(conn);
+		CouVideo c = new CouDao().selectRandomVideo(conn);
 		
 		close(conn);
 		
-		return list;
+		return c;
 	}
 	
 	// 상담사 목록 출력

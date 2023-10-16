@@ -57,16 +57,16 @@
                     <li><a href="#">커뮤니티</a>
                         <ul>
                         	<li>
-                                <a href="<%= contextPath %>/list.bo">공지사항</a>
+                                <a href="<%= contextPath %>/list.bo?cpage=1&type=10">공지사항</a>
                             </li>
                             <li>
-                                <a href="<%= contextPath %>/list.bo">자유게시판</a>
+                                <a href="<%= contextPath %>/list.bo?cpage=1&type=20">자유게시판</a>
                             </li>
                             <li>
-                                <a href="<%= contextPath %>/list.bo">정보게시판</a>
+                                <a href="<%= contextPath %>/list.bo?cpage=1&type=30">정보게시판</a>
                             </li>
                             <li>
-                                <a href="<%= contextPath %>/list.bo">익명게시판</a>
+                                <a href="<%= contextPath %>/list.bo?cpage=1&type=40">익명게시판</a>
                             </li>
                             <li><a href="<%= contextPath %>/list.qz?cpage=1">퀴즈게시판</a></li>
                             <% if(loginUser != null){ %>

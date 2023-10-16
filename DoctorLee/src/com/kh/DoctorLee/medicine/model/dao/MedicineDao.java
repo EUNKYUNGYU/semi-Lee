@@ -76,4 +76,22 @@ public class MedicineDao {
 		return med;
 		
 	}
+	public int insertMedicine(Connection conn, Medicine med) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMedicine");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, med.getMedName());
+			pstmt.setString(2, med.getPreInfo());
+			pstmt.setString(3, med.getCauction());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		return result;
+	}
 }

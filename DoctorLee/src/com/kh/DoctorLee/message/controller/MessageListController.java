@@ -53,8 +53,8 @@ public class MessageListController extends HttpServlet {
 		if(endPage > maxPage ) endPage = maxPage;
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,boardLimit, maxPage, startPage, endPage);
 		
-		System.out.println("메세지 리스트 컨트롤러 type" + type + " memNo " + memNo );	
-		System.out.println("메세지 리스트 컨트롤러 maxPage " + maxPage + " listCount " + listCount + "  boardLimit" + boardLimit);	
+		System.out.println("보드 리스트 컨트롤러 type" + type + " memNo " + memNo );	
+		System.out.println("보드 리스트 컨트롤러 maxPage " + maxPage + " listCount " + listCount + "  boardLimit" + boardLimit);	
 
 		ArrayList<Message> list = new MessageService().selectList(type, memNo, pi);
 		

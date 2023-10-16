@@ -52,18 +52,17 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
         table {
                 border-collapse: collapse;
                 width: 950px;
-                margin-left: 100;
-                margin-top: 30px;
                 border: 1px solid #ddd;
                 background-color: white;
+                margin-top: 50px;
                 }
 
                 /* 테이블 행 */
                 th, td {
                 padding: 8px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
+                margin: auto;
                 text-align: center;
+                border-bottom: 1px solid #ddd;
                 }
 
                 th {
@@ -78,29 +77,6 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
                 cursor: pointer;
                 }
 
-                /* 테이블 비율 */
-                th:nth-child(1),
-                td:nth-child(1) {
-                width: 30%;
-                }
-
-                th:nth-child(2),
-                td:nth-child(2) {
-                width: 30%;
-                }
-
-                th:nth-child(3),
-                td:nth-child(3) {
-                width: 30%;
-                }
-
-                th:nth-child(4),
-                td:nth-child(4) {
-                width: 30%;
-                }
-
-                
-                        
                 #count{
                     margin-left: 240px;
                     margin-top: 100px;
@@ -147,8 +123,28 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
             font-weight: 600;
             padding-top: 30px;
             padding-left: 200px;
-            
-           
+        }
+        
+        #th1{
+        	padding-left: 80px;
+        }
+        
+        #th2{
+        	padding-left: 50px;
+        }
+        #th3{
+        	padding-left: 170px;
+        }
+        
+        #th4{
+        	padding-left: 70px;
+        }
+        #th33{
+        padding-right: 30px;
+        }
+        
+        #th44{
+        padding-right: 20px;
         }
 </style>
 </head>
@@ -176,10 +172,10 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
                 <table class="list-area" align="center">
                     <thead>
                       <tr>
-                        <th>번호</th>
-                        <th>문의</th>
-                        <th>제목</th>
-                        <th>작성일</th>
+                        <th id="th1">번호</th>
+                        <th id="th2">문의</th>
+                        <th id="th3">제목</th>
+                        <th id="th4">작성일</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -194,8 +190,8 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
                       <tr>
                         <td><%=cs.getInqNo() %></td>
                         <td><%=cs.getInqType() %></td>
-                        <td><%=cs.getInqTitle() %></td>
-                        <td><%=cs.getCreateDate() %></td>
+                        <td id="th33"><%=cs.getInqTitle() %></td>
+                        <td id="th44"><%=cs.getCreateDate() %></td>
                       </tr>
                     <%} %>
                     	<%} %>

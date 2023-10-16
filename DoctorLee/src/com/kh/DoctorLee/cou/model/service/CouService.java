@@ -119,5 +119,16 @@ public class CouService {
 		
 		return list;
 	}
+	
+	// 상담사 상세보기
+	public Cou selectCou(int couNo) {
+		Connection conn = getConnection();
+		
+		Cou c = new CouDao().selectCou(conn, couNo);
+		
+		close(conn);
+		
+		return c;
+	}
 
 }

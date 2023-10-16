@@ -31,14 +31,12 @@ public class CouResListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 		ArrayList<Cou> list = new CouService().selectCouList();
 		
-		System.out.println(list);
+//		System.out.println(list);
 		
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/cou/couResListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/cou/couResListView.jsp").forward(request, response);
 	}
 
 	/**

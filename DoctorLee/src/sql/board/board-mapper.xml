@@ -15,23 +15,67 @@
 
 	<entry key="selectList">
 
-	SELECT
-		BOARD_NO
-		,BOARD_TITLE
-		,TO_CHAR(CREATE_DATE,'YYYY/MM/DD') CREATE_DATE
-		,VIEWS
-		,FILE_NO
-		,BOARD_NAME
-	FROM
-		TB_BOARD B
-	JOIN 
-		TB_BOARD_TYPE USING(BOARD_TYPE)
-	WHERE
-			B.STATUS = 'Y' 
-
+		SELECT *
+		 		FROM(
+					SELECT ROWNUM RNUM, A.*
+			  			FROM(
+		                    SELECT    
+		                             BOARD_NO, BOARD_TYPE, NICKNAME, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD')CREATE_DATE, VIEWS, B.STATUS 
+		                      FROM 
+		                             TB_BOARD B
+		                     JOIN 
+		                             TB_MEMBER ON(WRITER = MEM_NO)
+		                        JOIN 
+		                             TB_BOARD_TYPE USING(BOARD_TYPE)
+		                        WHERE
+		                             B.STATUS = 'Y'
+		                     	AND  
 
 	</entry>
 
+	<entry key="insertBoard">
+	
+		INSERT 
+		        INTO 
+		            TB_BOARD 
+		            (
+		            BOARD_NO
+		            , WRITER
+		            , BOARD_TITLE
+		            , BOARD_CONTENT
+		            , BOARD_TYPE
+		            )
+		    VALUES 
+		            (
+		            SEQ_BOARD_NO.NEXTVAL
+		            , ?
+		            , ?
+		            , ?
+		            ,
+	</entry>
+	
+	<entry key="selectBoard">
+		SELECT    
+		          BOARD_NO
+		         , BOARD_TYPE
+		         , NICKNAME
+		         , BOARD_TITLE
+		         , BOARD_CONTENT
+		         , TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD HH24:MI')CREATE_DATE
+		         , VIEWS
+		         , BOARD_CONTENT
+		         , (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = 2) AS LIKES
+		         , (SELECT COUNT(*) FROM TB_COMMENT WHERE BOARD_NO = 2) AS COMMENTS
+		         , B.STATUS
+		    FROM 
+		         TB_BOARD B
+		    JOIN 
+		          TB_MEMBER ON(WRITER = MEM_NO)
+		    JOIN 
+		        TB_BOARD_TYPE USING(BOARD_TYPE)
+		    WHERE
+		          B.STATUS = 'Y'
+	</entry>
 
 	
 </properties>

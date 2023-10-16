@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.kh.DoctorLee.common.SemiFileRenamePolicy;
+import com.kh.DoctorLee.board.model.service.BoardService;
+import com.kh.DoctorLee.board.model.vo.Board;
 
 
 /**
@@ -25,7 +24,6 @@ public class BoardInsertController extends HttpServlet {
      */
     public BoardInsertController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,20 +33,29 @@ public class BoardInsertController extends HttpServlet {
 	
 		request.setCharacterEncoding("UTF-8");
 		
-		if(ServletFileUpload.isMultipartContent(request)) {
-			
-			int maxSize = 1024 * 1024 * 50;
-			
-			String savePath = request.getServletContext().getRealPath("/resources/board_upfiles/");
-			
-			MultipartRequest multiReq = new MultipartRequest(request, savePath, maxSize, "UTF-8", new SemiFileRenamePolicy());
-			
-			String boardTitle = multiReq.getParameter("boardTitle");
-			String boardContent = multiReq.getParameter("boardContent");
-			String file = multiReq.getParameter("file");
-			String category = multiReq.getParameter("category");
-			
+		String boardTitle = request.getParameter("boardTitle");
+		String boardContent = request.getParameter("boardContent");
+		String category = request.getParameter("category");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		
+		Board b = new Board();
+		b.setBoardTitle(boardTitle);
+		b.setBoardContent(boardContent);
+		b.setBoardName(category);
+		
+		System.out.println("인서트 보드 컨트롤러에서 category " + category + b);
+		
+		int result = new BoardService().insertBoard(b, memNo);
+		
+		if(result > 0) { // 게시글 작성 성공
+			// 나중에 게시글 상세보기 만들어지면 거기로 리다이렉트하기, 지금은 그냥 게시판 리스트로
+			request.setAttribute("alertMsg", "게시글 작성에 성공하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.bo?cpage=1&type="+ category);
+		} else { // 게시글 작성 실패
+			request.setAttribute("alertMsg", "게시글 작성에 성공하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.bo?cpage=1&type="+ category);
 		}
+			
 	
 	
 	}

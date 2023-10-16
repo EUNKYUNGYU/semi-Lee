@@ -31,4 +31,13 @@
 				?
 			)
 	</entry>
+	<entry key="medCheck">
+		SELECT
+			MED_NAME
+		FROM
+			TB_MED
+		WHERE
+			MED_NAME = ?
+		
+	</entry>
 </properties>

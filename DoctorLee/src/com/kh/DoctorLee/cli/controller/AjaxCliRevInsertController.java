@@ -7,23 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.Clinic;
-import com.kh.DoctorLee.member.model.vo.Member;
+import com.kh.DoctorLee.cli.model.vo.CliRev;
 
 /**
- * Servlet implementation class CliDetailController
+ * Servlet implementation class AjaxCliRevInsertController
  */
-@WebServlet("/cliDetail.cli")
-public class CliDetailController extends HttpServlet {
+@WebServlet("/cliRevInsert.cli")
+public class AjaxCliRevInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliDetailController() {
+    public AjaxCliRevInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,29 +30,29 @@ public class CliDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// POST => 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
 		// 값 뽑기
-		int cliNo = Integer.parseInt(request.getParameter("cno"));
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int cliScope = Integer.parseInt(request.getParameter("cliScope"));
+		String revContent = request.getParameter("revContent");
+		
+		// VO 가공
+		CliRev c = new CliRev();
+		c.setCliNo(cno);
+		c.setMemNo(memNo);
+		c.setCliScope(cliScope);
+		c.setRevContent(revContent);
+		
 		
 		// Service 요청
-		Clinic c = new CliService().selectCli(cliNo);
+		int result = new CliService().insertCliRev(c);
 		
-		// 리뷰 버튼을 예약한 사용자에게만 보이게
-		HttpSession session = request.getSession(); 
-		
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		
-		int result = new CliService().selectResMem(cliNo, loginUser);
-		
-		// 클리닉 평균 가져오기
-		Double scope = new CliService().selectCliScope(cliNo);
-		
-		request.setAttribute("c", c);
-		request.setAttribute("result", result);
-		request.setAttribute("scope", scope);
-		
-		request.getRequestDispatcher("views/cli/cliDetailView.jsp").forward(request, response);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().print(result);
 	}
 
 	/**

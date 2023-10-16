@@ -13,8 +13,8 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.cli.model.vo.Category;
 import com.kh.DoctorLee.cli.model.vo.CliRes;
-import com.kh.DoctorLee.cli.model.vo.CliResDate;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
+import com.kh.DoctorLee.cli.model.vo.CliRev;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
 import com.kh.DoctorLee.member.model.vo.Member;
 
@@ -250,6 +250,60 @@ public class CliDao {
 		}
 		
 		return result;
+	}
+	
+	// 클리닉 리뷰 작성하기
+	public int insertCliRev(Connection conn, CliRev c) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCliRev");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, c.getCliNo());
+			pstmt.setInt(2, c.getMemNo());
+			pstmt.setString(3, c.getRevContent());
+			pstmt.setInt(4, c.getCliScope());
+			
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 클리닉 평점 가져오기
+	public Double selectCliScope(Connection conn, int cliNo) {
+		
+		Double scope = 0.0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCliScope");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cliNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				scope = rset.getDouble("ROUND(AVG(CLI_SCOPE),1)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return scope;
 	}
 
 }

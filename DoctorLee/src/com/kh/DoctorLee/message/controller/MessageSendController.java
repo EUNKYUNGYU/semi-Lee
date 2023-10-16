@@ -38,8 +38,6 @@ public class MessageSendController extends HttpServlet {
 		String receiverId = request.getParameter("receiverId");
 		String messageContent = request.getParameter("messageContent");
 		
-		System.out.println("searchMember 컨트롤러 " + senderNo + messageTitle + receiverId + messageContent);
-		
 		int receiverNo = new MessageService().searchMember(receiverId);
 		if(receiverNo > 0) {
 			
@@ -49,8 +47,6 @@ public class MessageSendController extends HttpServlet {
 			m.setMessageTitle(messageTitle);
 			m.setReceiverNo(receiverNo);
 			m.setMessageContent(messageContent);
-			
-			System.out.println("MessageSendController에서 receiverNo 잘 받아졌는지"+m);
 			
 			int result = new MessageService().insertMessage(m);
 			if(result > 0) {

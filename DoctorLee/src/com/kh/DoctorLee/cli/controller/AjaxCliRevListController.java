@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.cli.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.CliRes;
+import com.kh.DoctorLee.cli.model.vo.CliRev;
 
 /**
- * Servlet implementation class CliResController
+ * Servlet implementation class AjaxCliRevListController
  */
-@WebServlet("/insertCliRes.cli")
-public class CliResController extends HttpServlet {
+@WebServlet("/ajaxRevList.cli")
+public class AjaxCliRevListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliResController() {
+    public AjaxCliRevListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,36 +32,18 @@ public class CliResController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// POST 방식 => 인코딩
-		request.setCharacterEncoding("UTF-8");
 		
 		// 값 뽑기
-		int cliNo = Integer.parseInt(request.getParameter("cliNo"));
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		String resDate = request.getParameter("resDate");
-		String resTime = request.getParameter("resTime");
+		int cliNo = Integer.parseInt(request.getParameter("cno"));
 		
-		System.out.println("클리닉 번호 : " + cliNo);
-		
-		// VO 데이터 가공
-		CliRes c = new CliRes();
-		c.setCliNo(cliNo);
-		c.setMemNo(userNo);
-		c.setResDate(resDate);
-		c.setResTime(resTime);
+//		System.out.println(cliNo);
 		
 		// Service 요청
-		int result = new CliService().insertCliRes(c);
+		ArrayList<CliRev> list = new CliService().selectCliRevList(cliNo);
+//		System.out.println(list);
 		
-		// 응답화면 지정
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "클리닉 예약 성공");
-			response.sendRedirect(request.getContextPath() + "/list.cli");
-		} else {
-			request.getSession().setAttribute("alertMsg", "클리닉 예약 실패");
-		}
-		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

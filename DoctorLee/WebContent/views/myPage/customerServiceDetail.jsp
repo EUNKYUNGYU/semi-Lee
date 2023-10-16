@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.DoctorLee.mpBoard.model.vo.CustomerService" %>
+<%
+	CustomerService cs = (CustomerService)request.getAttribute("cs");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>고객센터 상세보기</title>
 <style>
-	   div{
-            border:  1px solid blue;
+	    div{
             box-sizing: border-box;
         }
 
@@ -51,23 +54,39 @@
                 text-align: center;
                 }
 
-               
-                th:nth-child(1),
-                td:nth-child(1) {
-                width: 16%;
-                }
+              
+        #csTitle{
+            width: 800px;
+            height: 30px;
+            
+        }
 
-                th:nth-child(2),
-                td:nth-child(2) {
-                width: 16%;
-                }
+        #csContent{
+            width: 800px;
+            height: 500px;
+            text-align: center;
+        }
 
-                th:nth-child(3),
-                td:nth-child(3) {
-                width: 16%;
-                height: 50px;
-                }
+		.deletebtn{
+		
+		text-decoration: none;
+        border: 1px solid #1E376F;
+        color: #1E376F;
+		float: right;
+        margin-right: 30px;
+        width: 100px;
+        height: 40px;
+        border-radius: 3px;
+        text-align: center;
+        padding-top: 7px;
+		}
 
+        .deletebtn:hover{
+            background-color: #1E376F;
+            color: white;
+            text-decoration: none;
+        }
+       
         #p11{
             text-align: center;
             font-size: 38px;
@@ -94,24 +113,29 @@
             	<%@ include file = "../common/myPageNavi.jsp" %>
             </div>
             <div id="content_2">
+                 <div id="content_2">
                 <p id="p11">마이페이지</p>
                 <p id="p21">고객센터</p>
                 <br>
                 <hr>
-                <table align="center">
-	                    <tr>
-	                        <th>제목</th>
-	                    </tr>
-	                    <tr>
-	                        <th>작성일</th>
-	                    </tr>
-	                    <tr>
-	                        <th>내용</th>
-	                    </tr>
-                 	  
+                <br><br>
+                <table>
+                    <tr>
+                    	<th><%=cs.getInqNo() %></th>
+                        <th id="csTitle">제목: <%=cs.getInqTitle() %> | 작성일: <%=cs.getCreateDate() %></th>
+                    </tr>
+                    <tr>
+                        <th id="csContent"><%=cs.getInqContent() %></th>
+                    </tr>
                 </table>
+                <span><a href="#" class="deletebtn" id="csdelete2">삭제하기</a></span>
+                <span><a href="#" class="deletebtn" id="csdelete">목록가기</a></span>
+                <!--
+                <button id="csdelete2" type="submit">목록가기</button>
+                <button id="csdelete" type="submit">삭제하기</button>
+            	<  -->
             </div>
-        
+        </div>
         </div>
     </div>
 </body>

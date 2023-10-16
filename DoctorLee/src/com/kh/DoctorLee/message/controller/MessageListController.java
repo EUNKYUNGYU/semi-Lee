@@ -41,24 +41,29 @@ public class MessageListController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-
-		int listCount = new MessageService().selectListCount();
+		String type = request.getParameter("type");
+		
+		int listCount = new MessageService().selectListCount(type, memNo);
 		int currentPage = Integer.parseInt(request.getParameter("cpage"));
 		int pageLimit = 10;
-		int boardLimit = 5;
+		int boardLimit = 15;
 		int maxPage = (int)Math.ceil((double)listCount / boardLimit);
 		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		int endPage= startPage + pageLimit - 1;
 		if(endPage > maxPage ) endPage = maxPage;
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,boardLimit, maxPage, startPage, endPage);
 		
-		String type = request.getParameter("type");
+		System.out.println("메세지 리스트 컨트롤러 type" + type + " memNo " + memNo );	
+		System.out.println("메세지 리스트 컨트롤러 maxPage " + maxPage + " listCount " + listCount + "  boardLimit" + boardLimit);	
+
 		ArrayList<Message> list = new MessageService().selectList(type, memNo, pi);
-				
+		
+		request.setAttribute("type", type);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
-		request.getRequestDispatcher("views/message/messageListView.jsp").forward(request, response);
 		
+		request.getRequestDispatcher("views/message/messageListView.jsp").forward(request, response);
+		System.out.println("---------");
 	}
 
 	/**

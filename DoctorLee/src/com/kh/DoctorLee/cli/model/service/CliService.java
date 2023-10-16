@@ -125,5 +125,16 @@ public class CliService {
 		
 		return scope;
 	}
+	
+	// 클리닉 리뷰 가져오기
+	public ArrayList<CliRev> selectCliRevList(int cliNo){
+		Connection conn = getConnection();
+		
+		ArrayList<CliRev> list = new CliDao().selectCliRevList(conn, cliNo);
+		
+		close(conn);
+		
+		return list;
+	}
 
 }

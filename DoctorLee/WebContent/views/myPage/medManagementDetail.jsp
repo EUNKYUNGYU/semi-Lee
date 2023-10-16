@@ -110,11 +110,24 @@
 		            padding-left: 150px;
 		        }
         
-        #deletebtn{
-            text-decoration: none;
-            color: white;
-        	margin-left: 1500px;
-        }
+                .deletebtn{
+                    text-decoration: none;
+                    border: 1px solid #1E376F;
+                    color: #1E376F;
+                    float: right;
+                    margin-right: 30px;
+                    width: 100px;
+                    height: 40px;
+                    border-radius: 3px;
+                    text-align: center;
+                    padding-top: 7px;
+		        }
+
+                .deletebtn:hover{
+                    background-color: #1E376F;
+                    color: white;
+                    text-decoration: none;
+                }
 </style>
 </head>
 <body>
@@ -177,7 +190,8 @@
                   </table>
                </div>
             </div>
-			<a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" id="deletebtn" class="btn btn-sm btn-primary">삭제하기</a>
+            <span><a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" class="deletebtn" id="csdelete2">삭제하기</a></span>
+            <span><a href="#" class="deletebtn" id="csdelete">목록가기</a></span>
         </div>
 </body>
 </html>

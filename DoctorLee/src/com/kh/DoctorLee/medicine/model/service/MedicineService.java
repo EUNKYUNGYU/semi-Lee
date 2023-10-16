@@ -30,6 +30,13 @@ public class MedicineService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public int checkMedicine(String checkMed) {
+		Connection conn = JDBCTemplate.getConnection();
+		int count =new MedicineDao().checkMedicine(conn,checkMed);
+		JDBCTemplate.close(conn);
+		return count;
+		
+	}
 	
 
 }

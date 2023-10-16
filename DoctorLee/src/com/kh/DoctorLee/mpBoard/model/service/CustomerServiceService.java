@@ -30,7 +30,36 @@ public class CustomerServiceService {
 		JDBCTemplate.close(conn);
 		
 		return cs;
+	}
+	
+	public int deleteCustomerService(int customerServiceNo) {
 		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new CustomerServiceDao().deleteCustomerService(conn, customerServiceNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public int insertAdminInq(CustomerService cs) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new CustomerServiceDao().insertAdminInq(conn, cs);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return result;
 	}
 	
 }

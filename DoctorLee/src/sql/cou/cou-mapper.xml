@@ -70,5 +70,19 @@
 		 WHERE
 		 		VIDEO_NO = ? 		
 	</entry>
+	
+	<entry key="selectRandVideo">
+		SELECT
+		  		VIDEO_NO,
+		  		MEM_NO,
+		  		VIDEO_TITLE,
+		  		CHANNEL_NAME,
+		  		VIDEO_ADDRESS
+		  FROM
+		  		TB_COU_VIDEO
+		 ORDER
+		    BY
+		  		DBMS_RANDOM.VALUE		
+	</entry>
 </properties>
 

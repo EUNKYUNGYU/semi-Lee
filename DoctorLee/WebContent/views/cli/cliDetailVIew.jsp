@@ -308,7 +308,7 @@
                     success:function(result){
                         alert('리뷰 등록 성공');
 
-                        $('#myModal').attr('style', 'display:none');
+                        $('#close').on('click');
                     },
                     error:function(){
                         console('리뷰 등록 실패');
@@ -344,7 +344,7 @@
             $(function(){
                 selectRevList();
 
-                // setInterval(selectRevList, 1000);
+                setInterval(selectRevList, 1000);
             })
         })
     </script>

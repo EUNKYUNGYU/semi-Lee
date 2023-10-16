@@ -108,4 +108,28 @@
 		  AND
 		  		MEM_NO = ?						
 	</entry>
+	
+	<entry key="insertCliRev">
+		INSERT
+		  INTO
+		  		TB_CLI_REV
+		VALUES
+				(
+				SEQ_CLI_REV_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				SYSDATE,
+				?
+				)		
+	</entry>
+	
+	<entry key="selectCliScope">
+		SELECT 
+				ROUND(AVG(CLI_SCOPE),1)
+		  FROM 
+				TB_CLI_REV
+		  WHERE 
+				CLI_NO = ?
+	</entry>
 </properties>

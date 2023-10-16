@@ -12,12 +12,39 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.DoctorLee.board.model.vo.Board;
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.quize.model.dao.QuizeDao;
-import com.kh.DoctorLee.quize.model.vo.Quize;
 
 public class BoardDao {
 	
 	private Properties prop = new Properties();
+	
+	public int selectListCount(Connection conn, String type) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount") +
+					"AND " + 
+					"BOARD_TYPE = " +
+					type;
+					 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
 	
 	public BoardDao() {
 		String filePath = QuizeDao.class.getResource("/sql/board/board-mapper.xml").getPath();
@@ -30,17 +57,23 @@ public class BoardDao {
 	}
 	
 	
-	public ArrayList<Board> selectList(Connection conn){
+	public ArrayList<Board> selectList(Connection conn, String type, PageInfo pi){
 		
 		
 		ArrayList<Board> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectList");
+		String sql = prop.getProperty("selectList") + 
+					"AND " + 
+					"BOARD_TYPE = ? " +
+					"ORDER BY " + 
+					"B.CREATE_DATE DESC";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, type);
 			rset = pstmt.executeQuery();
+			
 			while(rset.next()) {
 				
 				Board b = new Board();
@@ -65,9 +98,12 @@ public class BoardDao {
 		
 	}
 	
-	public Board selectBoard(Connection conn, int boardNo) {
+	public Board selectBoard(Connection conn, String type, int boardNo) {
 		
 		Board b = new Board();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBoard");
 		
 		
 		return b;

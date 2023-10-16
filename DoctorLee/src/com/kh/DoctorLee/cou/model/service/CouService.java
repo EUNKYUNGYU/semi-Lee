@@ -1,11 +1,16 @@
 package com.kh.DoctorLee.cou.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
+import static com.kh.DoctorLee.common.JDBCTemplate.commit;
+import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
+import static com.kh.DoctorLee.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.dao.CouDao;
+import com.kh.DoctorLee.cou.model.vo.Cou;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
 public class CouService {
@@ -91,6 +96,28 @@ public class CouService {
 		close(conn);
 		
 		return result;
+	}
+	
+	// 비디오 랜덤 출력하기
+	public ArrayList<CouVideo> selectRandomVideo() {
+		Connection conn = getConnection();
+		
+		ArrayList<CouVideo> list = new CouDao().selectRandomVideo(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	// 상담사 목록 출력
+	public ArrayList<Cou> selectCouList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Cou> list = new CouDao().selectCouList(conn);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

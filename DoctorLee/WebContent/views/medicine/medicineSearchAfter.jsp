@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList,com.kh.DoctorLee.medicine.model.vo.Medicine" %>
+<%@ page import = "java.util.ArrayList,com.kh.DoctorLee.medicine.model.vo.Medicine,com.kh.DoctorLee.member.model.vo.Member" %>
 <%
 	ArrayList<Medicine> medList = (ArrayList<Medicine>)request.getAttribute("medList");
+	Member loginUser = (Member)session.getAttribute("loginUser");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -46,6 +48,15 @@
 	#tr> button{
 		float :left;
 	}
+	.insert-med {
+		margin-left : 900px;
+		margin-bottom : 100px;
+	}
+	#search-form{
+		margin-bottom : 50px;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -60,7 +71,7 @@
 			<form action="<%=contextPath%>/select.med" id="search-form" method="post">
 			<input type="text" name="medName" id="medName" >
 			<button type="submit" id="search">검색</button><br><br>
-			<table id="text-area">
+			<table id="text-area" class="medList-area">
 				<thead>
 				<tr>
 					<th>검색된 약품 이름</th>
@@ -78,12 +89,28 @@
 				<%}%>
 				
 				<%}%>
+				<br><br>
+				
 				</tbody>
 			</table>
 			</form>
-		
+			<%if(loginUser.getMemId().equals("admin")){ %>
+					<a href="<%=contextPath%>/enrollForm.med" class="insert-med">약품 추가하기 </a>
+				<%} %>
 		</div>
 		
+		<script>
+			$(function(){
+				$('.medList-area>tbody>tr').click(function(){
+					const mname = $(this).children().eq(0).text();
+					//console.log(mname);
+    				location.href="<%=contextPath%>/detail.med?mname="+ mname;
+				})
+			});
+		</script>
+		<form>
+			<input type="hidden" name = "mname" id=mname>
+		</form>
 		<%@ include file="../common/footer.jsp" %>
 
 </body>

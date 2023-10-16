@@ -4,8 +4,8 @@
     
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	String type = String.valueOf(request.getAttribute("type"));
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>게시글 리스트 전체보기</title>
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
@@ -26,12 +26,11 @@
 <style>
 
 * {
+	border: 1px solid skyblue;
 	box-sizing: border-box;
 }
 
-body{
-	margin : 0;
-}
+body{margin : 0;}
 
 #header {
 	width: 100vw;
@@ -45,13 +44,10 @@ main {
 	line-height: 30px;
 }
 
-main > section, main > aside, main > div{
-	float: left;
-}
+main > section, main > aside, main > div{float: left;}
 
 .aside {
 	height: auto;
-	float: left;
 	margin : 20px auto;
 	display: flex;
 	justify-content: center;
@@ -84,13 +80,17 @@ main > section, main > aside, main > div{
 	height : auto;
 }
 
-article{width: 95%; height: auto; margin : 20px;}
-					
+article{
+	width: 95%;
+	height: auto;
+	margin : 20px;
+}
+
+
 #page, #search{
 	width : 100%;
 	height : 100px;
 	padding: 20px;
-	text-align: center;
 }
 
 footer {
@@ -104,11 +104,12 @@ footer {
 	
 }
 
-#boardTable{
+table{
 	background-color: rgb(232, 238, 253);
 	border-radius: 7px;
 }
 
+.notReadStyle{color: skyblue;}
 
 </style>
 </head>
@@ -125,61 +126,67 @@ footer {
 		<section id="section">
 			
 			<div id="contentTitle">
-				자유게시판
+				게시판
 			</div>
 			
 			<div id="content">
 				<article>
-					<table id="boardTable" class="table table-hover">
+					<hr>
+					<table align="center" id="BoardTable" class="table table-hover">
 					  <thead>
 					    <tr>
-					      <th scope="col" width="10%" style="text-align: center">게시글 번호</th>
-					      <th scope="col" width="30%" style="text-align: center">제목</th>
+					      <th scope="col" width="15%"></th>
+					      <th scope="col" width="40%" style="text-align: center">제목</th>
 					      <th scope="col" width="10%">작성자</th>
-					      <th scope="col" width="20%" style="text-align: center">작성일</th>
+					      <th scope="col" width="15%" style="text-align: center">작성일</th>
 					      <th scope="col" width="10%" style="text-align: center">조회수</th>
 					      <th scope="col" width="10%" style="text-align: center">추천수</th>
 					    </tr>
 					  </thead>
-					  <tbody>
-					  <% if(list == null) { %>
-					    <tr>
-						  <td colspan="5" style="text-align: center">작성한 게시글이 없습니다</td>
-					    <tr>
-					  <% } else { %>
-						<% for(Board b : list) { %>
-					      <td scope="row" style="text-align: center"><%= b.getBoardNo() %></td>
-					      <td scope="row" style="text-align: center"><%= b.getBoardTitle() %></td>
-					      <td scope="row" width="10%"><%= b.getWriter() %></td>
-					      <td scope="row" width="20%" style="text-align: center"><%= b.getCreateDate() %></td>
-					      <td scope="row" width="10%" style="text-align: center"><%= b.getViews() %></td>
-					      <td scope="row" width="10%" style="text-align: center">0</td>
-					    </tr>
-					    <% } %>
-						<% } %>
-					  </tbody>
+					  
+							<% if(list == null) { %>
+						
+						<tbody>
+							<tr>
+								<td colspan="6">조회된 게시글이 없습니다.</td>
+							</tr>
+							<% } else { %>
+							<% for(Board b : list) { %>
+							<tr>
+								<td class="tableCenter" align="center"><%= b.getBoardNo() %></td>
+								<td scope="row"><%= b.getBoardTitle() %></td>
+								<td class="tableCenter"><%= b.getWriter() %></td>
+								<td class="tableCenter" align="center"><%= b.getCreateDate() %></td>
+								<td class="tableCenter" align="center"><%= b.getViews() %></td>
+								<td class="tableCenter" align="center">0</td>
+							</tr>
+							<% } %>
+							<% } %>
+						</tbody>
 					</table>
 				</article>
 			</div>
 			
+			
 			<div id="page">
 				<%if(currentPage != 1) {%>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage - 1%>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'">&lt;</button>
+		        <button class="btn btn-default"
+		        onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage - 1%>'">&lt;</button>
 		        <% }%>
 		         
 		       
-		        <% for(int i = startPage; i <= endPage; i++){%>
-		         	<% if(currentPage != i) { %>
-		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.ms?cpage=<%= i %>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'"><%= i %></button>
-		         	
-		         	<% } else { %>
+		         	<% for(int i = startPage; i <= endPage; i++){%>
+		         		<% if(currentPage != i) { %>
+		         		<button class="btn btn-default" 
+		         		onclick="location.href='<%= contextPath%>/list.bo?cpage=<%= i %>'"><%= i %></button>
+		         		<% } else { %>
 		         		<button disabled class="btn btn-default"><%= i %></button>
 		         		<% } %>
-		         <% } %>
+		         	<% } %>
 		        
-		        <% System.out.println(maxPage); %>
 		        <%if(currentPage != maxPage) { %>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage + 1%>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'">&gt;</button>
+		        <button class="btn btn-default" 
+		        onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage + 1%>'">&gt;</button>
 		        <% } %>
 			</div>
 		
@@ -193,7 +200,7 @@ footer {
 		</aside>
 		
 	</main>
-	<clear both="br">
+	<br clear="both">
 	
 	<footer>
 		<%@ include file ="../common/footer.jsp" %>

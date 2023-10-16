@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.mpBoard.controller;
+package com.kh.DoctorLee.medicine.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.mpBoard.model.service.DiaryService;
-import com.kh.DoctorLee.mpBoard.model.vo.MyDiary;
+import com.kh.DoctorLee.medicine.model.service.MedicineService;
+import com.kh.DoctorLee.medicine.model.vo.Medicine;
 
 /**
- * Servlet implementation class DiaryDetailView
+ * Servlet implementation class MedicineDetailView
  */
-@WebServlet("/detail.di")
-public class DiaryDetailView extends HttpServlet {
+@WebServlet("/detail.med")
+public class MedicineDetailView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryDetailView() {
+    public MedicineDetailView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +31,11 @@ public class DiaryDetailView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		int diaryNo = Integer.parseInt(request.getParameter("dno"));
-		MyDiary md= new DiaryService().detailMyDiary(diaryNo);
-		request.setAttribute("md", md);
-		request.getRequestDispatcher("views/diary/diaryDetailView.jsp").forward(request, response);
-	
+		String medName = request.getParameter("mname");
+		Medicine med = new MedicineService().detailMedicine(medName);
+		request.setAttribute("med",med);
+		request.getRequestDispatcher("views/medicine/medicineDetailView.jsp").forward(request, response);;
+		
 	}
 
 	/**

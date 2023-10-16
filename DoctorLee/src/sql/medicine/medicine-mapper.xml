@@ -9,4 +9,26 @@
 		WHERE
 			MED_NAME LIKE '%'||?||'%'
 	</entry>
+	<entry key="selectMedicineDetail">
+		SELECT
+			MED_NAME,
+			PRE_INFO,
+			CAUCTION
+		FROM 
+			TB_MED
+		WHERE 
+			MED_NAME = ?
+		
+	</entry>
+	<entry key="insertMedicine">
+		INSERT
+			INTO
+		TB_MED
+			VALUES(
+				SEQ_TB_MED.NEXTVAL,
+				?,
+				?,
+				?
+			)
+	</entry>
 </properties>

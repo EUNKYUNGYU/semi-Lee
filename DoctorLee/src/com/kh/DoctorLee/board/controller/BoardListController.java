@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.board.model.service.BoardService;
 import com.kh.DoctorLee.board.model.vo.Board;
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class BoardListController
@@ -32,10 +33,25 @@ public class BoardListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		ArrayList<Board> list = new BoardService().selectList();
+		String type = request.getParameter("type");
+		int listCount = new BoardService().selectListCount(type);
+		int currentPage = Integer.parseInt(request.getParameter("cpage"));
+		int pageLimit = 10;
+		int boardLimit = 15;
+		int maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		int endPage= startPage + pageLimit - 1;
+		if(endPage > maxPage ) endPage = maxPage;
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,boardLimit, maxPage, startPage, endPage);
+		
+		
+		ArrayList<Board> list = new BoardService().selectList(type, pi);
+		
 		request.setAttribute("list", list);
+		request.setAttribute("type", type);
+		
 		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
-		System.out.println("보드 리스트 controller"+list);
+		System.out.println("보드 리스트 controller list "+list);
 		
 	}
 

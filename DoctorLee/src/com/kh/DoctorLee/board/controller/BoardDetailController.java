@@ -33,13 +33,14 @@ public class BoardDetailController extends HttpServlet {
 	
 		request.setCharacterEncoding("UTF-8");
 		
-		Board b = new Board();
-		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String type = String.valueOf(request.getParameter("type"));
 		
-		Board b = new BoardService().selectBoard(boardNo);
+		Board b = new BoardService().selectBoard(type, boardNo);
 		
-		if(b)
+		if(b != null) {
+			
+		}
  	
 	}
 

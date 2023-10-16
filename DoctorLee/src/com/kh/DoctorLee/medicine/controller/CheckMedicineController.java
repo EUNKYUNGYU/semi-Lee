@@ -1,7 +1,6 @@
-package com.kh.DoctorLee.cli.controller;
+package com.kh.DoctorLee.medicine.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.cli.model.service.CliService;
-import com.kh.DoctorLee.cli.model.vo.Category;
-import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.medicine.model.service.MedicineService;
 
 /**
- * Servlet implementation class CliListController
+ * Servlet implementation class CheckMedicineController
  */
-@WebServlet("/list.cli")
-public class CliListController extends HttpServlet {
+@WebServlet("/check.med")
+public class CheckMedicineController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CliListController() {
+    public CheckMedicineController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +29,15 @@ public class CliListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-//		String cateName = request.getParameter("cateNo");
-		
-		// 카테고리 불러오기
-		ArrayList<Category> list = new CliService().selectCategoryList();
-		
-		//System.out.println(list);
-		
-		request.setAttribute("list", list);
-
-		request.getRequestDispatcher("/views/cli/cliListView.jsp").forward(request, response);
+		String checkMed = request.getParameter("checkMed");
+		int count = new MedicineService().checkMedicine(checkMed);
+		response.setContentType("text/html; charset=UTF-8");
+		if(count > 0) {
+			response.getWriter().print("N");
+			
+		}else {
+			response.getWriter().print("Y");
+		}
 	}
 
 	/**

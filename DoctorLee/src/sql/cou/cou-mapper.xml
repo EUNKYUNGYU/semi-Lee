@@ -85,7 +85,7 @@
 	<entry key="selectCouList">
 		SELECT 
 				COU_NO, 
-				HOS_NO, 
+				HOS_NAME, 
 				COU_NAME, 
 				PHONE,
 				ORIGIN_NAME,
@@ -93,8 +93,27 @@
 				PROFILE_PATH
 		FROM 
 				TB_COU
+		JOIN
+				TB_HOSPITAL USING(HOS_NO)		
 		ORDER
 		   BY	COU_NAME	
+	</entry>
+	
+	<entry key="selectCou">
+		SELECT
+				COU_NO, 
+				HOS_NAME, 
+				COU_NAME, 
+				PHONE,
+				ORIGIN_NAME,
+				CHANGE_NAME,
+				PROFILE_PATH
+		FROM
+				TB_COU
+		JOIN
+				TB_HOSPITAL USING(HOS_NO)		
+		WHERE
+				COU_NO = ?				
 	</entry>
 </properties>
 

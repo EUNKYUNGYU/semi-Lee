@@ -240,15 +240,17 @@ public class CouDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			rset = pstmt.executeQuery();
+			
 			while(rset.next()) {
 				Cou c = new Cou();
 				c.setCouNo(rset.getInt("COU_NO"));
-				c.setHosNo(rset.getInt("HOS_NO"));
+				c.setHosName(rset.getString("HOS_NAME"));
 				c.setCouName(rset.getString("COU_NAME"));
 				c.setPhone(rset.getString("PHONE"));
 				c.setOriginName(rset.getString("ORIGIN_NAME"));
 				c.setChangeName(rset.getString("CHANGE_NAME"));
 				c.setProfilePath(rset.getString("PROFILE_PATH"));
+				
 				list.add(c);
 			}
 		} catch (SQLException e) {
@@ -257,6 +259,41 @@ public class CouDao {
 			close(rset);
 			close(pstmt);
 		}
+		
 		return list;
+	}
+	
+	// 상담사 상세보기
+	public Cou selectCou(Connection conn, int couNo) {
+		Cou c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCou");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Cou();
+				c.setCouNo(rset.getInt("COU_NO"));
+				c.setHosName(rset.getString("HOS_NAME"));
+				c.setCouName(rset.getString("COU_NAME"));
+				c.setPhone(rset.getString("PHONE"));
+				c.setOriginName(rset.getString("ORIGIN_NAME"));
+				c.setChangeName(rset.getString("CHANGE_NAME"));
+				c.setProfilePath(rset.getString("PROFILE_PATH"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return c;
 	}
 }

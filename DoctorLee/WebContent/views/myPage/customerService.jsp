@@ -200,7 +200,7 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
             </div>
         </div>
      </div>
-     
+      <%@ include file="../common/footer.jsp" %>
      <script>
      	
      	function personalInqPage(){

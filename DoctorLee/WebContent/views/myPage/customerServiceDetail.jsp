@@ -58,7 +58,6 @@
         #csTitle{
             width: 800px;
             height: 30px;
-            
         }
 
         #csContent{
@@ -119,7 +118,7 @@
                 <br>
                 <hr>
                 <br><br>
-                <table>
+                <table align="center">
                     <tr>
                     	<th><%=cs.getInqNo() %></th>
                         <th id="csTitle">문의:<%=cs.getCategory() %> | 제목: <%=cs.getInqTitle() %> | 작성일: <%=cs.getCreateDate() %></th>
@@ -134,5 +133,6 @@
         </div>
         </div>
     </div>
+     <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

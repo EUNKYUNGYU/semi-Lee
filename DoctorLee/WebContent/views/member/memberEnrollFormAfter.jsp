@@ -101,6 +101,7 @@
         <div id="content_3" align="center">
             <button type="reset" class="button" id="home" onclick="mainPage();">홈으로</button>
         </div>
+        <%@ include file="../common/footer.jsp" %>
         
         <script>
         	function mainPage(){

@@ -196,7 +196,7 @@
             </div>
  		</div>
  </div>
-    
+     <%@ include file="../common/footer.jsp" %>
     <script>
     	$(function(){
     		$('.list-area>tbody>tr').click(function(){
@@ -217,6 +217,6 @@
     	});
     </script>
 	 
-	 <br><br><br><br><br><br><br><br><br>
+	
 </body>
 </html>

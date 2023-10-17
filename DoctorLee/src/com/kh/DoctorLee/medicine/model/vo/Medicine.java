@@ -1,10 +1,12 @@
 package com.kh.DoctorLee.medicine.model.vo;
 
 public class Medicine {
+	
 	private int medNo;
 	private String medName;
 	private String preInfo;
 	private String cauction;
+	
 	public Medicine() {
 		super();
 	}

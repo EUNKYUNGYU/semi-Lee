@@ -413,13 +413,14 @@
             <br><br><br><br><br><br><br><br>
             <button type="reset" id="cancel1">취소</button>
             <button type="submit" id="register1"  onclick="return checkAll();">회원가입</button>
+            <br><br><br><br><br><br>
         </div>
         
 
 		</form>
     </div>
     
-
+	 <%@ include file="../common/footer.jsp" %>
 <script>
 
 	// 아이디 중복체크
@@ -523,6 +524,5 @@
 </script>
 
 
-    <br><br><br><br><br><br><br><br>
 </body>
 </html>

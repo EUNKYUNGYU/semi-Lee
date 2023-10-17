@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <%@ page import = "com.kh.DoctorLee.mpBoard.model.vo.MedManagement, com.kh.DoctorLee.medicine.model.vo.Medicine" %>
-=======
-<%@ page import = "com.kh.DoctorLee.mpBoard.model.vo.MedManagement,com.kh.DoctorLee.medicine.model.vo.Medicine" %>
->>>>>>> 149694f55af4d4092001019e0c4db182797ed4da
 <%
 	MedManagement mm = (MedManagement)request.getAttribute("mm");
 	Medicine med = (Medicine)request.getAttribute("med");
@@ -185,5 +181,6 @@
                </div>
             </div>
         </div>
+         <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

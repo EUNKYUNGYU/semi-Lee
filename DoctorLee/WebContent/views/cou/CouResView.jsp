@@ -26,9 +26,9 @@
             center:'title',
             right:'next'
         },
-        validRange: function(toady) {
+        validRange: function(nowDate) {
             return {
-                start: toady
+                start: nowDate
             };
         },
 
@@ -114,13 +114,10 @@
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
-        height: 1050px;
+        height: auto;
         margin-top: 50px;
         border: 1px solid red;
-    }
-
-    .content > div{
-        float: left;
+        margin-bottom: 50px;
     }
 
     #cou_navi{
@@ -131,7 +128,7 @@
     #cli-content {
         width: 1000px;
         margin-left: 100px;
-        height: 1000px;
+        height: auto;
     }
 
     /*클리닉 예약 날짜 출력 영역 div*/
@@ -303,6 +300,10 @@
     
             </div>
     
+        </div>
+
+        <div id="footer">
+            <%@ include file ="../common/footer.jsp" %>
         </div>
 
         <script>

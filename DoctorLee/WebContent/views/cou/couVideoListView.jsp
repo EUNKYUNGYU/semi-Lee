@@ -47,7 +47,7 @@
 /*하단 내용 영역을 감싸는 div*/
 .content{
     margin-top: 50px;
-    height: 2350px;
+    height: 2500px;
 }
 
 #cou_navi{
@@ -222,6 +222,11 @@ img{
     </div>
 
     </div>
+
+    <footer>
+		<%@ include file ="../common/footer.jsp" %>
+	</footer>
+
 
     <script>
         $(function(){

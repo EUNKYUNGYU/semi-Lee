@@ -143,6 +143,7 @@ public class BoardDao {
 			pstmt.setInt(3, boardNo);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
+				b.setBoardNo(rset.getInt("BOARD_NO"));
 				b.setWriter(rset.getString("NICKNAME"));
 				b.setBoardName(rset.getString("BOARD_NAME"));
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
@@ -161,5 +162,71 @@ public class BoardDao {
 		}
 		return b;
 	}
+	
+	public int deleteBoard(Connection conn, int boardNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int updateBoard(Connection conn, Board b) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBoard");
+		System.out.println("보드 업데이트 Dao b" + b);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("보드 업데이트 Dao b.getBoardType() " + b.getBoardType()
+			+ "b.getBoardTitle()" + b.getBoardTitle()  + "b.getBoardContent()" +b.getBoardContent()
+			+ "b.getBoardNo()" + b.getBoardNo());
+			pstmt.setInt(1, b.getBoardType());
+			pstmt.setString(2, b.getBoardTitle());
+			pstmt.setString(3, b.getBoardContent());
+			pstmt.setInt(4, b.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println("보드 업데이트 Dao result" + result);
+		return result;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

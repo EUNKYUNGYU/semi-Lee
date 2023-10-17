@@ -80,5 +80,29 @@
         	BOARD_NO = ?
 	</entry>
 
+<entry key="deleteBoard">
+
+	UPDATE 
+			TB_BOARD 
+		SET 
+			STATUS = 'N' 
+		WHERE 
+			BOARD_NO = ?
+
+</entry>
+
+<entry key="updateBoard">
+	
+	UPDATE 
+	        TB_BOARD 
+	    SET 
+	        BOARD_TYPE = ?,
+	        BOARD_TITLE = ?,
+	        BOARD_CONTENT = ?,
+	        MODIFY_DATE = SYSDATE
+	    WHERE 
+	        BOARD_NO = ?
+	        
+</entry>
 	
 </properties>

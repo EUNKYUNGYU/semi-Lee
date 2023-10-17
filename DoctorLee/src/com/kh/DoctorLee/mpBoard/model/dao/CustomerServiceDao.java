@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.common.JDBCTemplate;
 import com.kh.DoctorLee.member.model.dao.MemberDao;
+import com.kh.DoctorLee.mpBoard.model.vo.Category;
 import com.kh.DoctorLee.mpBoard.model.vo.CustomerService;
 
 public class CustomerServiceDao {
@@ -123,7 +124,7 @@ private Properties prop = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cs.getMemNo());
-			pstmt.setInt(2, cs.getInqType());
+			pstmt.setInt(2, Integer.parseInt(cs.getCategory()));
 			pstmt.setString(3, cs.getInqTitle());
 			pstmt.setString(4, cs.getInqContent());
 			result = pstmt.executeUpdate();
@@ -133,6 +134,31 @@ private Properties prop = new Properties();
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+	
+	public ArrayList<Category> selectCategoryList(Connection conn){
 		
+		ArrayList<Category> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCategoryList");
+			
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Category(rset.getInt("CATEGORY_NO"),
+									  rset.getString("CATEGORY_NAME")));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 	}
 }

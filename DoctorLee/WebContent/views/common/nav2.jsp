@@ -166,7 +166,7 @@ body{
 </style>
 </head>
 <body>
-
+			<!-- 
 			<script>
     			var msg = '<%=alertMsg%>';
     			
@@ -177,7 +177,7 @@ body{
     			<% session.removeAttribute("alertMsg");%>
     			}
     		</script>
-    		
+    		-->
     		
 <div id="navi">
             <div id="navi1"><a href="<%=contextPath%>" id="navitext">낭만닥터 이사부</a>

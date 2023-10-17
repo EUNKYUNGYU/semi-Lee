@@ -99,6 +99,13 @@
             background-color: #1E376F;
             color: white;
         }
+        
+        #optionbtn{
+            float: right;
+            margin-right: 400px;
+            width: 150px;
+            height: 30px;
+        }
 </style>
 </head>
 <body>
@@ -119,6 +126,10 @@
                 <br>
                 <hr>
 				<br>
+				<select id="optionbtn">
+                    <option value="1:1문의">1:1문의</option>
+                    <option value="관리자문의">관리자문의</option>
+                </select>
                 <textarea id="texttitle" cols="40" rows="10" style="resize: none;" maxlength="50" placeholder="제목을 입력해주세요."></textarea>
                 <textarea id="textcontent" cols="40" rows="10" style="resize: none;" maxlength="1000" placeholder="내용을 입력해주세요."></textarea>
                 <br>

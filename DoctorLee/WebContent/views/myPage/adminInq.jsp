@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.Category" %>
+<%
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,6 +103,13 @@
             background-color: #1E376F;
             color: white;
         }
+        
+        #optionbtn{
+            float: right;
+            margin-right: 400px;
+            width: 150px;
+            height: 30px;
+        }
 </style>
 </head>
 <body>
@@ -121,6 +132,13 @@
                 <br>
                 <hr>
 				<br>
+				<select name="category" id="optionbtn">
+				<% for(Category c : list) { %>
+                    <option value="<%= c.getCategoryNo()%>">
+                    	<%=c.getCategoryName() %>
+                    </option>
+				<%} %>
+                </select>
                 <textarea id="inqTitle" name="inqTitle" cols="40" rows="10" style="resize: none;" maxlength="50" placeholder="제목을 입력해주세요."></textarea>
                 <textarea id="inqContent" name="inqContent" cols="40" rows="10" style="resize: none;" maxlength="1000" placeholder="내용을 입력해주세요."></textarea>
                 <br>

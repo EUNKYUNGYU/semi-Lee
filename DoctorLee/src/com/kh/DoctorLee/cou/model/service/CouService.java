@@ -14,6 +14,7 @@ import com.kh.DoctorLee.cou.model.vo.Cou;
 import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
+import com.kh.DoctorLee.member.model.vo.Member;
 
 public class CouService {
 	
@@ -166,6 +167,16 @@ public class CouService {
 		} else {
 			rollback(conn);
 		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int selectResMem(int couNo, Member loginUser) {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().selectResMem(conn, couNo, loginUser);
 		
 		close(conn);
 		

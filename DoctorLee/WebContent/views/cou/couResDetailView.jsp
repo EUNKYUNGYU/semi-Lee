@@ -90,6 +90,19 @@
         margin-top: 30px;
         margin-left: 10px;
     }
+
+    /*리뷰 출력*/
+    #rev-border{
+        border: 1px solid red;
+    }
+
+    #rev-list{
+        list-style: none;
+    }
+    
+    .rev-content{
+        border: 1px solid purple;
+    }
 </style>
 </head>
 <body>
@@ -137,7 +150,23 @@
 
                     <% if(loginUser != null && result > 0) {%>
                         <button>후기 작성</button>
-                    <% } %>    
+                    <% } %>   
+                    
+                    <div id="rev-border">
+                        <ul id="rev-list">
+                            <!-- <li class="rev-content">
+                                <p>회원</p>
+                                <p>별점</p>
+                                <p>리뷰내용</p>
+                            </li>
+
+                            <li class="rev-content">
+                                <p>회원</p>
+                                <p>별점</p>
+                                <p>리뷰내용</p>
+                            </li> -->
+                        </ul>
+                    </div>
                 </div>
 
             </div>

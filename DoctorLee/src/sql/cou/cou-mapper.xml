@@ -168,5 +168,16 @@
 				?
 				)
 	</entry>
+	
+	<entry key="selectResMem">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_COU_RES
+		WHERE
+				MEM_NO = ?
+		AND
+				COU_NO = ?		
+	</entry>
 </properties>
 

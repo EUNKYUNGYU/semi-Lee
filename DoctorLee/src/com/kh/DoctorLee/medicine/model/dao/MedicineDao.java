@@ -30,6 +30,7 @@ public class MedicineDao {
 		String sql = prop.getProperty("selectMedicine");
 		
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, medName);
 			rset = pstmt.executeQuery();

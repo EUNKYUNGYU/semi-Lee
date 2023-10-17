@@ -314,7 +314,7 @@
 
                                             <div class="cli-score">
                                                 <span class="material-symbols-outlined">grade</span>
-                                                <span>별점</span>
+                                                <span><%=c.getScope()%></span>
                                             </div>
 
                                             <div class="cli-price">

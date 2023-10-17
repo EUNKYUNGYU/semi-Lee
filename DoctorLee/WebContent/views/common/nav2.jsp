@@ -208,7 +208,6 @@ body{
                         	<li><a href="<%=contextPath%>/myPage.me">마이페이지</a></li>
                             <li><a href="<%=contextPath%>/list.medi">복약관리</a></li>
                             <li><a href="<%=contextPath%>/updateForm.me">회원 정보 수정</a></li>
-                            <li><a href="#">회원 탈퇴</a></li>
                             <li><a href="<%=contextPath%>/customerService.mp">고객센터</a></li>
                             <li><a href="#">나의 게시글</a></li>
                             <li><a href="#">예약 관리</a></li>

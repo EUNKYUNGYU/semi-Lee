@@ -111,12 +111,7 @@
                 </div>
                 <ul id="navigator">
                     <li><a href="<%=contextPath1%>/list.medi">복약관리</a></li>
-                    <li><a href="#">회원정보 수정/탈퇴</a>
-                        <ul>
-                            <li><a href="<%=contextPath1%>/updateForm.me">회원 정보 수정</a></li>
-                            <li><a href="<%=contextPath1%>/deletePwd.me">회원 탈퇴</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="<%=contextPath1%>/updateForm.me">회원정보 수정</a></li>
                     <li><a href="<%=contextPath1%>/customerService.mp">고객센터</a></li>
                     <li><a href="#">자기 게시글 확인</a></li>
                     <li><a href="#">예약 관리</a></li>

@@ -211,5 +211,16 @@ public class CouService {
 		
 		return list;
 	}
+	
+	// 리뷰는 한 사람당 한 번만 작성 가능하게
+	public int selectRevCount(int couNo, Member loginUser) {
+		Connection conn = getConnection();
+		
+		int result2 = new CouDao().selectRevCount(conn, couNo, loginUser);
+		
+		close(conn);
+		
+		return result2;
+	}
 
 }

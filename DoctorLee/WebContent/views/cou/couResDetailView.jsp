@@ -4,6 +4,7 @@
 <%
     Cou c = (Cou)request.getAttribute("c");
     int result = (int)request.getAttribute("result");
+    int result2 = (int)request.getAttribute("result2");
 %>    
 <!DOCTYPE html>
 <html>
@@ -203,7 +204,7 @@
                 <div id="cli-bottom">
                     <h4>후기</h4>
 
-                    <% if(loginUser != null && result > 0) {%>
+                    <% if(loginUser != null && result > 0 && result2 == 0) {%>
                         <button data-toggle="modal" data-target="#myModal">후기 작성</button>
                     <% } %>   
                     

@@ -85,20 +85,34 @@
 	
 	<entry key="selectCouList">
 		SELECT 
+				ROUND(AVG(COU_SCOPE),1),
 				COU_NO, 
 				HOS_NAME, 
-				COU_NAME, 
-				PHONE,
-				ORIGIN_NAME,
-				CHANGE_NAME,
+				COU_NAME,
+                PHONE,
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
 				PROFILE_PATH,
-				PRICE
+                PRICE
 		FROM 
 				TB_COU
+		JOIN 
+				TB_HOSPITAL USING(HOS_NO)
 		JOIN
-				TB_HOSPITAL USING(HOS_NO)		
-		ORDER
-		   BY	COU_NAME	
+				TB_COU_REV USING(COU_NO)
+	    GROUP
+	    BY
+				COU_NO, 
+				HOS_NAME, 
+				COU_NAME,
+                PHONE,
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				PROFILE_PATH,
+                PRICE
+        ORDER
+        BY
+                COU_NAME	
 	</entry>
 	
 	<entry key="selectCou">

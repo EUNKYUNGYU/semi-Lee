@@ -245,6 +245,7 @@ public class CouDao {
 			
 			while(rset.next()) {
 				Cou c = new Cou();
+				c.setScope(rset.getDouble("ROUND(AVG(COU_SCOPE),1)"));
 				c.setCouNo(rset.getInt("COU_NO"));
 				c.setHosName(rset.getString("HOS_NAME"));
 				c.setCouName(rset.getString("COU_NAME"));

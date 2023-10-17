@@ -49,6 +49,7 @@
             // 달력 클릭 시 선택한 날짜 출력하기
             $('#resDate').val((info.dateStr).replaceAll('-', '.'));
             $('#resTime').val(null);
+            $('#hiddenResTime').val(null);
 
             var days = document.querySelectorAll(".day-color");
             days.forEach(function(day){
@@ -79,6 +80,7 @@
 
                     $('.time-content').click(function(){
                         $('#resTime').val($(this).children().text());
+                        $('#hiddenResTime').val($(this).children().text());
 
                         $(this).css('background-color', 'salmon');
 
@@ -218,6 +220,10 @@
         margin-right: 10px;
     }
 
+    #hiddenResTime{
+        visibility: hidden;
+    }
+
 </style>
 </head>
 <body>
@@ -285,6 +291,7 @@
 
                             <span>예약시간 : </span>
                             <input type="text" id="resTime" name="resTime" required readonly>
+                            <input type="text" id="hiddenResTime" required>
                         </div>
 
                         <div id="res-part" align="center">
@@ -309,18 +316,14 @@
                     }
                 })
 
-                $('#resTime').click(function(){
-                    console.log($(this).val());
+                $('#res-part').click(function(){
+
+                    if(!$('#resDate').val() && !$('#hiddenResTime').val()){
+                        alert('날짜를 선택하세요');
+                    } else if(!$('#hiddenResTime').val()){
+                        alert('시간을 선택하세요');
+                    }
                 })
-
-                // 시간 미선택 시 예약 버튼 비활성화
-                // if($('input[name=resTime]').val().trim() == ''){
-                //     $('button[type=submit]').attr('disabled', true);
-                // } else {
-                //     $('button[type=submit]').attr('disabled', false);
-                // }
-
-                
             })
         </script>
 

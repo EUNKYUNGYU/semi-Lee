@@ -136,5 +136,16 @@ public class CliService {
 		
 		return list;
 	}
+	
+	// 한 사람 당 한 번만 리뷰 작성 가능하게
+	public int selectRevCount(int cliNo, Member loginUser) {
+		Connection conn = getConnection();
+		
+		int result2 = new CliDao().selectRevCount(conn, cliNo, loginUser);
+		
+		close(conn);
+		
+		return result2;
+	}
 
 }

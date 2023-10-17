@@ -4,6 +4,7 @@
 <%
 	Clinic c = (Clinic)request.getAttribute("c");
     int result = (int)request.getAttribute("result");
+    int result2 = (int)request.getAttribute("result2");
     Double scope = (Double)request.getAttribute("scope");
 %>    
 <!DOCTYPE html>
@@ -206,7 +207,7 @@
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
                     <h4>후기</h4>
-                    <% if(loginUser != null && result > 0) {%>
+                    <% if(loginUser != null && result > 0 && result2 == 0) {%>
                         <button data-toggle="modal" data-target="#myModal">후기 작성</button>
                     <% } %>  
                     
@@ -290,17 +291,6 @@
                 // console.log($(this).parents().children().eq(1).val());
             })
 
-            // 리뷰: 별점 버튼 클릭
-            // $('input[name=reviewStar]').click(function(){
-            //     console.log($('input[name=reviewStar]:checked').val());
-            //     console.log($('#revContent').val());
-            // })
-
-            // $('#insertRev').click(function(){
-            //     console.log($('#revContent').text());
-            // })
-
-
             // 등록하기 버튼 클릭 시 리뷰 작성
             $('#insertRev').click(function(){
                 $.ajax({
@@ -333,11 +323,11 @@
                         let resultStr = '';
                         for(let i in result){
                             resultStr += '<li class="rev-content">'
-                                + '<p>' + result[i].nickName + '<p>'
-                                + '<p>' + result[i].cliScope + '<p>'
-                                + '<p>' + result[i].revContent + '<p>'
-                                + '<P>' + result[i].createDate + '<p>'
-                                + '</li>'
+                                            + '<p>' + result[i].nickName + '<p>'
+                                            + '<p>' + result[i].cliScope + '<p>'
+                                            + '<p>' + result[i].revContent + '<p>'
+                                            + '<P>' + result[i].createDate + '<p>'
+                                       + '</li>'
                         }
                         $('#rev-list').html(resultStr);
                     },

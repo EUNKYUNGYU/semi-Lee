@@ -333,7 +333,9 @@
         
                                                     +'<div class="cli-score">'
                                                             +'<span class="material-symbols-outlined">grade</span>'
-                                                            +'<span>' + '별점' +'</span>'
+                                                            +'<span>' 
+                                                                +result[i].scope 
+                                                            +'</span>'
                                                     +'</div>'
         
                                                     +'<div class="cli-cate">'

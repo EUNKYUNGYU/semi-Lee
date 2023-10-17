@@ -38,6 +38,8 @@ public class AjaxCouRevListController extends HttpServlet {
 		// Service 요청
 		ArrayList<CouRev> list = new CouService().selectCouRevList(couNo);
 		
+		System.out.println(list);
+		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
 	}

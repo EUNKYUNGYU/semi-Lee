@@ -205,7 +205,7 @@ public class CouService {
 	public ArrayList<CouRev> selectCouRevList(int couNo){
 		Connection conn = getConnection();
 		
-		ArrayList<CouRev> list = new CouDao().selectCouRevList(conn, c);
+		ArrayList<CouRev> list = new CouDao().selectCouRevList(conn, couNo);
 		
 		close(conn);
 		

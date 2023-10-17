@@ -52,7 +52,7 @@
 		<div id="medical-history-main">
 			<div id="medical-history">
 				<img alt="진료내역" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fmedia.istockphoto.com%2Fid%2F1254373900%2Fko%2F%25EB%25B2%25A1%25ED%2584%25B0%2F%25EC%25B1%2585-%25EC%2595%2584%25EC%259D%25B4%25EC%25BD%2598.jpg%3Fs%3D1024x1024%26w%3Dis%26k%3D20%26c%3D_7tLaLqGuxrxezYvvlq-kTVNIOVkUSzRuljj0SYsrlU%3D&type=a340" class="mhImg"><br>
-				<a href="#" class="mh-a">진료내역</a>
+				<a href="<%=contextPath %>/reservation.h" class="mh-a" id="reservation-history">예약내역</a>
 			</div>
 			<hr>
 	  		<div id="medical-fee">

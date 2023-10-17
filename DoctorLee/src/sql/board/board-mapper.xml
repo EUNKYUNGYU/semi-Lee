@@ -59,6 +59,8 @@
 		          BOARD_NO
 		         , BOARD_TYPE
 		         , BOARD_NAME
+		         , MEM_NO
+		         , MEM_ID
 		         , NICKNAME
 		         , BOARD_TITLE
 		         , BOARD_CONTENT

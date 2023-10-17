@@ -33,36 +33,13 @@
 
 
         /*--------------------p태그---------------------*/
-        #p1{
+        #p11{
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
             padding-top: 90px;
         }
 
-        #p2{
-            text-align: center;
-            font-size: 23px;
-            color: #1E376F;
-            font-weight: 600;
-            margin-top: 35px;
-           
-        }
-        
-        #p3{
-            text-align: left;
-            margin-left: 670px;
-            font-size: 18px;
-        }
-
-        #p4{
-            font-size: 16px;
-            padding-left: 350px;
-            font-size: 24px;
-            font-weight: 500;
-            
-           
-        }
        
         /*-------------가운데 박스--------------*/
         .positioning{
@@ -157,7 +134,7 @@
 	 <div id="content">
 
         <div id="content_1">
-            <p id="p1">비밀번호 찾기</p>
+            <p id="p11">비밀번호 찾기</p>
             
         </div>
             
@@ -196,8 +173,7 @@
 
     </div>
     
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

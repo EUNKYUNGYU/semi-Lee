@@ -35,7 +35,7 @@ body{
 	margin : 0;
 }
 
-header {
+#headerMessageListView {
 	width: 100vw;
 	height: 120px;
 }
@@ -141,7 +141,7 @@ table{
 </head>
 <body>
 
-	<header>
+	<header id="headerMessageListView">
 		<%@ include file ="../common/nav2.jsp" %>
 	</header> 
 	<main>
@@ -214,6 +214,8 @@ table{
 			
 			<script>
 				$(function(){
+					
+					console.log($('tr > td'));
 					
 					// 제목 클릭 했을 시 메세지 상세보기 페이지로 이동
 					$('tr > td').click(function(){

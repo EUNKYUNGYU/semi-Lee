@@ -39,10 +39,6 @@
         margin-top: 50px;
     }
 
-    .content > div{
-        float: left;
-    }
-
     #cou_navi{
         height: 1000px;
     }
@@ -385,6 +381,10 @@
         </div>
 
     </div>
+
+    <footer>
+        <%@ include file ="../common/footer.jsp" %>
+    </footer>
 
 </body>
 </html>

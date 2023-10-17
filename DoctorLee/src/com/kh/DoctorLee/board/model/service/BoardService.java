@@ -34,7 +34,6 @@ public class BoardService {
 	public int insertBoard(Board b, int memNo) {
 		
 		Connection conn = getConnection();
-		System.out.println("인서트 보드 서비스에서 setBoardName " + b.getBoardName());
 		int result = new BoardDao().insertBoard(conn, b, memNo);
 		if(result > 0) commit(conn);
 		else rollback(conn);
@@ -45,9 +44,7 @@ public class BoardService {
 	public Board selectBoard(int boardNo) {
 
 		Connection conn = getConnection();
-		System.out.println("보드 디테일 Service boardNo:  " + boardNo);
 		Board b = new BoardDao().selectBoard(conn, boardNo);
-		System.out.println("보드 디테일 Service b:  " + b);
 		close(conn);
 		return b;
 		
@@ -66,9 +63,8 @@ public class BoardService {
 	
 	public int updateBoard(Board b) {
 		
-		Connection conn = null;
+		Connection conn = getConnection();
 		int result = new BoardDao().updateBoard(conn, b);
-		System.out.println("보드 업데이트 Service result" + result);
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);

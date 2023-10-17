@@ -24,7 +24,7 @@
         /*하단 내용 영역을 감싸는 div*/
         .content{
             margin-top: 50px;
-            height: 1400px;
+            height: 1500px;
         }
 
         /*좌측 메뉴 영역 div*/
@@ -120,5 +120,9 @@
         </div>
 
     </div>
+
+    <footer>
+        <%@ include file ="../common/footer.jsp" %>
+    </footer>
 </body>
 </html>

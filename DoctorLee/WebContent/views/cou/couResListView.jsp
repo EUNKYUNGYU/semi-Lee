@@ -245,6 +245,10 @@
     .time-border > ul{
         list-style: none;
     }
+
+    footer{
+        margin-top: 100px;
+    }
 </style>
 </head>
 <body>
@@ -357,7 +361,13 @@
 
         </div>
 
+        <br clear="both">
+
     </div>
+
+    <footer>
+        <%@ include file ="../common/footer.jsp" %>
+    </footer>
 
 </body>
 </html>

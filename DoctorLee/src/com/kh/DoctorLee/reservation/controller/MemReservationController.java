@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.member.model.vo.Member;
+import org.json.simple.JSONObject;
+
 import com.kh.DoctorLee.reservation.model.service.ReservationService;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 
@@ -42,23 +43,50 @@ public class MemReservationController extends HttpServlet {
 		String hno = request.getParameter("hno");
 		String rsvtTime = rsvtH + rsvtM;
 		// System.out.println(hno);
+		// System.out.println(rsvtTime);
 		
-		Reservation rsvt = new Reservation();
-		rsvt.setRsvtDate(rsvtDate);
-		rsvt.setRsvtTime(rsvtTime);
-		rsvt.setRsvtDoc(rsvtDoc);
-		rsvt.setRsvtMem(rsvtName);
-		rsvt.setMemInfo(rsvtInfo);
-		rsvt.setRsvtHos(hno);
+		// insert하기 전 date + h + m 시간 체크 
+		int checkRsvtResult = new ReservationService().checkRsvtTreat(rsvtDate, rsvtTime);
+		//System.out.println(rsvtDate);
+		//System.out.println(rsvtTime);
+		System.out.println(checkRsvtResult);
 		
-		int result = new ReservationService().insertRsvt(rsvt);
-		
-		Reservation rsvtResult = new ReservationService().selectRsvt(rsvtName);
-		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
+		// result가 0보다 크면 겹치는 예약
+		if(checkRsvtResult > 0) {
+			// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
+			request.getSession().setAttribute("checkRsvtResult", checkRsvtResult);
+			System.out.println(checkRsvtResult);
+			//request.setAttribute("error", "다른 날짜(시간)를 선택해주세요.");
+			//request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		} else {
+			Reservation rsvt = new Reservation();
+			rsvt.setRsvtDate(rsvtDate);
+			rsvt.setRsvtTime(rsvtTime);
+			rsvt.setRsvtDoc(rsvtDoc);
+			rsvt.setRsvtMem(rsvtName);
+			rsvt.setMemInfo(rsvtInfo);
+			rsvt.setRsvtHos(hno);
+			
+			int result = new ReservationService().insertRsvt(rsvt);
+			if(result > 0) {
+				
+				Reservation rsvtResult = new ReservationService().selectRsvt(rsvtName);
+				
+				response.setContentType("application/json; charset=UTF-8");
+				JSONObject jO = new JSONObject();
+				jO.put("rsvtDate", rsvtResult.getRsvtDate());
+				jO.put("rsvtTime", rsvtResult.getRsvtTime());
+				jO.put("rsvtName", rsvtResult.getRsvtMem());
+				jO.put("rsvtInfo", rsvtResult.getMemInfo());
+				jO.put("rsvtDoc", rsvtResult.getRsvtDoc());
+				jO.put("rsvtNo", rsvtResult.getRsvtNo());
+				response.getWriter().print(jO);
+				
+				// request.setAttribute("rsvtResult", rsvtResult);
+				// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
+				
+			}
 		}
-		
 		
 	
 	}

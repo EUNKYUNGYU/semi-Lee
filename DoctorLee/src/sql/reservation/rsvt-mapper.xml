@@ -4,6 +4,17 @@
 <properties>
 	<comment>예약 관련 SQL문</comment>
 
+	<entry key="checkRsvtTreat">
+		SELECT 
+		      COUNT(*)
+ 		  FROM 
+ 		      TB_RESERVATION
+ 		 WHERE 
+ 		      RSVT_DATE = ?
+   		   AND 
+   		      RSVT_TIME = ?
+	</entry>
+
 	<entry key="insertRsvt">
 		INSERT 
 		  INTO 
@@ -30,9 +41,22 @@
 		      ,RSVT_DATE
 		      ,RSVT_TIME
 	   	 FROM
-	   	      TB_RESERVATION
-	   	WHERE
-	   	      RSVT_MEM = ?
+	   	      (SELECT
+                       RSVT_NO
+                      ,RSVT_MEM
+                      ,RSVT_DOC
+                      ,RSVT_HOS
+                      ,RSVT_DATE
+                      ,RSVT_TIME
+                FROM
+                      TB_RESERVATION
+                WHERE
+                      RSVT_MEM = ?
+              ORDER
+                 BY
+                    RSVT_NO DESC
+                      )
+              WHERE ROWNUM = 1
 	
 	</entry>
 	

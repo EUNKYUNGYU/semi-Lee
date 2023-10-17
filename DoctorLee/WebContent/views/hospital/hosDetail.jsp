@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList" %>
+<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*" %>
 <%
 	Hospital hos = (Hospital)request.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
+	//Reservation rsvt = (Reservation)request.getAttribute("selectRsvt");
+	
+	int hosTreatBegin = Integer.parseInt(hos.getTreatBegin().replaceAll(":00", ""));
+	int hosTreatEnd = Integer.parseInt(hos.getTreatEnd().replaceAll(":00|:30", ""));
+	
+	//int checkRsvtResult = (int)request.getSession().getAttribute("checkRsvtResult");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,81 +19,96 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
-    <script>
-		var subHno = location.search.substr(5);
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          locale: 'ko',
-          firstDay: 1,
-          headerToolbar: {
-        	  left: 'prev',
-        	  center: 'title',
-        	  right: 'next'
-          },
-          dateClick: function(info){
-        	 $.ajax({
-        		 url: 'hosRsvt.mem',
-        		 type: 'post',
-        		 data: {
-        			 rsvtDate: info.dateStr,
-        			 rsvtH: $('select[name=rsvtH] option:selected').text(),
-        			 rsvtM: $('select[name=rsvtM] option:selected').text(),
-        			 rsvtName: $('input[name=rsvtName]').val(),
-        		     rsvtInfo: $('input[name=rsvtInfo]').val(),
-        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').text(),
-        		     hno: subHno
-        		 },
-        		 success: function(result){
-        			 console.log(result);
-        			 // console.log(typeof(info.dateStr));
-        			 // console.log(new Date());
-        			 
-        			 $()
-        		 
-        		 },
-        		 error: function(){
-        			 alert('현재 예약 불가');
-						console.log(subHno);
-        		 }
-        	 });
-          }
-        });
-          
-        calendar.render();
-      });
-
-    </script>
 <style>
-	  .hos_wrap{margin: auto;}
-	  
-	  #hos_info, #hos_rsvt, #hos_review{
-	  	display: inline-block; 
-	  	width: 30%;
-	  	margin: 0 20px;
-	  	}
-	  
-	  #hos_info{}
-	  #hos_info>h3{color: #1E376F; display: inline-block;}
-	  #hos_info>span{color: #000; display: inline-block; margin-left: 25px; font-weight: bold;}
-	  #hos_info>p{margin-bottom: 30px;}
-	  #hos_info h4{font-size: 15px;}
-	  
-	  #hos_rsvt{}
-	  
-	  #hos_review{}
-		
-	  #star a{color: gray; font-size: 3rem; text-decoration: none;}
-	  #star a.on{color: yellow; font-size: 3rem;}
-  
+.hos_wrap{margin: auto;}
+
+#hos_info, #hos_rsvt, #hos_review{
+	display: inline-block; 
+	width: 30%;
+	margin: 0 20px;
+	}
+
+#hos_info{}
+#hos_info>h3{color: #1E376F; display: inline-block;}
+#hos_info>span{color: #000; display: inline-block; margin-left: 25px; font-weight: bold;}
+#hos_info>p{margin-bottom: 30px;}
+#hos_info h4{font-size: 15px;}
+
+#hos_rsvt{}
+
+#hos_review{}
+#hos_review>table{text-align: center;}
+#star{text-align: center; margin-bottom: 30px;}
+#star a{color: gray; font-size: 3rem; text-decoration: none; padding-left: 10px;}
+#star a.on{color: yellow; font-size: 3rem;}
+#review_btn>button{}
+
 </style>
+<script>
+	var hosNo = location.search.substring(5);
+    var rsvt_date = '';
+    var guest_rsvt_date = '';
+
+	document.addEventListener('DOMContentLoaded', function() {
+ 	
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+       initialView: 'dayGridMonth',
+       locale: 'ko',
+       firstDay: 1,
+       headerToolbar: {
+     	  left: 'prev',
+     	  center: 'title',
+     	  right: 'next'
+       },
+       dateClick: function(info){
+     	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+     	  rsvt_date = info.dateStr;
+     	  // console.log(info.dateStr);
+     	  console.log(this);
+     	  console.log(info);
+     	  
+     	  /*
+          $(this).on('click', function (e) { 
+              $(this).css("background-color", '#FFFFFF'); //기존 이벤트제목 배경색 투명처리.
+              $(this).css("background-color", '#F3F781'); 
+            });
+     	  */
+       }       
+
+     });
+       
+     calendar.render();
+     
+     var calendarGuest = document.getElementById('calendarGuest');
+     var calendarG = new FullCalendar.Calendar(calendarGuest, {
+       initialView: 'dayGridMonth',
+       locale: 'ko',
+       firstDay: 1,
+       headerToolbar: {
+     	  left: 'prev',
+     	  center: 'title',
+     	  right: 'next'
+       },
+     dateClick: function(info){
+     	 $(this).addClass('.ch');
+     	 guest_rsvt_date = info.dateStr;
+     	 
+	}
+
+     });
+       
+     calendarG.render();
+   });
+ 	
+   
+</script>
 <title>병원 상세</title>
 </head>
 <body>
@@ -148,14 +169,14 @@
 				
 			<div id="calendar"></div>
 			
-			<form action="" method="post" id="rsvt_form">
+			<!-- <form action="hosRsvt.mem" method="post" id="rsvt_form"> -->
 				<table id="rsvt_form">
 					<tr>
 						<th>예약시간</th>
 						<td>
 							<select name="rsvtH">
-								<% for(int i = 8; i <= 22; i++) { %>
-									<option value="<%= i %>">
+								<% for(int i = hosTreatBegin; i <= hosTreatEnd; i++) { %>
+									<option>
 										<%= i %>시
 									</option>
 								<% } %>
@@ -169,7 +190,7 @@
 					<tr>
 						<th>예약자명</th>
 						<td>
-							<input type="text" name="rsvtName">
+							<input type="text" name="rsvtName" required>
 						</td>
 					</tr>
 					<tr>
@@ -182,11 +203,17 @@
 						<th>의료진</th>
 						<td>
 							<select name="rsvtDoc">
-								<% for(Doctor d : docList){ %>
-									<option>
-										<%= d.getDocName() %>
-									</option>
+							<% if(docList.isEmpty()){ %>
+								<option>
+									등록된 의료진이 없습니다.
+								</option>
+							<%} else {%>
+							<% for(Doctor d : docList){ %>
+								<option value="<%= d.getDocNo() %>">
+									<%= d.getDocName() %>
+								</option>
 								<%} %>
+							<%} %>
 							</select>
 						</td>
 					</tr>			
@@ -194,19 +221,88 @@
 
 				<div id="rsvt_btn">
 					<% if(loginUser != null) { %>
-						<a href="<%= contextPath %>/hosRsvt.mem" 
+						<button onclick="rsvt();"
 						class="btn btn-primary"
-						data-toggle="modal" data-target="#rsvtModal">예약접수</a>
-					<%} else{ %>
-						<a href="#none" onclick="alert('로그인 후 이용 가능한 서비스');" class="btn btn-primary">예약접수</a>
-					<%} %>
+						data-toggle="modal" data-target="#rsvtModal">예약접수</button>
+					<% } else{ %>
+						<button onclick="loginUserIsNull();" class="btn btn-primary">예약접수</button>
+					<% } %>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guestRsvtModal">
 					  비회원 진료예약
 					</button>
+					<script>
 					
+						var $rsvtH = $('select[name=rsvtH] option:selected').text();
+						var $rsvtM = $('select[name=rsvtM] option:selected').text();
+						
+						$rsvtH = $rsvtH.replaceAll('\t', '');
+						$rsvtM = $rsvtM.replaceAll('\n', '');
+						$rsvtH = $rsvtH.replaceAll('\n', '');
+						$rsvtM = $rsvtM.replaceAll('\t', '');
+						
+						console.log($rsvtH);
+						console.log($rsvtM);
+						
+						function loginUserIsNull(){
+							alert('로그인 후 이용 가능한 서비스');
+							location.href = '<%= contextPath %>/login.me';
+							
+						};
+						
+						function rsvt(){
+							
+				        	 $.ajax({
+				        		 url: 'hosRsvt.mem',
+				        		 type: 'post',
+				        		 // async : false,
+				        		 data: {
+				        			 rsvtDate: window.rsvt_date, // '2020-02-02'
+				        			 rsvtH: $rsvtH,
+				        			 rsvtM: $rsvtM,
+				        			 rsvtName: $('input[name=rsvtName]').val(),
+				        		     rsvtInfo: $('input[name=rsvtInfo]').val(),
+				        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val(),
+				        		     hno: hosNo
+				        		 },
+				        		 success: function(result){
+				        			 console.log(result);
+				        			 // console.log(typeof(info.dateStr));
+				        			 // console.log(new Date());
+				        			 // console.log(rsvt_date);
+				        			 //console.log(rsvtDate);
+				        			 // var rsvtTime = result['rsvtTime'].replaceAll('\t', '');
+				        			 // console.log(rsvtTime);
+									var c = <%= request.getSession().getAttribute("checkRsvtResult") %>;
+				        			 console.log(c);
+				        			 
+				        			 if(result != null){
+					        			 $('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtName']);
+					        			 $('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo']);
+					        			 $('#rsvtModal .modal-body').children().eq(1).append(result['rsvtDate'] + "," + result['rsvtTime']);
+				        			 }
+				        			 
+				        			 /*
+				        			 if(result['rsvtInfo'] != ""){
+				        				 $('#rsvtModal .modal-body').children().eq(3).append(result['rsvtInfo']);
+				        			 } else{
+				        				 $('#rsvtModal .modal-body').children().eq(3).remove();
+				        			 }
+				        			 */
+									 
+				        		 },
+				        		 error: function(){
+				        			 alert('현재 예약 불가');
+				        			 // console.log(hosNo);
+				        			 // console.log(rsvt_date);
+				        			 // console.log(hosNo);
+				        			 // console.log(rsvtDate);
+				        		 }
+				        	 });
+						}
+						
+					</script>
 				</div>
 				
-			</form>
 
 			<!-- 회원 예약 확인 팝업 -->
 			<div class="modal" id="rsvtModal">
@@ -216,21 +312,25 @@
 			      <!-- Modal Header -->
 			      <div class="modal-header">
 			        <h4 class="modal-title">
-			        예약번호 : <%=  %>
-					</h4>
-						<%= loginUser.getMemName() %>
-					님의 예약이 완료되었습니다.
+			        	<b></b>님의 예약이 완료되었습니다.
+			        </h4>
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			      </div>
 			
 			      <!-- Modal body -->
 			      <div class="modal-body">
-			        Modal body..
+			        	<h5>
+			        		예약번호 : 
+			        	</h5>
+			        	<h6>
+			        		예약시간 :
+			        	</h6>
+			        	<span>
+			        		특이사항 : 
+			        	</span>
 			      </div>
-			
-			      <!-- Modal footer -->
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">확인</button>
 			      </div>
 			
 			    </div>
@@ -244,20 +344,98 @@
 			
 			      <!-- Modal Header -->
 			      <div class="modal-header">
-			        <h4 class="modal-title">Modal Heading</h4>
+			        <h4 class="modal-title">비회원 진료 예약</h4>
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
 			      </div>
 			
 			      <!-- Modal body -->
-			      <div class="modal-body">
-			        Modal body..
+			    <div class="modal-body">
+			    
+       			<div id="calendarGuest" height="500px;"></div>
+			
+				<table id="rsvt_form">
+					<tr>
+						<th>예약시간</th>
+						<td>
+							<select name="guest_rsvtH">
+								<% for(int i = 8; i <= 22; i++) { %>
+									<option value="<%= i %>">
+										<%= i %>시
+									</option>
+								<% } %>
+							</select>
+							<select name="guest_rsvtM">
+								<option>00분</option>
+								<option>30분</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>예약자명</th>
+						<td>
+							<input type="text" name="guest_rsvtName" required>
+						</td>
+					</tr>
+					<tr>
+						<th>특이사항</th>
+						<td>
+							<input type="text" name="guest_rsvtInfo">
+						</td>
+					</tr>
+					<tr>
+						<th>의료진</th>
+						<td>
+							<select name="guest_rsvtDoc">
+								<% for(Doctor d : docList){ %>
+									<% if(d.getDocName() == null){ %>
+										<option>
+											등록된 의료진이 없습니다.
+										</option>
+									<%} else {%>
+									<option value="<%= d.getDocNo() %>">
+										<%= d.getDocName() %>
+									</option>
+									<%} %>
+								<%} %>
+							</select>
+						</td>
+					</tr>			
+				</table>
 			      </div>
 			
 			      <!-- Modal footer -->
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			        <button onclick="guestRsvt();"
+						class="btn btn-primary"
+						data-toggle="modal" data-target="#rsvtModal">예약접수</button>
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 			      </div>
-			
+				  <script>
+				  
+					  function guestRsvt(){
+				        	 $.ajax({
+				        		 url: 'hosRsvt.guest',
+				        		 type: 'post',
+				        		 data: {
+				        			 rsvtDate: rsvt_date,
+				        			 rsvtH: $('select[name=guest_rsvtH] option:selected').text(),
+				        			 rsvtM: $('select[name=guest_rsvtM] option:selected').text(),
+				        			 rsvtName: $('input[name=guest_rsvtName]').val(),
+				        		     rsvtInfo: $('input[name=guest_rsvtInfo]').val(),
+				        		     rsvtDoc: $('select[name=guset_rsvtDoc] option:selected').val(),
+				        		     hno: hosNo
+				        		 },
+				        		 success: function(result){
+				        			 console.log(result);
+				        			 console.log(hosNo);
+				        		 },
+				        		 error: function(){
+				        			 alert('현재 예약 불가');
+				        		 }
+				        	 });
+						}
+				  
+				  </script>
 			    </div>
 			  </div>
 			</div>
@@ -271,13 +449,13 @@
 		<div id="hos_review">
 			  
 			 
-			 <p id="star">
-			 	<a href="#none" value="1">★</a>
-			 	   <a href="#none" value="2">★</a>
-				   <a href="#none" value="3">★</a>
-				   <a href="#none" value="4">★</a>
-				   <a href="#none" value="5">★</a>
-			 </p>
+			 <div id="star">
+		 	   <a href="#none" value="1">★</a>
+		 	   <a href="#none" value="2">★</a>
+			   <a href="#none" value="3">★</a>
+			   <a href="#none" value="4">★</a>
+			   <a href="#none" value="5">★</a>
+			 </div>
 
 			<script>
 				$('#star a').click(function(){
@@ -287,7 +465,7 @@
 				})
 			 </script>
 		
-				<table>
+				<table class="table table-bordered">
 				
 					<tr>
 						<td>후기 내용</td>
@@ -295,12 +473,15 @@
 					</tr>
 				
 				</table>
+				
+				<div id="review_btn">
+					
+					<button type="submit" class="btn btn-primary">리뷰등록</button>
+				
+				</div>
 		
 		
 		</div>
-		
-		
-		
 		
 	</div>
 	<!-- 랩 끝 -->

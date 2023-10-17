@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.DoctorLee.cou.model.service.CouService;
-import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouRev;
 
 /**
- * Servlet implementation class CouResListController
+ * Servlet implementation class AjaxCouRevListController
  */
-@WebServlet("/couResList.cou")
-public class CouResListController extends HttpServlet {
+@WebServlet("/ajaxRevList.cou")
+public class AjaxCouRevListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CouResListController() {
+    public AjaxCouRevListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +32,14 @@ public class CouResListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Cou> list = new CouService().selectCouList();
-//		System.out.println(list);
+		// 값 뽑기
+		int couNo = Integer.parseInt(request.getParameter("cno"));
 		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/cou/couResListView.jsp").forward(request, response);
+		// Service 요청
+		ArrayList<CouRev> list = new CouService().selectCouRevList(couNo);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

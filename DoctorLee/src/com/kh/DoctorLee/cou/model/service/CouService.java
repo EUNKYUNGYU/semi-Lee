@@ -13,6 +13,7 @@ import com.kh.DoctorLee.cou.model.dao.CouDao;
 import com.kh.DoctorLee.cou.model.vo.Cou;
 import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
+import com.kh.DoctorLee.cou.model.vo.CouRev;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 import com.kh.DoctorLee.member.model.vo.Member;
 
@@ -181,6 +182,34 @@ public class CouService {
 		close(conn);
 		
 		return result;
+	}
+	
+	// 상담 예약 후 리뷰 작성
+	public int insertCouRev(CouRev c) {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().insertCouRev(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 상담 리뷰 목록 출력
+	public ArrayList<CouRev> selectCouRevList(int couNo){
+		Connection conn = getConnection();
+		
+		ArrayList<CouRev> list = new CouDao().selectCouRevList(conn, c);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

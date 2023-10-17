@@ -102,47 +102,54 @@
         margin-top: 100px;
     }
 
-        /*모달 별점*/
-        #scope fieldset{
-            display: inline-block;
-            direction: rtl;
-            border:0;
-        }
-        #scope fieldset legend{
-            text-align: right;
-        }
-        #scope input[type=radio]{
-            display: none;
-        }
-        #scope label{
-            font-size: 3em;
-            color: transparent;
-            text-shadow: 0 0 0 #f0f0f0;
-        }
-        #scope label:hover{
-            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-        }
-        #scope label:hover ~ label{
-            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-        }
-        #scope input[type=radio]:checked ~ label{
-            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-        }
-        #reviewContents {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            box-sizing: border-box;
-            border: solid 1.5px #D3D3D3;
-            border-radius: 5px;
-            font-size: 16px;
-            resize: none;
-        }
+    /*모달 별점*/
+    #scope fieldset{
+        display: inline-block;
+        direction: rtl;
+        border:0;
+    }
 
-        /*모달 리뷰 내용*/
-        #revContent{
-            width: 450px;
-        }
+    #scope fieldset legend{
+        text-align: right;
+    }
+
+    #scope input[type=radio]{
+        display: none;
+    }
+
+    #scope label{
+        font-size: 3em;
+        color: transparent;
+        text-shadow: 0 0 0 #f0f0f0;
+    }
+
+    #scope label:hover{
+        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+
+    #scope label:hover ~ label{
+        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+
+    #scope input[type=radio]:checked ~ label{
+        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+
+    #reviewContents {
+        width: 100%;
+        height: 150px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: solid 1.5px #D3D3D3;
+        border-radius: 5px;
+        font-size: 16px;
+        resize: none;
+    }
+
+    /*모달 리뷰 내용*/
+    #revContent{
+        width: 450px;
+    }
       
     /*리뷰 출력*/
     #rev-border{
@@ -244,7 +251,7 @@
                         <h6>별점</h6>
                         <input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
                         <fieldset>
-                            <input type="radio" name="reviewStar" value="5" id="rate1"><label
+                            <input type="radio" name="reviewStar" value="5" id="rate1" checked><label
                                 for="rate1">★</label>
                             <input type="radio" name="reviewStar" value="4" id="rate2"><label
                                 for="rate2">★</label>
@@ -259,14 +266,14 @@
 
                     <div id="rev">
                         <h6>리뷰 작성</h6>
-                        <textarea name="revContent" id="revContent" cols="30" rows="10" style="resize: none;" required></textarea>
+                        <textarea name="revContent" id="revContent" cols="30" rows="10" style="resize: none;"></textarea>
                     </div>
                 </div>
             
       
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                <button id="insertRev" class="btn btn-primary">등록하기</button>
+                <button id="insertRev" class="btn btn-primary" data-dismiss="modal">등록하기</button>
                 </div>
 
             </div>
@@ -307,8 +314,6 @@
                     },
                     success:function(result){
                         alert('리뷰 등록 성공');
-
-                        $('#close').on('click');
                     },
                     error:function(){
                         console('리뷰 등록 실패');

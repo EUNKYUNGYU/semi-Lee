@@ -18,6 +18,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="resources/css/hospital/hosDetail.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -26,164 +27,113 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
-    
-    <script>
-		var hosNo = location.search.substring(5);
-        var rsvt_date = '';
-        var guest_rsvt_date = '';
-		
-   		document.addEventListener('DOMContentLoaded', function() {
-    	
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          locale: 'ko',
-          firstDay: 1,
-          headerToolbar: {
-        	  left: 'prev',
-        	  center: 'title',
-        	  right: 'next'
-          },
-          dateClick: function(info){
-        	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-        	  rsvt_date = info.dateStr;
-        	  // console.log(info.dateStr);
-			}
-
-        });
-          
-        calendar.render();
-        
-        var calendarGuest = document.getElementById('calendarGuest');
-        var calendarG = new FullCalendar.Calendar(calendarGuest, {
-          initialView: 'dayGridMonth',
-          locale: 'ko',
-          firstDay: 1,
-          headerToolbar: {
-        	  left: 'prev',
-        	  center: 'title',
-        	  right: 'next'
-          },
-          dateClick: function(info){
-        	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-        	  guest_rsvt_date = info.dateStr;
-			}
-
-        });
-          
-        calendarG.render();
-      });
-    	
-      
-    </script>
-<style>
-	.hos_wrap{margin: auto;}
-	.hos_wrap > div{float: left;}
-	.box{float: left;}
-	
-	#hos_info, #hos_rsvt, #hos_review{
-		display: inline-block;
-		width: 30%;
-		margin: 0 10px 30px 20px;
-		}
-	
-	#hos_info{}
-	#hos_info>h2{color: #1E376F; display: inline-block;}
-	#hos_info>span{color: #000; display: inline-block; margin-left: 25px; font-weight: bold;}
-	#hos_info>p{margin-bottom: 30px;}
-	#hos_info h4{font-size: 18px;}
-	#hos_info i{font-size: 25px;}
-	#hos_info div{margin-bottom: 20px;}
-	
-	#hos_rsvt{}
-	#rsvt_btn{width: 100%; text-align: center;}
-	#rsvt_btn>button{width: 45%;}
-	
-	#hos_review{}
-	#hos_review>table{text-align: center; margin-bottom: 20px;}
-	
-	#star{text-align: center;}
-	#star input{display: none;}
-	#star label{font-size: 3rem;}
-	
-	#review_btn>button{width: 100%;}
-	#review_box>input{width: 100%; margin-bottom: 20px;}
-
-       .yellow {
-           color: yellow;
-       }
-       
-  	 #star label:hover{
-    	text-shadow: 0 0 0 #f0f0f0; /* 마우스 호버 */
-	}
-	#star label:hover ~ label{
-	    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
-	}
-	#star input[type=radio]:checked ~ label{
-    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */	
-	}
-	
-
-</style>
 <script>
 	var hosNo = location.search.substring(5);
-    var rsvt_date = '';
-    var guest_rsvt_date = '';
+       var rsvt_date = '';
+       var guest_rsvt_date = '';
+	
+  		document.addEventListener('DOMContentLoaded', function() {
+   	
+       var calendarEl = document.getElementById('calendar');
+       var calendar = new FullCalendar.Calendar(calendarEl, {
+         initialView: 'dayGridMonth',
+         locale: 'ko',
+         firstDay: 1,
+         headerToolbar: {
+       	  left: 'prev',
+       	  center: 'title',
+       	  right: 'next'
+         },
+         dateClick: function(info){
+       	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+       	  rsvt_date = info.dateStr;
+       	  // console.log(info.dateStr);
+		}
 
-	document.addEventListener('DOMContentLoaded', function() {
- 	
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-       initialView: 'dayGridMonth',
-       locale: 'ko',
-       firstDay: 1,
-       headerToolbar: {
-     	  left: 'prev',
-     	  center: 'title',
-     	  right: 'next'
-       },
-       dateClick: function(info){
-     	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-     	  rsvt_date = info.dateStr;
-     	  // console.log(info.dateStr);
-     	  console.log(this);
-     	  console.log(info);
-     	  
-     	  /*
-          $(this).on('click', function (e) { 
-              $(this).css("background-color", '#FFFFFF'); //기존 이벤트제목 배경색 투명처리.
-              $(this).css("background-color", '#F3F781'); 
-            });
-     	  */
-       }       
-
-     });
+       });
+         
+       calendar.render();
        
-     calendar.render();
+       var calendarGuest = document.getElementById('calendarGuest');
+       var calendarG = new FullCalendar.Calendar(calendarGuest, {
+         initialView: 'dayGridMonth',
+         locale: 'ko',
+         firstDay: 1,
+         headerToolbar: {
+       	  left: 'prev',
+       	  center: 'title',
+       	  right: 'next'
+         },
+         dateClick: function(info){
+       	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+       	  guest_rsvt_date = info.dateStr;
+		}
+
+       });
+         
+       calendarG.render();
+     });
+   	
      
-     var calendarGuest = document.getElementById('calendarGuest');
-     var calendarG = new FullCalendar.Calendar(calendarGuest, {
-       initialView: 'dayGridMonth',
-       locale: 'ko',
-       firstDay: 1,
-       headerToolbar: {
-     	  left: 'prev',
-     	  center: 'title',
-     	  right: 'next'
-       },
-     dateClick: function(info){
-     	 
+var hosNo = location.search.substring(5);
+   var rsvt_date = '';
+   var guest_rsvt_date = '';
+
+document.addEventListener('DOMContentLoaded', function() {
+	
+   var calendarEl = document.getElementById('calendar');
+   var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'ko',
+      firstDay: 1,
+      headerToolbar: {
+    	  left: 'prev',
+    	  center: 'title',
+    	  right: 'next'
+      },
+      dateClick: function(info){
+    	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+    	  rsvt_date = info.dateStr;
+    	  // console.log(info.dateStr);
+    	  console.log(this);
+    	  console.log(info);
+    	  
+    	  /*
+         $(this).on('click', function (e) { 
+             $(this).css("background-color", '#FFFFFF'); //기존 이벤트제목 배경색 투명처리.
+             $(this).css("background-color", '#F3F781'); 
+           });
+    	  */
+      }       
+
+    });
+      
+    calendar.render();
+    
+    var calendarGuest = document.getElementById('calendarGuest');
+    var calendarG = new FullCalendar.Calendar(calendarGuest, {
+      initialView: 'dayGridMonth',
+      locale: 'ko',
+      firstDay: 1,
+      headerToolbar: {
+    	  left: 'prev',
+    	  center: 'title',
+    	  right: 'next'
+      },
+    dateClick: function(info){
+    	 
 	}
 
-     });
-       
-     calendarG.render();
-   });
- 	
-   
+    });
+      
+    calendarG.render();
+  });
+	
+  
 </script>
 <title>병원 상세</title>
 </head>
+
 <body>
     <%@ include file="../common/nav2.jsp" %>
 	<br><br><br><br>
@@ -263,7 +213,7 @@
 					<tr>
 						<th>예약자명</th>
 						<td>
-							<input type="text" name="rsvtName" required>
+							<input type="text" name="rsvtName">
 						</td>
 					</tr>
 					<tr>
@@ -347,21 +297,18 @@
 									},
 									success: function(result){
 										console.log(result);
+										var flag = result['checkRsvtResult'];
 										
-										var check = <%= request.getAttribute("checkRsvtResult") %>;
-										console.log(check);
-										
-										if(check > 0){
+									if(result != null){
+										if(flag > 0){
 											alert('다른 날짜(시간)를 선택해주세요');
 											
 										} else{
-										
-											if(result != null){
-												
 												$('#rsvtModal').modal('show');
 												$('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtName']);
 												$('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo']);
-												$('#rsvtModal .modal-body').children().eq(1).append(result['rsvtDate'] + "," + result['rsvtTime']);
+												$('#rsvtModal .modal-body').children().eq(1).append(result['rsvtDate'] + ", " + result['rsvtTime']);
+												$('#rsvtModal .modal-body').children().eq(2).append(result['rsvtInfo']);
 											}
 										}
 										// 성공 시 
@@ -378,15 +325,13 @@
 								return false;
 							}
 							return true;
-					}
+					};
 					
 					function loginUserIsNull(){
 						alert('로그인 후 이용 가능한 서비스');
 						location.href = '<%= contextPath %>/login.me';
 						
 					};
-					
-	
 					
 					</script>
 				</div>
@@ -420,8 +365,6 @@
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-danger" data-dismiss="modal">확인</button>
 			      </div>
-			
-			
 			    </div>
 			  </div>
 			</div>
@@ -440,9 +383,9 @@
 			      <!-- Modal body -->
 			    <div class="modal-body">
 			    
-       			<div id="calendarGuest" height="400px;"></div>
-			
-				<table id="rsvt_form">
+				<div id="calendarGuest"></div>
+
+				<table id="guest_rsvt_form" class="table table-bordered">
 					<tr>
 						<th>예약시간</th>
 						<td>
@@ -462,7 +405,7 @@
 					<tr>
 						<th>예약자명</th>
 						<td>
-							<input type="text" name="guest_rsvtName" required>
+							<input type="text" name="guest_rsvtName">
 						</td>
 					</tr>
 					<tr>
@@ -485,27 +428,81 @@
 										<%= d.getDocName() %>
 									</option>
 									<%} %>
-									<option value="<%= d.getDocNo() %>">
-										<%= d.getDocName() %>
-									</option>
 								<%} %>
 							</select>
 						</td>
-					</tr>			
+					</tr>	
+							
 				</table>
-			      </div>
+		      </div>
 			
 			      <!-- Modal footer -->
 			      <div class="modal-footer">
 			        <button onclick="guestRsvt();"
-						class="btn btn-primary"
-						data-toggle="modal" data-target="#rsvtModal">예약접수</button>
+							class="btn btn-primary">예약접수</button>
 			        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 			      </div>
 				
 			    </div>
 			  </div>
 			</div>
+			<script>
+			function guestRsvt(){
+				
+				var str = '';
+				if(window.rsvt_date == str){
+					alert('날짜를 선택해주세요.');
+					
+				} else if($('input[name=rsvtName]').val() == str){
+					alert('예약자명을 입력해주세요');
+					
+				} else {
+					$.ajax({
+						url: 'hosRsvt.guest',
+						type: 'post',
+						// async : true,
+						data: {
+							rsvtDate: window.guest_rsvt_date,
+							rsvtH: $('select[name=guest_rsvtH] option:selected').text().replaceAll('\t', '').replaceAll('\n', ''),
+							rsvtM: $('select[name=guest_rsvtM] option:selected').text().replaceAll('\n', '').replaceAll('\t', ''),
+							rsvtName: $('input[name=guest_rsvtName]').val(),
+							rsvtInfo: $('input[name=guest_rsvtInfo]').val(),
+							rsvtDoc: $('select[name=guest_rsvtDoc] option:selected').val(),
+							hno: hosNo
+						},
+						success: function(result){
+							console.log(result);
+							var flag = result['checkRsvtResult'];
+							
+						if(result != null){
+							if(flag > 0){
+								alert('다른 날짜(시간)를 선택해주세요');
+								
+							} else{
+									$('#rsvtModal').modal('show');
+									$('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtName']);
+									$('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo']);
+									$('#rsvtModal .modal-body').children().eq(1).append(result['rsvtDate'] + ", " + result['rsvtTime']);
+									$('#rsvtModal .modal-body').children().eq(2).append(result['rsvtInfo']);
+								}
+							}
+							// 성공 시 
+							//data-toggle="modal" data-target="#rsvtModal" 추가해서 모달 띄우기
+						},
+						error: function(){
+							alert('현재 예약 불가');
+							// console.log(hosNo);
+							// console.log(rsvt_date);
+							// console.log(hosNo);
+							// console.log(rsvtDate);
+						}
+					});
+					return false;
+				}
+				return true;
+		};
+			</script>
+			
 			
 		</div>
 		<!-- 진료 예약 끝 -->

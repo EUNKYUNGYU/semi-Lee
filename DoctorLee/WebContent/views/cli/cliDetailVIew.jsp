@@ -28,13 +28,10 @@
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
-        height: 1050px;
+        height: auto;
         margin-top: 50px;
         border: 1px solid red;
-    }
-
-    .content > div{
-        float: left;
+        margin-bottom: 50px;
     }
 
     #cou_navi{
@@ -55,7 +52,7 @@
     #cli-content {
         width: 1000px;
         margin-left: 100px;
-        height: 1000px;
+        height: auto;
     }
 
     /*클리닉 간단 정보 출력 영역 div*/
@@ -79,7 +76,7 @@
     /*클리닉 상세 정보 출력 영역 div*/
     #cli-middle{
         border: 1px solid royalblue;
-        height: 500px;
+        height: auto;
     }
 
     #cli-middle > h4{
@@ -90,7 +87,7 @@
     /*클리닉 후기 출력 영역 div*/
     #cli-bottom{
         border: 1px solid pink;
-        height: 300px;
+        height: auto;
     }
 
     #cli-bottom > h4{
@@ -233,6 +230,10 @@
         </div>
 
     </div>
+
+    <footer>
+        <%@ include file ="../common/footer.jsp" %>
+    </footer>
 
     <!--리뷰 작성 모달창-->
     <div class="modal" id="myModal">

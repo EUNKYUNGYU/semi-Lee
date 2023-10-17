@@ -44,9 +44,9 @@
 		UPDATE 
 			TB_MED
 		SET
-			?,
-			?,
-			?
+			MED_NAME = ?,
+			PRE_INFO = ?,
+			CAUCTION = ?
 		WHERE
 			MED_NAME = ?
 	</entry>

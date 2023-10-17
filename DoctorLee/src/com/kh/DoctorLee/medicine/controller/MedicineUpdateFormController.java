@@ -12,16 +12,16 @@ import com.kh.DoctorLee.medicine.model.service.MedicineService;
 import com.kh.DoctorLee.medicine.model.vo.Medicine;
 
 /**
- * Servlet implementation class UpdateMedicineController
+ * Servlet implementation class MedicineUpdateFormController
  */
-@WebServlet("/update.med")
-public class UpdateMedicineController extends HttpServlet {
+@WebServlet("/updateForm.med")
+public class MedicineUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMedicineController() {
+    public MedicineUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +31,12 @@ public class UpdateMedicineController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String updateMedName = request.getParameter("updateName");
-		String updatePreInfo = request.getParameter("updatePreInfo");
-		String updateCauction = request.getParameter("updateCauction");
 		String medName = request.getParameter("mname");
+		Medicine med = new MedicineService().detailMedicine(medName);
 		
-		Medicine med = new Medicine();
-		med.setMedName(updateMedName);
-		med.setPreInfo(updatePreInfo);
-		med.setCauction(updateCauction);
-		int result = new MedicineService().updateMedicine(med,medName);
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/search.med" );
-			
-		} else {
-			request.getRequestDispatcher("views/common/errorPage.jsp");
-		}
+		request.setAttribute("med", med);
+		request.getRequestDispatcher("views/medicine/medicineUpdateForm.jsp").forward(request, response);;
+		
 	}
 
 	/**

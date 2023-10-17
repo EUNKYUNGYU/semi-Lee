@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.medicine.model.service.MedicineService;
-import com.kh.DoctorLee.medicine.model.vo.Medicine;
 
 /**
- * Servlet implementation class UpdateMedicineController
+ * Servlet implementation class DeleteMedicineController
  */
-@WebServlet("/update.med")
-public class UpdateMedicineController extends HttpServlet {
+@WebServlet("/delete.med")
+public class DeleteMedicineController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMedicineController() {
+    public DeleteMedicineController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +30,11 @@ public class UpdateMedicineController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String updateMedName = request.getParameter("updateName");
-		String updatePreInfo = request.getParameter("updatePreInfo");
-		String updateCauction = request.getParameter("updateCauction");
 		String medName = request.getParameter("mname");
+		int result = new MedicineService().deleteMedicine(medName);
 		
-		Medicine med = new Medicine();
-		med.setMedName(updateMedName);
-		med.setPreInfo(updatePreInfo);
-		med.setCauction(updateCauction);
-		int result = new MedicineService().updateMedicine(med,medName);
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/search.med" );
-			
+			response.sendRedirect(request.getContextPath() + "/search.med");
 		} else {
 			request.getRequestDispatcher("views/common/errorPage.jsp");
 		}

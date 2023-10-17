@@ -11,13 +11,14 @@ public class Cou {
 	private String changeName;
 	private String profilePath;
 	private int price;
+	private double scope;
 	
 	public Cou() {
 		super();
 	}
 
 	public Cou(int couNo, int hosNo, String hosName, String couName, String phone, String originName, String changeName,
-			String profilePath, int price) {
+			String profilePath, int price, double scope) {
 		super();
 		this.couNo = couNo;
 		this.hosNo = hosNo;
@@ -28,6 +29,7 @@ public class Cou {
 		this.changeName = changeName;
 		this.profilePath = profilePath;
 		this.price = price;
+		this.scope = scope;
 	}
 
 	public int getCouNo() {
@@ -102,13 +104,18 @@ public class Cou {
 		this.price = price;
 	}
 
+	public double getScope() {
+		return scope;
+	}
+
+	public void setScope(double scope) {
+		this.scope = scope;
+	}
+
 	@Override
 	public String toString() {
 		return "Cou [couNo=" + couNo + ", hosNo=" + hosNo + ", hosName=" + hosName + ", couName=" + couName + ", phone="
 				+ phone + ", originName=" + originName + ", changeName=" + changeName + ", profilePath=" + profilePath
-				+ ", price=" + price + "]";
+				+ ", price=" + price + ", scope=" + scope + "]";
 	}
-
-	
-	
 }

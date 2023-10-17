@@ -39,29 +39,6 @@
             padding-top: 100px;
         }
 
-        #p2{
-            text-align: center;
-            font-size: 23px;
-            color: #1E376F;
-            font-weight: 600;
-            margin-top: 35px;
-           
-        }
-        
-        #p3{
-            text-align: left;
-            margin-left: 670px;
-            font-size: 18px;
-        }
-
-        #p4{
-            font-size: 16px;
-            padding-left: 350px;
-            font-size: 24px;
-            font-weight: 500;
-            
-           
-        }
        
         /*-------------가운데 박스--------------*/
         .positioning{
@@ -267,6 +244,8 @@
 
     </div>
     
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <%@ include file="../common/footer.jsp" %>
     <script>
         function enrollPage(){
             location.href = "<%=contextPath%>/enrollForm.me";
@@ -284,6 +263,6 @@
 
 
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
 </body>
 </html>

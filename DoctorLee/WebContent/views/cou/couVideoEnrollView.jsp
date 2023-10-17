@@ -23,7 +23,7 @@
 
     /*영상 등록 폼*/
     .content{
-        height: 1000px;
+        height: 1200px;
         margin-top: 50px;
     }
 
@@ -123,6 +123,10 @@
             </div>
         </div>
     
+        </div>
+
+        <div id="footer">
+            <%@ include file ="../common/footer.jsp" %>
         </div>
 
 </body>

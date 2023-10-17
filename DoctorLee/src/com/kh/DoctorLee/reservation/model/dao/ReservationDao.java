@@ -92,12 +92,11 @@ public class ReservationDao {
 			if(rset.next()) {
 				selectRsvt = new Reservation();
 				selectRsvt.setRsvtNo(rset.getInt("RSVT_NO"));
+				selectRsvt.setRsvtMem(rset.getString("RSVT_MEM"));
+				selectRsvt.setRsvtDoc(rset.getString("RSVT_DOC"));
+				selectRsvt.setRsvtHos(rset.getString("RSVT_HOS"));
 				selectRsvt.setRsvtDate(rset.getString("RSVT_DATE"));
 				selectRsvt.setRsvtTime(rset.getString("RSVT_TIME"));
-				selectRsvt.setMemInfo(rset.getString("MEM_INFO"));
-				selectRsvt.setRsvtHos(rset.getString("HOS_NAME"));
-				selectRsvt.setRsvtMem(rset.getString("RSVT_MEM"));
-				selectRsvt.setRsvtDoc(rset.getString("DOCTOR_NAME"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

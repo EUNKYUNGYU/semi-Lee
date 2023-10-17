@@ -50,13 +50,17 @@ public class HosRsvtMemController extends HttpServlet {
 		//System.out.println(rsvtTime);
 		System.out.println(checkRsvtResult);
 		
+		response.setContentType("application/json; charset=UTF-8");
+		JSONObject jO = new JSONObject();
+		
 		// result가 0보다 크면 겹치는 예약
 		if(checkRsvtResult > 0) {
 			// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
-			request.getSession().setAttribute("checkRsvtResult", checkRsvtResult);
+			request.setAttribute("checkRsvtResult", checkRsvtResult);
 			System.out.println(checkRsvtResult);
 			//request.setAttribute("error", "다른 날짜(시간)를 선택해주세요.");
 			//request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+
 		} else {
 			Reservation rsvt = new Reservation();
 			rsvt.setRsvtDate(rsvtDate);
@@ -69,22 +73,20 @@ public class HosRsvtMemController extends HttpServlet {
 			int result = new ReservationService().insertRsvt(rsvt);
 			if(result > 0) {
 				
-				Reservation rsvtResult = new ReservationService().selectRsvt(rsvtName);
+				Reservation selectRsvt = new ReservationService().selectRsvt(rsvtName);
 				
-				response.setContentType("application/json; charset=UTF-8");
-				JSONObject jO = new JSONObject();
-				jO.put("rsvtDate", rsvtResult.getRsvtDate());
-				jO.put("rsvtTime", rsvtResult.getRsvtTime());
-				jO.put("rsvtName", rsvtResult.getRsvtMem());
-				jO.put("rsvtInfo", rsvtResult.getMemInfo());
-				jO.put("rsvtDoc", rsvtResult.getRsvtDoc());
-				jO.put("rsvtNo", rsvtResult.getRsvtNo());
-				response.getWriter().print(jO);
+				jO.put("rsvtDate", selectRsvt.getRsvtDate());
+				jO.put("rsvtTime", selectRsvt.getRsvtTime());
+				jO.put("rsvtName", selectRsvt.getRsvtMem());
+				jO.put("rsvtInfo", selectRsvt.getMemInfo());
+				jO.put("rsvtDoc", selectRsvt.getRsvtDoc());
+				jO.put("rsvtNo", selectRsvt.getRsvtNo());
 				
 				// request.setAttribute("rsvtResult", rsvtResult);
 				// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
-				
+				response.getWriter().print(jO);
 			}
+			
 		}
 		
 	

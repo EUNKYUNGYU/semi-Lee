@@ -27,34 +27,27 @@
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
-        height: 1050px;
+        height: auto;
         margin-top: 50px;
-        border: 1px solid red;
-    }
-
-    .content > div{
-        float: left;
+        border: 1px solid blueviolet;
+        margin-bottom: 50px;
     }
 
     #cou_navi{
         height: 1000px;
     }
 
-    .left-menu{
-        margin-left: 200px;
-    }
 
     /*클리닉 정보 출력 영역 div*/
     #cli-content {
         width: 1000px;
         margin-left: 100px;
-        height: 1000px;
     }
 
     /*클리닉 간단 정보 출력 영역 div*/
     #cli-top{
         border: 1px solid rosybrown;
-        height: 200px;
+        height: auto;
     }
 
     #cli-top > h4{ 
@@ -84,7 +77,7 @@
     /*클리닉 후기 출력 영역 div*/
     #cli-bottom{
         border: 1px solid pink;
-        height: 300px;
+        height: auto;
     }
 
     #cli-bottom > h4{
@@ -210,17 +203,7 @@
                     
                     <div id="rev-border">
                         <ul id="rev-list">
-                            <!-- <li class="rev-content">
-                                <p>회원</p>
-                                <p>별점</p>
-                                <p>리뷰내용</p>
-                            </li>
 
-                            <li class="rev-content">
-                                <p>회원</p>
-                                <p>별점</p>
-                                <p>리뷰내용</p>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -230,6 +213,16 @@
         </div>
 
     </div>
+
+    <div id="footer">
+        <%@ include file ="../common/footer.jsp" %>
+    </div>
+
+    
+
+    
+
+    
 
 <!--리뷰 작성 모달창-->
 <div class="modal" id="myModal">
@@ -276,6 +269,7 @@
 
         </div>
     </div>
+    
   </div>
 
     <script>

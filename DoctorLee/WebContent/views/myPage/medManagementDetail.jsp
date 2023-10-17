@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.kh.DoctorLee.mpBoard.model.vo.MedManagement,com.kh.DoctorLee.medicine.model.vo.Medicine" %>
+<%@ page import = "com.kh.DoctorLee.mpBoard.model.vo.MedManagement, com.kh.DoctorLee.medicine.model.vo.Medicine" %>
 <%
 	MedManagement mm = (MedManagement)request.getAttribute("mm");
 	Medicine med = (Medicine)request.getAttribute("med");
@@ -116,18 +116,23 @@
                     border: 1px solid #1E376F;
                     color: #1E376F;
                     float: right;
-                    margin-right: 30px;
                     width: 100px;
                     height: 40px;
                     border-radius: 3px;
                     text-align: center;
                     padding-top: 7px;
+                    margin-top: 100px;
 		        }
 
                 .deletebtn:hover{
                     background-color: #1E376F;
                     color: white;
                     text-decoration: none;
+                }
+                
+                #csdelete2{
+                	margin-right: 250px;
+                	margin-left: 30px;
                 }
 </style>
 </head>
@@ -171,10 +176,11 @@
                            
                         </tbody>
                   </table>
-               </div>
-            </div>
             <span><a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" class="deletebtn" id="csdelete2">삭제하기</a></span>
             <span><a href="<%=contextPath%>/list.medi" class="deletebtn" id="csdelete">목록가기</a></span>
+               </div>
+            </div>
         </div>
+         <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

@@ -49,6 +49,7 @@
             // 달력 클릭 시 선택한 날짜 출력하기
             $('#resDate').val((info.dateStr).replaceAll('-', '.'));
             $('#resTime').val(null);
+            $('#hiddenResTime').val(null);
 
             var days = document.querySelectorAll(".day-color");
             days.forEach(function(day){
@@ -78,6 +79,7 @@
 
                     $('.time-content').click(function(){
                         $('#resTime').val($(this).children().text());
+                        $('#hiddenResTime').val($(this).children().text());
 
                         $(this).css('background-color', 'salmon');
 
@@ -110,13 +112,10 @@
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
-        height: 1050px;
+        height: auto;
         margin-top: 50px;
         border: 1px solid red;
-    }
-
-    .content > div{
-        float: left;
+        margin-bottom: 50px;
     }
 
     #cou_navi{
@@ -127,13 +126,13 @@
     #cli-content {
         width: 1000px;
         margin-left: 100px;
-        height: 1000px;
+        height: auto;
     }
 
     /*클리닉 예약 날짜 출력 영역 div*/
     #cli-top{
         border: 1px solid rosybrown;
-        height: 582px;
+        height: auto;
         width: 1100px;
     }
 
@@ -147,53 +146,53 @@
         border: 1px solid;
     }
 
-        /* 일요일 날짜 빨간색 */
-        .fc-day-sun a {
-            color: red;
-            text-decoration: none;
-        }
+    /* 일요일 날짜 빨간색 */
+    .fc-day-sun a {
+        color: red;
+        text-decoration: none;
+    }
 
-        /* 토요일 날짜 파란색 */
-        .fc-day-sat a {
-            color: blue;
-            text-decoration: none;
-        }
+    /* 토요일 날짜 파란색 */
+    .fc-day-sat a {
+        color: blue;
+        text-decoration: none;
+    }
         
-        /*날짜 선택 시 색깔 넣기*/
-        .day-color{
-            background-color: #1E376F !important;
-            font-weight: 900;
-        }
+    /*날짜 선택 시 색깔 넣기*/
+    .day-color{
+        background-color: #1E376F !important;
+        font-weight: 900;
+    }
     
     /*클리닉 예약 시간 출력 영역 div*/
-        #time-inner{
-            width: 300px;
-            height: 582px;
-            border-right : 1px solid;
-            border-bottom: 1px solid;
-        }
+    #time-inner{
+        width: 300px;
+        height: 582px;
+        border-right : 1px solid;
+        border-bottom: 1px solid;
+    }
 
-        .time-border{
-            overflow: auto;
-            height: 580px;
-            display: none;
-        }
+    .time-border{
+        overflow: auto;
+        height: 580px;
+        display: none;
+    }
 
-        .time-border > ul{
-            list-style: none;
-        }
+    .time-border > ul{
+        list-style: none;
+    }
 
-        .time-content{
-            background-color: bisque;
-            border-radius: 10px;
-            text-decoration: none;
-            margin-top: 20px;
-            width: 230px;
-            border: 1px solid brown;
-            height: 50px;
-            line-height: 50px;
-            margin-right: 30px;
-        }
+    .time-content{
+        background-color: bisque;
+        border-radius: 10px;
+        text-decoration: none;
+        margin-top: 20px;
+        width: 230px;
+        border: 1px solid brown;
+        height: 50px;
+        line-height: 50px;
+        margin-right: 30px;
+    }
 
     #cli-middle > h4{
         margin-top: 30px;
@@ -209,6 +208,10 @@
     #cli-bottom > input{
         display: block;
         margin-bottom: 10px;
+    }
+
+    #hiddenResTime{
+        visibility: hidden;
     }
 
 </style>
@@ -276,6 +279,8 @@
 
                             <span>예약시간 : </span>
                             <input type="text" id="resTime" name="resTime" required readonly>
+                            <input type="text" id="hiddenResTime" required>
+
                         </div>
 
                         <div id="res-part" align="center">
@@ -286,8 +291,14 @@
                 </div>
     
             </div>
+
+            
     
         </div>
+
+        <footer>
+            <%@ include file ="../common/footer.jsp" %>
+        </footer>
 
         <script>
             $(function(){
@@ -300,9 +311,13 @@
                     }
                 })
 
-                // if($('#resDate').val() == null || $('#resTime').val || null){
-                //     $('button[type=submit]').('disabled');
-                // }
+                $('#res-part').click(function(){
+                    if(!$('#resDate').val() && !$('#hiddenResTime').val()){
+                        alert('날짜를 선택하세요');
+                    } else if(!$('#hiddenResTime').val()){
+                        alert('시간을 선택하세요');
+                    }
+                })
             })
         </script>
 

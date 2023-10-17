@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.cou.model.vo.Cou" %>    
+<%@ page import="com.kh.DoctorLee.cou.model.vo.*, java.util.ArrayList" %>    
 <%
     Cou c = (Cou)request.getAttribute("c");
+    ArrayList<CouResTime> list = (ArrayList<CouResTime>)request.getAttribute("list");
 %>  
 <!DOCTYPE html>
 <html>
@@ -30,6 +31,18 @@
                 start: nowDate
             };
         },
+
+        events:[
+            <% for(CouResTime ct : list) {%>
+            {
+                title:'예약 가능',
+                start:'<%=ct.getCouDate()%>',
+                color:'#1E376F'
+            },
+            <% }%>
+        ],
+
+
 
         dateClick: function(info){
 

@@ -116,5 +116,14 @@
 		WHERE
 				COU_NO = ?				
 	</entry>
+	
+	<entry key="selectCouDate">
+		SELECT
+				DISTINCT COU_DATE
+		FROM
+				TB_COU_TIME
+		WHERE
+				COU_NO = ?				
+	</entry>
 </properties>
 

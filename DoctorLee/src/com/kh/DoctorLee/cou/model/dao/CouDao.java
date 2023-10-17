@@ -13,6 +13,8 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouResTime;
+import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
 public class CouDao {
@@ -293,5 +295,36 @@ public class CouDao {
 			close(pstmt);
 		}
 		return c;
+	}
+	
+	// 상담사 예약 가능 날짜 출력
+	public ArrayList<CouResTime> selectCouDate(Connection conn, int couNo){
+		
+		ArrayList<CouResTime> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouDate");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CouResTime c = new CouResTime();
+				c.setCouDate(rset.getString("COU_DATE"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }

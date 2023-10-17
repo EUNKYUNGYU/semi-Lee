@@ -40,11 +40,10 @@
 
 		
 	}
-	#diary > div {
+	#diary > div, #diary1 > div {
 		height : 100%;
 	}
 	#diary1 > div{
-		height : 100%;
 		float : left;
 		
 	}

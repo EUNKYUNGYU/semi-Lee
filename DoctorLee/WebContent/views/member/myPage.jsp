@@ -32,36 +32,13 @@
 
 
         /*--------------------p태그---------------------*/
-        #p1{
+        #p11{
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
             padding-top: 100px;
         }
 
-        #p2{
-            text-align: center;
-            font-size: 23px;
-            color: #1E376F;
-            font-weight: 600;
-            margin-top: 35px;
-           
-        }
-        
-        #p3{
-            text-align: left;
-            margin-left: 670px;
-            font-size: 18px;
-        }
-
-        #p4{
-            font-size: 16px;
-            padding-left: 350px;
-            font-size: 24px;
-            font-weight: 500;
-            
-           
-        }
        
         /*-------------가운데 박스--------------*/
         .positioning{
@@ -148,14 +125,14 @@
         }
 
         /*-------------찾기-------------*/
-        .z-test{
+        .z-test1{
             width: 150px;
             height: 150px;
             position: relative;
             
         }
         
-        #z1{
+        #z11{
             width: 1200px;
             height: 200px;
             border : 1px solid skyblue;
@@ -169,7 +146,7 @@
           
         }
 
-        #z1 > a{
+        #z11 > a{
             text-decoration: none;
             color: black;
             font-size: 20px;
@@ -204,7 +181,7 @@
 	 <div id="content">
 
         <div id="content_1">
-            <p id="p1">로그인</p>
+            <p id="p11">로그인</p>
             
         </div>
             
@@ -242,20 +219,20 @@
             
         </div>
         <div id="content_3">
-            <z class="z-test" id="z1" align="center">
-                <a href="#" id="register" onclick="enrollPage();">회원가입 <br><br>
+            <z class="z-test1" id="z11" align="center">
+                <a href="#" id="register1" onclick="enrollPage();">회원가입 <br><br>
                 <span style="font-size: 13px; font-weight: lighter; color: gray;">
                     낭만닥터 이사부의 회원이 <br>
                     되시면 홈페이지에서 제공하는 <br>
                     온라인 서비스를 이용하실 수 있습니다.</span>
             </a>
-                <a href="#" id="find1" onclick="findIdPage();">아이디 찾기 <br><br>
+                <a href="#" id="find11" onclick="findIdPage();">아이디 찾기 <br><br>
                     <span style="font-size: 13px; font-weight: lighter; color: gray;">
                         성함, 이메일을 통해 <br>
                         아이디를 확인 <br>
                         하실 수 있습니다.</span>
                 </a>
-                <a href="#" id="find2" onclick="findPwdPage();">비밀번호 찾기 <br><br>
+                <a href="#" id="find21" onclick="findPwdPage();">비밀번호 찾기 <br><br>
                     <span style="font-size: 13px; font-weight: lighter; color: gray;">
                         아이디, 이메일을 통해 <br>
                         임시비밀번호로 서비스를 이용 <br>
@@ -267,6 +244,8 @@
 
     </div>
     
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <%@ include file="../common/footer.jsp" %>
     <script>
         function enrollPage(){
             location.href = "<%=contextPath%>/enrollForm.me";
@@ -284,6 +263,6 @@
 
 
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
 </body>
 </html>

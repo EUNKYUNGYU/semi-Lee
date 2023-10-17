@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.medicine.model.service.MedicineService;
+import com.kh.DoctorLee.medicine.model.vo.Medicine;
 import com.kh.DoctorLee.mpBoard.model.service.MedManagementService;
 import com.kh.DoctorLee.mpBoard.model.vo.MedManagement;
 
@@ -36,7 +38,9 @@ public class MedManagementDetailController extends HttpServlet {
 		//System.out.println(medManNo);
 		
 		MedManagement mm = new MedManagementService().selectMedManagement(medManNo);
+		Medicine med = new MedicineService().selectMedicineTwo(medManNo);
 		request.setAttribute("mm", mm);
+		request.setAttribute("med", med);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/myPage/medManagementDetail.jsp");
 		view.forward(request, response);

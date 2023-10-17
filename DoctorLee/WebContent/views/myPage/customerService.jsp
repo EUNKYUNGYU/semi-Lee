@@ -165,8 +165,7 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
                 <br>
                 <hr>
                 <div id="inqbtn" align="center">
-                    <input type="button" value="1:1 문의" id="inq1" onclick="personalInqPage();">
-                    <input type="button" value="관리자 문의" id="inq2" onclick="adminInqPage();">
+                    <input type="button" value="문의하기" id="inq2" onclick="adminInqPage();">
                 </div>
 
                 <table class="list-area" align="center">
@@ -189,7 +188,7 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
                     	<% for(CustomerService cs : list) {%>
                       <tr>
                         <td><%=cs.getInqNo() %></td>
-                        <td><%=cs.getInqType() %></td>
+                        <td><%=cs.getCategory() %></td>
                         <td id="th33"><%=cs.getInqTitle() %></td>
                         <td id="th44"><%=cs.getCreateDate() %></td>
                       </tr>
@@ -201,7 +200,7 @@ ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribu
             </div>
         </div>
      </div>
-     
+      <%@ include file="../common/footer.jsp" %>
      <script>
      	
      	function personalInqPage(){

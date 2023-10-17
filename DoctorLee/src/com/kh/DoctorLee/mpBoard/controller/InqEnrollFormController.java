@@ -3,7 +3,6 @@ package com.kh.DoctorLee.mpBoard.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +13,16 @@ import com.kh.DoctorLee.mpBoard.model.service.CustomerServiceService;
 import com.kh.DoctorLee.mpBoard.model.vo.Category;
 
 /**
- * Servlet implementation class AdminInqController
+ * Servlet implementation class InqEnrollFormController
  */
-@WebServlet("/adminInq.mp")
-public class AdminInqController extends HttpServlet {
+@WebServlet("/enrollForm.cs")
+public class InqEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInqController() {
+    public InqEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,9 +36,10 @@ public class AdminInqController extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/myPage/adminInq.jsp").forward(request, response);
+		
 	
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

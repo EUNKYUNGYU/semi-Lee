@@ -11,6 +11,7 @@
 	
 	<entry key="selectCliList">
 		SELECT 
+				ROUND(AVG(CLI_SCOPE),1),
 				CLI_NO, 
 				HOS_NAME, 
 				CLI_CATE, 
@@ -25,8 +26,20 @@
 				TB_CLI_CATE USING(CATE_NO)
 		JOIN 
 				TB_HOSPITAL USING(HOS_NO)
+		JOIN
+				TB_CLI_REV USING(CLI_NO)		
 	    WHERE
-	    		CATE_NO = ?				
+	    		CATE_NO = ?
+	    GROUP
+	    BY
+				CLI_NO, 
+				HOS_NAME, 
+				CLI_CATE, 
+				CLI_NAME,
+				CLI_PRICE, 
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				DES_PATH						
 	</entry>
 	
 	<entry key="selectCli">
@@ -153,5 +166,16 @@
 				CLI_NO = ?
 		ORDER 
 		   BY   REV_NO DESC
+	</entry>
+	
+	<entry key="selectRevCount">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_CLI_REV
+		WHERE
+				CLI_NO = ?
+		AND
+				MEM_NO = ?						
 	</entry>
 </properties>

@@ -245,6 +245,10 @@
     .time-border > ul{
         list-style: none;
     }
+
+    footer{
+        margin-top: 100px;
+    }
 </style>
 </head>
 <body>
@@ -314,7 +318,7 @@
 
                                             <div class="cli-score">
                                                 <span class="material-symbols-outlined">grade</span>
-                                                <span>별점</span>
+                                                <span><%=c.getScope()%></span>
                                             </div>
 
                                             <div class="cli-price">
@@ -357,7 +361,13 @@
 
         </div>
 
+        <br clear="both">
+
     </div>
+
+    <footer>
+        <%@ include file ="../common/footer.jsp" %>
+    </footer>
 
 </body>
 </html>

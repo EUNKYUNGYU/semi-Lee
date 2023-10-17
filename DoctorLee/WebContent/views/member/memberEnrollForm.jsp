@@ -70,14 +70,14 @@
         }
         
         /*--------------------p태그---------------------*/
-        #p1{
+        #p11{
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
             margin-top: -150px;
         }
 
-        #p2{
+        #p21{
             text-align: center;
             font-size: 18px;
             color: #1E376F;
@@ -96,7 +96,7 @@
         }
        
         /*-----------버튼---------*/
-        #register{
+        #register1{
             background-color: #1E376F;
             color: white;
             border: 1px solid #1E376F;
@@ -108,7 +108,7 @@
             
             
         }
-        #cancel{
+        #cancel1{
             background-color: white;
             color: #1E376F;
             border: 1px solid #1E376F;
@@ -135,9 +135,9 @@
 	 <div id="content">
 
         <div id="content_1"></div>
-            <p id="p1">회원가입</p>
+            <p id="p11">회원가입</p>
             <hr style="border: 1.8px solid rgb(226, 226, 226);">
-            <p id="p2">낭만닥터 이사부의 회원이 되시면 다양한 정보와 맞춤 서비스를 이용하실 수 있습니다.</p>
+            <p id="p21">낭만닥터 이사부의 회원이 되시면 다양한 정보와 맞춤 서비스를 이용하실 수 있습니다.</p>
             
             <br>
             <hr style="border: 1.8px solid #1E376F;">
@@ -398,7 +398,8 @@
                         <input type="checkbox" value="과일류">과일류
                         <input type="checkbox" value="견과류">견과류
                         <input type="checkbox" value="기타">기타
-                       
+                    	<br>
+                    	<hr>  
                     
                 
             </div>
@@ -409,16 +410,17 @@
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
        
         <div id="content_3" align="center">
-            
-            <button type="reset" id="cancel">취소</button>
-            <button type="submit" id="register"  onclick="return checkAll();">회원가입</button>
+            <br><br><br><br><br><br><br><br>
+            <button type="reset" id="cancel1">취소</button>
+            <button type="submit" id="register1"  onclick="return checkAll();">회원가입</button>
+            <br><br><br><br><br><br>
         </div>
         
 
 		</form>
     </div>
     
-
+	 <%@ include file="../common/footer.jsp" %>
 <script>
 
 	// 아이디 중복체크
@@ -522,6 +524,5 @@
 </script>
 
 
-    <br><br><br><br><br><br><br><br>
 </body>
 </html>

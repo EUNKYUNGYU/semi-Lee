@@ -26,9 +26,9 @@
             center:'title',
             right:'next'
         },
-        validRange: function(toady) {
+        validRange: function(nowDate) {
             return {
-                start: toady
+                start: nowDate
             };
         },
 
@@ -49,6 +49,7 @@
             // 달력 클릭 시 선택한 날짜 출력하기
             $('#resDate').val((info.dateStr).replaceAll('-', '.'));
             $('#resTime').val(null);
+            $('#hiddenResTime').val(null);
 
             var days = document.querySelectorAll(".day-color");
             days.forEach(function(day){
@@ -79,6 +80,7 @@
 
                     $('.time-content').click(function(){
                         $('#resTime').val($(this).children().text());
+                        $('#hiddenResTime').val($(this).children().text());
 
                         $(this).css('background-color', 'salmon');
 
@@ -112,13 +114,10 @@
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
-        height: 1050px;
+        height: auto;
         margin-top: 50px;
         border: 1px solid red;
-    }
-
-    .content > div{
-        float: left;
+        margin-bottom: 50px;
     }
 
     #cou_navi{
@@ -129,7 +128,7 @@
     #cli-content {
         width: 1000px;
         margin-left: 100px;
-        height: 1000px;
+        height: auto;
     }
 
     /*클리닉 예약 날짜 출력 영역 div*/
@@ -218,6 +217,10 @@
         margin-right: 10px;
     }
 
+    #hiddenResTime{
+        visibility: hidden;
+    }
+
 </style>
 </head>
 <body>
@@ -285,6 +288,7 @@
 
                             <span>예약시간 : </span>
                             <input type="text" id="resTime" name="resTime" required readonly>
+                            <input type="text" id="hiddenResTime" required>
                         </div>
 
                         <div id="res-part" align="center">
@@ -298,6 +302,10 @@
     
         </div>
 
+        <div id="footer">
+            <%@ include file ="../common/footer.jsp" %>
+        </div>
+
         <script>
             $(function(){
                 //li클릭 시 색깔 바뀌는 이벤트
@@ -309,18 +317,14 @@
                     }
                 })
 
-                $('#resTime').click(function(){
-                    console.log($(this).val());
+                $('#res-part').click(function(){
+
+                    if(!$('#resDate').val() && !$('#hiddenResTime').val()){
+                        alert('날짜를 선택하세요');
+                    } else if(!$('#hiddenResTime').val()){
+                        alert('시간을 선택하세요');
+                    }
                 })
-
-                // 시간 미선택 시 예약 버튼 비활성화
-                // if($('input[name=resTime]').val().trim() == ''){
-                //     $('button[type=submit]').attr('disabled', true);
-                // } else {
-                //     $('button[type=submit]').attr('disabled', false);
-                // }
-
-                
             })
         </script>
 

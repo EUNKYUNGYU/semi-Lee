@@ -39,10 +39,6 @@
         margin-top: 50px;
     }
 
-    .content > div{
-        float: left;
-    }
-
     #cou_navi{
         height: 1000px;
     }
@@ -333,7 +329,9 @@
         
                                                     +'<div class="cli-score">'
                                                             +'<span class="material-symbols-outlined">grade</span>'
-                                                            +'<span>' + '별점' +'</span>'
+                                                            +'<span>' 
+                                                                +result[i].scope 
+                                                            +'</span>'
                                                     +'</div>'
         
                                                     +'<div class="cli-cate">'
@@ -383,6 +381,10 @@
         </div>
 
     </div>
+
+    <footer>
+        <%@ include file ="../common/footer.jsp" %>
+    </footer>
 
 </body>
 </html>

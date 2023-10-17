@@ -24,7 +24,7 @@
         /*하단 내용 영역을 감싸는 div*/
         .content{
             margin-top: 50px;
-            height: 1400px;
+            height: 1500px;
         }
 
         /*좌측 메뉴 영역 div*/
@@ -61,6 +61,10 @@
             width: 300px;
             height: 300px;
         }
+
+        #button-area > button{
+            margin-bottom: 10px;
+        }
 </style>
 </head>
 <body>
@@ -83,6 +87,13 @@
 
             <!--성향 테스트 목록 출력 영역 div-->
             <div id="test-list" align="center">
+
+                <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
+                    <div id="button-area" align="right">
+                        <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
+                    </div>
+                <% } %>
+
                 <div class="thumbnail" align="center">
                     <br>
                     <img src="https://images.ktestone.com/main-thumbnail/gardenflower-thumb.png" alt="">
@@ -109,5 +120,9 @@
         </div>
 
     </div>
+
+    <footer>
+        <%@ include file ="../common/footer.jsp" %>
+    </footer>
 </body>
 </html>

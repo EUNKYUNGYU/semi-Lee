@@ -19,6 +19,15 @@
 		INSERT 
 		  INTO 
 		       TB_RESERVATION
+		       (
+		       RSVT_NO
+,RSVT_DATE
+,RSVT_TIME
+,MEM_INFO
+,RSVT_HOS
+,RSVT_MEM
+,RSVT_DOC
+		       )
 	    VALUES	
 	    	  (
 	    	  SEQ_RSVT_NO.NEXTVAL

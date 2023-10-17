@@ -74,6 +74,7 @@ public class CliDao {
 			
 			while(rset.next()) {
 				Clinic c = new Clinic();
+				c.setScope(rset.getDouble("ROUND(AVG(CLI_SCOPE),1)"));
 				c.setCliNo(rset.getInt("CLI_NO"));
 				c.setHosNo(rset.getString("HOS_NAME"));
 				c.setCateName(rset.getString("CLI_CATE"));
@@ -342,6 +343,36 @@ public class CliDao {
 		}
 		
 		return list;
+	}
+	
+	// 한 사람 당 한 번만 리뷰 작성 가능하게
+	public int selectRevCount(Connection conn, int cliNo, Member loginUser) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRevCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cliNo);
+			pstmt.setInt(2, loginUser.getMemNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

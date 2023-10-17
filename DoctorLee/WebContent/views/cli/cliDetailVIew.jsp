@@ -4,6 +4,7 @@
 <%
 	Clinic c = (Clinic)request.getAttribute("c");
     int result = (int)request.getAttribute("result");
+    int result2 = (int)request.getAttribute("result2");
     Double scope = (Double)request.getAttribute("scope");
 %>    
 <!DOCTYPE html>
@@ -27,13 +28,10 @@
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
-        height: 1050px;
+        height: auto;
         margin-top: 50px;
         border: 1px solid red;
-    }
-
-    .content > div{
-        float: left;
+        margin-bottom: 50px;
     }
 
     #cou_navi{
@@ -54,7 +52,7 @@
     #cli-content {
         width: 1000px;
         margin-left: 100px;
-        height: 1000px;
+        height: auto;
     }
 
     /*클리닉 간단 정보 출력 영역 div*/
@@ -78,7 +76,7 @@
     /*클리닉 상세 정보 출력 영역 div*/
     #cli-middle{
         border: 1px solid royalblue;
-        height: 500px;
+        height: auto;
     }
 
     #cli-middle > h4{
@@ -89,7 +87,7 @@
     /*클리닉 후기 출력 영역 div*/
     #cli-bottom{
         border: 1px solid pink;
-        height: 300px;
+        height: auto;
     }
 
     #cli-bottom > h4{
@@ -206,7 +204,7 @@
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
                     <h4>후기</h4>
-                    <% if(loginUser != null && result > 0) {%>
+                    <% if(loginUser != null && result > 0 && result2 == 0) {%>
                         <button data-toggle="modal" data-target="#myModal">후기 작성</button>
                     <% } %>  
                     
@@ -232,6 +230,10 @@
         </div>
 
     </div>
+
+    <footer>
+        <%@ include file ="../common/footer.jsp" %>
+    </footer>
 
     <!--리뷰 작성 모달창-->
     <div class="modal" id="myModal">
@@ -290,17 +292,6 @@
                 // console.log($(this).parents().children().eq(1).val());
             })
 
-            // 리뷰: 별점 버튼 클릭
-            // $('input[name=reviewStar]').click(function(){
-            //     console.log($('input[name=reviewStar]:checked').val());
-            //     console.log($('#revContent').val());
-            // })
-
-            // $('#insertRev').click(function(){
-            //     console.log($('#revContent').text());
-            // })
-
-
             // 등록하기 버튼 클릭 시 리뷰 작성
             $('#insertRev').click(function(){
                 $.ajax({
@@ -333,11 +324,11 @@
                         let resultStr = '';
                         for(let i in result){
                             resultStr += '<li class="rev-content">'
-                                + '<p>' + result[i].nickName + '<p>'
-                                + '<p>' + result[i].cliScope + '<p>'
-                                + '<p>' + result[i].revContent + '<p>'
-                                + '<P>' + result[i].createDate + '<p>'
-                                + '</li>'
+                                            + '<p>' + result[i].nickName + '<p>'
+                                            + '<p>' + result[i].cliScope + '<p>'
+                                            + '<p>' + result[i].revContent + '<p>'
+                                            + '<P>' + result[i].createDate + '<p>'
+                                       + '</li>'
                         }
                         $('#rev-list').html(resultStr);
                     },

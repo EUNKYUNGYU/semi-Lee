@@ -69,7 +69,7 @@
         <div id="content_1">
 
             <div id="video">
-                       
+                <img src="https://img.youtube.com/vi/<%= cv.getVideoAddress() %>/maxresdefault.jpg" alt="">
             </div>
 
             <div id="board">

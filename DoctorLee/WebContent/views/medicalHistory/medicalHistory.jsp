@@ -12,7 +12,7 @@
 	}
 	#mhwrap{
 		width : 1000px;
-		height : 1200px;
+		height : 1500px;
 		margin : auto;
 	}
 	#mhwrap{

@@ -59,4 +59,14 @@
 				MED_NAME = ?
 				
 	</entry>
+	<entry key="selectMedicineDetailTwo">
+		SELECT
+			MED_NAME,
+			PRE_INFO,
+			CAUCTION
+		FROM
+			TB_MED
+		WHERE 
+			MED_NO = ?
+	</entry>
 </properties>

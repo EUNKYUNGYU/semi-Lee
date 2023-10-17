@@ -91,7 +91,8 @@
 				PHONE,
 				ORIGIN_NAME,
 				CHANGE_NAME,
-				PROFILE_PATH
+				PROFILE_PATH,
+				PRICE
 		FROM 
 				TB_COU
 		JOIN
@@ -108,13 +109,110 @@
 				PHONE,
 				ORIGIN_NAME,
 				CHANGE_NAME,
-				PROFILE_PATH
+				PROFILE_PATH,
+				PRICE
 		FROM
 				TB_COU
 		JOIN
 				TB_HOSPITAL USING(HOS_NO)		
 		WHERE
 				COU_NO = ?				
+	</entry>
+	
+	<entry key="selectCouDate">
+		SELECT
+				DISTINCT COU_DATE
+		FROM
+				TB_COU_TIME
+		WHERE
+				COU_NO = ?				
+	</entry>
+	
+	<entry key="selectCouTimeList">
+	SELECT
+				TIME_NO,
+				COU_NO,
+				COU_TIME,
+				COU_DATE
+		  FROM
+		  		TB_COU_TIME
+		 WHERE
+		 		COU_NO = ?
+		 AND
+		 		COU_DATE = ?
+		 AND
+		 		COU_TIME NOT IN(
+		 						SELECT
+		 								RES_TIME
+		 						  FROM
+		 						  		TB_COU_RES
+		 						 WHERE
+		 						 		COU_NO = ?
+		 						 AND
+		 						 		RES_DATE = ?				
+		 						)
+		ORDER 
+		   BY  TIME_NO
+	</entry>
+	
+	<entry key="insertCouRes">
+		INSERT
+		INTO
+				TB_COU_RES
+		VALUES
+				(
+				SEQ_COU_RES_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				?
+				)
+	</entry>
+	
+	<entry key="selectResMem">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_COU_RES
+		WHERE
+				MEM_NO = ?
+		AND
+				COU_NO = ?		
+	</entry>
+	
+	<entry key="insertCouRev">
+		INSERT
+		  INTO
+		  		TB_COU_REV
+		VALUES
+				(
+				SEQ_COU_REV_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				SYSDATE,
+				?
+				)  		
+	</entry>
+	
+	<entry key="selectCouRevList">
+		SELECT 
+				REV_NO, 
+				COU_NO, 
+				NICKNAME, 
+				REV_CONTENT, 
+				CR.CREATE_DATE, 
+				COU_SCOPE
+		  FROM 
+		  		TB_COU_REV CR
+		  JOIN
+		  		TB_MEMBER
+		  USING
+		  		(MEM_NO)		
+		  WHERE 
+				COU_NO = ?
+		ORDER 
+		   BY   REV_NO DESC
 	</entry>
 </properties>
 

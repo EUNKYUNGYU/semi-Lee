@@ -10,13 +10,14 @@ public class Cou {
 	private String originName;
 	private String changeName;
 	private String profilePath;
+	private int price;
 	
 	public Cou() {
 		super();
 	}
 
 	public Cou(int couNo, int hosNo, String hosName, String couName, String phone, String originName, String changeName,
-			String profilePath) {
+			String profilePath, int price) {
 		super();
 		this.couNo = couNo;
 		this.hosNo = hosNo;
@@ -26,6 +27,7 @@ public class Cou {
 		this.originName = originName;
 		this.changeName = changeName;
 		this.profilePath = profilePath;
+		this.price = price;
 	}
 
 	public int getCouNo() {
@@ -92,11 +94,21 @@ public class Cou {
 		this.profilePath = profilePath;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "Cou [couNo=" + couNo + ", hosNo=" + hosNo + ", hosName=" + hosName + ", couName=" + couName + ", phone="
 				+ phone + ", originName=" + originName + ", changeName=" + changeName + ", profilePath=" + profilePath
-				+ "]";
+				+ ", price=" + price + "]";
 	}
+
+	
 	
 }

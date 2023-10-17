@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.DoctorLee.medicine.model.vo.Medicine" %>
+ <%
+ 	Medicine med = (Medicine)request.getAttribute("med");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,17 +14,17 @@
 		margin-bottom : 150px;
 		margin-left : 300px;
 	}
-	#medName,#preInfo,#cauction{
+	#updateName,#updatePreInfo,#updateCauction{
 		width : 300px;
 		
 	}
-	#medName{
+	#updateName{
 		height : 20px;
 	}
-	#preInfo{
+	#updatePreInfo{
 		height : 300px;
 	}
-	#cauction{
+	#updateCauction{
 		height : 300px;
 		margin-left : 20px;
 	}
@@ -33,8 +37,8 @@
 		<br>
 		<h2 align="center">약품 수정 페이지</h2>
 		<form id="medEnroll-form"action="<%=contextPath%>/update.med" method="post">
-			
-			수정할 약품 이름:  <input type="text" name="updateName" id="updateName" required>
+			<input type="hidden" name="mname" value="<%=med.getMedName() %>">
+			수정할 약품 이름:  <input type="text" name="updateName" id="updateName" required placeholder="<%=med.getMedName() %>">
 						  
 						  
 						  <br><br>
@@ -50,13 +54,13 @@
 			
 			<script>
 				$(function(){
-					$('#preInfo').keyup(function(){
+					$('#updatePreInfo').keyup(function(){
 						 console.log($(this).val().length);
 		             	$('#piCount').text($(this).val().length);
 					})
 				})
 				$(function(){
-					$('#cauction').keyup(function(){
+					$('#updateCauction').keyup(function(){
 						 console.log($(this).val().length);
 		            	 $('#caCount').text($(this).val().length);
 					})

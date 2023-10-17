@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.medicine.model.service.MedicineService;
+import com.kh.DoctorLee.medicine.model.vo.Medicine;
 
 /**
  * Servlet implementation class UpdateMedicineController
@@ -30,8 +31,22 @@ public class UpdateMedicineController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		String updateMedName = request.getParameter("updateName");
+		String updatePreInfo = request.getParameter("updatePreInfo");
+		String updateCauction = request.getParameter("updateCauction");
 		String medName = request.getParameter("mname");
-		int result = new MedicineService().updateMedicine(medName);
+		
+		Medicine med = new Medicine();
+		med.setMedName(updateMedName);
+		med.setPreInfo(updatePreInfo);
+		med.setCauction(updateCauction);
+		int result = new MedicineService().updateMedicine(med,medName);
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/search.med" );
+			
+		} else {
+			request.getRequestDispatcher("views/common/errorPage.jsp");
+		}
 	}
 
 	/**

@@ -36,6 +36,7 @@ public class SelectHosiptalController extends HttpServlet {
 		
 		ArrayList<Hospital> hosList = new BookmarkService().selectHospital(hosName);
 		request.setAttribute("hosList", hosList);
+		request.setAttribute("hosName", hosName);
 		
 		request.getRequestDispatcher("views/myPage/bookmarkSearch.jsp").forward(request, response);
 	}

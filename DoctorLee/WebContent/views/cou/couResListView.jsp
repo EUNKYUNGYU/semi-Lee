@@ -61,68 +61,6 @@
         margin-top: 10px;
     }
 
-    /*카테고리 영역*/
-    #cli-cate-part{
-        width: 1000px;
-        border: 1px solid black;
-    }
-    
-    .category-title-part{
-        height: 100px;
-        border-bottom: 1px solid;
-        line-height: 100px;
-    }
-
-    .category-title-part span{
-        font-size: 26px;
-    }
-
-    .category-title-part > span{
-        margin-left: 50px;
-    }
-
-    .category-title-part > em > span{
-        background-color: #1E376F;
-        border-radius: 50%;
-        color: white;
-        margin-left: 100px;
-    }
-
-    #cli-cate-part{
-        width: 1000px;
-        margin-left: 100px;
-    }
-
-    .cate{
-        opacity: 0;
-    }
-
-
-    input[type=radio]+label{
-        color: black;
-        border-radius: 10px;
-        text-align: center;
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-bottom: 10px;
-        display: inline-block;
-        font-size: 20px;
-    }
-
-    input[type=radio]:checked + label{
-        color: blue;
-        text-decoration: underline;
-    }
-
-    #cate-inner > ul{
-        list-style: none;
-        display: flex;
-        justify-content: space-evenly;
-        margin-bottom: 0;
-        padding: 0;
-    }
-
-
     /*결과 출력 영역*/
     .title-part{
         height: 100px;
@@ -330,29 +268,6 @@
             <div id="cli-content">
 
                 <!--클리닉 내용 출력 영역 div-->
-                <div id="cli-cate-part">
-
-                    <!--제목 출력 영역 div-->
-                    <div class="category-title-part">
-                        <em>
-                            <span class="material-symbols-outlined">chevron_right</span>
-                        </em>
-                        <span>카테고리를 선택해주세요</span>
-                    </div>
-
-                <!--클리닉 카테고리 영역 div-->
-                <div id="cli-cate" align="left">
-                    <div id="cate-inner" align="center">
-                        <ul>
-                            <li><input type="radio" class="cate" name="cate" id="call" value="1"><label for="call">전화</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="meet" value="2"><label for="meet">대면</label></li>
-                        </ul>
-
-                    </div>
-                </div>
-        </div>
-
-                <!--클리닉 내용 출력 영역 div-->
                 <div id="cli-part">
 
                     <!--해당 카테고리 클리닉 출력 영역 div-->
@@ -376,7 +291,11 @@
                                         <!--클리닉 대표 이미지 div-->
                                         <div class="cli-img">
                                             <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                            <button>예약하기</button>
+                                            
+                                            <% if(loginUser != null) { %>
+                                                <button>예약하기</button>
+                                            <% } %>    
+                                            
                                             <span><%=c.getCouNo()%></span>
                                         </div>
 
@@ -399,7 +318,7 @@
                                             </div>
 
                                             <div class="cli-price">
-                                                <span>가격</span>
+                                                <span><%=c.getPrice()%></span>
                                             </div>
 
                                         </div>

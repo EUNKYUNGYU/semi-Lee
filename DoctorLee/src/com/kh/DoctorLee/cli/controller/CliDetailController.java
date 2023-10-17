@@ -7,9 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.DoctorLee.cli.model.service.CliService;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
  * Servlet implementation class CliDetailController
@@ -38,7 +40,19 @@ public class CliDetailController extends HttpServlet {
 		// Service 요청
 		Clinic c = new CliService().selectCli(cliNo);
 		
+		// 리뷰 버튼을 예약한 사용자에게만 보이게
+		HttpSession session = request.getSession(); 
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		int result = new CliService().selectResMem(cliNo, loginUser);
+		
+		// 클리닉 평균 가져오기
+		Double scope = new CliService().selectCliScope(cliNo);
+		
 		request.setAttribute("c", c);
+		request.setAttribute("result", result);
+		request.setAttribute("scope", scope);
 		
 		request.getRequestDispatcher("views/cli/cliDetailView.jsp").forward(request, response);
 	}

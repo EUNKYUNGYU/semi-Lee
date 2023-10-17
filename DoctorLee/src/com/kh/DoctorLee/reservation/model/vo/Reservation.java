@@ -14,7 +14,6 @@ public class Reservation {
 		super();
 	}
 	
-	
 	public Reservation(int rsvtNo, String rsvtHos, String rsvtDoc, String rsvtMem, String rsvtDate, String rsvtTime,
 			String memInfo) {
 		super();

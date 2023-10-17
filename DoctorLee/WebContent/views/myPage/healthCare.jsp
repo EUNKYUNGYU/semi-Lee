@@ -18,9 +18,7 @@
 		height : 900px;
 		margin : auto;
 	}
-	#diary{
-		width : 100%;
-	}
+	
 	#healthCare_main{
 		width : 80%;
 		height : 100%;
@@ -58,6 +56,7 @@
 		int standard = loginUser.getHeight()-loginUser.getWeight();// 로그인한 유저의 키 빼기 몸무게의 변수
 		//System.out.println(standard);
 	%>
+	
 	<h2 align="center"><%=loginUser.getMemName() %>님의 건강 관리 페이지 </h2>
 	<br>
 	<hr>
@@ -82,9 +81,9 @@
 						<table id="memInfo">
 							<thead>
 								<tr>
-									<td>성함</td>
-									<td>키</td>
-									<td>몸무게</td>
+									<th>성함</th>
+									<th>키</th>
+									<th>몸무게</th>
 								</tr>						
 							</thead>
 							<tbody>
@@ -137,7 +136,7 @@
 							<script>
 								$(function(){
 									//document.getElementById('healthCareInfo').innerHTML = '과체중입니다.';
-									$('recommendHealth').html('유산소 운동(줄넘기,산책,뜀걸음...등등)');
+									$('#recommendHealth').html('유산소 운동(줄넘기,산책,뜀걸음...등등)');
 								})
 							</script>
 						
@@ -147,7 +146,7 @@
 								<script>
 									$(function(){
 										//document.getElementById('healthCareInfo').innerHTML = '저체중입니다.';
-										$('recommendHealth').html('근력 운동(턱걸이,벤치/레그 프레스..등등) 위주로 해주시면됩니다.');
+										$('#recommendHealth').html('근력 운동(턱걸이,벤치/레그 프레스..등등) 위주로 해주시면됩니다.');
 									})
 									
 								</script>

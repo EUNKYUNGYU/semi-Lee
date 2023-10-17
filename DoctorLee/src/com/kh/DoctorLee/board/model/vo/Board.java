@@ -3,15 +3,19 @@ package com.kh.DoctorLee.board.model.vo;
 public class Board {
 
 	private int boardNo;
-	private int boardType;
+	private int boardType; // 10 / 20 / 30 / 40 / 50
 	private String writer;
 	private String boardTitle;
 	private String boardContent;
 	private String createDate;
 	private int views;
+	private int likes; // 추천 수를 저장하기 위한 필드
+	private int comments; // 댓글 수를 저장하기 위한 필드 
 	private String status;
-	private String fileNo;
-	private String boardName;
+	private String fileNo; // 테이블에서 삭제한 컬럼인데 일단 삭제 안 함, 나중에 필요없으면 삭제하기
+	private String boardName; // 공지사항 / 자유게시판 / 정보게시판 / 익명게시판 / 건강매거진
+	private String boardTypeStr; // 보드타입을 쿼리 스트링으로 받으면 String타입이라 따로 저장 할 변수가 필요해서 만들었음
+	
 	
 	
 	
@@ -22,7 +26,7 @@ public class Board {
 
 
 	public Board(int boardNo, int boardType, String writer, String boardTitle, String boardContent, String createDate,
-			int views, String status, String fileNo, String boardName) {
+			int views, int likes, int comments, String status, String fileNo, String boardName, String boardTypeStr) {
 		super();
 		this.boardNo = boardNo;
 		this.boardType = boardType;
@@ -31,10 +35,59 @@ public class Board {
 		this.boardContent = boardContent;
 		this.createDate = createDate;
 		this.views = views;
+		this.likes = likes;
+		this.comments = comments;
 		this.status = status;
 		this.fileNo = fileNo;
 		this.boardName = boardName;
+		this.boardTypeStr = boardTypeStr;
 	}
+
+
+
+
+
+	public String getBoardTypeStr() {
+		return boardTypeStr;
+	}
+
+
+
+	public void setBoardTypeStr(String boardTypeStr) {
+		this.boardTypeStr = boardTypeStr;
+	}
+
+
+
+	public int getLikes() {
+		return likes;
+	}
+
+
+
+
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
+
+
+
+
+	public int getComments() {
+		return comments;
+	}
+
+
+
+
+
+	public void setComments(int comments) {
+		this.comments = comments;
+	}
+
+
 
 
 
@@ -152,7 +205,7 @@ public class Board {
 
 
 
-	public void setBoardName(String board) {
+	public void setBoardName(String boardName) {
 		this.boardName = boardName;
 	}
 
@@ -162,10 +215,13 @@ public class Board {
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardType=" + boardType + ", writer=" + writer + ", boardTitle="
 				+ boardTitle + ", boardContent=" + boardContent + ", createDate=" + createDate + ", views=" + views
-				+ ", status=" + status + ", fileNo=" + fileNo + ", boardName=" + boardName + "]";
+				+ ", likes=" + likes + ", comments=" + comments + ", status=" + status + ", fileNo=" + fileNo
+				+ ", boardName=" + boardName + ", boardTypeStr=" + boardTypeStr + "]";
 	}
-	
-	
+
+
+
+
 	
 	
 	

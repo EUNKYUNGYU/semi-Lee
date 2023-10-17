@@ -157,8 +157,8 @@ header{
         font-size: 16px;
     }
 
-#navi:hover{background-color: antiquewhite;}
-#nav:hover{background-color: antiquewhite;}
+#navi:hover{background-color: #cadafc;}
+#nav:hover{background-color: #cadafc;}
 #nav > li >ul {
     display:none;
     padding:0;
@@ -168,11 +168,13 @@ header{
 }
 #nav > li > a:hover + ul {
         display: block;
-        background-color: #333;
+        background-color: #c6c6c6;
+        border-radius: 3px;
     }
 #nav > li > ul:hover {
         display: block;
-        background-color: #333;
+        background-color: #c6c6c6;
+        border-radius: 3px;
     }
 #nav > li > ul a{font-size: 11px;}
 #nav > li > ul a:hover{font-size: 14px;}
@@ -196,7 +198,7 @@ header{
                     <li><a href="#">클리닉</a></li>
                     <li><a href="#">건강 메거진</a>
                         <ul>
-                            <li><a href="#">의약품 검색</a></li>
+                            <li><a href="<%=contextPath%>/search.med">의약품 검색</a></li>
                             <li><a href="#">건강 관리 방법</a></li>
                             <li><a href="#">긴급 상황 대비 메뉴얼</a></li>
                         </ul>
@@ -213,13 +215,13 @@ header{
                     <li><a href="#">마이페이지</a>
                         <ul>
                         	<li><a href="<%=contextPath%>/myPage.me">마이페이지</a></li>
-                            <li><a href="#">복약관리</a></li>
+                            <li><a href="<%=contextPath%>/list.medi">복약관리</a></li>
                             <li><a href="<%=contextPath%>/updateForm.me">회원 정보 수정</a></li>
                             <li><a href="#">회원 탈퇴</a></li>
-                            <li><a href="#">관리자 문의</a></li>
+                            <li><a href="<%=contextPath%>/customerService.mp">고객센터</a></li>
                             <li><a href="#">자기 게시물 확인</a></li>
                             <li><a href="#">예약 관리</a></li>
-                            <li><a href="#">병원 즐겨찾기</a></li>
+                            <li><a href="<%=contextPath%>/first.bm">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="<%=contextPath%>/main.hc">건강 관리</a></li>
                             <li><a href="<%=contextPath %>/first.di">다이어리</a></li>

@@ -48,14 +48,11 @@ public class ReservationDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
-		
-		
 		return checkRsvtResult;
+			
 	}
-	
 	
 	// 예약 insert
 	public int insertRsvt(Connection conn, Reservation rsvt) {
@@ -81,9 +78,9 @@ public class ReservationDao {
 		return result;
 	}
 	
-	// 예약 확인
+	// 예약 조회
 	public Reservation selectRsvt(Connection conn, String rsvtName) {
-		Reservation rsvtResult = null;
+		Reservation selectRsvt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectRsvt");
@@ -93,13 +90,14 @@ public class ReservationDao {
 			pstmt.setString(1, rsvtName);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				rsvtResult = new Reservation();
-				rsvtResult.setRsvtNo(rset.getInt("RSVT_NO"));
-				rsvtResult.setRsvtMem(rset.getString("RSVT_MEM"));
-				rsvtResult.setRsvtDoc(rset.getString("RSVT_DOC"));
-				rsvtResult.setRsvtHos(rset.getString("RSVT_HOS"));
-				rsvtResult.setRsvtDate(rset.getString("RSVT_DATE"));
-				rsvtResult.setRsvtTime(rset.getString("RSVT_TIME"));
+				selectRsvt = new Reservation();
+				selectRsvt.setRsvtNo(rset.getInt("RSVT_NO"));
+				selectRsvt.setRsvtDate(rset.getString("RSVT_DATE"));
+				selectRsvt.setRsvtTime(rset.getString("RSVT_TIME"));
+				selectRsvt.setMemInfo(rset.getString("MEM_INFO"));
+				selectRsvt.setRsvtHos(rset.getString("HOS_NAME"));
+				selectRsvt.setRsvtMem(rset.getString("RSVT_MEM"));
+				selectRsvt.setRsvtDoc(rset.getString("DOCTOR_NAME"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -107,7 +105,6 @@ public class ReservationDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		return rsvtResult;
+		return selectRsvt;
 	}
 }

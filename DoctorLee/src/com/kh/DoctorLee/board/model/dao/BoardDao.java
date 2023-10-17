@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.DoctorLee.board.model.vo.Board;
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.quize.model.dao.QuizeDao;
-import com.kh.DoctorLee.quize.model.vo.Quize;
 
 public class BoardDao {
 	
@@ -29,27 +29,68 @@ public class BoardDao {
 		}
 	}
 	
+	public int selectListCount(Connection conn, String type) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount") +
+				" AND " + 
+				"BOARD_TYPE = " +
+				type;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("selectListCount Dao listCount" + listCount);
+		return listCount;
+		
+	}
 	
-	public ArrayList<Board> selectBoard(Connection conn){
+	public ArrayList<Board> selectList(Connection conn, String type, PageInfo pi){
 		
 		
 		ArrayList<Board> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectBoard");
+		String sql = prop.getProperty("selectList") + 
+					" BOARD_TYPE = " +
+					type + 
+					" ORDER BY " + 
+					"B.CREATE_DATE DESC " +
+					") A ) " +
+					"WHERE " + 
+					"RNUM BETWEEN ? AND ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rset = pstmt.executeQuery();
+			
 			while(rset.next()) {
 				
 				Board b = new Board();
 				b.setBoardNo(rset.getInt("BOARD_NO"));
+				// BOARD_TYPE이 NUMBER라서 (int)setBoardType에 담지 못해서 setBoardName으로 했음 
+				// => (String)BoardTypeStr 만들었음 수정해야 함
+				b.setBoardName(rset.getString("BOARD_TYPE")); 
+				b.setWriter(rset.getString("NICKNAME"));
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
 				b.setCreateDate(rset.getString("CREATE_DATE"));
 				b.setViews(rset.getInt("VIEWS"));
-				b.setFileNo(rset.getString("FILE_NO"));
-				b.setBoardName(rset.getString("BOARD_NAME"));
 				
 				list.add(b);
 				
@@ -63,6 +104,62 @@ public class BoardDao {
 		
 		return list;
 		
+	}
+	
+	public int insertBoard(Connection conn, Board b, int memNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertBoard") + b.getBoardName() + ")";
+		System.out.println("인서트 보드에서 b.getBoardName() " + b.getBoardName());
+		
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, b.getBoardTitle());
+			pstmt.setString(3, b.getBoardContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public Board selectBoard(Connection conn, int boardNo) {
+		
+		Board b = new Board();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, boardNo);
+			pstmt.setInt(3, boardNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				b.setWriter(rset.getString("NICKNAME"));
+				b.setBoardName(rset.getString("BOARD_NAME"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setBoardContent(rset.getString("BOARD_CONTENT"));
+				b.setCreateDate(rset.getString("CREATE_DATE"));
+				b.setViews(rset.getInt("VIEWS"));
+				b.setLikes(rset.getInt("LIKES"));
+				b.setComments(rset.getInt("COMMENTS"));
+			}
+			System.out.println("보드 디테일 Dao b:  " + b);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return b;
 	}
 
 }

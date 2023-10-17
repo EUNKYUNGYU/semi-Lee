@@ -12,14 +12,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>퀴즈게시판</title>
+<title>퀴즈 정답 확인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
 </script>
 
 <style>
 
 * {
-	border: 0.5px solid skyblue;
 	box-sizing: border-box;
 }
 
@@ -42,8 +41,7 @@ main > section, main > aside, main > div{
 	float: left;
 }
 
-#aside {
-	width: 20%;
+.aside {
 	height: auto;
 	float: left;
 	margin : 20px auto;
@@ -51,6 +49,10 @@ main > section, main > aside, main > div{
 	justify-content: center;
 	padding: 0;
 }
+
+#aside1{width :25%}
+
+#aside2{width :15%}
 
 #section{
 	width: 60%;
@@ -65,6 +67,7 @@ main > section, main > aside, main > div{
 	height : 100px;
 	padding: 20px;
 	font-size : 30px;
+	font-weight: bold;
 	line-height : 200%;
 }
 
@@ -77,7 +80,8 @@ article{
 	width: 95%;
 	height: auto;
 	margin : 20px auto;
-	background-color: rgb(230, 230, 230);
+	border: 1px solid rgb(230, 230, 230); border-radius: 10px;
+	padding: 20px;
 }
 
 #quizeHeader {
@@ -109,7 +113,7 @@ article{
 	line-height: 30px;
 	padding: 20px;
 	color : darkblue;
-	font-size : 25px;
+	font-size : 20px;
 	font-weight : bold;
 }
 
@@ -120,23 +124,10 @@ article{
 }
 
 #quizeFooter  >div {
-	float: left;
 	line-height: 70px;
 }
 
-#quizeFooter1 {
-	width: 75%;
-	height: 100%;
-	padding: 20px;
-}
-
-#quizeFooter2 {
-	width: 25%;
-	height: 100%;
-	text-align: center;
-}
-
-#page, #search{
+#back{
 	width : 100%;
 	height : 100px;
 	padding: 20px;
@@ -147,23 +138,8 @@ footer {
 	height: auto;
 }
 
-form{
-	padding: 20px 0px;
-}
 
-a {
-	text-decoration: none;
-	color: #1E376F;
-}
 
-button {
-	background-color: #1E376F;
-	border-radius: 7px;
-	color: white;
-	width: 60px;
-	height: 30px;
-	margin-left: 10px;
-}
 
 </style>
 </head>
@@ -176,7 +152,7 @@ button {
 	
 	<main>
 	
-		<aside id="aside">
+		<aside class="aside" id="aside1">
 			<%@ include file ="../common/cmNavi.jsp" %>
 		</aside>
 		
@@ -199,20 +175,13 @@ button {
 				
 				</article>
 			</div>
-			<div id="page">
-				페이지바 영역
-			</div>
-		
-			<div id="search">
-				검색 영역
+			<div id="back" align="right">
+				<a href="<%= contextPath %>/list.qz" id="backButton" class="btn btn-primary">돌아가기</a>
 			</div>
 		
 		</section>
 		
-		<aside id="aside">
-			오른쪽 사이드바 : 
-			<br> 지금은 여백
-			<br> 나중에 광고 넣을 수도 있음
+		<aside id="aside2" class="aside">
 		</aside>
 		
 	</main>

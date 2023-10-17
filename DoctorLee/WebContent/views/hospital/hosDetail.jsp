@@ -10,6 +10,7 @@
 	int hosTreatEnd = Integer.parseInt(hos.getTreatEnd().replaceAll(":00|:30", ""));
 	
 	//int checkRsvtResult = (int)request.getSession().getAttribute("checkRsvtResult");
+	Reservation rsvt = (Reservation)request.getAttribute("selectRsvt");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -22,32 +23,31 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 <style>
-.hos_wrap{margin: auto;}
-
-#hos_info, #hos_rsvt, #hos_review{
-	display: inline-block; 
-	width: 30%;
-	margin: 0 20px;
-	}
-
-#hos_info{}
-#hos_info>h3{color: #1E376F; display: inline-block;}
-#hos_info>span{color: #000; display: inline-block; margin-left: 25px; font-weight: bold;}
-#hos_info>p{margin-bottom: 30px;}
-#hos_info h4{font-size: 15px;}
-
-#hos_rsvt{}
-
-#hos_review{}
-#hos_review>table{text-align: center;}
-#star{text-align: center; margin-bottom: 30px;}
-#star a{color: gray; font-size: 3rem; text-decoration: none; padding-left: 10px;}
-#star a.on{color: yellow; font-size: 3rem;}
-#review_btn>button{}
+	.hos_wrap{margin: auto;}
+	
+	#hos_info, #hos_rsvt, #hos_review{
+		display: inline-block; 
+		width: 30%;
+		margin: 0 20px;
+		}
+	
+	#hos_info{}
+	#hos_info>h3{color: #1E376F; display: inline-block;}
+	#hos_info>span{color: #000; display: inline-block; margin-left: 25px; font-weight: bold;}
+	#hos_info>p{margin-bottom: 30px;}
+	#hos_info h4{font-size: 15px;}
+	
+	#hos_rsvt{}
+	
+	#hos_review{}
+	#hos_review>table{text-align: center;}
+	#star{text-align: center; margin-bottom: 30px;}
+	#star a{color: gray; font-size: 3rem; text-decoration: none; padding-left: 10px;}
+	#star a.on{color: yellow; font-size: 3rem;}
+	#review_btn>button{}
 
 </style>
 <script>
@@ -97,8 +97,6 @@
      	  right: 'next'
        },
      dateClick: function(info){
-     	 $(this).addClass('.ch');
-     	 guest_rsvt_date = info.dateStr;
      	 
 	}
 
@@ -300,6 +298,67 @@
 				        	 });
 						}
 						
+					/*
+						var rsvtH = $('select[name=rsvtH] option:selected').text();
+						var rsvtm = $('select[name=rsvtM] option:selected').text();
+						
+						rsvtH = rsvtH.replaceAll('\n', '');
+						rsvtM = rsvtM.replaceAll('\t', '');
+						var rsvt_time = rsvtH + rsvtM;
+					*/
+					
+					function loginUserIsNull(){
+						alert('로그인 후 이용 가능한 서비스');
+						location.href = '<%= contextPath %>/login.me';
+						
+					};
+					
+					function rsvt(){
+						
+			        	 $.ajax({
+			        		 url: 'hosRsvt.mem',
+			        		 type: 'post',
+			        		 // async : true,
+			        		 data: {
+			        			 rsvtDate: window.rsvt_date,
+			        			 rsvtH: $('select[name=rsvtH] option:selected').text(),
+			        			 rsvtM: $('select[name=rsvtM] option:selected').text(),
+			        			 rsvtName: $('input[name=rsvtName]').val(),
+			        		     rsvtInfo: $('input[name=rsvtInfo]').val(),
+			        		     rsvtDoc: $('select[name=rsvtDoc] option:selected').val(),
+			        		     hno: hosNo
+			        		 },
+			        		 success: function(result){
+			        			 console.log(result);
+			        			 // console.log(typeof(info.dateStr));
+			        			 // console.log(new Date());
+			        			 // console.log(rsvt_date);
+			        			 //console.log(rsvtDate);
+			        			 // var rsvtTime = result['rsvtTime'].replaceAll('\t', '');
+			        			 // console.log(rsvtTime);
+			        			 if(result != null){
+				        			 $('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtName']);
+				        			 $('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo']);
+				        			 $('#rsvtModal .modal-body').children().eq(1).append(result['rsvt_date'] + "," + result['rsvtTime']);
+			        			 }/*
+			        			 if(result['rsvtInfo'] != ""){
+			        				 $('#rsvtModal .modal-body').children().eq(3).append(result['rsvtInfo']);
+			        			 } else{
+			        				 $('#rsvtModal .modal-body').children().eq(3).remove();
+			        			 }
+			        			 */
+			        			 
+			        		 },
+			        		 error: function(){
+			        			 alert('현재 예약 불가');
+			        			 // console.log(hosNo);
+			        			 // console.log(rsvt_date);
+			        			 // console.log(hosNo);
+			        			 console.log(rsvtDate);
+			        		 }
+			        	 });
+					}
+					
 					</script>
 				</div>
 				
@@ -332,6 +391,7 @@
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-danger" data-dismiss="modal">확인</button>
 			      </div>
+			
 			
 			    </div>
 			  </div>
@@ -396,6 +456,9 @@
 										<%= d.getDocName() %>
 									</option>
 									<%} %>
+									<option value="<%= d.getDocNo() %>">
+										<%= d.getDocName() %>
+									</option>
 								<%} %>
 							</select>
 						</td>
@@ -447,7 +510,7 @@
 
 		<!-- 병원 리뷰 -->
 		<div id="hos_review">
-			  
+			  <!-- a태그에 value속성 못씀 -->
 			 
 			 <div id="star">
 		 	   <a href="#none" value="1">★</a>
@@ -455,8 +518,12 @@
 			   <a href="#none" value="3">★</a>
 			   <a href="#none" value="4">★</a>
 			   <a href="#none" value="5">★</a>
-			 </div>
-
+			</div>
+			
+			<div id="review_box">
+				<input type="text" maxlength="500">
+			</div>
+			
 			<script>
 				$('#star a').click(function(){
 					$(this).parent().children('a').removeClass('on');
@@ -475,11 +542,8 @@
 				</table>
 				
 				<div id="review_btn">
-					
 					<button type="submit" class="btn btn-primary">리뷰등록</button>
-				
 				</div>
-		
 		
 		</div>
 		

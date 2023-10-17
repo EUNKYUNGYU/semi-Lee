@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.DoctorLee.cou.model.vo.*" %>
+<%
+    ArrayList<Cou> list = (ArrayList<Cou>)request.getAttribute("list");
+%> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,20 +15,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
-
-<!--fullCalendar-->
-<script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'ko'
-      });
-      calendar.render();
-    });
-
-</script>
 
 <style>
     .outer{
@@ -52,6 +43,12 @@
 
     .left-menu{
         margin-left: 200px;
+    }
+
+    #cou-res{
+        background-color: skyblue;
+        font-weight: 800;
+        pointer-events: none;
     }
 
     /*우측 클리닉 영역*/
@@ -193,6 +190,10 @@
         padding: 10px;
     }
 
+    .cli-img > span{
+        display: none;
+    }
+
     /*클리닉 설명*/
     .cli-des{
         width: auto;
@@ -322,7 +323,7 @@
 
             <!--좌측 메뉴 div-->
             <div class="left-menu">
-                <%@ include file="../common/cliNavi.jsp"%>
+                <%@ include file="../common/couNavi.jsp"%>
             </div>
 
             <!--클리닉 출력 영역 div-->
@@ -343,64 +344,16 @@
                 <div id="cli-cate" align="left">
                     <div id="cate-inner" align="center">
                         <ul>
-                            <li><input type="radio" class="cate" name="cate" id="call"><label for="call">전화</label></li>
-                            <li><input type="radio" class="cate" name="cate" id="meet"><label for="meet">대면</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="call" value="1"><label for="call">전화</label></li>
+                            <li><input type="radio" class="cate" name="cate" id="meet" value="2"><label for="meet">대면</label></li>
                         </ul>
 
                     </div>
                 </div>
         </div>
 
-        <!--
-        <script>
-            $(function(){
-
-                // 카테고리 클릭 시 카테고리 영역은 숨겨지고 클리닉 출력 결과 영역이 나타남
-                $('.cate').click(function(){
-                    $('#content-part').css('display', 'block');
-                    $('#cate-inner').css('display', 'none');
-                })
-
-                // 클리닉 선택 시 클리닉 출력 결과 영역은 사라지고 예약일시 영역이 나타남
-                $('.content-cli').click(function(){
-                    $('#cli-date').css('visivilty', 'visible');
-                    $('#content-part').css('display', 'none');
-                })
-
-                // 카테고리를 선택하세요 영역 클릭 시 카테고리 영역을 제외한 다른 내용 영역은 사라짐
-                $('.category-title-part').click(function(){
-                    $('#cate-inner').css('display', 'block');
-                    $('#content-part').css('display', 'none');
-                    $('#cli-date').css('visivilty', 'none');
-                })
-
-                // 클리닉을 선택하세요 영역 클릭 시 클리닉 결과 영역을 제외한 다른 내용 영역은 사라짐
-                $('.title-part').click(function(){
-                    $('#cate-inner').css('display', 'none');
-                    $('#content-part').css('display', 'block');
-                    $('#cli-date').css('visivilty', 'none');
-                })
-
-                // 예약일시를 선택하세요 영역 클릭 시 예약일시 영역을 제외한 다른 내용 영역은 사라짐
-                $('.date-title-part').click(function(){
-                    $('#cate-inner').css('display', 'none');
-                    $('#content-part').css('display', 'none');
-                    $('#cli-date').css('visivilty', 'visible');
-                })
-            })
-        </script>
-        -->
-
                 <!--클리닉 내용 출력 영역 div-->
                 <div id="cli-part">
-
-                    <!--제목 출력 영역 div-->
-                    <div class="title-part">
-                        <em>
-                            <span class="material-symbols-outlined">chevron_right</span>
-                        </em>
-                        <span>상담사를 선택해주세요</span>
-                    </div>
 
                     <!--해당 카테고리 클리닉 출력 영역 div-->
                     <div id="content-part" align="center">
@@ -410,138 +363,52 @@
 
                             <!--클리닉 출력 ul-->
                             <ul class="content-list">
+                            
+                            <% if(list.isEmpty()) { %>
+                            	<p>등록된 상담사가 존재하지 않습니다.</p>
+                            <% } else { %>
 
-                                <!--클리닉 요소 하나하나 li-->
-                                <li class="content-cli">
+                                <% for(Cou c : list) { %>
 
-                                    <!--클리닉 대표 이미지 div-->
-                                    <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
-                                    </div>
+                                    <!--클리닉 요소 하나하나 li-->
+                                    <li class="content-cli">
 
-                                    <!--클리닉 설명 div-->
-                                    <div class="cli-des" align="left">
-
-                                        <div class="cli-top">
-                                            <span class="cli-name title">클리닉명</span>
+                                        <!--클리닉 대표 이미지 div-->
+                                        <div class="cli-img">
+                                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
+                                            <button>예약하기</button>
+                                            <span><%=c.getCouNo()%></span>
                                         </div>
 
-                                        <div class="cli-location">
-                                            <span>클리닉 장소</span>
+                                        <!--<input type="hidden" class="couNo" value="<%=c.getCouNo()%>">-->
+
+                                        <!--클리닉 설명 div-->
+                                        <div class="cli-des" align="left">
+
+                                            <div class="cli-top">
+                                                <span class="cli-name title"><%=c.getCouName()%></span>
+                                            </div>
+
+                                            <div class="cli-location">
+                                                <span><%=c.getHosName()%></span>
+                                            </div>
+
+                                            <div class="cli-score">
+                                                <span class="material-symbols-outlined">grade</span>
+                                                <span>별점</span>
+                                            </div>
+
+                                            <div class="cli-price">
+                                                <span>가격</span>
+                                            </div>
+
                                         </div>
+                                        <br clear="both">
+                                    </li>
+                                <% } %>
 
-                                        <div class="cli-score">
-                                            <span class="material-symbols-outlined">grade</span>
-                                            <span>별점</span>
-                                        </div>
-
-                                        <div class="cli-price">
-                                            <span>가격</span>
-                                        </div>
-
-                                    </div>
-                                    <br clear="both">
-                                </li>
-
-                                <!--클리닉 요소 하나하나 li-->
-                                <li class="content-cli">
-
-                                    <!--클리닉 대표 이미지 div-->
-                                    <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
-                                    </div>
-
-                                    <!--클리닉 설명 div-->
-                                    <div class="cli-des" align="left">
-
-                                        <div class="cli-top">
-                                            <span class="cli-name title">클리닉명</span>
-                                        </div>
-
-                                        <div class="cli-location">
-                                            <span>클리닉 장소</span>
-                                        </div>
-
-                                        <div class="cli-score">
-                                            <span class="material-symbols-outlined">grade</span>
-                                            <span>별점</span>
-                                        </div>
-
-                                        <div class="cli-price">
-                                            <span>가격</span>
-                                        </div>
-
-                                    </div>
-                                    <br clear="both">
-                                </li>
+                            <% } %>    
                                 
-                                <!--클리닉 요소 하나하나 li-->
-                                <li class="content-cli">
-
-                                    <!--클리닉 대표 이미지 div-->
-                                    <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
-                                    </div>
-
-                                    <!--클리닉 설명 div-->
-                                    <div class="cli-des" align="left">
-
-                                        <div class="cli-top">
-                                            <span class="cli-name title">클리닉명</span>
-                                        </div>
-
-                                        <div class="cli-location">
-                                            <span>클리닉 장소</span>
-                                        </div>
-
-                                        <div class="cli-score">
-                                            <span class="material-symbols-outlined">grade</span>
-                                            <span>별점</span>
-                                        </div>
-
-                                        <div class="cli-price">
-                                            <span>가격</span>
-                                        </div>
-
-                                    </div>
-                                    <br clear="both">
-                                </li>
-
-                                <!--클리닉 요소 하나하나 li-->
-                                <li class="content-cli">
-
-                                    <!--클리닉 대표 이미지 div-->
-                                    <div class="cli-img">
-                                        <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
-                                        <button>자세히 보기</button>
-                                    </div>
-
-                                    <!--클리닉 설명 div-->
-                                    <div class="cli-des" align="left">
-
-                                        <div class="cli-top">
-                                            <span class="cli-name title">클리닉명</span>
-                                        </div>
-
-                                        <div class="cli-location">
-                                            <span>클리닉 장소</span>
-                                        </div>
-
-                                        <div class="cli-score">
-                                            <span class="material-symbols-outlined">grade</span>
-                                            <span>별점</span>
-                                        </div>
-
-                                        <div class="cli-price">
-                                            <span>가격</span>
-                                        </div>
-
-                                    </div>
-                                    <br clear="both">
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -549,115 +416,21 @@
 
                 <script>
                     $(function(){
-                        //li클릭 시 색깔 바뀌는 이벤트
-                        $('.content-cli').click(function(){
-                            
-                            /*if($(this).css('background-color') == 'salmon'){
-
-                                $(this).css('background-color', 'bisque');
-                            } else {
-                                $(this).css('background-color', 'salmon');
-                            }*/
-
-                            console.log(this);
-
-                            if($(this).css('background-color', 'salmon')){
-                                $(this).css('background-color', 'bisque');
-
-                                $(this).siblings().css('background-color', 'salmon');
-                            }
-                            
-                            
-                        })
 
                         //돋보기 버튼 클릭 시 상세보기 페이지로 이동
                         $('.cli-img > button').click(function(){
-                            location.href='<%=contextPath%>/couDetail.cou';
+                            console.log($(this).siblings().eq(2).text());
+                            const couNo = $(this).siblings().eq(2).text();
+                            location.href='<%=contextPath%>/couDetail.cou?cno='+couNo;
                         })
+                        
                     })
+
+                    // 가격 불러오기
+                    function selectPrice(){
+
+                    }
                 </script>
-
-                <!--클리닉 예약 날짜 및 시간 띄우기 영역 div-->
-                <div id="res-part">
-                    <!--클리닉 예약일시 출력 영역 div-->
-                    <div id="cli-date-part">
-
-                        <!--제목 출력 영역 div-->
-                        <div class="date-title-part">
-                            <em>
-                                <span class="material-symbols-outlined">chevron_right</span>
-                            </em>
-                            <span>예약일시를 선택해주세요</span>
-                        </div>
-
-                        <!--예약일시 영역 div-->
-                        <div id="cli-date" align="left">
-                            <div id="date-inner" align="center">
-                            <div id="calendar"></div>
-                            </div>
-
-                            <div id="time-inner">
-                                <div class="time-border">
-                                    <ul>
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>11:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>12:30</p></a>
-                                        </li>
-
-                                        <li class="time-content" align="center">
-                                            <a href="#"><p>13:30</p></a>
-                                        </li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <br clear="both">
-                </div>
-            </div>
-
-            <script>
-                $(function(){
-                    //li클릭 시 색깔 바뀌는 이벤트
-                    $('.time-content').click(function(){
-
-                        console.log(this);
-
-                        if($(this).css('background-color', 'bisque')){
-                            $(this).css('background-color', 'salmon');
-
-                            $(this).siblings().css('background-color', 'bisque');
-                        }
-                    })
-                })
-            </script>
 
             <br><br><br><br><br>
 

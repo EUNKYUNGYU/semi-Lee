@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.util.ArrayList, com.kh.DoctorLee.board.model.vo.Board"%>
+<%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
+    
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	String type = String.valueOf(request.getAttribute("type"));
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 
 <!DOCTYPE html>
@@ -11,139 +18,228 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
 <style>
+
 * {
 	box-sizing: border-box;
-	border: 1px solid skyblue;
+}
+
+body{
+	margin : 0;
 }
 
 #header {
-	width: 1800px;
-	height: 200px;
+	width: 100vw;
+	height: 120px;
 }
 
-#section {
-	width: 1800px;
-	height: 2300px;
+main {
+	width: 100%;
+	height: auto; 
+	min-height: 1000px;
+	line-height: 30px;
 }
 
-#section > div , #section > aside{
+main > section, main > aside, main > div{
 	float: left;
 }
 
-#contentWrap {
-	width: 1400px;
-}
-
-
-
-aside {
-	width: 300px;
-	height: 100%;
+.aside {
+	height: auto;
 	float: left;
-	padding-left: 15px;
-	padding-right: 15px;
+	margin : 20px auto;
+	display: flex;
+	justify-content: center;
+	padding: 0;
 }
 
-#boardHeader, #boardArticle, #page, #search {
+#aside1{width :25%}
+
+#aside2{width :15%}
+
+#section{
+	width: 60%;
+	height: auto; 
+	min-height: 1000px;
 	float: left;
-	width: 1400px;
-	padding-left: 100px;
-	padding-right: 10px;
+	padding: 20px;
 }
 
-#boardHeader {
-	height: 100px;
-	font-size: 50px;
+#contentTitle{
+	width : 100%;
+	height : 100px;
+	padding: 20px;
+	font-size : 30px;
+	font-weight: bold;
+	line-height : 200%;
 }
 
-#boardArticle {
-	height: 1800px;
+#content{
+	width : 100%;
+	height : auto;
 }
 
-#BoardTable{
-	margin-top: 30px;
-	margin-left: 30px;
-	}
-#page {
-	height: 200px;
-}
+article{width: 95%; height: auto; margin : 20px;}
 
-#search {
-	height: 200px;
+#writeWrap{text-align: right;}
+					
+#page, #search{
+	width : 100%;
+	height : 100px;
+	padding: 20px;
+	text-align: center;
 }
 
 footer {
-	width: 1800px;
-	height: 300px;
+	width: 100%;
+	height: auto;
 }
-th, .tableCenter{
-	text-align : center;
-	}
+
+.messageList {
+	text-decoration: none;
+	color: black;
+	
+}
+
+#boardTable{
+	background-color: rgb(232, 238, 253);
+	border-radius: 7px;
+}
+
 
 </style>
 </head>
 <body>
 
-
-	<header id="header"> 헤더 영역 </header>
-	<section id="section">
-		<aside>
-			<%@ include file="../common/cmNavi.jsp"%>
+	<header id="header">
+		<%@ include file ="../common/nav2.jsp" %>
+	</header>
+	<main>
+		<aside id="aside1" class="aside">
+			<%@ include file ="../common/cmNavi.jsp" %>	
 		</aside>
-		<div id="contentWrap">
-
-
-			<header id="boardHeader">게시판이름</header>
-			<article id="boardArticle">
-				<div id="boardContent">
-					<table align="center" id="BoardTable">
-						<thead>
-							<tr>
-								<th width="100">게시글 번호</th>
-								<th width="350">제목</th>
-								<th width="150">작성자</th>
-								<th width="150">작성일</th>
-								<th width="100">조회수</th>
-								<th width="100">추천수</th>
-							</tr>
-							<% if(list == null) { %>
-						
-						<tbody>
-							<tr>
-								<td colspan="6">조회된 게시글이 없습니다.</td>
-							</tr>
-							<% } else { %>
-							<% for(Board b : list) { %>
-							<tr>
-								<td class="tableCenter"><%= b.getBoardNo() %></td>
-								<td><%= b.getBoardTitle() %></td>
-								<td class="tableCenter"><%= b.getWriter() %></td>
-								<td class="tableCenter"><%= b.getCreateDate() %></td>
-								<td class="tableCenter"><%= b.getViews() %></td>
-								<td class="tableCenter">0</td>
-							</tr>
-							<% } %>
-							<% } %>
-						</tbody>
-
-						</thead>
-
+		
+		<section id="section">
+			
+			<div id="contentTitle">
+				<% if("10".equals(type)) { %>
+					공지사항
+				<% } else if("20".equals(type)) { %>
+					자유게시판 
+				<% } else if("30".equals(type)) { %>
+					정보게시판 
+				<% } else if("40".equals(type)) { %>
+					익명게시판
+				<% } %>
+			</div>
+			
+			<div id="content">
+				<article>
+					<table id="boardTable" class="table table-hover">
+					  <thead>
+					    <tr>
+					      <th scope="col" width="10%" style="text-align: center">게시글 번호</th>
+					      <th scope="col" width="30%" style="text-align: center">제목</th>
+					      <th scope="col" width="10%">작성자</th>
+					      <th scope="col" width="20%" style="text-align: center">작성일</th>
+					      <th scope="col" width="10%" style="text-align: center">조회수</th>
+					      <th scope="col" width="10%" style="text-align: center">추천수</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  <% if(list == null) { %>
+					    <tr>
+						  <td colspan="5" style="text-align: center">작성한 게시글이 없습니다</td>
+					    <tr>
+					  <% } else { %>
+						<% for(Board b : list) { %>
+						<tr>
+					      <td scope="row" style="text-align: center"><%= b.getBoardNo() %></td>
+					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>"><%= b.getBoardTitle() %></td>
+					      <% if("40".equals(type)){ %>
+					      	<td scope="row" width="10%">익명</td>
+					      <% } else { %>
+					      	<td scope="row" width="10%"><%= b.getWriter() %></td>
+					      <% } %>
+					      <td scope="row" width="20%" style="text-align: center"><%= b.getCreateDate() %></td>
+					      <td scope="row" width="10%" style="text-align: center"><%= b.getViews() %></td>
+					      <td scope="row" width="10%" style="text-align: center">0</td>
+					    </tr>
+					    <% } %>
+						<% } %>
+					  </tbody>
 					</table>
 					
 					<script>
+					
+						$(function(){
+						
+							$('tr > td').eq(1).click(function(){
+								location.href = '<%=contextPath%>/detail.bo?boardNo=' + $(this).attr('name');
+							})
+							
+							
+							
+							
+							
+						})
+						
 						
 					
-					
 					</script>
-				</div>
-			</article>
-			<div id="page">페이지바 영역</div>
-			<div id="search">검색 영역</div>
-		</div>
-	</section>
+					
+					<!-- 로그인 했을 경우에만 글 쓰기 버튼 보이게하기 --> 
+					<% if(loginUser != null) { %>
+						<div id="writeWrap">
+						<a id="writeButton" class="btn btn-primary" href="<%= contextPath %>/views/board/boardEnrollForm.jsp" >글 쓰기</a>
+						</div>
+					<% } %>
+				</article>
+			</div>
+			
+			
+			<div id="page">
+				<%if(currentPage != 1) {%>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage - 1%>&type=<%= type%>'">&lt;</button>
+		        <% }%>
+		         
+		       
+		        <% for(int i = startPage; i <= endPage; i++){%>
+		         	<% if(currentPage != i) { %>
+		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.bo?cpage=<%= i %>&type=<%= type%>'"><%= i %></button>
+		         	
+		         	<% } else { %>
+		         		<button disabled class="btn btn-default"><%= i %></button>
+		         		<% } %>
+		         <% } %>
+		        
+		        <% System.out.println(maxPage); %>
+		        <%if(currentPage != maxPage) { %>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage + 1%>&type=<%= type%>'">&gt;</button>
+		        <% } %>
+			</div>
+		
+			<div id="search">
+				검색 영역
+			</div>
+		
+		</section>
+		
+		<aside id="aside2" class="aside">
+		</aside>
+		
+	</main>
+	<clear both="br">
 	
-	<footer> 푸터 영역 </footer>
+	<footer>
+		<%@ include file ="../common/footer.jsp" %>
+	</footer>
+
 
 </body>
 </html>

@@ -93,7 +93,7 @@
                     <table id="user" align="center">
                         <tr>
                             <br><br>
-                            <th align="center"><%= loginUser1.getMemName() %>님 환영합니다.</th><br>
+                            <div align="center"><%= loginUser1.getMemName() %>님 환영합니다.</div><br>
                             
 
                         </tr>
@@ -110,17 +110,17 @@
                     </div>
                 </div>
                 <ul id="navigator">
-                    <li><a href="#">복약관리</a></li>
+                    <li><a href="<%=contextPath1%>/list.medi">복약관리</a></li>
                     <li><a href="#">회원정보 수정/탈퇴</a>
                         <ul>
                             <li><a href="<%=contextPath1%>/updateForm.me">회원 정보 수정</a></li>
                             <li><a href="<%=contextPath1%>/deletePwd.me">회원 탈퇴</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">관리자 문의</a></li>
+                    <li><a href="<%=contextPath1%>/customerService.mp">고객센터</a></li>
                     <li><a href="#">자기 게시글 확인</a></li>
                     <li><a href="#">예약 관리</a></li>
-                    <li><a href="#">병원즐겨찾기</a></li>
+                    <li><a href="first.bm">병원즐겨찾기</a></li>
                     <li><a href="#">진료 내역 관리</a>
                         <ul>
                             <li><a href="#">진료 내역 관리</a></li>

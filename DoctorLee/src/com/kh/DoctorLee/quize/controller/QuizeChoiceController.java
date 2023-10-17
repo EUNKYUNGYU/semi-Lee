@@ -66,21 +66,19 @@ public class QuizeChoiceController extends HttpServlet {
 			
 			System.out.println(result);
 			if(result == 2) { // 정답, 포인트 획득 성공
-				request.getSession().setAttribute("alertMsg", "500포인트를 획득하였습니다.");
-				response.sendRedirect(request.getContextPath() + "/list.qz");
+				request.getSession().setAttribute("alertMsg", "정답입니다! 500포인트를 획득하였습니다.");
 			} else if(result == 1){ // 오답, 포인트 획득 실패
-				request.getSession().setAttribute("alertMsg", "포인트 획득에 실패하셨습니다.");
-				response.sendRedirect(request.getContextPath() + "/list.qz");
+				request.getSession().setAttribute("alertMsg", "오답입니다");
 			} else if(result == 0) { // 실패
-				request.getSession().setAttribute("alertMsg", "제출에 실패하였습니다. 다시 시도해 주십시오.");
-				response.sendRedirect(request.getContextPath() + "/list.qz");
+				request.getSession().setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
 			}
+			response.sendRedirect(request.getContextPath() + "/list.qz?cpage=1");
 			
 			System.out.println("----------------------------");
 			
 		}  else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
-			request.getSession().setAttribute("alertMsg", "이미 답을 제출 하셨습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.qz");
+			request.getSession().setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.qz?cpage=1");
 		}
 		
 	}

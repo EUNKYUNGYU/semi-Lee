@@ -11,9 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.quize.model.vo.Quize;
 import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
-import com.kh.DoctorLee.quize.model.vo.QuizeChoice;
 
 public class QuizeDao {
 
@@ -29,7 +29,31 @@ public class QuizeDao {
 		}
 	}
 	
-	public ArrayList<Quize> selectList(Connection conn){
+	public int selectListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
+	
+	public ArrayList<Quize> selectList(Connection conn, PageInfo pi){
 		
 		ArrayList<Quize> list = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -38,6 +62,13 @@ public class QuizeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 			

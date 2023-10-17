@@ -1,6 +1,6 @@
 package com.kh.DoctorLee.cou.model.dao;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.*;
+import static com.kh.DoctorLee.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
+import com.kh.DoctorLee.cou.model.vo.Cou;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
 public class CouDao {
@@ -114,5 +115,183 @@ public class CouDao {
 		return result;
 	}
 	
-
+	public CouVideo selectCouVideo(Connection conn, int videoNo) {
+		
+		CouVideo c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouVideo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, videoNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new CouVideo();
+				c.setVideoNo(rset.getInt("VIDEO_NO"));
+				c.setMemNo(rset.getInt("MEM_NO"));
+				c.setVideoTitle(rset.getString("VIDEO_TITLE"));
+				c.setChannelName(rset.getString("CHANNEL_NAME"));
+				c.setVideoAddress(rset.getString("VIDEO_ADDRESS"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return c;
+	}
+	
+	public int updateCouVideo(Connection conn, CouVideo c) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateCouVideo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, c.getVideoTitle());
+			pstmt.setString(2, c.getChannelName());
+			pstmt.setString(3, c.getVideoAddress());
+			pstmt.setInt(4, c.getVideoNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteVideo(Connection conn, int videoNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteVideo");
+		 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, videoNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 비디오 랜덤 추출
+	public CouVideo selectRandomVideo(Connection conn) {
+		
+		CouVideo c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRandomVideo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c.setVideoNo(rset.getInt("VIDEO_NO"));
+				c.setMemNo(rset.getInt("MEM_NO"));
+				c.setVideoTitle(rset.getString("VIDEO_TITLE"));
+				c.setChannelName(rset.getString("CHANNEL_NAME"));
+				c.setVideoAddress(rset.getString("VIDEO_ADDRESS"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return c;
+	}
+	
+	// 상담사 목록 출력
+	public ArrayList<Cou> selectCouList(Connection conn){
+		
+		ArrayList<Cou> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Cou c = new Cou();
+				c.setCouNo(rset.getInt("COU_NO"));
+				c.setHosName(rset.getString("HOS_NAME"));
+				c.setCouName(rset.getString("COU_NAME"));
+				c.setPhone(rset.getString("PHONE"));
+				c.setOriginName(rset.getString("ORIGIN_NAME"));
+				c.setChangeName(rset.getString("CHANGE_NAME"));
+				c.setProfilePath(rset.getString("PROFILE_PATH"));
+				
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	// 상담사 상세보기
+	public Cou selectCou(Connection conn, int couNo) {
+		Cou c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCou");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Cou();
+				c.setCouNo(rset.getInt("COU_NO"));
+				c.setHosName(rset.getString("HOS_NAME"));
+				c.setCouName(rset.getString("COU_NAME"));
+				c.setPhone(rset.getString("PHONE"));
+				c.setOriginName(rset.getString("ORIGIN_NAME"));
+				c.setChangeName(rset.getString("CHANGE_NAME"));
+				c.setProfilePath(rset.getString("PROFILE_PATH"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return c;
+	}
 }

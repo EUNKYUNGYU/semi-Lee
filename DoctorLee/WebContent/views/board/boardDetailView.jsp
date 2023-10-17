@@ -1,109 +1,180 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.util.ArrayList, com.kh.DoctorLee.board.model.vo.Board"%>
+<%@ page import="com.kh.DoctorLee.board.model.vo.Board, java.util.ArrayList"%>
+    
 <% 
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	Board b = (Board)request.getAttribute("b");
+
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 상세보기</title>
+<title>게시글 상세보기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
+</script>
+
 <style>
+
 * {
+	border: 0.5px solid skyblue;
 	box-sizing: border-box;
-	border: 1px solid rgb(186, 175, 238);
 }
 
-#header {
-	width: 1800px;
-	height: 200px;
-}
+body{margin : 0;}
 
-section {
-	width: 1800px;
-	height: auto; 
-	min-height: 800px;
-}
+#header {width: 100vw; height: 100px;}
 
-section > div , section > aside{
-	float: left;
-}
+main {width: 100%; height: auto;  line-height: 30px;}
 
-#contentWrap {
-	width: 1400px;
-}
+main > section, main > aside, main > div{float: left;}
 
-aside {
-	width: 300px;
-	height: 100%;
-	float: left;
-	padding-left: 15px;
-	padding-right: 15px;
-}
+.aside {height: auto; float: left; margin: 20px auto; display: flex; justify-content: center; padding: 0;}
 
-#boardHeader, #boardArticle, #page, #search {
-	float: left;
-	width: 1400px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
+#aside1{width :25%}
 
-#boardHeader {
-	height: 100px;
-	font-size: 50px;
-}
+#aside2{width :15%}
 
-#boardArticle {
-	height: auto; 
-	min-height: 500px;
-}
+#section{width: 60%; height: auto;  min-height: 1000px; float: left; padding: 20px;s}
 
-#buttonWrap {
-	height: 50px;
-	margin-left : 1200px;
-}
+#contentTitle{width : 100%; height : 100px; padding: 20px; font-size : 30px; font-weight: bold; line-height : 200%;}
 
-#boardTable {
-	width : 1100px;
-   	border-spacing: 10px;
-	
-}
+#content{width : 100%; height : auto;}
 
-footer {
-	width: 1800px;
-	height: 300px;
-}
+article{width: 95%; height: auto; margin: 20px auto; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 20px;}
+
+#boardHeader {width: 100%; height: 70px; padding: 20px; font-size: 30px; font-weight : 600;}
+
+#boardHeader>div {float: left;}
+
+#title {width: 70%; height: 100%; font-size: 30px;}
+
+#writerInfoWrap{width: 100%; height: 120px; padding: 10px;}
+
+#writerInfoWrap > div {float: left;}
+
+#writerThumbnail{width: 10%; height: 100%; }
+
+#user_photo2{width: 100px; height: 100px; padding:none;}
+
+#writerId{width: 90%; height: 100%; padding-left: 10px; font-size : 15px; font-weight : bold; line-height : 100px;} 
+
+#boardInfor {width: 100%; height: 50px; line-height: 30px; padding: 10px; color : gray; font-size : 12px;}
+
+#boardInfor > div{float: left;}
+
+#boardDate{width: 80%;}
+
+#commentCount{width: 20%; text-align: right;}
+
+#boardContent{width:100%; height: auto; padding: 10px;}
+
+#boardlikeWrap{width:100%; height:30;line-height: 30px;padding: 10px;color : gray;font-size : 12px;}
+
+#commentWrap {width: 100%;}
+
+#commentOption{width:100%; height:30; font-size: 18px; font-weight: 600; padding:0 10px;}
+
+#commentOption > a{color : gray; font-size : 12px; padding:0 10px;}
+
+#commentBox{border: 0.5px solid darkgray; border-radius: 10px; background-color: white; margin: 10px; padding: 5px; height: 95%;}
+
+#commentWriter{font-size : 15px; font-weight: 600; padding:0 10px;}
+
+#commentContent{background-color: transparent; width:100%; resize: none; outline: 0; border: 0; padding:0 10px;}
+
+#submitWrap{float: right; margin: -36px 10px -36px 0px;}
+
+#submitWrap > a{color : gray; font-size : 12px; padding:0 10px;}
+
+#page, #search{width : 100%; height : 100px; padding: 20px;}
+
+footer {width: 100%; height: auto;}
+
+a {text-decoration: none;}
 </style>
 </head>
 <body>
 
-
-	<header id="header"> 헤더 영역 </header>
-	<section>
-		<aside>
-			<%@ include file="../common/cmNavi.jsp"%>
-		</aside>
-		<div id="contentWrap">
-
-
-			<header id="boardHeader">게시판이름</header>
-			
-			<article id="boardArticle">
-				
-				<div id="boardContent">
-					
-					
-				</div>
-				
-			</article>
-			
-		</div>
-	</section>
+	<header id="header">
+		<%@ include file ="../common/nav2.jsp" %>
+	</header>
 	
-	<footer> 푸터 영역 </footer>
+	
+	<main>
+	
+		<aside id="aside1" class="aside">
+			<%@ include file ="../common/cmNavi.jsp" %>
+		</aside>
+		
+		<section id="section">
+			
+			<div id="contentTitle">
+				<%= b.getBoardName() %>
+			</div>
+			<div id="content">
+				<article>
+					<div id="boardHeader">
+						<div id="title"><%= b.getBoardTitle() %></div>		
+					</div>
+					<div id="writerInfoWrap">
+						<div id="writerThumbnail">
+							<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340" alt="회원사진" id="user_photo2" >
+                        
+						</div>
+						<div id="writerId">
+							<%= b.getWriter() %>
+						</div>
+					</div>
+					<div id="boardInfor">	
+						<div id="boardDate">
+							2023.09.05&nbsp;&nbsp;20:53&nbsp;&nbsp;&nbsp;&nbsp;조회 <%= b.getBoardName() %>
+						</div>
+						<div id="commentCount">
+							댓글&nbsp;&nbsp;<%= b.getComments() %>
+						</div>
+					</div>
+					<hr>
+					<div id="boardContent">
+						<%= b.getBoardContent() %>
+					</div>
+					<div id="boardlikeWrap">
+						좋아요 <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+					</div>	
+					<hr>
+					<div id="commentWrap">
+						<div id="commentOption">
+							댓글 <a>등록순</a> <a>최신순</a>
+						</div>
+						<div id="commentBox">
+							<div id="commentWriter">유저ID</div>
+							<textarea id="commentContent" placeholder="댓글을 남겨보세요"></textarea>
+							<div id="submitWrap">
+								<a href="#">등록</a>
+							</div>
+						</div>
+					</div>
+				
+				</article>
+			</div>
+			
+			<div id="page">
+				글쓰기 버튼 / 맨위로 가기 버튼 만들 공간
+			</div>
+		
+		
+		</section>
+		
+		<aside id="aside2" class="aside">
+		</aside>
+		
+	</main>
+	<br clear="both">
+	
+	<footer>
+		<%@ include file ="../common/footer.jsp" %>
+	</footer>
 
 
 </body>

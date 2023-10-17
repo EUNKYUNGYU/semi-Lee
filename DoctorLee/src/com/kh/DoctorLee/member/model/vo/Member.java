@@ -18,6 +18,7 @@ public class Member {
 	private Date createDate;
 	private Date modifyDate;
 	private String status;
+	private int point;
 	
 	
 	public Member() {
@@ -44,6 +45,57 @@ public class Member {
 		this.modifyDate = modifyDate;
 		this.status = status;
 	}
+	
+	
+
+
+	public Member(int memNo, String memId, String memPwd, String memName, String nickName, String phone, String iNum,
+			String email, String gender, int height, int weight, Date createDate, Date modifyDate, String status,
+			int point) {
+		super();
+		this.memNo = memNo;
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.nickName = nickName;
+		this.phone = phone;
+		this.iNum = iNum;
+		this.email = email;
+		this.gender = gender;
+		this.height = height;
+		this.weight = weight;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.status = status;
+		this.point = point;
+	}
+
+
+	
+	
+	
+	public String getiNum() {
+		return iNum;
+	}
+
+
+
+	public void setiNum(String iNum) {
+		this.iNum = iNum;
+	}
+
+
+
+	public int getPoint() {
+		return point;
+	}
+
+
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
 
 
 	public int getMemNo() {

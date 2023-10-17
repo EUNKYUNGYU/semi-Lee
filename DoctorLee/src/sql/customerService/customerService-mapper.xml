@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>고객센터 관련 SQL문</comment>
+
+	<entry key="selectCustomerServiceList">
+		SELECT
+				INQ_NO,
+				MEM_NO,
+				INQ_TYPE,
+				INQ_TITLE,
+				INQ_CONTENT,
+				CREATE_DATE
+		FROM
+				TB_CUS_SER
+		WHERE
+				DEL_STATUS = 'Y'
+		ORDER
+		   BY
+		   		CREATE_DATE DESC
+	</entry>
+	
+	<entry key="selectCustomerService">
+		SELECT
+				INQ_NO,
+				MEM_NO,
+				INQ_TYPE,
+				INQ_TITLE,
+				INQ_CONTENT,
+				CREATE_DATE,
+				DEL_STATUS
+		FROM
+				TB_CUS_SER
+		WHERE
+				INQ_NO = ?
+	</entry>
+	
+	<entry key="deleteCustomerService">
+		DELETE
+		  FROM
+		  		TB_CUS_SER
+		 WHERE
+		 		INQ_NO = ?
+		  		
+	</entry>
+	<entry key="insertAdminInq">
+		INSERT
+		INTO
+				TB_CUS_SER
+				(
+				INQ_NO,
+				MEM_NO,
+				INQ_TYPE,
+				INQ_TITLE,
+				INQ_CONTENT,
+				CREATE_DATE
+				)
+		VALUES
+				(
+				SEQ_INQ_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				?,
+				SYSDATE
+				)
+	</entry>
+</properties>

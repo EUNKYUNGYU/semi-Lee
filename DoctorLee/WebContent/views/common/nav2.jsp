@@ -195,30 +195,35 @@ body{
                     <li><a href="<%=contextPath%>/list.cli">클리닉</a></li>
                     <li><a href="#">건강 매거진</a>
                         <ul>
-                            <li><a href="#">의약품 검색</a></li>
+                            <li><a href="<%=contextPath%>/search.med">의약품 검색</a></li>
                             <li><a href="#">건강 관리 방법</a></li>
                             <li><a href="#">긴급 상황 대비 메뉴얼</a></li>
                         </ul>
                     </li>
                     <li><a href="#">커뮤니티</a>
                         <ul>
-                            <li><a href="#">자유게시판</a></li>
-                            <li><a href="#">정보게시판</a></li>
-                            <li><a href="#">쪽지</a></li>
-                            <li><a href="#">신고하기</a></li>
+                        	<li><a href="<%= contextPath %>/list.bo">공지사항</a>
+                            <li><a href="<%= contextPath %>/list.bo">자유게시판</a></li>
+                            <li><a href="<%= contextPath %>/list.bo">정보게시판</a></li>
+                            <li><a href="<%= contextPath %>/list.bo">익명게시판</a></li>
                             <li><a href="<%= contextPath %>/list.qz">퀴즈게시판</a></li>
+                            <% if(loginUser != null){ %>
+                            <li><a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver">쪽지함</a></li>
+                        	<% } else { %>
+                        	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');">쪽지함</a></li>
+                        	<% } %>
                         </ul>
                     </li>
                     <li><a href="#">마이페이지</a>
                         <ul>
                         	<li><a href="<%=contextPath%>/myPage.me">마이페이지</a></li>
-                            <li><a href="#">복약관리</a></li>
+                            <li><a href="<%=contextPath%>/list.medi">복약관리</a></li>
                             <li><a href="<%=contextPath%>/updateForm.me">회원 정보 수정</a></li>
                             <li><a href="#">회원 탈퇴</a></li>
-                            <li><a href="#">관리자 문의</a></li>
-                            <li><a href="#">자기 게시물 확인</a></li>
+                            <li><a href="<%=contextPath%>/customerService.mp">고객센터</a></li>
+                            <li><a href="#">나의 게시글</a></li>
                             <li><a href="#">예약 관리</a></li>
-                            <li><a href="#">병원 즐겨찾기</a></li>
+                            <li><a href="<%=contextPath%>/first.bm">병원 즐겨찾기</a></li>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="<%=contextPath%>/main.hc">건강 관리</a></li>
                             <li><a href="<%=contextPath%>/first.di">다이어리</a></li>

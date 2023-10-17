@@ -1,144 +1,136 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.util.ArrayList, com.kh.DoctorLee.board.model.vo.Board"%>
+<%@ page import="com.kh.DoctorLee.board.model.vo.Board, java.util.ArrayList"%>
+    
 <% 
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 작성</title>
+<title>게시글 상세보기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
+</script>
+
 <style>
+
 * {
+	border: 0.5px solid skyblue;
 	box-sizing: border-box;
-	border: 1px solid rgb(186, 175, 238);
 }
 
-#header {
-	width: 1800px;
-	height: 200px;
-}
+body{margin : 0;}
 
-section {
-	width: 1800px;
-	height: auto; 
-	min-height: 800px;
-}
+#header {width: 100vw; height: 100px;}
 
-section > div , section > aside{
-	float: left;
-}
+main {width: 100%; height: auto;  line-height: 30px;}
 
-#contentWrap {
-	width: 1400px;
-}
+main > section, main > aside, main > div{float: left;}
 
-aside {
-	width: 300px;
-	height: 100%;
-	float: left;
-	padding-left: 15px;
-	padding-right: 15px;
-}
+.aside {height: auto; float: left; margin: 20px auto; display: flex; justify-content: center; padding: 0;}
 
-#boardHeader, #boardArticle, #page, #search {
-	float: left;
-	width: 1400px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
+#aside1{width :25%}
 
-#boardHeader {
-	height: 100px;
-	font-size: 50px;
-}
+#aside2{width :15%}
 
-#boardArticle {
-	height: auto; 
-	min-height: 500px;
-}
+#section{width: 60%; height: auto;  min-height: 1000px; float: left; padding: 20px;s}
 
-#buttonWrap {
-	height: 50px;
-	margin-left : 1200px;
-}
+#contentTitle{width : 100%; height : 100px; padding: 20px; font-size : 30px; font-weight: bold; line-height : 200%;}
 
-#boardTable {
-	width : 1100px;
-   	border-spacing: 10px;
-	
-}
+#content{width : 100%; height : auto;}
 
-footer {
-	width: 1800px;
-	height: 300px;
-}
+article{width: 95%; height: auto; margin: 20px auto; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 20px;}
+
+#boardCategoryWrap{width:100%; height:auto;}
+
+#boardCategory{width:50%; height:30px;}
+
+#boardHeader {width: 100%; height: auto; padding: 5px; font-size: 30px; font-weight : 600;}
+
+#boardTitle {float: left; width: 50%; height:30px;}
+
+#title {width: 70%; height: 100%; font-size: 30px;}
+
+#boardInfor {width: 100%; height: 50px; line-height: 30px; padding: 10px; color : gray; font-size : 12px;}
+
+#boardInfor > div{float: left;}
+
+#boardDate{width: 80%;}
+
+#boardContent{width: 100%; height: auto; min-height: 400px; resize:none; border: none; outline:none; padding:20px;}
+
+#submitWrap{float: right; margin: -36px 10px -36px 0px;}
+
+#submitWrap > a{color : gray; font-size : 12px; padding:0 10px;}
+
+#page, #search{width : 100%; height : 100px; padding: 20px;}
+
+footer {width: 100%; height: auto;}
+
+a {text-decoration: none;}
 </style>
 </head>
 <body>
 
-
-	<header id="header"> 헤더 영역 </header>
-	<section>
-		<aside>
-			<%@ include file="../common/cmNavi.jsp"%>
-		</aside>
-		<div id="contentWrap">
-
-
-			<header id="boardHeader">게시글작성</header>
-			
-			<article id="boardArticle">
-				<form enctype="multipart/form-data"
-        		action="<%= contextPath %>/insert.bo" method="post" id="enroll-form">
-				
-				<div id="boardContent">
-				
-				<div id="buttonWrap">
-					<button type="submit">게시글 등록</button>
-				</div>
-				
-					<table align="center" id="boardTable">
-						<thead>
-							<tr>
-								<th>
-									<select style="width:900px; height:50px" name="category" id="">
-										<option value="20">자유게시판</option>
-                            			<option value="30">정보게시판</option>
-                            			<option value="40">익명게시판</option>
-                        			</select>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th height="70">
-									<input style="width:900px; height:50px" type="text" placeholder="제목을 입력해주세요" name="boardTitle">
-								</th>
-							</tr>
-							<tr>
-								<th>
-									<input style="width:900px; height:300px" type="text" placeholder="내용을 입력해주세요" name="boardContent">
-								</th>
-							</tr>
-							<tr>
-								<th height="70">
-									<input type="file" name="file" >
-								</th>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</form>
-			</article>
-			
-		</div>
-	</section>
+	<header id="header">
+		<%@ include file ="../common/nav2.jsp" %>
+	</header>
 	
-	<footer> 푸터 영역 </footer>
+	
+	<main>
+	
+		<aside id="aside1" class="aside">
+			<%@ include file ="../common/cmNavi.jsp" %>
+		</aside>
+		
+		<section id="section">
+			
+			<div id="contentTitle">
+				자유 게시판
+			</div>
+			<div id="content">
+				<article>
+					<form action="<%= contextPath %>/insert.bo" method="post">
+					<input type="hidden" name="memNo" value="<%= loginUser.getMemNo()%>">
+					<div id="boardCategoryWrap">
+						<select name="category" id="boardCategory">
+							<% if("admin".equals(loginUser.getMemId())) { %>
+							<option value="10">공지사항</option>
+							<% } %>
+							<option value="20">자유게시판</option>
+                            <option value="30">정보게시판</option>
+                            <option value="40">익명게시판</option>
+                        </select>
+					</div>
+					<div id="boardHeader">
+						<input type="text" placeholder="제목을 입력해주세요" name="boardTitle">		
+					</div>
+					<div>
+						<input type="file" name="file">
+					</div>
+					<hr>
+					<div id="boardContent">
+						<textarea id="boardContent" placeholder="내용을 입력해주세요" name="boardContent"></textarea>
+					<hr>
+					</div>
+					<button type="submit" class="btn btn-primary">글 작성</button>
+				</form>
+				</article>
+			</div>
+			
+		
+		</section>
+		
+		<aside id="aside2" class="aside">
+		</aside>
+		
+	</main>
+	<br clear="both">
+	
+	<footer>
+		<%@ include file ="../common/footer.jsp" %>
+	</footer>
 
 
 </body>

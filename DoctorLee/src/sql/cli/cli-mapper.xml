@@ -31,6 +31,7 @@
 	
 	<entry key="selectCli">
 		SELECT
+				CLI_NO,
 				HOS_NAME,
 				CLI_CATE,
 				CLI_NAME,
@@ -46,5 +47,109 @@
 		  		TB_HOSPITAL USING(HOS_NO)
 		 WHERE
 		 		CLI_NO = ? 								
+	</entry>
+	
+	<entry key="selectResDate">
+		SELECT 
+		        DISTINCT CLI_DATE 
+		  FROM 
+		        TB_CLI_TIME
+		 WHERE
+		        CLI_NO = ?
+	</entry>
+	
+	<entry key="selectCliTimeList">
+		SELECT
+				TIME_NO,
+				CLI_NO,
+				CLI_TIME,
+				CLI_DATE
+		  FROM
+		  		TB_CLI_TIME
+		 WHERE
+		 		CLI_NO = ?
+		 AND
+		 		CLI_DATE = ?
+		 AND
+		 		CLI_TIME NOT IN(
+		 						SELECT
+		 								RES_TIME
+		 						  FROM
+		 						  		TB_CLI_RES
+		 						 WHERE
+		 						 		CLI_NO = ? 				
+		 						)
+		ORDER 
+		   BY  TIME_NO
+						 						 				 				
+	</entry>
+	
+	<entry key="insertCliRes">
+		INSERT
+		  INTO
+		  		TB_CLI_RES
+		VALUES
+				(
+				SEQ_CLI_RES_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				?
+				)  		
+	</entry>
+	
+	<entry key="selectResMem">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_CLI_RES
+		WHERE
+				CLI_NO = ?
+		  AND
+		  		MEM_NO = ?						
+	</entry>
+	
+	<entry key="insertCliRev">
+		INSERT
+		  INTO
+		  		TB_CLI_REV
+		VALUES
+				(
+				SEQ_CLI_REV_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				SYSDATE,
+				?
+				)		
+	</entry>
+	
+	<entry key="selectCliScope">
+		SELECT 
+				ROUND(AVG(CLI_SCOPE),1)
+		  FROM 
+				TB_CLI_REV
+		  WHERE 
+				CLI_NO = ?
+	</entry>
+	
+	<entry key="selectCliRevList">
+		SELECT 
+				REV_NO, 
+				CLI_NO, 
+				NICKNAME, 
+				REV_CONTENT, 
+				CR.CREATE_DATE, 
+				CLI_SCOPE
+		  FROM 
+		  		TB_CLI_REV CR
+		  JOIN
+		  		TB_MEMBER
+		  USING
+		  		(MEM_NO)		
+		  WHERE 
+				CLI_NO = ?
+		ORDER 
+		   BY   REV_NO DESC
 	</entry>
 </properties>

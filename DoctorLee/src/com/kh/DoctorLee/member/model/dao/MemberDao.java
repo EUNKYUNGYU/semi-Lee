@@ -36,9 +36,6 @@ public class MemberDao {
 		
 		String sql = prop.getProperty("loginMember");
 		
-		//System.out.println(memId);
-		//System.out.println(memPwd);
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memId);
@@ -60,6 +57,7 @@ public class MemberDao {
 								rset.getDate("CREATE_DATE"),
 								rset.getDate("MODIFY_DATE"),
 								rset.getString("STATUS"));
+				//System.out.println(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

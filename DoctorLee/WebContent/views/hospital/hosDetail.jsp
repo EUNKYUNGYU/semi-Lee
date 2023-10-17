@@ -20,6 +20,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+    
     <script>
 		var hosNo = location.search.substring(5);
         var rsvt_date = '';
@@ -71,7 +72,7 @@
     </script>
 <style>
 	  .hos_wrap{margin: auto;}
-	  
+	  .hos_wrap > div{ float: left;}
 	  #hos_info, #hos_rsvt, #hos_review{
 	  	display: inline-block; 
 	  	width: 30%;
@@ -443,8 +444,10 @@
 		
 	</div>
 	<!-- 랩 끝 -->
-
+	<br clear="both">
+	<footer id="footerWrap">
     <%@ include file="../common/footer.jsp" %>
+	</footer>
 
 </body>
 </html>

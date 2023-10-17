@@ -3,6 +3,8 @@
 <%@ page import="com.kh.DoctorLee.board.model.vo.Board, java.util.ArrayList"%>
     
 <% 
+	Board b = (Board)request.getAttribute("b");
+
 %>
 
 <!DOCTYPE html>
@@ -87,14 +89,15 @@ a {text-decoration: none;}
 		<section id="section">
 			
 			<div id="contentTitle">
-				게시글 작성
+				게시글 수정
 			</div>
 			<div id="content">
 				<article>
-					<form action="<%= contextPath %>/insert.bo" method="post">
-					<input type="hidden" name="memNo" value="<%= loginUser.getMemNo()%>">
+					<form action="<%= contextPath %>/update.bo" method="post">
+						<input type="hidden" name="memNo" value="<%= loginUser.getMemNo()%>">
+						<input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
 					<div id="boardCategoryWrap">
-						<select name="category" id="boardCategory">
+						<select name="boardType" id="boardCategory">
 							<% if("admin".equals(loginUser.getMemId())) { %>
 							<option value="10">공지사항</option>
 							<% } %>
@@ -104,17 +107,18 @@ a {text-decoration: none;}
                         </select>
 					</div>
 					<div id="boardHeader">
-						<input type="text" placeholder="제목을 입력해주세요" name="boardTitle">		
+						<input type="text" placeholder="제목을 입력해주세요" name="boardTitle" value="<%= b.getBoardTitle() %>" required>		
 					</div>
 					<div>
 						<input type="file" name="file">
 					</div>
 					<hr>
 					<div id="boardContent">
-						<textarea id="boardContent" placeholder="내용을 입력해주세요" name="boardContent"></textarea>
+						<textarea id="boardContent" placeholder="내용을 입력해주세요" name="boardContent"required><%= b.getBoardContent() %>
+						</textarea>
 					<hr>
 					</div>
-					<button type="submit" class="btn btn-primary">글 작성</button>
+					<button type="submit" class="btn btn-primary">글 수정</button>
 				</form>
 				</article>
 			</div>

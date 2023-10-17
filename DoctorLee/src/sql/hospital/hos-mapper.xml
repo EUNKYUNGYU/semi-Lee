@@ -61,5 +61,23 @@
 		      HOS_NO = ?
 	
 	</entry>
+	
+	<entry key="selectReview">
+		SELECT
+		      REVIEW_NO
+			  ,NICKNAME 
+		      ,CONTENT
+ 			  ,SCOPE
+			  ,R.CREATE_DATE
+	     FROM
+	          TB_HOS_REVIEW R
+	     LEFT 
+         JOIN
+	          TB_MEMBER ON (REVIEW_WRITER = MEM_NO)
+	    WHERE
+	          REVIEW_HOS = ?
+          AND
+              R.STATUS = 'Y'
+	</entry>
 
 </properties>

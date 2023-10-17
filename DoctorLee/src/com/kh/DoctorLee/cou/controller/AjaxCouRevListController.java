@@ -1,30 +1,29 @@
 package com.kh.DoctorLee.cou.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.DoctorLee.cli.model.service.CliService;
+import com.google.gson.Gson;
 import com.kh.DoctorLee.cou.model.service.CouService;
-import com.kh.DoctorLee.cou.model.vo.Cou;
-import com.kh.DoctorLee.member.model.vo.Member;
+import com.kh.DoctorLee.cou.model.vo.CouRev;
 
 /**
- * Servlet implementation class CouResDetailController
+ * Servlet implementation class AjaxCouRevListController
  */
-@WebServlet("/couDetail.cou")
-public class CouResDetailController extends HttpServlet {
+@WebServlet("/ajaxRevList.cou")
+public class AjaxCouRevListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CouResDetailController() {
+    public AjaxCouRevListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,28 +32,16 @@ public class CouResDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
 		// 값 뽑기
 		int couNo = Integer.parseInt(request.getParameter("cno"));
 		
 		// Service 요청
-		Cou c = new CouService().selectCou(couNo);
+		ArrayList<CouRev> list = new CouService().selectCouRevList(couNo);
 		
-		// 리뷰 버튼을 예약한 사용자에게만 보이게
-		HttpSession session = request.getSession(); 
-				
-		Member loginUser = (Member)session.getAttribute("loginUser");
-				
-		int result = new CouService().selectResMem(couNo, loginUser);
+//		System.out.println(list);
 		
-		// 리뷰는 한 사람당 한 번만 작성 가능하게
-		int result2 = new CouService().selectRevCount(couNo, loginUser);
-		
-		request.setAttribute("c", c);
-		request.setAttribute("result", result);
-		request.setAttribute("result2", result2);
-		request.getRequestDispatcher("views/cou/couResDetailView.jsp").forward(request, response);
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

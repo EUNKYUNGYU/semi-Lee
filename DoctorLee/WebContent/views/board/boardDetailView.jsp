@@ -88,7 +88,13 @@ article{width: 95%; height: auto; margin: 20px auto; border: 1px solid rgb(230, 
 
 #submitWrap > a{color : gray; font-size : 12px; padding:0 10px;}
 
-#page, #search{width : 100%; height : 100px; padding: 20px;}
+#page{width : 100%; height : 80px; padding: 20px;}
+
+#page > div {float: left;}
+
+#writeWrap{width: 80%;}
+
+#upWrap{width: 20%; text-align: right;}
 
 footer {width: 100%; height: auto;}
 
@@ -124,7 +130,11 @@ a {text-decoration: none;}
                         
 						</div>
 						<div id="writerId">
-							<%= b.getWriter() %>
+							<% if("익명게시판".equals(b.getBoardName())) { %>
+								익명
+							<% } else { %>
+								<%= b.getWriter() %>
+							<% } %>
 						</div>
 					</div>
 					<div id="boardInfor">	
@@ -160,7 +170,18 @@ a {text-decoration: none;}
 			</div>
 			
 			<div id="page">
-				글쓰기 버튼 / 맨위로 가기 버튼 만들 공간
+				<div id="writeWrap">
+					<% if(loginUser != null) { %>
+						<a class="btn btn-primary" href="<%= contextPath %>/views/board/boardEnrollForm.jsp" >글 쓰기</a>
+						<% if(loginUser.getNickName().equals(b.getWriter())) { %>
+							<a class="btn btn-light" href="<%= contextPath %>/updateForm.bo?boardNo=<%= b.getBoardNo() %>">수정</a>
+							<a class="btn btn-light" href="<%= contextPath %>/delete.bo?boardNo=<%= b.getBoardNo() %>">삭제</a>
+						<% } %>
+					<% } %>
+				</div>
+				<div id="upWrap">
+					<a class="btn btn-light">^</a>
+				</div>
 			</div>
 		
 		

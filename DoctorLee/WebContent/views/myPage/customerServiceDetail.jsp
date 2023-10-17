@@ -122,7 +122,7 @@
                 <table>
                     <tr>
                     	<th><%=cs.getInqNo() %></th>
-                        <th id="csTitle">제목: <%=cs.getInqTitle() %> | 작성일: <%=cs.getCreateDate() %></th>
+                        <th id="csTitle">문의:<%=cs.getCategory() %> | 제목: <%=cs.getInqTitle() %> | 작성일: <%=cs.getCreateDate() %></th>
                     </tr>
                     <tr>
                         <th id="csContent"><%=cs.getInqContent() %></th>

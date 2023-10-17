@@ -15,6 +15,7 @@ import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.vo.Cou;
 import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
+import com.kh.DoctorLee.cou.model.vo.CouRev;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 import com.kh.DoctorLee.member.model.vo.Member;
 
@@ -406,6 +407,97 @@ public class CouDao {
 			
 			pstmt.setInt(1, loginUser.getMemNo());
 			pstmt.setInt(2, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 상담 예약 후 리뷰 작성
+	public int insertCouRev(Connection conn, CouRev c) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCouRev");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, c.getCouNo());
+			pstmt.setInt(2, c.getMemNo());
+			pstmt.setString(3, c.getRevContent());
+			pstmt.setInt(4, c.getCouScope());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 상담 리뷰 목록 출력
+	public ArrayList<CouRev> selectCouRevList(Connection conn, int couNo){
+		ArrayList<CouRev> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouRevList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CouRev c = new CouRev();
+				c.setRevNo(rset.getInt("REV_NO"));
+				c.setCouNo(rset.getInt("COU_NO"));
+				c.setNickName(rset.getString("NICKNAME"));
+				c.setRevContent(rset.getString("REV_CONTENT"));
+				c.setCreateDate(rset.getString("CREATE_DATE"));
+				c.setCouScope(rset.getInt("COU_SCOPE"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	// 리뷰는 한 사람당 한 번만 작성 가능하게
+	public int selectRevCount(Connection conn, int couNo, Member loginUser) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRevCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			pstmt.setInt(2, loginUser.getMemNo());
 			
 			rset = pstmt.executeQuery();
 			

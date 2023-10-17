@@ -7,24 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.DoctorLee.cli.model.service.CliService;
 import com.kh.DoctorLee.cou.model.service.CouService;
-import com.kh.DoctorLee.cou.model.vo.Cou;
-import com.kh.DoctorLee.member.model.vo.Member;
+import com.kh.DoctorLee.cou.model.vo.CouRev;
 
 /**
- * Servlet implementation class CouResDetailController
+ * Servlet implementation class AjaxCouRevController
  */
-@WebServlet("/couDetail.cou")
-public class CouResDetailController extends HttpServlet {
+@WebServlet("/ajaxRev.cou")
+public class AjaxCouRevController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CouResDetailController() {
+    public AjaxCouRevController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,28 +30,28 @@ public class CouResDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
 		// 값 뽑기
 		int couNo = Integer.parseInt(request.getParameter("cno"));
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int couScope = Integer.parseInt(request.getParameter("couScope"));
+		String revContent = request.getParameter("revContent");
+		
+		// VO 가공
+		CouRev c = new CouRev();
+		c.setCouNo(couNo);
+		c.setMemNo(memNo);
+		c.setCouScope(couScope);
+		c.setRevContent(revContent);
 		
 		// Service 요청
-		Cou c = new CouService().selectCou(couNo);
+		int result = new CouService().insertCouRev(c);
 		
-		// 리뷰 버튼을 예약한 사용자에게만 보이게
-		HttpSession session = request.getSession(); 
-				
-		Member loginUser = (Member)session.getAttribute("loginUser");
-				
-		int result = new CouService().selectResMem(couNo, loginUser);
-		
-		// 리뷰는 한 사람당 한 번만 작성 가능하게
-		int result2 = new CouService().selectRevCount(couNo, loginUser);
-		
-		request.setAttribute("c", c);
-		request.setAttribute("result", result);
-		request.setAttribute("result2", result2);
-		request.getRequestDispatcher("views/cou/couResDetailView.jsp").forward(request, response);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().print(result);
 	}
 
 	/**

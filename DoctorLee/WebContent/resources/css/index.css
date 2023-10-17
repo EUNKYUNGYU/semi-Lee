@@ -2,9 +2,6 @@
 
 a{text-decoration: none;}
 ul, ol, li{list-style: none;}
-body::-webkit-scrollbar {
-    display: none;
-}
 
 #wrap{margin: 0 auto;}
 

@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.cou.model.service.CouService;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouResTime;
 
 /**
- * Servlet implementation class CouResListController
+ * Servlet implementation class CouResFormController
  */
-@WebServlet("/couResList.cou")
-public class CouResListController extends HttpServlet {
+@WebServlet("/resForm.cou")
+public class CouResFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CouResListController() {
+    public CouResFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +32,24 @@ public class CouResListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Cou> list = new CouService().selectCouList();
 
+		// 값 뽑기
+		int couNo = Integer.parseInt(request.getParameter("cno"));
+//		System.out.println(couNo);
 		
+		// Service 요청
+		// 상담사 정보 불러오기
+		Cou c = new CouService().selectCou(couNo);
+//		System.out.println(c);
 		
+		// 상담 가능한 날짜 불러오기
+		ArrayList<CouResTime> list = new CouService().selectCouDate(couNo);
+		System.out.println(list);
+		
+		// 응답화면 요청
+		request.setAttribute("c", c);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/cou/couResListView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/cou/CouResView.jsp").forward(request, response);
 	}
 
 	/**

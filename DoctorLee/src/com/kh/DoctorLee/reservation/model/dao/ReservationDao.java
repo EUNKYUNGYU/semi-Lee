@@ -31,58 +31,30 @@ public class ReservationDao {
 		}
 	}
 	
-	// 날짜 확인 조회
-	public String checkRsvtDate(Connection conn, String checkRsvtDate) {
-		String result = "";
+	// 진료 시간 체크 
+	public int checkRsvtTreat(Connection conn, String rsvtDate, String rsvtTime) {
+		int checkRsvtResult = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("checkRsvtDate");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, checkRsvtDate);
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				result = rset.getString("RSVT_DATE");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return result;
-	}
-	
-	
-	// insert하기 전에 date겹치는지 확인
-	public String selectRsvtDate(Connection conn, String rsvtDate, String rsvtTime) {
-		String checkDate = "";
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectRsvtDate");
-		
+		String sql = prop.getProperty("checkRsvtTreat");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, rsvtDate);
 			pstmt.setString(2, rsvtTime);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				checkDate = rset.getString("RSVT_DATE") + rset.getString("RSVT_TIME");
-				
+			if(rset.next()) {
+				checkRsvtResult = rset.getInt("COUNT(*)");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
-		
-		return checkDate;
+		return checkRsvtResult;
+			
 	}
 	
-	// �삁�빟 insert
+	// 예약 insert
 	public int insertRsvt(Connection conn, Reservation rsvt) {
 		int result = 0;
 		PreparedStatement pstmt =  null;
@@ -133,8 +105,6 @@ public class ReservationDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return selectRsvt;
 	}
-
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.dao.CouDao;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
 public class CouService {
@@ -129,6 +130,17 @@ public class CouService {
 		close(conn);
 		
 		return c;
+	}
+	
+	// 상담사 예약 가능 날짜 출력
+	public ArrayList<CouResTime> selectCouDate(int couNo){
+		Connection conn = getConnection();
+		
+		ArrayList<CouResTime> list = new CouDao().selectCouDate(conn, couNo);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

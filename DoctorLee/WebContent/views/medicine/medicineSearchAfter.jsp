@@ -4,6 +4,7 @@
 <%
 	ArrayList<Medicine> medList = (ArrayList<Medicine>)request.getAttribute("medList");
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	String medName = request.getParameter("medName");
 
 %>
 <!DOCTYPE html>
@@ -67,6 +68,10 @@
 		<div id="search-form">	
 			<br>
 			
+			<%
+				System.out.println(medName); //검색한 약품 이름이 뭔지 확인하기 위함. 아무것도 안치면 공백으로 감
+			%>
+			
 			<h3>검색하실 약품 이름을 입력해주세요</h3> <br>	
 			<form action="<%=contextPath%>/select.med" id="search-form" method="post">
 			<input type="text" name="medName" id="medName" >
@@ -77,7 +82,7 @@
 					<th>검색된 약품 이름</th>
 				</tr>
 				<tbody>
-				<% if(medList.isEmpty()){%>
+				<% if(medList.isEmpty()|| medName.isEmpty() || medName.equals(" ")){%>
 				<tr>
 					<td>검색된 목록이 없습니다.</td>
 				</tr>

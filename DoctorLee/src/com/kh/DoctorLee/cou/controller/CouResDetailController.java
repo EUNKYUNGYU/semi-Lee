@@ -7,9 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.DoctorLee.cli.model.service.CliService;
 import com.kh.DoctorLee.cou.model.service.CouService;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
  * Servlet implementation class CouResDetailController
@@ -38,7 +41,15 @@ public class CouResDetailController extends HttpServlet {
 		// Service 요청
 		Cou c = new CouService().selectCou(couNo);
 		
+		// 리뷰 버튼을 예약한 사용자에게만 보이게
+		HttpSession session = request.getSession(); 
+				
+		Member loginUser = (Member)session.getAttribute("loginUser");
+				
+		int result = new CouService().selectResMem(couNo, loginUser);
+		
 		request.setAttribute("c", c);
+		request.setAttribute("result", result);
 		request.getRequestDispatcher("views/cou/couResDetailView.jsp").forward(request, response);
 	}
 

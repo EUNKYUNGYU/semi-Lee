@@ -104,14 +104,14 @@ a {text-decoration: none;}
                         </select>
 					</div>
 					<div id="boardHeader">
-						<input type="text" placeholder="제목을 입력해주세요" name="boardTitle">		
+						<input type="text" placeholder="제목을 입력해주세요" name="boardTitle" required>		
 					</div>
 					<div>
 						<input type="file" name="file">
 					</div>
 					<hr>
 					<div id="boardContent">
-						<textarea id="boardContent" placeholder="내용을 입력해주세요" name="boardContent"></textarea>
+						<textarea id="boardContent" placeholder="내용을 입력해주세요" name="boardContent" required></textarea>
 					<hr>
 					</div>
 					<button type="submit" class="btn btn-primary">글 작성</button>

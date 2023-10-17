@@ -111,7 +111,6 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertBoard") + b.getBoardName() + ")";
-		System.out.println("인서트 보드에서 b.getBoardName() " + b.getBoardName());
 		
 		try {
 			pstmt= conn.prepareStatement(sql);
@@ -145,6 +144,8 @@ public class BoardDao {
 			if(rset.next()) {
 				b.setBoardNo(rset.getInt("BOARD_NO"));
 				b.setWriter(rset.getString("NICKNAME"));
+				b.setMemNo(rset.getInt("MEM_NO"));
+				b.setMemId(rset.getString("MEM_ID"));
 				b.setBoardName(rset.getString("BOARD_NAME"));
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
 				b.setBoardContent(rset.getString("BOARD_CONTENT"));
@@ -153,7 +154,6 @@ public class BoardDao {
 				b.setLikes(rset.getInt("LIKES"));
 				b.setComments(rset.getInt("COMMENTS"));
 			}
-			System.out.println("보드 디테일 Dao b:  " + b);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -188,12 +188,8 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateBoard");
-		System.out.println("보드 업데이트 Dao b" + b);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("보드 업데이트 Dao b.getBoardType() " + b.getBoardType()
-			+ "b.getBoardTitle()" + b.getBoardTitle()  + "b.getBoardContent()" +b.getBoardContent()
-			+ "b.getBoardNo()" + b.getBoardNo());
 			pstmt.setInt(1, b.getBoardType());
 			pstmt.setString(2, b.getBoardTitle());
 			pstmt.setString(3, b.getBoardContent());
@@ -206,7 +202,6 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("보드 업데이트 Dao result" + result);
 		return result;
 	}
 

@@ -105,12 +105,17 @@
         <div class="content" align="center">
 
             <!--좌측 메뉴 div-->
-            <div class="left-menu">
-                <%@ include file="../common/cliNavi.jsp"%>
-            </div>
+            
 
             <!--클리닉 출력 영역 div-->
             <div id="cli-content" align="left">
+
+                <% if(loginUser != null){ %>
+                    <!--클리닉 예약하기 페이지로 이동하는 버튼-->
+                    <div id="res-btn" align="right">
+                        <button type="button" id="resBtn">예약하기</button>
+                    </div>
+                <% } %>
 
                 <!--클리닉 간단 정보 출력 영역 div-->
                 <div id="cli-top" >
@@ -136,6 +141,14 @@
         </div>
 
     </div>
+
+    <script>
+
+        // 예약 버튼 클릭 시 예약하기 페이지로 이동
+        $('#resBtn').click(function(){
+            location.href='<%=contextPath%>/resForm.cou?cno=<%=c.getCouNo()%>';
+        })
+    </script>
 
 </body>
 </html>

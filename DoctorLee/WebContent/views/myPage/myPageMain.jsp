@@ -158,7 +158,7 @@ Member loginUser = (Member)session.getAttribute("loginUser");
                     <li><a href="#">자기 게시글 확인</a></li>
                     <li><a href="#">예약 관리</a></li>
                     <li><a href="<%=contextPath%>/main.bm">병원즐겨찾기</a></li>
-                    <li><a href="#">진료 내역 관리</a>
+                    <li><a href="<%=contextPath%>/first.mehi">진료 내역 관리</a>
                         <ul>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">처방전</a></li>
@@ -201,9 +201,10 @@ Member loginUser = (Member)session.getAttribute("loginUser");
             </div>
 
         </div>
-        <%@ include file="../common/footer.jsp" %>
+       
     </div>
     <%} %>
+    <%@ include file="../common/footer.jsp" %>
     
     <script>
         $(function(){

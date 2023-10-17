@@ -155,4 +155,32 @@ public class MedicineDao {
 		}
 		return result;
 	}
+	public Medicine selectMedicineTwo(Connection conn,int medManNo) {
+		Medicine med = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMedicineDetailTwo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, medManNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				med = new Medicine();
+				med.setMedName(rset.getString("MED_NAME"));
+				med.setPreInfo(rset.getString("PRE_INFO"));
+				med.setCauction(rset.getString("CAUCTION"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+			
+		}
+		return med;
+		
+	}
 }

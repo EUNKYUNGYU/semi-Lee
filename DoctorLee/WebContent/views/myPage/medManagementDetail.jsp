@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ page import = "com.kh.DoctorLee.mpBoard.model.vo.MedManagement, com.kh.DoctorLee.medicine.model.vo.Medicine" %>
+=======
+<%@ page import = "com.kh.DoctorLee.mpBoard.model.vo.MedManagement,com.kh.DoctorLee.medicine.model.vo.Medicine" %>
+>>>>>>> 149694f55af4d4092001019e0c4db182797ed4da
 <%
 	MedManagement mm = (MedManagement)request.getAttribute("mm");
 	Medicine med = (Medicine)request.getAttribute("med");
@@ -169,29 +173,11 @@
                     </thead>
                       <tbody>
                         <tr>
-                          <td>• 셀트리온클래리트로</td>
-                          <td>[마크로라이드계 항생제]</td>
-                          <td>위장장애 유발 가능</td>
+                          <td><%=med.getMedName() %></td>
+                          <td><%=med.getPreInfo() %></td>
+                          <td><%=med.getCauction() %></td>
                         <tr>
-                            <td>• 코슈정</td>
-                            <td>[비염&콧물약]</td>
-                            <td>어지러움 / 늦은 시간 복용 피하기</td>
-                        </tr>
-                        <tr>
-                            <td>• 뮤코세린캅셀</td>
-                            <td>[진해거담제&기침감기약]</td>
-                            <td>어지러움 / 늦은 시간 복용 피하기</td>
-                        </tr>
-                        <tr>
-                            <td>• 코푸정</td>
-                            <td>[진해거담제&기침감기약]</td>
-                            <td>입마름 / 졸음</td>
-                        </tr>
-                        <tr>
-                            <td>• 펠루비정</td>
-                            <td>[비스테로이드성 소염진통제]</td>
-                            <td>운전 및 기계 조작 주의</td>
-                        </tr>
+                           
                         </tbody>
                   </table>
             <span><a href="<%=contextPath%>/delete.medi?nno=<%= mm.getMedManNo()%>" class="deletebtn" id="csdelete2">삭제하기</a></span>

@@ -8,15 +8,15 @@ import com.kh.DoctorLee.reservation.model.dao.ReservationDao;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 public class ReservationService {
 
-	// 날짜 확인 조회
-	public String checkRsvtDate(String checkRsvtDate) {
+	// 진료 시간 체크
+	public int checkRsvtTreat(String rsvtDate, String rsvtTime) {
 		Connection conn = getConnection();
-		String result = new ReservationDao().checkRsvtDate(conn, checkRsvtDate);
+		int checkRsvtResult = new ReservationDao().checkRsvtTreat(conn, rsvtDate, rsvtTime);
 		close(conn);
-		return result;
+		return checkRsvtResult;
 	}
 	
-	// �삁�빟 insert
+	// 예약 insert
 	public int insertRsvt(Reservation rsvt) {
 		Connection conn = getConnection();
 		int result = new ReservationDao().insertRsvt(conn, rsvt);
@@ -25,7 +25,7 @@ public class ReservationService {
 		close(conn);
 		return result;
 	}
-	
+				
 	// 예약 조회
 	public Reservation selectRsvt(String rsvtName) {
 		Connection conn = getConnection();
@@ -35,10 +35,4 @@ public class ReservationService {
 		
 	}
 	
-	public String selectRsvtDate(String rsvtDate, String rsvtTime) {
-		Connection conn = getConnection();
-		String checkDate = new ReservationDao().selectRsvtDate(conn, rsvtDate, rsvtTime);
-		close(conn);
-		return checkDate;
-	}
 }

@@ -42,7 +42,8 @@ public class HosDetailController extends HttpServlet {
 			request.setAttribute("docList", docList);
 			request.getRequestDispatcher("views/hospital/hosDetail.jsp").forward(request, response);
 		} else {
-			
+			request.setAttribute("error", "병원 정보를 불러올 수 없습니다.");
+			request.getRequestDispatcher("views/common.errorPage.jsp");
 		}
 		
 	}

@@ -214,5 +214,16 @@
 		ORDER 
 		   BY   REV_NO DESC
 	</entry>
+	
+	<entry key="selectRevCount">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_COU_REV
+		WHERE
+				COU_NO = ?
+		AND
+				MEM_NO = ?						
+	</entry>
 </properties>
 

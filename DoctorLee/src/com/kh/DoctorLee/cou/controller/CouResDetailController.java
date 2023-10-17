@@ -48,8 +48,12 @@ public class CouResDetailController extends HttpServlet {
 				
 		int result = new CouService().selectResMem(couNo, loginUser);
 		
+		// 리뷰는 한 사람당 한 번만 작성 가능하게
+		int result2 = new CouService().selectRevCount(couNo, loginUser);
+		
 		request.setAttribute("c", c);
 		request.setAttribute("result", result);
+		request.setAttribute("result2", result2);
 		request.getRequestDispatcher("views/cou/couResDetailView.jsp").forward(request, response);
 	}
 

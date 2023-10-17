@@ -12,6 +12,21 @@
 	 		STATUS = 'Y'
  
 	</entry>
+	
+	<entry key="selectListCountMyBoard">
+	
+		SELECT 
+	 			COUNT(*) 
+		 	FROM 
+		 		TB_BOARD 
+	        JOIN
+	            TB_MEMBER ON (MEM_NO = WRITER)
+		 	WHERE 
+		 		TB_BOARD.STATUS = 'Y'
+	        AND 
+	            MEM_NO = ?
+	         
+	</entry>
 
 	<entry key="selectList">
 
@@ -106,5 +121,53 @@
 	        BOARD_NO = ?
 	        
 </entry>
+
+<entry key="selectMyBoardList">
+
+	SELECT *
+		FROM(
+			SELECT ROWNUM RNUM, A.*
+				FROM(
+					SELECT
+						BOARD_NO
+						, BOARD_TYPE
+						, MEM_ID
+						, NICKNAME
+						, BOARD_TITLE
+						,TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD')CREATE_DATE
+						, VIEWS
+						, B.STATUS
+					FROM
+						TB_BOARD B
+					JOIN
+						TB_MEMBER ON(WRITER = MEM_NO)
+					JOIN
+						TB_BOARD_TYPE USING(BOARD_TYPE)
+					WHERE
+						B.STATUS = 'Y'
+					AND
+						MEM_NO = ?
+					ORDER BY
+							B.CREATE_DATE DESC )
+				A )
+		WHERE
+			RNUM BETWEEN ? AND ?
+
+</entry>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 </properties>

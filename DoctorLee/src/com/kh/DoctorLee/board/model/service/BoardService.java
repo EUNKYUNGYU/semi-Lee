@@ -21,11 +21,27 @@ public class BoardService {
 		close(conn);
 		return listCount;
 	}
+	
+	public int selectListCountMyBoard(int memNo) {
+		
+		Connection conn = getConnection();
+		int listCount = new BoardDao().selectListCount(conn, memNo);
+		close(conn);
+		return listCount;
+	}
 		
 	public ArrayList<Board> selectList(String type, PageInfo pi){
 		
 		Connection conn = getConnection();
 		ArrayList<Board> list = new BoardDao().selectList(conn, type, pi);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Board> selectMyBoardList(int memNo, PageInfo pi){
+		
+		Connection conn = getConnection();
+		ArrayList<Board> list = new BoardDao().selectMyBoardList(conn, memNo, pi);
 		close(conn);
 		return list;
 		

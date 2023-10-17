@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList"%>
+<%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
     
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int memNo = (Integer)request.getAttribute("memNo");
+	String memId = (String)request.getAttribute("memId");
+	String nickname = (String)request.getAttribute("nickname");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 
 <!DOCTYPE html>
@@ -105,6 +115,7 @@ article{width: 95%; height: auto; margin : 20px;}
 	width : 100%;
 	height : 100px;
 	padding: 20px;
+	text-align: center;
 }
 
 footer {
@@ -138,18 +149,20 @@ footer {
 		
 		<section id="section">
 			
+			<% if(loginUser != null && memId.equals(loginUser.getMemId())) { %>
 			<div id="contentTitle">
 				나의 게시글
 			</div>
+			<% } %>
 			
 			<div id="content">
 				<article>
 					<div id="userWrap">
 						<div id="userThubnail">사진</div>
 						<div id="userInforWrap">
-							<div id="userId">유저 ID</div>
+							<div id="userId"><%= nickname %><span style="color: gray;">(<%= memId %>)</span></div>
 							<div id="userBoard">
-								<a href="" class="messageList">작성글6&nbsp;&nbsp;</a>
+								<a href="" class="messageList">작성글<%= listCount %>&nbsp;&nbsp;</a>
 								<a href="" class="messageList">댓글단 글25&nbsp;&nbsp;</a>
 								<a href="" class="messageList">추천한 글13</a>							
 							</div>
@@ -169,15 +182,21 @@ footer {
 					    </tr>
 					  </thead>
 					  <tbody>
+					   <% if(list == null) { %>
 					    <tr>
-						  <td colspan="5"  style="text-align: center">작성한 게시글이 없습니다</th>
+						  <td colspan="5" style="text-align: center">작성한 게시글이 없습니다</td>
 					    <tr>
-					      <td scope="col" width="10%">게시글 번호</th>
-					      <td scope="col" width="40%">제목</th>
-					      <td scope="col" width="20%">작성일</th>
-					      <td scope="col" width="10%">조회수</th>
+					    <% } else { %>
+						<% for(Board b : list) { %>
+					    <tr>
+					      <td scope="col" width="10%"><%= b.getBoardNo() %></th>
+					      <td scope="col" width="40%"><%= b.getBoardTitle() %></th>
+					      <td scope="col" width="20%"><%= b.getCreateDate() %></th>
+					      <td scope="col" width="10%"><%= b.getViews() %></th>
 					      <td scope="col" width="10%">추천수</th>
 					    </tr>
+					    <% } %>
+						<% } %>
 					  </tbody>
 					</table>
 					
@@ -193,7 +212,24 @@ footer {
 			</div>
 			
 			<div id="page">
-				페이지바 영역
+				<%if(currentPage != 1) {%>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.mbo?memNo=<%= memNo %>&cpage=<%= currentPage - 1%>'">&lt;</button>
+		        <% }%>
+		         
+		       
+		        <% for(int i = startPage; i <= endPage; i++){%>
+		         	<% if(currentPage != i) { %>
+		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.mbo?cpage=<%= i %>&memNo=<%= memNo%>'"><%= i %></button>
+		         	
+		         	<% } else { %>
+		         		<button disabled class="btn btn-default"><%= i %></button>
+		         		<% } %>
+		         <% } %>
+		        
+		        <% System.out.println(maxPage); %>
+		        <%if(currentPage != maxPage) { %>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.mbo?cpage=<%= currentPage + 1%>&memNo=<%= memNo%>'">&gt;</button>
+		        <% } %>
 			</div>
 		
 			<div id="search">

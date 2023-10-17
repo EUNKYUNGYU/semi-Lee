@@ -53,11 +53,24 @@ article{width: 95%; height: auto; margin: 20px auto; }
 
 #writerInfoWrap > div {float: left;}
 
-#writerThumbnail{width: 10%; height: 100%; }
+#writerThumbnail{width: 10%; height: 100%;}
 
 #user_photo2{width: 100px; height: 100px;}
 
-#writerId{width: 90%; height: 100%; padding-left: 10px; font-size : 15px; font-weight : bold; line-height : 100px;} 
+#writeIdWrap{width: 90%; height: 100%;  padding: 30px;} 
+
+#writeId{width: 100%; height: 30px; font-size : 15px; font-weight : bold; line-height : 100px;}
+
+#writeInfoHidden{display: none; width: 100px; height: auto; position: absolute; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 6px; font-size : 12px;
+				background-color: white; }
+
+#writerIdButton{cursor: pointer;}
+
+#writeInfoHidden > ul{padding: 0px; margin: 0px;}
+
+#writeInfoHidden > ul > li{padding: 3px;}
+
+#writeInfoHidden > ul > li >a {padding: 3px; color: black; cursor: pointer;}
 
 #boardInfor {width: 100%; height: 50px; line-height: 30px; padding: 10px; color : gray; font-size : 12px;}
 
@@ -141,12 +154,22 @@ a {text-decoration: none;}
 							<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340" alt="회원사진" id="user_photo2" >
                         
 						</div>
-						<div id="writerId">
-							<% if("익명게시판".equals(b.getBoardName())) { %>
-								익명
-							<% } else { %>
-								<%= b.getWriter() %>
-							<% } %>
+						<div id="writeIdWrap">
+							<div id="writerId">
+								<% if("익명게시판".equals(b.getBoardName())) { %>
+									익명
+								<% } else { %>
+									<a id="writerIdButton"><%= b.getWriter() %></a>
+								<% } %>
+							<div id="writeInfoHidden">
+								<ul id="writeInfoHiddenUl">
+									<li><a href="<%= contextPath %>/list.mbo?memNo=<%= b.getMemNo() %>&cpage=1" class="hiddenButton">게시글 보기</a></li>
+									<% if(loginUser != null) { %>
+										<li><a href="<%= contextPath %>/insertMem.ms?receiverId=<%= b.getMemId() %>&receiverNo=<%= b.getMemNo() %>&senderNo=<%= loginUser.getMemNo() %>" class="hiddenButton">쪽지 보내기</a></li>
+									<% } %>
+								</ul>
+							</div>
+							</div>
 						</div>
 					</div>
 					<div id="boardInfor">	
@@ -221,6 +244,7 @@ a {text-decoration: none;}
 	<footer>
 		<%@ include file ="../common/footer.jsp" %>
 	</footer>
+
 
 
 </body>

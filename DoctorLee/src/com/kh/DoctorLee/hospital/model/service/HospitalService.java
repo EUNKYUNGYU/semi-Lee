@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.kh.DoctorLee.hospital.model.dao.HospitalDao;
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
+import com.kh.DoctorLee.review.model.vo.Review;
 
 public class HospitalService {
 	// 메인 검색창, 응답
@@ -40,6 +41,14 @@ public class HospitalService {
 	public ArrayList<Doctor> selectDoc(int hno) {
 		Connection conn = getConnection();
 		ArrayList<Doctor> docList = new HospitalDao().selectDoc(conn, hno);
+		close(conn);
+		return docList;
+	}
+	
+	// 리뷰 조회
+	public ArrayList<Review> selectReview(int hno) {
+		Connection conn = getConnection();
+		ArrayList<Review> docList = new HospitalDao().selectReview(conn, hno);
 		close(conn);
 		return docList;
 	}

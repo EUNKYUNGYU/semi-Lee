@@ -14,7 +14,7 @@ import com.kh.DoctorLee.reservation.model.service.ReservationService;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class HosRsvtMemController
+ * Servlet implementation class MemReservationController
  */
 @WebServlet("/hosRsvt.mem")
 public class HosRsvtMemController extends HttpServlet {
@@ -34,65 +34,58 @@ public class HosRsvtMemController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String rsvtDate = request.getParameter("rsvtDate");
-		// String rsvtH = request.getParameter("rsvtH");
-		// String rsvtM = request.getParameter("rsvtM");
-		// String rsvtTime = rsvtH + rsvtM;
+		String rsvtH = request.getParameter("rsvtH");
+		String rsvtM = request.getParameter("rsvtM");
 		String rsvtName = request.getParameter("rsvtName");
 		String rsvtInfo = request.getParameter("rsvtInfo");
 		String rsvtDoc = request.getParameter("rsvtDoc");
-		String rsvtHos = request.getParameter("hno");
-		String rsvtTime = request.getParameter("rsvt_time");
+		String hno = request.getParameter("hno");
+		String rsvtTime = rsvtH + rsvtM;
+		// System.out.println(hno);
+		// System.out.println(rsvtTime);
 		
-		// °ãÄ¡´Â ³¯Â¥ ÀÖ´ÂÁö È®ÀÎ
+		// insertí•˜ê¸° ì „ date + h + m ì‹œê°„ ì²´í¬ 
+		int checkRsvtResult = new ReservationService().checkRsvtTreat(rsvtDate, rsvtTime);
+		//System.out.println(rsvtDate);
+		//System.out.println(rsvtTime);
+		System.out.println(checkRsvtResult);
 		
-		// rsvtTime = rsvtTime.replaceAll("\n\t", "");
-		
-		String checkDate = new ReservationService().selectRsvtDate(rsvtDate, rsvtTime);
-
-		if(checkDate.equals(rsvtDate + rsvtTime)) { // ¿¹¾à ¸øÇÔ
-			response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + rsvtHos);
-			
+		// resultê°€ 0ë³´ë‹¤ í¬ë©´ ê²¹ì¹˜ëŠ” ì˜ˆì•½
+		if(checkRsvtResult > 0) {
+			// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
+			request.getSession().setAttribute("checkRsvtResult", checkRsvtResult);
+			System.out.println(checkRsvtResult);
+			//request.setAttribute("error", "ë‹¤ë¥¸ ë‚ ì§œ(ì‹œê°„)ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
+			//request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		} else {
-		
 			Reservation rsvt = new Reservation();
 			rsvt.setRsvtDate(rsvtDate);
 			rsvt.setRsvtTime(rsvtTime);
+			rsvt.setRsvtDoc(rsvtDoc);
 			rsvt.setRsvtMem(rsvtName);
 			rsvt.setMemInfo(rsvtInfo);
-			rsvt.setRsvtDoc(rsvtDoc);
-			rsvt.setRsvtHos(rsvtHos);
-			System.out.println(rsvtDate);
+			rsvt.setRsvtHos(hno);
 			
-			
-			
-			int result = new ReservationService().insertRsvt(rsvt); // ¿¹¾à insert
-			
-			if(result > 0) { // insert ¼º°ø
-				Reservation selectRsvt = new ReservationService().selectRsvt(rsvtName);
+			int result = new ReservationService().insertRsvt(rsvt);
+			if(result > 0) {
 				
-				if(selectRsvt != null) { // Á¶È¸ ¼º°ø
-					
-					// selectRsvt.getRsvtTime().replaceAll("\n\t", "");
-					
-					JSONObject jsonR = new JSONObject();
-					jsonR.put("rsvtNo", selectRsvt.getRsvtNo());
-					jsonR.put("rsvt_date", selectRsvt.getRsvtDate());
-					jsonR.put("rsvtTime", selectRsvt.getRsvtTime());
-					jsonR.put("rsvtName", selectRsvt.getRsvtMem());
-					jsonR.put("rsvtInfo", selectRsvt.getMemInfo());
-					jsonR.put("rsvtHos", selectRsvt.getRsvtHos());
-					jsonR.put("rsvtDoc", selectRsvt.getRsvtDoc());
-					System.out.println(jsonR);
-					
-					response.setContentType("application/json; charset=UTF-8");
-					response.getWriter().print(jsonR);
-					
-					// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + rsvt.getRsvtHos());
-				}
+				Reservation rsvtResult = new ReservationService().selectRsvt(rsvtName);
+				
+				response.setContentType("application/json; charset=UTF-8");
+				JSONObject jO = new JSONObject();
+				jO.put("rsvtDate", rsvtResult.getRsvtDate());
+				jO.put("rsvtTime", rsvtResult.getRsvtTime());
+				jO.put("rsvtName", rsvtResult.getRsvtMem());
+				jO.put("rsvtInfo", rsvtResult.getMemInfo());
+				jO.put("rsvtDoc", rsvtResult.getRsvtDoc());
+				jO.put("rsvtNo", rsvtResult.getRsvtNo());
+				response.getWriter().print(jO);
+				
+				// request.setAttribute("rsvtResult", rsvtResult);
+				// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
+				
 			}
-			
 		}
-		
 		
 	
 	}
@@ -101,7 +94,6 @@ public class HosRsvtMemController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

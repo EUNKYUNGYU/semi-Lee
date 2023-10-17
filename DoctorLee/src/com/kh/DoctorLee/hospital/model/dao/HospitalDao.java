@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
+import com.kh.DoctorLee.review.model.vo.Review;
 
 public class HospitalDao {
 	
@@ -29,6 +30,7 @@ public class HospitalDao {
 		}
 	}
 	
+	// 병원 검색
 	public ArrayList<Hospital> schToIndex(Connection conn, String search, String hkeyH){
 		ArrayList<Hospital> list = new ArrayList();
 		ResultSet rset = null;
@@ -74,7 +76,6 @@ public class HospitalDao {
 			
 			System.out.println(hosCount);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -84,6 +85,7 @@ public class HospitalDao {
 		return hosCount;
 	}
 	
+	// 병원 상세페이지 시 필요한 데이터 조회
 	public Hospital hosDetail(Connection conn, int hno) {
 		Hospital hos = null;
 		PreparedStatement pstmt = null;
@@ -108,7 +110,6 @@ public class HospitalDao {
 				
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -117,6 +118,7 @@ public class HospitalDao {
 		return hos;
 	}
 
+	// 의료진 조회
 	public ArrayList<Doctor> selectDoc(Connection conn, int hno) {
 		ArrayList<Doctor> docList = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -144,5 +146,38 @@ public class HospitalDao {
 		}
 		
 		return docList;
+	}
+	
+	// 리뷰 조회
+	public ArrayList<Review> selectReview(Connection conn, int hno) {
+		ArrayList<Review> reviewList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hno);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Review rv = new Review();
+				rv.setReviewNo(rset.getInt("REVIEW_NO"));
+				rv.setReviewWriter(rset.getString("NICKNAME"));
+				rv.setContent(rset.getString("CONTENT"));
+				rv.setScope(rset.getInt("SCOPE"));
+				rv.setCreateDate(rset.getDate("CREATE_DATE"));
+				
+				reviewList.add(rv);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reviewList;
 	}
 }

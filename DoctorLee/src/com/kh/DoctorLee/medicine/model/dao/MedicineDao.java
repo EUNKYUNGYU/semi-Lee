@@ -30,6 +30,7 @@ public class MedicineDao {
 		String sql = prop.getProperty("selectMedicine");
 		
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, medName);
 			rset = pstmt.executeQuery();
@@ -115,19 +116,43 @@ public class MedicineDao {
 		}
 		return count;
 	}
-	public int updateMedicine(Connection conn, String medName) {
+	public int updateMedicine(Connection conn, Medicine med,String medName) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateMedicine");
 		
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,med.getMedName());
+			pstmt.setString(2, med.getPreInfo());
+			pstmt.setString(3, med.getCauction());
+			pstmt.setString(4, medName);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
+		}	finally {
+			JDBCTemplate.close(pstmt);
 		}
 		
 		
+		return result;
+	}
+	public int deleteMedicine(Connection conn,String medName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMedicine");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, medName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
 		return result;
 	}
 }

@@ -3,6 +3,8 @@
 <%@ page import="com.kh.DoctorLee.board.model.vo.Board, java.util.ArrayList"%>
     
 <% 
+	Board b = (Board)request.getAttribute("b");
+
 %>
 
 <!DOCTYPE html>
@@ -86,7 +88,13 @@ article{width: 95%; height: auto; margin: 20px auto; border: 1px solid rgb(230, 
 
 #submitWrap > a{color : gray; font-size : 12px; padding:0 10px;}
 
-#page, #search{width : 100%; height : 100px; padding: 20px;}
+#page{width : 100%; height : 80px; padding: 20px;}
+
+#page > div {float: left;}
+
+#writeWrap{width: 80%;}
+
+#upWrap{width: 20%; text-align: right;}
 
 footer {width: 100%; height: auto;}
 
@@ -109,12 +117,12 @@ a {text-decoration: none;}
 		<section id="section">
 			
 			<div id="contentTitle">
-				자유 게시판
+				<%= b.getBoardName() %>
 			</div>
 			<div id="content">
 				<article>
 					<div id="boardHeader">
-						<div id="title">게시글 제목</div>		
+						<div id="title"><%= b.getBoardTitle() %></div>		
 					</div>
 					<div id="writerInfoWrap">
 						<div id="writerThumbnail">
@@ -122,31 +130,27 @@ a {text-decoration: none;}
                         
 						</div>
 						<div id="writerId">
-							작성자 아이디
+							<% if("익명게시판".equals(b.getBoardName())) { %>
+								익명
+							<% } else { %>
+								<%= b.getWriter() %>
+							<% } %>
 						</div>
 					</div>
 					<div id="boardInfor">	
 						<div id="boardDate">
-							2023.09.05&nbsp;&nbsp;20:53&nbsp;&nbsp;&nbsp;&nbsp;조회 203
+							2023.09.05&nbsp;&nbsp;20:53&nbsp;&nbsp;&nbsp;&nbsp;조회 <%= b.getBoardName() %>
 						</div>
 						<div id="commentCount">
-							댓글&nbsp;&nbsp;3
+							댓글&nbsp;&nbsp;<%= b.getComments() %>
 						</div>
 					</div>
 					<hr>
 					<div id="boardContent">
-							내용입니다~~~~<br>
-							어쩌구저쩌구<br>
-							아아아아아아아ㅏ<br>
-							<br>
-							<br>
-							내용!!!!
-							<br>
-							아아오오아아오오
-							<br>
+						<%= b.getBoardContent() %>
 					</div>
 					<div id="boardlikeWrap">
-						좋아요 3 댓글 2
+						좋아요 <%= b.getLikes() %> 댓글 <%= b.getComments() %>
 					</div>	
 					<hr>
 					<div id="commentWrap">
@@ -166,7 +170,18 @@ a {text-decoration: none;}
 			</div>
 			
 			<div id="page">
-				글쓰기 / 맨위로 가기 버튼 만들 공간
+				<div id="writeWrap">
+					<% if(loginUser != null) { %>
+						<a class="btn btn-primary" href="<%= contextPath %>/views/board/boardEnrollForm.jsp" >글 쓰기</a>
+						<% if(loginUser.getNickName().equals(b.getWriter())) { %>
+							<a class="btn btn-light" href="<%= contextPath %>/updateForm.bo?boardNo=<%= b.getBoardNo() %>">수정</a>
+							<a class="btn btn-light" href="<%= contextPath %>/delete.bo?boardNo=<%= b.getBoardNo() %>">삭제</a>
+						<% } %>
+					<% } %>
+				</div>
+				<div id="upWrap">
+					<a class="btn btn-light">^</a>
+				</div>
 			</div>
 		
 		

@@ -8,22 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.board.model.dao.BoardDao;
 import com.kh.DoctorLee.board.model.service.BoardService;
 import com.kh.DoctorLee.board.model.vo.Board;
 
-
 /**
- * Servlet implementation class BoardInsertController
+ * Servlet implementation class BoardUpdateCotroller
  */
-@WebServlet("/insert.bo")
-public class BoardInsertController extends HttpServlet {
+@WebServlet("/update.bo")
+public class BoardUpdateCotroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardInsertController() {
+    public BoardUpdateCotroller() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,28 +34,28 @@ public class BoardInsertController extends HttpServlet {
 	
 		request.setCharacterEncoding("UTF-8");
 		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int boardType = Integer.parseInt(request.getParameter("boardType"));
 		String boardTitle = request.getParameter("boardTitle");
 		String boardContent = request.getParameter("boardContent");
-		String category = request.getParameter("category");
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
 		Board b = new Board();
+		b.setBoardType(boardType);
 		b.setBoardTitle(boardTitle);
 		b.setBoardContent(boardContent);
-		b.setBoardName(category);
+		b.setBoardNo(boardNo);
 		
-		int result = new BoardService().insertBoard(b, memNo);
+		System.out.println("보드 업데이트 컨트롤러 boardType 받아 왔는지" + b);
+		int result = new BoardService().updateBoard(b);
 		
-		if(result > 0) { // 게시글 작성 성공
-			// 나중에 게시글 상세보기 만들어지면 거기로 리다이렉트하기, 지금은 그냥 게시판 리스트로
-			request.setAttribute("alertMsg", "게시글 작성에 성공하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.bo?cpage=1&type="+ category);
-		} else { // 게시글 작성 실패
-			request.setAttribute("alertMsg", "게시글 작성에 성공하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.bo?cpage=1&type="+ category);
+		if(result > 0) { // 게시글 업데이트 성공
+			request.setAttribute("alertMsg", "게시글 수정에 성공하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo" + boardNo);
+		} else { // 게시글 업데이트 실패
+			request.setAttribute("alertMsg", "게시글 수정에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo" + boardNo);
 		}
-			
-	
 	
 	}
 

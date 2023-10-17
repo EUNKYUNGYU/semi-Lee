@@ -1337,8 +1337,20 @@ SELECT
         TB_BOARD_TYPE USING(BOARD_TYPE)
     WHERE
           B.STATUS = 'Y';
+          
+UPDATE TB_BOARD SET STATUS = 'N' WHERE BOARD_NO = 36;
         
+ALTER TABLE TB_BOARD ADD MODIFY_DATE DATE DEFAULT SYSDATE NOT NULL;
 
+UPDATE 
+        TB_BOARD 
+    SET 
+        BOARD_TYPE = 20,
+        BOARD_TITLE = '공지 자유게시판으로 바꾼 제목입니당',
+        BOARD_CONTENT = '바꾼 내용입니당',
+        MODIFY_DATE = SYSDATE
+    WHERE 
+        BOARD_NO = 1;
                       
 
 

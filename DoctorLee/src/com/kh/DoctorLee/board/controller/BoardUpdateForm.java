@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.board.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import com.kh.DoctorLee.board.model.service.BoardService;
 import com.kh.DoctorLee.board.model.vo.Board;
 
 /**
- * Servlet implementation class BoardDetailView
+ * Servlet implementation class BoardUpdateForm
  */
-@WebServlet("/detail.bo")
-public class BoardDetailController extends HttpServlet {
+@WebServlet("/updateForm.bo")
+public class BoardUpdateForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailController() {
+    public BoardUpdateForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +30,21 @@ public class BoardDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.setCharacterEncoding("UTF-8");
-		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		String type = String.valueOf(request.getParameter("type"));
-		
+		System.out.println("보드 업데이트 폼 컨트롤러  boardNo" + boardNo);
 		Board b = new BoardService().selectBoard(boardNo);
+		System.out.println("보드 업데이트 폼 컨트롤러 b받아왔나" + b);
 		
-		if(b != null) { // 게시글 조회에 성공 했을 경우
-			request.setAttribute("b", b);
-			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
+		if(b != null) { // 게시글 정보 가져오기 성공
 			
-		} else {
-			request.getSession().setAttribute("alertMsg", "게시글 조회에 실패 했습니다. 다시 시도해주십시오.");
-			response.sendRedirect(request.getContextPath() + "/list.bo");
+			request.setAttribute("b", b);
+			request.getRequestDispatcher("views/board/boardUpdateForm.jsp").forward(request, response);
+			
+		} else { // 게시글 정보 가져오기 실패
+			request.setAttribute("alertMsg", "게시글 수정에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/detail.bo?" + boardNo);
 		}
- 	
+	
 	}
 
 	/**

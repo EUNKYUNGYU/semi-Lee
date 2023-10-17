@@ -1,7 +1,6 @@
-package com.kh.DoctorLee.medicine.controller;
+package com.kh.DoctorLee.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.medicine.model.service.MedicineService;
-import com.kh.DoctorLee.medicine.model.vo.Medicine;
+import com.kh.DoctorLee.board.model.service.BoardService;
 
 /**
- * Servlet implementation class SelectMedicineController
+ * Servlet implementation class BoardDeleteController
  */
-@WebServlet("/select.med")
-public class SelectMedicineController extends HttpServlet {
+@WebServlet("/delete.bo")
+public class BoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectMedicineController() {
+    public BoardDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +29,20 @@ public class SelectMedicineController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String medName = request.getParameter("medName");
-		ArrayList<Medicine> medList = new MedicineService().selectMedicine(medName);
-		request.setAttribute("medName", medName);
-		request.setAttribute("medList", medList);
-		request.getRequestDispatcher("views/medicine/medicineSearchAfter.jsp").forward(request, response);;
+	
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		int result = new BoardService().deleteBoard(boardNo);
+		
+		if(result > 0) { // 게시글 삭제에 성공 한 경우
+			request.getSession().setAttribute("arlerMsg", "게시글이 삭제되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.bo?cpage=1&type=20");
+			
+		} else { // 게시글 삭제에 실패 한 경우
+			request.getSession().setAttribute("arlerMsg", "게시글 삭제에 실패하셨습니다.");
+			response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
+			
+		}
 	}
 
 	/**

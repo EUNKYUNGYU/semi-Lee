@@ -158,8 +158,9 @@ footer {
 					    <tr>
 					  <% } else { %>
 						<% for(Board b : list) { %>
+						<tr>
 					      <td scope="row" style="text-align: center"><%= b.getBoardNo() %></td>
-					      <td scope="row" style="text-align: center"><%= b.getBoardTitle() %></td>
+					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>"><%= b.getBoardTitle() %></td>
 					      <% if("40".equals(type)){ %>
 					      	<td scope="row" width="10%">익명</td>
 					      <% } else { %>
@@ -178,7 +179,9 @@ footer {
 					
 						$(function(){
 						
-							$('tr > td').eq(1).click()
+							$('tr > td').eq(1).click(function(){
+								location.href = '<%=contextPath%>/detail.bo?boardNo=' + $(this).attr('name');
+							})
 							
 							
 							

@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.medicine.controller;
+package com.kh.DoctorLee.cou.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.medicine.model.service.MedicineService;
-import com.kh.DoctorLee.medicine.model.vo.Medicine;
+import com.google.gson.Gson;
+import com.kh.DoctorLee.cou.model.service.CouService;
+import com.kh.DoctorLee.cou.model.vo.CouResTime;
 
 /**
- * Servlet implementation class SelectMedicineController
+ * Servlet implementation class AjaxTimeController
  */
-@WebServlet("/select.med")
-public class SelectMedicineController extends HttpServlet {
+@WebServlet("/ajaxTime.cou" )
+public class AjaxCouTimeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectMedicineController() {
+    public AjaxCouTimeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +32,20 @@ public class SelectMedicineController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String medName = request.getParameter("medName");
-		ArrayList<Medicine> medList = new MedicineService().selectMedicine(medName);
-		request.setAttribute("medName", medName);
-		request.setAttribute("medList", medList);
-		request.getRequestDispatcher("views/medicine/medicineSearchAfter.jsp").forward(request, response);;
+		
+		// 값 뽑기
+		int couNo = Integer.parseInt(request.getParameter("couNo"));
+		String resDate = (request.getParameter("resDate")).replace(".", "/");
+		
+//		System.out.println(couNo + " / " + resDate);
+		
+		// Service 요청
+		ArrayList<CouResTime> timeList = new CouService().selectCouTimeList(couNo, resDate);
+//		System.out.println(timeList);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(timeList, response.getWriter());
+		
 	}
 
 	/**

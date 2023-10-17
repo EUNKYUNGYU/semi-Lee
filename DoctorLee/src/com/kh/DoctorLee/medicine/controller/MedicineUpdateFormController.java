@@ -1,7 +1,6 @@
 package com.kh.DoctorLee.medicine.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.kh.DoctorLee.medicine.model.service.MedicineService;
 import com.kh.DoctorLee.medicine.model.vo.Medicine;
 
 /**
- * Servlet implementation class SelectMedicineController
+ * Servlet implementation class MedicineUpdateFormController
  */
-@WebServlet("/select.med")
-public class SelectMedicineController extends HttpServlet {
+@WebServlet("/updateForm.med")
+public class MedicineUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectMedicineController() {
+    public MedicineUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +31,12 @@ public class SelectMedicineController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String medName = request.getParameter("medName");
-		ArrayList<Medicine> medList = new MedicineService().selectMedicine(medName);
-		request.setAttribute("medName", medName);
-		request.setAttribute("medList", medList);
-		request.getRequestDispatcher("views/medicine/medicineSearchAfter.jsp").forward(request, response);;
+		String medName = request.getParameter("mname");
+		Medicine med = new MedicineService().detailMedicine(medName);
+		
+		request.setAttribute("med", med);
+		request.getRequestDispatcher("views/medicine/medicineUpdateForm.jsp").forward(request, response);;
+		
 	}
 
 	/**

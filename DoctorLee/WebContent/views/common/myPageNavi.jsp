@@ -121,7 +121,7 @@
                     <li><a href="#">자기 게시글 확인</a></li>
                     <li><a href="#">예약 관리</a></li>
                     <li><a href="first.bm">병원즐겨찾기</a></li>
-                    <li><a href="#">진료 내역 관리</a>
+                    <li><a href="<%=contextPath1%>/first.mehi">진료 내역 관리</a>
                         <ul>
                             <li><a href="#">진료 내역 관리</a></li>
                             <li><a href="#">처방전</a></li>

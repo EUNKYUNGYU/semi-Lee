@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.DoctorLee.common.JDBCTemplate;
 import com.kh.DoctorLee.mpBoard.model.dao.CustomerServiceDao;
+import com.kh.DoctorLee.mpBoard.model.vo.Category;
 import com.kh.DoctorLee.mpBoard.model.vo.CustomerService;
 
 public class CustomerServiceService {
@@ -60,6 +61,19 @@ public class CustomerServiceService {
 		}
 		
 		return result;
+	}
+	
+	public ArrayList<Category> selectCategoryList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Category> list = new CustomerServiceDao().selectCategoryList(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	
 	}
 	
 }

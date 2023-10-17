@@ -26,8 +26,57 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
-<style>
+    
+    <script>
+		var hosNo = location.search.substring(5);
+        var rsvt_date = '';
+        var guest_rsvt_date = '';
+		
+   		document.addEventListener('DOMContentLoaded', function() {
+    	
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          locale: 'ko',
+          firstDay: 1,
+          headerToolbar: {
+        	  left: 'prev',
+        	  center: 'title',
+        	  right: 'next'
+          },
+          dateClick: function(info){
+        	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+        	  rsvt_date = info.dateStr;
+        	  // console.log(info.dateStr);
+			}
 
+        });
+          
+        calendar.render();
+        
+        var calendarGuest = document.getElementById('calendarGuest');
+        var calendarG = new FullCalendar.Calendar(calendarGuest, {
+          initialView: 'dayGridMonth',
+          locale: 'ko',
+          firstDay: 1,
+          headerToolbar: {
+        	  left: 'prev',
+        	  center: 'title',
+        	  right: 'next'
+          },
+          dateClick: function(info){
+        	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+        	  guest_rsvt_date = info.dateStr;
+			}
+
+        });
+          
+        calendarG.render();
+      });
+    	
+      
+    </script>
+<style>
 	.hos_wrap{margin: auto;}
 	.hos_wrap > div{float: left;}
 	.box{float: left;}
@@ -530,5 +579,6 @@
 	<div class="box">
     	<%@ include file="../common/footer.jsp" %>
 	</div>
+
 </body>
 </html>

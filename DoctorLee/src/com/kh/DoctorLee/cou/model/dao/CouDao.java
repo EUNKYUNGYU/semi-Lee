@@ -483,4 +483,34 @@ public class CouDao {
 		
 		return list;
 	}
+	
+	// 리뷰는 한 사람당 한 번만 작성 가능하게
+	public int selectRevCount(Connection conn, int couNo, Member loginUser) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRevCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			pstmt.setInt(2, loginUser.getMemNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

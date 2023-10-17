@@ -3,18 +3,6 @@
 
 <properties>
 	<comment>예약 관련 SQL문</comment>
-	<entry key="selectRsvtDate">
-		SELECT
-		       RSVT_DATE
-		       ,RSVT_TIME
-		  FROM 
-		       TB_RESERVATION
-	     WHERE
-	           RSVT_DATE = ?
-	       AND 
-	           RSVT_TIME = ?
-	</entry>
-
 
 	<entry key="checkRsvtTreat">
 		SELECT 
@@ -41,48 +29,6 @@
 	    	  ,?
 	    	  ,?
 	    	  )	  
-	
-	</entry>
-	<entry key="selectRsvt">
-		<!-- 
-		SELECT
-		       RSVT_NO
-		       ,RSVT_DATE
-		       ,RSVT_TIME
-		       ,MEM_INFO
-		       ,RSVT_HOS
-		       ,RSVT_MEM
-		       ,RSVT_DOC
-		 FROM
-		       TB_RESERVATION
-		WHERE
-		       RSVT_MEM = ?
-		-->
-		SELECT
-		       RSVT_NO
-		       ,RSVT_DATE
-		       ,RSVT_TIME
-		       ,MEM_INFO
-		       ,HOS_NAME
-		       ,RSVT_MEM
-		       ,DOCTOR_NAME
-		 FROM
-		       TB_RESERVATION
-         JOIN
-              TB_HOSPITAL ON(RSVT_HOS = HOS_NO)
-         JOIN
-              TB_DOCTOR ON(RSVT_DOC = DOCTOR_NO)
-		WHERE
-		       RSVT_MEM = ?
-	</entry>
-	
-	<entry key="checkRsvtDate">
-		SELECT
-		       RSVT_DATE
-		  FROM
-		       TB_RESERVATION
-	     WHERE
-	           RSVT_DATE = ?
 	
 	</entry>
 	

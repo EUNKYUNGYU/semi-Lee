@@ -27,6 +27,7 @@
 				MED_MAN_NO
 		  FROM
 		  		TB_MED_MAN
+		  
 		  WHERE
 		   		MED_MAN_NO = ?
 	</entry>

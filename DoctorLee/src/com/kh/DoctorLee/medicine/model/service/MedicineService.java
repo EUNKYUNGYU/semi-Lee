@@ -59,6 +59,12 @@ public class MedicineService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+	} 
+	public Medicine selectMedicineTwo(int medManNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Medicine med = new MedicineDao().selectMedicineTwo(conn, medManNo);
+		JDBCTemplate.close(conn);
+		return med;
 	}
 	
 

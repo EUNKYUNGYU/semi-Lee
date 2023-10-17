@@ -4,6 +4,7 @@
 <%
  	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("hosList");
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	String hosName = request.getParameter("hosName");
  %>
  <style>
  	h3 {
@@ -67,7 +68,7 @@
 					<th>검색된 병원 이름</th>
 				</tr>
 				<tbody>
-			<% if(hosList.isEmpty()){ %>
+			<% if(hosList.isEmpty() || hosName.isEmpty() || hosName.equals(" ")){ %>
 				<tr>
 					<td>검색된 목록이 없습니다.</td>
 				</tr>

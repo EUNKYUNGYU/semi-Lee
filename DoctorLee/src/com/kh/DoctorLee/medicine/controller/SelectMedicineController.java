@@ -34,6 +34,7 @@ public class SelectMedicineController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String medName = request.getParameter("medName");
 		ArrayList<Medicine> medList = new MedicineService().selectMedicine(medName);
+		request.setAttribute("medName", medName);
 		request.setAttribute("medList", medList);
 		request.getRequestDispatcher("views/medicine/medicineSearchAfter.jsp").forward(request, response);;
 	}

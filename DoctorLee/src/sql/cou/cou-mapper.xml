@@ -91,7 +91,8 @@
 				PHONE,
 				ORIGIN_NAME,
 				CHANGE_NAME,
-				PROFILE_PATH
+				PROFILE_PATH,
+				PRICE
 		FROM 
 				TB_COU
 		JOIN
@@ -108,7 +109,8 @@
 				PHONE,
 				ORIGIN_NAME,
 				CHANGE_NAME,
-				PROFILE_PATH
+				PROFILE_PATH,
+				PRICE
 		FROM
 				TB_COU
 		JOIN
@@ -124,6 +126,47 @@
 				TB_COU_TIME
 		WHERE
 				COU_NO = ?				
+	</entry>
+	
+	<entry key="selectCouTimeList">
+	SELECT
+				TIME_NO,
+				COU_NO,
+				COU_TIME,
+				COU_DATE
+		  FROM
+		  		TB_COU_TIME
+		 WHERE
+		 		COU_NO = ?
+		 AND
+		 		COU_DATE = ?
+		 AND
+		 		COU_TIME NOT IN(
+		 						SELECT
+		 								RES_TIME
+		 						  FROM
+		 						  		TB_COU_RES
+		 						 WHERE
+		 						 		COU_NO = ?
+		 						 AND
+		 						 		RES_DATE = ?				
+		 						)
+		ORDER 
+		   BY  TIME_NO
+	</entry>
+	
+	<entry key="insertCouRes">
+		INSERT
+		INTO
+				TB_COU_RES
+		VALUES
+				(
+				SEQ_COU_RES_NO.NEXTVAL,
+				?,
+				?,
+				?,
+				?
+				)
 	</entry>
 </properties>
 

@@ -26,9 +26,9 @@
             center:'title',
             right:'next'
         },
-        validRange: function(nowDate) {
+        validRange: function(toady) {
             return {
-                start: nowDate
+                start: toady
             };
         },
 
@@ -39,10 +39,8 @@
                 start:'<%=ct.getCouDate()%>',
                 color:'#1E376F'
             },
-            <% }%>
+            <% } %>
         ],
-
-
 
         dateClick: function(info){
 
@@ -57,6 +55,40 @@
                 day.classList.remove("day-color");
             })
             info.dayEl.classList.add("day-color");
+
+            // 날짜 클릭 시 시간 출력
+            $.ajax({
+                url:'ajaxTime.cou',
+                data:{
+                    couNo:<%=c.getCouNo()%>,
+                    resDate:$('#resDate').val()
+                },
+                success:function(result){
+                    let resultStr = '';
+
+                    for(let i in result){
+                        resultStr += '<li class="time-content" align="center">'
+                                        +'<a>'
+                                            +'<p>'
+                                                +result[i].couTime
+                                            +'</p>'
+                                        +'</a>'
+                                    +'</li>'    
+                    }
+                    $('.time-list').html(resultStr);
+
+                    $('.time-content').click(function(){
+                        $('#resTime').val($(this).children().text());
+
+                        $(this).css('background-color', 'salmon');
+
+                        $(this).siblings().css('background-color', 'bisque');
+                    })
+                },
+                error:function(){
+                    console.log('실패');
+                }
+            })
 
         }
       });
@@ -203,7 +235,7 @@
                 <!--클리닉 예약 출력 영역 div-->
                 <div id="cli-content" align="left">
     
-                    <form action="insertCliRes.cli" method="post">
+                    <form action="insertCouRes.cou" method="post">
                         
                         <div id="cli-top">
 
@@ -227,18 +259,18 @@
                         <div id="cli-bottom">
                             <h4>예약 정보</h4>
 
+                            <input type="hidden" name="couNo" value="<%=c.getCouNo()%>">
+
+                            <input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
+
                             <span>상담사명 : </span>
                             <input type="text" id="couName" value="<%=c.getCouName()%>"  readonly>
 
                             <span>병원명 :</span>
                             <input type="text" id="hosNo" value="<%=c.getHosName()%>" readonly>
 
-                            <span>상담 유형 : </span>
-                            <input type="radio" name="cliCate" id="meet"><label for="meet">대면</label>
-                            <input type="radio" name="cliCate" id="call"><label for="call">전화</label>
-
                             <span>가격 : </span>
-                            <input type="text" id="cliPrice" readonly>
+                            <input type="text" id="couPrice" value="<%=c.getPrice()%>" readonly>
 
                             <input type="hidden" name="userNo" value="<%=loginUser.getMemNo()%>">
                             
@@ -277,9 +309,18 @@
                     }
                 })
 
-                // if($('#resDate').val() == null || $('#resTime').val || null){
-                //     $('button[type=submit]').('disabled');
+                $('#resTime').click(function(){
+                    console.log($(this).val());
+                })
+
+                // 시간 미선택 시 예약 버튼 비활성화
+                // if($('input[name=resTime]').val().trim() == ''){
+                //     $('button[type=submit]').attr('disabled', true);
+                // } else {
+                //     $('button[type=submit]').attr('disabled', false);
                 // }
+
+                
             })
         </script>
 

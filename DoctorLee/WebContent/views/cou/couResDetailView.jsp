@@ -3,6 +3,7 @@
 <%@ page import="com.kh.DoctorLee.cou.model.vo.Cou" %>    
 <%
     Cou c = (Cou)request.getAttribute("c");
+    int result = (int)request.getAttribute("result");
 %>    
 <!DOCTYPE html>
 <html>
@@ -121,7 +122,7 @@
                 <div id="cli-top" >
                     <h4><%= c.getCouName() %></h4>
                     <p><%= c.getHosName() %></p>
-                    <p>클리닉 가격</p>
+                    <p><%=c.getPrice()%></p>
 
                 </div>
 
@@ -133,7 +134,10 @@
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
                     <h4>후기</h4>
-                    <button>후기 작성</button>
+
+                    <% if(loginUser != null && result > 0) {%>
+                        <button>후기 작성</button>
+                    <% } %>    
                 </div>
 
             </div>

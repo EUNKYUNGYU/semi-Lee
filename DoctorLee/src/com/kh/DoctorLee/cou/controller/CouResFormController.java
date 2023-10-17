@@ -44,7 +44,7 @@ public class CouResFormController extends HttpServlet {
 		
 		// 상담 가능한 날짜 불러오기
 		ArrayList<CouResTime> list = new CouService().selectCouDate(couNo);
-		System.out.println(list);
+//		System.out.println(list);
 		
 		// 응답화면 요청
 		request.setAttribute("c", c);

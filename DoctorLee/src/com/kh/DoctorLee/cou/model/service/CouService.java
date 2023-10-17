@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.dao.CouDao;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
@@ -141,6 +142,34 @@ public class CouService {
 		close(conn);
 		
 		return list;
+	}
+	
+	// 상담사 예약 가능 시간 출력
+	public ArrayList<CouResTime> selectCouTimeList(int couNo, String resDate){
+		Connection conn = getConnection();
+		
+		ArrayList<CouResTime> timeList = new CouDao().selectCouTimeList(conn, couNo, resDate);
+		
+		close(conn);
+		
+		return timeList;
+	}
+	
+	// 상담 예약하기
+	public int insertCouRes(CouRes c) {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().insertCouRes(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

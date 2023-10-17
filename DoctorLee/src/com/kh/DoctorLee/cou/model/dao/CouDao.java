@@ -13,6 +13,8 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouRes;
+import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
 
 public class CouDao {
@@ -248,6 +250,7 @@ public class CouDao {
 				c.setOriginName(rset.getString("ORIGIN_NAME"));
 				c.setChangeName(rset.getString("CHANGE_NAME"));
 				c.setProfilePath(rset.getString("PROFILE_PATH"));
+				c.setPrice(rset.getInt("PRICE"));
 				
 				list.add(c);
 			}
@@ -285,6 +288,7 @@ public class CouDao {
 				c.setOriginName(rset.getString("ORIGIN_NAME"));
 				c.setChangeName(rset.getString("CHANGE_NAME"));
 				c.setProfilePath(rset.getString("PROFILE_PATH"));
+				c.setPrice(rset.getInt("PRICE"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -293,5 +297,98 @@ public class CouDao {
 			close(pstmt);
 		}
 		return c;
+	}
+	
+	// 상담사 예약 가능 날짜 출력
+	public ArrayList<CouResTime> selectCouDate(Connection conn, int couNo){
+		
+		ArrayList<CouResTime> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouDate");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CouResTime c = new CouResTime();
+				c.setCouDate(rset.getString("COU_DATE"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	// 상담사 예약 가능 시간 출력
+	public ArrayList<CouResTime> selectCouTimeList(Connection conn, int couNo, String resDate){
+		
+		ArrayList<CouResTime> timeList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouTimeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			pstmt.setString(2, resDate);
+			pstmt.setInt(3, couNo);
+			pstmt.setString(4, resDate);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CouResTime ct = new CouResTime();
+				ct.setTimeNo(rset.getInt("TIME_NO"));
+				ct.setCouNo(rset.getInt("COU_NO"));
+				ct.setCouTime(rset.getString("COU_TIME"));
+				ct.setCouDate(rset.getString("COU_DATE"));
+				timeList.add(ct);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return timeList;
+	}
+	
+	// 상담 예약하기
+	public int insertCouRes(Connection conn, CouRes c) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCouRes");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, c.getMemNo());
+			pstmt.setInt(2, c.getCouNo());
+			pstmt.setString(3, c.getResDate());
+			pstmt.setString(4, c.getResTime());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

@@ -314,6 +314,7 @@
                         console('리뷰 등록 실패');
                     }
                 })
+
             })
 
             function selectRevList(){

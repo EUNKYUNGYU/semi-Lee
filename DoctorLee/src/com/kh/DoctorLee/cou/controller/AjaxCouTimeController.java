@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.DoctorLee.cou.model.service.CouService;
-import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouResTime;
 
 /**
- * Servlet implementation class CouResListController
+ * Servlet implementation class AjaxTimeController
  */
-@WebServlet("/couResList.cou")
-public class CouResListController extends HttpServlet {
+@WebServlet("/ajaxTime.cou" )
+public class AjaxCouTimeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CouResListController() {
+    public AjaxCouTimeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +32,20 @@ public class CouResListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Cou> list = new CouService().selectCouList();
-		System.out.println(list);
 		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/cou/couResListView.jsp").forward(request, response);
+		// 값 뽑기
+		int couNo = Integer.parseInt(request.getParameter("couNo"));
+		String resDate = (request.getParameter("resDate")).replace(".", "/");
+		
+//		System.out.println(couNo + " / " + resDate);
+		
+		// Service 요청
+		ArrayList<CouResTime> timeList = new CouService().selectCouTimeList(couNo, resDate);
+//		System.out.println(timeList);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(timeList, response.getWriter());
+		
 	}
 
 	/**

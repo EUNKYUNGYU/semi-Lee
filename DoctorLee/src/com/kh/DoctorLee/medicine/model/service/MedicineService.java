@@ -37,15 +37,27 @@ public class MedicineService {
 		return count;
 		
 	}
-	public int updateMedicine(String medName) {
+	public int updateMedicine(Medicine med,String medName) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new MedicineDao().updateMedicine(conn,medName);
+		int result = new MedicineDao().updateMedicine(conn,med,medName);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int deleteMedicine(String medName) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MedicineDao().deleteMedicine(conn,medName);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		} 
+		JDBCTemplate.close(conn);
+		
 		return result;
 	}
 	

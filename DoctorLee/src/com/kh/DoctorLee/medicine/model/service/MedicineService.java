@@ -48,6 +48,18 @@ public class MedicineService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public int deleteMedicine(String medName) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MedicineDao().deleteMedicine(conn,medName);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		} 
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 	
 
 }

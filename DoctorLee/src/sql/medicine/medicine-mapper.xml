@@ -50,4 +50,12 @@
 		WHERE
 			MED_NAME = ?
 	</entry>
+	<entry key="deleteMedicine">
+		DELETE
+			FROM
+				TB_MED
+			WHERE
+				MED_NAME = ?
+				
+	</entry>
 </properties>

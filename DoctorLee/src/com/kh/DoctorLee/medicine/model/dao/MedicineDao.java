@@ -138,4 +138,20 @@ public class MedicineDao {
 		
 		return result;
 	}
+	public int deleteMedicine(Connection conn,String medName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMedicine");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, medName);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
 }

@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.mpBoard.controller;
+package com.kh.DoctorLee.medicine.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.mpBoard.model.service.DiaryService;
+import com.kh.DoctorLee.medicine.model.service.MedicineService;
 
 /**
- * Servlet implementation class DeleteDiaryController
+ * Servlet implementation class DeleteMedicineController
  */
-@WebServlet("/delete.di")
-public class DeleteDiaryController extends HttpServlet {
+@WebServlet("/delete.med")
+public class DeleteMedicineController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteDiaryController() {
+    public DeleteMedicineController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +30,14 @@ public class DeleteDiaryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		int diaryNo = Integer.parseInt(request.getParameter("dno"));
-		int result = new DiaryService().deleteDiary(diaryNo);
+		String medName = request.getParameter("mname");
+		int result = new MedicineService().deleteMedicine(medName);
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/first.di");
+			response.sendRedirect(request.getContextPath() + "/search.med");
 		} else {
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
-		
 	}
 
 	/**

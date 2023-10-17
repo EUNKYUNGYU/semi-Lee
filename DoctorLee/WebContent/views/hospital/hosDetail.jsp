@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*" %>
+<%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*, com.kh.DoctorLee.review.model.vo.*" %>
 <%
 	Hospital hos = (Hospital)request.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
+	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
 	//Reservation rsvt = (Reservation)request.getAttribute("selectRsvt");
 	
 	int hosTreatBegin = Integer.parseInt(hos.getTreatBegin().replaceAll(":00", ""));
@@ -101,9 +102,9 @@
 	.hos_wrap{margin: auto;}
 	
 	#hos_info, #hos_rsvt, #hos_review{
-		display: inline-block; 
+		display: inline-block;
 		width: 30%;
-		margin: 0 20px;
+		margin: 0 10px 30px 20px;
 		}
 	
 	#hos_info{}
@@ -113,13 +114,32 @@
 	#hos_info h4{font-size: 15px;}
 	
 	#hos_rsvt{}
+	#rsvt_btn{width: 100%; text-align: center;}
+	#rsvt_btn>button{width: 45%;}
 	
 	#hos_review{}
-	#hos_review>table{text-align: center;}
-	#star{text-align: center; margin-bottom: 30px;}
-	#star a{color: gray; font-size: 3rem; text-decoration: none; padding-left: 10px;}
-	#star a.on{color: yellow; font-size: 3rem;}
-	#review_btn>button{}
+	#hos_review>table{text-align: center; margin-bottom: 20px;}
+	
+	#star{text-align: center;}
+	#star input{display: none;}
+	#star label{font-size: 3rem;}
+	#review_btn>button{width: 100%;}
+	#review_box>input{width: 100%; margin-bottom: 20px;}
+
+       .yellow {
+           color: yellow;
+       }
+       
+  	 #star label:hover{
+    	text-shadow: 0 0 0 #f0f0f0; /* 마우스 호버 */
+	}
+	#star label:hover ~ label{
+	    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+	}
+	#star input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */	
+	}
+	
 
 </style>
 <script>
@@ -237,10 +257,10 @@
         <!-- 진료 예약 -->
         <div id="hos_rsvt">
 				
-			<div id="calendar"></div>
+				<div id="calendar"></div>
 			
-			<!-- <form action="hosRsvt.mem" method="post" id="rsvt_form"> -->
-				<table id="rsvt_form">
+				<!-- <form action="hosRsvt.mem" method="post" id="rsvt_form"> -->
+				<table id="rsvt_form" class="table table-bordered">
 					<tr>
 						<th>예약시간</th>
 						<td>
@@ -575,33 +595,43 @@
 			  </div>
 			</div>
 			
-			</div>
+		</div>
 			<!-- 진료 예약 끝 -->
 				
 
 
 		<!-- 병원 리뷰 -->
 		<div id="hos_review">
+		
 			  <!-- a태그에 value속성 못씀 -->
-			 
 			 <div id="star">
-		 	   <a href="#none" value="1">★</a>
-		 	   <a href="#none" value="2">★</a>
-			   <a href="#none" value="3">★</a>
-			   <a href="#none" value="4">★</a>
-			   <a href="#none" value="5">★</a>
+		 	    <input type="radio" id="star1" class="star_input" value="1">
+		 	   	<label for="star1" class="star_label">★</label>
+		 	   	
+		 	    <input type="radio" id="star2" class="star_input" value="2">
+		 	   	<label for="star2" class="star_label">★</label>
+		 	   	
+		 	   	<input type="radio" id="star3" class="star_input" value="3">
+		 	   	<label for="star3" class="star_label">★</label>
+		 	   	
+		 	   	<input type="radio" id="star4" class="star_input" value="4">
+		 	   	<label for="star4" class="star_label">★</label>
+		 	   	
+		 	   	<input type="radio" id="star5" class="star_input" value="5">
+		 	   	<label for="star5" class="star_label">★</label>
 			</div>
 			
 			<div id="review_box">
-				<input type="text" maxlength="500">
+				<input type="text" maxlength="500" placeholder="후기 내용을 입력해주세요.">
 			</div>
 			
 			<script>
-				$('#star a').click(function(){
-					$(this).parent().children('a').removeClass('on');
-					$(this).addClass('on').prevAll('a').addClass('on');
+				$('.star_label').click(function(){
+					$(this).removeClass('.yellow');
+					$(this).prevAll('yellow').addClass('yellow');
 					//console.log($(this).attr('value'));
-				})
+				});
+
 			 </script>
 		
 				<table class="table table-bordered">
@@ -610,7 +640,22 @@
 						<td>후기 내용</td>
 						<td>후기 작성자</td>
 					</tr>
-				
+					<% if(reviewList.isEmpty()) { %>
+						<tr>
+							<td colspan="2">해당 병원의 후기가 존재하지 않습니다.</td>
+						</tr>
+					<% } else{ %>
+						<% for(Review r : reviewList){ %>
+							<tr>
+								<td><%= r.getContent() %></td>
+								<% if(r.getReviewWriter() == null){ %>
+									<td>USER</td>
+								<%} else { %>
+									<td><%= r.getReviewWriter() %></td>
+								<%} %>
+							</tr>
+						<%} %>
+					<%} %>
 				</table>
 				
 				<div id="review_btn">

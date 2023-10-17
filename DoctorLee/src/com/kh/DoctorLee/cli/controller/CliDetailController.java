@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.DoctorLee.cli.model.service.CliService;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.cou.model.service.CouService;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
@@ -47,11 +48,15 @@ public class CliDetailController extends HttpServlet {
 		
 		int result = new CliService().selectResMem(cliNo, loginUser);
 		
-		// 클리닉 평균 가져오기
+		// 리뷰는 한 사람당 한 번만 작성 가능하게
+		int result2 = new CliService().selectRevCount(cliNo, loginUser);
+		
+		// 클리닉 평점 가져오기
 		Double scope = new CliService().selectCliScope(cliNo);
 		
 		request.setAttribute("c", c);
 		request.setAttribute("result", result);
+		request.setAttribute("result2", result2);
 		request.setAttribute("scope", scope);
 		
 		request.getRequestDispatcher("views/cli/cliDetailView.jsp").forward(request, response);

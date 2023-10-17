@@ -8,6 +8,7 @@
 			TB_MED
 		WHERE
 			MED_NAME LIKE '%'||?||'%'
+		
 	</entry>
 	<entry key="selectMedicineDetail">
 		SELECT

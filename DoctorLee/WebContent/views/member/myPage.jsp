@@ -32,7 +32,7 @@
 
 
         /*--------------------p태그---------------------*/
-        #p1{
+        #p11{
             text-align: center;
             font-size: 38px;
             font-weight: bolder;
@@ -204,7 +204,7 @@
 	 <div id="content">
 
         <div id="content_1">
-            <p id="p1">로그인</p>
+            <p id="p11">로그인</p>
             
         </div>
             

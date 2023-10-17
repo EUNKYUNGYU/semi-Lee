@@ -318,7 +318,7 @@
                                             </div>
 
                                             <div class="cli-price">
-                                                <span>가격</span>
+                                                <span><%=c.getPrice()%></span>
                                             </div>
 
                                         </div>

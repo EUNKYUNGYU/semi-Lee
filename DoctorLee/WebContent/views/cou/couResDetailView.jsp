@@ -3,6 +3,7 @@
 <%@ page import="com.kh.DoctorLee.cou.model.vo.Cou" %>    
 <%
     Cou c = (Cou)request.getAttribute("c");
+    int result = (int)request.getAttribute("result");
 %>    
 <!DOCTYPE html>
 <html>
@@ -89,6 +90,19 @@
         margin-top: 30px;
         margin-left: 10px;
     }
+
+    /*리뷰 출력*/
+    #rev-border{
+        border: 1px solid red;
+    }
+
+    #rev-list{
+        list-style: none;
+    }
+    
+    .rev-content{
+        border: 1px solid purple;
+    }
 </style>
 </head>
 <body>
@@ -121,7 +135,7 @@
                 <div id="cli-top" >
                     <h4><%= c.getCouName() %></h4>
                     <p><%= c.getHosName() %></p>
-                    <p>클리닉 가격</p>
+                    <p><%=c.getPrice()%></p>
 
                 </div>
 
@@ -133,7 +147,26 @@
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
                     <h4>후기</h4>
-                    <button>후기 작성</button>
+
+                    <% if(loginUser != null && result > 0) {%>
+                        <button>후기 작성</button>
+                    <% } %>   
+                    
+                    <div id="rev-border">
+                        <ul id="rev-list">
+                            <!-- <li class="rev-content">
+                                <p>회원</p>
+                                <p>별점</p>
+                                <p>리뷰내용</p>
+                            </li>
+
+                            <li class="rev-content">
+                                <p>회원</p>
+                                <p>별점</p>
+                                <p>리뷰내용</p>
+                            </li> -->
+                        </ul>
+                    </div>
                 </div>
 
             </div>

@@ -124,8 +124,8 @@ private Properties prop = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cs.getMemNo());
-			pstmt.setInt(2, Integer.parseInt(cs.getCategory()));
-			pstmt.setString(3, cs.getInqTitle());
+			pstmt.setString(2, cs.getInqTitle());
+			pstmt.setInt(3, cs.getInqType());
 			pstmt.setString(4, cs.getInqContent());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

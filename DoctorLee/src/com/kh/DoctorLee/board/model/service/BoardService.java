@@ -58,9 +58,17 @@ public class BoardService {
 	}
 	
 	public Board selectBoard(int boardNo) {
-
+		
 		Connection conn = getConnection();
-		Board b = new BoardDao().selectBoard(conn, boardNo);
+		int result = new BoardDao().increseViews(conn, boardNo);
+		Board b = new Board();
+		
+		if(result > 0) {
+			b = new BoardDao().selectBoard(conn, boardNo);
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		close(conn);
 		return b;
 		
@@ -87,5 +95,35 @@ public class BoardService {
 		return result;
 	}
 	
+	public int selectLike(int memNo, int boardNo) {
+		
+		Connection conn = getConnection();
+		int result = new BoardDao().selectLike(conn, memNo, boardNo);
+		close(conn);
+		return result;
+		
+	}
+	
+	public int insertLike(int memNo, int boardNo) {
+		
+		Connection conn = getConnection();
+		int result = new BoardDao().insertLike(conn, memNo, boardNo);
+		if(result > 1) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
+	
+	public int deleteLike(int memNo, int boardNo) {
+		
+		Connection conn = getConnection();
+		int result = new BoardDao().deleteLike(conn, memNo, boardNo);
+		if(result > 1) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
 	
 }

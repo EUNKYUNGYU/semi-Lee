@@ -69,6 +69,15 @@
 		            ,
 	</entry>
 	
+	<entry key="increseViews">
+		UPDATE 
+		        TB_BOARD 
+		    SET 
+		        VIEWS = VIEWS + 1
+		    WHERE 
+		        BOARD_NO = ?
+	</entry>
+	
 	<entry key="selectBoard">
 		SELECT
 		          BOARD_NO
@@ -155,9 +164,50 @@
 
 </entry>
 
+<entry key="selectLike">
+
+	SELECT 
+			COUNT(*) 
+		FROM 
+			TB_LIKE
+		WHERE 
+			MEM_NO = ?
+		AND 
+			BOARD_NO = ?
+</entry>	
 	
+<entry key="insertLike">
+
+	INSERT 
+		INTO 
+			TB_LIKE 
+			(
+			MEM_NO
+			, BOARD_NO
+			, LIKE_DATE
+			)
+		 VALUES
+		 	(
+		 	?
+		 	, ?
+		 	, SYSDATE
+		 	)
 
 
+</entry>
+
+<entry key="deleteLike">
+
+	DELETE 
+		FROM 
+			TB_LIKE 
+		WHERE 
+			MEM_NO = ? 
+		AND  
+			BOARD_NO = ?
+
+
+</entry>
 
 
 

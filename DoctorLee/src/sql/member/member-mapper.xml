@@ -84,7 +84,7 @@
 				HEIGHT = ?,
 				WEIGHT = ?,
 				MODIFY_DATE = SYSDATE,
-				DISEASE = ?,
+				DISEASES = ?,
 				INHALE_ALL = ?,
 				FOOD_ALL = ?
 		  WHERE

@@ -22,36 +22,43 @@
         margin-left: 50px;
     }
 
-    .header {height: 100px; z-index: 1;}
+    /*상단 네비*/
+    #navi{
+        height: 100px;
+    }
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
         height: auto;
+        margin-top: 50px;
+        border: 1px solid red;
         margin-bottom: 50px;
-        margin-top: -500px;
     }
 
     #cou_navi{
         height: 1000px;
     }
 
+    .left-menu{
+        margin-left: 200px;
+    }
+
+    /*클리닉 예약하기 버튼 영역*/
+    #res-btn > button{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 
     /*클리닉 정보 출력 영역 div*/
     #cli-content {
         width: 1000px;
         margin-left: 100px;
-    }
-
-    /*예약하기 버튼*/
-    #res-btn > button{
-        margin-top: 10px;
-        margin-bottom: 10px;
-        z-index: 1000000000000;
+        height: auto;
     }
 
     /*클리닉 간단 정보 출력 영역 div*/
     #cli-top{
-        border: 1px solid;
+        border: 1px solid rosybrown;
         height: auto;
     }
 
@@ -68,26 +75,19 @@
     }
     
     /*클리닉 상세 정보 출력 영역 div*/
-
     #cli-middle{
-        border-left: 1px solid;
-        border-right: 1px solid;
+        border: 1px solid royalblue;
         height: auto;
-        padding-top: 30px;
-        padding-bottom: 30px;
     }
 
     #cli-middle > h4{
-        margin-left: 10px;
-    }
-
-    #cli-middle > p{
+        margin-top: 30px;
         margin-left: 10px;
     }
 
     /*클리닉 후기 출력 영역 div*/
     #cli-bottom{
-        border: 1px solid;
+        border: 1px solid pink;
         height: auto;
     }
 
@@ -95,7 +95,7 @@
         margin-top: 30px;
         margin-left: 10px;
     }
-  
+
     /*모달*/
     .modal{
         margin-top: 100px;
@@ -149,28 +149,30 @@
     #revContent{
         width: 450px;
     }
-    
-
+      
     /*리뷰 출력*/
     #rev-border{
-        vertical-align: middle;
+        border: 1px solid;
     }
 
     #rev-list{
         list-style: none;
-        
     }
     
+    .rev-content{
+        border: 1px solid purple;
+    }
+
+    #cli-top > span{
+        vertical-align: middle;
+    }
+
     .rev-content{
         border: 1px solid;
         border-radius: 5px;
         width: 900px;
         margin-top: 20px;
         margin-left: 8px;
-    }
-
-    #cli-top > span{
-        vertical-align: middle;
     }
 
     .revScope{
@@ -182,14 +184,16 @@
         vertical-align: middle;
         margin-right: 5px;
     }
+
+    
 </style>
 </head>
 <body>
 
     <!--상단 네비게이션 메뉴 div-->
-    <header>
-        <%@ include file="../common/nav2.jsp"%>
-    </header>
+    <%@ include file="../common/nav2.jsp"%>
+    <br><br><br>
+    
 
     <!--전체를 감싸는 div-->
     <div class="outer">

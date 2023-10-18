@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.cou.model.vo.Cou" %>    
+<%@ page import="com.kh.DoctorLee.cou.model.vo.*, java.util.ArrayList" %>    
 <%
     Cou c = (Cou)request.getAttribute("c");
     int result = (int)request.getAttribute("result");
     int result2 = (int)request.getAttribute("result2");
+    ArrayList<CouCar> list = (ArrayList<CouCar>)request.getAttribute("list");
+    Double scope = (Double)request.getAttribute("scope");
 %>    
 <!DOCTYPE html>
 <html>
@@ -20,17 +22,13 @@
         margin-left: 50px;
     }
 
-    /*상단 네비*/
-    #navi{
-        height: 100px;
-    }
+    .header {height: 100px; z-index: 1;}
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
         height: auto;
-        margin-top: 50px;
-        border: 1px solid blueviolet;
         margin-bottom: 50px;
+        margin-top: -500px;
     }
 
     #cou_navi{
@@ -44,9 +42,16 @@
         margin-left: 100px;
     }
 
+    /*예약하기 버튼*/
+    #res-btn > button{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        z-index: 1000000000000;
+    }
+
     /*클리닉 간단 정보 출력 영역 div*/
     #cli-top{
-        border: 1px solid rosybrown;
+        border: 1px solid;
         height: auto;
     }
 
@@ -65,18 +70,24 @@
     /*클리닉 상세 정보 출력 영역 div*/
 
     #cli-middle{
-        border: 1px solid royalblue;
-        height: 500px;
+        border-left: 1px solid;
+        border-right: 1px solid;
+        height: auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 
     #cli-middle > h4{
-        margin-top: 30px;
+        margin-left: 10px;
+    }
+
+    #cli-middle > p{
         margin-left: 10px;
     }
 
     /*클리닉 후기 출력 영역 div*/
     #cli-bottom{
-        border: 1px solid pink;
+        border: 1px solid;
         height: auto;
     }
 
@@ -142,24 +153,43 @@
 
     /*리뷰 출력*/
     #rev-border{
-        border: 1px solid red;
+        vertical-align: middle;
     }
 
     #rev-list{
         list-style: none;
+        
     }
     
     .rev-content{
-        border: 1px solid purple;
+        border: 1px solid;
+        border-radius: 5px;
+        width: 900px;
+        margin-top: 20px;
+        margin-left: 8px;
+    }
+
+    #cli-top > span{
+        vertical-align: middle;
+    }
+
+    .revScope{
+        border: 1px solid;
+        width: auto;
+    }
+
+    .revScope > span{
+        vertical-align: middle;
+        margin-right: 5px;
     }
 </style>
 </head>
 <body>
 
     <!--상단 네비게이션 메뉴 div-->
-    <%@ include file="../common/nav2.jsp"%>
-
-    <br><br><br>
+    <header>
+        <%@ include file="../common/nav2.jsp"%>
+    </header>
 
     <!--전체를 감싸는 div-->
     <div class="outer">
@@ -176,7 +206,7 @@
                 <% if(loginUser != null){ %>
                     <!--클리닉 예약하기 페이지로 이동하는 버튼-->
                     <div id="res-btn" align="right">
-                        <button type="button" id="resBtn">예약하기</button>
+                        <button class="btn btn-primary" type="button" id="resBtn">예약하기</button>
                     </div>
                 <% } %>
 
@@ -184,13 +214,23 @@
                 <div id="cli-top" >
                     <h4><%= c.getCouName() %></h4>
                     <p><%= c.getHosName() %></p>
-                    <p><%=c.getPrice()%></p>
+                    <span class="material-symbols-outlined">grade</span>
+                    <span><%= scope %></span>
+                    <p><%=c.getPrice()%>원</p>
 
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->
                 <div id="cli-middle">
-                    <h4>상세 정보</h4>
+                    <h4>주요 자격 및 경력</h4>
+
+                    <%if(list.isEmpty()){%>
+                        <p>상세 정보가 없습니다.</p>
+                    <% } else { %>
+                        <%for(CouCar cc : list) {%>
+                            <p><%=cc.getCarContent()%></p>
+                        <% } %>
+                    <% } %>        
                 </div>
 
                 <!--클리닉 후기 출력 영역 div-->
@@ -219,9 +259,6 @@
     </div>
 
     
-
-    
-
     
 
 <!--리뷰 작성 모달창-->
@@ -291,12 +328,13 @@
                     revContent:$('#revContent').val()
                 },
                 success:function(result){
-                    alter('리뷰 등록 성공');
+                    alert('리뷰 등록 성공');
                 },
                 error:function(){
                     alert('리뷰 등록 실패');
                 }
             })
+            location.reload();	
         })
 
         // 리뷰 목록 불러오기
@@ -310,10 +348,24 @@
                     let resultStr = '';
                     for(let i in result){
                         resultStr += '<li class="rev-content">'
-                                + '<p>' + result[i].nickName + '<p>'
-                                + '<p>' + result[i].couScope + '<p>'
-                                + '<p>' + result[i].revContent + '<p>'
-                                + '<P>' + result[i].createDate + '<p>'
+
+                                + '<div class="revNickName">'
+                                    + '<p>' + result[i].nickName + '</p>'
+                                + '</div>'
+
+                                + '<div class="revScope">'
+                                    + '<span class="star">⭐</span>'
+                                    + '<span>' + result[i].couScope + '</span>'
+                                + '</div>'
+
+                                +'<div class="reContent">'
+                                    + '<p>' + result[i].revContent + '</p>'
+                                + '</div>'
+
+                                + '<div class="revDate">'
+                                    + '<P>' + result[i].createDate + '</p>'
+                                + '</div>'
+
                                 + '</li>'
                     }
                     $('#rev-list').html(resultStr);

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.dao.CouDao;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouCar;
 import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouRev;
@@ -100,17 +101,6 @@ public class CouService {
 		close(conn);
 		
 		return result;
-	}
-	
-	// 비디오 랜덤 출력하기
-	public CouVideo selectRandomVideo() {
-		Connection conn = getConnection();
-		
-		CouVideo c = new CouDao().selectRandomVideo(conn);
-		
-		close(conn);
-		
-		return c;
 	}
 	
 	// 상담사 목록 출력
@@ -221,6 +211,41 @@ public class CouService {
 		close(conn);
 		
 		return result2;
+	}
+	
+	// 상담사 경력 및 자격 가져오기
+	public ArrayList<CouCar> selectCouCarList(int couNo){
+		Connection conn = getConnection();
+		
+		ArrayList<CouCar> list = new CouDao().selectCouCarList(conn, couNo);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	// DB에 저장된 비디오 개수 출력
+	public int selectVideoCount() {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().selectVideoCount(conn);
+		
+//		System.out.println(result);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 상담사 평점 가져오기
+	public Double selectCouScope(int couNo) {
+		Connection conn = getConnection();
+		
+		Double scope = new CouDao().selectCouScope(conn, couNo);
+		
+		close(conn);
+		
+		return scope;
 	}
 
 }

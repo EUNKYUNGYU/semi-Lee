@@ -87,8 +87,9 @@ img{
 .list-content{
     width: 1000px;
     border-radius: 10px;
-    background-color: bisque;
+    background-color: #1E376F;
     margin-top: 15px;
+    color: white;
 }
 
 .list-des{
@@ -106,11 +107,11 @@ img{
 
 #button-area> button{
     width: 100px;
-        height: 30px;
-        border-radius: 3px;
-        background-color: #1E376F;
-        color: white;
-        font-size: 12px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #1E376F;
+    color: white;
+    font-size: 12px;
 }
 
 /*수정 및 삭제 아이콘*/
@@ -202,19 +203,19 @@ img{
             <br>
             <div class="paging-area" align="center">
                 <% if(currentPage != 1) {%>
-                    <button onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=<%=currentPage -1%>'">&lt</button>
+                    <button class="btn btn-light" onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=<%=currentPage -1%>'">&lt</button>
                 <% }%>
                 
                 <% for(int i = startPage; i <= endPage; i++) {%>
                     <% if(currentPage != i) { %>
-                        <button onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=<%=i%>'"><%= i%></button>
+                        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=<%=i%>'"><%= i%></button>
                     <% } else { %>
-                        <button disabled><%= i%></button>    
+                        <button class="btn btn-light" disabled><%= i%></button>    
                     <% } %>
                 <% } %>
                 
                 <% if(currentPage != maxPage) { %>
-                    <button onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage\<%=currentPage + 1%>'">&gt</button>
+                    <button class="btn btn-light" onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage\<%=currentPage + 1%>'">&gt</button>
                 <% } %>
             </div>
 

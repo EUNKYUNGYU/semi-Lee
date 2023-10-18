@@ -45,4 +45,10 @@ public class MedManagementService {
 		}
 		return result;
 	}
+	public ArrayList<MedManagement> selectMedManagementh(int memNo){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<MedManagement> list = new MedManagementDao().selectMedManagementh(conn, memNo);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }

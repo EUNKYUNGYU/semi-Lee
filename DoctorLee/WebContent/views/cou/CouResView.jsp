@@ -82,9 +82,9 @@
                         $('#resTime').val($(this).children().text());
                         $('#hiddenResTime').val($(this).children().text());
 
-                        $(this).css('background-color', 'salmon');
+                        $(this).css('background-color', '#475f94');
 
-                        $(this).siblings().css('background-color', 'bisque');
+                        $(this).siblings().css('background-color', '#1E376F');
                     })
                 },
                 error:function(){
@@ -185,12 +185,12 @@
     }
 
     .time-content{
-        background-color: bisque;
+        background-color: #1E376F;
+        color: white;
         border-radius: 10px;
         text-decoration: none;
         margin-top: 20px;
         width: 230px;
-        border: 1px solid brown;
         height: 50px;
         line-height: 50px;
         margin-right: 30px;
@@ -292,7 +292,7 @@
                         </div>
 
                         <div id="res-part" align="center">
-                            <button type="submit">예약하기</button>
+                            <button class="btn btn-primary" type="submit">예약하기</button>
                         </div>
                     </form>
     
@@ -310,10 +310,10 @@
             $(function(){
                 //li클릭 시 색깔 바뀌는 이벤트
                 $('.time-content').click(function(){
-                    if($(this).css('background-color', 'bisque')){
-                        $(this).css('background-color', 'salmon');
+                    if($(this).css('background-color', '#1E376F')){
+                        $(this).css('background-color', 'navy');
 
-                        $(this).siblings().css('background-color', 'bisque');
+                        $(this).siblings().css('background-color', '#1E376F');
                     }
                 })
 

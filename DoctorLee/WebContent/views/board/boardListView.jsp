@@ -148,7 +148,7 @@ footer {
 					      <th scope="col" width="10%">작성자</th>
 					      <th scope="col" width="20%" style="text-align: center">작성일</th>
 					      <th scope="col" width="10%" style="text-align: center">조회수</th>
-					      <th scope="col" width="10%" style="text-align: center">추천수</th>
+					      <th scope="col" width="10%" style="text-align: center">좋아요</th>
 					    </tr>
 					  </thead>
 					  <tbody>

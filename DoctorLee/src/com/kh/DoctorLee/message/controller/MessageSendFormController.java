@@ -30,12 +30,11 @@ public class MessageSendFormController extends HttpServlet {
 		String receiverId = request.getParameter("receiverId");
 		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
 		
-		System.out.println("messageEnrollFormMy컨트롤러에서 receiverId "+ receiverId +"receiverNo "+receiverNo);
-		request.getSession().setAttribute("receiverId", receiverId);
-		request.getSession().setAttribute("receiverNo", receiverNo);
-		request.getRequestDispatcher(request.getContextPath() + "/views/message/messageEnrollFormMyBoard.jsp").forward(request, response);
+		request.setAttribute("receiverId", receiverId);
+		request.setAttribute("receiverNo", receiverNo);
+		
+		request.getRequestDispatcher("/views/message/messageEnrollFormMyBoard.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

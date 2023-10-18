@@ -181,7 +181,7 @@ img{
                                 edit
                             </span>
 
-                            <span class="material-symbols-outlined delete" data-toggle="modal" data-target="#myModal">
+                            <span class="material-symbols-outlined delete">
                                 delete
                             </span>
                         </div>

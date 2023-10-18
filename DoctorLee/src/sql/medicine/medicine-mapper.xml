@@ -34,7 +34,7 @@
 	</entry>
 	<entry key="medCheck">
 		SELECT
-			MED_NAME
+			COUNT(*)
 		FROM
 			TB_MED
 		WHERE

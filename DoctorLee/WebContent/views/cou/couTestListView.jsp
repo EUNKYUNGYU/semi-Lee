@@ -51,10 +51,11 @@
 
         /*성향 테스트 목록 컨텐츠*/
         .thumbnail{
-            background-color: bisque;
+            background-color: #1E376F;
             width: 1000px;
             border-radius: 10px;
             margin-bottom: 10px;
+            color: white;
         }
         
         .thumbnail > img{

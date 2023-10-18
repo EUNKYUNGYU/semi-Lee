@@ -6,6 +6,7 @@
     int result = (int)request.getAttribute("result");
     int result2 = (int)request.getAttribute("result2");
     ArrayList<CouCar> list = (ArrayList<CouCar>)request.getAttribute("list");
+    Double scope = (Double)request.getAttribute("scope");
 %>    
 <!DOCTYPE html>
 <html>
@@ -21,17 +22,14 @@
         margin-left: 50px;
     }
 
-    /*상단 네비*/
-    #navi{
-        height: 100px;
-    }
+    .header {width: 100vw; height: 100px;}
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
         height: auto;
-        margin-top: 50px;
         border: 1px solid blueviolet;
         margin-bottom: 50px;
+        margin-top: -500px;
     }
 
     #cou_navi{
@@ -43,6 +41,12 @@
     #cli-content {
         width: 1000px;
         margin-left: 100px;
+    }
+
+    /*예약하기 버튼*/
+    #res-btn > button{
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     /*클리닉 간단 정보 출력 영역 div*/
@@ -72,6 +76,10 @@
 
     #cli-middle > h4{
         margin-top: 30px;
+        margin-left: 10px;
+    }
+
+    #cli-middle > p{
         margin-left: 10px;
     }
 
@@ -158,9 +166,9 @@
 <body>
 
     <!--상단 네비게이션 메뉴 div-->
-    <%@ include file="../common/nav2.jsp"%>
-
-    <br><br><br>
+    <header>
+        <%@ include file="../common/nav2.jsp"%>
+    </header>
 
     <!--전체를 감싸는 div-->
     <div class="outer">
@@ -177,7 +185,7 @@
                 <% if(loginUser != null){ %>
                     <!--클리닉 예약하기 페이지로 이동하는 버튼-->
                     <div id="res-btn" align="right">
-                        <button type="button" id="resBtn">예약하기</button>
+                        <button class="btn btn-primary" type="button" id="resBtn">예약하기</button>
                     </div>
                 <% } %>
 
@@ -185,13 +193,14 @@
                 <div id="cli-top" >
                     <h4><%= c.getCouName() %></h4>
                     <p><%= c.getHosName() %></p>
-                    <p><%=c.getPrice()%></p>
+                    <p><%=scope %></p>
+                    <p><%=c.getPrice()%>원</p>
 
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->
                 <div id="cli-middle">
-                    <h4>상세 정보</h4>
+                    <h4>주요 자격 및 경력</h4>
 
                     <%if(list.isEmpty()){%>
                         <p>상세 정보가 없습니다.</p>

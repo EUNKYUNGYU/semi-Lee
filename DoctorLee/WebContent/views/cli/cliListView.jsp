@@ -158,11 +158,12 @@
 
     /*클리닉 출력 요소 li*/
     .content-cli{
-        background-color:salmon;
+        background-color:#1E376F;
         border-radius: 10px;
         margin-bottom: 5px;
         margin-top: 5px;
         width: 898px;
+        color: white;
     }
 
     .content-cli > div{
@@ -304,7 +305,7 @@
                                             +'<div class="cli-img">' 
                                                 +'<img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>'
                                                 +'<% if(loginUser != null) {%>' 
-                                                    +'<button>예약하기</button>'
+                                                    +'<button class="btn btn-primary">예약하기</button>'
                                                 +'<%}%>'    
                                             + '</div>'
         

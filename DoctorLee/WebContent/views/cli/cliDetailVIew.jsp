@@ -43,8 +43,8 @@
     }
 
     /*클리닉 예약하기 버튼 영역*/
-    #res-btn{
-        border: 1px solid blue;
+    #res-btn > button{
+        margin-top: 10px;
         margin-bottom: 10px;
     }
 
@@ -184,7 +184,7 @@
                 <% if(loginUser != null){ %>
                     <!--클리닉 예약하기 페이지로 이동하는 버튼-->
                     <div id="res-btn" align="right">
-                        <button type="button" id="resBtn">예약하기</button>
+                        <button class="btn btn-primary" type="button" id="resBtn">예약하기</button>
                     </div>
                 <% } %>
 
@@ -193,7 +193,7 @@
                     <h4><%= c.getCliName() %></h4>
                     <p><%= c.getHosNo() %></p>
                     <p><%= scope %></p>
-                    <p><%= c.getCliPrice() %></p>
+                    <p><%= c.getCliPrice() %>원</p>
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->

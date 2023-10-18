@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import com.kh.DoctorLee.reservation.model.vo.GuestReservation;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 
 public class ReservationDao {
@@ -106,4 +107,80 @@ public class ReservationDao {
 		}
 		return selectRsvt;
 	}
+	
+	// ----- 비회원 예약 코드 ----
+	
+	public int checkRsvtTreatG(Connection conn, String rsvtDateG, String rsvtTimeG) {
+		int checkRsvtResult = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkRsvtTreat_G");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rsvtDateG);
+			pstmt.setString(2, rsvtTimeG);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				checkRsvtResult = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return checkRsvtResult;
+			
+	}
+	
+	public int insertRsvtG(Connection conn, GuestReservation gRsvt) {
+		int result = 0;
+		PreparedStatement pstmt =  null;
+		String sql = prop.getProperty("insertRsvt_G");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, gRsvt.getGuestRsvtDate());
+			pstmt.setString(2, gRsvt.getGuestRsvtTime());
+			pstmt.setString(3, gRsvt.getGuestRsvtInfo());
+			pstmt.setString(4, gRsvt.getGuestRsvtHos());
+			pstmt.setString(5, gRsvt.getRsvtGuest());
+			pstmt.setString(6, gRsvt.getGuestRsvtDoc());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public GuestReservation selectRsvtG(Connection conn, String rsvtNameG) {
+		GuestReservation rsvtG = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectRsvt_G");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rsvtNameG);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				rsvtG = new GuestReservation();
+				rsvtG.setGuestRsvtNo(rset.getInt("GUEST_RSVT_NO"));
+				rsvtG.setRsvtGuest(rset.getString("RSVT_GUEST"));
+				rsvtG.setGuestRsvtDoc(rset.getString("GUEST_RSVT_DOC"));
+				rsvtG.setGuestRsvtHos(rset.getString("GUEST_RSVT_HOS"));
+				rsvtG.setGuestRsvtDate(rset.getString("GUEST_RSVT_DATE"));
+				rsvtG.setGuestRsvtTime(rset.getString("GUEST_RSVT_TIME"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rsvtG;
+	}
+	
 }

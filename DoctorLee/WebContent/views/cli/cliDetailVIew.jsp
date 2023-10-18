@@ -183,7 +183,7 @@
         vertical-align: middle;
         margin-right: 5px;
     }
-    
+
 </style>
 </head>
 <body>
@@ -344,7 +344,7 @@
                                             + '</div>'
 
                                             + '<div class="revScope">'
-                                                + '<span>★</span>'
+                                                + '<span>⭐</span>'
                                                 + '<span>' + result[i].cliScope + '</span>'
                                             + '</div>'
 

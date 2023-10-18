@@ -182,10 +182,6 @@
         vertical-align: middle;
         margin-right: 5px;
     }
-
-    .star{
-        background-color: yellow;
-    }
 </style>
 </head>
 <body>
@@ -358,7 +354,7 @@
                                 + '</div>'
 
                                 + '<div class="revScope">'
-                                    + '<span class="star">★</span>'
+                                    + '<span class="star">⭐</span>'
                                     + '<span>' + result[i].couScope + '</span>'
                                 + '</div>'
 

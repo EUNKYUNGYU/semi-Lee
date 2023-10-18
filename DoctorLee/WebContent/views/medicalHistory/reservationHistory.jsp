@@ -51,11 +51,13 @@
 			<tbody>
 			<% if(list.isEmpty()){ %>
 				<tr>
-					<td>공지가항이 존재하지 않습니다.</td>
+					<td>공지사항이 존재하지 않습니다.</td>
 				</tr>
 			<% } else{ %>
 				<% for(MpReservation mr : list){ %>
+					
 					<tr>
+						
 						<td><%= mr.getRsvtHos() %></td>
 						<td><%= mr.getRsvtDate() %></td>
 						<td><%= mr.getRsvtTime() %></td>

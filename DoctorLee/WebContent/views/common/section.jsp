@@ -6,18 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-<<<<<<< HEAD
-	*{border: 1px solid red;
-	box-sizing: border-box;}
-	
-    div{
-        height: 500px;
-        width: 1412px; 
-        box-sizing: border-box;
-    }
-
-    #section{
-    }
 
         #content_1 > div{
             float: left;
@@ -29,17 +17,6 @@
             width: 2000px; 
         }
 
-    #board1 , #board{
-        height: 100%; 
-        width: 45%; 
-        text-align: center;
-    }
-
-    #video{
-        
-        padding: 70px;
-        
-    }
         section > div{
             float: left;
         }
@@ -52,12 +29,6 @@
             text-align: center;
         }
 
-
-    #board1 > img{
-        width: 560px;
-        height: 315px;
-        margin-top: 70px;
-    }
         #video > iframe{
             margin-top: 70px;
         }
@@ -89,17 +60,6 @@
 <body>
     <div id="section">
         <div id="content_1">
-
-			<div  id="board1">
-			
-	            <div id="video">
-	                <iframe id="main_video" width="560" height="315" src="https://www.youtube.com/embed/AJyx1VyjE1g?si=4kRxwyXwCDIFjzMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	            </div>
-
-			</div>
-			
-            </div>
-
             <div id="video">
             
                 <iframe id="main_video" width="560" height="315" src="https://www.youtube.com/embed/AJyx1VyjE1g?si=4kRxwyXwCDIFjzMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

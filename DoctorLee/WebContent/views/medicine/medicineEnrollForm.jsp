@@ -57,6 +57,7 @@
 	</div>
 	<script>
 		$(function(){
+			
 			$('#preInfo').keyup(function(){
 				 console.log($(this).val().length);
 	             $('#piCount').text($(this).val().length);
@@ -70,12 +71,13 @@
 		});
 		function medCheck(){
 			const $medName = $('#medEnroll-form input[name=medName]');
-			
+			//console.log($medName.val());
 			$.ajax({
 				url : 'check.med',
 				data : {checkMed : $medName.val()},
 				success : function(result){
-					if(result ==='N'){
+					if(result ==='NNNNN'){
+						console.log(result);
 						alert('이미 존재하는 약품명입니다.');
 						$medName.val('').focus();
 					}

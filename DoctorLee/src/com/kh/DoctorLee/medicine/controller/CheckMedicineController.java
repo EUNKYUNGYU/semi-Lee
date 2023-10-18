@@ -32,11 +32,12 @@ public class CheckMedicineController extends HttpServlet {
 		String checkMed = request.getParameter("checkMed");
 		int count = new MedicineService().checkMedicine(checkMed);
 		response.setContentType("text/html; charset=UTF-8");
+		
 		if(count > 0) {
-			response.getWriter().print("N");
+			response.getWriter().print("NNNNN");
 			
 		}else {
-			response.getWriter().print("Y");
+			response.getWriter().print("NNNNY");
 		}
 	}
 

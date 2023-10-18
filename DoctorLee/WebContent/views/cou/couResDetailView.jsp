@@ -356,7 +356,7 @@
                                 + '</div>'
 
                                 + '<div class="revScope">'
-                                    + '<span class="material-symbols-outlined">grade</span>'
+                                    + '<span>★</span>'
                                     + '<span>' + result[i].couScope + '</span>'
                                 + '</div>'
 

@@ -116,5 +116,37 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+	public ArrayList<MedManagement> selectMedManagementh(Connection conn,int memNo){
+		ArrayList<MedManagement> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMedManagementh");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,memNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				MedManagement mm = new MedManagement();
+				mm.setHosName(rset.getString("HOS_NAME"));
+				mm.setDoctorName(rset.getString("DOCTOR_NAME"));
+				mm.setMediName(rset.getString("MEDI_NAME"));
+				mm.setTreateDate(rset.getDate("TREAT_DATE"));
+				mm.setPreDate(rset.getDate("PRE_DATE"));
+				mm.setMedManNo(rset.getInt("MED_MAN_NO"));
+				
+				list.add(mm);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return list;
+	}
 	
 }

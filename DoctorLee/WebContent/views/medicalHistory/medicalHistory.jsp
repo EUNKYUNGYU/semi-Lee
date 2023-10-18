@@ -71,7 +71,7 @@
 	  		<hr>
 	  		<div id="prescription">
 	  			<img alt="처방전" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fmedical-report-prescription-checkup-icon-vector-id1165500434%3Fk%3D6%26m%3D1165500434%26s%3D170667a%26w%3D0%26h%3Dy2uhxrhVP8pjfRv8eo2AY82D1qXZiI72D3HXIGlRfwI%3D&type=a340" class="mhImg"><br>
-	  			<a href="#" class="mh-a">처방전 보기</a>
+	  			<a href="<%=contextPath %>/prescription.h?mno=<%=loginUser.getMemNo() %>" class="mh-a">처방전 보기</a>
 	  		</div>
 	  		
 	  	</div>

@@ -58,6 +58,7 @@
         #csTitle{
             width: 800px;
             height: 30px;
+            
         }
 
         #csContent{
@@ -67,17 +68,16 @@
         }
 
 		.deletebtn{
-		
-		text-decoration: none;
-        border: 1px solid #1E376F;
-        color: #1E376F;
-		float: right;
-        margin-right: 30px;
-        width: 100px;
-        height: 40px;
-        border-radius: 3px;
-        text-align: center;
-        padding-top: 7px;
+            text-decoration: none;
+            border: 1px solid #1E376F;
+            color: #1E376F;
+            float: right;
+            margin-right: 30px;
+            width: 100px;
+            height: 40px;
+            border-radius: 3px;
+            text-align: center;
+            padding-top: 7px;
 		}
 
         .deletebtn:hover{
@@ -118,21 +118,24 @@
                 <br>
                 <hr>
                 <br><br>
-                <table align="center">
+                <table>
                     <tr>
                     	<th><%=cs.getInqNo() %></th>
-                        <th id="csTitle">문의:<%=cs.getCategory() %> | 제목: <%=cs.getInqTitle() %> | 작성일: <%=cs.getCreateDate() %></th>
+                        <th id="csTitle">제목: <%=cs.getInqTitle() %> | 작성일: <%=cs.getCreateDate() %></th>
                     </tr>
                     <tr>
                         <th id="csContent"><%=cs.getInqContent() %></th>
                     </tr>
                 </table>
-                <span><a href="<%=contextPath%>/delete.cs?nno=<%=cs.getInqNo() %>" class="deletebtn" id="csdelete2">삭제하기</a></span>
-                <span><a href="<%=contextPath %>/customerService.mp" class="deletebtn" id="csdelete">목록가기</a></span>
+                <span><a href="<%=contextPath %>/delete.cs?nno=<%=cs.getInqNo() %>" class="deletebtn" id="csdelete2">삭제하기</a></span>
+                <span><a href="<%=contextPath %>/customerService.mp?cpage=1" class="deletebtn" id="csdelete">목록가기</a></span>
+                <!--
+                <button id="csdelete2" type="submit">목록가기</button>
+                <button id="csdelete" type="submit">삭제하기</button>
+            	<  -->
             </div>
         </div>
         </div>
     </div>
-     <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

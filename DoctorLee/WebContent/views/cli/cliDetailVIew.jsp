@@ -161,6 +161,10 @@
     .rev-content{
         border: 1px solid purple;
     }
+
+    #cli-top > span{
+        vertical-align: middle;
+    }
 </style>
 </head>
 <body>
@@ -192,7 +196,8 @@
                 <div id="cli-top" >
                     <h4><%= c.getCliName() %></h4>
                     <p><%= c.getHosNo() %></p>
-                    <p><%= scope %></p>
+                    <span class="material-symbols-outlined">grade</span>
+                    <span><%= scope %></span>
                     <p><%= c.getCliPrice() %>원</p>
                 </div>
 

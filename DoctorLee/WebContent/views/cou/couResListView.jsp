@@ -143,6 +143,12 @@
     footer{
         margin-top: 100px;
     }
+
+    #cou-res{
+        background-color: skyblue;
+        pointer-events: none;
+        font-weight: 800;
+    }
 </style>
 </head>
 <body>

@@ -182,7 +182,7 @@
                     <%if(list.isEmpty()) { %>
                     <!-- 없을때 -->
                     <tr>
-                    	<td>문의글이 없습니다.</td>
+                    	<td>작성한 문의글이 없습니다.</td>
                     </tr>
                     <%} else { %>
                     <!-- 있을때 -->
@@ -190,7 +190,7 @@
                     	
                       <tr>
                         <td><%=cs.getInqNo() %></td>
-                        <td><%=cs.getCategory() %></td>
+                        <td><%=cs.getInqType() %></td>
                         <td id="th33"><%=cs.getInqTitle() %></td>
                         <td id="th44"><%=cs.getCreateDate() %></td>
                       </tr>

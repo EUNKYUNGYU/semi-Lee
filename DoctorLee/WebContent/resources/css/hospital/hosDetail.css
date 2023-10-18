@@ -26,24 +26,35 @@
 #hos_review>table{text-align: center; margin-bottom: 20px;}
 
 #star{text-align: center;}
-#star input{display: none;}
-#star label{font-size: 3rem;}
+#star>input[type=radio]{display: none;}
+#star>label{
+	font-size: 3rem;
+	color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#star>label:hover{
+	 text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
 
+#star>label:hover::firstchild ~ label{
+     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+#star>input[type=radio]:checked + label{
+     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
 #review_btn>button{width: 100%;}
-#review_box>input{width: 100%; margin-bottom: 20px;}
+#review_box>input{width: 100%; margin-bottom: 20px; height: 20px;}
 
 .yellow {color: yellow;}
       
-#star label:hover{
-   	text-shadow: 0 0 0 #f0f0f0; /* 마우스 호버 */
-}
-#star label:hover ~ label{
-    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
-}
-#star input[type=radio]:checked ~ label{
-   text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */	
-}
+.blue{background: rgba(79, 137, 255, 0.4);}
 
 #guest_rsvt_form{
 	
 }
+#calendarGuest{
+	
+	height: 400px !important;
+}
+

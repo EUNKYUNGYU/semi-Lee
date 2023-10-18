@@ -1355,3 +1355,33 @@ UPDATE
 commit;
 
 
+UPDATE 
+        TB_BOARD 
+    SET 
+        VIEWS = VIEWS + ?
+    WHERE 
+        BOARD_NO = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

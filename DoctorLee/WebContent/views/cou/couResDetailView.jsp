@@ -22,7 +22,7 @@
         margin-left: 50px;
     }
 
-    .header {width: 100vw; height: 100px;}
+    .header {height: 100px; z-index: 1;}
 
     /*하단 내용 영역을 감싸는 div*/
     .content{
@@ -46,6 +46,7 @@
     #res-btn > button{
         margin-top: 10px;
         margin-bottom: 10px;
+        z-index: 1000000000000;
     }
 
     /*클리닉 간단 정보 출력 영역 div*/
@@ -258,9 +259,6 @@
     </div>
 
     
-
-    
-
     
 
 <!--리뷰 작성 모달창-->
@@ -356,7 +354,7 @@
                                 + '</div>'
 
                                 + '<div class="revScope">'
-                                    + '<span class="material-symbols-outlined">grade</span>'
+                                    + '<span class="star">⭐</span>'
                                     + '<span>' + result[i].couScope + '</span>'
                                 + '</div>'
 

@@ -5,7 +5,6 @@
 <% 
 	String receiverId = (String)request.getAttribute("receiverId");
 	int receiverNo = (Integer)request.getAttribute("receiverNo");
-	System.out.println("messageEnrollFormMyBoard에서 receiverId "+ receiverId +"receiverNo "+receiverNo);
 	
 %>
 
@@ -163,10 +162,10 @@ table{background-color: rgb(232, 238, 253); border-radius: 7px;}
 					</div>
 					<div id="receiverWrap">
 						<div id="receiverText">
-							<%= receiverId %>
+							받는 사람
 						</div>
 						<div id="receiver">
-							<input id="messageReceiver" name="receiverId" type="text" placeholder="받을 사람의 ID를 입력해주세요">
+							<input id="messageReceiver" name="receiverId" type="text" value="<%= receiverId %>" readonly>
 						</div>
 					</div>
 					

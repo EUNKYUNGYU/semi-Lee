@@ -185,7 +185,12 @@ a {text-decoration: none;}
 						<%= b.getBoardContent() %>
 					</div>
 					<div id="boardlikeWrap">
-						좋아요 <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+						<% if(loginUser != null) { %>
+						<a href="<%= contextPath %>/like.bo?memNo=<%= loginUser.getMemNo() %>&boardNo=<%= b.getBoardNo() %>">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+						<% } else { %>
+					 	좋아요 <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+						<% } %>
+						
 					</div>	
 					<hr clear="both">
 					

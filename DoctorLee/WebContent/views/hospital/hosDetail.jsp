@@ -29,10 +29,10 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 <script>
 	var hosNo = location.search.substring(5);
-       var rsvt_date = '';
-       var guest_rsvt_date = '';
+ 	var rsvt_date = '';
+   	var guest_rsvt_date = '';
 	
-  		document.addEventListener('DOMContentLoaded', function() {
+	document.addEventListener('DOMContentLoaded', function() {
    	
        var calendarEl = document.getElementById('calendar');
        var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -45,9 +45,13 @@
        	  right: 'next'
          },
          dateClick: function(info){
-       	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-       	  rsvt_date = info.dateStr;
-       	  // console.log(info.dateStr);
+	       	  rsvt_date = info.dateStr;
+	       	info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+	       	  // console.log(info.dateStr);
+	       	  //info.dayEl.addClass('blue');
+	            
+	       	  //console.log(day);
+	       	  //console.log(dayEl); 
 		}
 
        });
@@ -65,8 +69,8 @@
        	  right: 'next'
          },
          dateClick: function(info){
-       	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-       	  guest_rsvt_date = info.dateStr;
+	       	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
+	       	  guest_rsvt_date = info.dateStr;
 		}
 
        });
@@ -74,62 +78,6 @@
        calendarG.render();
      });
    	
-     
-var hosNo = location.search.substring(5);
-   var rsvt_date = '';
-   var guest_rsvt_date = '';
-
-document.addEventListener('DOMContentLoaded', function() {
-	
-   var calendarEl = document.getElementById('calendar');
-   var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      locale: 'ko',
-      firstDay: 1,
-      headerToolbar: {
-    	  left: 'prev',
-    	  center: 'title',
-    	  right: 'next'
-      },
-      dateClick: function(info){
-    	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-    	  rsvt_date = info.dateStr;
-    	  // console.log(info.dateStr);
-    	  console.log(this);
-    	  console.log(info);
-    	  
-    	  /*
-         $(this).on('click', function (e) { 
-             $(this).css("background-color", '#FFFFFF'); //기존 이벤트제목 배경색 투명처리.
-             $(this).css("background-color", '#F3F781'); 
-           });
-    	  */
-      }       
-
-    });
-      
-    calendar.render();
-    
-    var calendarGuest = document.getElementById('calendarGuest');
-    var calendarG = new FullCalendar.Calendar(calendarGuest, {
-      initialView: 'dayGridMonth',
-      locale: 'ko',
-      firstDay: 1,
-      headerToolbar: {
-    	  left: 'prev',
-    	  center: 'title',
-    	  right: 'next'
-      },
-    dateClick: function(info){
-    	 
-	}
-
-    });
-      
-    calendarG.render();
-  });
-	
-  
 </script>
 <title>병원 상세</title>
 </head>
@@ -450,10 +398,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			function guestRsvt(){
 				
 				var str = '';
-				if(window.rsvt_date == str){
+				if(window.guest_rsvt_date == str){
 					alert('날짜를 선택해주세요.');
 					
-				} else if($('input[name=rsvtName]').val() == str){
+				} else if($('input[name=guest_rsvtName]').val() == str){
 					alert('예약자명을 입력해주세요');
 					
 				} else {
@@ -462,12 +410,12 @@ document.addEventListener('DOMContentLoaded', function() {
 						type: 'post',
 						// async : true,
 						data: {
-							rsvtDate: window.guest_rsvt_date,
-							rsvtH: $('select[name=guest_rsvtH] option:selected').text().replaceAll('\t', '').replaceAll('\n', ''),
-							rsvtM: $('select[name=guest_rsvtM] option:selected').text().replaceAll('\n', '').replaceAll('\t', ''),
-							rsvtName: $('input[name=guest_rsvtName]').val(),
-							rsvtInfo: $('input[name=guest_rsvtInfo]').val(),
-							rsvtDoc: $('select[name=guest_rsvtDoc] option:selected').val(),
+							rsvtDate_G: window.guest_rsvt_date,
+							rsvtH_G: $('select[name=guest_rsvtH] option:selected').text().replaceAll('\t', '').replaceAll('\n', ''),
+							rsvtM_G: $('select[name=guest_rsvtM] option:selected').text().replaceAll('\n', '').replaceAll('\t', ''),
+							rsvtName_G: $('input[name=guest_rsvtName]').val(),
+							rsvtInfo_G: $('input[name=guest_rsvtInfo]').val(),
+							rsvtDoc_G: $('select[name=guest_rsvtDoc] option:selected').val(),
 							hno: hosNo
 						},
 						success: function(result){
@@ -479,6 +427,8 @@ document.addEventListener('DOMContentLoaded', function() {
 								alert('다른 날짜(시간)를 선택해주세요');
 								
 							} else{
+									
+									$('#guestRsvtModal').modal('hide');
 									$('#rsvtModal').modal('show');
 									$('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtName']);
 									$('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo']);
@@ -529,11 +479,12 @@ document.addEventListener('DOMContentLoaded', function() {
 			</div>
 			
 			<div id="review_box">
-				<input type="text" maxlength="500" placeholder="후기 내용을 입력해주세요.">
+				<input type="text" maxlength="1200" placeholder="(1200자 이내)후기 내용을 입력해주세요.">
 			</div>
 			
 			<script>
-				$('.star_label').click(function(){
+				
+				$('.star_label').on('click', function(){
 					$(this).removeClass('.yellow');
 					$(this).prevAll('yellow').addClass('yellow');
 					//console.log($(this).attr('value'));

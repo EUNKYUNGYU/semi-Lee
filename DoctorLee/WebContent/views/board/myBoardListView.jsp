@@ -200,6 +200,7 @@ footer {
 					  </tbody>
 					</table>
 					
+					<% if(loginUser != null && memId.equals(loginUser.getMemId())) { %>
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
 							<input type="checkbox" name="allCheck" id="allCheck"><label for="allCheck">&nbsp;&nbsp;전체선택</label>
@@ -208,6 +209,7 @@ footer {
 							<a href="#" id="deleteAllButton" type="button" class="btn btn-light">삭제</a>
 						</div>
 					</div>
+					<% } %>
 				</article>
 			</div>
 			

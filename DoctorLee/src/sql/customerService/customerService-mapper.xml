@@ -72,6 +72,7 @@
 				CATEGORY_NAME
 		  FROM
 		  		CATEGORY
+		 
 				
 	</entry>
 </properties>

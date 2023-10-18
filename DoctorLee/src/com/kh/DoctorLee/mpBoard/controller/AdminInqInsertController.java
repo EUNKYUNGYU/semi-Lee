@@ -37,7 +37,7 @@ public class AdminInqInsertController extends HttpServlet {
 		String inqContent = request.getParameter("inqContent");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		String category = request.getParameter("category");
-		System.out.println(category);
+		
 	
 		CustomerService cs = new CustomerService();
 		cs.setInqTitle(inqTitle);

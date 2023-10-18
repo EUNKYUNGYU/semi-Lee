@@ -44,8 +44,24 @@ public class MemberInsertController extends HttpServlet {
 		String gender = request.getParameter("gender");
 		int height = Integer.parseInt(request.getParameter("height"));
 		int weight = Integer.parseInt(request.getParameter("weight"));
+		String[] diseasesArr = request.getParameterValues("diseases");
+		String[] inhaleAllArr = request.getParameterValues("inhaleAll");
+		String[] foodAllArr = request.getParameterValues("foodAll");
 		
+		String diseases = "";
+		if(diseasesArr != null) {
+			diseases = String.join(",", diseasesArr);
+		}
 		
+		String inhaleAll = "";
+		if(inhaleAllArr != null) {
+			inhaleAll = String.join(",", inhaleAllArr);
+		}
+		
+		String foodAll = "";
+		if(foodAllArr != null) {
+			foodAll = String.join(",", foodAllArr);
+		}
 		
 		Member m = new Member();
 		m.setMemId(memId);
@@ -58,6 +74,9 @@ public class MemberInsertController extends HttpServlet {
 		m.setGender(gender);
 		m.setHeight(height);
 		m.setWeight(weight);
+		m.setDiseases(diseases);
+		m.setInhaleAll(inhaleAll);
+		m.setFoodAll(foodAll);
 		
 		int result = new MemberService().insertMember(m);
 	

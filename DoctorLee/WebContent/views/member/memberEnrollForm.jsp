@@ -215,7 +215,7 @@
                         <hr>
                         <br>
                         
-                        <input type="checkbox">[필수] 이용약관동의
+                        <input type="checkbox" checked onclick="return false;">[필수] 이용약관동의
                         <br><br>
                         <div class="auto">
                             1. 개인정보 수집목적 및 이용목적 <br>
@@ -276,7 +276,7 @@
                             - 보유기간 : 회원 탈퇴 시 혹은 법정 보유 기간<br>
                         </div>
                         <br><br>
-                        <input type="checkbox">[필수] 개인정보 수집 및 이용 동의
+                        <input type="checkbox" checked onclick="return false;">[필수] 개인정보 수집 및 이용 동의
                         <br><br>
                         <div class="auto">
                             1. 개인정보 수집목적 및 이용목적 <br>
@@ -359,45 +359,46 @@
                         <hr>
                         <br>
                         질병
+                        <span style="font-size: 14px;">(중복 선택 가능)</span>
                         <br><br>
-                        <input type="checkbox" value="암">암
-                        <input type="checkbox" value="간질환">간질환
-                        <input type="checkbox" value="심장질환">심장질환
-                        <input type="checkbox" value="뇌혈관질환">뇌혈관질환
+                        <input type="checkbox" value="암" name="diseases">암
+                        <input type="checkbox" value="간질환" name="diseases">간질환
+                        <input type="checkbox" value="심장질환" name="diseases">심장질환
+                        <input type="checkbox" value="뇌혈관질환" name="diseases">뇌혈관질환
                         <br>
-                        <input type="checkbox" value="당뇨병">당뇨병
-                        <input type="checkbox" value="고혈압">고혈압
-                        <input type="checkbox" value="호흡기질환">호흡기질환
-                        <input type="checkbox" value="기타">기타
+                        <input type="checkbox" value="당뇨병" name="diseases">당뇨병
+                        <input type="checkbox" value="고혈압" name="diseases">고혈압
+                        <input type="checkbox" value="호흡기질환" name="diseases">호흡기질환
+                        <input type="checkbox" value="기타" name="diseases">기타
                         <br><br>
                         <hr>
                         <br>
                         흡입 알레르기
                         <span style="font-size: 14px;">(중복 선택 가능)</span>
                         <br><br>
-                        <input type="checkbox" value="곤충류">곤충류
-                        <input type="checkbox" value="진드기류">진드기류
-                        <input type="checkbox" value="목초화분">목초화분
-                        <input type="checkbox" value="비듬&상피세포">비듬&상피세포
+                        <input type="checkbox" value="곤충류" name="inhaleAll">곤충류
+                        <input type="checkbox" value="진드기류" name="inhaleAll">진드기류
+                        <input type="checkbox" value="목초화분" name="inhaleAll">목초화분
+                        <input type="checkbox" value="비듬&상피세포" name="inhaleAll">비듬&상피세포
                         <br>
-                        <input type="checkbox" value="잡초화분">잡초화분
-                        <input type="checkbox" value="수목화분">수목화분
-                        <input type="checkbox" value="곰팡이류">곰팡이류
-                        <input type="checkbox" value="기타">기타
+                        <input type="checkbox" value="잡초화분" name="inhaleAll">잡초화분
+                        <input type="checkbox" value="수목화분" name="inhaleAll">수목화분
+                        <input type="checkbox" value="곰팡이류" name="inhaleAll">곰팡이류
+                        <input type="checkbox" value="기타" name="inhaleAll">기타
                         <br><br>
                         <hr>
                         <br>
                         음식물 알레르기
                         <span style="font-size: 14px;">(중복 선택 가능)</span>
                         <br><br>
-                        <input type="checkbox" value="곡류">곡류
-                        <input type="checkbox" value="해산물">해산물
-                        <input type="checkbox" value="채소류">채소류
-                        <input type="checkbox" value="동물성식품">동물성식품
+                        <input type="checkbox" value="곡류" name="foodAll">곡류
+                        <input type="checkbox" value="해산물" name="foodAll">해산물
+                        <input type="checkbox" value="채소류" name="foodAll">채소류
+                        <input type="checkbox" value="동물성식품" name="foodAll">동물성식품
                         <br>
-                        <input type="checkbox" value="과일류">과일류
-                        <input type="checkbox" value="견과류">견과류
-                        <input type="checkbox" value="기타">기타
+                        <input type="checkbox" value="과일류" name="foodAll">과일류
+                        <input type="checkbox" value="견과류" name="foodAll">견과류
+                        <input type="checkbox" value="기타" name="foodAll">기타
                     	<br>
                     	<hr>  
                     
@@ -457,6 +458,7 @@
 			}
 			
 		});
+		
 	}
 
 	// 유효성 검사

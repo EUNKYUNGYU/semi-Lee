@@ -31,14 +31,14 @@
 
 
         /*--------------------p태그---------------------*/
-        #p1{
+        #p11{
             text-align: center;
             font-size: 32px;
             font-weight: bolder;
             margin-top: 80px;
         }
 
-        #p2{
+        #p21{
             text-align: center;
             font-size: 18px;
             
@@ -85,8 +85,8 @@
 	 <div id="content">
 
         <div id="content_1"></div>
-            <p id="p1">낭만닥터 이사부에 회원가입을 해주셔서 감사합니다.</p>
-            <p id="p2">
+            <p id="p11">낭만닥터 이사부에 회원가입을 해주셔서 감사합니다.</p>
+            <p id="p21">
                 온라인 진료 예약/조회를 비롯한 다양한 개인화 서비스 이용을 원하시면 <br>
                 <span style="color: #1E376F;">환자번호 확인 절차</span>가 필요합니다.
             </p>
@@ -101,6 +101,7 @@
         <div id="content_3" align="center">
             <button type="reset" class="button" id="home" onclick="mainPage();">홈으로</button>
         </div>
+        <br><br><br><br><br><br><br><br>
         <%@ include file="../common/footer.jsp" %>
         
         <script>
@@ -113,6 +114,6 @@
     
 
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 </body>
 </html>

@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
-
-    <%
-        String contextPath1 = request.getContextPath();
-        Member loginUser1 = (Member)session.getAttribute("loginUser");
-    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,16 +76,22 @@
 
             <table id="user-area" align="center">
 
+                
                 <tr>
                     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340" alt="회원사진" id="user_photo" >
                
                 </tr>
-               
+                <%if(loginUser != null){%>
                 <tr>
                     <br><br>
-                    <div align="center"><%= loginUser1.getMemName() %>님 환영합니다.</div><br>
+                    <div align="center"><%=loginUser.getMemName()%>님 환영합니다.</div><br>
                
                 </tr>
+                <% } else { %>
+                    <tr>
+                        <div>로그인이 필요한 서비스입니다.</div>
+                    </tr>
+                <% } %>
                 
             </table>
 

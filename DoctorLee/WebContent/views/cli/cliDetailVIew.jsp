@@ -43,8 +43,8 @@
     }
 
     /*클리닉 예약하기 버튼 영역*/
-    #res-btn{
-        border: 1px solid blue;
+    #res-btn > button{
+        margin-top: 10px;
         margin-bottom: 10px;
     }
 
@@ -58,7 +58,7 @@
     /*클리닉 간단 정보 출력 영역 div*/
     #cli-top{
         border: 1px solid rosybrown;
-        height: 200px;
+        height: auto;
     }
 
     #cli-top > h4{ 
@@ -161,6 +161,29 @@
     .rev-content{
         border: 1px solid purple;
     }
+
+    #cli-top > span{
+        vertical-align: middle;
+    }
+
+    .rev-content{
+        border: 1px solid;
+        border-radius: 5px;
+        width: 900px;
+        margin-top: 20px;
+        margin-left: 8px;
+    }
+
+    .revScope{
+        border: 1px solid;
+        width: auto;
+    }
+
+    .revScope > span{
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
 </style>
 </head>
 <body>
@@ -184,7 +207,7 @@
                 <% if(loginUser != null){ %>
                     <!--클리닉 예약하기 페이지로 이동하는 버튼-->
                     <div id="res-btn" align="right">
-                        <button type="button" id="resBtn">예약하기</button>
+                        <button class="btn btn-primary" type="button" id="resBtn">예약하기</button>
                     </div>
                 <% } %>
 
@@ -192,8 +215,9 @@
                 <div id="cli-top" >
                     <h4><%= c.getCliName() %></h4>
                     <p><%= c.getHosNo() %></p>
-                    <p><%= scope %></p>
-                    <p><%= c.getCliPrice() %></p>
+                    <span class="material-symbols-outlined">grade</span>
+                    <span><%= scope %></span>
+                    <p><%= c.getCliPrice() %>원</p>
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->
@@ -210,17 +234,7 @@
                     
                     <div id="rev-border">
                         <ul id="rev-list">
-                            <!-- <li class="rev-content">
-                                <p>회원</p>
-                                <p>별점</p>
-                                <p>리뷰내용</p>
-                            </li>
-
-                            <li class="rev-content">
-                                <p>회원</p>
-                                <p>별점</p>
-                                <p>리뷰내용</p>
-                            </li> -->
+                            
                         </ul>
                     </div>
                 </div>
@@ -310,7 +324,7 @@
                         console('리뷰 등록 실패');
                     }
                 })
-
+                location.reload();	
             })
 
             function selectRevList(){
@@ -324,10 +338,24 @@
                         let resultStr = '';
                         for(let i in result){
                             resultStr += '<li class="rev-content">'
-                                            + '<p>' + result[i].nickName + '<p>'
-                                            + '<p>' + result[i].cliScope + '<p>'
-                                            + '<p>' + result[i].revContent + '<p>'
-                                            + '<P>' + result[i].createDate + '<p>'
+
+                                            + '<div class="revNickName">'
+                                                + '<p>' + result[i].nickName + '</p>'
+                                            + '</div>'
+
+                                            + '<div class="revScope">'
+                                                + '<span>⭐</span>'
+                                                + '<span>' + result[i].cliScope + '</span>'
+                                            + '</div>'
+
+                                            +'<div class="reContent">'
+                                                + '<p>' + result[i].revContent + '</p>'
+                                            + '</div>'
+
+                                            + '<div class="revDate">'
+                                                + '<P>' + result[i].createDate + '</p>'
+                                            + '</div>'
+
                                        + '</li>'
                         }
                         $('#rev-list').html(resultStr);

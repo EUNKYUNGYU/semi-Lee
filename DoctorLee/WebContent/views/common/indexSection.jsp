@@ -8,24 +8,27 @@
 <style>
     div{
         height: 500px;
-        width: 1412px; 
-        box-sizing: border-box;
-    }
-
-    #section{
+        width: 1412px;
         box-sizing: border-box;
         border: 1px solid red;
     }
 
+    #section{
+        box-sizing: border-box;
+    }
+
+    #section > div{
+        float: left;
+    }
+    
     #content_1 > div{
         float: left;
     }
 
     #video{
         height: 100%; 
-        width: 45%; 
+        width: 50%; 
         text-align: center;
-        border: 1px solid red;
     }
 
     #video > iframe{
@@ -39,9 +42,8 @@
 
     #board{
         height: 100%;
-        width: 45%;
+        width: 50%;
         text-align: center;
-        border: 1px solid red;
     }
 
     #board > img{
@@ -53,13 +55,6 @@
     #board > img, #board > h4:hover{
         cursor: pointer;
     }
-
-    img{
-        width: 450px;
-        height: 280px;
-    }    
-
-
 </style>
 </head>
 <body>
@@ -68,11 +63,7 @@
         <div id="content_1">
 
             <div id="video">
-                
-                <iframe id="main_video" width="560" height="315" src="https://www.youtube.com/embed/AJyx1VyjE1g?si=4kRxwyXwCDIFjzMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                
-            </div>
-
+                <p></p>
             </div>
 
             <div id="board">
@@ -85,5 +76,6 @@
         </div>
 
     </div>
+
 </body>
 </html>

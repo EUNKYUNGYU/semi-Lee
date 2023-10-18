@@ -75,6 +75,8 @@ public class CouVideoListController extends HttpServlet {
 		
 		ArrayList<CouVideo> list = new CouService().selectVideoList(pi);
 		
+//		System.out.println(list);
+		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		

@@ -19,7 +19,10 @@
 		  		WEIGHT,
 		  		CREATE_DATE,
 		  		MODIFY_DATE,
-		  		STATUS
+		  		STATUS,
+		  		DISEASES,
+		  		INHALE_ALL,
+		  		FOOD_ALL
 		  FROM
 		  		TB_MEMBER
 		  WHERE
@@ -46,11 +49,17 @@
 		  		EMAIL,
 		  		GENDER,
 		  		HEIGHT,
-		  		WEIGHT
+		  		WEIGHT,
+		  		DISEASES,
+		  		INHALE_ALL,
+		  		FOOD_ALL
 		  		)
 	  VALUES
 	  			(
 	  			SEQ_MEMBER_NO.NEXTVAL,
+	  			?,
+	  			?,
+	  			?,
 	  			?,
 	  			?,
 	  			?,
@@ -74,7 +83,10 @@
 				EMAIL = ?,
 				HEIGHT = ?,
 				WEIGHT = ?,
-				MODIFY_DATE = SYSDATE
+				MODIFY_DATE = SYSDATE,
+				DISEASE = ?,
+				INHALE_ALL = ?,
+				FOOD_ALL = ?
 		  WHERE
 				MEM_ID = ?
 		    AND

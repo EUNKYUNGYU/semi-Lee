@@ -71,21 +71,9 @@
 		 		VIDEO_NO = ? 		
 	</entry>
 	
-	<entry key="selectRandomVideo">
-		SELECT
-							   VIDEO_NO,
-							   MEM_NO,
-							   VIDEO_TITLE,
-							   CHANNEL_NAME,
-							   VIDEO_ADDRESS
-						  FROM
-							   TB_COU_VIDEO	
-							   	
-	</entry>
-	
 	<entry key="selectCouList">
 		SELECT 
-				ROUND(AVG(COU_SCOPE),1),
+				ROUND(AVG(NVL(COU_SCOPE,0)),1),
 				COU_NO, 
 				HOS_NAME, 
 				COU_NAME,
@@ -238,6 +226,33 @@
 				COU_NO = ?
 		AND
 				MEM_NO = ?						
+	</entry>
+	
+	<entry key="selectCouCarList">
+		SELECT
+				CAR_NO,
+				COU_NO,
+				CAR_CONTENT
+		FROM
+				TB_COU_CAR
+		WHERE
+				COU_NO = ?				
+	</entry>
+	
+	<entry key="selectVideoCount">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_COU_VIDEO
+	</entry>
+	
+	<entry key="selectCouScope">
+		 SELECT 
+				ROUND(AVG(COU_SCOPE),1)
+		  FROM 
+				TB_COU_REV
+		  WHERE 
+				COU_NO = ?
 	</entry>
 </properties>
 

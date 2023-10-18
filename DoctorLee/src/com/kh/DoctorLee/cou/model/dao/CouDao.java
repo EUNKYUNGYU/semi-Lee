@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouCar;
 import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouRev;
@@ -198,37 +199,6 @@ public class CouDao {
 		return result;
 	}
 	
-	// 비디오 랜덤 추출
-	public CouVideo selectRandomVideo(Connection conn) {
-		
-		CouVideo c = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectRandomVideo");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				c.setVideoNo(rset.getInt("VIDEO_NO"));
-				c.setMemNo(rset.getInt("MEM_NO"));
-				c.setVideoTitle(rset.getString("VIDEO_TITLE"));
-				c.setChannelName(rset.getString("CHANNEL_NAME"));
-				c.setVideoAddress(rset.getString("VIDEO_ADDRESS"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return c;
-	}
-	
 	// 상담사 목록 출력
 	public ArrayList<Cou> selectCouList(Connection conn){
 		
@@ -245,7 +215,7 @@ public class CouDao {
 			
 			while(rset.next()) {
 				Cou c = new Cou();
-				c.setScope(rset.getDouble("ROUND(AVG(COU_SCOPE),1)"));
+				c.setScope(rset.getDouble("ROUND(AVG(NVL(COU_SCOPE,0)),1)"));
 				c.setCouNo(rset.getInt("COU_NO"));
 				c.setHosName(rset.getString("HOS_NAME"));
 				c.setCouName(rset.getString("COU_NAME"));
@@ -513,5 +483,93 @@ public class CouDao {
 		}
 		
 		return result;
+	}
+	
+	// 상담사 경력 및 자격 가져오기
+	public ArrayList<CouCar> selectCouCarList(Connection conn, int couNo){
+		
+		ArrayList<CouCar> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouCarList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CouCar c = new CouCar();
+				c.setCarNo(rset.getInt("CAR_NO"));
+				c.setCouNo(rset.getInt("COU_NO"));
+				c.setCarContent(rset.getString("CAR_CONTENT"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	// DB에 저장된 비디오 개수 출력
+	public int selectVideoCount(Connection conn) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectVideoCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// 상담사 평점 가져오기
+	public Double selectCouScope(Connection conn, int couNo) {
+		
+		Double scope = 0.0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouScope");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				scope = rset.getDouble("ROUND(AVG(COU_SCOPE),1)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return scope;
 	}
 }

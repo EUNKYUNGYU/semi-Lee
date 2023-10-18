@@ -159,6 +159,7 @@
             	<%@ include file = "../common/myPageNavi.jsp" %>
             </div>
             <div id="content_2">
+            
                 <p id="p11">마이페이지</p>
             
                 <p id="p21">고객센터</p>
@@ -186,6 +187,7 @@
                     <%} else { %>
                     <!-- 있을때 -->
                     	<% for(CustomerService cs : list) {%>
+                    	
                       <tr>
                         <td><%=cs.getInqNo() %></td>
                         <td><%=cs.getInqType() %></td>

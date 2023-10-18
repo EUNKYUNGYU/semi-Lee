@@ -436,20 +436,20 @@
 				if(result == 'NNNNN'){
 					alert('이미 존재하거나 탈퇴한 회원의 아이디 입니다.');
 				
-					$userId.val('').focus();	
+					$memId.val('').focus();	
 					
 				}
 				else{
 					
 					if(confirm('사용가능한 아이디 입니다. 사용하시겠습니까?')){
 						// 이후 변경 불가능 
-						$userId.attr('readonly', true);
+						$memId.attr('readonly', true);
 						
 						// submit버튼을 활성화
 						$('#enroll-form button[type=submit]').removeAttr('disabled');
 					}
 					else{
-						$userId.focus();
+						$memId.focus();
 					}
 				}
 			},

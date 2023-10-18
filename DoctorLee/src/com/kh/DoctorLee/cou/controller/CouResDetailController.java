@@ -57,10 +57,14 @@ public class CouResDetailController extends HttpServlet {
 		// 상담사 경력 및 자격 가져오기
 		ArrayList<CouCar> list = new CouService().selectCouCarList(couNo);
 		
+		// 상담사 평점 가져오기
+		Double scope = new CouService().selectCouScope(couNo);
+		
 		request.setAttribute("c", c);
 		request.setAttribute("result", result);
 		request.setAttribute("result2", result2);
 		request.setAttribute("list", list);
+		request.setAttribute("scope", scope);
 		request.getRequestDispatcher("views/cou/couResDetailView.jsp").forward(request, response);
 	}
 

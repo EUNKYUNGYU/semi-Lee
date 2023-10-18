@@ -33,9 +33,13 @@ public class IndexCouVideoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Service 요청
-		CouVideo c = new CouService().selectRandomVideo();
+		// DB에 저장된 비디오 개수 출력
+		int result = new CouService().selectVideoCount();
 		
-		request.setAttribute("c", c);
+		
+		//CouVideo c = new CouService().selectRandomVideo();
+		
+		request.setAttribute("result", result);
 		request.getRequestDispatcher("/views/common/section.jsp").forward(request, response);
 	}
 

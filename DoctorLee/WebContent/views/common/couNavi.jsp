@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
+
+    <%
+        String contextPath1 = request.getContextPath();
+        Member loginUser1 = (Member)session.getAttribute("loginUser");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,17 +20,16 @@
 
     #cou_navi{
         width: 225px;
-        border: 1px solid black;
+        background-color:#1E376F;
     }
 
     #profile{
         background-color: white;
-        border-bottom: 1px solid black;
     }
 
     #user_photo{
-        width: 100px;
-        height: 100px;
+        width:100px;
+        height:100px;
     }
 
     #menu{
@@ -33,17 +38,20 @@
         padding: 0;
     }
 
+    #menu > li{
+        text-align: center;
+    }
+
     #menu a{
         text-decoration: none;
-        color: black;
+        color : whitesmoke;
         display: block;
         line-height: 35px;
-        border-bottom: 1px solid black;
     }
 
     #menu a:hover{
-        color: red;
-        font-size: 20px;
+        font-size : 16px;
+            color : rgba(245, 245, 245, 0.445)
     }
 
     #menu > li > ul{
@@ -59,6 +67,10 @@
     #menu > li > ul:hover{
         display: block;
     }
+
+    #menu > li > ul a{
+        font-size: 13px;
+    }
 </style>
 </head>
 <body>
@@ -68,17 +80,18 @@
         <div id="profile">
 
             <table id="user-area" align="center">
-               
-                <tr>
-                    <br><br>
-                    <th>OOO</th><br>
-               
-                </tr>
-               
+
                 <tr>
                     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340" alt="회원사진" id="user_photo" >
                
                 </tr>
+               
+                <tr>
+                    <br><br>
+                    <div align="center"><%= loginUser1.getMemName() %>님 환영합니다.</div><br>
+               
+                </tr>
+                
             </table>
 
         </div>

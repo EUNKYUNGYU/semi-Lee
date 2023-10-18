@@ -55,8 +55,6 @@
     #board > img, #board > h4:hover{
         cursor: pointer;
     }
-
-
 </style>
 </head>
 <body>
@@ -78,5 +76,6 @@
         </div>
 
     </div>
+
 </body>
 </html>

@@ -20,6 +20,11 @@
     .outer{
         width: 1800px;
         margin-left: 50px;
+        margin-top: 100px;
+    }
+
+    .header{
+        border: 1px solid white;
     }
 
     /*상단 네비*/
@@ -45,12 +50,6 @@
         margin-left: 200px;
     }
 
-    #cou-res{
-        background-color: skyblue;
-        font-weight: 800;
-        pointer-events: none;
-    }
-
     /*우측 클리닉 영역*/
     #cli-part, #res-part{
         margin-left: 100px;
@@ -61,41 +60,17 @@
         margin-top: 10px;
     }
 
-    /*결과 출력 영역*/
-    .title-part{
-        height: 100px;
-        border: 1px solid black;
-        line-height: 100px;
-    }
-
-    .title-part span{
-        font-size: 26px;
-    }
-
-    .title-part > span{
-        margin-left: 50px;
-    }
-
-    .title-part > em > span{
-        background-color: #1E376F;
-        border-radius: 50%;
-        color: white;
-        margin-left: 100px;
-    }
-
     /*해당 카테고리 출력 영역*/
     #content-part{
-        height: auto;
+        height: 1000px;
         border: 1px solid;
-        /*display: none;*/
     }
 
     /*클리닉 출력 테두리*/
     .content-border{
         margin: 10px;
-        height: 500px;
+        height: 980px;
         overflow: auto;
-        border: 1px solid red;
     }
 
     /*클리닉 출력 리스트 ul*/
@@ -106,11 +81,12 @@
 
     /*클리닉 출력 요소 li*/
     .content-cli{
-        background-color:salmon;
+        background-color:#1E376F;
         border-radius: 10px;
         margin-bottom: 5px;
         margin-top: 5px;
         width: 898px;
+        color: white;
     }
 
     .content-cli > div{
@@ -164,88 +140,6 @@
         padding: 0;
     }
 
-    /*날짜와 시간을 띄울 영역*/
-    #res-part{
-        height: auto;
-        margin-top: 10px;
-    }
-
-    /*예약 출력 영역*/
-    #cli-date-part{
-        width: 1000px;
-    }
-
-    .date-title-part{
-        height: 100px;
-        line-height: 100px;
-        border: 1px solid;
-    }
-
-    .date-title-part span{
-        font-size: 26px;
-    }
-
-    .date-title-part > span{
-        margin-left: 50px;
-    }
-
-    .date-title-part > em > span{
-        background-color: #1E376F;
-        border-radius: 50%;
-        color: white;
-        margin-left: 100px;
-    }
-
-    #cli-date-part{
-        width: 1000px;
-    }
-
-    #cli-date{
-        /*display: none;*/
-        height: 550px;
-        width: 1000px;
-    }
-    
-    #date-inner{
-        width: 700px;
-        height: 582px;
-        border: 1px solid;
-    }
-
-    #time-inner{
-        width: 300px;
-        height: 582px;
-        border-right : 1px solid;
-        border-bottom: 1px solid;
-    }
-
-    #cli-date > div{
-        float: left;
-    }
-
-    /*시간 출력*/
-    .time-content{
-        background-color: bisque;
-        border-radius: 10px;
-        text-decoration: none;
-        margin-top: 20px;
-        width: 230px;
-        border: 1px solid brown;
-        height: 50px;
-        line-height: 50px;
-        margin-right: 30px;
-    }
-
-    .time-border{
-        border: 1px solid blue;
-        overflow: auto;
-        height: 580px;
-    }
-
-    .time-border > ul{
-        list-style: none;
-    }
-
     footer{
         margin-top: 100px;
     }
@@ -253,9 +147,9 @@
 </head>
 <body>
     <!--상단 네비게이션 메뉴 div-->
-    <%@ include file="../common/nav2.jsp"%>
-
-    <br><br><br>
+    <div class="header">
+        <%@ include file="../common/nav2.jsp"%>
+    </div>
 
     <!--전체를 감싸는 div-->
     <div class="outer">
@@ -294,10 +188,11 @@
 
                                         <!--클리닉 대표 이미지 div-->
                                         <div class="cli-img">
-                                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>
+                                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
+                                            <br>
                                             
                                             <% if(loginUser != null) { %>
-                                                <button>예약하기</button>
+                                                <button class="btn btn-primary">예약하기</button>
                                             <% } %>    
                                             
                                             <span><%=c.getCouNo()%></span>
@@ -322,7 +217,7 @@
                                             </div>
 
                                             <div class="cli-price">
-                                                <span><%=c.getPrice()%></span>
+                                                <span><%=c.getPrice()%>원</span>
                                             </div>
 
                                         </div>
@@ -354,8 +249,6 @@
 
                     }
                 </script>
-
-            <br><br><br><br><br>
 
             </div>
 

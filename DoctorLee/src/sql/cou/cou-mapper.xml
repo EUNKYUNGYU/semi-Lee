@@ -239,5 +239,16 @@
 		AND
 				MEM_NO = ?						
 	</entry>
+	
+	<entry key="selectCouCarList">
+		SELECT
+				CAR_NO,
+				COU_NO,
+				CAR_CONTENT
+		FROM
+				TB_COU_CAR
+		WHERE
+				COU_NO = ?				
+	</entry>
 </properties>
 

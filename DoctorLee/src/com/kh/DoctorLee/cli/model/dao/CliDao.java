@@ -74,7 +74,7 @@ public class CliDao {
 			
 			while(rset.next()) {
 				Clinic c = new Clinic();
-				c.setScope(rset.getDouble("ROUND(AVG(CLI_SCOPE),1)"));
+				c.setScope(rset.getDouble("ROUND(AVG(NVL(CLI_SCOPE,0)),1)"));
 				c.setCliNo(rset.getInt("CLI_NO"));
 				c.setHosNo(rset.getString("HOS_NAME"));
 				c.setCateName(rset.getString("CLI_CATE"));

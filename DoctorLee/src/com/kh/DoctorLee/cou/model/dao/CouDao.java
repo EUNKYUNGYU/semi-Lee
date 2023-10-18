@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouCar;
 import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouRev;
@@ -513,5 +514,38 @@ public class CouDao {
 		}
 		
 		return result;
+	}
+	
+	// 상담사 경력 및 자격 가져오기
+	public ArrayList<CouCar> selectCouCarList(Connection conn, int couNo){
+		
+		ArrayList<CouCar> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCouCarList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CouCar c = new CouCar();
+				c.setCarNo(rset.getInt("CAR_NO"));
+				c.setCouNo(rset.getInt("COU_NO"));
+				c.setCarContent(rset.getString("CAR_CONTENT"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 }

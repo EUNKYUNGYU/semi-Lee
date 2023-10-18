@@ -56,7 +56,10 @@ public class MemberDao {
 								rset.getInt("WEIGHT"),
 								rset.getDate("CREATE_DATE"),
 								rset.getDate("MODIFY_DATE"),
-								rset.getString("STATUS"));
+								rset.getString("STATUS"),
+								rset.getString("DISEASES"),
+								rset.getString("INHALE_ALL"),
+								rset.getString("FOOD_ALL"));
 				//System.out.println(m);
 			}
 		} catch (SQLException e) {
@@ -92,6 +95,9 @@ public class MemberDao {
 			pstmt.setString(8, m.getGender());
 			pstmt.setInt(9, m.getHeight());
 			pstmt.setInt(10, m.getWeight());
+			pstmt.setString(11, m.getDiseases());
+			pstmt.setString(12, m.getInhaleAll());
+			pstmt.setString(13, m.getFoodAll());
 		
 			
 			result = pstmt.executeUpdate();
@@ -121,7 +127,10 @@ public class MemberDao {
 			pstmt.setString(4, m.getEmail());
 			pstmt.setInt(5, m.getHeight());
 			pstmt.setInt(6, m.getWeight());
-			pstmt.setString(7, m.getMemId());
+			pstmt.setString(7, m.getDiseases());
+			pstmt.setString(8, m.getInhaleAll());
+			pstmt.setString(9, m.getFoodAll());
+			pstmt.setString(10, m.getMemId());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

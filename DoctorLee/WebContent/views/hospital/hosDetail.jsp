@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*, com.kh.DoctorLee.review.model.vo.*" %>
 <%
-	Hospital hos = (Hospital)request.getAttribute("hos");
+
+	Hospital hos = (Hospital)session.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
 	
@@ -194,7 +195,7 @@
 						<button onclick="loginUserIsNull();" class="btn btn-primary">예약접수</button>
 					<% } %>
 					<button type="button" class="btn btn-primary"
-							onclick="'location.href=<%= contextPath %>/hospital/guestRsvtPage.jsp'">
+							onclick="location.href='<%= contextPath %>/views/hospital/guetRsvtPage.jsp'">
 					  비회원 진료예약
 					</button>
 					<script>

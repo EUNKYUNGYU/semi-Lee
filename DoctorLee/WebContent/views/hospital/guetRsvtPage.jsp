@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*, com.kh.DoctorLee.review.model.vo.*" %>
 <%
-	Hospital hos = (Hospital)request.getAttribute("hos");
+	Hospital hos = (Hospital)session.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
 	
 	int hosTreatBegin = Integer.parseInt(hos.getTreatBegin().replaceAll(":00", ""));

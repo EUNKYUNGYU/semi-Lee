@@ -185,6 +185,23 @@
         margin-right: 5px;
     }
 
+    #rev-top > *{
+        float: left;
+    }
+
+    #rev-top{
+        height: 50px;
+        border: 1px solid green;
+    }
+
+    #rev-top > h4{
+        line-height: 50px;
+    }
+
+    #rev-top > button{
+        margin-left: 10px;
+        margin-top: 5px;
+    }
     
 </style>
 </head>
@@ -239,11 +256,17 @@
 
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
-                    <h4>후기</h4>
 
-                    <% if(loginUser != null && result > 0 && result2 == 0) {%>
-                        <button data-toggle="modal" data-target="#myModal">후기 작성</button>
-                    <% } %>   
+                    <div id="rev-top">
+                        <h4>후기</h4>
+
+                        <% if(loginUser != null && result > 0 && result2 == 0) {%>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">후기 작성</button>
+                        <% } %> 
+
+                    </div>
+
+                    <br clear="both">
                     
                     <div id="rev-border">
                         <ul id="rev-list">

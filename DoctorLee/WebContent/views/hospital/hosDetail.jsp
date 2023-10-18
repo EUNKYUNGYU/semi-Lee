@@ -2,16 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*, com.kh.DoctorLee.review.model.vo.*" %>
 <%
-	Hospital hos = (Hospital)request.getAttribute("hos");
+
+	Hospital hos = (Hospital)session.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
-	//Reservation rsvt = (Reservation)request.getAttribute("selectRsvt");
 	
 	int hosTreatBegin = Integer.parseInt(hos.getTreatBegin().replaceAll(":00", ""));
 	int hosTreatEnd = Integer.parseInt(hos.getTreatEnd().replaceAll(":00|:30", ""));
-	
-	//int checkRsvtResult = (int)request.getSession().getAttribute("checkRsvtResult");
-	Reservation rsvt = (Reservation)request.getAttribute("selectRsvt");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -197,7 +194,8 @@
 					<% } else{ %>
 						<button onclick="loginUserIsNull();" class="btn btn-primary">예약접수</button>
 					<% } %>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guestRsvtModal">
+					<button type="button" class="btn btn-primary"
+							onclick="location.href='<%= contextPath %>/views/hospital/guetRsvtPage.jsp'">
 					  비회원 진료예약
 					</button>
 					<script>
@@ -246,6 +244,7 @@
 									success: function(result){
 										console.log(result);
 										var flag = result['checkRsvtResult'];
+										//console.log(result.rsvtInfo);
 										
 									if(result != null){
 										if(flag > 0){
@@ -306,9 +305,9 @@
 			        	<h6>
 			        		예약시간 :
 			        	</h6>
-			        	<span>
+			        	<h6>
 			        		특이사항 : 
-			        	</span>
+			        	</h6>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-danger" data-dismiss="modal">확인</button>
@@ -395,64 +394,64 @@
 			  </div>
 			</div>
 			<script>
-			function guestRsvt(){
-				
-				var str = '';
-				if(window.guest_rsvt_date == str){
-					alert('날짜를 선택해주세요.');
+			/*
+				function guestRsvt(){
 					
-				} else if($('input[name=guest_rsvtName]').val() == str){
-					alert('예약자명을 입력해주세요');
-					
-				} else {
-					$.ajax({
-						url: 'hosRsvt.guest',
-						type: 'post',
-						// async : true,
-						data: {
-							rsvtDate_G: window.guest_rsvt_date,
-							rsvtH_G: $('select[name=guest_rsvtH] option:selected').text().replaceAll('\t', '').replaceAll('\n', ''),
-							rsvtM_G: $('select[name=guest_rsvtM] option:selected').text().replaceAll('\n', '').replaceAll('\t', ''),
-							rsvtName_G: $('input[name=guest_rsvtName]').val(),
-							rsvtInfo_G: $('input[name=guest_rsvtInfo]').val(),
-							rsvtDoc_G: $('select[name=guest_rsvtDoc] option:selected').val(),
-							hno: hosNo
-						},
-						success: function(result){
-							console.log(result);
-							var flag = result['checkRsvtResult'];
-							
-						if(result != null){
-							if(flag > 0){
-								alert('다른 날짜(시간)를 선택해주세요');
+					var str = '';
+					if(window.guest_rsvt_date == str){
+						alert('날짜를 선택해주세요.');
+						
+					} else if($('input[name=guest_rsvtName]').val() == str){
+						alert('예약자명을 입력해주세요');
+						
+					} else {
+						$.ajax({
+							url: 'hosRsvt.guest',
+							type: 'post',
+							// async : true,
+							data: {
+								rsvtDate_G: window.guest_rsvt_date,
+								rsvtH_G: $('select[name=guest_rsvtH] option:selected').text().replaceAll('\t', '').replaceAll('\n', ''),
+								rsvtM_G: $('select[name=guest_rsvtM] option:selected').text().replaceAll('\n', '').replaceAll('\t', ''),
+								rsvtName_G: $('input[name=guest_rsvtName]').val(),
+								rsvtInfo_G: $('input[name=guest_rsvtInfo]').val(),
+								rsvtDoc_G: $('select[name=guest_rsvtDoc] option:selected').val(),
+								hno: hosNo
+							},
+							success: function(result){
+								console.log(result);
+								var flag = result['checkRsvtResult'];
 								
-							} else{
+							if(result != null){
+								if(flag > 0){
+									alert('다른 날짜(시간)를 선택해주세요');
 									
-									$('#guestRsvtModal').modal('hide');
-									$('#rsvtModal').modal('show');
-									$('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtName']);
-									$('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo']);
-									$('#rsvtModal .modal-body').children().eq(1).append(result['rsvtDate'] + ", " + result['rsvtTime']);
-									$('#rsvtModal .modal-body').children().eq(2).append(result['rsvtInfo']);
+								} else{
+										$('#guestRsvtModal').modal('hide');
+										$('#rsvtModal').modal('show');
+										$('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtGuest']);
+										$('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo_G']);
+										$('#rsvtModal .modal-body').children().eq(1).append(result['rsvtDate_G'] + ", " + result['rsvtTime_G']);
+										$('#rsvtModal .modal-body').children().eq(2).append(result['rsvtInfo_G']);
+									}
 								}
+								// 성공 시 
+								//data-toggle="modal" data-target="#rsvtModal" 추가해서 모달 띄우기
+							},
+							error: function(){
+								alert('현재 예약 불가');
+								// console.log(hosNo);
+								// console.log(rsvt_date);
+								// console.log(hosNo);
+								// console.log(rsvtDate);
 							}
-							// 성공 시 
-							//data-toggle="modal" data-target="#rsvtModal" 추가해서 모달 띄우기
-						},
-						error: function(){
-							alert('현재 예약 불가');
-							// console.log(hosNo);
-							// console.log(rsvt_date);
-							// console.log(hosNo);
-							// console.log(rsvtDate);
-						}
-					});
-					return false;
-				}
-				return true;
-		};
+						});
+						return false;
+					}
+					return true;
+				};
+				*/
 			</script>
-			
 			
 		</div>
 		<!-- 진료 예약 끝 -->

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.DoctorLee.hospital.model.service.HospitalService;
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
@@ -40,11 +41,16 @@ public class HosDetailController extends HttpServlet {
 		ArrayList<Review> reviewList = new HospitalService().selectReview(hno);
 		
 		if(hos != null) {
-			request.setAttribute("hos", hos);
+			// request.setAttribute("hos", hos);
+			HttpSession session = request.getSession();
+			session.setAttribute("hos", hos);
+			
 			request.setAttribute("docList", docList);
 			request.setAttribute("reviewList", reviewList);
 			request.getRequestDispatcher("views/hospital/hosDetail.jsp").forward(request, response);
 		} else {
+			
+			
 			request.setAttribute("error", "병원 정보를 불러올 수 없습니다.");
 			request.getRequestDispatcher("views/common.errorPage.jsp");
 		}

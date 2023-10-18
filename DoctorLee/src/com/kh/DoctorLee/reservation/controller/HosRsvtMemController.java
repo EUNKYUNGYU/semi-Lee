@@ -90,8 +90,8 @@ public class HosRsvtMemController extends HttpServlet {
 				// request.setAttribute("rsvtResult", rsvtResult);
 				// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
 				response.getWriter().print(jO);
+				System.out.println(selectRsvt.getMemInfo());
 			}
-	
 	}
 
 	/**

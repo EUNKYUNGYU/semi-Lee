@@ -41,6 +41,7 @@ public class BoardUpdateCotroller extends HttpServlet {
 		String boardContent = request.getParameter("boardContent");
 		
 		Board b = new Board();
+		
 		b.setBoardType(boardType);
 		b.setBoardTitle(boardTitle);
 		b.setBoardContent(boardContent);
@@ -51,10 +52,10 @@ public class BoardUpdateCotroller extends HttpServlet {
 		
 		if(result > 0) { // 게시글 업데이트 성공
 			request.setAttribute("alertMsg", "게시글 수정에 성공하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo" + boardNo);
+			response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
 		} else { // 게시글 업데이트 실패
 			request.setAttribute("alertMsg", "게시글 수정에 실패하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo" + boardNo);
+			response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
 		}
 	
 	}

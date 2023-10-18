@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.board.controller;
+package com.kh.DoctorLee.comment.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.board.model.service.BoardService;
-import com.kh.DoctorLee.board.model.vo.Board;
-
 /**
- * Servlet implementation class BoardUpdateForm
+ * Servlet implementation class CommentInsertController
  */
-@WebServlet("/updateForm.bo")
-public class BoardUpdateForm extends HttpServlet {
+@WebServlet("/insert.co")
+public class CommentInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateForm() {
+    public CommentInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +26,8 @@ public class BoardUpdateForm extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		Board b = new BoardService().selectBoard(boardNo);
-		
-		if(b != null) { // 게시글 정보 가져오기 성공
-			
-			request.setAttribute("b", b);
-			request.getRequestDispatcher("views/board/boardUpdateForm.jsp").forward(request, response);
-			
-		} else { // 게시글 정보 가져오기 실패
-			request.setAttribute("alertMsg", "게시글 수정에 실패하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.bo?" + boardNo);
-		}
-	
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

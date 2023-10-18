@@ -56,6 +56,30 @@ public class BoardDao {
 		
 	}
 	
+	public int selectListCount(Connection conn, int memNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCountMyBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
 	public ArrayList<Board> selectList(Connection conn, String type, PageInfo pi){
 		
 		
@@ -106,12 +130,55 @@ public class BoardDao {
 		
 	}
 	
+	public ArrayList<Board> selectMyBoardList(Connection conn, int memNo, PageInfo pi){
+		
+		
+		ArrayList<Board> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyBoardList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				Board b = new Board();
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE")); 
+				b.setMemId(rset.getString("MEM_ID"));
+				b.setWriter(rset.getString("NICKNAME"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setCreateDate(rset.getString("CREATE_DATE"));
+				b.setViews(rset.getInt("VIEWS"));
+				
+				list.add(b);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	
+	
 	public int insertBoard(Connection conn, Board b, int memNo) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertBoard") + b.getBoardName() + ")";
-		System.out.println("인서트 보드에서 b.getBoardName() " + b.getBoardName());
 		
 		try {
 			pstmt= conn.prepareStatement(sql);
@@ -145,6 +212,8 @@ public class BoardDao {
 			if(rset.next()) {
 				b.setBoardNo(rset.getInt("BOARD_NO"));
 				b.setWriter(rset.getString("NICKNAME"));
+				b.setMemNo(rset.getInt("MEM_NO"));
+				b.setMemId(rset.getString("MEM_ID"));
 				b.setBoardName(rset.getString("BOARD_NAME"));
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
 				b.setBoardContent(rset.getString("BOARD_CONTENT"));
@@ -153,7 +222,6 @@ public class BoardDao {
 				b.setLikes(rset.getInt("LIKES"));
 				b.setComments(rset.getInt("COMMENTS"));
 			}
-			System.out.println("보드 디테일 Dao b:  " + b);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -188,12 +256,8 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateBoard");
-		System.out.println("보드 업데이트 Dao b" + b);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("보드 업데이트 Dao b.getBoardType() " + b.getBoardType()
-			+ "b.getBoardTitle()" + b.getBoardTitle()  + "b.getBoardContent()" +b.getBoardContent()
-			+ "b.getBoardNo()" + b.getBoardNo());
 			pstmt.setInt(1, b.getBoardType());
 			pstmt.setString(2, b.getBoardTitle());
 			pstmt.setString(3, b.getBoardContent());
@@ -206,7 +270,6 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("보드 업데이트 Dao result" + result);
 		return result;
 	}
 

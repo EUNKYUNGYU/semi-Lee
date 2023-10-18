@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.hos_wrap{margin: auto;}
+.hos_wrap > div{float: left;}
+.box{float: left;}
+
+#hos_info, #hos_rsvt, #hos_review{
+	display: inline-block;
+	width: 30%;
+	margin: 0 10px 30px 20px;
+	}
+
+#hos_info{}
+#hos_info>h2{color: #1E376F; display: inline-block;}
+#hos_info>span{color: #000; display: inline-block; margin-left: 25px; font-weight: bold;}
+#hos_info>p{margin-bottom: 30px;}
+#hos_info h4{font-size: 18px;}
+#hos_info i{font-size: 25px;}
+#hos_info div{margin-bottom: 20px;}
+
+#hos_rsvt{}
+#rsvt_btn{width: 100%; text-align: center;}
+#rsvt_btn>button{width: 45%;}
+
+#hos_review{}
+#hos_review>table{text-align: center; margin-bottom: 20px;}
+
+#star{text-align: center;}
+#star input{display: none;}
+#star label{font-size: 3rem;}
+
+#review_btn>button{width: 100%;}
+#review_box>input{width: 100%; margin-bottom: 20px;}
+
+.yellow {color: yellow;}
+      
+#star label:hover{
+   	text-shadow: 0 0 0 #f0f0f0; /* 마우스 호버 */
+}
+#star label:hover ~ label{
+    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+}
+#star input[type=radio]:checked ~ label{
+   text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */	
+}
+
+#guest_rsvt_form{
+	
+}

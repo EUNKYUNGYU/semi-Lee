@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.cou.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.kh.DoctorLee.cli.model.service.CliService;
 import com.kh.DoctorLee.cou.model.service.CouService;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouCar;
+import com.kh.DoctorLee.cou.model.vo.CouRev;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
@@ -51,9 +54,13 @@ public class CouResDetailController extends HttpServlet {
 		// 리뷰는 한 사람당 한 번만 작성 가능하게
 		int result2 = new CouService().selectRevCount(couNo, loginUser);
 		
+		// 상담사 경력 및 자격 가져오기
+		ArrayList<CouCar> list = new CouService().selectCouCarList(couNo);
+		
 		request.setAttribute("c", c);
 		request.setAttribute("result", result);
 		request.setAttribute("result2", result2);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/cou/couResDetailView.jsp").forward(request, response);
 	}
 

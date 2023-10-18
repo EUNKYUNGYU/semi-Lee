@@ -4,7 +4,9 @@ public class Board {
 
 	private int boardNo;
 	private int boardType; // 10 / 20 / 30 / 40 / 50
+	private int memNo;
 	private String writer;
+	private String memId; // 작성자 닉네임 클릭 했을 시 해당 사용자의 id가 보이게 하기 위해 만든 필드
 	private String boardTitle;
 	private String boardContent;
 	private String createDate;
@@ -16,21 +18,22 @@ public class Board {
 	private String boardName; // 공지사항 / 자유게시판 / 정보게시판 / 익명게시판 / 건강매거진
 	private String boardTypeStr; // 보드타입을 쿼리 스트링으로 받으면 String타입이라 따로 저장 할 변수가 필요해서 만들었음
 	
-	
-	
-	
 	public Board() {
 		super();
 	}
 
 
 
-	public Board(int boardNo, int boardType, String writer, String boardTitle, String boardContent, String createDate,
-			int views, int likes, int comments, String status, String fileNo, String boardName, String boardTypeStr) {
+
+	public Board(int boardNo, int boardType, int memNo, String writer, String memId, String boardTitle,
+			String boardContent, String createDate, int views, int likes, int comments, String status, String fileNo,
+			String boardName, String boardTypeStr) {
 		super();
 		this.boardNo = boardNo;
 		this.boardType = boardType;
+		this.memNo = memNo;
 		this.writer = writer;
+		this.memId = memId;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.createDate = createDate;
@@ -45,6 +48,29 @@ public class Board {
 
 
 
+
+	public int getMemNo() {
+		return memNo;
+	}
+
+
+
+
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+
+
+
+
+	public String getMemId() {
+		return memId;
+	}
+
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
 
 
 	public String getBoardTypeStr() {
@@ -63,39 +89,22 @@ public class Board {
 		return likes;
 	}
 
-
-
-
-
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-
-
-
 
 
 	public int getComments() {
 		return comments;
 	}
 
-
-
-
-
 	public void setComments(int comments) {
 		this.comments = comments;
 	}
 
-
-
-
-
 	public int getBoardNo() {
 		return boardNo;
 	}
-
-
 
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
@@ -124,8 +133,6 @@ public class Board {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-
-
 
 	public String getBoardTitle() {
 		return boardTitle;
@@ -179,13 +186,9 @@ public class Board {
 		return status;
 	}
 
-
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-
 
 	public String getFileNo() {
 		return fileNo;
@@ -211,18 +214,16 @@ public class Board {
 
 
 
+
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", boardType=" + boardType + ", writer=" + writer + ", boardTitle="
-				+ boardTitle + ", boardContent=" + boardContent + ", createDate=" + createDate + ", views=" + views
-				+ ", likes=" + likes + ", comments=" + comments + ", status=" + status + ", fileNo=" + fileNo
-				+ ", boardName=" + boardName + ", boardTypeStr=" + boardTypeStr + "]";
+		return "Board [boardNo=" + boardNo + ", boardType=" + boardType + ", memNo=" + memNo + ", writer=" + writer
+				+ ", memId=" + memId + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", createDate="
+				+ createDate + ", views=" + views + ", likes=" + likes + ", comments=" + comments + ", status=" + status
+				+ ", fileNo=" + fileNo + ", boardName=" + boardName + ", boardTypeStr=" + boardTypeStr + "]";
 	}
-
-
-
-
 	
+
 	
 	
 

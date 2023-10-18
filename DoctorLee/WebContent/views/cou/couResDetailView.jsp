@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.cou.model.vo.Cou" %>    
+<%@ page import="com.kh.DoctorLee.cou.model.vo.*, java.util.ArrayList" %>    
 <%
     Cou c = (Cou)request.getAttribute("c");
     int result = (int)request.getAttribute("result");
     int result2 = (int)request.getAttribute("result2");
+    ArrayList<CouCar> list = (ArrayList<CouCar>)request.getAttribute("list");
 %>    
 <!DOCTYPE html>
 <html>
@@ -191,6 +192,14 @@
                 <!--클리닉 상세 정보 출력 영역 div-->
                 <div id="cli-middle">
                     <h4>상세 정보</h4>
+
+                    <%if(list.isEmpty()){%>
+                        <p>상세 정보가 없습니다.</p>
+                    <% } else { %>
+                        <%for(CouCar cc : list) {%>
+                            <p><%=cc.getCarContent()%></p>
+                        <% } %>
+                    <% } %>        
                 </div>
 
                 <!--클리닉 후기 출력 영역 div-->
@@ -291,12 +300,13 @@
                     revContent:$('#revContent').val()
                 },
                 success:function(result){
-                    alter('리뷰 등록 성공');
+                    alert('리뷰 등록 성공');
                 },
                 error:function(){
                     alert('리뷰 등록 실패');
                 }
             })
+            location.reload();	
         })
 
         // 리뷰 목록 불러오기

@@ -18,7 +18,6 @@
 <style>
 
 * {
-	border: 0.5px solid skyblue;
 	box-sizing: border-box;
 }
 
@@ -40,9 +39,9 @@ main > section, main > aside, main > div{float: left;}
 
 #contentTitle{width : 100%; height : 100px; padding: 20px; font-size : 30px; font-weight: bold; line-height : 200%;}
 
-#content{width : 100%; height : auto;}
+#content{width : 100%; height : auto; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 0px 0px 20px 0px;}
 
-article{width: 95%; height: auto; margin: 20px auto; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 20px;}
+article{width: 95%; height: auto; margin: 20px auto; }
 
 #boardHeader {width: 100%; height: 70px; padding: 20px; font-size: 30px; font-weight : 600;}
 
@@ -54,11 +53,24 @@ article{width: 95%; height: auto; margin: 20px auto; border: 1px solid rgb(230, 
 
 #writerInfoWrap > div {float: left;}
 
-#writerThumbnail{width: 10%; height: 100%; }
+#writerThumbnail{width: 10%; height: 100%;}
 
-#user_photo2{width: 100px; height: 100px; padding:none;}
+#user_photo2{width: 100px; height: 100px;}
 
-#writerId{width: 90%; height: 100%; padding-left: 10px; font-size : 15px; font-weight : bold; line-height : 100px;} 
+#writeIdWrap{width: 90%; height: 100%;  padding: 30px;} 
+
+#writeId{width: 100%; height: 30px; font-size : 15px; font-weight : bold; line-height : 100px;}
+
+#writeInfoHidden{display: none; width: 100px; height: auto; position: absolute; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 6px; font-size : 12px;
+				background-color: white; }
+
+#writerIdButton{cursor: pointer;}
+
+#writeInfoHidden > ul{padding: 0px; margin: 0px;}
+
+#writeInfoHidden > ul > li{padding: 3px;}
+
+#writeInfoHidden > ul > li >a {padding: 3px; color: black; cursor: pointer;}
 
 #boardInfor {width: 100%; height: 50px; line-height: 30px; padding: 10px; color : gray; font-size : 12px;}
 
@@ -70,19 +82,33 @@ article{width: 95%; height: auto; margin: 20px auto; border: 1px solid rgb(230, 
 
 #boardContent{width:100%; height: auto; padding: 10px;}
 
-#boardlikeWrap{width:100%; height:30;line-height: 30px;padding: 10px;color : gray;font-size : 12px;}
+#boardlikeWrap{width:100%; height:30px; line-height: 30px; padding-left: 10px; color : gray;font-size : 12px;}
 
-#commentWrap {width: 100%;}
+#commentWrap {width: 100%; height: auto;}
 
-#commentOption{width:100%; height:30; font-size: 18px; font-weight: 600; padding:0 10px;}
+#commentWrap > div{float: left;}
+
+#commentOption{width:100%; height:30px; font-size: 18px; font-weight: 600; padding:0 10px;}
 
 #commentOption > a{color : gray; font-size : 12px; padding:0 10px;}
 
-#commentBox{border: 0.5px solid darkgray; border-radius: 10px; background-color: white; margin: 10px; padding: 5px; height: 95%;}
+#commentContentBox{width: 100%; height: auto;}
 
-#commentWriter{font-size : 15px; font-weight: 600; padding:0 10px;}
+#commentContentBox > div{float: left;}
 
-#commentContent{background-color: transparent; width:100%; resize: none; outline: 0; border: 0; padding:0 10px;}
+#commentWriteMemId{width: 100%; height: 30px; font-weight: bold; font-size: 13px; padding: 0 10px;}
+
+#commentContent{width: 100%; height: 30px; font-size: 11px; padding: 0 10px;}
+
+#commentCreateDate{width: 100%; height: 30px; font-size: 10px; color: gray; padding: 0 10px;}
+
+#commentCreateDate > a{color: gray;}
+
+#commentInsertBox{width: 100%; height: 100px; border: 0.5px solid darkgray; border-radius: 10px; background-color: white; padding: 5px; height: 95%;}
+
+#commentWriter{width: 100%; height: 30px; font-size : 15px; font-weight: 600; padding:0 10px;}
+
+#commentContent{width: 100%; height: 30px;background-color: transparent; resize: none; outline: 0; border: 0; padding:0 10px;}
 
 #submitWrap{float: right; margin: -36px 10px -36px 0px;}
 
@@ -109,7 +135,6 @@ a {text-decoration: none;}
 	
 	
 	<main>
-	
 		<aside id="aside1" class="aside">
 			<%@ include file ="../common/cmNavi.jsp" %>
 		</aside>
@@ -129,40 +154,63 @@ a {text-decoration: none;}
 							<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340" alt="회원사진" id="user_photo2" >
                         
 						</div>
-						<div id="writerId">
-							<% if("익명게시판".equals(b.getBoardName())) { %>
-								익명
-							<% } else { %>
-								<%= b.getWriter() %>
-							<% } %>
+						<div id="writeIdWrap">
+							<div id="writerId">
+								<% if("익명게시판".equals(b.getBoardName())) { %>
+									익명
+								<% } else { %>
+									<a id="writerIdButton"><%= b.getWriter() %></a>
+								<% } %>
+							<div id="writeInfoHidden">
+								<ul id="writeInfoHiddenUl">
+									<li><a href="<%= contextPath %>/list.mbo?memNo=<%= b.getMemNo() %>&cpage=1" class="hiddenButton">게시글 보기</a></li>
+									<% if(loginUser != null) { %>
+										<li><a href="<%= contextPath %>/insertMem.ms?receiverId=<%= b.getMemId() %>&receiverNo=<%= b.getMemNo() %>&senderNo=<%= loginUser.getMemNo() %>" class="hiddenButton">쪽지 보내기</a></li>
+									<% } %>
+								</ul>
+							</div>
+							</div>
 						</div>
 					</div>
 					<div id="boardInfor">	
 						<div id="boardDate">
-							2023.09.05&nbsp;&nbsp;20:53&nbsp;&nbsp;&nbsp;&nbsp;조회 <%= b.getBoardName() %>
+							2023.09.05&nbsp;&nbsp;20:53&nbsp;&nbsp;&nbsp;&nbsp;조회 <%= b.getViews() %>
 						</div>
 						<div id="commentCount">
 							댓글&nbsp;&nbsp;<%= b.getComments() %>
 						</div>
 					</div>
-					<hr>
+					<hr clear="both">
 					<div id="boardContent">
 						<%= b.getBoardContent() %>
 					</div>
 					<div id="boardlikeWrap">
 						좋아요 <%= b.getLikes() %> 댓글 <%= b.getComments() %>
 					</div>	
-					<hr>
+					<hr clear="both">
+					
+					<!-- 댓글 하나도 없을 시 등록 순 최신순 버튼 비활성화 -->
+					
 					<div id="commentWrap">
 						<div id="commentOption">
 							댓글 <a>등록순</a> <a>최신순</a>
 						</div>
-						<div id="commentBox">
+						<div id="commentContentBox">
+							<div id="commentWriteMemId">
+								댓글 단 유저 id
+							</div>
+							<div id="commentContent">
+								댓글 내용입니다
+							</div>
+							<div id="commentCreateDate">
+								2023.10.17 13:14&nbsp;&nbsp;
+								<a href="#">답글 쓰기</a>
+							</div>
+						</div>						
+						<div id="commentInsertBox">
 							<div id="commentWriter">유저ID</div>
 							<textarea id="commentContent" placeholder="댓글을 남겨보세요"></textarea>
-							<div id="submitWrap">
-								<a href="#">등록</a>
-							</div>
+							<div id="submitWrap"><a href="#">등록</a></div>
 						</div>
 					</div>
 				
@@ -196,6 +244,7 @@ a {text-decoration: none;}
 	<footer>
 		<%@ include file ="../common/footer.jsp" %>
 	</footer>
+
 
 
 </body>

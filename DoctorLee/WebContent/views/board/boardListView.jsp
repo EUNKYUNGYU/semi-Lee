@@ -179,13 +179,9 @@ footer {
 					
 						$(function(){
 						
-							$('tr > td').eq(1).click(function(){
+							$('tr > td').click(function(){
 								location.href = '<%=contextPath%>/detail.bo?boardNo=' + $(this).attr('name');
 							})
-							
-							
-							
-							
 							
 						})
 						

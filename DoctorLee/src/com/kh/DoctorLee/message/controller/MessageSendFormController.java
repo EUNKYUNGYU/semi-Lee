@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.board.controller;
+package com.kh.DoctorLee.message.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.board.model.service.BoardService;
-import com.kh.DoctorLee.board.model.vo.Board;
-
 /**
- * Servlet implementation class BoardUpdateForm
+ * Servlet implementation class MessageSendFromMyBoardController
  */
-@WebServlet("/updateForm.bo")
-public class BoardUpdateForm extends HttpServlet {
+@WebServlet("/insertMem.ms")
+public class MessageSendFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateForm() {
+    public MessageSendFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +26,14 @@ public class BoardUpdateForm extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		Board b = new BoardService().selectBoard(boardNo);
 		
-		if(b != null) { // 게시글 정보 가져오기 성공
-			
-			request.setAttribute("b", b);
-			request.getRequestDispatcher("views/board/boardUpdateForm.jsp").forward(request, response);
-			
-		} else { // 게시글 정보 가져오기 실패
-			request.setAttribute("alertMsg", "게시글 수정에 실패하였습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.bo?" + boardNo);
-		}
-	
+		String receiverId = request.getParameter("receiverId");
+		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
+		
+		System.out.println("messageEnrollFormMy컨트롤러에서 receiverId "+ receiverId +"receiverNo "+receiverNo);
+		request.getSession().setAttribute("receiverId", receiverId);
+		request.getSession().setAttribute("receiverNo", receiverNo);
+		request.getRequestDispatcher(request.getContextPath() + "/views/message/messageEnrollFormMyBoard.jsp").forward(request, response);
 	}
 
 	/**

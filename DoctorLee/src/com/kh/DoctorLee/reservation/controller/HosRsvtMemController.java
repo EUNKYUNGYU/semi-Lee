@@ -50,10 +50,9 @@ public class HosRsvtMemController extends HttpServlet {
 		//System.out.println(rsvtTime);
 		System.out.println(checkRsvtResult);
 		
-		response.setContentType("application/json; charset=UTF-8");
-		JSONObject jO = new JSONObject();
 		
 		// result가 0보다 크면 겹치는 예약
+		/*
 		if(checkRsvtResult > 0) {
 			// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
 			request.setAttribute("checkRsvtResult", checkRsvtResult);
@@ -62,6 +61,7 @@ public class HosRsvtMemController extends HttpServlet {
 			//request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 
 		} else {
+		*/
 			Reservation rsvt = new Reservation();
 			rsvt.setRsvtDate(rsvtDate);
 			rsvt.setRsvtTime(rsvtTime);
@@ -71,7 +71,11 @@ public class HosRsvtMemController extends HttpServlet {
 			rsvt.setRsvtHos(hno);
 			
 			int result = new ReservationService().insertRsvt(rsvt);
+			
 			if(result > 0) {
+				
+				response.setContentType("application/json; charset=UTF-8");
+				JSONObject jO = new JSONObject();
 				
 				Reservation selectRsvt = new ReservationService().selectRsvt(rsvtName);
 				
@@ -81,14 +85,12 @@ public class HosRsvtMemController extends HttpServlet {
 				jO.put("rsvtInfo", selectRsvt.getMemInfo());
 				jO.put("rsvtDoc", selectRsvt.getRsvtDoc());
 				jO.put("rsvtNo", selectRsvt.getRsvtNo());
+				jO.put("checkRsvtResult", checkRsvtResult);
 				
 				// request.setAttribute("rsvtResult", rsvtResult);
 				// response.sendRedirect(request.getContextPath() + "/hosDetail.dy?hno=" + hno);
 				response.getWriter().print(jO);
 			}
-			
-		}
-		
 	
 	}
 

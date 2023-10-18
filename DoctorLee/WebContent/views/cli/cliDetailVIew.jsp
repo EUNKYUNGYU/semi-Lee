@@ -58,7 +58,7 @@
     /*클리닉 간단 정보 출력 영역 div*/
     #cli-top{
         border: 1px solid rosybrown;
-        height: 200px;
+        height: auto;
     }
 
     #cli-top > h4{ 
@@ -310,7 +310,7 @@
                         console('리뷰 등록 실패');
                     }
                 })
-
+                location.reload();	
             })
 
             function selectRevList(){

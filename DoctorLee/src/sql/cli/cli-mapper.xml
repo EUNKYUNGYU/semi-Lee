@@ -10,9 +10,9 @@
 	</entry>
 	
 	<entry key="selectCliList">
-		SELECT 
-				ROUND(AVG(CLI_SCOPE),1),
-				CLI_NO, 
+		SELECT          
+				ROUND(AVG(NVL(CLI_SCOPE,0)),1), 
+                CLI_NO, 
 				HOS_NAME, 
 				CLI_CATE, 
 				CLI_NAME,
@@ -20,26 +20,21 @@
 				ORIGIN_NAME, 
 				CHANGE_NAME, 
 				DES_PATH
-		FROM 
-				TB_CLI
-		JOIN 	
-				TB_CLI_CATE USING(CATE_NO)
-		JOIN 
-				TB_HOSPITAL USING(HOS_NO)
-		JOIN
-				TB_CLI_REV USING(CLI_NO)		
-	    WHERE
-	    		CATE_NO = ?
-	    GROUP
-	    BY
-				CLI_NO, 
+		   FROM TB_CLI_REV
+	  FULL JOIN TB_CLI USING(CLI_NO)
+		   JOIN TB_HOSPITAL USING(HOS_NO)
+		   JOIN TB_CLI_CATE USING(CATE_NO)
+		  WHERE
+				CATE_NO = ?	
+	   GROUP BY CLI_NO, 
 				HOS_NAME, 
 				CLI_CATE, 
 				CLI_NAME,
 				CLI_PRICE, 
 				ORIGIN_NAME, 
 				CHANGE_NAME, 
-				DES_PATH						
+				DES_PATH
+									
 	</entry>
 	
 	<entry key="selectCli">

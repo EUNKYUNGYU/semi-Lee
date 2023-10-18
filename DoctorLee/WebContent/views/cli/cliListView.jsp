@@ -146,7 +146,7 @@
     /*클리닉 출력 테두리*/
     .content-border{
         margin: 10px;
-        height: auto;
+        height: 500px;
         overflow: auto;
     }
 

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.cou.model.dao.CouDao;
 import com.kh.DoctorLee.cou.model.vo.Cou;
+import com.kh.DoctorLee.cou.model.vo.CouCar;
 import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouRev;
@@ -221,6 +222,17 @@ public class CouService {
 		close(conn);
 		
 		return result2;
+	}
+	
+	// 상담사 경력 및 자격 가져오기
+	public ArrayList<CouCar> selectCouCarList(int couNo){
+		Connection conn = getConnection();
+		
+		ArrayList<CouCar> list = new CouDao().selectCouCarList(conn, couNo);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

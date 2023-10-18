@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.CustomerService"  %>
+<%@ page import = "java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.CustomerService"%>
 <%
-ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribute("list");
+	ArrayList<CustomerService> list = (ArrayList<CustomerService>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>

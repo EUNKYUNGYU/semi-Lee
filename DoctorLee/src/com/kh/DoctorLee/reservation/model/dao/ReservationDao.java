@@ -98,6 +98,7 @@ public class ReservationDao {
 				selectRsvt.setRsvtHos(rset.getString("RSVT_HOS"));
 				selectRsvt.setRsvtDate(rset.getString("RSVT_DATE"));
 				selectRsvt.setRsvtTime(rset.getString("RSVT_TIME"));
+				selectRsvt.setMemInfo(rset.getString("MEM_INFO"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

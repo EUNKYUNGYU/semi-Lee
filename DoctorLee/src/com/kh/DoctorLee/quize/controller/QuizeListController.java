@@ -36,7 +36,9 @@ public class QuizeListController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int listCount = new QuizeService().selectListCount();
-		int currentPage = Integer.parseInt(request.getParameter("cpage"));
+		int currentPage = 1;
+		//currentPage = Integer.parseInt(request.getParameter("cpage"));
+		System.out.println("QuizeListController 에서currentPage  " + currentPage);
 		int pageLimit = 10;
 		int boardLimit = 5;
 		int maxPage = (int)Math.ceil((double)listCount / boardLimit);

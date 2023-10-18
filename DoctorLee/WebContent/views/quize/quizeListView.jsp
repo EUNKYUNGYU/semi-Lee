@@ -11,7 +11,8 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
-	
+	String alertMsg1 = (String)session.getAttribute("alertMsg1");
+	System.out.println("quizeListView.jsp에서 list랑 pi"+list+pi);
 	%>
 
 <!DOCTYPE html>

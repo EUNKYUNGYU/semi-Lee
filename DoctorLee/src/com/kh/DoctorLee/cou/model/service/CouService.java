@@ -103,17 +103,6 @@ public class CouService {
 		return result;
 	}
 	
-	// 비디오 랜덤 출력하기
-	public CouVideo selectRandomVideo() {
-		Connection conn = getConnection();
-		
-		CouVideo c = new CouDao().selectRandomVideo(conn);
-		
-		close(conn);
-		
-		return c;
-	}
-	
 	// 상담사 목록 출력
 	public ArrayList<Cou> selectCouList(){
 		Connection conn = getConnection();
@@ -233,6 +222,30 @@ public class CouService {
 		close(conn);
 		
 		return list;
+	}
+	
+	// DB에 저장된 비디오 개수 출력
+	public int selectVideoCount() {
+		Connection conn = getConnection();
+		
+		int result = new CouDao().selectVideoCount(conn);
+		
+//		System.out.println(result);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	// 상담사 평점 가져오기
+	public Double selectCouScope(int couNo) {
+		Connection conn = getConnection();
+		
+		Double scope = new CouDao().selectCouScope(conn, couNo);
+		
+		close(conn);
+		
+		return scope;
 	}
 
 }

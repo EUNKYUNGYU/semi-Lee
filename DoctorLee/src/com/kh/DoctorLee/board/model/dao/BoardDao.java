@@ -222,6 +222,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectBoard");
+		//, (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = 3 AND MEM_NO = 1) AS LIKETHIS
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -308,8 +309,10 @@ public class BoardDao {
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) result = 1;
-			
+			if(rset.next()) {
+				result = rset.getInt("COUNT(*)");
+			}; // 이미 좋아요 한 적이 있으면 1
+			System.out.println( "보드 좋아요 dao result "+ result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -32,13 +32,14 @@ public class BoardLikeController extends HttpServlet {
 	
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		
 		int resultLike = new BoardService().selectLike(memNo, boardNo);
 		int result = 0;
+		System.out.println("좋아요컨트롤러 memNo " + memNo + "boardNo" + boardNo + "resultLike " + resultLike);
 		
-		if(resultLike > 1) { // 좋아요가 이미 되어 있을 경우 -> 좋아요 취소
-			result = new BoardService().insertLike(memNo, boardNo);
-			if(result > 1) { // 좋아요  취소가 된 경우
+		if(resultLike > 0) { // 좋아요가 이미 되어 있을 경우 -> 좋아요 취소
+			result = new BoardService().deleteLike(memNo, boardNo);
+			if(result > 0) { // 좋아요  취소가 된 경우
+				System.out.println("좋아요 취소 " );
 				request.setAttribute("alertMsg", "❤ 좋아요가 취소되었습니다 ❤");
 				response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
 			} else { // 좋아요 취소가 안 된 경우
@@ -46,10 +47,10 @@ public class BoardLikeController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
 			}
 			
-			
 		} else { // 좋아요가 되어 있지 않은 경우 -> 좋아요 누르기
-			result = new BoardService().deleteLike(memNo, boardNo);
-			if(result > 1) { // 좋아요  누르기가 된 경우
+			result = new BoardService().insertLike(memNo, boardNo);
+			if(result > 0) { // 좋아요  누르기가 된 경우
+				System.out.println("좋아요 " );
 				request.setAttribute("alertMsg", "♥ 좋아요 ♥");
 				response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
 			} else { // 좋아요 누르기가 안 된 경우

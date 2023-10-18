@@ -108,7 +108,7 @@ public class BoardService {
 		
 		Connection conn = getConnection();
 		int result = new BoardDao().insertLike(conn, memNo, boardNo);
-		if(result > 1) commit(conn);
+		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
@@ -119,7 +119,7 @@ public class BoardService {
 		
 		Connection conn = getConnection();
 		int result = new BoardDao().deleteLike(conn, memNo, boardNo);
-		if(result > 1) commit(conn);
+		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;

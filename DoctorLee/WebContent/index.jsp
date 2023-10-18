@@ -174,10 +174,6 @@
         </section>
 
         <!-- 섹션 2 -->
-        <section>
-            
-            </div>
-        </section>
 
         <!-- 푸터 -->
         <div id="footer">

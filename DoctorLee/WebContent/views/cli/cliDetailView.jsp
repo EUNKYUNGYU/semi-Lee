@@ -157,10 +157,6 @@
     #rev-list{
         list-style: none;
     }
-    
-    .rev-content{
-        border: 1px solid purple;
-    }
 
     #cli-top > span{
         vertical-align: middle;

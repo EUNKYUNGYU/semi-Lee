@@ -27,7 +27,6 @@
     /*하단 내용 영역을 감싸는 div*/
     .content{
         height: auto;
-        border: 1px solid blueviolet;
         margin-bottom: 50px;
         margin-top: -500px;
     }
@@ -51,7 +50,7 @@
 
     /*클리닉 간단 정보 출력 영역 div*/
     #cli-top{
-        border: 1px solid rosybrown;
+        border: 1px solid;
         height: auto;
     }
 
@@ -70,12 +69,14 @@
     /*클리닉 상세 정보 출력 영역 div*/
 
     #cli-middle{
-        border: 1px solid royalblue;
-        height: 500px;
+        border-left: 1px solid;
+        border-right: 1px solid;
+        height: auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 
     #cli-middle > h4{
-        margin-top: 30px;
         margin-left: 10px;
     }
 
@@ -85,7 +86,7 @@
 
     /*클리닉 후기 출력 영역 div*/
     #cli-bottom{
-        border: 1px solid pink;
+        border: 1px solid;
         height: auto;
     }
 
@@ -151,15 +152,34 @@
 
     /*리뷰 출력*/
     #rev-border{
-        border: 1px solid red;
+        vertical-align: middle;
     }
 
     #rev-list{
         list-style: none;
+        
     }
     
     .rev-content{
-        border: 1px solid purple;
+        border: 1px solid;
+        border-radius: 5px;
+        width: 900px;
+        margin-top: 20px;
+        margin-left: 8px;
+    }
+
+    #cli-top > span{
+        vertical-align: middle;
+    }
+
+    .revScope{
+        border: 1px solid;
+        width: auto;
+    }
+
+    .revScope > span{
+        vertical-align: middle;
+        margin-right: 5px;
     }
 </style>
 </head>
@@ -193,7 +213,8 @@
                 <div id="cli-top" >
                     <h4><%= c.getCouName() %></h4>
                     <p><%= c.getHosName() %></p>
-                    <p><%=scope %></p>
+                    <span class="material-symbols-outlined">grade</span>
+                    <span><%= scope %></span>
                     <p><%=c.getPrice()%>원</p>
 
                 </div>
@@ -329,10 +350,24 @@
                     let resultStr = '';
                     for(let i in result){
                         resultStr += '<li class="rev-content">'
-                                + '<p>' + result[i].nickName + '<p>'
-                                + '<p>' + result[i].couScope + '<p>'
-                                + '<p>' + result[i].revContent + '<p>'
-                                + '<P>' + result[i].createDate + '<p>'
+
+                                + '<div class="revNickName">'
+                                    + '<p>' + result[i].nickName + '</p>'
+                                + '</div>'
+
+                                + '<div class="revScope">'
+                                    + '<span>★</span>'
+                                    + '<span>' + result[i].couScope + '</span>'
+                                + '</div>'
+
+                                +'<div class="reContent">'
+                                    + '<p>' + result[i].revContent + '</p>'
+                                + '</div>'
+
+                                + '<div class="revDate">'
+                                    + '<P>' + result[i].createDate + '</p>'
+                                + '</div>'
+
                                 + '</li>'
                     }
                     $('#rev-list').html(resultStr);

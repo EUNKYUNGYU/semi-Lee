@@ -5,13 +5,9 @@
 	Hospital hos = (Hospital)request.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
-	//Reservation rsvt = (Reservation)request.getAttribute("selectRsvt");
 	
 	int hosTreatBegin = Integer.parseInt(hos.getTreatBegin().replaceAll(":00", ""));
 	int hosTreatEnd = Integer.parseInt(hos.getTreatEnd().replaceAll(":00|:30", ""));
-	
-	//int checkRsvtResult = (int)request.getSession().getAttribute("checkRsvtResult");
-	Reservation rsvt = (Reservation)request.getAttribute("selectRsvt");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -197,7 +193,8 @@
 					<% } else{ %>
 						<button onclick="loginUserIsNull();" class="btn btn-primary">예약접수</button>
 					<% } %>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guestRsvtModal">
+					<button type="button" class="btn btn-primary"
+							onclick="'location.href=<%= contextPath %>/hospital/guestRsvtPage.jsp'">
 					  비회원 진료예약
 					</button>
 					<script>
@@ -454,7 +451,6 @@
 				};
 				*/
 			</script>
-			
 			
 		</div>
 		<!-- 진료 예약 끝 -->

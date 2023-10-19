@@ -15,7 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
 <!--style-->
-<link rel="stylesheet" href="resources/css/cli/cliRes.css">
+<link rel="stylesheet" href="resources/css/cou/couRes.css">
 
 <!--fullCalendar-->
 <script>

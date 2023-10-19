@@ -190,21 +190,23 @@
                     for(let i in result){
                         resultStr += '<li class="rev-content">'
 
-                                + '<div class="revNickName">'
-                                    + '<p>' + result[i].nickName + '</p>'
-                                + '</div>'
-
                                 + '<div class="revScope">'
-                                    + '<span class="star">⭐</span>'
-                                    + '<span>' + result[i].couScope + '</span>'
+                                        + '<span class="star">⭐</span>'
+                                        + '<span>' + result[i].couScope + '</span>'
                                 + '</div>'
 
                                 +'<div class="reContent">'
                                     + '<p>' + result[i].revContent + '</p>'
                                 + '</div>'
 
+                                + '<div class="revNickName">'
+                                    + '<p>' + result[i].nickName + '</p>'
+                                + '</div>'
+
+                                
+
                                 + '<div class="revDate">'
-                                    + '<P>' + result[i].createDate + '</p>'
+                                    + '<p>' + result[i].createDate + '</p>'
                                 + '</div>'
 
                                 + '</li>'

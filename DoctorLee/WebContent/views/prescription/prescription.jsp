@@ -157,7 +157,7 @@ div{
                 <br>
 
                 
-                <table class="list-area" align="center">
+                <table class="list-area">
                     <thead id="thead1">
                       <tr>
                         <th>병원명</th>

@@ -6,68 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>심리 영상 등록 페이지</title>
-<style>
-    .outer{
-        width: 1800px;
-        margin-left: 50px;
-    }
 
-    #navi{
-        background-color: white;
-        margin-bottom: 100px;
-    }
+<!--style-->
+<link rel="stylesheet" href="resources/css/cou/couVideoEnroll.css">
 
-    .content > div{
-        float: left;
-    }
-
-    /*영상 등록 폼*/
-    .content{
-        height: 1200px;
-        margin-top: 50px;
-    }
-
-    #left-menu{
-        margin-left: 200px;
-    }
-
-    #cou_navi{
-        height: 1000px;
-    }
-
-    #cou-video{
-        background-color: skyblue;
-        font-weight: 800;
-        pointer-events: none;
-    }
-
-    /*내용 영역*/
-    .enrollVideo{
-        width: 1000px;
-        border-radius: 10px;
-        background-color: #1E376F;
-        margin-left: 100px;
-    }
-
-    .enrollVideo th, .enrollVideo h3{
-        color: white;
-    }
-
-    input[type=text]{
-        width: 500px;
-        height: 40px;
-        margin-bottom: 30px;
-    }
-
-    #submitBtn{
-        width: 100px;
-        height: 30px;
-        border-radius: 3px;
-        background-color: #1E376F;
-        color: white;
-        font-size: 12px;
-    }
-</style>
 </head>
 <body>
     <!--상단 네비게이션 메뉴 div-->

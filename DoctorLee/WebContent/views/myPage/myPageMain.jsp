@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
 <%
-Member loginUser = (Member)session.getAttribute("loginUser");
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	
 %>
 
 <!DOCTYPE html>
@@ -105,6 +106,10 @@ Member loginUser = (Member)session.getAttribute("loginUser");
        p {
         margin-left : 50px;
        }
+       .myPageMain{
+       		text-align : center;
+       		margin-bottom : 80px;
+       }
 
 </style>
 </head>
@@ -112,9 +117,10 @@ Member loginUser = (Member)session.getAttribute("loginUser");
  	
 	<%@ include file="../common/navi.jsp" %>
 	
-	<h2 align="center">마이페이지</h2><br>
+	
+	<h2 class="myPageMain">마이페이지</h2><br>
     <hr>
-    <br><br><br><br><br>
+    
     <% if(loginUser == null) { %>
     <form action="<%= contextPath %>/login.me" method="post">
     	<button type="submit">로그인하러가기</button>
@@ -126,7 +132,7 @@ Member loginUser = (Member)session.getAttribute("loginUser");
             
             <div id="mp_navi">
                 <div id="empty">
-                    <table id="user" align="center">
+                    <table id="user">
                         <tr>
                             <br><br>
                             <th align="center"><%= loginUser.getMemName() %> 환영합니다.</th><br>
@@ -141,7 +147,8 @@ Member loginUser = (Member)session.getAttribute("loginUser");
                         
                     </table>
                     <div>
-                        날짜 : <br>
+                        만든 날짜 : <br><%= loginUser.getCreateDate() %>
+                        <br>
                         오늘 예약 : <br>
                     </div>
                     <br><br><br>
@@ -221,6 +228,7 @@ Member loginUser = (Member)session.getAttribute("loginUser");
                 }
             })
         })
+        
     </script>
 
 </body>

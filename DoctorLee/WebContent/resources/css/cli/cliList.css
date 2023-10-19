@@ -1,0 +1,198 @@
+.day-color{
+    background-color: #1E376F !important;
+    font-weight: 900;
+}
+
+.outer{
+    width: 1800px;
+    margin-left: 50px;
+}
+
+/*상단 네비*/
+#navi{
+    height: 100px;
+}
+
+/*하단 내용 영역을 감싸는 div*/
+.content{
+    height: auto;
+    margin-top: 50px;
+}
+
+#cou_navi{
+    height: 1000px;
+}
+
+/*우측 클리닉 영역*/
+#cli-part, #res-part{
+    margin-left: 100px;
+    width: 1000px;
+}
+
+#cli-part{
+    margin-top: 10px;
+}
+
+/*카테고리 영역*/
+#cli-cate-part{
+    width: 1000px;
+    border: 1px solid;
+}
+
+.category-title-part{
+    height: 100px;
+    border-bottom: 1px solid;
+    line-height: 100px;
+}
+
+.category-title-part span{
+    font-size: 26px;
+}
+
+.category-title-part > span{
+    margin-left: 50px;
+}
+
+.category-title-part > em > span{
+    background-color: #1E376F;
+    border-radius: 50%;
+    color: white;
+    margin-left: 100px;
+}
+
+#cli-cate-part{
+    width: 1000px;
+    margin-left: 100px;
+}
+
+.cate{
+    opacity: 0;
+}
+
+
+input[type=radio]+label{
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    display: inline-block;
+    font-size: 20px;
+}
+
+input[type=radio]:checked + label{
+    color: blue;
+    text-decoration: underline;
+}
+
+#cate-inner > ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+
+/*결과 출력 영역*/
+.title-part{
+    height: 100px;
+    border: 1px solid black;
+    line-height: 100px;
+}
+
+.title-part span{
+    font-size: 26px;
+}
+
+.title-part > span{
+    margin-left: 50px;
+}
+
+.title-part > em > span{
+    background-color: #1E376F;
+    border-radius: 50%;
+    color: white;
+    margin-left: 100px;
+}
+
+/*해당 카테고리 출력 영역*/
+#content-part{
+    height: auto;
+    border: 1px solid;
+}
+
+/*클리닉 출력 테두리*/
+.content-border{
+    margin: 10px;
+    height: 500px;
+    overflow: auto;
+}
+
+/*클리닉 출력 리스트 ul*/
+.content-list{
+    list-style: none;
+    padding-left: 15px;
+}
+
+/*클리닉 출력 요소 li*/
+.content-cli{
+    background-color:#1E376F;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 898px;
+    color: white;
+}
+
+.content-cli > div{
+    float: left;
+}
+
+/*클리닉 대표 이미지*/
+.cli-img{
+    margin: 10px;
+}
+
+.cli-img > img{
+    width: 110px;
+    height: 130px;
+    padding: 10px;
+}
+
+.cli-no{
+    display: none;
+}
+
+/*클리닉 설명*/
+.cli-des{
+    width: 500px;
+    margin: 10px;
+    padding: 10px;
+    height: 132px;
+}
+
+.cli-des > div > span{
+    vertical-align: middle;
+}
+
+.title{
+    vertical-align: middle;
+}
+
+.cli-name{
+    font-weight: 1000;
+}
+
+/*별점*/
+.cli-score > span{
+    vertical-align: middle;
+}
+
+/*돋보기 아이콘*/
+.material-symbols-outlined{
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}

@@ -12,6 +12,7 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	
+	System.out.println("quizeListView.jsp에서 list랑 pi"+list+pi);
 	%>
 
 <!DOCTYPE html>

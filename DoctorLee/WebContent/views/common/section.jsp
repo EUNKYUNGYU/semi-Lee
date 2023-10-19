@@ -64,7 +64,7 @@
             
                 <iframe id="main_video" width="560" height="315" src="https://www.youtube.com/embed/AJyx1VyjE1g?si=4kRxwyXwCDIFjzMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 <br>
-                <a href="#">심리 영상 게시판 가기</a>
+                <a href="<%=contextPath%>/couVideoList.cou?cpage=1">심리 영상 게시판 가기</a>
             </div>
             <div id="board">
                 <img src="https://cdn.dailycc.net/news/photo/202306/748295_649266_210.jpg" alt="">

@@ -14,44 +14,49 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
+<!--style-->
+<link rel="stylesheet" href="resources/css/cou/couRes.css">
+
 <!--fullCalendar-->
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
+      var calendarEl = document.getElementById('calendar'); // calendar 요소 접근
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        locale: 'ko',
-        headerToolbar:{
-            left:'prev',
-            center:'title',
-            right:'next'
+        locale: 'ko', // 한국어로 설정
+        headerToolbar:{ //헤드 툴바 설정
+            left:'prev', // 왼쪽 : 이전 달로 가는 버튼
+            center:'title', // 가운데 : 현재 위치의 년(2023)과 달(10월)을 보여줌
+            right:'next' // 오른쪽 : 다음 달로 가는 버튼
         },
-        validRange: function(nowDate) {
+        validRange: function(nowDate) { // 선택 가능한 날짜 범위를 설정
             return {
-                start: nowDate
+                start: nowDate // 오늘부터 선택 가능
             };
         },
 
-        events:[
+        events:[ // 이벤트 추가
             <% for(CouResTime ct : list) {%>
             {
-                title:'예약 가능',
-                start:'<%=ct.getCouDate()%>',
-                color:'#1E376F'
+                title:'예약 가능', // 달력에 표시될 이름
+                start:'<%=ct.getCouDate()%>', // 시작 날짜
+                color:'#1E376F' // 달력에 표시될 색상
             },
             <% } %>
         ],
 
         dateClick: function(info){
 
+            // 날짜 선택 시 숨겨진 예약 시간이 보여짐
             $('.time-border').css('display', 'block');
 
             // 달력 클릭 시 선택한 날짜 출력하기
-            $('#resDate').val((info.dateStr).replaceAll('-', '.'));
-            $('#resTime').val(null);
-            $('#hiddenResTime').val(null);
+            $('#resDate').val((info.dateStr).replaceAll('-', '.')); // 선택한 날짜 형식 변경(예) 2023.10.19 -> 2023/10/19) : DB에는 2023/10/19 형식으로 저장되어 있음
+            $('#resTime').val(null); // 날짜 선택 시 이전에 선택한 시간이 초기화됨
+            $('#hiddenResTime').val(null); // 날짜 선택 시 input:hidden에 담긴 시간이 초기화됨
 
-            var days = document.querySelectorAll(".day-color");
+            var days = document.querySelectorAll(".day-color"); // style에서 .day-color 선택
+            
             days.forEach(function(day){
                 day.classList.remove("day-color");
             })
@@ -61,8 +66,8 @@
             $.ajax({
                 url:'ajaxTime.cou',
                 data:{
-                    couNo:<%=c.getCouNo()%>,
-                    resDate:$('#resDate').val()
+                    couNo:<%=c.getCouNo()%>, // 상담사 번호 
+                    resDate:$('#resDate').val() // 선택(클릭)한 날짜값이 담긴 input(#resDate)의 값
                 },
                 success:function(result){
                     let resultStr = '';
@@ -78,13 +83,13 @@
                     }
                     $('.time-list').html(resultStr);
 
-                    $('.time-content').click(function(){
-                        $('#resTime').val($(this).children().text());
-                        $('#hiddenResTime').val($(this).children().text());
+                    $('.time-content').click(function(){ // 시간 선택(클릭) 시
+                        $('#resTime').val($(this).children().text()); // 예약 시간을 담는 input값에 선택한 시간의 값이 담김
+                        $('#hiddenResTime').val($(this).children().text()); // 예약 시간을 선택 안했을 때 넘어가는 것을 방지하기 위해서 required를 준 input:hidden에도 값을 넘겨줌
 
-                        $(this).css('background-color', '#475f94');
+                        $(this).css('background-color', '#475f94'); // 선택한 시간의 배경이 바뀜
 
-                        $(this).siblings().css('background-color', '#1E376F');
+                        $(this).siblings().css('background-color', '#1E376F'); // 선택한 시간 이외의 다른 시간들의 색상을 원래대로 돌려줌
                     })
                 },
                 error:function(){
@@ -101,127 +106,7 @@
 </script>
 
 
-<style>
-    .outer{
-        width: 1800px;
-        margin-left: 50px;
-    }
 
-    /*상단 네비*/
-    #navi{
-        height: 100px;
-    }
-
-    /*하단 내용 영역을 감싸는 div*/
-    .content{
-        height: auto;
-        margin-top: 50px;
-        border: 1px solid red;
-        margin-bottom: 50px;
-    }
-
-    #cou_navi{
-        height: 1000px;
-    }
-
-    /*클리닉 정보 출력 영역 div*/
-    #cli-content {
-        width: 1000px;
-        margin-left: 100px;
-        height: auto;
-    }
-
-    /*클리닉 예약 날짜 출력 영역 div*/
-    #cli-top{
-        border: 1px solid rosybrown;
-        height: 582px;
-        width: 1100px;
-    }
-
-    #cli-top > div{
-        float: left;
-    }
-
-    #date-inner{
-        width: 700px;
-        height: 582px;
-        border: 1px solid;
-    }
-
-    /* 일요일 날짜 빨간색 */
-    .fc-day-sun a {
-        color: red;
-        text-decoration: none;
-    }
-
-    /* 토요일 날짜 파란색 */
-    .fc-day-sat a {
-        color: blue;
-        text-decoration: none;
-    }
-        
-    /*날짜 선택 시 색깔 넣기*/
-    .day-color{
-        background-color: #1E376F !important;
-        font-weight: 900;
-    }
-    
-    /*클리닉 예약 시간 출력 영역 div*/
-    #time-inner{
-        width: 300px;
-        height: 582px;
-        border-right : 1px solid;
-        border-bottom: 1px solid;
-    }
-
-    .time-border{
-        overflow: auto;
-        height: 580px;
-        display: none;
-    }
-
-    .time-border > ul{
-        list-style: none;
-    }
-
-    .time-content{
-        background-color: #1E376F;
-        color: white;
-        border-radius: 10px;
-        text-decoration: none;
-        margin-top: 20px;
-        width: 230px;
-        height: 50px;
-        line-height: 50px;
-        margin-right: 30px;
-    }
-
-    #cli-middle > h4{
-        margin-top: 30px;
-        margin-left: 10px;
-    }
-
-    /*클리닉 예약자 정보 입력 영역 div*/
-    #cli-bottom{
-        border: 1px solid pink;
-        height: auto;
-    }
-
-    #cli-bottom > span{
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    label{
-        margin-left: 5px;
-        margin-right: 10px;
-    }
-
-    #hiddenResTime{
-        visibility: hidden;
-    }
-
-</style>
 </head>
 <body>
         <!--상단 네비게이션 메뉴 div-->

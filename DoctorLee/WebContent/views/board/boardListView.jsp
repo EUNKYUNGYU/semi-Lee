@@ -160,7 +160,11 @@ footer {
 						<% for(Board b : list) { %>
 						<tr>
 					      <td scope="row" style="text-align: center"><%= b.getBoardNo() %></td>
+					         <% if(loginUser != null){ %>
+					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>&memNo=<%= loginUser.getMemNo() %>"><%= b.getBoardTitle() %></td>
+					      <% } else { %>
 					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>"><%= b.getBoardTitle() %></td>
+					      <% } %>
 					      <% if("40".equals(type)){ %>
 					      	<td scope="row" width="10%">익명</td>
 					      <% } else { %>
@@ -174,9 +178,8 @@ footer {
 						<% } %>
 					  </tbody>
 					</table>
-					
 					<script>
-					
+						
 						$(function(){
 						
 							$('tr > td').click(function(){

@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.DoctorLee.member.model.vo.Member;
 import com.kh.DoctorLee.quize.model.service.QuizeService;
@@ -56,29 +57,31 @@ public class QuizeChoiceController extends HttpServlet {
 		System.out.println("quizeChoiceController에서 choice " + choice);
 
 		int resultExist = new QuizeService().quizeAnswerExist(memNo, quizeNo);
-		
-		if(resultExist ==  0) { // 답안 제출 한적 있음, 정답 화면 보여주기
+		System.out.println("quizeChoiceController에서 resultExist " + resultExist);
+		if(resultExist ==  1) { // 답안 제출 한적 있음, 정답 화면 보여주기
 			
 			System.out.println("답 제출 한 적 있는지 " + resultExist);
 			int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
 			
 			System.out.println("quizeChoiceService의 return값 : " + result);
 			
+			HttpSession session = request.getSession();
+			
 			System.out.println(result);
 			if(result == 2) { // 정답, 포인트 획득 성공
-				request.getSession().setAttribute("alertMsg", "정답입니다! 500포인트를 획득하였습니다.");
+				session.setAttribute("alertMsg", "정답입니다! 500포인트를 획득하였습니다.");
 			} else if(result == 1){ // 오답, 포인트 획득 실패
-				request.getSession().setAttribute("alertMsg", "오답입니다");
+				session.setAttribute("alertMsg", "오답입니다");
 			} else if(result == 0) { // 실패
-				request.getSession().setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
+				session.setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
 			}
-			response.sendRedirect(request.getContextPath() + "/list.qz?cpage=1");
+			request.getRequestDispatcher("/list.qz?cpage=1").forward(request, response);
 			
 			System.out.println("----------------------------");
 			
 		}  else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
 			request.getSession().setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.qz?cpage=1");
+			request.getRequestDispatcher("/views/quize/quizeListView.jsp").forward(request, response);
 		}
 		
 	}

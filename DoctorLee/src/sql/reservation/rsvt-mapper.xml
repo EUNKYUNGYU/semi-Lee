@@ -50,6 +50,7 @@
 		      ,RSVT_HOS
 		      ,RSVT_DATE
 		      ,RSVT_TIME
+		      ,MEM_INFO
 	   	 FROM
 	   	      (SELECT
                        RSVT_NO
@@ -58,6 +59,7 @@
                       ,RSVT_HOS
                       ,RSVT_DATE
                       ,RSVT_TIME
+                      ,MEM_INFO
                 FROM
                       TB_RESERVATION
                 WHERE
@@ -108,6 +110,7 @@
 		      ,GUEST_RSVT_HOS
 		      ,GUEST_RSVT_DATE
 		      ,GUEST_RSVT_TIME
+		      ,GUEST_RSVT_INFO
 	   	 FROM
 	   	      (SELECT
                         GUEST_RSVT_NO
@@ -116,6 +119,7 @@
 				      ,GUEST_RSVT_HOS
 				      ,GUEST_RSVT_DATE
 				      ,GUEST_RSVT_TIME
+				      ,GUEST_RSVT_INFO
                 FROM
                       TB_GUEST_RESERVATION
                 WHERE

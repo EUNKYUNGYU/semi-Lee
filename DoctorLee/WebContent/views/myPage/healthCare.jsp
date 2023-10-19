@@ -9,46 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>건강관리 </title>
-<style>
-	div{
-		box-sizing : border-box;
-	}
-	#healthCare{
-		width : 1000px;
-		height : 900px;
-		margin : auto;
-	}
-	
-	#healthCare_main{
-		width : 80%;
-		height : 100%;
-		float: left;
-	}
-	#healthCare > div {
-		height : 100%;
-	}
-	#heathCare_main > div{
-		height : 100%;
-		float : left;
-	}
-	#area{
-		width : 20%;
-		float : left;
-	}
-	#memInfo{
-		width : 60%;
-		margin : auto;
-	}
-	#memInfo td, #memInfo th{
-		border : 1px solid black;
-		padding : 8px;
-		text-align : center;
-	}
-	.healthCareMain{
-		text-align : center;
-	}
-	
-</style>
+<link rel="stylesheet" href="resources/css/myPage/healthCare.css">
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>

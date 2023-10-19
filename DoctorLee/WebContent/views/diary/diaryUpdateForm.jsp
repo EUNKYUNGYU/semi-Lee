@@ -9,17 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>다이어리 업데이트</title>
-<style>
-	#enroll-form > table{
-        border : 1px solid white;
-    	}
-	#enroll-form input, #enroll-form textarea{
-        width : 100%;
-   	 	}
-
-
-
-</style>
+<link rel="stylesheet" href="resources/css/myPage/diary.css">
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>

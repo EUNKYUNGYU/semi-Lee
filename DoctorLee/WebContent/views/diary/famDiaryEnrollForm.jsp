@@ -6,17 +6,7 @@
 %>
 <!DOCTYPE html>
 <html>
-<style>
-#enroll-form > table{
-        border : 1px solid white;
-    }
-#enroll-form input, #enroll-form textarea{
-        width : 100%;
-    }
-
-
-
-</style>
+<link rel="stylesheet" href="resources/css/myPage/diary.css">
 <head>
 <meta charset="UTF-8">
 <title>가족 다이어리 쓰기  here</title>

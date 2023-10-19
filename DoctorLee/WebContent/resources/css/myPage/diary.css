@@ -1,0 +1,108 @@
+@charset "UTF-8";
+div{
+        box-sizing : border-box;
+        
+    }
+	#diary{width : 1000px;
+		   height : 600px;
+		   margin : auto;
+	}
+	#diary{
+		width : 100%;
+		
+	}
+	#diary1 {
+		width : 80%;
+		height : 100%;
+		float : left;
+
+		
+	}
+	#diary > div, #diary1 > div {
+		height : 100%;
+	}
+	#diary1 > div{
+		float : left;
+		
+	}
+	#my_diary , #fam_diary{
+		width : 50%;
+	}
+	
+    #area{
+        width : 20%;
+        float: left;
+        
+    }
+    #my_diary > a{
+        text-decoration: none;
+        color : black;
+        margin-left : 170px;
+    }
+    #fam_diary > a{
+        text-decoration: none;
+        color : black;
+        margin-left : 170px;
+        
+    }
+    
+    #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+   #customers1 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+#customers1 td, #customers1 th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers1 tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers1 tr:hover {background-color: #ddd;}
+
+#customers1 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+<!--여기까지가 diary.jsp-->
+#enroll-form > table{
+        border : 1px solid white;
+    }
+#enroll-form input, #enroll-form textarea{
+        width : 100%;
+    }
+div > a {
+	text-decoration : none;
+}
+
+<!--여기까지가 diaryDetailView,diaryUpdateForm-->
+
+
+
+	

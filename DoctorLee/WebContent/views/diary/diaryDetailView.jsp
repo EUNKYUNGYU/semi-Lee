@@ -9,16 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>다이어리 디테일</title>
-<style>
-#enroll-form > table{
-        border : 1px solid white;
-    }
-#enroll-form input, #enroll-form textarea{
-        width : 100%;
-    }
-div > a {
-	text-decoration : none;
-}
+<link rel="stylesheet" href="resources/css/myPage/diary.css">
 
 
 

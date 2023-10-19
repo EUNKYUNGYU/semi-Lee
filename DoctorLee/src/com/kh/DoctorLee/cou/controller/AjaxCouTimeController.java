@@ -35,7 +35,7 @@ public class AjaxCouTimeController extends HttpServlet {
 		
 		// 값 뽑기
 		int couNo = Integer.parseInt(request.getParameter("couNo"));
-		String resDate = (request.getParameter("resDate")).replace(".", "/");
+		String resDate = (request.getParameter("resDate")).replace(".", "-");
 		
 //		System.out.println(couNo + " / " + resDate);
 		

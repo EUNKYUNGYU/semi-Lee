@@ -14,6 +14,9 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
+<!--style-->
+<link rel="stylesheet" href="resources/css/cou/couRes.css">
+
 <!--fullCalendar-->
 <script>
 
@@ -100,119 +103,6 @@
 
 
 <style>
-    .outer{
-        width: 1800px;
-        margin-left: 50px;
-    }
-
-    /*상단 네비*/
-    #navi{
-        height: 100px;
-    }
-
-    /*하단 내용 영역을 감싸는 div*/
-    .content{
-        height: auto;
-        margin-top: 50px;
-        border: 1px solid red;
-        margin-bottom: 50px;
-    }
-
-    #cou_navi{
-        height: 1000px;
-    }
-
-    /*클리닉 정보 출력 영역 div*/
-    #cli-content {
-        width: 1000px;
-        margin-left: 100px;
-        height: auto;
-    }
-
-    /*클리닉 예약 날짜 출력 영역 div*/
-    #cli-top{
-        border: 1px solid rosybrown;
-        height: auto;
-        width: 1100px;
-    }
-
-    #cli-top > div{
-        float: left;
-    }
-
-    #date-inner{
-        width: 700px;
-        height: 582px;
-        border: 1px solid;
-    }
-
-    /* 일요일 날짜 빨간색 */
-    .fc-day-sun a {
-        color: red;
-        text-decoration: none;
-    }
-
-    /* 토요일 날짜 파란색 */
-    .fc-day-sat a {
-        color: blue;
-        text-decoration: none;
-    }
-        
-    /*날짜 선택 시 색깔 넣기*/
-    .day-color{
-        background-color: #1E376F !important;
-        font-weight: 900;
-    }
-    
-    /*클리닉 예약 시간 출력 영역 div*/
-    #time-inner{
-        width: 300px;
-        height: 582px;
-        border-right : 1px solid;
-        border-bottom: 1px solid;
-    }
-
-    .time-border{
-        overflow: auto;
-        height: 580px;
-        display: none;
-    }
-
-    .time-border > ul{
-        list-style: none;
-    }
-
-    .time-content{
-        background-color: bisque;
-        border-radius: 10px;
-        text-decoration: none;
-        margin-top: 20px;
-        width: 230px;
-        border: 1px solid brown;
-        height: 50px;
-        line-height: 50px;
-        margin-right: 30px;
-    }
-
-    #cli-middle > h4{
-        margin-top: 30px;
-        margin-left: 10px;
-    }
-
-    /*클리닉 예약자 정보 입력 영역 div*/
-    #cli-bottom{
-        border: 1px solid pink;
-        height: auto;
-    }
-
-    #cli-bottom > input{
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    #hiddenResTime{
-        visibility: hidden;
-    }
 
 </style>
 </head>
@@ -284,7 +174,7 @@
                         </div>
 
                         <div id="res-part" align="center">
-                            <button type="submit">예약하기</button>
+                            <button class="btn btn-primary" type="submit">예약하기</button>
                         </div>
                     </form>
     

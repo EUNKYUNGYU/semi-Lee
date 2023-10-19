@@ -104,7 +104,7 @@
             width: 140px;
             height: 50px;
             font-size: 17px;
-            margin-top: 80px;
+            margin-top: 20px;
             
             
         }
@@ -125,6 +125,47 @@
             color: white;
         }
        
+       .allBtn{
+        	margin-left : 30px;
+        }
+        
+        .spanfont{
+        	font-size: 14px;
+        }
+        
+        #memId{
+        	margin-left: 80px;
+        }
+        
+        #memPwd{
+        	margin-left: 65px;
+        }
+        
+        #memPwd2{
+        	margin-left: 30px;
+        }
+        
+        #memName{
+        	margin-left: 90px;
+        }
+        #nickName{
+        	margin-left: 80px;
+        }
+        #email{
+        	margin-left: 35px;
+        }
+        #phone{
+        	margin-left: 19px;
+        }
+        #iNum{
+        	margin-left: 19px;
+        }
+        #height{
+        	margin-left: 65px;
+        }
+        #weight{
+        	margin-left: 35px;
+        }
 
     </style>
 </head>
@@ -136,87 +177,55 @@
 
         <div id="content_1"></div>
             <p id="p11">회원가입</p>
-            <hr style="border: 1.8px solid rgb(226, 226, 226);">
+            <hr>
             <p id="p21">낭만닥터 이사부의 회원이 되시면 다양한 정보와 맞춤 서비스를 이용하실 수 있습니다.</p>
             
             <br>
-            <hr style="border: 1.8px solid #1E376F;">
+            <hr>
            
             
             <form id="enroll-form" action="<%=contextPath%>/insert.me" method="post" class="formfont">
             <div class="content_2">
                 
-                        <br><br>
                         <span style="font-size: 23px; font-weight: bold;">기본입력사항(필수)</span>
-                        <br><br><br>
-                        <hr style="border: 1px solid #1E376F;">
-                        <br>
+                        <hr>
                         아이디*
-                        <br><br>
                         <input type="text" name="memId" id="memId" class="box" required>
                         <input type="button" value="중복확인" id="r_id2" onclick="idCheck();">
-                        <br><br>
                         <span style="font-size: 14px;">아이디는 영문 대/소문자, 숫자 조합하여 5 ~ 15자리</span>
-                        <br><br>
                         <hr>
-                        <br>
                         비밀번호*
-                        <br><br>
-                        <input type="password" name="memPwd" id="memPwd" class="box" required><br>
-                        <br>
+                        <input type="password" name="memPwd" id="memPwd" class="box" required>
                         <span style="font-size: 14px;">비밀번호는 영문 대/소문자, 숫자, 특수문자(!@#$%^*+=-)가 포함되는 10~16자</span>
-                        <br><br>
                         <hr>
-                        <br>
                         비밀번호 확인*
-                        <br><br>
                         <input type="password" name="memPwd2"  id="memPwd2" class="box" required>
-                        <br><br>
                         <hr>
-                        <br>
                         이름*
-                        <br><br>
                         <input type="text" name="memName" id="memName" class="box" required> <br>
-                        <br>
                         <hr>
-                        <br>
                        
   
    		     닉네임*
-                        <br><br>
-                        <input type="text" name="nickName" class="box" required> <br>
-                        <br>
+                        <input type="text" id="nickName" name="nickName" class="box" required> <br>
                         <hr>
-                        <br>
                         성별*
-                        <br><br>
                         <label for="man">남자</label>
                         <input type="radio" name="gender" value="M" id="man">
                         <label for="woman">여자</label>
                         <input type="radio" name="gender" value="F" id="woman"> <br><br>
                         <hr>
-                        <br>
                         이메일*
-                        <br><br>
                         <input type="email" name="email" id="email" placeholder="email@naver.com" class="box" required>
-                        <br><br>
                         <hr>
-                        <br>
                         휴대전화*
-                        <br><br>
                         <input type="text" name="phone" id="phone" placeholder="-을 제외하고 입력하세요." class="box" required>
-                        <br><br><br>
                         <hr>
-                        <br>
                   주민등록번호*
-                        <br><br>
                         <input type="password" name="iNum" id="iNum" placeholder="-을 제외하고 입력하세요." class="box" required>
-                        <br><br>
                         <hr>
-                        <br>
                         
                         <input type="checkbox" checked onclick="return false;">[필수] 이용약관동의
-                        <br><br>
                         <div class="auto">
                             1. 개인정보 수집목적 및 이용목적 <br>
 
@@ -275,9 +284,7 @@
                             - 수집항목 : 이름, 아이디, 휴대전화번호<br>
                             - 보유기간 : 회원 탈퇴 시 혹은 법정 보유 기간<br>
                         </div>
-                        <br><br>
                         <input type="checkbox" checked onclick="return false;">[필수] 개인정보 수집 및 이용 동의
-                        <br><br>
                         <div class="auto">
                             1. 개인정보 수집목적 및 이용목적 <br>
 
@@ -344,74 +351,47 @@
                         <span style="font-size: 23px; font-weight: bold;">건강관리입력사항(선택)</span>
                         <br><br>
                         <hr style="border: 1px solid #1E376F;">
-                        <br>
-                        <br>
                         키
-                        <br><br>
-                        <input type="text" placeholder="   cm" class="box" name="height" required>
-                        <br><br>
+                        <input type="text" placeholder="   cm" class="box" id="height" name="height" required>
                         <hr>
-                        <br>
                         몸무게
-                        <br><br>
-                        <input type="text" placeholder="   kg" class="box" name="weight" required>
-                        <br><br>
+                        <input type="text" placeholder="   kg" class="box" id="weight" name="weight" required>
                         <hr>
-                        <br>
-                        질병
-                        <span style="font-size: 14px;">(중복 선택 가능)</span>
-                        <br><br>
-                        <input type="checkbox" value="암" name="diseases">암
-                        <input type="checkbox" value="간질환" name="diseases">간질환
-                        <input type="checkbox" value="심장질환" name="diseases">심장질환
-                        <input type="checkbox" value="뇌혈관질환" name="diseases">뇌혈관질환
-                        <br>
-                        <input type="checkbox" value="당뇨병" name="diseases">당뇨병
-                        <input type="checkbox" value="고혈압" name="diseases">고혈압
-                        <input type="checkbox" value="호흡기질환" name="diseases">호흡기질환
-                        <input type="checkbox" value="기타" name="diseases">기타
-                        <br><br>
-                        <hr>
-                        <br>
-                        흡입 알레르기
-                        <span style="font-size: 14px;">(중복 선택 가능)</span>
-                        <br><br>
-                        <input type="checkbox" value="곤충류" name="inhaleAll">곤충류
-                        <input type="checkbox" value="진드기류" name="inhaleAll">진드기류
-                        <input type="checkbox" value="목초화분" name="inhaleAll">목초화분
-                        <input type="checkbox" value="비듬&상피세포" name="inhaleAll">비듬&상피세포
-                        <br>
-                        <input type="checkbox" value="잡초화분" name="inhaleAll">잡초화분
-                        <input type="checkbox" value="수목화분" name="inhaleAll">수목화분
-                        <input type="checkbox" value="곰팡이류" name="inhaleAll">곰팡이류
-                        <input type="checkbox" value="기타" name="inhaleAll">기타
-                        <br><br>
-                        <hr>
-                        <br>
-                        음식물 알레르기
-                        <span style="font-size: 14px;">(중복 선택 가능)</span>
-                        <br><br>
-                        <input type="checkbox" value="곡류" name="foodAll">곡류
-                        <input type="checkbox" value="해산물" name="foodAll">해산물
-                        <input type="checkbox" value="채소류" name="foodAll">채소류
-                        <input type="checkbox" value="동물성식품" name="foodAll">동물성식품
-                        <br>
-                        <input type="checkbox" value="과일류" name="foodAll">과일류
-                        <input type="checkbox" value="견과류" name="foodAll">견과류
-                        <input type="checkbox" value="기타" name="foodAll">기타
-                    	<br>
-                    	<hr>  
-                    
-                
+                     질병
+                    <span class="spanfont">(중복 선택 가능)</span>
+                    <input type="checkbox" value="암" name="diseases" class="allBtn">암
+                    <input type="checkbox" value="간질환" name="diseases" class="allBtn">간질환
+                    <input type="checkbox" value="심장질환" name="diseases" class="allBtn">심장질환
+                    <input type="checkbox" value="뇌혈관질환" name="diseases" class="allBtn">뇌혈관질환
+                    <input type="checkbox" value="당뇨병" name="diseases" class="allBtn">당뇨병
+                    <input type="checkbox" value="고혈압" name="diseases" class="allBtn">고혈압
+                    <input type="checkbox" value="호흡기질환" name="diseases" class="allBtn">호흡기질환
+                    <input type="checkbox" value="기타" name="diseases" class="allBtn">기타
+                    <hr>
+                    흡입 알레르기
+                    <span class="spanfont">(중복 선택 가능)</span>
+                    <input type="checkbox" value="곤충류" name="inhaleAll" class="allBtn">곤충류
+                    <input type="checkbox" value="진드기류" name="inhaleAll" class="allBtn">진드기류
+                    <input type="checkbox" value="목초화분" name="inhaleAll" class="allBtn">목초화분
+                    <input type="checkbox" value="비듬&상피세포" name="inhaleAll" class="allBtn">비듬&상피세포
+                    <input type="checkbox" value="잡초화분" name="inhaleAll" class="allBtn">잡초화분
+                    <input type="checkbox" value="수목화분" name="inhaleAll" class="allBtn">수목화분
+                    <input type="checkbox" value="곰팡이류" name="inhaleAll" class="allBtn">곰팡이류
+                    <input type="checkbox" value="기타" name="inhaleAll" class="allBtn">기타
+                    <hr>
+                    음식물 알레르기
+                    <span class="spanfont">(중복 선택 가능)</span>
+                    <input type="checkbox" value="곡류" name="foodAll" class="allBtn">곡류
+                    <input type="checkbox" value="해산물" name="foodAll" class="allBtn">해산물
+                    <input type="checkbox" value="채소류" name="foodAll" class="allBtn">채소류
+                    <input type="checkbox" value="동물성식품" name="foodAll" class="allBtn">동물성식품
+                    <input type="checkbox" value="과일류" name="foodAll" class="allBtn">과일류
+                    <input type="checkbox" value="견과류" name="foodAll" class="allBtn">견과류
+                    <input type="checkbox" value="기타" name="foodAll" class="allBtn">기타
+                    <hr>
             </div>
-                
         </div>
-      
-
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-       
         <div id="content_3" align="center">
-            <br><br><br><br><br><br><br><br>
             <button type="reset" id="cancel1">취소</button>
             <button type="submit" id="register1"  onclick="return checkAll();">회원가입</button>
             <br><br><br><br><br><br>

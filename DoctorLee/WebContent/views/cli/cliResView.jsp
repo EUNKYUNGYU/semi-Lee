@@ -15,7 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
 <!--style-->
-<link rel="stylesheet" href="resources/css/cli/cliRes.css">
+<link rel="stylesheet" href="resources/css/cou/couRes.css">
 
 <!--fullCalendar-->
 <script>
@@ -174,7 +174,7 @@
                         </div>
 
                         <div id="res-part" align="center">
-                            <button type="submit">예약하기</button>
+                            <button class="btn btn-primary" type="submit">예약하기</button>
                         </div>
                     </form>
     

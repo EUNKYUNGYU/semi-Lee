@@ -16,7 +16,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <!--style-->
-<link rel="stylesheet" href="resources/css/cli/cliDetail.css">
+<link rel="stylesheet" href="resources/css/cou/couResDetail.css">
+
+
 </head>
 <body>
 
@@ -53,9 +55,7 @@
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->
-                <div id="cli-middle">
-                    <h4>상세 정보</h4>
-                </div>
+                
 
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
@@ -171,10 +171,6 @@
                         for(let i in result){
                             resultStr += '<li class="rev-content">'
 
-                                            + '<div class="revNickName">'
-                                                + '<p>' + result[i].nickName + '</p>'
-                                            + '</div>'
-
                                             + '<div class="revScope">'
                                                 + '<span>⭐</span>'
                                                 + '<span>' + result[i].cliScope + '</span>'
@@ -184,8 +180,13 @@
                                                 + '<p>' + result[i].revContent + '</p>'
                                             + '</div>'
 
-                                            + '<div class="revDate">'
+                                            + '<div class="revNickName">'
+                                                + '<p>' + result[i].nickName + '</p>'
                                                 + '<P>' + result[i].createDate + '</p>'
+                                            + '</div>'
+
+                                            + '<div class="revDate">'
+                                                
                                             + '</div>'
 
                                        + '</li>'

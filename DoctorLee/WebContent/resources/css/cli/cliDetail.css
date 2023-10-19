@@ -12,7 +12,6 @@
 .content{
     height: auto;
     margin-top: 50px;
-    border: 1px solid red;
     margin-bottom: 50px;
 }
 
@@ -39,8 +38,8 @@
 
 /*클리닉 간단 정보 출력 영역 div*/
 #cli-top{
-    border: 1px solid rosybrown;
     height: auto;
+    border: 1px solid;
 }
 
 #cli-top > h4{ 
@@ -57,24 +56,18 @@
 
 /*클리닉 상세 정보 출력 영역 div*/
 #cli-middle{
-    border: 1px solid royalblue;
     height: auto;
-}
-
-#cli-middle > h4{
-    margin-top: 30px;
-    margin-left: 10px;
+    border: 1px solid;
+    padding-top: 20px;
+    padding-left: 20px;
 }
 
 /*클리닉 후기 출력 영역 div*/
 #cli-bottom{
-    border: 1px solid pink;
+    border: 1px solid;
     height: auto;
-}
-
-#cli-bottom > h4{
-    margin-top: 30px;
-    margin-left: 10px;
+    padding-top: 20px;
+    padding-left: 20px;
 }
 
 /*모달*/
@@ -132,10 +125,6 @@
 }
   
 /*리뷰 출력*/
-#rev-border{
-    border: 1px solid red;
-}
-
 #rev-list{
     list-style: none;
 }
@@ -149,15 +138,30 @@
     border-radius: 5px;
     width: 900px;
     margin-top: 20px;
-    margin-left: 8px;
 }
 
 .revScope{
-    border: 1px solid;
     width: auto;
 }
 
 .revScope > span{
     vertical-align: middle;
     margin-right: 5px;
+}
+
+#rev-top > *{
+    float: left;
+}
+
+#rev-top{
+    height: 50px;
+}
+
+#rev-top > h4{
+    line-height: 50px;
+}
+
+#rev-top > button{
+    margin-left: 10px;
+    margin-top: 5px;
 }

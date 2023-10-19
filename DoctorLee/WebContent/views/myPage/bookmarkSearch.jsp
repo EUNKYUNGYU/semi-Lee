@@ -6,47 +6,11 @@
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	String hosName = request.getParameter("hosName");
  %>
- <style>
- 	h3 {
-		text-align : center;
-	}
-	#hosName{
-		margin-left : 610px;
-		width : 700px;
-		height : 30px;
-		border-radius : 5px;
-		padding : 0;
-		
-		
-		
-	}
-	#search{
-		height : 35px;
-		
-		
-		
-		
-	}
-	#text-area{
-		height : 600px;
-		border : 1px solid black;
-		width : 700px;
-		margin-left : 610px;
-	}
-	#text-area > tbody > tr>td:hover {
-		font-size : 20px;
-	}
-	#text-area td,#text-area th{
-		border : 1px solid black;
-		padding : 0px;
-	}
-	#tr> button{
-		float :left;
-	}
- </style>
+
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="stylesheet" href="resources/css/myPage/bookmark.css">
 <meta charset="UTF-8">
 <title>검색 후 화면</title>
 </head>

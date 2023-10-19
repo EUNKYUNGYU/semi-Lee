@@ -12,67 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <title>병원 즐겨찾기</title>
-<style>
-	div{
-		box-sizing : border-box;
-	}
-	#bookmark{
-		width : 1000px;
-		height : 900px;
-		margin : auto;
-	}
-	#bookmark_main{
-		width : 80%;
-		height : 100%;
-		float : left;
-	}
-	#bookmark > div{
-		height : 100%;
-	}
-	#bookmark_main > div{
-		height : 100%;
-		float : left;
-	}
-	#area{
-		width : 20%;
-		float : left;
-	}
-	#bk-info{
-		width : 60%;
-		margin : auto;
-	}
-	#bk-info td, #bk-info th{
-		
-		padding : 8px;
-		text-align : center;
-	}
-	#bk-info th {
-		font-size : 23px;
-		color : skyblue;
-	}
-	#insertBk > img{
-		margin-top : 50px;
-		margin-left : 250px;
-	}
-	#insertBk > a {
-		margin-left : 350px;
-		
-	}
-	.delete {
-		margin : auto;
-		padding : 0;
-		float : left;
-		display : inline-block;
-		
-	}
-	.delete:hover{
-		cursor : pointer;
-	}
+
+	<link rel="stylesheet" href="resources/css/myPage/bookmark.css">
 	
-	
-	
-	
-</style>
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
@@ -87,8 +29,8 @@
 				<%@ include file="../common/myPageNavi.jsp" %>
 			 <% //System.out.println(loginUser1);%>
 			</div>
-			<div id="bookmark_main">
-				<h3 align="center"><%=loginUser.getMemName() %>님의 즐겨찾기</h3>
+			<div id="bookmark-main-area">
+				<h3 ><%=loginUser.getMemName() %>님의 즐겨찾기</h3>
 				<br><hr><br><br>
 				<table id="bk-info">
 					<% if(list == null){ %>

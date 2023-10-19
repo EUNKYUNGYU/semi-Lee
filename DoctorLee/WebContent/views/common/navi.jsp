@@ -200,7 +200,7 @@ header{
                     <li><a href="#">건강 메거진</a>
                         <ul>
                             <li><a href="<%=contextPath%>/search.med">의약품 검색</a></li>
-                            <li><a href="#">건강 관리 방법</a></li>
+                            <li><a href="<%=contextPath%>/main.ahc">건강 관리 방법</a></li>
                             <li><a href="#">긴급 상황 대비 메뉴얼</a></li>
                         </ul>
                     </li>

@@ -11,54 +11,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
- <style>
- 	h3 {
-		text-align : center;
-	}
-	#medName{
-		margin-left : 610px;
-		width : 700px;
-		height : 30px;
-		border-radius : 5px;
-		padding : 0;
-		
-		
-		
-	}
-	#search{
-		height : 35px;
-		
-		
-		
-		
-	}
-	#text-area{
-		height : 600px;
-		border : 1px solid black;
-		width : 700px;
-		margin-left : 610px;
-	}
-	#text-area > tbody > tr>td:hover {
-		font-size : 20px;
-	}
-	#text-area td,#text-area th{
-		border : 1px solid black;
-		padding : 0px;
-	}
-	#tr> button{
-		float :left;
-	}
-	.insert-med {
-		margin-left : 900px;
-		margin-bottom : 100px;
-	}
-	#search-form{
-		margin-bottom : 50px;
-	}
-	
-	
-</style>
+<title>dd</title>
+<link rel="stylesheet" href="resources/css/medicine/medicine.css">
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
@@ -76,7 +30,7 @@
 			<form action="<%=contextPath%>/select.med" id="search-form" method="post">
 			<input type="text" name="medName" id="medName" >
 			<button type="submit" id="search">검색</button><br><br>
-			<table id="text-area" class="medList-area">
+			<table id="text-area1" class="medList-area">
 				<thead>
 				<tr>
 					<th>검색된 약품 이름</th>

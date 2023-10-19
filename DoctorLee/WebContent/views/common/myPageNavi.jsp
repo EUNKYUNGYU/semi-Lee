@@ -26,64 +26,7 @@
 	
 	<!-- css -->
 	<link rel="stylesheet" href="resources/css/index.css">
- <style>
-        div {
-            box-sizing: border-box;
-            
-            
-        }
-        #mp_navi {
-            width : 225px;
-            height: 700px;
-            background-color:#1E376F;
-        }
-        #navigator{
-            list-style:none;
-            margin : 0;
-            padding : 0;
-            
-            margin-top : 100x;
-            
-            
-            
-        }
-        #navigator > li{
-            text-align : center;
-        }
-        #navigator a{
-            text-decoration: none;
-            color : whitesmoke;
-            display : block;
-            line-height: 35px;;
-
-
-        }
-        #navigator a:hover {
-            font-size : 16px;
-            color : rgba(245, 245, 245, 0.445)
-        }
-        #user_photo{
-            width:100px;
-            height:100px;
-            margin-left: 50px;
-
-        }
-        #empty{
-            background-color: white;
-        }
-        #navigator > li >ul{
-            list-style: none;
-            padding : 0;
-            display:none;
-        }
-        #navigator > li > a:hover + ul{
-            display: block;
-        }
-        #navigator > li > ul:hover{
-            display: block;
-        }
-        #navigator >li > ul a{font-size: 13px;}
-    </style>
+ 	<link rel="stylesheet" href="resources/css/myPage/myPageNavi.css">
 </head>
 <body>
     		

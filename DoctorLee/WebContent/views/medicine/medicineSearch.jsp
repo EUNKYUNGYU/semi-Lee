@@ -5,35 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>약품 검색</title>
-<style>
-	h3 {
-		text-align : center;
-	}
-	#medName{
-		margin-left : 610px;
-		width : 700px;
-		height : 30px;
-		border-radius : 5px;
-		padding : 0;
-		
-		
-		
-	}
-	#search{
-		height : 35px;
-		
-		
-		
-		
-	}
-	#text-area{
-		height : 300px;
-		border : 1px solid black;
-		width : 700px;
-		margin-left : 610px;
-	}
-	
-</style>
+<link rel="stylesheet" href="resources/css/medicine/medicine.css">
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>

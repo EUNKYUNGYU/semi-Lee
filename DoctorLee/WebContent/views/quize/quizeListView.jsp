@@ -161,9 +161,9 @@ form{
 	padding: 20px 0px;
 }
 
-a {
+.buttonAnswerCheck {
 	text-decoration: none;
-	color: #1E376F;
+	color: #007bff;
 	padding-left : 50px;
 }
 
@@ -269,7 +269,8 @@ a {
 					<div id="quizeFooter2">
 						<!-- 1. 로그인하지 않았을 경우 정답 확인하기 버튼을 눌렀을 때 확인 불가능 -->
 						<% if(loginUser == null) { %>
-								<a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능합니다.');">정답 확인하기 &gt;</a>
+								<a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능합니다.');"
+								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 						
 						<!-- 1. 로그인 했을 경우 
 							- 제출 기한이 지나지 않았다면 answerExist.qz(QuizeAnswerExistController)에서 정답을 제출한 적이 있는지 확인 후
@@ -281,11 +282,13 @@ a {
 						<% } else { %>
 							<!-- 2. 제출 기한 지남 -->
 							<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
-								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=false">정답 확인하기 &gt;</a>
+								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=false"
+								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 								
 							<!-- 2. 제출 기한이 남은 경우-->
 							<% } else { %>
-								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=true">정답 확인하기 &gt;</a>
+								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=true"
+								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 							<% } %>
 								
 						<% } %>

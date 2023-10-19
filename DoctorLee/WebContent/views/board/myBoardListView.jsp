@@ -190,7 +190,12 @@ footer {
 						<% for(Board b : list) { %>
 					    <tr>
 					      <td scope="col" width="10%"><%= b.getBoardNo() %></th>
-					      <td scope="col" width="40%"><%= b.getBoardTitle() %></th>
+					      
+					      <% if(loginUser != null){ %>
+					      <td scope="col" width="40%" name="<%= b.getBoardNo() %>&memNo=<%= loginUser.getMemNo() %>"><%= b.getBoardTitle() %></td>
+					      <% } else { %>
+                      	  <td scope="col" width="40%" name="<%= b.getBoardNo() %>&memNo=0"><%= b.getBoardTitle() %></td>
+					      <% } %>
 					      <td scope="col" width="20%"><%= b.getCreateDate() %></th>
 					      <td scope="col" width="10%"><%= b.getViews() %></th>
 					      <td scope="col" width="10%">추천수</th>
@@ -199,6 +204,21 @@ footer {
 						<% } %>
 					  </tbody>
 					</table>
+					
+					<script>
+						
+						$(function(){
+						
+							$('tr > td').click(function(){
+								location.href = '<%=contextPath%>/detail.bo?boardNo=' + $(this).attr('name');
+							})
+							
+						})
+						
+						
+					
+					</script>
+					
 					
 					<% if(loginUser != null && memId.equals(loginUser.getMemId())) { %>
 					<div id="buttonWrap">

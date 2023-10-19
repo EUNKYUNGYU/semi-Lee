@@ -186,9 +186,10 @@ a {text-decoration: none;}
 					</div>
 					<div id="boardlikeWrap">
 						<% if(loginUser != null) { %>
-						<a href="<%= contextPath %>/like.bo?memNo=<%= loginUser.getMemNo() %>&boardNo=<%= b.getBoardNo() %>">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+							<img src="resources/img/emptyHeart.png" alt="빈하트" id="emptyHeart" >
+							<a href="<%= contextPath %>/like.bo?memNo=<%= loginUser.getMemNo() %>&boardNo=<%= b.getBoardNo() %>">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
 						<% } else { %>
-					 	좋아요 <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+					 		<a href='#' onclick="alert('로그인 후 이용 가능한 기능입니다.');">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
 						<% } %>
 						
 					</div>	

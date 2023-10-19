@@ -163,7 +163,7 @@ footer {
 					         <% if(loginUser != null){ %>
 					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>&memNo=<%= loginUser.getMemNo() %>"><%= b.getBoardTitle() %></td>
 					      <% } else { %>
-					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>"><%= b.getBoardTitle() %></td>
+					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>&memNo=0"><%= b.getBoardTitle() %></td>
 					      <% } %>
 					      <% if("40".equals(type)){ %>
 					      	<td scope="row" width="10%">익명</td>

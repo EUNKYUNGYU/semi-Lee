@@ -61,8 +61,8 @@
                     <li><a href="first.bm">병원즐겨찾기</a></li>
                     <li><a href="<%=contextPath1%>/first.mehi">진료 내역 관리</a>
                         <ul>
-                            <li><a href="#">진료 내역 관리</a></li>
-                            <li><a href="#">처방전</a></li>
+                            <li><a href="/reservation.h">진료 내역 관리</a></li>
+                            <li><a href="/prescription.h">처방전</a></li>
                         </ul>
                     </li>
                     <li><a href="<%=contextPath1%>/main.hc">건강 관리</a></li>

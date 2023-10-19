@@ -1361,6 +1361,34 @@ DELETE FROM TB_LIKE WHERE BOARD_NO = 1 AND  MEM_NO = 1;
 SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = 1 AND MEM_NO = 1;
 
 
+SELECT
+		          BOARD_NO
+		         , BOARD_TYPE
+		         , BOARD_NAME
+		         , MEM_NO
+		         , MEM_ID
+		         , NICKNAME
+		         , BOARD_TITLE
+		         , BOARD_CONTENT
+		         , TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD HH24:MI')CREATE_DATE
+		         , VIEWS
+		         , BOARD_CONTENT
+		         , (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = 1) AS LIKES
+		         , (SELECT COUNT(*) FROM TB_COMMENT WHERE BOARD_NO = 1) AS COMMENTS
+		         , B.STATUS
+                 , (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = 1 AND MEM_NO = 1) AS LIKE_MEM
+		    FROM
+		         TB_BOARD B 
+		    JOIN
+		          TB_MEMBER ON(WRITER = MEM_NO)
+		    JOIN
+		        TB_BOARD_TYPE USING(BOARD_TYPE)
+		    WHERE
+		          B.STATUS = 'Y'
+		        AND
+        	BOARD_NO = 1;
+
+
 
 
 

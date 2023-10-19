@@ -21,121 +21,15 @@
 <head>
 <meta charset="UTF-8">
 <title>나의 게시글 리스트 전체보기</title>
+
+<link rel="stylesheet" href="resources/css/board/myBoardListView.css">
+
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-<style>
 
-* {
-	box-sizing: border-box;
-}
-
-body{
-	margin : 0;
-}
-
-#header {
-	width: 100vw;
-	height: 120px;
-}
-
-main {
-	width: 100%;
-	height: auto; 
-	min-height: 1000px;
-	line-height: 30px;
-}
-
-main > section, main > aside, main > div{
-	float: left;
-}
-
-.aside {
-	height: auto;
-	float: left;
-	margin : 20px auto;
-	display: flex;
-	justify-content: center;
-	padding: 0;
-}
-
-#aside1{width :25%}
-
-#aside2{width :15%}
-
-#section{
-	width: 60%;
-	height: auto; 
-	min-height: 1000px;
-	float: left;
-	padding: 20px;
-}
-
-#contentTitle{
-	width : 100%;
-	height : 100px;
-	padding: 20px;
-	font-size : 30px;
-	font-weight: bold;
-	line-height : 200%;
-}
-
-#content{
-	width : 100%;
-	height : auto;
-}
-
-article{width: 95%; height: auto; margin : 20px;}
-					
-#userWrap{height: 100px;}
-
-#userWrap > div{float: left; }
-
-#userThubnail{width: 10%; height: 100%;}
-
-#userInforWrap{width: 70%; height: 100%; padding: 5px;}
-
-#userId{height: 60%; padding: 10px; font-size: 25px; font-weight: bold;}
-
-#userBoard{height: 40%; padding: 5px 10px;}
-					
-#typeWrap{height: 50px; padding: 7px;}
-
-#buttonWrap{height: 50px;}
-
-#buttonWrap > div{float: left; }
-
-#buttonWrap1{width: 90%; height:100%; padding:10px;}
-
-#buttonWrap2{width: 10%; height:100%; padding:5px; text-align: right;}
-
-#page, #search{
-	width : 100%;
-	height : 100px;
-	padding: 20px;
-	text-align: center;
-}
-
-footer {
-	width: 100%;
-	height: auto;
-}
-
-.messageList {
-	text-decoration: none;
-	color: black;
-	
-}
-
-#boardTable{
-	background-color: rgb(232, 238, 253);
-	border-radius: 7px;
-}
-
-
-</style>
 </head>
 <body>
 
@@ -190,7 +84,12 @@ footer {
 						<% for(Board b : list) { %>
 					    <tr>
 					      <td scope="col" width="10%"><%= b.getBoardNo() %></th>
-					      <td scope="col" width="40%"><%= b.getBoardTitle() %></th>
+					      
+					      <% if(loginUser != null){ %>
+					      <td scope="col" width="40%" name="<%= b.getBoardNo() %>&memNo=<%= loginUser.getMemNo() %>"><%= b.getBoardTitle() %></td>
+					      <% } else { %>
+                      	  <td scope="col" width="40%" name="<%= b.getBoardNo() %>&memNo=0"><%= b.getBoardTitle() %></td>
+					      <% } %>
 					      <td scope="col" width="20%"><%= b.getCreateDate() %></th>
 					      <td scope="col" width="10%"><%= b.getViews() %></th>
 					      <td scope="col" width="10%">추천수</th>
@@ -199,6 +98,21 @@ footer {
 						<% } %>
 					  </tbody>
 					</table>
+					
+					<script>
+						
+						$(function(){
+						
+							$('tr > td').click(function(){
+								location.href = '<%=contextPath%>/detail.bo?boardNo=' + $(this).attr('name');
+							})
+							
+						})
+						
+						
+					
+					</script>
+					
 					
 					<% if(loginUser != null && memId.equals(loginUser.getMemId())) { %>
 					<div id="buttonWrap">

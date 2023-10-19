@@ -7,11 +7,11 @@
 <title>커뮤니티 사이드바</title>
 
  <style>
+
         #mp_navi {
             width : 225px;
             height: 700px;
-            border: 2px rgb(230, 230, 230);
-            border-style: solid none;
+            background-color:#1E376F;
         }
         
         #navigator{
@@ -27,20 +27,20 @@
         
         #navigator a{
             text-decoration: none;
+            color : whitesmoke;
             display : block;
             line-height: 35px;;
         }
         
         #navigator a:hover {
             font-size : 16px;
-            color : #1E376F;
+            color : rgba(245, 245, 245, 0.445)
         }
         
         #user_photo{
             width:100px;
             height:100px;
-            margin-left: 61px;
-            margin-top: 20px;
+            margin-left: 50px;
         }
         #empty{
             background-color: white;
@@ -54,7 +54,7 @@
         
         #navigator > li {
             list-style: none;
-            padding : 7px 30px;
+            padding : 10px;
         }
         
         #navigator > li > a:hover + ul{
@@ -67,6 +67,7 @@
         
         #navigator >li > ul a{font-size: 13px;}
         
+        .loginMemUser{width: 150px; height: 40px; border-radius: 7px; }
     </style>
 </head>
 <body>
@@ -78,6 +79,7 @@
                         </tr>
 					<%if(loginUser != null){%>
 		                <tr>
+		                    <br><br>
 		                    <div align="center"><%=loginUser.getMemName()%>님 환영합니다.</div><br>
 		                </tr>
                 	<% } else { %>
@@ -89,13 +91,13 @@
                 </div>
                 <ul id="navigator">
                     <% if(loginUser != null){ %>
-                		<li><a  href="<%= contextPath %>/views/board/boardEnrollForm.jsp" class="btn btn-primary" >게시글 작성</a></li>
-                    	<li><a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=receiver" class="btn btn-primary">쪽지함</a></li>
-                    	<li><a href="#" class="btn btn-light">내가 쓴 글 확인</a>
+                		<li><a  href="<%= contextPath %>/views/board/boardEnrollForm.jsp" class="btn btn-primary loginMemUser">게시글 작성</a></li>
+                    	<li><a href="#" class="btn btn-primary loginMemUser">내가 쓴 글 확인</a>
+                    	<li><a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=receiver" class="btn btn-primary loginMemUser">쪽지함</a></li>
                     <% } else { %>
-                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary">게시글 작성</a></li>
-                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary">쪽지함</a></li>
-                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-light">내가 쓴 글 확인</a></li>
+                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary loginMemUser">게시글 작성</a></li>
+                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary loginMemUser">내가 쓴 글 확인</a></li>
+                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary loginMemUser">쪽지함</a></li>
                     <% } %>
                         	<li>
                                 <a href="<%= contextPath %>/list.bo?cpage=1&type=10">공지사항</a>

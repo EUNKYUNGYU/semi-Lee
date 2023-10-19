@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+body{
+	margin : 0;
+}
+
+#header {
+	width: 100vw;
+	height: 120px;
+}
+
+main {
+	width: 100%;
+	height: auto; 
+	line-height: 30px;
+}
+
+main > section, main > aside, main > div{
+	float: left;
+}
+
+.aside {
+	height: auto;
+	float: left;
+	margin : 20px auto;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+}
+
+#aside1{width :25%}
+
+#aside2{width :15%}
+
+#section{
+	width: 60%;
+	height: auto; 
+	min-height: 1000px;
+	float: left;
+	padding: 20px;
+}
+
+#contentTitle{
+	width : 100%;
+	height : 100px;
+	padding: 20px;
+	font-size : 30px;
+	font-weight: bold;
+	line-height : 200%;
+}
+
+#content{
+	width : 100%;
+	height : auto;
+}
+
+article{
+	width: 95%;
+	height: auto;
+	margin : 20px auto;
+	border: 1px solid rgb(230, 230, 230); border-radius: 10px;
+	padding: 20px;
+}
+
+#quizeHeader {
+	width: 100%;
+	height: 70px;
+	padding: 20px;
+	font-size : 30px;
+	font-weight : 600;
+}
+
+#quizeHeader>div {
+	float: left;
+}
+
+#title {
+	width: 70%;
+	height: 100%;
+	font-size: 30px;
+}
+
+#vote, #deadline {
+	width: 15%;
+	height: 100%;
+}
+
+#quizeContent {
+	width: 100%;
+	height: 80px;
+	line-height: 30px;
+	padding: 20px;
+	color : darkblue;
+	font-size : 20px;
+	font-weight : bold;
+}
+
+#quizeFooter {
+	width: 100%;
+	height:auto;
+	padding: 20px;
+}
+
+#quizeFooter  >div {
+	line-height: 70px;
+}
+
+#back{
+	width : 100%;
+	height : 100px;
+	padding: 20px;
+}
+
+footer {
+	width: 100%;
+	height: auto;
+}
+
+
+

@@ -1,0 +1,133 @@
+@charset "UTF-8";
+div{
+		box-sizing : border-box;
+	}
+	#bookmark{
+		width : 1000px;
+		height : 900px;
+		margin : auto;
+	}
+	#bookmark-main-area{
+		width : 80%;
+		height : 100%;
+		float : left;
+	}
+	#bookmark > div{
+		height : 100%;
+	}
+	#bookmark-main-area > div{
+		height : 100%;
+		float : left;
+	}
+	#area{
+		width : 20%;
+		float : left;
+	}
+	#bk-info{
+		width : 60%;
+		margin : auto;
+	}
+	#bk-info td, #bk-info th{
+		
+		padding : 8px;
+		text-align : center;
+	}
+	#bk-info th {
+		font-size : 23px;
+		color : skyblue;
+	}
+	#insertBk > img{
+		margin-top : 50px;
+		margin-left : 250px;
+	}
+	#insertBk > a {
+		margin-left : 350px;
+		
+	}
+	.delete {
+		margin : auto;
+		padding : 0;
+		float : left;
+		display : inline-block;
+		
+	}
+	.delete:hover{
+		cursor : pointer;
+	}
+	#bookmark-main-area > h3{
+		text-align : center;
+	}
+	
+	<!--여기까지가 bookmark.jsp -->
+	
+	
+	
+	h3 {
+		text-align : center;
+	}
+	#hosName{
+		margin-left : 610px;
+		width : 700px;
+		height : 30px;
+		border-radius : 5px;
+		padding : 0;
+		
+		
+		
+	}
+	#search{
+		height : 35px;
+		
+		
+		
+		
+	}
+	#text-area{
+		height : 300px;
+		border : 1px solid black;
+		width : 700px;
+		margin-left : 610px;
+	}
+	#bookmark-main > h3{
+		text-align : center;
+	}
+	h3 {
+		text-align : center;
+	}
+	#hosName{
+		margin-left : 610px;
+		width : 700px;
+		height : 30px;
+		border-radius : 5px;
+		padding : 0;
+		
+		
+		
+	}
+	#search{
+		height : 35px;
+		
+		
+		
+		
+	}
+	#text-area{
+		height : 600px;
+		border : 1px solid black;
+		width : 700px;
+		margin-left : 610px;
+	}
+	#text-area > tbody > tr>td:hover {
+		font-size : 20px;
+	}
+	#text-area td,#text-area th{
+		border : 1px solid black;
+		padding : 0px;
+	}
+	#tr> button{
+		float :left;
+	}
+	<!--여기까지가 bookmarkSearch-->
+ 
+	
+	

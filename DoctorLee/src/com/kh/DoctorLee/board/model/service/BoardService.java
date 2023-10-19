@@ -57,14 +57,14 @@ public class BoardService {
 		return result;
 	}
 	
-	public Board selectBoard(int boardNo) {
+	public Board selectBoard(int boardNo, int memNo) {
 		
 		Connection conn = getConnection();
 		int result = new BoardDao().increseViews(conn, boardNo);
 		Board b = new Board();
 		
 		if(result > 0) {
-			b = new BoardDao().selectBoard(conn, boardNo);
+			b = new BoardDao().selectBoard(conn, boardNo, memNo);
 			commit(conn);
 		} else {
 			rollback(conn);

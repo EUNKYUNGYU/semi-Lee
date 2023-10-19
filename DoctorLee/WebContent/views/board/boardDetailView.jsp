@@ -4,7 +4,6 @@
     
 <% 
 	Board b = (Board)request.getAttribute("b");
-
 %>
 
 <!DOCTYPE html>
@@ -12,120 +11,13 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 상세보기</title>
+
+<link rel="stylesheet" href="resources/css/board/boardDetailView.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
 </script>
 
-<style>
 
-* {
-	box-sizing: border-box;
-}
-
-body{margin : 0;}
-
-#header {width: 100vw; height: 100px;}
-
-main {width: 100%; height: auto;  line-height: 30px;}
-
-main > section, main > aside, main > div{float: left;}
-
-.aside {height: auto; float: left; margin: 20px auto; display: flex; justify-content: center; padding: 0;}
-
-#aside1{width :25%}
-
-#aside2{width :15%}
-
-#section{width: 60%; height: auto;  min-height: 1000px; float: left; padding: 20px;s}
-
-#contentTitle{width : 100%; height : 100px; padding: 20px; font-size : 30px; font-weight: bold; line-height : 200%;}
-
-#content{width : 100%; height : auto; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 0px 0px 20px 0px;}
-
-article{width: 95%; height: auto; margin: 20px auto; }
-
-#boardHeader {width: 100%; height: 70px; padding: 20px; font-size: 30px; font-weight : 600;}
-
-#boardHeader>div {float: left;}
-
-#title {width: 70%; height: 100%; font-size: 30px;}
-
-#writerInfoWrap{width: 100%; height: 120px; padding: 10px;}
-
-#writerInfoWrap > div {float: left;}
-
-#writerThumbnail{width: 10%; height: 100%;}
-
-#user_photo2{width: 100px; height: 100px;}
-
-#writeIdWrap{width: 90%; height: 100%;  padding: 30px;} 
-
-#writeId{width: 100%; height: 30px; font-size : 15px; font-weight : bold; line-height : 100px;}
-
-#writeInfoHidden{display: none; width: 100px; height: auto; position: absolute; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 6px; font-size : 12px;
-				background-color: white; }
-
-#writerIdButton{cursor: pointer;}
-
-#writeInfoHidden > ul{padding: 0px; margin: 0px;}
-
-#writeInfoHidden > ul > li{padding: 3px;}
-
-#writeInfoHidden > ul > li >a {padding: 3px; color: black; cursor: pointer;}
-
-#boardInfor {width: 100%; height: 50px; line-height: 30px; padding: 10px; color : gray; font-size : 12px;}
-
-#boardInfor > div{float: left;}
-
-#boardDate{width: 80%;}
-
-#commentCount{width: 20%; text-align: right;}
-
-#boardContent{width:100%; height: auto; padding: 10px;}
-
-#boardlikeWrap{width:100%; height:30px; line-height: 30px; padding-left: 10px; color : gray;font-size : 12px;}
-
-#commentWrap {width: 100%; height: auto;}
-
-#commentWrap > div{float: left;}
-
-#commentOption{width:100%; height:30px; font-size: 18px; font-weight: 600; padding:0 10px;}
-
-#commentOption > a{color : gray; font-size : 12px; padding:0 10px;}
-
-#commentContentBox{width: 100%; height: auto;}
-
-#commentContentBox > div{float: left;}
-
-#commentWriteMemId{width: 100%; height: 30px; font-weight: bold; font-size: 13px; padding: 0 10px;}
-
-#commentContent{width: 100%; height: 30px; font-size: 11px; padding: 0 10px;}
-
-#commentCreateDate{width: 100%; height: 30px; font-size: 10px; color: gray; padding: 0 10px;}
-
-#commentCreateDate > a{color: gray;}
-
-#commentInsertBox{width: 100%; height: 100px; border: 0.5px solid darkgray; border-radius: 10px; background-color: white; padding: 5px; height: 95%;}
-
-#commentWriter{width: 100%; height: 30px; font-size : 15px; font-weight: 600; padding:0 10px;}
-
-#commentContent{width: 100%; height: 30px;background-color: transparent; resize: none; outline: 0; border: 0; padding:0 10px;}
-
-#submitWrap{float: right; margin: -36px 10px -36px 0px;}
-
-#submitWrap > a{color : gray; font-size : 12px; padding:0 10px;}
-
-#page{width : 100%; height : 80px; padding: 20px;}
-
-#page > div {float: left;}
-
-#writeWrap{width: 80%;}
-
-#upWrap{width: 20%; text-align: right;}
-
-footer {width: 100%; height: auto;}
-
-a {text-decoration: none;}
-</style>
 </head>
 <body>
 
@@ -186,9 +78,15 @@ a {text-decoration: none;}
 					</div>
 					<div id="boardlikeWrap">
 						<% if(loginUser != null) { %>
-							<img src="resources/img/emptyHeart.png" alt="빈하트" id="emptyHeart" >
-							<a href="<%= contextPath %>/like.bo?memNo=<%= loginUser.getMemNo() %>&boardNo=<%= b.getBoardNo() %>">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+						<% System.out.println(b.getLikeMem()); %>
+							<% if(b.getLikeMem() == 1) { %>
+								<img src="resources/img/fullHeart.png" alt="빈하트" id="emptyHeart" >
+							<% } else { %>
+								<img src="resources/img/emptyHeart.png" alt="빈하트" id="emptyHeart" >
+							<% } %>
+								<a href="<%= contextPath %>/like.bo?memNo=<%= loginUser.getMemNo() %>&boardNo=<%= b.getBoardNo() %>">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
 						<% } else { %>
+							<img src="resources/img/emptyHeart.png" alt="빈하트" id="emptyHeart" >
 					 		<a href='#' onclick="alert('로그인 후 이용 가능한 기능입니다.');">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
 						<% } %>
 						

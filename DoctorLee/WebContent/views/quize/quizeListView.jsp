@@ -66,7 +66,7 @@
 						<div id="deadline">
 						<!-- 퀴즈의 제출 기한이 지난 경우 -->
 						<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
-							기한 지남
+							기한 종료
 						
 						<!-- 퀴즈의 제출 기한이 남은 경우, 몇 일 남았는지 보이게 -->
 						<% } else { %>

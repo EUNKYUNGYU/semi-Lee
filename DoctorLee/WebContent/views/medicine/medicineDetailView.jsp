@@ -11,6 +11,7 @@
 		width : 500px;
 		margin-left : 700px;
 		height : 30px;
+		text-align : center;
 		
 	}
 	#info-area{
@@ -18,18 +19,22 @@
 		width : 500;
 		margin-left : 700px;
 		height : 60px;
+		text-align : center;
 	}
 	#cauction-area {
 		border : 1px solid black;
 		width : 500;
 		margin-left : 700px;
 		height : 100px;
+		text-align : center;
 	}
 	.back {
 		margin-left : 700px;
 		margin-bottom : 50px;
 	}
-	
+	.med-detail-view{
+		text-align : center;
+	}
 	
 </style>
 <!DOCTYPE html>
@@ -42,14 +47,14 @@
 	<%@ include file="../common/navi.jsp" %>
 	<div class="outer">
 		<br>
-		<h2 align="center">약품 상세보기</h2>
+		<h2 class="med-detail-view">약품 상세보기</h2>
 		
 		<br><br>
-		<div id = "medName-area" align="center">약품명 : <%= med.getMedName() %></div>
+		<div id = "medName-area" >약품명 : <%= med.getMedName() %></div>
 
-		<div id= "info-area" align="center">pre-info : <%=med.getPreInfo() %></div>
+		<div id= "info-area" >pre-info : <%=med.getPreInfo() %></div>
 
-		<div id= "cauction-area" align="center">주의사항 : <%=med.getCauction() %></div>
+		<div id= "cauction-area" >주의사항 : <%=med.getCauction() %></div>
 	</div>
 	
 

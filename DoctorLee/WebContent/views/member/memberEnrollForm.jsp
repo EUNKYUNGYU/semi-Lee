@@ -3,171 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="stylesheet" href="resources/css/member/enrollForm.css">
 <meta charset="UTF-8">
 <title>회원가입폼</title>
- <style>
-        div{
-            box-sizing: border-box;
-            margin: auto;
-        }
-
-        /*전체를 감싸는 div 속성*/
-        #content{
-            width: 1800px;
-            height: 2800px;
-        }
-
-       
-
-        /*세부속성*/
-        #content_1, #content_2, #content_3{
-            width: 100%;
-        }
-
-        #content_1{height: 10%;}
-        .content_2{height: 80%;}
-        #content_3{height: 10%;}
-
-        /*-----------------content_2-----------------*/
-        
-        .content_2{
-            width: 1200px;
-            height: 1000px;
-            float: left;
-            margin-left: 300px;
-            
-        }
-        
-        .box{
-            width: 240px;
-            height: 30px;
-            background-color:#ecf1ff;
-            border: 1px solid rgb(138, 138, 138);
-            border-radius: 3px;
-        }
-        
-        #r_id2{
-            width: 100px;
-            height: 30px;
-            background-color: #1E376F;
-            border-radius: 3px;
-            color: white;
-            border: none;
-            font-size: 12px;
-        }
-
-        .auto{
-            overflow: auto;
-            width: 1200px;
-            height: 250px;
-            border: 2px solid rgb(235, 235, 235);
-        }
-        .auto2{
-            overflow: auto;
-            width: 1200px;
-            height: 100px;
-            border: 2px solid rgb(235, 235, 235);
-        }
-        
-        /*--------------------p태그---------------------*/
-        #p11{
-            text-align: center;
-            font-size: 38px;
-            font-weight: bolder;
-            margin-top: -150px;
-        }
-
-        #p21{
-            text-align: center;
-            font-size: 18px;
-            color: #1E376F;
-            font-weight: 600;
-            padding-top: 30px;
-            
-           
-        }
-       
-     
-        /*-------------텍스트 창--------------*/
-      
-        #checked_id{
-            margin-left: 550px;
-            margin-top: -50px;
-        }
-       
-        /*-----------버튼---------*/
-        #register1{
-            background-color: #1E376F;
-            color: white;
-            border: 1px solid #1E376F;
-            border-radius: 3px;
-            width: 140px;
-            height: 50px;
-            font-size: 17px;
-            margin-top: 20px;
-            
-            
-        }
-        #cancel1{
-            background-color: white;
-            color: #1E376F;
-            border: 1px solid #1E376F;
-            border-radius: 3px;
-            width: 140px;
-            height: 50px;
-            font-size: 17px;
-            margin-right: 40px;
-            
-        }
-
-        #cancel:hover{
-            background-color: #1E376F;
-            color: white;
-        }
-       
-       .allBtn{
-        	margin-left : 30px;
-        }
-        
-        .spanfont{
-        	font-size: 14px;
-        }
-        
-        #memId{
-        	margin-left: 80px;
-        }
-        
-        #memPwd{
-        	margin-left: 65px;
-        }
-        
-        #memPwd2{
-        	margin-left: 30px;
-        }
-        
-        #memName{
-        	margin-left: 90px;
-        }
-        #nickName{
-        	margin-left: 80px;
-        }
-        #email{
-        	margin-left: 35px;
-        }
-        #phone{
-        	margin-left: 19px;
-        }
-        #iNum{
-        	margin-left: 19px;
-        }
-        #height{
-        	margin-left: 65px;
-        }
-        #weight{
-        	margin-left: 35px;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -229,25 +67,25 @@
                         <div class="auto">
                             1. 개인정보 수집목적 및 이용목적 <br>
 
-                            가. 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 <br>
-
-                            콘텐츠 제공 , 구매 및 요금 결제 , 물품배송 또는 청구지 등 발송 , 금융거래 본인 인증 및 금융 서비스
-
-                            나. 회원 관리
-
-                            회원제 서비스 이용에 따른 본인확인 , 개인 식별 , 불량회원의 부정 이용 방지와 비인가 사용 방지 , 가입 의사 확인 , 연령확인 , 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 불만처리 등 민원처리 , 고지사항 전달 <br>
+				                            가. 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 <br>
+				
+				                            콘텐츠 제공 , 구매 및 요금 결제 , 물품배송 또는 청구지 등 발송 , 금융거래 본인 인증 및 금융 서비스
+				
+				                            나. 회원 관리
+				
+				                            회원제 서비스 이용에 따른 본인확인 , 개인 식별 , 불량회원의 부정 이용 방지와 비인가 사용 방지 , 가입 의사 확인 , 연령확인 , 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 불만처리 등 민원처리 , 고지사항 전달 <br>
 
                             2. 수집하는 개인정보 항목 : 이름 , 로그인ID , 비밀번호 , 이메일 , 14세미만 가입자의 경우 법정대리인의 정보
 
                             3. 개인정보의 보유기간 및 이용기간
 
-                            원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.<br>
-
-                            가. 회사 내부 방침에 의한 정보 보유 사유 <br>
+				                            원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.<br>
+				
+				                            가. 회사 내부 방침에 의한 정보 보유 사유 <br>
 
                             o 부정거래 방지 및 쇼핑몰 운영방침에 따른 보관 : OO년<br>
 
-                            나. 관련 법령에 의한 정보보유 사유<br>
+                            	나. 관련 법령에 의한 정보보유 사유<br>
 
                             o 계약 또는 청약철회 등에 관한 기록<br>
 
@@ -273,11 +111,11 @@
 
                             -보존기간 : 3개월<br>
 
-                            ※ 동의를 거부할 수 있으나 거부시 회원 가입이 불가능합니다.<br>
+                            	※ 동의를 거부할 수 있으나 거부시 회원 가입이 불가능합니다.<br>
 
                             #개인정보의 위탁 처리<br>
-                            어반레이디는 서비스 향상을 위해 관계법령에 따라 회원의 동의를 얻거나 관련 사항을 공개 또는 고지 후 회원의 개인정보를 외부에 위탁하여 처리하고 있습니다.<br>
-                            어반레이디의 개인정보처리 수탁자와 그 업무의 내용은 다음과 같습니다.<br>
+				                            어반레이디는 서비스 향상을 위해 관계법령에 따라 회원의 동의를 얻거나 관련 사항을 공개 또는 고지 후 회원의 개인정보를 외부에 위탁하여 처리하고 있습니다.<br>
+				                            어반레이디의 개인정보처리 수탁자와 그 업무의 내용은 다음과 같습니다.<br>
                             - 수탁자 : ㈜스냅컴퍼니<br>
                             - 알림전송수탁업체 : 주식회사 루나소프트<br>
                             - 위탁 업무 내용 : 신규 서비스(제품) 개발 및 맞춤 서비스 제공, 이벤트 및 광고성 정보 및 참여기회 제공<br>
@@ -288,25 +126,25 @@
                         <div class="auto">
                             1. 개인정보 수집목적 및 이용목적 <br>
 
-                            가. 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 <br>
-
-                            콘텐츠 제공 , 구매 및 요금 결제 , 물품배송 또는 청구지 등 발송 , 금융거래 본인 인증 및 금융 서비스
-
-                            나. 회원 관리
-
-                            회원제 서비스 이용에 따른 본인확인 , 개인 식별 , 불량회원의 부정 이용 방지와 비인가 사용 방지 , 가입 의사 확인 , 연령확인 , 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 불만처리 등 민원처리 , 고지사항 전달 <br>
+				                            가. 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 <br>
+				
+				                            콘텐츠 제공 , 구매 및 요금 결제 , 물품배송 또는 청구지 등 발송 , 금융거래 본인 인증 및 금융 서비스
+				
+				                            나. 회원 관리
+				
+				                            회원제 서비스 이용에 따른 본인확인 , 개인 식별 , 불량회원의 부정 이용 방지와 비인가 사용 방지 , 가입 의사 확인 , 연령확인 , 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 불만처리 등 민원처리 , 고지사항 전달 <br>
 
                             2. 수집하는 개인정보 항목 : 이름 , 로그인ID , 비밀번호 , 이메일 , 14세미만 가입자의 경우 법정대리인의 정보
 
                             3. 개인정보의 보유기간 및 이용기간
 
-                            원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.<br>
-
-                            가. 회사 내부 방침에 의한 정보 보유 사유 <br>
+				                            원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.<br>
+				
+				                            가. 회사 내부 방침에 의한 정보 보유 사유 <br>
 
                             o 부정거래 방지 및 쇼핑몰 운영방침에 따른 보관 : OO년<br>
 
-                            나. 관련 법령에 의한 정보보유 사유<br>
+                           	 나. 관련 법령에 의한 정보보유 사유<br>
 
                             o 계약 또는 청약철회 등에 관한 기록<br>
 
@@ -332,7 +170,7 @@
 
                             -보존기간 : 3개월<br>
 
-                            ※ 동의를 거부할 수 있으나 거부시 회원 가입이 불가능합니다.<br>
+                           	 ※ 동의를 거부할 수 있으나 거부시 회원 가입이 불가능합니다.<br>
 
                             #개인정보의 위탁 처리<br>
 			                            어반레이디는 서비스 향상을 위해 관계법령에 따라 회원의 동의를 얻거나 관련 사항을 공개 또는 고지 후 회원의 개인정보를 외부에 위탁하여 처리하고 있습니다.<br>
@@ -343,14 +181,11 @@
                             - 수집항목 : 이름, 아이디, 휴대전화번호<br>
                             - 보유기간 : 회원 탈퇴 시 혹은 법정 보유 기간<br>
                         </div>
-                        <br><br>
                         
 
-                        <hr style="border: 1px solid #1E376F;">                       
-                        <br>
+                        <hr>                       
                         <span style="font-size: 23px; font-weight: bold;">건강관리입력사항(선택)</span>
-                        <br><br>
-                        <hr style="border: 1px solid #1E376F;">
+                        <hr>
                         키
                         <input type="text" placeholder="   cm" class="box" id="height" name="height" required>
                         <hr>

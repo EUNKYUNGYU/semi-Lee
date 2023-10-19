@@ -1,0 +1,138 @@
+@charset "UTF-8";
+h3 {
+		text-align : center;
+	}
+	#medName{
+		margin-left : 610px;
+		width : 700px;
+		height : 30px;
+		border-radius : 5px;
+		padding : 0;
+		
+		
+		
+	}
+	#search{
+		height : 35px;
+		
+		
+		
+		
+	}
+	#text-area{
+		height : 300px;
+		border : 1px solid black;
+		width : 700px;
+		margin-left : 610px;
+	}
+	
+	
+<!--여기까지가 medicineSearch-->
+	#medName-area {
+		border : 1px solid black;
+		width : 500px;
+		margin-left : 700px;
+		height : 30px;
+		text-align : center;
+		
+	}
+	#info-area{
+		border : 1px solid black;
+		width : 500;
+		margin-left : 700px;
+		height : 60px;
+		text-align : center;
+	}
+	#cauction-area {
+		border : 1px solid black;
+		width : 500;
+		margin-left : 700px;
+		height : 100px;
+		text-align : center;
+	}
+	.back {
+		margin-left : 700px;
+		margin-bottom : 50px;
+	}
+	.med-detail-view{
+		text-align : center;
+	}
+	<!--여기까지가 medicineDetailView-->
+	.outer{
+		margin-bottom : 150px;
+		margin-left : 300px;
+	}
+	#medName-enroll,#preInfo-enroll,#cauction-enroll{
+		width : 300px;
+		
+	}
+	#medName-enroll{
+		height : 20px;
+	}
+	#preInfo-enroll{
+		height : 300px;
+	}
+	#cauction-enroll{
+		height : 300px;
+		margin-left : 20px;
+	}
+	.med-enrollForm {
+		text-align : center;
+	}
+	#check_medicine-enroll,#preInfo-enroll,#cauction-enroll{
+		margin-bottom : 30px;
+		
+	}
+	#search{
+		height : 35px;
+		
+		
+		
+		
+	}
+	#text-area1{
+		height : 600px;
+		border : 1px solid black;
+		width : 700px;
+		margin-left : 610px;
+	}
+	#text-area1 > tbody > tr>td:hover {
+		font-size : 20px;
+	}
+	#text-area1 td,#text-area1 th{
+		border : 1px solid black;
+		padding : 0px;
+	}
+	#tr> button{
+		float :left;
+	}
+	.insert-med {
+		margin-left : 900px;
+		margin-bottom : 100px;
+	}
+	#search-form{
+		margin-bottom : 50px;
+	}
+	<!--여기까지가 medicineSearchAfter-->
+	.outer{
+		margin-bottom : 150px;
+		margin-left : 300px;
+	}
+	#updateName,#updatePreInfo,#updateCauction{
+		width : 300px;
+		
+	}
+	#updateName{
+		height : 20px;
+	}
+	#updatePreInfo{
+		height : 300px;
+	}
+	#updateCauction{
+		height : 300px;
+		margin-left : 20px;
+	}
+	.update-medicine{
+		text-align : center;
+	}
+

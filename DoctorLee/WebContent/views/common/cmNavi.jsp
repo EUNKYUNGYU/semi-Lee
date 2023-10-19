@@ -7,11 +7,11 @@
 <title>커뮤니티 사이드바</title>
 
  <style>
-
         #mp_navi {
             width : 225px;
             height: 700px;
-            background-color:#1E376F;
+            border: 2px rgb(230, 230, 230);
+            border-style: solid none;
         }
         
         #navigator{
@@ -27,20 +27,20 @@
         
         #navigator a{
             text-decoration: none;
-            color : whitesmoke;
             display : block;
             line-height: 35px;;
         }
         
         #navigator a:hover {
             font-size : 16px;
-            color : rgba(245, 245, 245, 0.445)
+            color : #1E376F;
         }
         
         #user_photo{
             width:100px;
             height:100px;
-            margin-left: 50px;
+            margin-left: 61px;
+            margin-top: 20px;
         }
         #empty{
             background-color: white;
@@ -52,6 +52,11 @@
             display:none;
         }
         
+        #navigator > li {
+            list-style: none;
+            padding : 7px 30px;
+        }
+        
         #navigator > li > a:hover + ul{
             display: block;
         }
@@ -61,6 +66,7 @@
         }
         
         #navigator >li > ul a{font-size: 13px;}
+        
     </style>
 </head>
 <body>
@@ -68,28 +74,47 @@
                 <div id="empty">
                     <table id="user" align="center">
                         <tr>
-                            <br><br>
-                            <th align="center">xxx님 환영합니다.</th><br>
-                            
-                        </tr>
-                        <tr>
                             <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340" alt="회원사진" id="user_photo" >
                         </tr>
+					<%if(loginUser != null){%>
+		                <tr>
+		                    <div align="center"><%=loginUser.getMemName()%>님 환영합니다.</div><br>
+		                </tr>
+                	<% } else { %>
+	                    <tr>
+	                        <div>로그인이 필요한 서비스입니다.</div>
+	                    </tr>
+	                <% } %>
                     </table>
-                  
                 </div>
                 <ul id="navigator">
-                	<li><a href="#" class="btn btn-default">게시글 작성</a></li>
-                    <li><a href="#" class="btn btn-default">내가 쓴 글 확인</a>
-      				<li><a href="#" class="btn btn-default">쪽지함</a></li>
-                	<br>
-                	<br>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">자유게시판</a></li>
-                    <li><a href="#">정보게시판</a></li>
-                    <li><a href="#">익명게시판</a></li>
-                    <li><a href="#">퀴즈게시판</a></li>
-                    </li>
+                    <% if(loginUser != null){ %>
+                		<li><a  href="<%= contextPath %>/views/board/boardEnrollForm.jsp" class="btn btn-primary" >게시글 작성</a></li>
+                    	<li><a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=receiver" class="btn btn-primary">쪽지함</a></li>
+                    	<li><a href="#" class="btn btn-light">내가 쓴 글 확인</a>
+                    <% } else { %>
+                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary">게시글 작성</a></li>
+                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary">쪽지함</a></li>
+                    	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-light">내가 쓴 글 확인</a></li>
+                    <% } %>
+                        	<li>
+                                <a href="<%= contextPath %>/list.bo?cpage=1&type=10">공지사항</a>
+                            </li>
+                            <li>
+                                <a href="<%= contextPath %>/list.bo?cpage=1&type=20">자유게시판</a>
+                            </li>
+                            <li>
+                                <a href="<%= contextPath %>/list.bo?cpage=1&type=30">정보게시판</a>
+                            </li>
+                            <li>
+                                <a href="<%= contextPath %>/list.bo?cpage=1&type=40">익명게시판</a>
+                            </li>
+                            <li><a href="<%= contextPath %>/list.qz?cpage=1">퀴즈게시판</a></li>
+                            <% if(loginUser != null){ %>
+                            <li><a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=receiver">쪽지함</a></li>
+                        	<% } else { %>
+                        	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');">쪽지함</a></li>
+                        	<% } %>
                 </ul>
 
 
@@ -109,6 +134,8 @@
                         }
                     })
                 })
+                
+                
             </script>
 </body>
 </html>

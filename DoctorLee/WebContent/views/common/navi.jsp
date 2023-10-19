@@ -197,7 +197,7 @@ header{
                         </ul>
                     </li>
                     <li><a href="#">클리닉</a></li>
-                    <li><a href="#">건강 메거진</a>
+                    <li><a href="#">건강 매거진</a>
                         <ul>
                             <li><a href="<%=contextPath%>/search.med">의약품 검색</a></li>
                             <li><a href="<%=contextPath%>/main.ahc">건강 관리 방법</a></li>

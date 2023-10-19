@@ -9,33 +9,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	.outer{
-		margin-bottom : 150px;
-		margin-left : 300px;
-	}
-	#updateName,#updatePreInfo,#updateCauction{
-		width : 300px;
-		
-	}
-	#updateName{
-		height : 20px;
-	}
-	#updatePreInfo{
-		height : 300px;
-	}
-	#updateCauction{
-		height : 300px;
-		margin-left : 20px;
-	}
-	
-</style>
+<link rel="stylesheet" href="resources/css/medicine/medicine.css">
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
 	<div class="outer">
 		<br>
-		<h2 align="center">약품 수정 페이지</h2>
+		<h2 class="update-medicine">약품 수정 페이지</h2>
 		<form id="medEnroll-form"action="<%=contextPath%>/update.med" method="post">
 			<input type="hidden" name="mname" value="<%=med.getMedName() %>">
 			수정할 약품 이름:  <input type="text" name="updateName" id="updateName" required placeholder="<%=med.getMedName() %>">

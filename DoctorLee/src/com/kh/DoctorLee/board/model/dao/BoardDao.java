@@ -115,7 +115,7 @@ public class BoardDao {
 				b.setBoardTitle(rset.getString("BOARD_TITLE"));
 				b.setCreateDate(rset.getString("CREATE_DATE"));
 				b.setViews(rset.getInt("VIEWS"));
-				
+				b.setLikes(rset.getInt("LIKES"));
 				list.add(b);
 				
 			}
@@ -216,7 +216,7 @@ public class BoardDao {
 	}
 	
 	
-	public Board selectBoard(Connection conn, int boardNo) {
+	public Board selectBoard(Connection conn, int boardNo, int memNo) {
 		
 		Board b = new Board();
 		PreparedStatement pstmt = null;
@@ -229,6 +229,8 @@ public class BoardDao {
 			pstmt.setInt(1, boardNo);
 			pstmt.setInt(2, boardNo);
 			pstmt.setInt(3, boardNo);
+			pstmt.setInt(4, memNo);
+			pstmt.setInt(5, boardNo);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				b.setBoardNo(rset.getInt("BOARD_NO"));
@@ -241,7 +243,9 @@ public class BoardDao {
 				b.setCreateDate(rset.getString("CREATE_DATE"));
 				b.setViews(rset.getInt("VIEWS"));
 				b.setLikes(rset.getInt("LIKES"));
+				b.setLikeMem(rset.getInt("LIKE_MEM"));
 				b.setComments(rset.getInt("COMMENTS"));
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

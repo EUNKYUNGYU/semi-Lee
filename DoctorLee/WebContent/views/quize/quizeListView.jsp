@@ -13,163 +13,19 @@
 	int maxPage = pi.getMaxPage();
 	
 	System.out.println("quizeListView.jsp에서 list랑 pi"+list+pi);
-	%>
+
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>퀴즈게시판</title>
+<link rel="stylesheet" href="resources/css/quize/quizeListView.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
 </script>
 
-<style>ㅡ
 
-* {
-	box-sizing: border-box;
-}
-
-body{
-	margin : 0;
-}
-
-#header {
-	width: 100vw;
-	height: 120px;
-}
-
-main {
-	width: 100%;
-	height: auto; 
-	line-height: 30px;
-}
-
-main > section, main > aside, main > div{
-	float: left;
-}
-
-.aside {
-	height: auto;
-	float: left;
-	margin : 20px auto;
-	display: flex;
-	justify-content: center;
-	padding: 0;
-}
-
-#aside1{width :25%}
-
-#aside2{width :15%}
-
-#section{
-	width: 60%;
-	height: auto; 
-	min-height: 1000px;
-	float: left;
-	padding: 20px;
-}
-
-#contentTitle{
-	width : 100%;
-	height : 100px;
-	padding: 20px;
-	font-size : 30px;
-	font-weight: bold;
-	line-height : 200%;
-}
-
-#content{
-	width : 100%;
-	height : auto;
-}
-
-article{
-	width: 95%;
-	height: auto;
-	margin : 20px auto;
-	border: 1px solid rgb(230, 230, 230); border-radius: 10px;
-	padding: 20px 20px 0px 20px;
-}
-
-#quizeHeader {
-	width: 100%;
-	height: 70px;
-	text-align: center;
-	line-height: 70px;
-}
-
-#quizeHeader>div {
-	float: left;
-}
-
-#title {
-	width: 70%;
-	height: 100%;
-	font-size: 30px;
-	font-weight : 600;
-	text-align: left;
-	padding-left: 20px;
-}
-
-#vote, #deadline {
-	width: 15%;
-	height: 100%;
-}
-
-#quizeContent {
-	width: 100%;
-	height: 300px;
-	line-height: 30px;
-	padding: 20px;
-}
-
-#quizeFooter {
-	width: 100%;
-	height:70px;
-}
-
-#quizeFooter  >div {
-	float: left;
-}
-
-#quizeFooter1 {
-	width: 75%;
-	height: 100%;
-	padding: 20px;
-}
-
-#quizeFooter2 {
-	width: 25%;
-	height: 100%;
-	line-height: 85px;
-	padding-left: 80px;
-}
-
-#page, #search{
-	width : 100%;
-	height : 100px;
-	padding: 20px;
-	text-align: center;
-}
-
-footer {
-	width: 100%;
-	height: auto;
-}
-
-form{
-	padding: 20px 0px;
-}
-
-a {
-	text-decoration: none;
-	color: #1E376F;
-	padding-left : 50px;
-}
-
-
-
-</style>
 </head>
 <body>
 
@@ -210,7 +66,7 @@ a {
 						<div id="deadline">
 						<!-- 퀴즈의 제출 기한이 지난 경우 -->
 						<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
-							기한 지남
+							기한 종료
 						
 						<!-- 퀴즈의 제출 기한이 남은 경우, 몇 일 남았는지 보이게 -->
 						<% } else { %>
@@ -269,7 +125,8 @@ a {
 					<div id="quizeFooter2">
 						<!-- 1. 로그인하지 않았을 경우 정답 확인하기 버튼을 눌렀을 때 확인 불가능 -->
 						<% if(loginUser == null) { %>
-								<a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능합니다.');">정답 확인하기 &gt;</a>
+								<a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능합니다.');"
+								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 						
 						<!-- 1. 로그인 했을 경우 
 							- 제출 기한이 지나지 않았다면 answerExist.qz(QuizeAnswerExistController)에서 정답을 제출한 적이 있는지 확인 후
@@ -281,11 +138,13 @@ a {
 						<% } else { %>
 							<!-- 2. 제출 기한 지남 -->
 							<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
-								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=false">정답 확인하기 &gt;</a>
+								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=false"
+								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 								
 							<!-- 2. 제출 기한이 남은 경우-->
 							<% } else { %>
-								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=true">정답 확인하기 &gt;</a>
+								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=true"
+								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 							<% } %>
 								
 						<% } %>

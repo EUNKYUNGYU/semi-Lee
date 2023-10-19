@@ -58,8 +58,7 @@ public class QuizeChoiceController extends HttpServlet {
 
 		int resultExist = new QuizeService().quizeAnswerExist(memNo, quizeNo);
 		System.out.println("quizeChoiceController에서 resultExist " + resultExist);
-		if(resultExist ==  1) { // 답안 제출 한적 있음, 정답 화면 보여주기
-			
+		if(resultExist ==  0) { // 답안 제출 한적 없음
 			System.out.println("답 제출 한 적 있는지 " + resultExist);
 			int result = new QuizeService().quizeChoice(quizeNo, memNo, choice);
 			
@@ -70,18 +69,22 @@ public class QuizeChoiceController extends HttpServlet {
 			System.out.println(result);
 			if(result == 2) { // 정답, 포인트 획득 성공
 				session.setAttribute("alertMsg", "정답입니다! 500포인트를 획득하였습니다.");
+				System.out.println("500포인트");
 			} else if(result == 1){ // 오답, 포인트 획득 실패
+				System.out.println("오답");
 				session.setAttribute("alertMsg", "오답입니다");
 			} else if(result == 0) { // 실패
+				System.out.println("이미 제출");
 				session.setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
 			}
 			request.getRequestDispatcher("/list.qz?cpage=1").forward(request, response);
 			
 			System.out.println("----------------------------");
 			
-		}  else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
+		}  else { // 답안 제출 한 적 있음
+			System.out.println("답 제출 했음");
 			request.getSession().setAttribute("alertMsg", "이미 답을 제출하셨습니다.");
-			request.getRequestDispatcher("/views/quize/quizeListView.jsp").forward(request, response);
+			request.getRequestDispatcher("/list.qz?cpage=1").forward(request, response);
 		}
 		
 	}

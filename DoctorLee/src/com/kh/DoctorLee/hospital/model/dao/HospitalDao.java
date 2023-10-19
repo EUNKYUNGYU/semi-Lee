@@ -182,7 +182,7 @@ public class HospitalDao {
 		return reviewList;
 	}
 	
-	// 
+	/*
 	public ArrayList<Hospital> selectHospital(Connection conn, PageInfo pInfo){
 		ArrayList<Hospital> pList = new ArrayList();
 		ResultSet rset = null;
@@ -190,11 +190,6 @@ public class HospitalDao {
 		String sql =  prop.getProperty("selectHosList");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			int sRow = (pInfo.getCurrentPage() - 1) * pInfo.getBoardLimit() + 1;
-			int eRow = sRow + pInfo.getBoardLimit() - 1;
-			pstmt.setInt(1, sRow);
-			pstmt.setInt(2, eRow);
-			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				Hospital hos = new Hospital();
@@ -218,5 +213,6 @@ public class HospitalDao {
 		return pList;
 		
 	}
+	*/
 	
 }

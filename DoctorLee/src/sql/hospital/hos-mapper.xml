@@ -103,6 +103,6 @@
 						    BY 
 						      CREATE_DATE) H)
 		 WHERE
-		       RNUM BETWEEN ? AND ?
+		       RNUM BETWEEN 1 AND 100
 	</entry>
 </properties>

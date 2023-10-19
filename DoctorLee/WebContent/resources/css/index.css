@@ -46,6 +46,8 @@ header{
     border: none;
 	background: none;
 }
+#icon_search:hover{cursor: pointer;}
+#index_search_bar>input:hover{cursor: pointer;}
 
 /* bxslider */
 .bx-wrapper{

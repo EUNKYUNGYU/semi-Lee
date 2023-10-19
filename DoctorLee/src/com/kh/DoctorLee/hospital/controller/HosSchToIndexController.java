@@ -32,19 +32,17 @@ public class HosSchToIndexController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// paging
-		int hosCount = new HospitalService().hosCount(); // 병원 입점 개수 조회
+		int listCount = new HospitalService().hosCount(); // 병원 입점 개수 조회
 		int currentPage = Integer.parseInt(request.getParameter("hkeyP"));
 		// localhost:8765/DoctorLee/hosSch.dy?search=&hkey=1
-		int pageLimit = 10;
+		int pageLimit = 5;
 		int hosLimit = 3;
-		int maxPage = (int)Math.ceil((double)hosCount / hosLimit);
+		int maxPage = (int)Math.ceil((double)listCount / hosLimit);
 		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		int endPage = startPage + pageLimit - 1;
 		if(endPage > maxPage) endPage = maxPage;
 		
-		PageInfo pInfo = new PageInfo(hosCount, currentPage, pageLimit, hosLimit, maxPage, startPage, endPage);
-		
-		ArrayList<Hospital> pList = new HospitalService().selectHospital(pInfo);
+		PageInfo pInfo = new PageInfo(listCount, currentPage, pageLimit, hosLimit, maxPage, startPage, endPage);
 		
 		String search = request.getParameter("search");
 		String hkeyH = request.getParameter("hkeyH");
@@ -52,12 +50,12 @@ public class HosSchToIndexController extends HttpServlet {
 		ArrayList<Hospital> list = new HospitalService().schToIndex(search, hkeyH);
 		
 		// 앞단에서 널체크
-		request.setAttribute("pList", pList);
 		request.setAttribute("list", list);
 		request.setAttribute("pInfo", pInfo);
 		
 		request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
 		// response.sendRedirect(request.getContextPath());
+		System.out.println(request.getContextPath());
 	}
 
 	/**

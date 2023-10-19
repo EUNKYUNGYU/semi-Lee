@@ -54,11 +54,12 @@ public class HospitalService {
 		return docList;
 	}
 	
-	// 
+	/*
 	public ArrayList<Hospital> selectHospital(PageInfo pInfo){
 		Connection conn = getConnection();
 		ArrayList<Hospital> pList = new HospitalDao().selectHospital(conn, pInfo);
 		close(conn);
 		return pList;
 	}
+	*/
 }

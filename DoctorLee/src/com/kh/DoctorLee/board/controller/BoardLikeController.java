@@ -41,10 +41,10 @@ public class BoardLikeController extends HttpServlet {
 			if(result > 0) { // 좋아요  취소가 된 경우
 				System.out.println("좋아요 취소 " );
 				request.setAttribute("alertMsg", "❤ 좋아요가 취소되었습니다 ❤");
-				response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
+				response.sendRedirect(request.getContextPath() + "/detail.bo?memNo=" + memNo + "&boardNo=" + boardNo);
 			} else { // 좋아요 취소가 안 된 경우
 				request.setAttribute("alertMsg", "다시 시도해주십시오.");
-				response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
+				response.sendRedirect(request.getContextPath() + "/detail.bo?memNo=" + memNo + "&boardNo=" + boardNo);
 			}
 			
 		} else { // 좋아요가 되어 있지 않은 경우 -> 좋아요 누르기
@@ -52,10 +52,10 @@ public class BoardLikeController extends HttpServlet {
 			if(result > 0) { // 좋아요  누르기가 된 경우
 				System.out.println("좋아요 " );
 				request.setAttribute("alertMsg", "♥ 좋아요 ♥");
-				response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
+				response.sendRedirect(request.getContextPath() + "/detail.bo?memNo=" + memNo + "&boardNo=" + boardNo);
 			} else { // 좋아요 누르기가 안 된 경우
 				request.setAttribute("alertMsg", "다시 시도해주십시오.");
-				response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
+				response.sendRedirect(request.getContextPath() + "/detail.bo?memNo=" + memNo + "&boardNo=" + boardNo);
 			}
 			}
 		}

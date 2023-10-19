@@ -28,6 +28,8 @@
 	<!-- css -->
 	<link rel="stylesheet" href="resources/css/index.css">
 
+    <!-- js -->
+    <script src="resources/js/index.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -106,16 +108,20 @@
 			</div>
 		<% } %>
 		
+		<!-- 
 		<script>
+			var contextPath = location.pathname;
+		
 			function enrollPage(){
-				location.href= "<%=contextPath%>/enrollForm.me";
+				location.href= "/enrollForm.me";
 			}
 			
 			function loginPage(){
-				location.href="<%=contextPath%>/login.me";
+				location.href="/login.me";
 			}
+			//console.log(window.location.pathname);
 		</script>
-		
+		-->
 
         <!-- 헤더 영역 -->
         <header>
@@ -143,6 +149,7 @@
                 
             </form>
             
+            <!-- 
             <script>
             	// 엔터키 이벤트
             	document.getElementById('index_search_bar').addEventListener('keyup', function(e){
@@ -164,7 +171,7 @@
                 })
 
             </script>
-
+			-->
         </header>
 
         <!-- 섹션 1 -->

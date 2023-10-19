@@ -24,6 +24,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+<script src="resources/js/hospital/hosDetail.js"></script>
+<!-- 
 <script>
 	var hosNo = location.search.substring(5);
  	var rsvt_date = '';
@@ -74,8 +76,8 @@
          
        calendarG.render();
      });
-   	
 </script>
+-->
 <title>병원 상세</title>
 </head>
 
@@ -198,10 +200,11 @@
 							onclick="location.href='<%= contextPath %>/views/hospital/guetRsvtPage.jsp'">
 					  비회원 진료예약
 					</button>
+					<!-- 
 					<script>
 						function loginUserIsNull(){
 							alert('로그인 후 이용 가능한 서비스');
-							location.href = '<%= contextPath %>/login.me';
+							location.href = '/login.me';
 							
 						};
 						
@@ -276,11 +279,12 @@
 					
 					function loginUserIsNull(){
 						alert('로그인 후 이용 가능한 서비스');
-						location.href = '<%= contextPath %>/login.me';
+						location.href = '/login.me';
 						
 					};
 					
 					</script>
+					-->
 				</div>
 				
 
@@ -393,8 +397,8 @@
 			    </div>
 			  </div>
 			</div>
+			<!-- 
 			<script>
-			/*
 				function guestRsvt(){
 					
 					var str = '';
@@ -450,8 +454,8 @@
 					}
 					return true;
 				};
-				*/
 			</script>
+			-->
 			
 		</div>
 		<!-- 진료 예약 끝 -->

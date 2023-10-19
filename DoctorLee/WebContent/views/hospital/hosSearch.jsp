@@ -99,7 +99,7 @@
        	
 		<div id="pageing_bar">
 			<!-- http://localhost:8765/DoctorLee/hosSch.dy?search=&hkey=병원 -->
-			<% if(pInfo.getCurrentPage() != 1){ %>
+			<% if(pInfo.getCurrentPage()!= 1){ %>
 				<button onclick="location.href='<%= contextPath %>/hosSch.dy?search=&hkeyP=<%= pInfo.getCurrentPage() + 1 %>'">&lt;</button>
 			<%} %>
 			<% for(int i = pInfo.getStartPage(); i <= pInfo.getEndPage(); i++) { %>

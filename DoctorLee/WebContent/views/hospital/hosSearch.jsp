@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.hospital.model.vo.*, com.kh.DoctorLee.common.model.vo.PageInfo" %>
 <%
+	ArrayList<Hospital> pList = (ArrayList<Hospital>)request.getAttribute("pList");
 	ArrayList<Hospital> list = (ArrayList<Hospital>)request.getAttribute("list");
 	PageInfo pInfo = (PageInfo)request.getAttribute("pInfo");
 %>

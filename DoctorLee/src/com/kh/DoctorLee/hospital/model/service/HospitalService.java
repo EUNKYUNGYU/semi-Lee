@@ -6,6 +6,7 @@ import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.hospital.model.dao.HospitalDao;
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
@@ -53,4 +54,11 @@ public class HospitalService {
 		return docList;
 	}
 	
+	// 
+	public ArrayList<Hospital> selectHospital(PageInfo pInfo){
+		Connection conn = getConnection();
+		ArrayList<Hospital> pList = new HospitalDao().selectHospital(conn, pInfo);
+		close(conn);
+		return pList;
+	}
 }

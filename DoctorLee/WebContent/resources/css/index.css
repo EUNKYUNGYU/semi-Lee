@@ -39,12 +39,12 @@ header{
 #icon_search{
     float: left;
     position: absolute;
-    top: 50%;
+    top: 50%; left: 0;
     transform: translate(0, -50%);
     margin: 0 0 0 10px;
     color: #fff;
     border: none;
-
+	background: none;
 }
 
 /* bxslider */

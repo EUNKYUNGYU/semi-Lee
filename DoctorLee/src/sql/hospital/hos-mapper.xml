@@ -80,4 +80,29 @@
               R.STATUS = 'Y'
 	</entry>
 
+	<entry key="selectHosList">
+		SELECT *
+		  FROM (
+		  		SELECT ROWNUM RNUM, H.*
+		  		  FROM (
+		  		  		SELECT
+		  		  			  HOS_NO
+		  		  			  ,HOS_NAME
+		  		  			  ,HOS_ADDRESS
+								,TREAT_DEP
+								,TREAT_DATE
+								,TREAT_BEGIN
+								,TREAT_END
+								,HOS_TEL
+								,HOS_INFO
+						FROM 
+							 TB_HOSPITAL
+						WHERE
+						     STATUS = 'Y'
+						 ORDER
+						    BY 
+						      CREATE_DATE) H)
+		 WHERE
+		       RNUM BETWEEN ? AND ?
+	</entry>
 </properties>

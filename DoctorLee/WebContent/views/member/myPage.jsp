@@ -172,6 +172,11 @@
             font-size: larger;
         }
 
+		#span1, #span2, #span3{
+		font-size: 13px; 
+		font-weight: lighter; 
+		color: gray;
+		}
     </style>
 </head>
 <body>
@@ -205,9 +210,6 @@
                             <input type="password" id="pwd_1" name="memPwd" placeholder="비밀번호" required>
                         </div>
 
-                        <div id="login_form_etc" align="center">
-                            <div><input type="checkbox" name="checkedId" value="checkedId">아이디 저장</div>
-                        </div>
     
                     <input type="submit" id="loginbtn" value="로그인"></input>
                     </form>
@@ -221,22 +223,25 @@
         <div id="content_3">
             <z class="z-test1" id="z11" align="center">
                 <a href="#" id="register1" onclick="enrollPage();">회원가입 <br><br>
-                <span style="font-size: 13px; font-weight: lighter; color: gray;">
-                    낭만닥터 이사부의 회원이 <br>
-                    되시면 홈페이지에서 제공하는 <br>
-                    온라인 서비스를 이용하실 수 있습니다.</span>
+                <span id="span1">
+			                    낭만닥터 이사부의 회원이 <br>
+			                    되시면 홈페이지에서 제공하는 <br>
+			                    온라인 서비스를 이용하실 수 있습니다.
+                 </span>
             </a>
                 <a href="#" id="find11" onclick="findIdPage();">아이디 찾기 <br><br>
-                    <span style="font-size: 13px; font-weight: lighter; color: gray;">
-                        성함, 이메일을 통해 <br>
-                        아이디를 확인 <br>
-                        하실 수 있습니다.</span>
+                    <span id="span2">
+			                        성함, 이메일을 통해 <br>
+			                        아이디를 확인 <br>
+			                        하실 수 있습니다.
+                    </span>
                 </a>
                 <a href="#" id="find21" onclick="findPwdPage();">비밀번호 찾기 <br><br>
-                    <span style="font-size: 13px; font-weight: lighter; color: gray;">
-                        아이디, 이메일을 통해 <br>
-                        임시비밀번호로 서비스를 이용 <br>
-                        하실 수 있습니다. </span>
+                    <span id="span3">
+			                        아이디, 이메일을 통해 <br>
+			                        임시비밀번호로 서비스를 이용 <br>
+			                        하실 수 있습니다.
+                     </span>
 
                 </a>
             </z>

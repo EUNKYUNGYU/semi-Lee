@@ -69,6 +69,8 @@
             width: 600px;
             height: 10px;
             overflow: hidden;
+            resize: none;
+            
         }
         
         #inqContent{
@@ -78,7 +80,7 @@
             height: 500px;
             margin-left: 200px;
             margin-top: 30px;
-            
+            resize: none;
         }
        
         #count{
@@ -139,10 +141,10 @@
                     </option>
 				<%} %>
                 </select>
-                <textarea id="inqTitle" name="inqTitle" cols="40" rows="10" style="resize: none;" maxlength="50" placeholder="제목을 입력해주세요."></textarea>
-                <textarea id="inqContent" name="inqContent" cols="40" rows="10" style="resize: none;" maxlength="1000" placeholder="내용을 입력해주세요."></textarea>
+                <textarea id="inqTitle" name="inqTitle" maxlength="50" placeholder="제목을 입력해주세요."></textarea>
+                <textarea id="inqContent" name="inqContent" maxlength="1000" placeholder="내용을 입력해주세요."></textarea>
                 <br>
-                <span id="count">0</span>/ 1000자
+                <span id="count">0 </span>/ 1000자
                 <button type="submit" id="pwd_1" onclick="insertAdminPage();">확인</button>
                 
     		</form>

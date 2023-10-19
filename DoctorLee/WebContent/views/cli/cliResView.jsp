@@ -174,7 +174,7 @@
                         </div>
 
                         <div id="res-part" align="center">
-                            <button type="submit">예약하기</button>
+                            <button class="btn btn-primary" type="submit">예약하기</button>
                         </div>
                     </form>
     

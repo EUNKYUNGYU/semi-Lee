@@ -56,6 +56,7 @@ div{
                 margin-top: 30px;
                 border: 1px solid #ddd;
                 background-color: white;
+                align: center;
                 }
 
                 /* 테이블 행 */
@@ -131,11 +132,12 @@ div{
             font-weight: 600;
             padding-top: 30px;
             padding-left: 150px;
+            text-align: left;
         }
        
        
     </style>
-</style>
+
 </head>
 <body>
 	<div id="wrap">
@@ -152,12 +154,12 @@ div{
             <div id="content_2">
                 <p id="p11">마이페이지</p>
             
-                <div id="p21" style="text-align: left;">처방전</div>
+                <div id="p21">처방전</div>
                 <hr>
                 <br>
 
                 
-                <table class="list-area" align="center">
+                <table class="list-area">
                     <thead id="thead1">
                       <tr>
                         <th>병원명</th>
@@ -165,7 +167,7 @@ div{
                         <th>약처방</th>
                         <th>진료일자</th>
                         <th>처방전발급일</th>
-                        <th>번호</th>
+                        <th>  번호</th>
                       </tr>
                     </thead>
                     <tbody>

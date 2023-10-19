@@ -15,172 +15,10 @@
 <!--Google Fonts Icon-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-<style>
-    .outer{
-        width: 1800px;
-        margin-left: 50px;
-    }
+<!--style-->
+<link rel="stylesheet" href="resources/css/cou/couResDetail.css">
 
-    /*상단 네비*/
-    #navi{
-        height: 100px;
-    }
 
-    /*하단 내용 영역을 감싸는 div*/
-    .content{
-        height: auto;
-        margin-top: 50px;
-        border: 1px solid red;
-        margin-bottom: 50px;
-    }
-
-    #cou_navi{
-        height: 1000px;
-    }
-
-    .left-menu{
-        margin-left: 200px;
-    }
-
-    /*클리닉 예약하기 버튼 영역*/
-    #res-btn > button{
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    /*클리닉 정보 출력 영역 div*/
-    #cli-content {
-        width: 1000px;
-        margin-left: 100px;
-        height: auto;
-    }
-
-    /*클리닉 간단 정보 출력 영역 div*/
-    #cli-top{
-        border: 1px solid rosybrown;
-        height: auto;
-    }
-
-    #cli-top > h4{ 
-        margin-top: 30px;
-    }
-
-    #cli-top > p{
-        margin-top: 30px;
-    }
-
-    #cli-top > *{
-        margin-left: 10px;
-    }
-    
-    /*클리닉 상세 정보 출력 영역 div*/
-    #cli-middle{
-        border: 1px solid royalblue;
-        height: auto;
-    }
-
-    #cli-middle > h4{
-        margin-top: 30px;
-        margin-left: 10px;
-    }
-
-    /*클리닉 후기 출력 영역 div*/
-    #cli-bottom{
-        border: 1px solid pink;
-        height: auto;
-    }
-
-    #cli-bottom > h4{
-        margin-top: 30px;
-        margin-left: 10px;
-    }
-
-    /*모달*/
-    .modal{
-        margin-top: 100px;
-    }
-
-    /*모달 별점*/
-    #scope fieldset{
-        display: inline-block;
-        direction: rtl;
-        border:0;
-    }
-
-    #scope fieldset legend{
-        text-align: right;
-    }
-
-    #scope input[type=radio]{
-        display: none;
-    }
-
-    #scope label{
-        font-size: 3em;
-        color: transparent;
-        text-shadow: 0 0 0 #f0f0f0;
-    }
-
-    #scope label:hover{
-        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-    }
-
-    #scope label:hover ~ label{
-        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-    }
-
-    #scope input[type=radio]:checked ~ label{
-        text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-    }
-
-    #reviewContents {
-        width: 100%;
-        height: 150px;
-        padding: 10px;
-        box-sizing: border-box;
-        border: solid 1.5px #D3D3D3;
-        border-radius: 5px;
-        font-size: 16px;
-        resize: none;
-    }
-
-    /*모달 리뷰 내용*/
-    #revContent{
-        width: 450px;
-    }
-      
-    /*리뷰 출력*/
-    #rev-border{
-        border: 1px solid red;
-    }
-
-    #rev-list{
-        list-style: none;
-    }
-
-    #cli-top > span{
-        vertical-align: middle;
-    }
-
-    .rev-content{
-        border: 1px solid;
-        border-radius: 5px;
-        width: 900px;
-        margin-top: 20px;
-        margin-left: 8px;
-    }
-
-    .revScope{
-        border: 1px solid;
-        width: auto;
-    }
-
-    .revScope > span{
-        vertical-align: middle;
-        margin-right: 5px;
-    }
-
-</style>
 </head>
 <body>
 
@@ -217,9 +55,7 @@
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->
-                <div id="cli-middle">
-                    <h4>상세 정보</h4>
-                </div>
+                
 
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
@@ -335,10 +171,6 @@
                         for(let i in result){
                             resultStr += '<li class="rev-content">'
 
-                                            + '<div class="revNickName">'
-                                                + '<p>' + result[i].nickName + '</p>'
-                                            + '</div>'
-
                                             + '<div class="revScope">'
                                                 + '<span>⭐</span>'
                                                 + '<span>' + result[i].cliScope + '</span>'
@@ -348,8 +180,13 @@
                                                 + '<p>' + result[i].revContent + '</p>'
                                             + '</div>'
 
-                                            + '<div class="revDate">'
+                                            + '<div class="revNickName">'
+                                                + '<p>' + result[i].nickName + '</p>'
                                                 + '<P>' + result[i].createDate + '</p>'
+                                            + '</div>'
+
+                                            + '<div class="revDate">'
+                                                
                                             + '</div>'
 
                                        + '</li>'

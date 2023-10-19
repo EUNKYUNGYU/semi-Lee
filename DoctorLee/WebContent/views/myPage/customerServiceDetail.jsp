@@ -129,13 +129,9 @@
                 </table>
                 <span><a href="<%=contextPath %>/delete.cs?nno=<%=cs.getInqNo() %>" class="deletebtn" id="csdelete2">삭제하기</a></span>
                 <span><a href="<%=contextPath %>/customerService.mp?cpage=1" class="deletebtn" id="csdelete">목록가기</a></span>
-                <!--
-                <button id="csdelete2" type="submit">목록가기</button>
-                <button id="csdelete" type="submit">삭제하기</button>
-            	<  -->
-            </div>
+        	</div>
         </div>
-        </div>
+      </div>
     </div>
 </body>
 </html>

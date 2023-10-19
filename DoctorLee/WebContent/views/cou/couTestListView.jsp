@@ -5,68 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>심리 : 성향 테스트 목록 페이지</title>
-<style>
-        .outer{
-            width: 1800px;
-            margin-left: 50px;
-        }
 
-        /*상단 네비*/
-        #navi{
-            height: 100px;
-            background-color: white;
-        }
+<!--style-->
+<link rel="stylesheet" href="resources/css/cou/couTestList.css">
 
-        .content > div{
-            float: left;
-        }
-
-        /*하단 내용 영역을 감싸는 div*/
-        .content{
-            margin-top: 50px;
-            height: 1500px;
-        }
-
-        /*좌측 메뉴 영역 div*/
-        #cou_navi{
-            height: 1350px;
-        }
-
-        #left-menu{
-            margin-left: 200px;
-        }
-
-        #cou-test{
-            background-color: skyblue;
-            pointer-events: none;
-            font-weight: 800;
-        }
-
-        /*성향 테스트 내용 출력 영역 div*/
-        #test-list{
-            width: 1000px;
-            margin-left: 100px;
-        }
-
-
-        /*성향 테스트 목록 컨텐츠*/
-        .thumbnail{
-            background-color: #1E376F;
-            width: 1000px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            color: white;
-        }
-        
-        .thumbnail > img{
-            width: 300px;
-            height: 300px;
-        }
-
-        #button-area > button{
-            margin-bottom: 10px;
-        }
-</style>
 </head>
 <body>
 

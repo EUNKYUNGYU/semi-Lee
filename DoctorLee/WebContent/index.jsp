@@ -172,6 +172,18 @@
 
             </script>
 			-->
+			
+			<script>
+			var msg = '<%= alertMsg %>';  <!-- null / 메시지 문구-->
+			if(msg != 'null'){
+			alert(msg);
+			// menuvar.jsp가 로딩 될 때마다 alert이 계속 수행됨
+			// session에 들어있는 alertMsg키값에 해당하는 밸류값을 지워줄 것!
+			// => XX.removeAttribute("키값");
+			<% session.removeAttribute("alertMsg"); %>
+			}
+			
+			</script>
         </header>
 
         <!-- 섹션 1 -->

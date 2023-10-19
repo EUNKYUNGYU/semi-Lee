@@ -61,6 +61,7 @@
             font-weight: 600;
             padding-top: 30px;
             padding-left: 380px;
+            padding-bottom: 30px;
         }
 
         /*-----------------------------------------------*/
@@ -78,7 +79,8 @@
             width: 140px;
             height: 50px;
             font-size: 17px;
-            margin-top: 120px;
+            margin-top: 200px;
+            margin-left: 240px;
         }
         
         #cancel{
@@ -98,10 +100,6 @@
             color: white;
         }
 
-        .register{
-            margin-left: 100px;
-        }
-        
         #updatePwdButton, #deleteMemberButton{
         	background-color: white;
         	color: #1E376F
@@ -188,13 +186,12 @@
                     * 최선의 서비스 제공을 위해서 회원정보를 최신정보로 변경하여 주시기 바랍니다. <br>
                     * 아래 회원정보는 홈페이지 회원가입자에 대한 개인정보이며 정보보호를 위해 암호화하여 관리합니다. <br>
                     * 온라인 회원가입정보와 병원내 진료시스템 개인정보는 별도로 관리되므로 온라인 회원정보가 변경될 경우 <br>
-                    * 콜센터(☎1577-0000)에 연락하시어 진료시스템상 개인정보도 변경해 주십시오.       
+                    * 콜센터(☎1577-0000)에 연락하시어 진료시스템상 개인정보도 변경해 주십시오. <br>  
                 </p>
-                
                 <hr>
 
                 <form name="login" action="<%=contextPath %>/update.me" method="post" class="formfont">
-                    <input type="hidden" name="memId" value="<%= loginUser.getMemId() %>" class="box"> <br>
+                    <input type="hidden" name="memId" value="<%= loginUser.getMemId() %>" class="box">
                     <h2>회원정보수정</h2>
                     <hr>
                     

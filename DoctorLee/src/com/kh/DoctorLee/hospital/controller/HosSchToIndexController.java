@@ -55,6 +55,7 @@ public class HosSchToIndexController extends HttpServlet {
 		
 		request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
 		// response.sendRedirect(request.getContextPath());
+		System.out.println(request.getContextPath());
 	}
 
 	/**

@@ -44,6 +44,9 @@
 		padding : 8px;
 		text-align : center;
 	}
+	.healthCareMain{
+		text-align : center;
+	}
 	
 </style>
 </head>
@@ -57,7 +60,7 @@
 		//System.out.println(standard);
 	%>
 	
-	<h2 align="center"><%=loginUser.getMemName() %>님의 건강 관리 페이지 </h2>
+	<h2 class="healthCareMain"><%=loginUser.getMemName() %>님의 건강 관리 페이지 </h2>
 	<br>
 	<hr>
 	<br><br><br>

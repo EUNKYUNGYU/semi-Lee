@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 import com.kh.DoctorLee.review.model.vo.Review;
@@ -180,4 +181,38 @@ public class HospitalDao {
 		
 		return reviewList;
 	}
+	
+	/*
+	public ArrayList<Hospital> selectHospital(Connection conn, PageInfo pInfo){
+		ArrayList<Hospital> pList = new ArrayList();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql =  prop.getProperty("selectHosList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			while(rset.next()) {
+				Hospital hos = new Hospital();
+				hos.setHosNo(rset.getInt("HOS_NO"));
+				hos.setHosName(rset.getString("HOS_NAME"));
+				hos.setHosAddress(rset.getString("HOS_ADDRESS"));
+				hos.setTreatDep(rset.getString("TREAT_NAME"));
+				hos.setTreatDate(rset.getString("TREAT_DATE"));
+				hos.setTreatBegin(rset.getString("TREAT_BEGIN"));
+				hos.setTreatEnd(rset.getString("TREAT_END"));
+				hos.setHosTel(rset.getString("HOS_TEL"));
+				hos.setHosInfo(rset.getString("HOS_INFO"));
+				pList.add(hos);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return pList;
+		
+	}
+	*/
+	
 }

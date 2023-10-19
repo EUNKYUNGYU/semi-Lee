@@ -142,9 +142,9 @@
          
         <div id="content_2">
             <div class="outer">
-                <div class="positioning" id=first></div>
+                <div class="positioning" id="first"></div>
 
-                    <div class="positioning" id=second>비밀번호를 찾고자하는 아이디와 이메일을 입력해주세요.
+                    <div class="positioning" id="second">비밀번호를 찾고자하는 아이디와 이메일을 입력해주세요.
                     
 
                         

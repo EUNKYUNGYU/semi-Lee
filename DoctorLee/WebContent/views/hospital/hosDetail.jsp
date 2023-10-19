@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*, com.kh.DoctorLee.review.model.vo.*" %>
 <%
-
 	Hospital hos = (Hospital)session.getAttribute("hos");
 	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
 	ArrayList<Review> reviewList = (ArrayList<Review>)request.getAttribute("reviewList");
 	
 	int hosTreatBegin = Integer.parseInt(hos.getTreatBegin().replaceAll(":00", ""));
 	int hosTreatEnd = Integer.parseInt(hos.getTreatEnd().replaceAll(":00|:30", ""));
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -197,9 +197,10 @@
 						<button onclick="loginUserIsNull();" class="btn btn-primary">예약접수</button>
 					<% } %>
 					<button type="button" class="btn btn-primary"
-							onclick="location.href='<%= contextPath %>/views/hospital/guetRsvtPage.jsp'">
+							onclick="guestRsvtPage(<%= hos.getHosNo() %>);">
 					  비회원 진료예약
 					</button>
+					
 					<!-- 
 					<script>
 						function loginUserIsNull(){
@@ -484,44 +485,43 @@
 			<div id="review_box">
 				<input type="text" maxlength="1200" placeholder="(1200자 이내)후기 내용을 입력해주세요.">
 			</div>
-			
-			<script>
-				
-				$('.star_label').on('click', function(){
-					$(this).removeClass('.yellow');
-					$(this).prevAll('yellow').addClass('yellow');
-					//console.log($(this).attr('value'));
-				});
 
-			 </script>
-		
-				<table class="table table-bordered">
-				
+			<table class="table table-bordered">
+				<tr>
+					<td>후기 내용</td>
+					<td>후기 작성자</td>
+				</tr>
+				<% if(reviewList.isEmpty()) { %>
 					<tr>
-						<td>후기 내용</td>
-						<td>후기 작성자</td>
+						<td colspan="2">해당 병원의 후기가 존재하지 않습니다.</td>
 					</tr>
-					<% if(reviewList.isEmpty()) { %>
+				<% } else{ %>
+					<% for(Review r : reviewList){ %>
 						<tr>
-							<td colspan="2">해당 병원의 후기가 존재하지 않습니다.</td>
+							<td>
+								<%= r.getContent() %>
+							</td>
+							<% if(r.getReviewWriter() == null){ %>
+								<td>
+									USER
+								</td>
+							<%} else { %>
+								<td><%= r.getReviewWriter() %></td>
+							<%} %>
 						</tr>
-					<% } else{ %>
-						<% for(Review r : reviewList){ %>
-							<tr>
-								<td><%= r.getContent() %></td>
-								<% if(r.getReviewWriter() == null){ %>
-									<td>USER</td>
-								<%} else { %>
-									<td><%= r.getReviewWriter() %></td>
-								<%} %>
-							</tr>
-						<%} %>
 					<%} %>
-				</table>
-				
-				<div id="review_btn">
-					<button type="submit" class="btn btn-primary">리뷰등록</button>
-				</div>
+				<%} %>
+			</table>
+			
+			<div id="review_btn">
+				<% if(loginUser != null){ %>
+					<button class="btn btn-primary"
+							onclick="insertReview();">리뷰등록</button>
+				<% } else{%>
+					<button class="btn btn-primary"
+							onclick="alert('로그인 후 이용할 수 있는 서비스입니다.');">리뷰등록</button>
+				<%} %>
+			</div>
 		
 		</div>
 	</div>

@@ -33,15 +33,12 @@
             </form>
             
             <script>
-            	
             	document.getElementById('sch_bar').addEventListener('keyup', function(e){
             		
             		if(e.keycode == 13){
             			$('sch_hos button').click();
             		}
             	})
-            
-            
             </script>
             
             <ul class="sch_category">
@@ -118,7 +115,7 @@
     </div>
     <!-- hos_wrap 끝 -->
 
-		<!-- 지도 -->
+	<!-- 지도 -->
 
 
     <%@ include file="../common/footer.jsp" %>

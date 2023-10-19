@@ -5,7 +5,6 @@ let contextPath = '/DoctorLee';
 
 var hosNo = location.search.substring(5);
 var rsvt_date = '';
-var guest_rsvt_date = '';
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	  right: 'next'
 	 },
 	 dateClick: function(info){
-	   	  rsvt_date = info.dateStr;
+   	  	rsvt_date = info.dateStr;
 	   	info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
 	  // console.log(info.dateStr);
 	  //info.dayEl.addClass('blue');
@@ -32,26 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
    });
      
    calendar.render();
-   
-   var calendarGuest = document.getElementById('calendarGuest');
-   var calendarG = new FullCalendar.Calendar(calendarGuest, {
-     initialView: 'dayGridMonth',
- locale: 'ko',
- firstDay: 1,
- headerToolbar: {
-  left: 'prev',
-  center: 'title',
-  right: 'next'
- },
- dateClick: function(info){
-   	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-       	  guest_rsvt_date = info.dateStr;
-	}
-
-   });
-     
-   calendarG.render();
- });
+}); 
 
 function loginUserIsNull(){
 	alert('로그인 후 이용 가능한 서비스');
@@ -110,8 +90,8 @@ function rsvt(){
 						$('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo']);
 						$('#rsvtModal .modal-body').children().eq(1).append(result['rsvtDate'] + ", " + result['rsvtTime']);
 						$('#rsvtModal .modal-body').children().eq(2).append(result['rsvtInfo']);
-					}
-				}
+					};
+				};
 				// 성공 시 
 				//data-toggle="modal" data-target="#rsvtModal" 추가해서 모달 띄우기
 			},
@@ -122,9 +102,47 @@ function rsvt(){
 				// console.log(hosNo);
 				// console.log(rsvtDate);
 			}
-		});
+		})
 		return false;
 	}
 	return true;
 };
+
+function guestRsvtPage(hno){
+	location.href = contextPath + '/hosRsvt.guest?hno=' + hno;
+};
+
+function insertReview(){
+	
+	$.ajax({
+		url: 'review.hos',
+		data: {
+			hno: hosNo,
+			rvWriter: '유저',
+			rvContent: $('#review_box>input').val(),
+			scope: $('#star > input[type=radio]:checked').val()
+			
+		},
+		success: function(result){
+			console.log(result);
+			console.log('ajax success');
+			
+			$('#hos_review>table').first().html().remove();
+			$('#hos_review>table').html(
+					'<tr><td>' + result.content
+					+'</td><td>' + result.writer
+					+'/td></tr>'
+					);
+		},
+		error: function(){
+			console.log('ajax fail');
+		}
+	})
+	
+	$('.star_label').on('click', function(){
+		$(this).removeClass('.yellow');
+		$(this).prevAll('yellow').addClass('yellow');
+		//console.log($(this).attr('value'));
+	});
+}
 

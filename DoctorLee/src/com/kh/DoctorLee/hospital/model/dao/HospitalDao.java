@@ -100,6 +100,7 @@ public class HospitalDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				hos = new Hospital();
+				hos.setHosNo(rset.getInt("HOS_NO"));
 				hos.setHosName(rset.getString("HOS_NAME"));
 				hos.setHosAddress(rset.getString("HOS_ADDRESS"));
 				hos.setTreatDep(rset.getString("TREAT_NAME"));

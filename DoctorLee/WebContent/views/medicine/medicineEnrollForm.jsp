@@ -24,6 +24,13 @@
 		height : 300px;
 		margin-left : 20px;
 	}
+	.med-enrollForm {
+		text-align : center;
+	}
+	#check_medicine,#preInfo,#cauction{
+		margin-bottom : 30px;
+		
+	}
 	
 </style>
 
@@ -32,17 +39,15 @@
 	<%@ include file="../common/navi.jsp" %>
 	<div class="outer">
 		<br>
-		<h2 align="center">약품 등록 페이지</h2>
+		<h2 class="med-enrollForm">약품 등록 페이지</h2>
 		<form id="medEnroll-form"action="<%=contextPath%>/insert.med" method="post">
 			
 			추가할 약품 이름:  <input type="text" name="medName" id="medName" required>
 						  <button type="button"  id="check_medicine" onclick="medCheck();">중복확인</button>
-						  
-						  <br><br>
+						 <br><br>
 			추가할 약품 설명: <input type="text" name="preInfo" id="preInfo" placeholder="      33자 이내로 입력하세요.">
 						 <span id="piCount">0</span> / 33
 						<br><br>
-			
 			추가할 주의점  :<input type="text" name="cauction" id="cauction" placeholder="      66자 이내로 입력하세요.">
 						<span id="caCount">0</span> / 66
 						<br><br>

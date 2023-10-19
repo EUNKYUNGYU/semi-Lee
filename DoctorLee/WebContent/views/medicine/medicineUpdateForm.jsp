@@ -9,29 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	.outer{
-		margin-bottom : 150px;
-		margin-left : 300px;
-	}
-	#updateName,#updatePreInfo,#updateCauction{
-		width : 300px;
-		
-	}
-	#updateName{
-		height : 20px;
-	}
-	#updatePreInfo{
-		height : 300px;
-	}
-	#updateCauction{
-		height : 300px;
-		margin-left : 20px;
-	}
-	.update-medicine{
-		text-align : center;
-	}
-</style>
+<link rel="stylesheet" href="resources/css/medicine/medicine.css">
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>

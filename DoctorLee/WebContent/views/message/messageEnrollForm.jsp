@@ -47,7 +47,7 @@
 							쪽지 제목
 						</div>
 						<div id="messageTitleDiv">
-							<input type="text" id="messageTitle" name="messageTitle" placeholder="제목을 입력해주세요">
+							<input type="text" id="messageTitle" name="messageTitle" placeholder="제목을 입력해주세요" required>
 						</div>
 					</div>
 					<div id="receiverWrap">
@@ -55,13 +55,13 @@
 							받는 사람
 						</div>
 						<div id="receiver">
-							<input id="messageReceiver" name="receiverId" type="text" placeholder="받을 사람의 ID를 입력해주세요">
+							<input id="messageReceiver" name="receiverId" type="text" placeholder="받을 사람의 ID를 입력해주세요" required>
 						</div>
 					</div>
 					
 					<hr>
 					<div id="messageContentWrap">
-						<textarea id="messageContent" name="messageContent"></textarea>
+						<textarea id="messageContent" name="messageContent" required></textarea>
 					</div>
 					</form>
 					<hr>

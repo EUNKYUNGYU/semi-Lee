@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+*{font-family: 'Nanum Gothic', sans-serif; font-family: 'Nanum Gothic Coding', monospace;}
 a{text-decoration: none;}
 ul, ol, li{list-style: none;}
 
@@ -17,6 +18,7 @@ header{
     height: 600px;
     display: block;
     width: inherit;
+    margin-top: 22px;
 }
 
 /* 메인화면 검색창 */
@@ -342,8 +344,10 @@ section > div{
 #loginMemName{
 	font-size: 15px;
 	float:right;
-	margin-top:47px;
+	margin-top:17px;
 	margin-right: 70px;
+	z-index: 99999999991;
+    position: relative;
 }
 #mem-info a{
 	text-decoration:none;
@@ -351,14 +355,18 @@ section > div{
 	font-size: 12px;
 	margin-right:30px;
 	float:right;
-	margin-top:50px;
+	margin-top:20px;
+	z-index: 99999999991;
+    position: relative;
 }
 
 #createId,#login{
     float: right;
     margin-right: 20px;
-    margin-top: 45px;
+    margin-top: 10px;
     cursor: pointer;
+    z-index: 99999999991;
+    position: relative;
 }
 
 #login{

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 상세보기</title>
+<title>게시글 작성하기</title>
 
 <link rel="stylesheet" href="resources/css/board/boardEnrollForm.css">
 

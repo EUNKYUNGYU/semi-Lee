@@ -56,7 +56,7 @@
 							<button type="button" class="btn btn-light" id="msgDelButton">삭제
 						</div>
 						<div id="buttonWrap2">
-							<a href="<%= contextPath %>/views/message/messageEnrollForm.jsp" class="btn btn-primary">쪽지 보내기</a>
+							<a href="<%= contextPath %>/sendCommon.ms" class="btn btn-primary">쪽지 보내기</a>
 						</div>
 					</div>
 					<hr>

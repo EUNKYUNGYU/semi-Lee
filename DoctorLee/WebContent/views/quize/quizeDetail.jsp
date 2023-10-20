@@ -53,7 +53,7 @@
 				</article>
 			</div>
 			<div id="back" align="right">
-				<a href="<%= contextPath %>/list.qz" id="backButton" class="btn btn-primary">돌아가기</a>
+				<a href="<%= contextPath %>/list.qz?cpage=1" id="backButton" class="btn btn-primary">돌아가기</a>
 			</div>
 		
 		</section>

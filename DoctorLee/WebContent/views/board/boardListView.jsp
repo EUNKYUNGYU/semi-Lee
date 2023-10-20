@@ -102,14 +102,13 @@
 							
 						})
 						
-						
 					
 					</script>
 					
 					<!-- 로그인 했을 경우에만 글 쓰기 버튼 보이게하기 --> 
 					<% if(loginUser != null) { %>
 						<div id="writeWrap">
-						<a id="writeButton" class="btn btn-primary" href="<%= contextPath %>/views/board/boardEnrollForm.jsp" >글 쓰기</a>
+						<a id="writeButton" class="btn btn-primary" href="<%= contextPath %>/enrollForm.bo" >글 쓰기</a>
 						</div>
 					<% } %>
 				</article>
@@ -136,11 +135,6 @@
 		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage + 1%>&type=<%= type%>'">&gt;</button>
 		        <% } %>
 			</div>
-		
-			<div id="search">
-				검색 영역
-			</div>
-		
 		</section>
 		
 		<aside id="aside2" class="aside">

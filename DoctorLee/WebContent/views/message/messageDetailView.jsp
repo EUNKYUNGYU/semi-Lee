@@ -53,7 +53,7 @@
 							</form>
 						</div>
 						<div id="buttonWrap2">
-							<a href="<%= contextPath %>/views/message/messageEnrollForm.jsp" class="btn btn-primary">답장하기</a>
+							<a href="<%= contextPath %>/sendCommon.ms" class="btn btn-primary">답장하기</a>
 						</div>
 					</div>
 					<div id="messageTitleWrap">

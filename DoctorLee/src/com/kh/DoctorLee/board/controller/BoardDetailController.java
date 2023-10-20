@@ -35,9 +35,9 @@ public class BoardDetailController extends HttpServlet {
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String type = String.valueOf(request.getParameter("type"));
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int memNo = 0;
+		memNo =  Integer.parseInt(request.getParameter("memNo"));
 		Board b = new BoardService().selectBoard(boardNo, memNo);
-		System.out.println(b);
 		
 		if(b != null) { // 게시글 조회에 성공 했을 경우
 			

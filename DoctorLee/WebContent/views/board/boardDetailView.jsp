@@ -33,8 +33,13 @@
 		
 		<section id="section">
 			
-			<div id="contentTitle">
-				<%= b.getBoardName() %>
+			<div id="contentTitleWrap">
+				<div id="contentTitle">
+					<%= b.getBoardName() %>
+				</div>
+				<div id="backWrap">
+					<a href="<%= contextPath %>/list.bo?cpage=1&type=<%= b.getBoardType() %>" class="btn btn-light">목록으로</a>
+				</div>
 			</div>
 			<div id="content">
 				<article>
@@ -123,6 +128,7 @@
 			
 			<div id="page">
 				<div id="writeWrap">
+				
 					<% if(loginUser != null) { %>
 						<a class="btn btn-primary" href="<%= contextPath %>/views/board/boardEnrollForm.jsp" >글 쓰기</a>
 						<% if(loginUser.getNickName().equals(b.getWriter())) { %>
@@ -130,9 +136,10 @@
 							<a class="btn btn-light" href="<%= contextPath %>/delete.bo?boardNo=<%= b.getBoardNo() %>">삭제</a>
 						<% } %>
 					<% } %>
+				&nbsp;
 				</div>
 				<div id="upWrap">
-					<a class="btn btn-light">^</a>
+					<a href="#header" class="btn btn-light">^</a>
 				</div>
 			</div>
 		

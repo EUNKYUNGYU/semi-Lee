@@ -54,6 +54,7 @@ public class MemberDao {
 								rset.getString("GENDER"),
 								rset.getInt("HEIGHT"),
 								rset.getInt("WEIGHT"),
+								rset.getInt("POINT"),
 								rset.getDate("CREATE_DATE"),
 								rset.getDate("MODIFY_DATE"),
 								rset.getString("STATUS"),

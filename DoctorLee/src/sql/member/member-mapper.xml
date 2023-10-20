@@ -17,6 +17,7 @@
 		  		GENDER,
 		  		HEIGHT,
 		  		WEIGHT,
+		  		POINT,
 		  		CREATE_DATE,
 		  		MODIFY_DATE,
 		  		STATUS,

@@ -123,9 +123,11 @@ article{
 #page, #search{
 	width : 100%;
 	height : 100px;
-	padding: 20px;
+	padding: 20px 0px 20pxs 20px;
 	text-align: center;
 }
+
+#upWrap{width: 97%; text-align: right;}
 
 footer {
 	width: 100%;

@@ -18,9 +18,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 	
 <style>
+	*{font-family: 'Nanum Gothic', sans-serif; font-family: 'Nanum Gothic Coding', monospace;}
 body{
 	box-sizing: border-box;
 	margin : 0;
@@ -125,8 +126,10 @@ body{
 #loginMemName{
 	font-size: 15px;
 	float:right;
-	margin-top:47px;
+	margin-top:17px;
 	margin-right: 70px;
+	z-index: 99999999991;
+    position: relative;
 }
 #mem-info a{
 	text-decoration:none;
@@ -134,15 +137,18 @@ body{
 	font-size: 12px;
 	margin-right:30px;
 	float:right;
-	margin-top:50px;
+	margin-top:20px;
+	z-index: 99999999991;
+    position: relative;
 }
 
 #createId,#login{
     float: right;
     margin-right: 20px;
-    margin-top: 50px;
+    margin-top: 10px;
     cursor: pointer;
-    
+    z-index: 99999999991;
+    position: relative;
 }
 
 #login{

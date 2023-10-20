@@ -80,7 +80,7 @@ public class Member {
 
 
 	public Member(int memNo, String memId, String memPwd, String memName, String nickName, String phone, String iNum,
-			String email, String gender, int height, int weight, Date createDate, Date modifyDate, String status,
+			String email, String gender, int height, int weight, int point, Date createDate, Date modifyDate, String status,
 			String diseases, String inhaleAll, String foodAll) {
 		super();
 		this.memNo = memNo;
@@ -94,6 +94,7 @@ public class Member {
 		this.gender = gender;
 		this.height = height;
 		this.weight = weight;
+		this.point = point;
 		this.createDate = createDate;
 		this.modifyDate = modifyDate;
 		this.status = status;

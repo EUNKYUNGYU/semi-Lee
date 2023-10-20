@@ -14,6 +14,7 @@
 <title>공통 네비게이터</title>
  <!-- 폰트어썸 키트 -->
     <script src="https://kit.fontawesome.com/46331f5575.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
     
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -25,6 +26,8 @@
 	<!-- css -->
 	<link rel="stylesheet" href="resources/css/index.css">
 <style>
+*{font-family: 'Nanum Gothic', sans-serif; font-family: 'Nanum Gothic Coding', monospace;}
+
 body::-webkit-scrollbar {
     display: none;
 }
@@ -43,6 +46,7 @@ header{
     height: 600px;
     display: block;
     width: inherit;
+    margin-top: 52px;
 }
 
 /* 메인화면 검색창 아이콘 */

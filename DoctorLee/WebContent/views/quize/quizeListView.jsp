@@ -155,6 +155,12 @@
 			<% } %>
 			</div>
 			
+			<div id="page">
+				<div id="upWrap">
+					<a href="#header" class="btn btn-light">^</a>
+				</div>
+			</div>
+			
 			
 			<script>
 			
@@ -187,10 +193,6 @@
 		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.qz?cpage=<%= currentPage + 1%>'">&gt;</button>
 		        <% } %>
 			</div>
-			<div id="search">
-				검색 영역
-			</div>
-		
 		</section>
 		
 		<aside class="aside" id="aside2">

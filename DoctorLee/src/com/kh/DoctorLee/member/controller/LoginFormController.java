@@ -49,7 +49,7 @@ public class LoginFormController extends HttpServlet {
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("alertMsg", "로그인 성공");
+			//session.setAttribute("alertMsg", "로그인 성공");
 			
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}

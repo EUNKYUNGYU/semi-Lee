@@ -222,7 +222,6 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectBoard");
-		//, (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = 3 AND MEM_NO = 1) AS LIKETHIS
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -234,6 +233,7 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardType(rset.getInt("BOARD_TYPE"));
 				b.setWriter(rset.getString("NICKNAME"));
 				b.setMemNo(rset.getInt("MEM_NO"));
 				b.setMemId(rset.getString("MEM_ID"));

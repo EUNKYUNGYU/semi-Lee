@@ -15,7 +15,13 @@ main > section, main > aside, main > div{float: left;}
 
 #section{width: 60%; height: auto;  min-height: 1000px; float: left; padding: 20px;s}
 
-#contentTitle{width : 100%; height : 100px; padding: 20px; font-size : 30px; font-weight: bold; line-height : 200%;}
+#contentTitleWrap{width : 100%; height : 100px; padding: 20px 0px 20px 20px;line-height : 200%;}
+
+#contentTitleWrap > div{float: left;}
+
+#contentTitle{width :90%; height : 100%; font-size : 30px; font-weight: bold;}
+
+#backWrap{width : 10%; height : 100%; text-align: right;}
 
 #content{width : 100%; height : auto; border: 1px solid rgb(230, 230, 230); border-radius: 10px; padding: 0px 0px 20px 0px;}
 
@@ -92,13 +98,13 @@ article{width: 95%; height: auto; margin: 20px auto; }
 
 #submitWrap > a{color : gray; font-size : 12px; padding:0 10px;}
 
-#page{width : 100%; height : 80px; padding: 20px;}
+#page{width : 100%; height : 80px; padding: 20px 0px 20px 20px;}
 
 #page > div {float: left;}
 
-#writeWrap{width: 80%;}
+#writeWrap{width: 90%;}
 
-#upWrap{width: 20%; text-align: right;}
+#upWrap{width: 10%; text-align: right;}
 
 footer {width: 100%; height: auto;}
 

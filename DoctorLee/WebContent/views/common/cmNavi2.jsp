@@ -84,7 +84,7 @@
 		                </tr>
                 	<% } else { %>
 	                    <tr>
-	                        <div>로그인이 필요한 서비스입니다.</div>
+	                        <div>비회원입니다.</div>
 	                    </tr>
 	                <% } %>
                     </table>
@@ -92,7 +92,7 @@
                 <ul id="navigator">
                     <% if(loginUser != null){ %>
                 		<li><a  href="<%= contextPath %>/views/board/boardEnrollForm.jsp" class="btn btn-primary loginMemUser">게시글 작성</a></li>
-                    	<li><a href="#" class="btn btn-primary loginMemUser">내가 쓴 글 확인</a>
+                    	<li><a href="list.mbo?memNo=<%= loginUser.getMemNo() %>&cpage=1" class="btn btn-primary loginMemUser">내가 쓴 글 확인</a>
                     	<li><a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=receiver" class="btn btn-primary loginMemUser">쪽지함</a></li>
                     <% } else { %>
                     	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary loginMemUser">게시글 작성</a></li>

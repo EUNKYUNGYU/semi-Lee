@@ -85,14 +85,16 @@
 						<% if(loginUser != null) { %>
 						<% System.out.println(b.getLikeMem()); %>
 							<% if(b.getLikeMem() == 1) { %>
-								<img src="resources/img/fullHeart.png" alt="빈하트" id="emptyHeart" >
+								<img src="resources/img/fullHeart.png" alt="하트" >
 							<% } else { %>
-								<img src="resources/img/emptyHeart.png" alt="빈하트" id="emptyHeart" >
+								<img src="resources/img/emptyHeart.png" alt="빈하트">
 							<% } %>
-								<a href="<%= contextPath %>/like.bo?memNo=<%= loginUser.getMemNo() %>&boardNo=<%= b.getBoardNo() %>">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+								<a href="<%= contextPath %>/like.bo?memNo=<%= loginUser.getMemNo() %>&boardNo=<%= b.getBoardNo() %>" id="like" class="like">좋아요</a> <%= b.getLikes() %> 
+								&nbsp;&nbsp;<img src="resources/img/comment.png" alt="댓글">&nbsp;댓글 <%= b.getComments() %>
 						<% } else { %>
-							<img src="resources/img/emptyHeart.png" alt="빈하트" id="emptyHeart" >
-					 		<a href='#' onclick="alert('로그인 후 이용 가능한 기능입니다.');">좋아요</a> <%= b.getLikes() %> 댓글 <%= b.getComments() %>
+							<img src="resources/img/emptyHeart.png" alt="빈하트">
+					 		<a href='#' onclick="alert('로그인 후 이용 가능한 기능입니다.');" id="like" class="like">좋아요</a> <%= b.getLikes() %> 
+					 		&nbsp;&nbsp;<img src="resources/img/comment.png" alt="댓글">&nbsp;댓글 <%= b.getComments() %>
 						<% } %>
 						
 					</div>	

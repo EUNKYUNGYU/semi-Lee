@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 #header {width: 100vw; height: 100px;}
 
 main {width: 100%; height: auto;  line-height: 30px;}
@@ -108,4 +107,4 @@ article{width: 95%; height: auto; margin: 20px auto; }
 
 footer {width: 100%; height: auto;}
 
-a {text-decoration: none;}
+#like{color: #82bfe7 !important;}

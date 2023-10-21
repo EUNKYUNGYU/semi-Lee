@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +45,9 @@ font-family: 'Nanum Gothic Coding', monospace;}
             margin-left: 61px;
             margin-top: 20px;
         }
+        
+        #loginPlz{text-align: center;}
+        
         #empty{
             background-color: white;
         }
@@ -92,7 +96,7 @@ font-family: 'Nanum Gothic Coding', monospace;}
 		                </tr>
                 	<% } else { %>
 	                    <tr>
-	                        <div>로그인이 필요한 서비스입니다.</div>
+	                        <div id="loginPlz">로그인을 해주세요.</div>
 	                    </tr>
 	                <% } %>
                     </table>
@@ -101,7 +105,7 @@ font-family: 'Nanum Gothic Coding', monospace;}
                     <% if(loginUser != null){ %>
                 		<li><a  href="<%= contextPath %>/enrollForm.bo" class="btn btn-primary" >게시글 작성</a></li>
                     	<li><a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=receiver" class="btn btn-primary">쪽지함</a></li>
-                    	<li><a href="#" class="btn btn-light">내가 쓴 글 확인</a>
+                    	<li><a href="list.mbo?memNo=<%= loginUser.getMemNo() %>&cpage=1" class="btn btn-light loginMemUser">내가 쓴 글 확인</a>
                     <% } else { %>
                     	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary">게시글 작성</a></li>
                     	<li><a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능한 기능입니다.');" class="btn btn-primary">쪽지함</a></li>

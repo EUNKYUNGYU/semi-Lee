@@ -141,7 +141,7 @@
 		</aside>
 		
 	</main>
-	<clear both="br">
+	<br clear="both">
 	
 	<footer>
 		<%@ include file ="../common/footer.jsp" %>

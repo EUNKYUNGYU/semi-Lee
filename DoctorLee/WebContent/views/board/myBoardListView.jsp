@@ -148,10 +148,6 @@
 		        <% } %>
 			</div>
 		
-			<div id="search">
-				검색 영역
-			</div>
-		
 		</section>
 		
 		<aside id="aside2" class="aside">
@@ -159,6 +155,7 @@
 		
 	</main>
 	
+	<br clear="both">
 	
 	<footer>
 		<%@ include file ="../common/footer.jsp" %>

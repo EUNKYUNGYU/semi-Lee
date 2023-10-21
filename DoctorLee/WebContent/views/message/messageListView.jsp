@@ -164,10 +164,6 @@
 		        <% } %>
 			</div>
 		
-			<div id="search">
-				검색 영역
-			</div>
-		
 		</section>
 		
 		<aside id="aside2" class="aside">

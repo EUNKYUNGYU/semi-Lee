@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="resources/css/hospital/hosSearch.css">
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7800b346bcf611e7326b48dc6d22f39a"></script>
 <title>병원 검색</title>
 </head>
 <body>
@@ -111,7 +112,19 @@
 			<%} %>
 		</div>
     
-    
+    	<div id="mapwrap">
+	        <div id="map" style="width:300px;height:400px;"></div>
+	    	<script>
+		    	var container = document.getElementById('map');
+		    	var options = {
+		    		center: new kakao.maps.LatLng(33.450701, 126.570667),
+		    		level: 3
+		    	};
+		
+		    	var map = new kakao.maps.Map(container, options);
+	
+	    	</script>
+    	</div>
     </div>
     <!-- hos_wrap 끝 -->
 

@@ -49,13 +49,18 @@ public class HosSchToIndexController extends HttpServlet {
 		
 		ArrayList<Hospital> list = new HospitalService().schToIndex(search, hkeyH);
 		
+		if(!list.isEmpty()) {
 		// 앞단에서 널체크
 		request.setAttribute("list", list);
 		request.setAttribute("pInfo", pInfo);
 		
 		request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
 		// response.sendRedirect(request.getContextPath());
-		System.out.println(request.getContextPath());
+		// System.out.println(request.getContextPath());
+		} else {
+			request.setAttribute("error", "병원이 존재하지 않습니다.");
+			request.getRequestDispatcher("views/common.errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

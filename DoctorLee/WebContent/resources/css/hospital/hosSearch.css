@@ -69,3 +69,7 @@ aside{
 .hos_rsvt_btn>button:hover{cursor: pointer;}
 #hos_list:hover{cursor: pointer;}
 .sch_category>li{margin-bottom: 10px;}
+
+#mapwrap{
+	float: right;
+}

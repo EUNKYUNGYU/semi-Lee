@@ -144,5 +144,6 @@ function insertReview(){
 		$(this).prevAll('yellow').addClass('yellow');
 		//console.log($(this).attr('value'));
 	});
-}
-
+	
+	
+};

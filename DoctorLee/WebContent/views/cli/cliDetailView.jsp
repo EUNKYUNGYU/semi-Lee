@@ -61,7 +61,7 @@
                 <div id="cli-bottom">
                     <h4>후기</h4>
                     <% if(loginUser != null && result > 0 && result2 == 0) {%>
-                        <button data-toggle="modal" data-target="#myModal">후기 작성</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">후기 작성</button>
                     <% } %>  
                     
                     <div id="rev-border">

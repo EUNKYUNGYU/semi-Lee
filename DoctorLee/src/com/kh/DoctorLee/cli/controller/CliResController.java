@@ -40,7 +40,7 @@ public class CliResController extends HttpServlet {
 		String resDate = request.getParameter("resDate");
 		String resTime = request.getParameter("resTime");
 		
-		System.out.println("클리닉 번호 : " + cliNo);
+//		System.out.println("클리닉 번호 : " + cliNo);
 		
 		// VO 데이터 가공
 		CliRes c = new CliRes();

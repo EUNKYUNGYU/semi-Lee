@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.quize.model.service;
+package com.kh.DoctorLee.quiz.model.service;
 
 import static com.kh.DoctorLee.common.JDBCTemplate.close;
 import static com.kh.DoctorLee.common.JDBCTemplate.commit;
@@ -9,65 +9,65 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
-import com.kh.DoctorLee.quize.model.dao.QuizeDao;
-import com.kh.DoctorLee.quize.model.vo.Quize;
-import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
+import com.kh.DoctorLee.quiz.model.dao.QuizDao;
+import com.kh.DoctorLee.quiz.model.vo.Quiz;
+import com.kh.DoctorLee.quiz.model.vo.QuizAnswer;
 
-public class QuizeService {
+public class QuizService {
 
 	
 	public int selectListCount() {
 		Connection conn = getConnection();
-		int listCount = new QuizeDao().selectListCount(conn);
+		int listCount = new QuizDao().selectListCount(conn);
 		close(conn);
 		return listCount;
 	}
 	
-	public ArrayList<Quize> selectList(PageInfo pi){
+	public ArrayList<Quiz> selectList(PageInfo pi){
 		
 		Connection conn = getConnection();
-		ArrayList<Quize> list = new QuizeDao().selectList(conn, pi);
+		ArrayList<Quiz> list = new QuizDao().selectList(conn, pi);
 		close(conn);
 		return list;
 	}
 	
-	public QuizeAnswer detailQuize(int quizeNo){
+	public QuizAnswer detailQuiz(int quizNo){
 		
 		Connection conn = getConnection();
-		QuizeAnswer answer = new QuizeDao().detailQuize(conn, quizeNo);
+		QuizAnswer answer = new QuizDao().detailQuiz(conn, quizNo);
 		close(conn);
 		return answer;
 	}
 	
-	public int increaseVote(int quizeNo) {
+	public int increaseVote(int quizNo) {
 		Connection conn = getConnection();
-		int result = new QuizeDao().increaseVote(conn, quizeNo);
+		int result = new QuizDao().increaseVote(conn, quizNo);
 		if(result > 0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	}
 	
-	public int quizeChoice(int quizeNo, int memNo, int choice) {
+	public int quizChoice(int quizNo, int memNo, int choice) {
 		
 		Connection conn = getConnection();
 		
 		int result1 = 0; // increaseVote
-		int result2 = 0; // quizeChoiceInsert 
-		int result4 = 0; // quizeGetPoint
+		int result2 = 0; // quizChoiceInsert 
+		int result4 = 0; // quizGetPoint
 		
-		result1 = new QuizeDao().increaseVote(conn, quizeNo);
+		result1 = new QuizDao().increaseVote(conn, quizNo);
 		if(result1 > 0) { // increaseVote성공
-			result2 = new QuizeDao().quizeChoiceInsert(conn, quizeNo, memNo, choice);
+			result2 = new QuizDao().quizChoiceInsert(conn, quizNo, memNo, choice);
 			
-			if(result2 > 0) { // quizeChoiceInsert 퀴즈 답 제출 성공했을 경우 
+			if(result2 > 0) { // quizChoiceInsert 퀴즈 답 제출 성공했을 경우 
 				
 				// 답 제출까지 성공했을 경우 정답인지 오답인지만 알려주는 결과
-				// quizeChoiceIsRight 정답인지 확인만 해줌, 트랜잭션 필요 없음
-				int result3 = new QuizeDao().quizeChoiceIsRight(conn, quizeNo, choice);
+				// quizChoiceIsRight 정답인지 확인만 해줌, 트랜잭션 필요 없음
+				int result3 = new QuizDao().quizChoiceIsRight(conn, quizNo, choice);
 				
 				if(result3 > 0) { // 정답인 경우, 4번까지 진행하고 커밋
-					result4 = new QuizeDao().quizeGetPoint(conn, quizeNo, memNo);
+					result4 = new QuizDao().quizGetPoint(conn, quizNo, memNo);
 					
 					if(result4 > 0) { // 이건 정답이고 포인트 획득 자체도 성공적으로 된 경우
 						commit(conn);
@@ -79,7 +79,7 @@ public class QuizeService {
 					commit(conn);
 				}
 			
-			} else { // quizeChoiceInsert 퀴즈 답 제출 실패  
+			} else { // quizChoiceInsert 퀴즈 답 제출 실패  
 				rollback(conn);
 			}
 		
@@ -92,10 +92,10 @@ public class QuizeService {
 
 	}
 	
-	public int quizeAnswerExist(int memNo, int quizeNo) {
+	public int quizAnswerExist(int memNo, int quizNo) {
 		
 		Connection conn = getConnection();
-		int result = new QuizeDao().quizeAnswerExist(conn, memNo, quizeNo);
+		int result = new QuizDao().quizAnswerExist(conn, memNo, quizNo);
 		close(conn);
 		return result;
 		

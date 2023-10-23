@@ -1,32 +1,32 @@
-package com.kh.DoctorLee.quize.model.vo;
+package com.kh.DoctorLee.quiz.model.vo;
 
-public class QuizeChoice {
+public class QuizChoice {
 	
-	private int quizeNo;
+	private int quizNo;
 	private int memNo;
 	private int choice;
 	
 	
-	public QuizeChoice() {
+	public QuizChoice() {
 		super();
 	}
 
 
-	public QuizeChoice(int quizeNo, int memNo, int choice) {
+	public QuizChoice(int quizNo, int memNo, int choice) {
 		super();
-		this.quizeNo = quizeNo;
+		this.quizNo = quizNo;
 		this.memNo = memNo;
 		this.choice = choice;
 	}
 
 
-	public int getQuizeNo() {
-		return quizeNo;
+	public int getQuizNo() {
+		return quizNo;
 	}
 
 
-	public void setQuizeNo(int quizeNo) {
-		this.quizeNo = quizeNo;
+	public void setQuizNo(int quizNo) {
+		this.quizNo = quizNo;
 	}
 
 
@@ -52,7 +52,7 @@ public class QuizeChoice {
 
 	@Override
 	public String toString() {
-		return "QuizeChoice [quizeNo=" + quizeNo + ", memNo=" + memNo + ", choice=" + choice + "]";
+		return "QuizChoice [quizNo=" + quizNo + ", memNo=" + memNo + ", choice=" + choice + "]";
 	}
 	
 	

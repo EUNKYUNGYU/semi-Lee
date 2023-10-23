@@ -66,14 +66,14 @@ article{
 	padding: 20px 20px 0px 20px;
 }
 
-#quizeHeader {
+#quizHeader {
 	width: 100%;
 	height: 70px;
 	text-align: center;
 	line-height: 70px;
 }
 
-#quizeHeader>div {
+#quizHeader>div {
 	float: left;
 }
 
@@ -91,29 +91,29 @@ article{
 	height: 100%;
 }
 
-#quizeContent {
+#quizContent {
 	width: 100%;
 	height: 300px;
 	line-height: 30px;
 	padding: 20px;
 }
 
-#quizeFooter {
+#quizFooter {
 	width: 100%;
 	height:70px;
 }
 
-#quizeFooter  >div {
+#quizFooter  >div {
 	float: left;
 }
 
-#quizeFooter1 {
+#quizFooter1 {
 	width: 75%;
 	height: 100%;
 	padding: 20px;
 }
 
-#quizeFooter2 {
+#quizFooter2 {
 	width: 25%;
 	height: 100%;
 	line-height: 85px;

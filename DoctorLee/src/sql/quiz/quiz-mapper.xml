@@ -2,15 +2,12 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-
-
-
 <entry key="selectListCount">
 	 	
-	 	SELECT 
+	 SELECT 
 	 		COUNT(*) 
 	 	FROM 
-	 		TB_QUIZE_BOARD 
+	 		TB_QUIZ_BOARD 
  
 </entry>
 
@@ -22,9 +19,9 @@
 			SELECT ROWNUM RNUM, A.*
 	  			FROM(
 		  			SELECT 	
-					        QUIZE_NO
-					        , QUIZE_TITLE
-					        , QUIZE_CONTENT
+					        QUIZ_NO
+					        , QUIZ_TITLE
+					        , QUIZ_CONTENT
 					        , VOTE
 					        , CREATE_DATE
 					        , TO_CHAR(TRUNC(END_DATE - SYSDATE)) DEADLINE
@@ -33,7 +30,7 @@
 					        , CHOICE3
 					        , CHOICE4
 						FROM
-			        		TB_QUIZE_BOARD 
+			        		TB_QUIZ_BOARD 
 			    		ORDER BY
 			        		DEADLINE DESC) A )
  		WHERE 
@@ -41,65 +38,69 @@
 
 </entry>
 
-<entry key="detailQuize">
+
+<entry key="detailQuiz">
 
 	SELECT 
-        	ANSWER, ANSWER_DETAIL, QUIZE_TITLE
+        	ANSWER, ANSWER_DETAIL, QUIZ_TITLE
     	FROM 
-        	TB_QUIZE_ANSWER
+        	TB_QUIZ_ANSWER
         JOIN 
-        	TB_QUIZE_BOARD USING(QUIZE_NO) 
+        	TB_QUIZ_BOARD USING(QUIZ_NO) 
     	WHERE 
-        	QUIZE_NO = ?
+        	QUIZ_NO = ?
         
 </entry>
 
+
  <entry key="increaseVote">
  
- UPDATE 
- 		TB_QUIZE_BOARD
- 	SET 
- 		VOTE = VOTE + 1 
- 	WHERE 
- 		QUIZE_NO = ?
- 
- 
+	 UPDATE 
+	 		TB_QUIZ_BOARD
+	 	SET 
+	 		VOTE = VOTE + 1 
+	 	WHERE 
+	 		QUIZ_NO = ?
+	 
  </entry>
 
-<entry key="quizeChoice">
 
-INSERT 
-		INTO 
-			TB_QUIZE_CHOICE 
-							(
-							QUIZE_NO
-							, MEM_NO
-							, CHOICE
-							) 
-					VALUES
-							(
-							?
-							,?
-							,?
-							)
+<entry key="quizChoice">
+
+	INSERT 
+			INTO 
+				TB_QUIZ_CHOICE 
+								(
+								QUIZ_NO
+								, MEM_NO
+								, CHOICE
+								) 
+						VALUES
+								(
+								?
+								,?
+								,?
+								)
 						
 </entry>
 
-<entry key="quizeChoiceIsRight">
+
+<entry key="quizChoiceIsRight">
 
 	SELECT 
         ANSWER
     FROM 
-        TB_QUIZE_ANSWER
+        TB_QUIZ_ANSWER
     WHERE 
-        QUIZE_NO = ?   
+        QUIZ_NO = ?   
         
     AND    
         ANSWER = ?
 
 </entry>
 
- <entry key="quizeGetPoint">
+
+ <entry key="quizGetPoint">
  	
 	UPDATE 
 			TB_MEMBER 
@@ -108,20 +109,19 @@ INSERT
 					 WHERE 
 					 	MEM_NO = ?
  
- 
  </entry>
  
- <entry key="quizeAnswerExist">
+ 
+ <entry key="quizAnswerExist">
  
   	SELECT 
- 			CHOICE
+ 			COUNT(*)
  		FROM 
- 			TB_QUIZE_CHOICE 
+ 			TB_QUIZ_CHOICE 
  		WHERE 
  			MEM_NO = ?
  		AND
- 			QUIZE_NO = ?
- 
+ 			QUIZ_NO = ?
 
  </entry>
 

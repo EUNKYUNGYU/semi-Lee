@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.quize.controller;
+package com.kh.DoctorLee.quiz.controller;
 
 import java.io.IOException;
 
@@ -8,22 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.quize.model.service.QuizeService;
-import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
+import com.kh.DoctorLee.quiz.model.service.QuizService;
+import com.kh.DoctorLee.quiz.model.vo.QuizAnswer;
 
 /**
- * Servlet implementation class QuizeAnswerExistController
+ * Servlet implementation class QuizAnswerExistController
  */
 @WebServlet("/answerExist.qz")
-public class QuizeAnswerExistController extends HttpServlet {
+public class QuizAnswerExistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuizeAnswerExistController() {
+    public QuizAnswerExistController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -40,13 +39,13 @@ public class QuizeAnswerExistController extends HttpServlet {
 		
 		if(due.equals("true")) { // 제출 기한이 남은 경우
 			
-			int result = new QuizeService().quizeAnswerExist(memNo, qno);
+			int result = new QuizService().quizAnswerExist(memNo, qno);
 			
 			if(result > 0) { // 답안 제출 한적 있음, 정답 화면 보여주기
 				int qno1 = Integer.parseInt(request.getParameter("qno"));
-				QuizeAnswer answer = new QuizeService().detailQuize(qno1);
+				QuizAnswer answer = new QuizService().detailQuiz(qno1);
 				request.setAttribute("answer", answer);
-				request.getRequestDispatcher("views/quize/quizeDetail.jsp").forward(request, response);
+				request.getRequestDispatcher("views/quiz/quizDetail.jsp").forward(request, response);
 			} else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
 				request.setAttribute("alertMsg", "답을 먼저 제출해주십시오");
 				response.sendRedirect(request.getContextPath() + "/list.qz?cpage=1");
@@ -54,9 +53,9 @@ public class QuizeAnswerExistController extends HttpServlet {
 			
 		} else { // 제출 기한이 지난 경우 답 제출 한 적 없어도, 정답 화면 보여주기
 			int qno1 = Integer.parseInt(request.getParameter("qno"));
-			QuizeAnswer answer = new QuizeService().detailQuize(qno1);
+			QuizAnswer answer = new QuizService().detailQuiz(qno1);
 			request.setAttribute("answer", answer);
-			request.getRequestDispatcher("views/quize/quizeDetail.jsp").forward(request, response);
+			request.getRequestDispatcher("views/quiz/quizDetail.jsp").forward(request, response);
 		}
 		
 	}

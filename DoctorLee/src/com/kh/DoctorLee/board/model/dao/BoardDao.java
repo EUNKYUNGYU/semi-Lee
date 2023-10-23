@@ -13,14 +13,13 @@ import java.util.Properties;
 
 import com.kh.DoctorLee.board.model.vo.Board;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
-import com.kh.DoctorLee.quize.model.dao.QuizeDao;
 
 public class BoardDao {
 	
 	private Properties prop = new Properties();
 	
 	public BoardDao() {
-		String filePath = QuizeDao.class.getResource("/sql/board/board-mapper.xml").getPath();
+		String filePath = BoardDao.class.getResource("/sql/board/board-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));

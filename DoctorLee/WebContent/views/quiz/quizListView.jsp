@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="com.kh.DoctorLee.quize.model.vo.Quize,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
+	import="com.kh.DoctorLee.quiz.model.vo.Quiz,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
     
 <% 
-	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
+	ArrayList<Quiz> list = (ArrayList<Quiz>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int currentPage = pi.getCurrentPage();
@@ -12,7 +12,7 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	
-	System.out.println("quizeListView.jsp에서 list랑 pi"+list+pi);
+	System.out.println("quizListView.jsp에서 list랑 pi"+list+pi);
 
 %>
 
@@ -21,7 +21,7 @@
 <head>
 <meta charset="UTF-8">
 <title>퀴즈게시판</title>
-<link rel="stylesheet" href="resources/css/quize/quizeListView.css">
+<link rel="stylesheet" href="resources/css/quiz/quizListView.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
 </script>
 
@@ -55,12 +55,12 @@
 				
 			<!-- 퀴즈가 있을 경우 반복문으로 출력 -->			
 			<% } else { %>
-			<% for(Quize q : list) { %>
+			<% for(Quiz q : list) { %>
 				<div id="content">
 				
 				<article>
-					<div id="quizeHeader">
-						<div id="title"><%= q.getQuizeTitle() %></div>
+					<div id="quizHeader">
+						<div id="title"><%= q.getQuizTitle() %></div>
 						<div id="vote"><%= q.getVote() %>명 투표 중</div>
 						
 						<div id="deadline">
@@ -76,8 +76,8 @@
 					</div>
 					
 					<form method="post" action="<%= contextPath %>/choice.qz">
-					<div id="quizeContent">
-					<%= q.getQuizeContent() %>
+					<div id="quizContent">
+					<%= q.getQuizContent() %>
 						
 					<br><br>
 					<input type="radio" name="choice" value="1" id="choice1" checked> 
@@ -91,9 +91,9 @@
 					</div>
 					
 					<!-- 퀴즈 정답 제출 / 정답 확인하기 버튼-->		
-					<div id="quizeFooter">
+					<div id="quizFooter">
 							
-						<div id="quizeFooter1">
+						<div id="quizFooter1">
 						<!-- 1. 로그인을 했을 때만 답 제출 가능 -->
 						<% if(loginUser != null) { %>
 							
@@ -106,31 +106,31 @@
 								- 답안을 낸 적이 없다면 -> 제출 가능 -> 정답일 경우 : 500포인트 획득
 														 -> 오답일 경우 : 포인트 획득 실패
 								- 답안을 낸 적이 있다면 -> 제출 불가능	
-								위의 과정을 choice.qz(QuizeChoiceController)에서 수행
+								위의 과정을 choice.qz(QuizChoiceController)에서 수행
 							-->
 							<% } else { %>
-								<button type="submit" id="quizeButton1" class="quizeButton1 btn btn-primary">제출
+								<button type="submit" id="quizButton1" class="quizButton1 btn btn-primary">제출
 								<input type="hidden" id="memNo" name="memNo" value="<%= loginUser.getMemNo() %>">
-								<input type="hidden" id="quizeNo" name="quizeNo" value="<%= q.getQuizeNo() %>">
+								<input type="hidden" id="quizNo" name="quizNo" value="<%= q.getQuizNo() %>">
 							<% } %>
 								
 						<!-- 1. 로그인 안 했을 경우 제출 버튼 눌렀을 시 alert('로그인 후 이용 가능합니다.') -->
 						<% } else { %>
-								<button type="button" id="quizeButton2" class="quizeButton2 btn btn-primary" >제출
+								<button type="button" id="quizButton2" class="quizButton2 btn btn-primary" >제출
 					   	<% } %>
 						</div>	
 					</form>
 				   	
 							
-					<div id="quizeFooter2">
+					<div id="quizFooter2">
 						<!-- 1. 로그인하지 않았을 경우 정답 확인하기 버튼을 눌렀을 때 확인 불가능 -->
 						<% if(loginUser == null) { %>
 								<a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능합니다.');"
 								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 						
 						<!-- 1. 로그인 했을 경우 
-							- 제출 기한이 지나지 않았다면 answerExist.qz(QuizeAnswerExistController)에서 정답을 제출한 적이 있는지 확인 후
-								- 제출 한 적 있다면 : quizeDetail.jsp로 포워딩하여 답을 보여줌
+							- 제출 기한이 지나지 않았다면 answerExist.qz(QuizAnswerExistController)에서 정답을 제출한 적이 있는지 확인 후
+								- 제출 한 적 있다면 : quizDetail.jsp로 포워딩하여 답을 보여줌
 								- 제출 한 적 없다면 : alert('답을 먼저 제출해주십시오')
 							- 제출 기한이 지났을 경우 퀴즈 답을 제출 한적 없더라도 답을 보여줌
 						 -->
@@ -138,12 +138,12 @@
 						<% } else { %>
 							<!-- 2. 제출 기한 지남 -->
 							<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
-								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=false"
+								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizNo()%>&memNo=<%= loginUser.getMemNo() %>&due=false"
 								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 								
 							<!-- 2. 제출 기한이 남은 경우-->
 							<% } else { %>
-								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizeNo()%>&memNo=<%= loginUser.getMemNo() %>&due=true"
+								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizNo()%>&memNo=<%= loginUser.getMemNo() %>&due=true"
 								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
 							<% } %>
 								
@@ -166,7 +166,7 @@
 			
 			  $(function(){
 				  
-			      $('.quizeButton2').click(function(){
+			      $('.quizButton2').click(function(){
 			    	  alert('로그인 후 이용 가능합니다.');
 			      });   
 							

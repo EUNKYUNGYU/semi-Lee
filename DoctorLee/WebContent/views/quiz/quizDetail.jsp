@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="com.kh.DoctorLee.quize.model.vo.Quize, java.util.ArrayList, com.kh.DoctorLee.quize.model.vo.QuizeAnswer"%>
+	import="com.kh.DoctorLee.quiz.model.vo.Quiz, java.util.ArrayList, com.kh.DoctorLee.quiz.model.vo.QuizAnswer"%>
     
 <% 
-	ArrayList<Quize> list = (ArrayList<Quize>)request.getAttribute("list");
-	QuizeAnswer answer = (QuizeAnswer)request.getAttribute("answer");
+	ArrayList<Quiz> list = (ArrayList<Quiz>)request.getAttribute("list");
+	QuizAnswer answer = (QuizAnswer)request.getAttribute("answer");
 %>
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <title>퀴즈 정답 확인</title>
 
-<link rel="stylesheet" href="resources/css/quize/quizeDetail.css">
+<link rel="stylesheet" href="resources/css/quiz/quizDetail.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
 </script>
@@ -40,13 +40,13 @@
 			</div>
 			<div id="content">
 				<article>
-					<div id="quizeHeader">
-						<div id="title"><%= answer.getQuizeTitle() %></div>		
+					<div id="quizHeader">
+						<div id="title"><%= answer.getQuizTitle() %></div>		
 					</div>
-					<div id="quizeContent">	
+					<div id="quizContent">	
 						정답 : <%= answer.getAnswer() %>번 <br>
 					</div>
-					<div id="quizeFooter">
+					<div id="quizFooter">
 						<%= answer.getAnswerDetail() %>
 					</div>
 				

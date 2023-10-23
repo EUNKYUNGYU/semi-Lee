@@ -1,10 +1,10 @@
-package com.kh.DoctorLee.quize.model.vo;
+package com.kh.DoctorLee.quiz.model.vo;
 
-public class Quize {
+public class Quiz {
 
-	private int quizeNo;
-	private String quizeTitle;
-	private String quizeContent;
+	private int quizNo;
+	private String quizTitle;
+	private String quizContent;
 	private String createDate;
 	private String endDate;
 	private String deadline;
@@ -15,16 +15,16 @@ public class Quize {
 	private String choice4;
 	private int answer;
 	
-	public Quize() {
+	public Quiz() {
 		super();
 	}
 
-	public Quize(int quizeNo, String quizeTitle, String quizeContent, String createDate, String endDate,
+	public Quiz(int quizNo, String quizTitle, String quizContent, String createDate, String endDate,
 			String deadline, int vote, String choice1, String choice2, String choice3, String choice4, int answer) {
 		super();
-		this.quizeNo = quizeNo;
-		this.quizeTitle = quizeTitle;
-		this.quizeContent = quizeContent;
+		this.quizNo = quizNo;
+		this.quizTitle = quizTitle;
+		this.quizContent = quizContent;
 		this.createDate = createDate;
 		this.endDate = endDate;
 		this.deadline = deadline;
@@ -46,31 +46,31 @@ public class Quize {
 	}
 
 
-	public int getQuizeNo() {
-		return quizeNo;
+	public int getQuizNo() {
+		return quizNo;
 	}
 
-	public void setQuizeNo(int quizeNo) {
-		this.quizeNo = quizeNo;
-	}
-
-
-	public String getQuizeTitle() {
-		return quizeTitle;
+	public void setQuizNo(int quizNo) {
+		this.quizNo = quizNo;
 	}
 
 
-	public void setQuizeTitle(String quizeTitle) {
-		this.quizeTitle = quizeTitle;
-	}
-
-	public String getQuizeContent() {
-		return quizeContent;
+	public String getQuizTitle() {
+		return quizTitle;
 	}
 
 
-	public void setQuizeContent(String quizeContent) {
-		this.quizeContent = quizeContent;
+	public void setQuizTitle(String quizTitle) {
+		this.quizTitle = quizTitle;
+	}
+
+	public String getQuizContent() {
+		return quizContent;
+	}
+
+
+	public void setQuizContent(String quizContent) {
+		this.quizContent = quizContent;
 	}
 
 
@@ -182,7 +182,7 @@ public class Quize {
 
 	@Override
 	public String toString() {
-		return "Quize [quizeNo=" + quizeNo + ", quizeTitle=" + quizeTitle + ", quizeContent=" + quizeContent
+		return "Quiz [quizNo=" + quizNo + ", quizTitle=" + quizTitle + ", quizContent=" + quizContent
 				+ ", createDate=" + createDate + ", endDate=" + endDate + ", deadline=" + deadline + ", vote=" + vote
 				+ ", choice1=" + choice1 + ", choice2=" + choice2 + ", choice3=" + choice3 + ", choice4=" + choice4
 				+ ", answer=" + answer + "]";

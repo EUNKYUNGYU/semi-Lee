@@ -1,4 +1,4 @@
-package com.kh.DoctorLee.quize.model.dao;
+package com.kh.DoctorLee.quiz.model.dao;
 
 import static com.kh.DoctorLee.common.JDBCTemplate.close;
 
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
-import com.kh.DoctorLee.quize.model.vo.Quize;
-import com.kh.DoctorLee.quize.model.vo.QuizeAnswer;
+import com.kh.DoctorLee.quiz.model.vo.Quiz;
+import com.kh.DoctorLee.quiz.model.vo.QuizAnswer;
 
-public class QuizeDao {
+public class QuizDao {
 
 	private Properties prop = new Properties();
 	
-	public QuizeDao() {
-		String filePath = QuizeDao.class.getResource("/sql/quize/quize-mapper.xml").getPath();
+	public QuizDao() {
+		String filePath = QuizDao.class.getResource("/sql/quiz/quiz-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
@@ -53,9 +53,9 @@ public class QuizeDao {
 		
 	}
 	
-	public ArrayList<Quize> selectList(Connection conn, PageInfo pi){
+	public ArrayList<Quiz> selectList(Connection conn, PageInfo pi){
 		
-		ArrayList<Quize> list = new ArrayList();
+		ArrayList<Quiz> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectList");
@@ -72,10 +72,10 @@ public class QuizeDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 			
-				Quize q = new Quize();
-				q.setQuizeNo(rset.getInt("QUIZE_NO"));
-				q.setQuizeTitle(rset.getString("QUIZE_TITLE"));
-				q.setQuizeContent(rset.getString("QUIZE_CONTENT"));
+				Quiz q = new Quiz();
+				q.setQuizNo(rset.getInt("QUIZ_NO"));
+				q.setQuizTitle(rset.getString("QUIZ_TITLE"));
+				q.setQuizContent(rset.getString("QUIZ_CONTENT"));
 				q.setVote(rset.getInt("VOTE"));
 				q.setCreateDate(rset.getString("CREATE_DATE"));
 				q.setDeadline(rset.getString("DEADLINE"));
@@ -99,21 +99,21 @@ public class QuizeDao {
 	}
 
 	
-	public QuizeAnswer detailQuize(Connection conn, int quizeNo){
+	public QuizAnswer detailQuiz(Connection conn, int quizNo){
 		
-		QuizeAnswer answer = new QuizeAnswer();
+		QuizAnswer answer = new QuizAnswer();
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("detailQuize");
+		String sql = prop.getProperty("detailQuiz");
 		ResultSet rset = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(1, quizNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				answer.setQuizeTitle(rset.getString("QUIZE_TITLE"));
+				answer.setQuizTitle(rset.getString("QUIZ_TITLE"));
 				answer.setAnswer(rset.getInt("ANSWER"));
 				answer.setAnswerDetail(rset.getString("ANSWER_DETAIL"));
 			}
@@ -129,7 +129,7 @@ public class QuizeDao {
 		
 	}
 	
-	public int increaseVote(Connection conn, int quizeNo) {
+	public int increaseVote(Connection conn, int quizNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("increaseVote");
@@ -137,7 +137,7 @@ public class QuizeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(1, quizNo);
 
 			result = pstmt.executeUpdate();
 			
@@ -152,15 +152,15 @@ public class QuizeDao {
 		
 	}
 	
-	public int quizeChoiceInsert(Connection conn, int quizeNo, int memNo, int choice) {
+	public int quizChoiceInsert(Connection conn, int quizNo, int memNo, int choice) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("quizeChoice");
+		String sql = prop.getProperty("quizChoice");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(1, quizNo);
 			pstmt.setInt(2, memNo);
 			pstmt.setInt(3, choice);
 			
@@ -176,15 +176,15 @@ public class QuizeDao {
 		
 	}
 	
-	public int quizeChoiceIsRight(Connection conn, int quizeNo, int choice) {
+	public int quizChoiceIsRight(Connection conn, int quizNo, int choice) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("quizeChoiceIsRight");
+		String sql = prop.getProperty("quizChoiceIsRight");
 		ResultSet rset = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, quizeNo);
+			pstmt.setInt(1, quizNo);
 			pstmt.setInt(2, choice);
 			
 			rset = pstmt.executeQuery();
@@ -200,10 +200,10 @@ public class QuizeDao {
 		return result;
 	}
 	
-	public int quizeGetPoint(Connection conn, int quizeNo, int memNo) {
+	public int quizGetPoint(Connection conn, int quizNo, int memNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("quizeGetPoint");
+		String sql = prop.getProperty("quizGetPoint");
 		ResultSet rset = null;
 		
 		try {
@@ -223,16 +223,16 @@ public class QuizeDao {
 		
 	}
 	
-	public int quizeAnswerExist(Connection conn, int memNo, int quizeNo) {
+	public int quizAnswerExist(Connection conn, int memNo, int quizNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("quizeAnswerExist");
+		String sql = prop.getProperty("quizAnswerExist");
 		ResultSet rset = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memNo);
-			pstmt.setInt(2,  quizeNo);
+			pstmt.setInt(2,  quizNo);
 
 			rset = pstmt.executeQuery();
 			if(rset.next()) result = 1;

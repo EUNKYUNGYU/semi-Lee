@@ -187,7 +187,7 @@
 						success : function(result){
 							//console.log(result);
 							if(result > 0){
-								$('commentContentInsert').val('');
+								$('#commentContentInsert').val('');
 								selectCommentList();
 							}
 						},

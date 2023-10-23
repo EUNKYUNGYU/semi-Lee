@@ -9,13 +9,19 @@ Member loginUser = (Member)session.getAttribute("loginUser");
 <head>
 <meta charset="UTF-8">
 <title>다이어리 첫 페이지 </title>
+<style>
+	#diary-btn{
+		margin-top :100px;
+	}
+</style>
 </head>
+
 <body>
 	<%@ include file="../common/navi.jsp" %>
 	<br><br>
 	<form action="<%= contextPath %>/list.di" id="login-form" method="post">
     		 	<!-- list controller로 memNo 넘겨주기  -->
-    		 	<button name="memNo" value=<%=loginUser.getMemNo()%>>다이어리 보러가기</button>
+    		 	<button name="memNo" value=<%=loginUser.getMemNo()%> id="diary-btn">다이어리 보러가기</button>
     	
    	</form>
    	<%@ include file="../common/footer.jsp" %>

@@ -61,7 +61,7 @@
 					
 					<hr>
 					<div id="messageContentWrap">
-						<textarea id="messageContent" name="messageContent" required></textarea>
+						<textarea id="messageContent" name="messageContent" required maxlength="1000"></textarea>
 					</div>
 					</form>
 					<hr>
@@ -92,6 +92,14 @@
 		<%@ include file ="../common/footer.jsp" %>
 	</footer>
 
-
+	<script>
+	    $(function(){
+	        $('#messageContent').keyup(function(){
+	            console.log($(this).val().length);
+	            $('#messageLen').text($(this).val().length);
+	        })
+	    })
+	</script>
+	
 </body>
 </html>

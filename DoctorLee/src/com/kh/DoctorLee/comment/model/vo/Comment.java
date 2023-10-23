@@ -5,11 +5,11 @@ public class Comment {
 	private int CommentNo;
 	private int boardNo;
 	private int topCommentNo;
-	private int writer;
+	private String writer;
 	private String commentContent;
 	private String createDate;
 	private String status;
-	public Comment(int commentNo, int boardNo, int topCommentNo, int writer, String commentContent, String createDate,
+	public Comment(int commentNo, int boardNo, int topCommentNo, String writer, String commentContent, String createDate,
 			String status) {
 		super();
 		CommentNo = commentNo;
@@ -41,10 +41,10 @@ public class Comment {
 	public void setTopCommentNo(int topCommentNo) {
 		this.topCommentNo = topCommentNo;
 	}
-	public int getWriter() {
+	public String getWriter() {
 		return writer;
 	}
-	public void setWriter(int writer) {
+	public void setWriter(String writer) {
 		this.writer = writer;
 	}
 	public String getCommentContent() {

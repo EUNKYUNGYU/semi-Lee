@@ -84,9 +84,9 @@
                         $('#resTime').val($(this).children().text());
                         $('#hiddenResTime').val($(this).children().text());
 
-                        $(this).css('background-color', 'salmon');
+                        $(this).css('background-color', '#475f94'); // 선택한 시간의 배경이 바뀜
 
-                        $(this).siblings().css('background-color', 'bisque');
+                        $(this).siblings().css('background-color', '#1E376F'); // 선택한 시간 이외의 다른 시간들의 색상을 원래대로 돌려줌
                     })
                 },
                 error:function(){
@@ -192,14 +192,6 @@
 
         <script>
             $(function(){
-                //li클릭 시 색깔 바뀌는 이벤트
-                $('.time-content').click(function(){
-                    if($(this).css('background-color', 'bisque')){
-                        $(this).css('background-color', 'salmon');
-
-                        $(this).siblings().css('background-color', 'bisque');
-                    }
-                })
 
                 $('#res-part').click(function(){
                     if(!$('#resDate').val() && !$('#hiddenResTime').val()){

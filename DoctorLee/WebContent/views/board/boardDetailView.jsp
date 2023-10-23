@@ -117,16 +117,88 @@
 								2023.10.17 13:14&nbsp;&nbsp;
 								<a href="#">답글 쓰기</a>
 							</div>
-						</div>						
+						</div>	
+											
 						<div id="commentInsertBox">
 							<div id="commentWriter">유저ID</div>
-							<textarea id="commentContent" placeholder="댓글을 남겨보세요"></textarea>
-							<div id="submitWrap"><a href="#">등록</a></div>
+							<textarea id="commentContentInsert" placeholder="댓글을 남겨보세요"></textarea>
+							<% if(loginUser != null) { %>
+								<div id="submitWrap"><a href='#javascript:void(0);' onclick="insertComment()">등록</a></div>
+							<% } else { %>
+								<div id="submitWrap"><a href='#' onclick="alert('로그인 후 이용 가능한 기능입니다.');">등록</a></div>
+							<% } %>
 						</div>
 					</div>
 				
 				</article>
 			</div>
+			
+			<script>
+			
+				function selectCommentList(){
+					
+					$.ajax({
+						url  : 'coList.co',
+						data : {boardNo: <%= b.getBoardNo() %>},
+						success : function(result){
+							console.log(result);
+							
+							let resultStr = '';
+							for(let i in result){
+								
+								resultStr += '<div id="commentWriteMemId">'
+										  + result[i].writer
+								          + '</div>'
+								          + '<div id="commentContent">'
+										  + result[i].commentContent
+									      + '</div>'
+									      + '<div id="commentCreateDate">'
+										  + result[i].createDate
+										  + '&nbsp;&nbsp;'
+										  + '<div id="commentCreateDate">'
+										  + '</div>'
+										  + '</div>';
+								
+							}
+							$('#commentContentBox').html(resultStr);
+						},
+						error : function(){
+							console.log('댓글 읽어오기 실패')	
+						}
+						
+					});
+					
+				}
+				
+				$(function(){
+					selectCommentList();
+					
+				});
+				
+				function insertComment(){
+					
+					$.ajax({
+						url : 'coInsert.co',
+						type: 'post',
+						data : {
+							boardNo : <%= b.getBoardNo() %>,
+							content : $('#commentContentInsert').val()
+						}, 
+						success : function(result){
+							//console.log(result);
+							if(result > 0){
+								$('commentContentInsert').val('');
+								selectCommentList();
+							}
+						},
+						error : function(){alert('댓글 작성에 실패하였습니다.');}
+					
+					})
+						
+				}
+			
+			</script>
+			
 			
 			<div id="page">
 				<div id="writeWrap">

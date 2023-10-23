@@ -161,8 +161,10 @@
 
                                     //자세히보기 버튼 클릭 시 상세보기 페이지로 이동
                                     $('.cli-img > button').click(function(){
-                                        location.href='<%=contextPath%>/cliDetail.cli?cno=' + $('.cli-no').text();
-                                        //console.log($('.cli-no').text());
+                                        const cliNo = $(this).parent().siblings().children().eq(1).text();
+                                        location.href='<%=contextPath%>/cliDetail.cli?cno=' + cliNo;
+                                        // console.log($('.cli-no').text());
+                                        // console.log($(this).parent().siblings().children().eq(1).text());
                                     })
                                 },
                                 error:function(){

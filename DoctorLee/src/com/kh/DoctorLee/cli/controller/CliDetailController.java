@@ -38,8 +38,6 @@ public class CliDetailController extends HttpServlet {
 		// 값 뽑기
 		int cliNo = Integer.parseInt(request.getParameter("cno"));
 		
-		System.out.println(cliNo);
-		
 		// Service 요청
 		Clinic c = new CliService().selectCli(cliNo);
 		

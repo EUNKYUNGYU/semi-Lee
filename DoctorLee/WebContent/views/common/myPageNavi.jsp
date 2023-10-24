@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 	String contextPath1 = request.getContextPath();
-	Member loginUser1 = (Member)session.getAttribute("loginUser");
+	
 %>
 
     
@@ -36,7 +37,7 @@
                     <table id="user" align="center">
                         <tr>
                             <br><br>
-                            <div align="center"><%= loginUser1.getMemName() %>님 환영합니다.</div><br>
+                            <div align="center">${sessionScope.loginUser.memName} 님 환영합니다.</div><br>
                             
 
                         </tr>

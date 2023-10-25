@@ -42,21 +42,21 @@
                             <h3>영상 수정하기</h3>
                             <br>
 
-                            <input type="hidden" name="videoNo" value="<%=c.getVideoNo()%>">
+                            <input type="hidden" name="videoNo" value="${v.videoNo }">
 
                             <tr>
                                 <th width="150">제목</th>
-                                <td><input type="text" name="title" id="title" required value="<%=c.getVideoTitle()%>"></td>
+                                <td><input type="text" name="title" id="title" required value="${ v.videoTitle }"></td>
                             </tr>
 
                             <tr>
                                 <th>채널명</th>
-                                <td><input type="text" name="channel" id="channel" required value="<%=c.getChannelName()%>"></td>
+                                <td><input type="text" name="channel" id="channel" required value="${ v.channelName }"></td>
                             </tr>
 
                             <tr>
                                 <th>영상 주소</th>
-                                <td><input type="text" name="address" id="address" required value="<%=c.getVideoAddress()%>"></td>
+                                <td><input type="text" name="address" id="address" required value="${ v.videoAddress }"></td>
                             </tr>
                         </table>
 
@@ -74,7 +74,7 @@
         </div>
 
         <div id="footer">
-            <%@ include file ="../common/footer.jsp" %>
+            <jsp:include page="../common/footer.jsp"/>
         </div>
 </body>
 </html>

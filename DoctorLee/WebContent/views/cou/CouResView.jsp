@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.cou.model.vo.*, java.util.ArrayList" %>    
-<%
-    Cou c = (Cou)request.getAttribute("c");
-    ArrayList<CouResTime> list = (ArrayList<CouResTime>)request.getAttribute("list");
-%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,20 +26,20 @@
             center:'title', // 가운데 : 현재 위치의 년(2023)과 달(10월)을 보여줌
             right:'next' // 오른쪽 : 다음 달로 가는 버튼
         },
-        validRange: function(nowDate) { // 선택 가능한 날짜 범위를 설정
+        validRange: function(nowDate) { // 선택 가능한 날짜 범위를 설정 
             return {
                 start: nowDate // 오늘부터 선택 가능
             };
-        },
+        }, 
 
         events:[ // 이벤트 추가
-            <% for(CouResTime ct : list) {%>
+        	<c:forEach var="ct" items="${ list }">
             {
                 title:'예약 가능', // 달력에 표시될 이름
-                start:'<%=ct.getCouDate()%>', // 시작 날짜
+                start:'${ct.couDate}', // 시작 날짜
                 color:'#1E376F' // 달력에 표시될 색상
             },
-            <% } %>
+            </c:forEach>
         ],
 
         dateClick: function(info){
@@ -66,7 +63,7 @@
             $.ajax({
                 url:'ajaxTime.cou',
                 data:{
-                    couNo:<%=c.getCouNo()%>, // 상담사 번호 
+                    couNo:${c.couNo}, // 상담사 번호 
                     resDate:$('#resDate').val() // 선택(클릭)한 날짜값이 담긴 input(#resDate)의 값
                 },
                 success:function(result){
@@ -147,26 +144,26 @@
                         <div id="cli-bottom">
                             <h4>예약 정보</h4>
 
-                            <input type="hidden" name="couNo" value="<%=c.getCouNo()%>">
+                            <input type="hidden" name="couNo" value="${ c.couNo }">
 
-                            <input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
+                            <input type="hidden" name="memNo" value="${ loginUser.memNo }">
 
                             <span>상담사명 : </span>
-                            <input type="text" id="couName" value="<%=c.getCouName()%>"  readonly>
+                            <input type="text" id="couName" value="${ c.couName }"  readonly>
 
                             <span>병원명 :</span>
-                            <input type="text" id="hosNo" value="<%=c.getHosName()%>" readonly>
+                            <input type="text" id="hosNo" value="${ c.hosName }" readonly>
 
                             <span>가격 : </span>
-                            <input type="text" id="couPrice" value="<%=c.getPrice()%>" readonly>
+                            <input type="text" id="couPrice" value="${ c.price }" readonly>
 
-                            <input type="hidden" name="userNo" value="<%=loginUser.getMemNo()%>">
+                            <input type="hidden" name="userNo" value="${ loginUser.memNo }">
                             
                             <span>예약자명 :</span>
-                            <input type="text" id="userName" value="<%= loginUser.getMemName()%>" readonly>
+                            <input type="text" id="userName" value="${ loginUser.memName }" readonly>
                             
                             <span>예약자 전화번호 : </span>
-                            <input type="text" id="userPhone" value="<%=loginUser.getPhone()%>" readonly>
+                            <input type="text" id="userPhone" value="${ loginUser.phone }" readonly>
                             
                             <span>예약일 : </span>
                             <input type="text" id="resDate" name="resDate" required readonly>
@@ -188,7 +185,7 @@
         </div>
 
         <div id="footer">
-            <%@ include file ="../common/footer.jsp" %>
+            <jsp:include page="../common/footer.jsp"/>
         </div>
 
         <script>

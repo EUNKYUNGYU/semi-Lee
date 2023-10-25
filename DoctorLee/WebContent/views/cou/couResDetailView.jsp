@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.cou.model.vo.*, java.util.ArrayList" %>    
-<%
-    Cou c = (Cou)request.getAttribute("c");
-    int result = (int)request.getAttribute("result");
-    int result2 = (int)request.getAttribute("result2");
-    ArrayList<CouCar> list = (ArrayList<CouCar>)request.getAttribute("list");
-    Double scope = (Double)request.getAttribute("scope");
-%>    
+ 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,34 +33,41 @@
             <!--클리닉 출력 영역 div-->
             <div id="cli-content" align="left">
 
-                <% if(loginUser != null){ %>
-                    <!--클리닉 예약하기 페이지로 이동하는 버튼-->
+				<c:if test="${ !empty loginUser }">
                     <div id="res-btn" align="right">
                         <button class="btn btn-primary" type="button" id="resBtn">예약하기</button>
                     </div>
-                <% } %>
+                </c:if>
 
                 <!--클리닉 간단 정보 출력 영역 div-->
                 <div id="cli-top" >
-                    <h4><%= c.getCouName() %></h4>
-                    <p><%= c.getHosName() %></p>
+                    <h4>${ c.couName } </h4>
+                    <p>${c.hosName } </p>
                     <span class="material-symbols-outlined">grade</span>
-                    <span><%= scope %></span>
-                    <p><%=c.getPrice()%>원</p>
+                    <span>${ requestScope.scope }</span>
+                    <p>${ c.price }원</p>
 
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->
                 <div id="cli-middle">
                     <h4>주요 자격 및 경력</h4>
-
-                    <%if(list.isEmpty()){%>
-                        <p>상세 정보가 없습니다.</p>
-                    <% } else { %>
-                        <%for(CouCar cc : list) {%>
-                            <p><%=cc.getCarContent()%></p>
-                        <% } %>
-                    <% } %>        
+					
+					<c:choose>
+					
+						<c:when test="${ empty list }">
+							<p>상세 정보가 없습니다.</p>
+						</c:when>
+						
+						<c:otherwise>
+						
+							<c:forEach var="c" items="${ list }">
+								<p>${ c.carContent }</p>
+							</c:forEach>
+						
+						</c:otherwise>
+					
+					</c:choose>        
                 </div>
 
                 <!--클리닉 후기 출력 영역 div-->
@@ -74,10 +76,10 @@
                     <div id="rev-top">
                         <h4>후기</h4>
 
-                        <% if(loginUser != null && result > 0 && result2 == 0) {%>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">후기 작성</button>
-                        <% } %> 
-
+						<c:if test="${ !empty loginUser && result gt 0 && result2 eq 0 }">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">후기 작성</button> 
+                        </c:if>
+                        
                     </div>
 
                     <br clear="both">
@@ -96,7 +98,7 @@
     </div>
 
     <div id="footer">
-        <%@ include file ="../common/footer.jsp" %>
+        <jsp:include page="../common/footer.jsp"/>
     </div>
 
     
@@ -154,7 +156,7 @@
 
         // 예약 버튼 클릭 시 예약하기 페이지로 이동
         $('#resBtn').click(function(){
-            location.href='<%=contextPath%>/resForm.cou?cno=<%=c.getCouNo()%>';
+            location.href='<%=contextPath%>/resForm.cou?cno=${ c.couNo}';
         })
 
         // 리뷰 등록하기 버튼 클릭 시 리뷰 작성
@@ -163,8 +165,8 @@
                 url:'ajaxRev.cou',
                 type:'post',
                 data:{
-                    cno: <%=c.getCouNo()%>,
-                    memNo: <%=loginUser.getMemNo()%>,
+                    cno: ${c.couNo},
+                    memNo: ${ loginUser.memNo},
                     couScope:$('input[name=reviewStar]:checked').val(),
                     revContent:$('#revContent').val()
                 },
@@ -183,7 +185,7 @@
             $.ajax({
                 url:'ajaxRevList.cou',
                 data:{
-                    cno: <%=c.getCouNo()%>
+                    cno: ${ c.couNo }
                 },
                 success:function(result){
                     let resultStr = '';

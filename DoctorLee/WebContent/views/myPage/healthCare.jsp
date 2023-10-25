@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
-<%
-	Member loginUser = (Member)session.getAttribute("loginUser");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,23 +11,16 @@
 </head>
 <body>
 	<%@ include file="../common/navi.jsp" %>
-	<%
-		int heavy = 90; // 로그인한 유저의 키 - 몸무게가 90 이하일 경우에는 비만
-		int thin = 110; // 로그인한 유저의 키 - 몸무게가 110 이상일 경우에는 마름
-		//로그인한 유저의 키 - 몸무게가 110 이하 90 이상일 경우에는 표준 
-		int standard = loginUser.getHeight()-loginUser.getWeight();// 로그인한 유저의 키 빼기 몸무게의 변수
-		//System.out.println(standard);
-	%>
+	<c:set var="heavy" value="90"/>
+	<c:set var="thin" value="110"/>
+	<c:set var="standard" value="${sessionScope.loginUser.height-sessionScope.loginUser.weight }"/>
 	
-	<h2 class="healthCareMain"><%=loginUser.getMemName() %>님의 건강 관리 페이지 </h2>
+	<h2 class="healthCareMain">${sessionScope.loginUser.memName}님의 건강 관리 페이지 </h2>
 	<br>
 	<hr>
 	<br><br><br>
-	<% if(loginUser == null) {%>
-		<form action="<%=contextPath %>/login.me" method="post">
-			<button type="submit">로그인하러가기</button>
-		</form>
-	<% } else { %>
+	
+	
 		
 			<div id="healthCare">
 				<div id="area">
@@ -37,7 +28,7 @@
 
 				</div>
 				<div id="healthCare_main">
-					<h3 align="center"><%=loginUser.getMemName()%>님의 정보입니다. </h3>
+					<h3 align="center">${sessionScope.loginUser.memName }님의 정보입니다. </h3>
 					<br>
 					<hr>
 					<br>
@@ -52,29 +43,30 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><%=loginUser.getMemName() %></td>
-									<td><%=loginUser.getHeight() %></td>
-									<td><%=loginUser.getWeight() %></td>
+									<td>${sessionScope.loginUser.memName }</td>
+									<td>${sessionScope.loginUser.height }</td>
+									<td>${sessionScope.loginUser.weight }</td>
 								</tr>
 							</tbody>
 						</table>
 						<br><br><hr><br>
-						<h3 align="center"><%=loginUser.getMemName() %>님의 건강상태</h3> <br>
+						<h3 align="center">${sessionScope.loginUser.memName }님의 건강상태</h3> <br>
 						<h5 align="center" id="healthCareInfo">정보</h5>
 						
 						<hr>
 						<br>
-						<% if(standard < heavy){ %>
+						<c:choose>
+							<c:when test="${standard < heavy }">
 							<script>
 								$(function(){
 									//document.getElementById('healthCareInfo').innerHTML = '과체중입니다.';
 									$('#healthCareInfo').html('과체중입니다.');
 								})
 							</script>
+							</c:when>
 						
-						<% }else{ %>
 						
-							<% if(standard > thin) { %>
+							<c:when test="${standard > thin }">
 								<script>
 									$(function(){
 										//document.getElementById('healthCareInfo').innerHTML = '저체중입니다.';
@@ -82,31 +74,33 @@
 									})
 									
 								</script>
-								
+							</c:when>
 							
-							<%} else{ %>
+							<c:otherwise>
 								<script>
 									$(function(){
 										//document.getElementById('healthCareInfo').innerHTML = '정상체중입니다';
 										$('#healthCareInfo').html('정상체중입니다.');
 									})
 								</script>
-							
-							<%} %>
-						<%} %>
-						<h3 align="center"><%=loginUser.getMemName() %>님을 위한 운동 추천!</h3>
+							</c:otherwise>
+						
+						</c:choose>
+						<h3 align="center">${sessionScope.loginUser.memName }님을 위한 운동 추천!</h3>
 						<p id="recommendHealth" align="center">추천 운동</p>
-						<% if(standard < heavy){ %>
+						<c:choose>
+							<c:when test="${standard < heavy }">
 							<script>
 								$(function(){
 									//document.getElementById('healthCareInfo').innerHTML = '과체중입니다.';
 									$('#recommendHealth').html('유산소 운동(줄넘기,산책,뜀걸음...등등)');
 								})
 							</script>
+							</c:when>
 						
-						<% }else{ %>
 						
-							<% if(standard > thin) { %>
+						
+							<c:when test="${standard > thin }">
 								<script>
 									$(function(){
 										//document.getElementById('healthCareInfo').innerHTML = '저체중입니다.';
@@ -114,9 +108,9 @@
 									})
 									
 								</script>
-								
+							</c:when>
 							
-							<%} else{ %>
+							<c:otherwise>
 								<script>
 									$(function(){
 										//document.getElementById('healthCareInfo').innerHTML = '정상체중입니다';
@@ -124,24 +118,25 @@
 									})
 								</script>
 							
-							<%} %>
-						<%} %>
+							</c:otherwise>
+						</c:choose>
 						<br><hr><br>
-						<h3 align="center"><%=loginUser.getMemName()%>님을 위한 추천 음식</h3>
+						<h3 align="center">${sessionScope.loginUser.memName }님을 위한 추천 음식</h3>
 						<h5 align="center" id="recommendFood">추천 음식 </h5>
 							
 						<br>
-						<% if(standard < heavy){ %>
+						<c:choose>
+						<c:when test="${standard < heavy }">
 							<script>
 								$(function(){
 									//document.getElementById('healthCareInfo').innerHTML = '과체중입니다.';
 									$('#recommendFood').html('탄수화물은 되도록 적게 드시며 고 단백질 음식을 섭취하세용~');
 								})
 							</script>
+						</c:when>
 						
-						<% }else{ %>
-						
-							<% if(standard > thin) { %>
+						<c:when test="${standard > thin }">
+							
 								<script>
 									$(function(){
 										//document.getElementById('healthCareInfo').innerHTML = '저체중입니다.';
@@ -149,9 +144,9 @@
 									})
 									
 								</script>
-								
+						</c:when>
 							
-							<%} else{ %>
+						<c:otherwise>
 								<script>
 									$(function(){
 										//document.getElementById('healthCareInfo').innerHTML = '정상체중입니다';
@@ -159,17 +154,16 @@
 									})
 								</script>
 							
-							<%} %>
-						<%} %>
+						</c:otherwise>
 						
 						
 						
-						
+						</c:choose>
 						
 						
 				
 				</div>
-				<%} %>
+				
 			</div>
 			<%@ include file="../common/footer.jsp" %>
 

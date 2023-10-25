@@ -26,10 +26,7 @@
 
         <!--하단 내용 영역을 감싸는 div-->
         <div class="content" align="center">
-
-            <!--좌측 메뉴 div-->
             
-
             <!--클리닉 출력 영역 div-->
             <div id="cli-content" align="left">
 
@@ -120,7 +117,7 @@
 
                 <div id="scope">
                     <h6>별점</h6>
-                    <input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
+                    <input type="hidden" name="memNo" value="${ loginUser.memNo }">
                     <fieldset>
                         <input type="radio" name="reviewStar" value="5" id="rate1" checked><label
                             for="rate1">★</label>

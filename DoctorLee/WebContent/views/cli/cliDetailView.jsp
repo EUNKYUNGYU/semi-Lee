@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%
-	String contextPath = request.getContextPath();
-%> 
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +19,7 @@
 <body>
 
     <!--상단 네비게이션 메뉴 div-->
-	<jsp:include page="../common/nav2.jsp"/>
+    <%@ include file="../common/nav2.jsp"%>
     <br><br><br>
 
     <!--전체를 감싸는 div-->
@@ -131,7 +129,7 @@
 
             // 예약 버튼 클릭 시 예약하기 페이지로 이동
             $('#resBtn').click(function(){
-                location.href='<%=contextPath%>/cliRes.cli?cno=${ c.cliNo }';
+                location.href='<%=contextPath%>/cliRes.cli?cno=${ c.cliNo}';
                 // console.log($(this).parents().children().eq(1).val());
             })
 

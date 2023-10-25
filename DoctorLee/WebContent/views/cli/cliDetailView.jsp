@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %>    
+<%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%
-	Clinic c = (Clinic)request.getAttribute("c");
-    int result = (int)request.getAttribute("result");
-    int result2 = (int)request.getAttribute("result2");
-    Double scope = (Double)request.getAttribute("scope");
-%>    
+	String contextPath = request.getContextPath();
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +21,7 @@
 <body>
 
     <!--상단 네비게이션 메뉴 div-->
-    <%@ include file="../common/nav2.jsp"%>
-
+	<jsp:include page="../common/nav2.jsp"/>
     <br><br><br>
 
     <!--전체를 감싸는 div-->
@@ -36,22 +33,21 @@
             <!--클리닉 출력 영역 div-->
             <div id="cli-content" align="left">
 
-                <input type="hidden" name="cliNo" value="<%=c.getCliNo()%>">
+                <input type="hidden" name="cliNo" value="${c.cliNo}">
 
-                <% if(loginUser != null){ %>
-                    <!--클리닉 예약하기 페이지로 이동하는 버튼-->
+				<c:if test="${ !empty loginUser }">
                     <div id="res-btn" align="right">
                         <button class="btn btn-primary" type="button" id="resBtn">예약하기</button>
                     </div>
-                <% } %>
+                </c:if>
 
                 <!--클리닉 간단 정보 출력 영역 div-->
                 <div id="cli-top" >
-                    <h4><%= c.getCliName() %></h4>
-                    <p><%= c.getHosNo() %></p>
+                    <h4>${ c.cliName }</h4>
+                    <p>${ c.hosNo }</p>
                     <span class="material-symbols-outlined">grade</span>
-                    <span><%= scope %></span>
-                    <p><%= c.getCliPrice() %>원</p>
+                    <span>${ c.scope }</span>
+                    <p>${ c.cliPrice }원</p>
                 </div>
 
                 <!--클리닉 상세 정보 출력 영역 div-->
@@ -60,9 +56,10 @@
                 <!--클리닉 후기 출력 영역 div-->
                 <div id="cli-bottom">
                     <h4>후기</h4>
-                    <% if(loginUser != null && result > 0 && result2 == 0) {%>
+                    
+                    <c:if test="${ !empty loginUser && result gt 0 && result2 eq 0 }">
                         <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">후기 작성</button>
-                    <% } %>  
+                    </c:if>
                     
                     <div id="rev-border">
                         <ul id="rev-list">
@@ -78,7 +75,7 @@
     </div>
 
     <footer>
-        <%@ include file ="../common/footer.jsp" %>
+        <jsp:include page="../common/footer.jsp"/>
     </footer>
 
     <!--리뷰 작성 모달창-->
@@ -97,7 +94,7 @@
 
                     <div id="scope">
                         <h6>별점</h6>
-                        <input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
+                        <input type="hidden" name="memNo" value="${ loginUser.memNo }">
                         <fieldset>
                             <input type="radio" name="reviewStar" value="5" id="rate1" checked><label
                                 for="rate1">★</label>
@@ -134,7 +131,7 @@
 
             // 예약 버튼 클릭 시 예약하기 페이지로 이동
             $('#resBtn').click(function(){
-                location.href='<%=contextPath%>/cliRes.cli?cno=<%=c.getCliNo()%>';
+                location.href='<%=contextPath%>/cliRes.cli?cno=${ c.cliNo }';
                 // console.log($(this).parents().children().eq(1).val());
             })
 
@@ -144,8 +141,8 @@
                     url:'cliRevInsert.cli',
                     type:'post',
                     data:{
-                        cno: <%=c.getCliNo()%>,
-                        memNo:<%=loginUser.getMemNo()%>,
+                        cno: ${c.cliNo},
+                        memNo:${ loginUser.memNo},
                         cliScope: $('input[name=reviewStar]:checked').val(),
                         revContent: $('#revContent').val()
                     },
@@ -163,7 +160,7 @@
                 $.ajax({
                     url: 'ajaxRevList.cli',
                     data : {
-                        cno: <%=c.getCliNo()%>
+                        cno: ${c.cliNo}
                     },
                     success : function(result){
 

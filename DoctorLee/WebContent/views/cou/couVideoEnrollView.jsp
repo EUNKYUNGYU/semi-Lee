@@ -68,7 +68,7 @@
         </div>
 
         <div id="footer">
-            <%@ include file ="../common/footer.jsp" %>
+            <jsp:include page="../common/footer.jsp"/>
         </div>
 
 </body>

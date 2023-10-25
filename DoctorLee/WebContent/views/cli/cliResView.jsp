@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.cli.model.vo.*, java.util.ArrayList" %>    
-<%
-	Clinic c = (Clinic)request.getAttribute("c");
-    ArrayList<CliResTime> list = (ArrayList<CliResTime>)request.getAttribute("list");
-%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +15,7 @@
 <link rel="stylesheet" href="resources/css/cou/couRes.css">
 
 <!--fullCalendar-->
-<script>
+<script> 
 
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
@@ -36,13 +33,13 @@
         },
 
         events:[
-            <% for(CliResTime ct : list) {%>
+        	<c:forEach var="ct" items="${ list }">
             {
                 title:'예약 가능',
-                start:'<%=ct.getCliDate()%>',
+                start:'${ct.cliDate}',
                 color:'#1E376F'
             },
-            <% }%>
+            </c:forEach>
         ],
 
         dateClick: function(info){
@@ -64,7 +61,7 @@
             $.ajax({
                 url:'ajaxTime.cli',
                 data:{
-                    cliNo:<%=c.getCliNo()%>,
+                    cliNo:${c.cliNo},
                     resDate:$('#resDate').val()},
                 success:function(result){
                     let resultStr = '';
@@ -145,24 +142,24 @@
                         <div id="cli-bottom">
                             <h4>예약 정보</h4>
 
-                            <input type="hidden" name="cliNo" value="<%=c.getCliNo()%>">
+                            <input type="hidden" name="cliNo" value="${c.cliNo}">
 
                             <span>클리닉명 : </span>
-                            <input type="text" id="cliName" value="<%= c.getCliName() %>" readonly>
+                            <input type="text" id="cliName" value="${c.cliName}" readonly>
 
                             <span>병원명 :</span>
-                            <input type="text" id="hosNo" value="<%= c.getHosNo() %>" readonly>
+                            <input type="text" id="hosNo" value="${ c.hosNo }" readonly>
 
                             <span>가격 : </span>
-                            <input type="text" id="cliPrice" value="<%= c.getCliPrice() %>" readonly>
+                            <input type="text" id="cliPrice" value="${ c.cliPrice }" readonly>
 
-                            <input type="hidden" name="userNo" value="<%=loginUser.getMemNo()%>">
+                            <input type="hidden" name="userNo" value="${ loginUser.memNo }">
                             
                             <span>예약자명 :</span>
-                            <input type="text" id="userName" value="<%= loginUser.getMemName()%>" readonly>
+                            <input type="text" id="userName" value="${loginUser.memName}" readonly>
                             
                             <span>예약자 전화번호 : </span>
-                            <input type="text" id="userPhone" value="<%=loginUser.getPhone()%>"" readonly>
+                            <input type="text" id="userPhone" value="${ loginUser.phone }" readonly>
                             
                             <span>예약일 : </span>
                             <input type="text" id="resDate" name="resDate" required readonly>
@@ -187,7 +184,7 @@
         </div>
 
         <footer>
-            <%@ include file ="../common/footer.jsp" %>
+            <jsp:include page="../common/footer.jsp"/>
         </footer>
 
         <script>

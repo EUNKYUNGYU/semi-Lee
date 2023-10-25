@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,18 +82,22 @@
                     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340" alt="회원사진" id="user_photo" >
                
                 </tr>
-                <%if(loginUser != null){%>
-                <tr>
-                    <br><br>
-                    <div align="center"><%=loginUser.getMemName()%>님 환영합니다.</div><br>
-               
-                </tr>
-                <% } else { %>
-                    <tr>
-                        <div>로그인이 필요한 서비스입니다.</div>
-                    </tr>
-                <% } %>
                 
+                <c:choose>
+                	<c:when test="${ !empty loginUser }">
+	                <tr>
+	                    <br><br>
+	                    <div align="center"> ${ loginUser.memName}님 환영합니다.</div><br>
+	               
+	                </tr>
+	                </c:when>
+	                
+	                <c:otherwise>
+	                    <tr>
+	                        <div>로그인이 필요한 서비스입니다.</div>
+	                    </tr>
+	                </c:otherwise>
+                </c:choose>
             </table>
 
         </div>

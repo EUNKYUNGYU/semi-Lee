@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +32,11 @@
             <!--성향 테스트 목록 출력 영역 div-->
             <div id="test-list" align="center">
 
-                <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
+				<c:if test="${ !empty loginUser && loginUser.memId eq 'admin' }">
                     <div id="button-area" align="right">
                         <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
                     </div>
-                <% } %>
+                </c:if>
 
                 <div class="thumbnail" align="center">
                     <br>
@@ -65,7 +66,7 @@
     </div>
 
     <footer>
-        <%@ include file ="../common/footer.jsp" %>
+        <jsp:include page="../common/footer.jsp"/>
     </footer>
 </body>
 </html>

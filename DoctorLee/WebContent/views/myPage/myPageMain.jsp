@@ -205,8 +205,9 @@
        
     </div>
     </c:otherwise>
-    <jsp:include page="../common/footer.jsp"/>
+   
     </c:choose>
+     <jsp:include page="../common/footer.jsp"/>
     <script>
         $(function(){
             $('a').click(function(){

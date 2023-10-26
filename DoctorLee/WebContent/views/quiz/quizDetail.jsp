@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page
 	import="com.kh.DoctorLee.quiz.model.vo.Quiz, java.util.ArrayList, com.kh.DoctorLee.quiz.model.vo.QuizAnswer"%>
     
@@ -41,7 +42,7 @@
 			<div id="content">
 				<article>
 					<div id="quizHeader">
-						<div id="title"><%= answer.getQuizTitle() %></div>		
+						<div id="title">${ answer }</div>		
 					</div>
 					<div id="quizContent">	
 						정답 : <%= answer.getAnswer() %>번 <br>

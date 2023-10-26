@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
-<%
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -120,13 +117,15 @@
 	
 	<h2 class="myPageMain">마이페이지</h2><br>
     <hr>
+    <c:choose>
+    <c:when test="${empty sessionScope.loginUser }">
     
-    <% if(loginUser == null) { %>
     <form action="<%= contextPath %>/login.me" method="post">
     	<button type="submit">로그인하러가기</button>
     	
     </form>
-    <% } else { %>
+    </c:when>
+    <c:otherwise>
     <div id="wraper">
         <div id="myPage">
             
@@ -135,7 +134,7 @@
                     <table id="user">
                         <tr>
                             <br><br>
-                            <th align="center"><%= loginUser.getMemName() %> 환영합니다.</th><br>
+                            <th align="center">${sessionScope.loginUser.memName } 환영합니다.</th><br>
                             
 
                         </tr>
@@ -147,7 +146,7 @@
                         
                     </table>
                     <div>
-                        만든 날짜 : <br><%= loginUser.getCreateDate() %>
+                        만든 날짜 : <br>${sessionScope.loginUser.createDate }
                         <br>
                         오늘 예약 : <br>
                     </div>
@@ -182,11 +181,11 @@
             <div id="mem_info">
                 <div id="my_info">
                     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA2MTNfMjcz%2FMDAxNjU1MDQ4NDU0NDkw.O3lQE9MMivnCNvAFZne6k5HrLr20MJRuV6pqDZTdDdMg.PeiJfGqE2PdsWhsyVSlYcK1B7MsF0srJe0J8mN0unXEg.JPEG.553812%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5.jpeg&type=a340" alt="이미지">
-                    <h3>일반회원 ) <%= loginUser.getMemName() %>님</h3>
+                    <h3>일반회원 ) ${sessionScope.loginUser.memName }님</h3>
                     <p>
                     <br>
-                        이메일 :  <%= loginUser.getEmail() %>      <br>
-                        휴대폰 번호 : <%= loginUser.getPhone() %>
+                        이메일 :  ${sessionScope.loginUser.email }      <br>
+                        휴대폰 번호 : ${sessionScope.loginUser.phone }
                     </p>
                     
                 </div>
@@ -205,9 +204,9 @@
         </div>
        
     </div>
-    <%} %>
-    <%@ include file="../common/footer.jsp" %>
-    
+    </c:otherwise>
+    <jsp:include page="../common/footer.jsp"/>
+    </c:choose>
     <script>
         $(function(){
             $('a').click(function(){

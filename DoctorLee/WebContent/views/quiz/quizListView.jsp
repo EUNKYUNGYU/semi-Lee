@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="com.kh.DoctorLee.quiz.model.vo.Quiz,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.kh.DoctorLee.quiz.model.vo.Quiz,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
     
 <% 
 	ArrayList<Quiz> list = (ArrayList<Quiz>)request.getAttribute("list");
@@ -11,11 +11,8 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
-	
-	System.out.println("quizListView.jsp에서 list랑 pi"+list+pi);
 
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +42,7 @@
 				퀴즈 게시판
 			</div>
 			
-			<!-- 퀴즈가 없을 경우 -->		
+			<!-- 퀴즈가 없을 경우 -->
 			<% if(list.isEmpty()) { %>
 				<div id="content">
 					<article>
@@ -70,6 +67,7 @@
 						
 						<!-- 퀴즈의 제출 기한이 남은 경우, 몇 일 남았는지 보이게 -->
 						<% } else { %>
+							${ q.deadline }
 							<%= q.getDeadline() %>일 남음
 						<% } %>
 						</div>

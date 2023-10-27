@@ -1,6 +1,8 @@
 package com.kh.DoctorLee.reservation.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,14 +42,16 @@ public class HosRsvtGuestInsertController extends HttpServlet {
 		String rsvtDocG = request.getParameter("rsvtDoc_G");
 		String hno = request.getParameter("hno");
 		
-		int checkRsvtResult = new ReservationService().checkRsvtTreatG(rsvtDateG, rsvtTimeG);
+		HashMap<String, String> map = new HashMap();
+		map.put("rsvtDateG", rsvtDateG);
+		map.put("rsvtTimeG", rsvtTimeG);
+		int checkRsvtResult = new ReservationService().checkRsvtTreatG(map);
 		
 		GuestReservation g = new GuestReservation();
 		g.setGuestRsvtDate(rsvtDateG);
 		g.setGuestRsvtTime(rsvtTimeG);
 		g.setRsvtGuest(rsvtNameG);
 		g.setGuestRsvtInfo(rsvtInfoG);
-		g.setGuestRsvtDoc(rsvtDocG);
 		g.setGuestRsvtDoc(rsvtDocG);
 		g.setGuestRsvtHos(hno);
 		

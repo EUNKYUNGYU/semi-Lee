@@ -33,14 +33,14 @@
         <!--하단 내용 영역을 감싸는 div-->
         <div class="content" align="center">
 
-            <form action="<%=contextPath%>/enrollRes.cli" method="post"></form>
+            <form action="enrollRes.cli" method="post"></form>
 
             <!--클리닉 출력 영역 div-->
             <div id="cli-content">
 
 				<c:if test="${ !empty loginUser && loginUser.memId eq 'admin' }">
                     <div id="button-area" align="right">
-                        <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
+                        <button type="button" onclick="location.href='couVideoEnroll.cou'">등록하기</button>
                     </div>
                 </c:if>
 
@@ -161,9 +161,7 @@
                                     //자세히보기 버튼 클릭 시 상세보기 페이지로 이동
                                     $('.cli-img > button').click(function(){
                                         const cliNo = $(this).parent().siblings().children().eq(1).text();
-                                        location.href='<%=contextPath%>/cliDetail.cli?cno=' + cliNo;
-                                        // console.log($('.cli-no').text());
-                                        // console.log($(this).parent().siblings().children().eq(1).text());
+                                        location.href='cliDetail.cli?cno=' + cliNo;
                                     })
                                 },
                                 error:function(){

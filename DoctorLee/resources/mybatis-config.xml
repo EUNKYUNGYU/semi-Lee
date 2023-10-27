@@ -33,6 +33,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.DoctorLee.quiz.model.vo.QuizAnswer" alias="QuizAnswer"/>
 		<typeAlias type="com.kh.DoctorLee.quiz.model.vo.QuizChoice" alias="QuizChoice"/>
 		
+		<typeAlias type="com.kh.DoctorLee.hospital.model.vo.Hospital" alias="hospital"/>
+		<typeAlias type="com.kh.DoctorLee.hospital.model.vo.Doctor" alias="doctor"/>
+		<typeAlias type="com.kh.DoctorLee.reservation.model.vo.Reservation" alias="reservation"/>
+		<typeAlias type="com.kh.DoctorLee.reservation.model.vo.GuestReservation" alias="guestReservation"/>
 	</typeAliases>
 
 	<environments default="development">
@@ -55,6 +59,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="/mapper/message-mapper.xml"/>
 		<mapper resource="/mapper/quiz-mapper.xml"/>
 		<mapper resource="/mapper/comment-mapper.xml"/>		
+		
+		<mapper resource="/mapper/hospital/hospital-mapper.xml"/>
+		<mapper resource="/mapper/hospital/doctor-mapper.xml"/>
+		<mapper resource="/mapper/reservation/reservation-mapper.xml"/>
+		<mapper resource="/mapper/reservation/guestReservation-mapper.xml"/>
 	</mappers>
 	
 </configuration>

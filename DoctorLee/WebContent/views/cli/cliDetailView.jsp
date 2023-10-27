@@ -35,7 +35,7 @@
 
 				<c:if test="${ !empty loginUser }">
                     <div id="res-btn" align="right">
-                        <button class="btn btn-primary" type="button" id="resBtn" onclick="location.href='<%=contextPath%>/cliRes.cli?cno=${ c.cliNo}'">예약하기</button>
+                        <button class="btn btn-primary" type="button" id="resBtn" onclick="location.href='cliRes.cli?cno=${ c.cliNo}'">예약하기</button>
                     </div>
                 </c:if>
 

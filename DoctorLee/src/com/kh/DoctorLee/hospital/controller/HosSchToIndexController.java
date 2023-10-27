@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.DoctorLee.common.template.Pagination;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
-import com.kh.DoctorLee.hospital.model.service.HospitalService;
+import com.kh.DoctorLee.hospital.model.service.HospitalServiceImpl;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
 /**
  * Servlet implementation class HosSchToIndexController
  */
-@WebServlet("/hosSch.dy")
+@WebServlet("/hosSearch.do")
 public class HosSchToIndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,36 +32,22 @@ public class HosSchToIndexController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// paging
-		int listCount = new HospitalService().hosCount(); // 병원 입점 개수 조회
-		int currentPage = Integer.parseInt(request.getParameter("hkeyP"));
-		// localhost:8765/DoctorLee/hosSch.dy?search=&hkey=1
+		HospitalServiceImpl hosService = new HospitalServiceImpl();
+		String keyword = request.getParameter("keyword");
+		
+		int listCount = hosService.selectHosCount(keyword); // 전체 병원 개수 조회
+		int page = Integer.parseInt(request.getParameter("page"));
 		int pageLimit = 5;
 		int hosLimit = 3;
-		int maxPage = (int)Math.ceil((double)listCount / hosLimit);
-		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-		int endPage = startPage + pageLimit - 1;
-		if(endPage > maxPage) endPage = maxPage;
+
+		PageInfo pi = Pagination.getPageInfo(listCount, page, pageLimit, hosLimit); 
 		
-		PageInfo pInfo = new PageInfo(listCount, currentPage, pageLimit, hosLimit, maxPage, startPage, endPage);
-		
-		String search = request.getParameter("search");
-		String hkeyH = request.getParameter("hkeyH");
-		
-		ArrayList<Hospital> list = new HospitalService().schToIndex(search, hkeyH);
-		
-		if(!list.isEmpty()) {
-		// 앞단에서 널체크
-		request.setAttribute("list", list);
-		request.setAttribute("pInfo", pInfo);
-		
+		ArrayList<Hospital> hosList = hosService.selectHosList(pi, keyword);
+		request.setAttribute("pi", pi);
+		request.setAttribute("hosList", hosList);
+		request.setAttribute("keyword", keyword);
 		request.getRequestDispatcher("views/hospital/hosSearch.jsp").forward(request, response);
-		// response.sendRedirect(request.getContextPath());
-		// System.out.println(request.getContextPath());
-		} else {
-			request.setAttribute("error", "병원이 존재하지 않습니다.");
-			request.getRequestDispatcher("views/common.errorPage.jsp").forward(request, response);
-		}
+
 	}
 
 	/**

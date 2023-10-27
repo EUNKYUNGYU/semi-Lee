@@ -65,7 +65,7 @@
 	                                            <br>
 	                                            
 	                                            <c:if test="${ !empty loginUser }">
-	                                                <button class="btn btn-primary">예약하기</button> 
+	                                                <button class="btn btn-primary" onclick="location.href='couDetail.cou?cno=${c.couNo}'">예약하기</button> 
 	                                            </c:if>  
 	                                            
 	                                            <span>${ c.couNo }</span>
@@ -104,23 +104,7 @@
                     </div>
                 </div>
 
-                <script>
-                    $(function(){
-
-                        //돋보기 버튼 클릭 시 상세보기 페이지로 이동
-                        $('.cli-img > button').click(function(){
-                            console.log($(this).siblings().eq(2).text());
-                            const couNo = $(this).siblings().eq(2).text();
-                            location.href='<%=contextPath%>/couDetail.cou?cno='+couNo;
-                        })
-                        
-                    })
-
-                    // 가격 불러오기
-                    function selectPrice(){
-
-                    }
-                </script>
+       
 
             </div>
 

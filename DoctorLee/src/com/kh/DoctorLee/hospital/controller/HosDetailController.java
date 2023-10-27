@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.DoctorLee.hospital.model.service.HospitalService;
+import com.kh.DoctorLee.hospital.model.service.HospitalServiceImpl;
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 import com.kh.DoctorLee.review.model.vo.Review;
@@ -33,27 +34,21 @@ public class HosDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HospitalServiceImpl hosService = new HospitalServiceImpl();
+		
 		//http://localhost:8765/DoctorLee/views/hospital/hosDetail.dy?hno=4
 		int hno = Integer.parseInt(request.getParameter("hno"));
 		
-		Hospital hos = new HospitalService().hosDetail(hno);
-		ArrayList<Doctor> docList = new HospitalService().selectDoc(hno);
-		ArrayList<Review> reviewList = new HospitalService().selectReview(hno);
+		Hospital hos = hosService.selectHosDetail(hno);
+		ArrayList<Doctor> docList = hosService.selectDoc(hno);
+		ArrayList<Review> reviewList = hosService.selectReview(hno);
 		
-		if(hos != null) {
-			// request.setAttribute("hos", hos);
-			HttpSession session = request.getSession();
-			session.setAttribute("hos", hos);
-			
-			request.setAttribute("docList", docList);
-			request.setAttribute("reviewList", reviewList);
-			request.getRequestDispatcher("views/hospital/hosDetail.jsp").forward(request, response);
-		} else {
-			
-			
-			request.setAttribute("error", "병원 정보를 불러올 수 없습니다.");
-			request.getRequestDispatcher("views/common.errorPage.jsp");
-		}
+		HttpSession session = request.getSession();
+		session.setAttribute("hos", hos);
+		request.setAttribute("docList", docList);
+		request.setAttribute("reviewList", reviewList);
+		
+		request.getRequestDispatcher("views/hospital/hosDetail.jsp").forward(request, response);
 		
 	}
 

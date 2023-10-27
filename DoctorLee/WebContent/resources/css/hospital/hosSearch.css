@@ -5,7 +5,7 @@ ul, li, ol{list-style: none;}
 a{text-decoration: none;}
 .sch_wrap{margin: 0 auto; padding-top: 100px; padding-left: 50px; height: 1000px;}
 
-     /* 병원 검색*/
+/* 병원 검색*/
 aside{
     float: left;
     width: 30%; height: 800px;
@@ -68,8 +68,16 @@ aside{
 }
 .hos_rsvt_btn>button:hover{cursor: pointer;}
 #hos_list:hover{cursor: pointer;}
+
+.sch_category{position: relative;}
 .sch_category>li{margin-bottom: 10px;}
+.sch_category a{color: #333;}
+
+#pageing_bar{display: none;}
+
+#footer_wrap{floar: left;}
 
 #mapwrap{
+	width: 30%;
 	float: right;
 }

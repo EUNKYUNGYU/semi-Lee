@@ -6,59 +6,62 @@ import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
 import static com.kh.DoctorLee.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.HashMap;
 
-import com.kh.DoctorLee.reservation.ReservationImp;
+import org.apache.ibatis.session.SqlSession;
+
+import com.kh.DoctorLee.common.tempate.Template;
 import com.kh.DoctorLee.reservation.model.dao.ReservationDao;
 import com.kh.DoctorLee.reservation.model.vo.GuestReservation;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;
 public class ReservationService{
 
+	private ReservationDao rsvtDao = new ReservationDao();
+	
 	// 진료 시간 체크
-	public int checkRsvtTreat(String rsvtDate, String rsvtTime) {
-		Connection conn = getConnection();
-		int checkRsvtResult = new ReservationDao().checkRsvtTreat(conn, rsvtDate, rsvtTime);
-		close(conn);
-		return checkRsvtResult;
+	public int checkRsvtTreat(HashMap<String, String> map) {
+		SqlSession sqlSession = Template.getSqlSession();
+		int result = rsvtDao.checkRsvtTreat(sqlSession, map);
+		return result;
 	}
 	
 	// 예약 insert
 	public int insertRsvt(Reservation rsvt) {
-		Connection conn = getConnection();
-		int result = new ReservationDao().insertRsvt(conn, rsvt);
-		if(result > 0) commit(conn);
-		else rollback(conn);
-		close(conn);
+		SqlSession sqlSession = Template.getSqlSession();
+		int result = rsvtDao.insertRsvt(sqlSession, rsvt);
+		if(result > 0) sqlSession.commit();
+		sqlSession.close();
 		return result;
 	}
 				
 	// 예약 조회
 	public Reservation selectRsvt(String rsvtName) {
-		Connection conn = getConnection();
-		Reservation selectRsvt = new ReservationDao().selectRsvt(conn, rsvtName);
-		close(conn);
-		return selectRsvt;
+		SqlSession sqlSession = Template.getSqlSession();
+		Reservation rsvt = rsvtDao.selectRsvt(sqlSession, rsvtName);
+		return rsvt;
 		
 	}
 	
-	public int checkRsvtTreatG(String rsvtDateG, String rsvtTimeG) {
-		Connection conn = getConnection();
-		int checkRsvtResult = new ReservationDao().checkRsvtTreatG(conn, rsvtDateG, rsvtTimeG);
-		close(conn);
+	// 비회원
+	public int checkRsvtTreatG(HashMap<String, String> map) {
+		SqlSession sqlSession = Template.getSqlSession();
+		int checkRsvtResult = rsvtDao.checkRsvtTreatG(sqlSession, map);
+		sqlSession.close();
 		return checkRsvtResult;
 	}
 	
 	public int insertRsvtG(GuestReservation gRsvt) {
-		Connection conn = getConnection();
-		int result = new ReservationDao().insertRsvtG(conn, gRsvt);
-		if(result > 0) commit(conn);
-		else rollback(conn);
+		SqlSession sqlSession = Template.getSqlSession();
+		int result = rsvtDao.insertRsvtG(sqlSession, gRsvt);
+		if(result > 0) sqlSession.commit();
+		sqlSession.close();
 		return result;
 	}
 	
 	public GuestReservation selectRsvtG(String rsvtNameG) {
-		Connection conn = getConnection();
-		GuestReservation gRsvt = new ReservationDao().selectRsvtG(conn, rsvtNameG);
-		close(conn);
+		SqlSession sqlSession = Template.getSqlSession();
+		GuestReservation gRsvt = rsvtDao.selectRsvtG(sqlSession, rsvtNameG);
+		sqlSession.close();
 		return gRsvt;
 	}
 	

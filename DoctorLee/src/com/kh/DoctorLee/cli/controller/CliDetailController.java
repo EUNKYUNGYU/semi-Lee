@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.cli.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.DoctorLee.cli.model.service.CliService;
+import com.kh.DoctorLee.cli.model.vo.CliRes;
+import com.kh.DoctorLee.cli.model.vo.CliRev;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
-import com.kh.DoctorLee.cou.model.service.CouService;
+import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 /**
@@ -46,18 +49,24 @@ public class CliDetailController extends HttpServlet {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		int result = new CliService().selectResMem(cliNo, loginUser);
+		CliRes cr = new CliRes();
+		cr.setCliNo(cliNo);
+		cr.setMemNo(loginUser.getMemNo());
+		
+		int result = new CliService().selectResMem(cr);
 		
 		// 리뷰는 한 사람당 한 번만 작성 가능하게
-		int result2 = new CliService().selectRevCount(cliNo, loginUser);
+		int result2 = new CliService().selectRevCount(cr);
 		
-		// 클리닉 평점 가져오기
-		Double scope = new CliService().selectCliScope(cliNo);
+		// 리뷰 목록
+		ArrayList<CliRev> list = new CliService().selectCliRevList(cliNo);
+		
+		System.out.println(list);
 		
 		request.setAttribute("c", c);
 		request.setAttribute("result", result);
 		request.setAttribute("result2", result2);
-		request.setAttribute("scope", scope);
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/cli/cliDetailView.jsp").forward(request, response);
 	}

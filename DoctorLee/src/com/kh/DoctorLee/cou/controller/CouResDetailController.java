@@ -64,7 +64,6 @@ public class CouResDetailController extends HttpServlet {
 		// 리뷰 목록 가져오기
 		ArrayList<CouRev> rlist = new CouService().selectCouRevList(couNo);
 		
-		
 		request.setAttribute("c", c);
 		request.setAttribute("result", result);
 		request.setAttribute("result2", result2);

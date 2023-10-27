@@ -7,6 +7,7 @@ import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.CliRev;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.member.model.vo.Member;
 
 public interface CliServiceI {
@@ -19,17 +20,15 @@ public interface CliServiceI {
 	
 	ArrayList<CliResTime> selectResDate(int cliNo);
 
-	ArrayList<CliResTime> selectCliTimeList(int cliNo, String resDate);
+	ArrayList<CliResTime> selectCliTimeList(CliRes cr);
 	
 	int insertCliRes(CliRes c);
 	
-	int selectResMem(int cliNo, Member loginUser);
+	int selectResMem(CliRes cr);
 	
 	int insertCliRev(CliRev c);
 	
-	Double selectCliScope(int cliNo);
-	
 	ArrayList<CliRev> selectCliRevList(int cliNo);
 	
-	int selectRevCount(int cliNo, Member loginUser);
+	int selectRevCount(CliRes cr);
 }

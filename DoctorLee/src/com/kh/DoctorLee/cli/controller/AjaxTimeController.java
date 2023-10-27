@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.kh.DoctorLee.cli.model.service.CliService;
+import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
 
 /**
@@ -38,7 +39,10 @@ public class AjaxTimeController extends HttpServlet {
 		String resDate = (request.getParameter("resDate")).replace(".", "-");
 		
 		// Service 요청
-		ArrayList<CliResTime> timeList = new CliService().selectCliTimeList(cliNo, resDate);
+		CliRes cr = new CliRes();
+		cr.setCliNo(cliNo);
+		cr.setResDate(resDate);
+		ArrayList<CliResTime> timeList = new CliService().selectCliTimeList(cr);
 		
 //		System.out.println(timeList);
 		

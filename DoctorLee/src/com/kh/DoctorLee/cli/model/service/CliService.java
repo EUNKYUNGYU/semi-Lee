@@ -8,24 +8,38 @@ import static com.kh.DoctorLee.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.kh.DoctorLee.cli.model.dao.CliDao;
 import com.kh.DoctorLee.cli.model.vo.Category;
 import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.CliRev;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
+import com.kh.DoctorLee.common.template.Template;
 import com.kh.DoctorLee.member.model.vo.Member;
 
-public class CliService {
+public class CliService implements CliServiceI{
+	
+	private CliDao cliDao = new CliDao();
 
 	public ArrayList<Category> selectCategoryList() {
-		Connection conn = getConnection();
 		
-		ArrayList<Category> list = new CliDao().selectCategoryList(conn);
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		close(conn);
+		ArrayList<Category> list = cliDao.selectCategoryList(sqlSession);
+		
+		sqlSession.close();
 		
 		return list;
+		
+//		Connection conn = getConnection();
+//		
+//		ArrayList<Category> list = new CliDao().selectCategoryList(conn);
+//		
+//		close(conn);
+//		
+//		return list;
 	}
 	
 	public ArrayList<Clinic> selectCliList(int cateNo){

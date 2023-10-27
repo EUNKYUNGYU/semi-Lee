@@ -32,14 +32,11 @@ public class CliListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-//		String cateName = request.getParameter("cateNo");
+		request.setCharacterEncoding("UTF-8");
 		
 		// 카테고리 불러오기
 		ArrayList<Category> list = new CliService().selectCategoryList();
-		
-		//System.out.println(list);
 		
 		request.setAttribute("list", list);
 

@@ -9,7 +9,6 @@ import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
 import com.kh.DoctorLee.cou.model.vo.CouRev;
 import com.kh.DoctorLee.cou.model.vo.CouVideo;
-import com.kh.DoctorLee.member.model.vo.Member;
 
 public interface CouServiceI {
 
@@ -31,7 +30,7 @@ public interface CouServiceI {
 	
 	ArrayList<CouResTime> selectCouDate(int couNo);
 	
-	ArrayList<CouResTime> selectCouTimeList(int couNo, String resDate);
+	ArrayList<CouResTime> selectCouTimeList(CouRes cr);
 	
 	int insertCouRes(CouRes c);
 	
@@ -45,6 +44,5 @@ public interface CouServiceI {
 	
 	ArrayList<CouCar> selectCouCarList(int couNo);
 	
-	Double selectCouScope(int couNo);
 }
 

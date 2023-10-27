@@ -61,10 +61,14 @@ public class CouResDetailController extends HttpServlet {
 		// 상담사 경력 및 자격 가져오기
 		ArrayList<CouCar> list = new CouService().selectCouCarList(couNo);
 		
+		// 리뷰 목록 가져오기
+		ArrayList<CouRev> rlist = new CouService().selectCouRevList(couNo);
+		
+		
 		request.setAttribute("c", c);
 		request.setAttribute("result", result);
 		request.setAttribute("result2", result2);
-		request.setAttribute("list", list);
+		request.setAttribute("rlist", rlist);
 		request.getRequestDispatcher("views/cou/couResDetailView.jsp").forward(request, response);
 	}
 

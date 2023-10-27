@@ -47,6 +47,7 @@ public class CouService implements CouServiceI {
 	}
 
 	// 비디오 게시하기
+	@Override
 	public int insertVideo(CouVideo cv) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -60,6 +61,7 @@ public class CouService implements CouServiceI {
 	}
 	
 	// 비디오 영상 수정하기 위한 내용 조회하기
+	@Override
 	public CouVideo selectCouVideo(int videoNo) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -71,6 +73,7 @@ public class CouService implements CouServiceI {
 	}
 	
 	// 비디오 내용 수정
+	@Override
 	public int updateCouVideo(CouVideo c) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -84,6 +87,7 @@ public class CouService implements CouServiceI {
 	}
 	
 	// 비디오 삭제
+	@Override
 	public int deleteVideo(int videoNo) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -97,6 +101,7 @@ public class CouService implements CouServiceI {
 	}
 	
 	// 상담사 목록 출력
+	@Override
 	public ArrayList<Cou> selectCouList(){
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -108,6 +113,7 @@ public class CouService implements CouServiceI {
 	}
 	
 	// 상담사 상세보기
+	@Override
 	public Cou selectCou(int couNo) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -118,6 +124,7 @@ public class CouService implements CouServiceI {
 		return c;
 	}
 	
+	@Override
 	public int selectResMem(CouRes cr) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -129,6 +136,7 @@ public class CouService implements CouServiceI {
 	}
 	
 	// 리뷰는 한 사람당 한 번만 작성 가능하게
+	@Override
 	public int selectRevCount(CouRes cr) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -140,6 +148,7 @@ public class CouService implements CouServiceI {
 	}
 	
 	// 상담사 경력 및 자격 가져오기
+	@Override
 	public ArrayList<CouCar> selectCouCarList(int couNo){
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -153,6 +162,7 @@ public class CouService implements CouServiceI {
 	////////////////////////////////////////////////////////////
 	
 	// 상담 리뷰 목록 출력
+	@Override
 	public ArrayList<CouRev> selectCouRevList(int couNo){
 		SqlSession sqlSession = Template.getSqlSession();
 			
@@ -164,6 +174,7 @@ public class CouService implements CouServiceI {
 	}
 	
 	// 상담사 예약 가능 날짜 출력
+	@Override
 	public ArrayList<CouResTime> selectCouDate(int couNo){
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -174,33 +185,46 @@ public class CouService implements CouServiceI {
 		return list;
 	}
 	
-	// 상담사 예약 가능 시간 출력
-	public ArrayList<CouResTime> selectCouTimeList(int couNo, String resDate){
+	@Override
+	public ArrayList<CouResTime> selectCouTimeList(CouRes cr) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return null;
+		ArrayList<CouResTime> list = couDao.selectCouTimeList(sqlSession, cr);
+		
+		sqlSession.close();
+		
+		return list;
 	}
-	
+
 	// 상담 예약하기
+	@Override
 	public int insertCouRes(CouRes c) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return 0;
+		int result = couDao.insertCouRes(sqlSession, c);
+		
+		if(result > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return result;
 	}
 
 	
 	
 	// 상담 예약 후 리뷰 작성
-	public int insertCouRev(CouRev c) {
-		
-		return 0;
-	}
-
 	@Override
-	public Double selectCouScope(int couNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertCouRev(CouRev c) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = couDao.insertCouRev(sqlSession, c);
+		
+		if(result > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return result;
 	}
-	
 
-	
 
 }

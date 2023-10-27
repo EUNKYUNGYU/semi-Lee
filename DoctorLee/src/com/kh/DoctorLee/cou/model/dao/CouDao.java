@@ -67,5 +67,17 @@ public class CouDao {
 	public ArrayList<CouRev> selectCouRevList(SqlSession sqlSession, int couNo) {
 		return (ArrayList)sqlSession.selectList("couMapper.selectCouRevList", couNo);
 	}
+	
+	public ArrayList<CouResTime> selectCouTimeList(SqlSession sqlSession, CouRes cr){
+		return (ArrayList)sqlSession.selectList("couMapper.selectCouTimeList", cr);
+	}
+	
+	public int insertCouRes(SqlSession sqlSession, CouRes c) {
+		return sqlSession.insert("couMapper.insertCouRes", c);
+	}
+	
+	public int insertCouRev(SqlSession sqlSession, CouRev c) {
+		return sqlSession.insert("couMapper.insertCouRev", c);
+	}
 
 }

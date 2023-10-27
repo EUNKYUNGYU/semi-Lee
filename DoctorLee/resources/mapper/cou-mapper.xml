@@ -221,7 +221,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				COU_NO = #{couNo}
 	</select>
 	
-	<select id="selectCouDate" parameterType="_int" resultMap="cou"></select>
+	<select id="selectCouDate" parameterType="_int" resultMap="couResTimeResultSet">
+		SELECT
+				DISTINCT COU_DATE
+		FROM
+				TB_COU_TIME
+		WHERE
+				COU_NO = #{couNo}
+	</select>
+	
+	<select id="selectCouTimeList" parameterType="CouRes" resultMap="couResTimeResultSet">
+		SELECT
+				TIME_NO,
+				COU_NO,
+				COU_TIME,
+				COU_DATE
+		FROM
+				TB_COU_TIME
+		WHERE
+				COU_NO = #{couNo}
+		AND
+				COU_DATE = #{resDate}
+		AND
+				COU_TIME NOT IN
+								(
+									SELECT
+											RES_TIME
+									FROM
+											TB_COU_RES
+									WHERE
+											COU_NO = #{couNo}
+									AND
+											RES_DATE = #{resDate}
+								)
+		ORDER
+		   BY	TIME_NO
+	</select>
 	
 	<select id="selectCouRevList" parameterType="_int" resultMap="couRevResultSet">
 		SELECT
@@ -242,5 +277,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   		REV_NO DESC
 				
 	</select>
+	
+	<insert id="insertCouRes" parameterType="CouRes">
+		INSERT
+		  INTO
+		  		TB_COU_RES
+		 VALUES
+		 		(
+		 		SEQ_COU_RES_NO.NEXTVAL,
+		 		#{memNo},
+		 		#{couNo},
+		 		#{resDate},
+		 		#{resTime}
+		 		)
+	</insert>
+	
+	<insert id="insertCouRev" parameterType="CouRev">
+		INSERT
+		  INTO
+		  		TB_COU_REV
+		VALUES
+				(
+				SEQ_COU_REV_NO.NEXTVAL,
+				#{couNo},
+				#{memNo},
+				#{revContent},
+				SYSDATE,
+				#{couScope}
+				)
+	</insert>
 
 </mapper>

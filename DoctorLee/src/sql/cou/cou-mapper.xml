@@ -1,57 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	
-	<entry key="selectCouDate">
-		SELECT
-				DISTINCT COU_DATE
-		FROM
-				TB_COU_TIME
-		WHERE
-				COU_NO = ?				
-	</entry>
-	
-	<entry key="selectCouTimeList">
-	SELECT
-				TIME_NO,
-				COU_NO,
-				COU_TIME,
-				COU_DATE
-		  FROM
-		  		TB_COU_TIME
-		 WHERE
-		 		COU_NO = ?
-		 AND
-		 		COU_DATE = ?
-		 AND
-		 		COU_TIME NOT IN(
-		 						SELECT
-		 								RES_TIME
-		 						  FROM
-		 						  		TB_COU_RES
-		 						 WHERE
-		 						 		COU_NO = ?
-		 						 AND
-		 						 		RES_DATE = ?				
-		 						)
-		ORDER 
-		   BY  TIME_NO
-	</entry>
-	
-	<entry key="insertCouRes">
-		INSERT
-		INTO
-				TB_COU_RES
-		VALUES
-				(
-				SEQ_COU_RES_NO.NEXTVAL,
-				?,
-				?,
-				?,
-				?
-				)
-	</entry>
-	
+			
 	<entry key="insertCouRev">
 		INSERT
 		  INTO
@@ -85,13 +35,6 @@
 				COU_NO = ?
 		ORDER 
 		   BY   REV_NO DESC
-	</entry>
-	
-	<entry key="selectVideoCount">
-		SELECT
-				COUNT(*)
-		FROM
-				TB_COU_VIDEO
 	</entry>
 	
 </properties>

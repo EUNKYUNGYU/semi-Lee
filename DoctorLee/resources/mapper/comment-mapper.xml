@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+
+
+<select id="selectCommentList">
+
+	SELECT 
+			COMMENT_NO
+			, NICKNAME
+			, COMMENT_CONTENT
+			, TO_CHAR(TB_COMMENT.CREATE_DATE, 'YY/MM/DD HH24:MM:SS') AS CREATE_DATE
+		FROM 
+			TB_COMMENT 
+		JOIN 
+			TB_MEMBER ON(WRITER = MEM_NO)
+		WHERE 
+			BOARD_NO = ?
+		AND 
+			TB_COMMENT.STATUS = 'Y'
+		ORDER BY
+			TB_COMMENT.CREATE_DATE DESC
+		
+</select>
+
+<insert id="insertComment">
+	INSERT 
+		INTO 
+			TB_COMMENT 
+					(
+					COMMENT_NO
+					, BOARD_NO
+					, WRITER
+					, COMMENT_CONTENT
+					)
+			VALUES 
+					(
+					SEQ_COMMENT_NO.NEXTVAL
+					, ?
+					, ?
+					, ?
+					)
+
+</insert>
+	
+
+
+</mapper>

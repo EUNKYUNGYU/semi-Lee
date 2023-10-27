@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+
+
+<select id="selectListCount">
+	 	
+	 SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_QUIZ_BOARD 
+ 
+</select>
+
+
+<select id="selectList">
+
+	 SELECT *
+ 		FROM(
+			SELECT ROWNUM RNUM, A.*
+	  			FROM(
+		  			SELECT 	
+					        QUIZ_NO
+					        , QUIZ_TITLE
+					        , QUIZ_CONTENT
+					        , VOTE
+					        , CREATE_DATE
+					        , TO_CHAR(TRUNC(END_DATE - SYSDATE)) DEADLINE
+					        , CHOICE1
+					        , CHOICE2
+					        , CHOICE3
+					        , CHOICE4
+						FROM
+			        		TB_QUIZ_BOARD 
+			    		ORDER BY
+			        		DEADLINE DESC) A )
+ 		WHERE 
+ 			RNUM BETWEEN ? AND ?
+
+</select>
+
+
+<select id="detailQuiz">
+
+	SELECT 
+        	ANSWER, ANSWER_DETAIL, QUIZ_TITLE
+    	FROM 
+        	TB_QUIZ_ANSWER
+        JOIN 
+        	TB_QUIZ_BOARD USING(QUIZ_NO) 
+    	WHERE 
+        	QUIZ_NO = ?
+        
+</select>
+
+
+ <update id="increaseVote">
+ 
+	 UPDATE 
+	 		TB_QUIZ_BOARD
+	 	SET 
+	 		VOTE = VOTE + 1 
+	 	WHERE 
+	 		QUIZ_NO = ?
+	 
+ </update>
+
+
+<insert id="quizChoice">
+
+	INSERT 
+			INTO 
+				TB_QUIZ_CHOICE 
+								(
+								QUIZ_NO
+								, MEM_NO
+								, CHOICE
+								) 
+						VALUES
+								(
+								?
+								,?
+								,?
+								)
+						
+</insert>
+
+
+<select id="quizChoiceIsRight">
+
+	SELECT 
+        ANSWER
+    FROM 
+        TB_QUIZ_ANSWER
+    WHERE 
+        QUIZ_NO = ?   
+        
+    AND    
+        ANSWER = ?
+
+</select>
+
+
+ <entry id="quizGetPoint">
+ 	
+	UPDATE 
+			TB_MEMBER 
+					SET 
+						POINT = POINT + 500
+					 WHERE 
+					 	MEM_NO = ?
+ 
+ </entry>
+ 
+ 
+ <select id="quizAnswerExist">
+ 
+  	SELECT 
+ 			COUNT(*)
+ 		FROM 
+ 			TB_QUIZ_CHOICE 
+ 		WHERE 
+ 			MEM_NO = ?
+ 		AND
+ 			QUIZ_NO = ?
+
+ </select>
+
+
+</mapper>

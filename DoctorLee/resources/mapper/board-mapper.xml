@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+
+
+	<select id="selectListCount">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_BOARD 
+	 	WHERE 
+	 		STATUS = 'Y'
+ 
+	</select>
+	
+	<select id="selectListCountMyBoard">
+	
+		SELECT 
+	 			COUNT(*) 
+		 	FROM 
+		 		TB_BOARD 
+	        JOIN
+	            TB_MEMBER ON (MEM_NO = WRITER)
+		 	WHERE 
+		 		TB_BOARD.STATUS = 'Y'
+	        AND 
+	            MEM_NO = ?
+	         
+	</select>
+
+	<select id="selectList">
+
+		SELECT *
+		 		FROM(
+					SELECT ROWNUM RNUM, A.*
+			  			FROM(
+		                    SELECT    
+		                             BOARD_NO
+		                             , BOARD_TYPE
+		                             , NICKNAME
+		                             , BOARD_TITLE
+		                             , BOARD_CONTENT
+		                             , TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD')CREATE_DATE
+		                             , VIEWS
+		                             , B.STATUS 
+		                             , (SELECT COUNT(*) FROM TB_LIKE) AS LIKES
+		                      FROM 
+		                             TB_BOARD B
+		                     JOIN 
+		                             TB_MEMBER ON(WRITER = MEM_NO)
+		                        JOIN 
+		                             TB_BOARD_TYPE USING(BOARD_TYPE)
+		                        WHERE
+		                             B.STATUS = 'Y'
+		                     	AND  
+
+	</select>
+
+	<insert id="insertBoard">
+	
+		INSERT 
+		        INTO 
+		            TB_BOARD 
+		            (
+		            BOARD_NO
+		            , WRITER
+		            , BOARD_TITLE
+		            , BOARD_CONTENT
+		            , BOARD_TYPE
+		            )
+		    VALUES 
+		            (
+		            SEQ_BOARD_NO.NEXTVAL
+		            , ?
+		            , ?
+		            , ?
+		            ,
+	</insert>
+	
+	<update id="increseViews">
+		UPDATE 
+		        TB_BOARD 
+		    SET 
+		        VIEWS = VIEWS + 1
+		    WHERE 
+		        BOARD_NO = ?
+	</update>
+	
+	<select id="selectBoard">
+		SELECT
+		          BOARD_NO
+		         , BOARD_TYPE
+		         , BOARD_NAME
+		         , MEM_NO
+		         , MEM_ID
+		         , NICKNAME
+		         , BOARD_TITLE
+		         , BOARD_CONTENT
+		         , TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD HH24:MI')CREATE_DATE
+		         , VIEWS
+		         , BOARD_CONTENT
+		         , (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = ?) AS LIKES
+		         , (SELECT COUNT(*) FROM TB_COMMENT WHERE BOARD_NO = ?) AS COMMENTS
+		         , B.STATUS
+		         , (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = ? AND MEM_NO = ?) AS LIKE_MEM
+		    FROM
+		         TB_BOARD B 
+		    JOIN
+		          TB_MEMBER ON(WRITER = MEM_NO)
+		    JOIN
+		        TB_BOARD_TYPE USING(BOARD_TYPE)
+		    WHERE
+		          B.STATUS = 'Y'
+		        AND
+        	BOARD_NO = ?
+        	
+	</select>
+
+<update id="deleteBoard">
+
+	UPDATE 
+			TB_BOARD 
+		SET 
+			STATUS = 'N' 
+		WHERE 
+			BOARD_NO = ?
+
+</update>
+
+<update id="updateBoard">
+	
+	UPDATE 
+	        TB_BOARD 
+	    SET 
+	        BOARD_TYPE = ?,
+	        BOARD_TITLE = ?,
+	        BOARD_CONTENT = ?,
+	        MODIFY_DATE = SYSDATE
+	    WHERE 
+	        BOARD_NO = ?
+	        
+</update>
+
+<select id="selectMyBoardList">
+
+	SELECT *
+		FROM(
+			SELECT ROWNUM RNUM, A.*
+				FROM(
+					SELECT
+						BOARD_NO
+						, BOARD_TYPE
+						, MEM_ID
+						, NICKNAME
+						, BOARD_TITLE
+						,TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD')CREATE_DATE
+						, VIEWS
+						, B.STATUS
+					FROM
+						TB_BOARD B
+					JOIN
+						TB_MEMBER ON(WRITER = MEM_NO)
+					JOIN
+						TB_BOARD_TYPE USING(BOARD_TYPE)
+					WHERE
+						B.STATUS = 'Y'
+					AND
+						MEM_NO = ?
+					ORDER BY
+							B.CREATE_DATE DESC )
+				A )
+		WHERE
+			RNUM BETWEEN ? AND ?
+
+</select>
+
+<select id="selectLike">
+
+	SELECT 
+			COUNT(*) 
+		FROM 
+			TB_LIKE
+		WHERE 
+			MEM_NO = ?
+		AND 
+			BOARD_NO = ?
+</select>	
+	
+<insert id="insertLike">
+
+	INSERT 
+		INTO 
+			TB_LIKE 
+			(
+			MEM_NO
+			, BOARD_NO
+			, LIKE_DATE
+			)
+		 VALUES
+		 	(
+		 	?
+		 	, ?
+		 	, SYSDATE
+		 	)
+
+
+</insert>
+
+<delete id="deleteLike">
+
+	DELETE 
+		FROM 
+			TB_LIKE 
+		WHERE 
+			MEM_NO = ? 
+		AND  
+			BOARD_NO = ?
+
+
+</delete>
+
+
+
+</mapper>

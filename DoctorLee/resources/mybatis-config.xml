@@ -22,6 +22,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.DoctorLee.cou.model.vo.CouResTime" alias="CouResTime"/>
 		<typeAlias type="com.kh.DoctorLee.cou.model.vo.CouRev" alias="CouRev"/>
 		<typeAlias type="com.kh.DoctorLee.cou.model.vo.CouVideo" alias="CouVideo"/>
+		
+		<typeAlias type="com.kh.DoctorLee.board.model.vo.Board" alias="Board"/>
+		
+		<typeAlias type="com.kh.DoctorLee.comment.model.vo.Comment" alias="Comment"/>
+		
+		<typeAlias type="com.kh.DoctorLee.message.model.vo.Message" alias="Message"/>
+		
+		<typeAlias type="com.kh.DoctorLee.quiz.model.vo.Quiz" alias="Quiz"/>
+		<typeAlias type="com.kh.DoctorLee.quiz.model.vo.QuizAnswer" alias="QuizAnswer"/>
+		<typeAlias type="com.kh.DoctorLee.quiz.model.vo.QuizChoice" alias="QuizChoice"/>
+		
 	</typeAliases>
 
 	<environments default="development">
@@ -40,7 +51,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="/mapper/cou-mapper.xml"/>
 		<mapper resource="/mapper/cli-mapper.xml"/>
-		
+		<mapper resource="/mapper/board-mapper.xml"/>
+		<mapper resource="/mapper/message-mapper.xml"/>
+		<mapper resource="/mapper/quiz-mapper.xml"/>
+		<mapper resource="/mapper/comment-mapper.xml"/>		
 	</mappers>
 	
 </configuration>

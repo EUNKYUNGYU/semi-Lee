@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
-<properties>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
 
-<entry key="selectListCount">
-	 	
+	<select id="selectListCount">
+		 	
 	 	SELECT 
 	 		COUNT(*) 
 	 	FROM 
 	 		TB_MESSAGE 
 	 	WHERE 
 	 		STATUS = 'Y'
- 
-</entry>
-
-<entry key="selectListCountreciever">
-	 	
-	 	SELECT 
+	 		
+	</select>
+	
+	<select id="selectListCountreciever">
+		 
+		 SELECT 
 	 		COUNT(*) 
 	 	FROM 
 	 		TB_MESSAGE 
@@ -24,11 +26,12 @@
 	 	AND
 	 		RECEIVER = ?
  
-</entry>
-
-<entry key="selectListCountsender">
-	 	
-	 	SELECT 
+	
+	</select>
+	
+	<select id="selectListCountsender">
+	
+		 SELECT 
 	 		COUNT(*) 
 	 	FROM 
 	 		TB_MESSAGE 
@@ -36,14 +39,12 @@
 	 		STATUS = 'Y'
 	 	AND
 	 		SENDER = ?
- 
-</entry>
-
-
-
-<entry key="selectList">
-
-	 SELECT *
+	
+	</select>
+	
+	<select id="selectList">
+	
+	SELECT *
  		FROM(
 			SELECT ROWNUM RNUM, A.*
 	  			FROM(
@@ -59,25 +60,24 @@
         TB_MESSAGE.STATUS = 'Y'
         ORDER BY SEND_DATE DESC) A )
  		WHERE 
- 			RNUM BETWEEN ? AND ? 
-
-</entry>
-
-<entry key="updateReadStatus">
-
-	UPDATE 
+ 			RNUM BETWEEN ? AND ?;   
+	
+	</select>
+	
+	<update id="updateReadStatus">
+	
+		UPDATE 
 			TB_MESSAGE 
 		SET 
 			READ_STATUS = 'Y' 
 		WHERE 
 			MESSAGE_NO = ?
-
-</entry>
-
-
-<entry key="selectMessage">
-
-SELECT 
+	
+	</update>
+	
+	<select id="selectMessage">
+	
+	SELECT 
         MESSAGE_TITLE, MEM_ID, SEND_DATE, MESSAGE_CONTENT
         
     FROM
@@ -88,22 +88,22 @@ SELECT
         MESSAGE_NO = ? 
     AND 
         TB_MESSAGE.STATUS = 'Y'
-
-</entry>
-
-<entry key="searchMember">
-
-    SELECT 
+	
+	</select>
+	
+	<select id="searchMember">
+	
+	    SELECT 
         	MEM_NO
         FROM 
             TB_MEMBER
         WHERE 
              MEM_ID = ?
-
-</entry>
-
-<entry key="insertMessage">
-
+	
+	</select>
+	
+	<insert id="insertMessage">
+	
 	INSERT INTO
 	            TB_MESSAGE 
 	                    (
@@ -121,41 +121,19 @@ SELECT
 	                    , ?
 	                    , ?
 	                    )
-
-</entry>
-
-<entry key="deleteMessage">
-
-	UPDATE 
+	</insert>
+	
+	<delete id="deleteMessage">
+	
+		UPDATE 
 			TB_MESSAGE 
 		SET
 			STATUS = 'N'
 		WHERE
 			MESSAGE_NO = ?
+	
+	</delete>
+	
+	
 
-</entry>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</properties>
-
-
+</mapper>

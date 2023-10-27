@@ -1,16 +1,12 @@
 package com.kh.DoctorLee.hospital.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.close;
-import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
-
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
-import com.kh.DoctorLee.common.template.Template;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
+import com.kh.DoctorLee.common.template.Template;
 import com.kh.DoctorLee.hospital.model.dao.HospitalDao;
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;

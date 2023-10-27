@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.DoctorLee.hospital.model.service.HospitalService;
 import com.kh.DoctorLee.hospital.model.service.HospitalServiceImpl;
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;

@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.kh.DoctorLee.common.tempate.Template;
+import com.kh.DoctorLee.common.template.Template;
 import com.kh.DoctorLee.reservation.model.dao.ReservationDao;
 import com.kh.DoctorLee.reservation.model.vo.GuestReservation;
 import com.kh.DoctorLee.reservation.model.vo.Reservation;

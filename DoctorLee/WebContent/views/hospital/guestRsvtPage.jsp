@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.hospital.model.vo.*, java.util.ArrayList, com.kh.DoctorLee.reservation.model.vo.*, com.kh.DoctorLee.review.model.vo.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	Hospital hos = (Hospital)session.getAttribute("hos");
-	ArrayList<Doctor> docList = (ArrayList<Doctor>)request.getAttribute("docList");
 	
 	int hosTreatBegin = Integer.parseInt(hos.getTreatBegin().replaceAll(":00", ""));
 	int hosTreatEnd = Integer.parseInt(hos.getTreatEnd().replaceAll(":00|:30", ""));
@@ -22,35 +22,6 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 <script src="resources/js/reservation/guestRsvt.js"></script>
-<!-- 
-<script>
-	var hosNo = location.search.substring(5);
-   	var guest_rsvt_date = '';
-	
-	document.addEventListener('DOMContentLoaded', function() {
-   	
-       var calendarGuest = document.getElementById('calendarGuest');
-       var calendarG = new FullCalendar.Calendar(calendarGuest, {
-         initialView: 'dayGridMonth',
-         locale: 'ko',
-         firstDay: 1,
-         headerToolbar: {
-       	  left: 'prev',
-       	  center: 'title',
-       	  right: 'next'
-         },
-         dateClick: function(info){
-	       	  info.dayEl.style.backgroundColor = 'rgba(79, 137, 255, 0.4)';
-	       	  guest_rsvt_date = info.dateStr;
-		}
-
-       });
-         
-       calendarG.render();
-     });
-   	
-</script>
--->
 </head>
 <body>
 <!-- 비회원 예약 -->
@@ -74,11 +45,11 @@
 		<th>예약시간</th>
 		<td>
 			<select name="guest_rsvtH">
-				<% for(int i = 8; i <= 22; i++) { %>
-					<option value="<%= i %>">
-						<%= i %>시
+				<c:forEach var="i" begin="<%= hosTreatBegin %>" end="<%= hosTreatEnd %>" step="1">
+					<option value="${ i }">
+						${ i }시
 					</option>
-				<% } %>
+				</c:forEach>
 			</select>
 			<select name="guest_rsvtM">
 				<option>00분</option>
@@ -102,17 +73,20 @@
 		<th>의료진</th>
 		<td>
 			<select name="guest_rsvtDoc">
-				<% for(Doctor d : docList){ %>
-					<% if(d == null){ %>
-						<option>
-							등록된 의료진이 없습니다.
-						</option>
-					<%} else {%>
-					<option value="<%= d.getDocNo() %>">
-						<%= d.getDocName() %>
-					</option>
-					<%} %>
-				<%} %>
+				<c:forEach var="d" items="${ docList }">
+					<c:choose>
+						<c:when test="${ empty d }">
+							<option>
+								등록된 의료진이 없습니다.
+							</option>
+						</c:when>
+						<c:otherwise>
+							<option value="${ d.docNo }">
+								${ d.docName }
+							</option>
+						</c:otherwise>
+					</c:choose>				
+				</c:forEach>
 			</select>
 		</td>
 	</tr>	
@@ -163,65 +137,5 @@
   </div>
 </div>
 
-<!-- 
-<script>
-
-function guestRsvt(){
-	
-	var str = '';
-	if(window.guest_rsvt_date == str){
-		alert('날짜를 선택해주세요.');
-		
-	} else if($('input[name=guest_rsvtName]').val() == str){
-		alert('예약자명을 입력해주세요');
-		
-	} else {
-		$.ajax({
-			url: 'hosRsvt.guest',
-			type: 'post',
-			// async : true,
-			data: {
-				rsvtDate_G: window.guest_rsvt_date,
-				rsvtH_G: $('select[name=guest_rsvtH] option:selected').text().replaceAll('\t', '').replaceAll('\n', ''),
-				rsvtM_G: $('select[name=guest_rsvtM] option:selected').text().replaceAll('\n', '').replaceAll('\t', ''),
-				rsvtName_G: $('input[name=guest_rsvtName]').val(),
-				rsvtInfo_G: $('input[name=guest_rsvtInfo]').val(),
-				rsvtDoc_G: $('select[name=guest_rsvtDoc] option:selected').val(),
-				hno: hosNo
-			},
-			success: function(result){
-				console.log(result);
-				var flag = result['checkRsvtResult'];
-				
-			if(result != null){
-				if(flag > 0){
-					alert('다른 날짜(시간)를 선택해주세요');
-					
-				} else{
-						$('#rsvtModal').modal('show');
-						$('#rsvtModal .modal-title').children().eq(0).filter('b').text(result['rsvtGuest']);
-						$('#rsvtModal .modal-body').children().eq(0).append(result['rsvtNo_G']);
-						$('#rsvtModal .modal-body').children().eq(1).append(result['rsvtDate_G'] + ", " + result['rsvtTime_G']);
-						$('#rsvtModal .modal-body').children().eq(2).append(result['rsvtInfo_G']);
-					}
-				}
-				// 성공 시 
-				//data-toggle="modal" data-target="#rsvtModal" 추가해서 모달 띄우기
-			},
-			error: function(){
-				alert('현재 예약 불가');
-				// console.log(hosNo);
-				// console.log(rsvt_date);
-				// console.log(hosNo);
-				// console.log(rsvtDate);
-			}
-		});
-		return false;
-	}
-	return true;
-};
-
-</script>
--->		
 </body>
 </html>

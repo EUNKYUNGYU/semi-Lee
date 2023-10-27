@@ -108,21 +108,6 @@
 				<a href="<%=contextPath %>/logout.me">로그아웃</a>
 			</div>
 		<% } %>
-		
-		<!-- 
-		<script>
-			var contextPath = location.pathname;
-		
-			function enrollPage(){
-				location.href= "/enrollForm.me";
-			}
-			
-			function loginPage(){
-				location.href="/login.me";
-			}
-			//console.log(window.location.pathname);
-		</script>
-		-->
 
         <!-- 헤더 영역 -->
         <header>
@@ -136,12 +121,14 @@
                 </ul>
             </div>
 
-            <form action="hosSch.dy" method="get" id="index_search_bar">
+            <form action="hosSearch.do" method="get" id="index_search_bar">
             
                 <!-- 메인화면 검색창 -->
-                <input type="text" name="search" placeholder="검색어를 입력하세요.">
-                <input type="hidden" name="hkeyP" value="1">
-				<input type="hidden" name="hkeyH" value="병원">
+                <input type="text" name="keyword" placeholder="검색어를 입력하세요.">
+                <input type="hidden" name="page" value="1">
+				<!-- <input type="hidden" name="hkeyH" value="병원"> -->
+				<!-- 검색 결과창으로 들어왔을 때, 빈문자열로 들어왔을 경우와 키워드가 있을 경우를 나눠서 조회를 해오지 않고,
+				그냥 병원 리스트를 조회한 페이지에서 키워드를가지고 동적으로 페이지를 바꿔준다?? -->
                 
                 <!-- 검색창 아이콘 -->                
                 <button type="submit" id="icon_search">
@@ -149,31 +136,6 @@
                 </button>
                 
             </form>
-            
-            <!-- 
-            <script>
-            	// 엔터키 이벤트
-            	document.getElementById('index_search_bar').addEventListener('keyup', function(e){
-            		if(e.keyCode == 13){
-            			document.getElementById("icon_search").click();
-            		}
-            	});
-            	
-                // 백그라운드 이미지 슬라이드
-                $(function(){
-                    $('.bxslider').bxSlider({
-                        auto: true, 
-                        speed: 500,
-                        pause: 5000,
-                        mode: 'fade',
-                    });
-                             		
-                                   
-                })
-
-            </script>
-			-->
-			
 
         </header>
 

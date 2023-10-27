@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.common.Pagination;
+import com.kh.DoctorLee.common.template.Pagination;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
-import com.kh.DoctorLee.hospital.model.service.HospitalService;
 import com.kh.DoctorLee.hospital.model.service.HospitalServiceImpl;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 

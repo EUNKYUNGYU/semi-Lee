@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rsvtMapper">
+
+	<resultMap id="rsvtResultSet" type="reservation">
+		<result column="RSVT_NO" property="rsvtNo"/>
+		<result column="RSVT_MEM" property="rsvtMem"/>
+		<result column="RSVT_DOC" property="rsvtDoc"/>
+		<result column="RSVT_HOS" property="rsvtHos"/>
+		<result column="RSVT_DATE" property="rsvtDate"/>
+		<result column="RSVT_TIME" property="rsvtTime"/>
+		<result column="MEM_INFO" property="memInfo"/>
+	</resultMap>
+	
+	<resultMap id="gRsvtResultSet" type="guestReservation">
+		<result column="GUEST_RSVT_NO" property="guestRsvtNo"/>
+		<result column="GUEST_RSVT_DATE" property="guestRsvtDate"/>
+		<result column="GUEST_RSVT_TIME" property="guestRsvtTime"/>
+		<result column="GUEST_RSVT_INFO" property="guestRsvtInfo"/>
+		<result column="GUEST_RSVT_HOS" property="guestRsvtHos"/>
+		<result column="RSVT_GUEST" property="rsvtGuest"/>
+		<result column="GUEST_RSVT_DOC" property="guestRsvtDoc"/>
+	</resultMap>
+	
+	<select id="checkRsvtTreat" parameterType="hashmap" resultType="_int">
+		SELECT 
+		      COUNT(*)
+ 		  FROM 
+ 		      TB_RESERVATION
+ 		 WHERE 
+ 		      RSVT_DATE = #{ rsvtDate }
+   		   AND 
+   		      RSVT_TIME = #{ rsvtTime }
+	</select>
+	
+	<insert id="insertRsvt" parameterType="reservation">
+		INSERT 
+		  INTO 
+		       TB_RESERVATION
+		       (
+		       	 RSVT_NO
+				,RSVT_DATE
+				,RSVT_TIME
+				,MEM_INFO
+				,RSVT_HOS
+				,RSVT_MEM
+				,RSVT_DOC
+		       )
+	    VALUES	
+	    	  (
+	    	  SEQ_RSVT_NO.NEXTVAL
+	    	  ,#{ rsvtDate }
+	    	  ,#{ rsvtTime }
+	    	  ,#{ memInfo }
+	    	  ,#{ rsvtHos }
+	    	  ,#{ rsvtMem }
+	    	  ,#{ rsvtDoc }
+	    	  )	  
+	</insert>
+	
+	<select id="selectRsvt" parameterType="string" resultMap="rsvtResultSet">
+		SELECT
+		      RSVT_NO
+		      ,RSVT_MEM
+		      ,RSVT_DOC
+		      ,RSVT_HOS
+		      ,RSVT_DATE
+		      ,RSVT_TIME
+		      ,MEM_INFO
+	   	 FROM
+	   	      (SELECT
+                       RSVT_NO
+                      ,RSVT_MEM
+                      ,RSVT_DOC
+                      ,RSVT_HOS
+                      ,RSVT_DATE
+                      ,RSVT_TIME
+                      ,MEM_INFO
+                FROM
+                      TB_RESERVATION
+                WHERE
+                      RSVT_MEM = #{ rsvtName }
+              ORDER
+                 BY
+                    RSVT_NO DESC)
+              WHERE ROWNUM = 1
+	</select>
+	
+	<select id="checkRsvtTreatG" parameterType="hashmap" resultType="_int">
+		SELECT 
+		      COUNT(*)
+ 		  FROM 
+ 		      TB_GUEST_RESERVATION
+ 		 WHERE 
+ 		      GUEST_RSVT_DATE = #{ rsvtDateG }
+   		   AND 
+   		      GUEST_RSVT_TIME = #{ rsvtTimeG }
+	</select>
+	
+	<insert id="insertRsvtG" parameterType="guestReservation">
+		INSERT 
+		  INTO 
+		       TB_GUEST_RESERVATION
+	    VALUES	
+	    	  (
+	    	  SEQ_GUEST_RSVT_NO.NEXTVAL
+	    	  ,#{ guestRsvtDate }
+	    	  ,#{ guestRsvtTime }
+	    	  ,#{ guestRsvtInfo }
+	    	  ,#{ guestRsvtHos }
+	    	  ,#{ rsvtGuest }
+	    	  ,#{ guestRsvtDoc }
+	    	  )	  
+	</insert>
+	
+	<select id="selectRsvtG" parameterType="string" resultMap="gRsvtResultSet">
+		SELECT
+		      GUEST_RSVT_NO
+		      ,RSVT_GUEST
+		      ,GUEST_RSVT_DOC
+		      ,GUEST_RSVT_HOS
+		      ,GUEST_RSVT_DATE
+		      ,GUEST_RSVT_TIME
+		      ,GUEST_RSVT_INFO
+	   	 FROM
+	   	      (SELECT
+                        GUEST_RSVT_NO
+				      ,RSVT_GUEST
+				      ,GUEST_RSVT_DOC
+				      ,GUEST_RSVT_HOS
+				      ,GUEST_RSVT_DATE
+				      ,GUEST_RSVT_TIME
+				      ,GUEST_RSVT_INFO
+                FROM
+                      TB_GUEST_RESERVATION
+                WHERE
+                      RSVT_GUEST = #{ rsvtNameG }
+              ORDER
+                 BY
+                    GUEST_RSVT_NO DESC)
+         WHERE 
+         		ROWNUM = 1
+	</select>
+
+</mapper>

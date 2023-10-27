@@ -32,7 +32,7 @@
 
 				<c:if test="${ !empty loginUser }">
                     <div id="res-btn" align="right">
-                        <button class="btn btn-primary" type="button" id="resBtn" onclick="location.href='<%=contextPath%>/resForm.cou?cno=${ c.couNo}'">예약하기</button>
+                        <button class="btn btn-primary" type="button" id="resBtn" onclick="location.href='resForm.cou?cno=${ c.couNo}'">예약하기</button>
                     </div>
                 </c:if>
 

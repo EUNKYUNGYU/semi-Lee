@@ -48,7 +48,7 @@
 
 			<c:if test="${ !empty loginUser && loginUser.memId eq 'admin' }">
                 <div id="button-area" align="right">
-                    <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
+                    <button type="button" onclick="location.href='couVideoEnroll.cou'">등록하기</button>
                 </div>
             </c:if>
 
@@ -73,11 +73,11 @@
 		
 							<c:if test="${ !empty loginUser && loginUser.memId eq 'admin' }">
 		                        <div class="emoji" align="right">
-		                            <span class="material-symbols-outlined edit" onclick="location.href='<%=contextPath%>/updateVideo.cou?cvno=${c.videoNo}'">
+		                            <span class="material-symbols-outlined edit" onclick="location.href='updateVideo.cou?cvno=${c.videoNo}'">
 		                                edit
 		                            </span>
 		
-		                            <span class="material-symbols-outlined delete" onclick="location.href='<%=contextPath%>/deleteVideo.cou?cvno=${c.videoNo}'">
+		                            <span class="material-symbols-outlined delete" onclick="location.href='deleteVideo.cou?cvno=${c.videoNo}'">
 		                                delete
 		                            </span>
 		                        </div>
@@ -100,7 +100,7 @@
             <br>
             <div class="paging-area" align="center">
             	<c:if test="${  pi.currentPage != 1 }">
-                    <button class="btn btn-light" onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=${ pi.currentPage -1}'">&lt</button>
+                    <button class="btn btn-light" onclick="location.href='couVideoList.cou?cpage=${ pi.currentPage -1}'">&lt</button>
                 </c:if>
                 
                 <c:forEach var="i" begin="${ pi.startPage }" end="${ pi.endPage}">
@@ -108,7 +108,7 @@
                 	<c:choose>
                 	
                 		<c:when test="${ pi.currentPage != i }">
-                			<button class="btn btn-light" onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage=${ i }'">${ i }</button>
+                			<button class="btn btn-light" onclick="location.href='couVideoList.cou?cpage=${ i }'">${ i }</button>
                 		</c:when>
                 		
                 		<c:otherwise>
@@ -120,7 +120,7 @@
                 </c:forEach>
                 
                 <c:if test="${ pi.currentPage != pi.maxPage }">
-                	<button class="btn btn-light" onclick="location.href='<%=contextPath%>/couVideoList.cou?cpage\${ pi.currentPage + 1 }'">&gt</button>
+                	<button class="btn btn-light" onclick="location.href='couVideoList.cou?cpage\${ pi.currentPage + 1 }'">&gt</button>
                 </c:if>
                 
             </div>

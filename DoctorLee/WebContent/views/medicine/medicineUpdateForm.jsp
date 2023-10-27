@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.medicine.model.vo.Medicine" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
  <%
- 	Medicine med = (Medicine)request.getAttribute("med");
+ 	//Medicine med = (Medicine)request.getAttribute("med");
+ 	String contextPath = request.getContextPath();
  %>
 <!DOCTYPE html>
 <html>
@@ -12,12 +15,13 @@
 <link rel="stylesheet" href="resources/css/medicine/medicine.css">
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 	<div class="outer">
 		<br>
 		<h2 class="update-medicine">약품 수정 페이지</h2>
 		<form id="medEnroll-form"action="<%=contextPath%>/update.med" method="post">
-			<input type="hidden" name="mname" value="<%=med.getMedName() %>">
+			<input type="hidden" name="mname" value="${requestSession.med.medName}">
 			수정할 약품 이름:  <input type="text" name="updateName" id="updateName" required placeholder="<%=med.getMedName() %>">
 						  
 						  

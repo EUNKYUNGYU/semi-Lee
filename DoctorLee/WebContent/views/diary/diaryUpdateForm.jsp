@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.mpBoard.model.vo.MyDiary" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	MyDiary md = (MyDiary)request.getAttribute("md");
+	
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -12,19 +14,20 @@
 <link rel="stylesheet" href="resources/css/myPage/diary.css">
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 	 <div class="outer">
         <br>
         <h2 align="center">내 다이어리 </h2>
         
         <form action="<%=contextPath%>/update.di" id="update-form" method="post">
-        	<input type="hidden" name="dno" value="<%=md.getDiaryNo() %>">
+        	<input type="hidden" name="dno" value="${requestScope.md.diaryNo}">
             
             <br><br><br>
             <table align="center">
                 <tr>
                     <th width="50">제목</th>
-                    <td width="700" ><input type="text" name="title" maxlength="300" value=<%=md.getDiaryTitle() %>></td>
+                    <td width="700" ><input type="text" name="title" maxlength="300" value="${requestScope.md.diaryTitle}"></td>
                 </tr>
                 <br><br><br>
                 <tr>
@@ -33,7 +36,7 @@
                 <tr>
                     
                     <td colspan="3">
-                        <textarea name="content" id="content" style="resize:none;" rows="20"><%=md.getDiaryContent() %></textarea>
+                        <textarea name="content" id="content" style="resize:none;" rows="20">${requestScope.md.diaryContent}</textarea>
                         
                     </td>
                 </tr>
@@ -55,7 +58,8 @@
         
        
     </div>
-    <%@ include file="../common/footer.jsp"%>
+    <jsp:include page="../common/footer.jsp"/>
+    
 	
 
 </body>

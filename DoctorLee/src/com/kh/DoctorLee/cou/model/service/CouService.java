@@ -1,11 +1,5 @@
 package com.kh.DoctorLee.cou.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.close;
-import static com.kh.DoctorLee.common.JDBCTemplate.commit;
-import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
-import static com.kh.DoctorLee.common.JDBCTemplate.rollback;
-
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
@@ -54,44 +48,130 @@ public class CouService implements CouServiceI {
 
 	// 비디오 게시하기
 	public int insertVideo(CouVideo cv) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return 0;
+		int result = couDao.insertVideo(sqlSession, cv);
+		
+		if(result > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return result;
 	}
 	
 	// 비디오 영상 수정하기 위한 내용 조회하기
 	public CouVideo selectCouVideo(int videoNo) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return null;
+		CouVideo v = couDao.selectCouVideo(sqlSession, videoNo);
+		
+		sqlSession.close();
+		
+		return v;
 	}
 	
 	// 비디오 내용 수정
 	public int updateCouVideo(CouVideo c) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return 0;
+		int result = couDao.updateCouVideo(sqlSession, c);
+		
+		if(result > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return result;
 	}
 	
 	// 비디오 삭제
 	public int deleteVideo(int videoNo) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return 0;
+		int result = couDao.deleteVideo(sqlSession, videoNo);
+		
+		if(result > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return result;
 	}
 	
 	// 상담사 목록 출력
 	public ArrayList<Cou> selectCouList(){
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return null;
+		ArrayList<Cou> list = couDao.selectCouList(sqlSession);
+		
+		sqlSession.close();
+		
+		return list;
 	}
 	
 	// 상담사 상세보기
 	public Cou selectCou(int couNo) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return null;
+		Cou c = couDao.selectCou(sqlSession, couNo);
+		
+		sqlSession.close();
+		
+		return c;
+	}
+	
+	public int selectResMem(CouRes cr) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = couDao.selectResMem(sqlSession, cr);
+		
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	// 리뷰는 한 사람당 한 번만 작성 가능하게
+	public int selectRevCount(CouRes cr) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = couDao.selectRevCount(sqlSession, cr);
+		
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	// 상담사 경력 및 자격 가져오기
+	public ArrayList<CouCar> selectCouCarList(int couNo){
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		ArrayList<CouCar> list = couDao.selectCouCarList(sqlSession, couNo);
+		
+		sqlSession.close();
+		
+		return list;
+	}
+	
+	////////////////////////////////////////////////////////////
+	
+	// 상담 리뷰 목록 출력
+	public ArrayList<CouRev> selectCouRevList(int couNo){
+		SqlSession sqlSession = Template.getSqlSession();
+			
+		ArrayList<CouRev> list = couDao.selectCouRevList(sqlSession, couNo);
+			
+		sqlSession.close();
+			
+		return list;
 	}
 	
 	// 상담사 예약 가능 날짜 출력
 	public ArrayList<CouResTime> selectCouDate(int couNo){
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		return null;
+		ArrayList<CouResTime> list = couDao.selectCouDate(sqlSession, couNo);
+		
+		sqlSession.close();
+		
+		return list;
 	}
 	
 	// 상담사 예약 가능 시간 출력
@@ -106,39 +186,21 @@ public class CouService implements CouServiceI {
 		return 0;
 	}
 
-	public int selectResMem(int couNo, Member loginUser) {
-		
-		return 0;
-	}
+	
 	
 	// 상담 예약 후 리뷰 작성
 	public int insertCouRev(CouRev c) {
 		
 		return 0;
 	}
-	
-	// 상담 리뷰 목록 출력
-	public ArrayList<CouRev> selectCouRevList(int couNo){
-		
-		return null;
-	}
-	
-	// 리뷰는 한 사람당 한 번만 작성 가능하게
-	public int selectRevCount(int couNo, Member loginUser) {
-		
-		return 0;
-	}
-	
-	// 상담사 경력 및 자격 가져오기
-	public ArrayList<CouCar> selectCouCarList(int couNo){
-		
-		return null;
-	}
-	
-	// 상담사 평점 가져오기
+
+	@Override
 	public Double selectCouScope(int couNo) {
-		
-		return 0.0;
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+
+	
 
 }

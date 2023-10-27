@@ -41,7 +41,7 @@
                     <h4>${ c.couName } </h4>
                     <p>${c.hosName } </p>
                     <span class="material-symbols-outlined">grade</span>
-                    <span>${ requestScope.scope }</span>
+                    <span>${ c.scope }</span>
                     <p>${ c.price }원</p>
 
                 </div>

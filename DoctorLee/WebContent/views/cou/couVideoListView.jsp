@@ -73,22 +73,22 @@
 		
 							<c:if test="${ !empty loginUser && loginUser.memId eq 'admin' }">
 		                        <div class="emoji" align="right">
-		                            <span class="material-symbols-outlined edit">
+		                            <span class="material-symbols-outlined edit" onclick="location.href='<%=contextPath%>/updateVideo.cou?cvno=${c.videoNo}'">
 		                                edit
 		                            </span>
 		
-		                            <span class="material-symbols-outlined delete">
+		                            <span class="material-symbols-outlined delete" onclick="location.href='<%=contextPath%>/deleteVideo.cou?cvno=${c.videoNo}'">
 		                                delete
 		                            </span>
 		                        </div>
 		                    </c:if>
 		                        		
 			                <div class="list-img">
-			                    <img src="https://img.youtube.com/vi/${ c.videoAddress }/maxresdefault.jpg" alt="">
+			                    <img src="https://img.youtube.com/vi/${ c.videoAddress }/maxresdefault.jpg" onclick="location.href='https://www.youtube.com/watch?v=${c.videoAddress}'">
 			                </div>
 			                <div class="list-des">
-			                    <p class="video-title">${c.videoTitle}</p>
-			                    <p class="video-channel">${c.channelName}</p>
+			                    <p class="video-title" onclick="location.href='https://www.youtube.com/watch?v=${c.videoAddress}'">${c.videoTitle}</p>
+			                    <p class="video-channel" onclick="location.href ='https://www.youtube.com/results?search_query=${c.channelName}'">${c.channelName}</p>
 			                </div>
 		                    <br>
 			            </div>
@@ -134,57 +134,6 @@
 		<jsp:include page="../common/footer.jsp"/>
 	</footer>
 
-
-    <script>
-        $(function(){
-
-            // 썸네일 클릭 시 해당 영상 주소로 이동
-            $('.list-img').click(function(){
-                const address = $(this).parent().children().eq(1).val();
-                
-                // console.log(this);
-                location.href = 'https://www.youtube.com/watch?v='+address;
-            })
-
-            // 영상 제목 클릭 시 해당 영상 주소로 이동
-            $('.video-title').click(function(){
-                const address = $(this).parents().children().eq(3).val();
-                
-                // console.log($(this).parents().children().eq(3).val());
-                location.href = 'https://www.youtube.com/watch?v='+address;
-            })
-
-            // 채널명 클릭 시 해당 채널로 이동
-            $('.video-channel').click(function(){
-                const address = $(this).parents().children().eq(5).val();
-                console.log(address);
-                location.href = 'https://www.youtube.com/results?search_query='+address; 
-            })
-
-            // 클릭 시 영상 수정 페이지로 이동
-            $('.edit').click(function(){
-                console.log('수정');
-
-                const videoNo = $('.list-content').children().eq(2).val();
-
-                location.href = '<%=contextPath%>/updateVideo.cou?cvno='+videoNo;
-            })
-
-            // 클릭 시 영상 삭제
-            $('.delete').click(function(){
-
-                const videoNo = $('.list-content').children().eq(2).val();
-
-                var result  = confirm('영상을 삭제하겠습니까?');
-
-                if(result){
-                    location.href='<%=contextPath%>/deleteVideo.cou?cvno='+videoNo;
-                } else {
-
-                }
-            })
-        })
-    </script>
 
 </body>
 </html>

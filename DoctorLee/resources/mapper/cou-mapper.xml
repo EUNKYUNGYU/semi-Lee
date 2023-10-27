@@ -12,6 +12,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CHANNEL_NAME" property="channelName"/>
 		<result column="VIDEO_ADDRESS" property="videoAddress"/>
 	</resultMap>
+	
+	<resultMap type="Cou" id="couResultSet">
+		<result column="COU_NO" property="couNo"/>
+		<result column="HOS_NO" property="hosNo"/>
+		<result column="HOS_NAME" property="hosName"/>
+		<result column="COU_NAME" property="couName"/>
+		<result column="PHONE" property="phone"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="PROFILE_PATH" property="profilePath"/>
+		<result column="PRICE" property="price"/>
+		<result column="ROUND(AVG(NVL(COU_SCOPE,0)),1)" property="scope"/>
+		<result column="ROUND(AVG(COU_SCOPE),1)" property="scope"/>
+	</resultMap>
+	
+	<resultMap type="CouRev" id="couRevResultSet">
+		<result column="REV_NO" property="revNo"/>
+		<result column="COU_NO" property="couNo"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="REV_CONTENT" property="revContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COU_SCOPE" property="couScope"/>
+		<result column="NICKNAME" property="nickName"/>
+	</resultMap>
+	
+	<resultMap type="CouRes" id="couResResultSet">
+		<result column="RES_NO" property="resNo"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="COU_NO" property="couNo"/>
+		<result column="RES_DATE" property="resDate"/>
+		<result column="RES_TIME" property="resTime"/>
+	</resultMap>
+	
+	<resultMap type="CouResTime" id="couResTimeResultSet">
+		<result column="TIME_NO" property="timeNo"/>
+		<result column="COU_NO" property="couNo"/>
+		<result column="COU_TIME" property="couTime"/>
+		<result column="COU_DATE" property="couDate"/>
+	</resultMap>
+	
+	<resultMap type="CouCar" id="couCarResultSet">
+		<result column="CAR_NO" property="carNo"/>
+		<result column="COU_NO" property="couNo"/>
+		<result column="CAR_CONTENT" property="carContent"/>
+	</resultMap>
 
 	<select id="selectVideoListCount" resultType="_int">
 		SELECT
@@ -32,6 +77,170 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER
 		   BY
 		   		VIDEO_NO DESC
+	</select>
+	
+	<insert id="insertVideo" parameterType="CouVideo">
+		INSERT
+		  INTO
+		  		TB_COU_VIDEO
+		VALUES
+				(
+				SEQ_CVIDEO_NO.NEXTVAL,
+				#{memNo},
+				#{videoTitle},
+				#{channelName},
+				#{videoAddress}
+				)
+	</insert>
+	
+	<select id="selectCouVideo" parameterType="_int" resultMap="couVideoResultSet">
+		SELECT
+				VIDEO_NO,
+				MEM_NO,
+				VIDEO_TITLE,
+				CHANNEL_NAME,
+				VIDEO_ADDRESS
+		FROM
+				TB_COU_VIDEO
+		WHERE
+				VIDEO_NO = #{videoNo}
+	</select>
+	
+	<update id="updateCouVideo" parameterType="CouVideo">
+		UPDATE
+				TB_COU_VIDEO
+		SET
+				VIDEO_TITLE = #{videoTitle},
+				CHANNEL_NAME = #{channelName},
+				VIDEO_ADDRESS = #{videoAddress}
+		WHERE
+				VIDEO_NO = #{videoNo}
+	</update>
+	
+	<delete id="deleteVideo" parameterType="_int">
+		DELETE
+		  FROM
+		  		TB_COU_VIDEO
+		 WHERE
+		 		VIDEO_NO = #{videoNo}	
+	</delete>
+	
+	<select id="selectCouList" resultMap="couResultSet">
+		SELECT 
+				ROUND(AVG(NVL(COU_SCOPE,0)),1),
+				COU_NO, 
+				HOS_NAME, 
+				COU_NAME,
+                PHONE,
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				PROFILE_PATH,
+                PRICE
+		FROM 
+				TB_COU
+		JOIN 
+				TB_HOSPITAL USING(HOS_NO)
+		FULL JOIN
+				TB_COU_REV USING(COU_NO)
+	    GROUP
+	    BY
+				COU_NO, 
+				HOS_NAME, 
+				COU_NAME,
+                PHONE,
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				PROFILE_PATH,
+                PRICE
+        ORDER
+        BY
+                COU_NAME
+	</select>
+	
+	<select id="selectCou" parameterType="_int" resultMap="couResultSet">
+		SELECT
+                ROUND(AVG(NVL(COU_SCOPE,0)),1),
+				COU_NO, 
+				HOS_NAME, 
+				COU_NAME, 
+				PHONE,
+				ORIGIN_NAME,
+				CHANGE_NAME,
+				PROFILE_PATH,
+				PRICE
+		FROM
+				TB_COU
+		JOIN
+				TB_HOSPITAL USING(HOS_NO)
+        FULL JOIN
+                TB_COU_REV USING(COU_NO)
+		WHERE
+				COU_NO = #{couNo}
+		GROUP
+		   BY   COU_NO, 
+				HOS_NAME, 
+				COU_NAME, 
+				PHONE,
+				ORIGIN_NAME,
+				CHANGE_NAME,
+				PROFILE_PATH,
+				PRICE
+				
+	</select>
+	
+	<select id="selectResMem" parameterType="CouRev" resultType="_int">
+		SELECT	
+				COUNT(*)
+		FROM
+				TB_COU_RES
+		WHERE
+				MEM_NO = #{memNo}
+		AND
+				COU_NO = #{couNo}
+	</select>
+	
+	<select id="selectRevCount" parameterType="CouRev" resultType="_int">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_COU_REV
+		WHERE
+				COU_NO = #{couNo}
+		AND
+				MEM_NO = #{memNo}
+	</select>
+	
+	<select id="selectCouCarList" parameterType="_int" resultMap="couCarResultSet">
+		SELECT
+				CAR_NO,
+				COU_NO,
+				CAR_CONTENT
+		FROM
+				TB_COU_CAR
+		WHERE
+				COU_NO = #{couNo}
+	</select>
+	
+	<select id="selectCouDate" parameterType="_int" resultMap="cou"></select>
+	
+	<select id="selectCouRevList" parameterType="_int" resultMap="couRevResultSet">
+		SELECT
+				REV_NO,
+				COU_NO,
+				NICKNAME,
+				REV_CONTENT,
+				CR.CREATE_DATE,
+				COU_SCOPE
+		FROM
+				TB_COU_REV CR
+		JOIN
+				TB_MEMBER USING(MEM_NO)
+		WHERE
+				COU_NO = #{couNo}
+		ORDER
+		   BY
+		   		REV_NO DESC
+				
 	</select>
 
 </mapper>

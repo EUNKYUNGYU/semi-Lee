@@ -35,13 +35,13 @@ public interface CouServiceI {
 	
 	int insertCouRes(CouRes c);
 	
-	int selectResMem(int couNo, Member loginUser);
+	int selectResMem(CouRes cr);
 	
 	int insertCouRev(CouRev c);
 	
 	ArrayList<CouRev> selectCouRevList(int couNo);
 	
-	int selectRevCount(int couNo, Member loginUser);
+	int selectRevCount(CouRes cr);
 	
 	ArrayList<CouCar> selectCouCarList(int couNo);
 	

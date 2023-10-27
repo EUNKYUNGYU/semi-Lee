@@ -1,12 +1,8 @@
 package com.kh.DoctorLee.cli.model.service;
 
-import static com.kh.DoctorLee.common.JDBCTemplate.close;
-import static com.kh.DoctorLee.common.JDBCTemplate.commit;
-import static com.kh.DoctorLee.common.JDBCTemplate.getConnection;
-import static com.kh.DoctorLee.common.JDBCTemplate.rollback;
-
-import java.sql.Connection;
 import java.util.ArrayList;
+
+import org.apache.ibatis.session.SqlSession;
 
 import com.kh.DoctorLee.cli.model.dao.CliDao;
 import com.kh.DoctorLee.cli.model.vo.Category;
@@ -14,138 +10,125 @@ import com.kh.DoctorLee.cli.model.vo.CliRes;
 import com.kh.DoctorLee.cli.model.vo.CliResTime;
 import com.kh.DoctorLee.cli.model.vo.CliRev;
 import com.kh.DoctorLee.cli.model.vo.Clinic;
-import com.kh.DoctorLee.member.model.vo.Member;
+import com.kh.DoctorLee.common.template.Template;
 
-public class CliService {
+public class CliService implements CliServiceI{
+	
+	private CliDao cliDao = new CliDao();
 
+	@Override
 	public ArrayList<Category> selectCategoryList() {
-		Connection conn = getConnection();
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		ArrayList<Category> list = new CliDao().selectCategoryList(conn);
+		ArrayList<Category> list = cliDao.selectCategoryList(sqlSession);
 		
-		close(conn);
+		sqlSession.close();
 		
 		return list;
 	}
-	
-	public ArrayList<Clinic> selectCliList(int cateNo){
-		Connection conn = getConnection();
+
+	@Override
+	public ArrayList<Clinic> selectCliList(int cateNo) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		ArrayList<Clinic> cliList = new CliDao().selectCliList(conn, cateNo);
+		ArrayList<Clinic> list = cliDao.selectCliList(sqlSession, cateNo);
 		
-		close(conn);
+		sqlSession.close();
 		
-		return cliList;
+		return list;
 	}
-	
+
+	@Override
 	public Clinic selectCli(int cliNo) {
-		Connection conn = getConnection();
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		Clinic c = new CliDao().selectCli(conn, cliNo);
+		Clinic c = cliDao.selectCli(sqlSession, cliNo);
 		
-		close(conn);
+		sqlSession.close();
+		
 		return c;
 	}
 	
-	// 클리닉 예약 가능 날짜 가져오기
-	public ArrayList<CliResTime> selectResDate(int cliNo){
-		Connection conn = getConnection();
+	@Override
+	public int selectResMem(CliRes cr) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		ArrayList<CliResTime> list = new CliDao().selectResDate(conn, cliNo);
+		int result = cliDao.selectResMem(sqlSession, cr);
 		
-		close(conn);
+		sqlSession.close();
 		
-		return list;
+		return result;
 	}
 	
-	// 클리닉 예약 가능 시간 가져오기
-	public ArrayList<CliResTime> selectCliTimeList(int cliNo, String resDate){
-		Connection conn = getConnection();
+	@Override
+	public int selectRevCount(CliRes cr) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		ArrayList<CliResTime> list = new CliDao().selectCliTimeList(conn, cliNo, resDate);
+		int result = cliDao.selectRevCount(sqlSession, cr);
 		
-		close(conn);
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	@Override
+	public ArrayList<CliRev> selectCliRevList(int cliNo) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		ArrayList<CliRev> list = cliDao.selectCliRevList(sqlSession, cliNo);
+		
+		sqlSession.close();
 		
 		return list;
 	}
 
-	
-	// 클리닉 예약하기
-	public int insertCliRes(CliRes c) {
-		Connection conn = getConnection();
+	@Override
+	public ArrayList<CliResTime> selectResDate(int cliNo) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		int result = new CliDao().insertCliRes(conn, c);
+		ArrayList<CliResTime> list = cliDao.selectResDate(sqlSession, cliNo);
 		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result;
-	}
-	
-	// 클리닉 예약자 정보 불러오기
-	public int selectResMem(int cliNo, Member loginUser){
-		Connection conn = getConnection();
-		
-		int result = new CliDao().selectResMem(conn, cliNo, loginUser);
-		
-		close(conn);
-		
-		return result;
-	}
-	
-	// 클리닉 리뷰 작성
-	public int insertCliRev(CliRev c) {
-		Connection conn = getConnection();
-		
-		int result = new CliDao().insertCliRev(conn, c);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result;
-	}
-	
-	// 클리닉 평점 가져오기
-	public Double selectCliScope(int cliNo) {
-		Connection conn = getConnection();
-		
-		Double scope = new CliDao().selectCliScope(conn, cliNo);
-		
-		close(conn);
-		
-		return scope;
-	}
-	
-	// 클리닉 리뷰 가져오기
-	public ArrayList<CliRev> selectCliRevList(int cliNo){
-		Connection conn = getConnection();
-		
-		ArrayList<CliRev> list = new CliDao().selectCliRevList(conn, cliNo);
-		
-		close(conn);
+		sqlSession.close();
 		
 		return list;
 	}
-	
-	// 한 사람 당 한 번만 리뷰 작성 가능하게
-	public int selectRevCount(int cliNo, Member loginUser) {
-		Connection conn = getConnection();
+
+	@Override
+	public ArrayList<CliResTime> selectCliTimeList(CliRes cr) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		int result2 = new CliDao().selectRevCount(conn, cliNo, loginUser);
+		ArrayList<CliResTime> list = cliDao.selectCliTimeList(sqlSession, cr);
 		
-		close(conn);
+		sqlSession.close();
 		
-		return result2;
+		return list;
 	}
+
+	@Override
+	public int insertCliRes(CliRes c) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = cliDao.insertCliRes(sqlSession, c);
+		
+		if(result > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public int insertCliRev(CliRev c) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = cliDao.insertCliRev(sqlSession, c);
+		
+		if(result > 0) sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
 
 }

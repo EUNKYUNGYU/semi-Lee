@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.kh.DoctorLee.cou.model.service.CouService;
+import com.kh.DoctorLee.cou.model.vo.CouRes;
 import com.kh.DoctorLee.cou.model.vo.CouResTime;
 
 /**
@@ -37,10 +38,11 @@ public class AjaxCouTimeController extends HttpServlet {
 		int couNo = Integer.parseInt(request.getParameter("couNo"));
 		String resDate = (request.getParameter("resDate")).replace(".", "-");
 		
-//		System.out.println(couNo + " / " + resDate);
-		
 		// Service 요청
-		ArrayList<CouResTime> timeList = new CouService().selectCouTimeList(couNo, resDate);
+		CouRes cr = new CouRes();
+		cr.setCouNo(couNo);
+		cr.setResDate(resDate);
+		ArrayList<CouResTime> timeList = new CouService().selectCouTimeList(cr);
 //		System.out.println(timeList);
 		
 		response.setContentType("application/json; charset=UTF-8");

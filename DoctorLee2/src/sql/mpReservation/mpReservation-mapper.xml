@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectReservation">
+		SELECT 
+			RSVT_DATE,
+			RSVT_TIME,
+			HOS_NAME,
+			RSVT_DOC,
+			RSVT_HOS,
+			DOCTOR_NAME
+		FROM
+			TB_RESERVATION 
+		JOIN 
+			TB_HOSPITAL ON(RSVT_HOS = HOS_NO)	
+		JOIN
+            TB_DOCTOR ON(RSVT_DOC = DOCTOR_NO)
+		WHERE
+			RSVT_MEM_NO = ? 
+	</entry>
+</properties>

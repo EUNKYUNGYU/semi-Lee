@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.cou.model.vo.*" %>
-<%
-    ArrayList<Cou> list = (ArrayList<Cou>)request.getAttribute("list");
-%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -52,78 +50,61 @@
                             <!--클리닉 출력 ul-->
                             <ul class="content-list">
                             
-                            <% if(list.isEmpty()) { %>
-                            	<p>등록된 상담사가 존재하지 않습니다.</p>
-                            <% } else { %>
+                            <c:choose>
+                            	<c:when test="${ empty list }">
+                            		<p>등록된 상담사가 존재하지 않습니다.</p>
+                            	</c:when>
+                            	
+                            	<c:otherwise>
+                            		<c:forEach var="c" items="${ list }">
+                            			
+                            			<li class="content-cli">
 
-                                <% for(Cou c : list) { %>
+	                                        <div class="cli-img">
+	                                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
+	                                            <br>
+	                                            
+	                                            <c:if test="${ !empty loginUser }">
+	                                                <button class="btn btn-primary" onclick="location.href='couDetail.cou?cno=${c.couNo}'">예약하기</button> 
+	                                            </c:if>  
+	                                            
+	                                            <span>${ c.couNo }</span>
+	                                        </div>
 
-                                    <!--클리닉 요소 하나하나 li-->
-                                    <li class="content-cli">
 
-                                        <!--클리닉 대표 이미지 div-->
-                                        <div class="cli-img">
-                                            <img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt="">
-                                            <br>
-                                            
-                                            <% if(loginUser != null) { %>
-                                                <button class="btn btn-primary">예약하기</button>
-                                            <% } %>    
-                                            
-                                            <span><%=c.getCouNo()%></span>
-                                        </div>
-
-                                        <!--<input type="hidden" class="couNo" value="<%=c.getCouNo()%>">-->
-
-                                        <!--클리닉 설명 div-->
-                                        <div class="cli-des" align="left">
-
-                                            <div class="cli-top">
-                                                <span class="cli-name title"><%=c.getCouName()%></span>
-                                            </div>
-
-                                            <div class="cli-location">
-                                                <span><%=c.getHosName()%></span>
-                                            </div>
-
-                                            <div class="cli-score">
-                                                <span class="material-symbols-outlined">grade</span>
-                                                <span><%=c.getScope()%></span>
-                                            </div>
-
-                                            <div class="cli-price">
-                                                <span><%=c.getPrice()%>원</span>
-                                            </div>
-
-                                        </div>
-                                        <br clear="both">
-                                    </li>
-                                <% } %>
-
-                            <% } %>    
+	                                        <div class="cli-des" align="left">
+	
+	                                            <div class="cli-top">
+	                                                <span class="cli-name title">${ c.couName }</span>
+	                                            </div>
+	
+	                                            <div class="cli-location">
+	                                                <span>${ c.hosName }</span>
+	                                            </div>
+	
+	                                            <div class="cli-score">
+	                                                <span class="material-symbols-outlined">grade</span>
+	                                                <span>${ c.scope }</span>
+	                                            </div>
+	
+	                                            <div class="cli-price">
+	                                                <span>${ c.price }원</span>
+	                                            </div>
+	
+	                                        </div>
+                                        	<br clear="both">
+                                    	</li>
+                            		</c:forEach>
+                            	
+                            	</c:otherwise>
+                            </c:choose>  
                                 
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <script>
-                    $(function(){
-
-                        //돋보기 버튼 클릭 시 상세보기 페이지로 이동
-                        $('.cli-img > button').click(function(){
-                            console.log($(this).siblings().eq(2).text());
-                            const couNo = $(this).siblings().eq(2).text();
-                            location.href='<%=contextPath%>/couDetail.cou?cno='+couNo;
-                        })
-                        
-                    })
-
-                    // 가격 불러오기
-                    function selectPrice(){
-
-                    }
-                </script>
+       
 
             </div>
 

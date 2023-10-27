@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.mpBoard.model.vo.MyDiary" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	MyDiary md = (MyDiary)request.getAttribute("md");
+	
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -11,13 +13,10 @@
 <title>다이어리 디테일</title>
 <link rel="stylesheet" href="resources/css/myPage/diary.css">
 
-
-
-
-</style>
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 
     <div class="outer">
         <br>
@@ -30,7 +29,7 @@
             <table align="center">
                 <tr>
                     <th width="50">제목</th>
-                    <td width="700" ><input type="text" name="title" maxlength="300" value=<%=md.getDiaryTitle() %> readonly></td>
+                    <td width="700" ><input type="text" name="title" maxlength="300" value="${requestScope.md.diaryTitle}" readonly></td>
                 </tr>
                 <br><br><br>
                 <tr>
@@ -39,7 +38,7 @@
                 <tr>
                     
                     <td colspan="3">
-                        <textarea name="content" id="content" style="resize:none;" rows="20" readonly><%=md.getDiaryContent() %></textarea>
+                        <textarea name="content" id="content" style="resize:none;" rows="20" readonly>${requestScope.md.diaryContent}</textarea>
                         
                     </td>
                 </tr>
@@ -51,8 +50,8 @@
             </script>
             <br><br>
             <div align="center">
-            	<a href="<%= contextPath %>/updateForm.di?dno=<%=md.getDiaryNo()%>" >수정하기</a>
-                <a href="<%= contextPath %>/delete.di?dno=<%=md.getDiaryNo()%>">삭제하기</a>
+            	<a href="<%= contextPath %>/updateForm.di?dno=${requestScope.md.diaryNo}" >수정하기</a>
+                <a href="<%= contextPath %>/delete.di?dno=${requestScope.md.diaryNo}">삭제하기</a>
                 <button type="button"  onclick="history.back();">뒤로가기</button>
                 
             </div>
@@ -63,7 +62,8 @@
         
        
     </div>
-    <%@ include file="../common/footer.jsp"%>
+    <jsp:include page="../common/footer.jsp"/>
+    
 
 </body>
 </html>

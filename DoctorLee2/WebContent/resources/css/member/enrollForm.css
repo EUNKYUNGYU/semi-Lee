@@ -1,0 +1,160 @@
+        div{
+            box-sizing: border-box;
+            margin: auto;
+        }
+
+        /*전체를 감싸는 div 속성*/
+        #content{
+            width: 1800px;
+            height: 2800px;
+        }
+
+       
+
+        /*세부속성*/
+        #content_1, #content_2, #content_3{
+            width: 100%;
+        }
+
+        #content_1{height: 10%;}
+        .content_2{height: 80%;}
+        #content_3{height: 10%;}
+
+        /*-----------------content_2-----------------*/
+        
+        .content_2{
+            width: 1200px;
+            height: 1000px;
+            float: left;
+            margin-left: 300px;
+            
+        }
+        
+        .box{
+            width: 240px;
+            height: 30px;
+            background-color:#ecf1ff;
+            border: 1px solid rgb(138, 138, 138);
+            border-radius: 3px;
+        }
+        
+        #r_id2{
+            width: 100px;
+            height: 30px;
+            background-color: #1E376F;
+            border-radius: 3px;
+            color: white;
+            border: none;
+            font-size: 12px;
+        }
+
+        .auto{
+            overflow: auto;
+            width: 1200px;
+            height: 250px;
+            border: 2px solid rgb(235, 235, 235);
+        }
+        .auto2{
+            overflow: auto;
+            width: 1200px;
+            height: 100px;
+            border: 2px solid rgb(235, 235, 235);
+        }
+        
+        /*--------------------p태그---------------------*/
+        #p11{
+            text-align: center;
+            font-size: 38px;
+            font-weight: bolder;
+            margin-top: -150px;
+        }
+
+        #p21{
+            text-align: center;
+            font-size: 18px;
+            color: #1E376F;
+            font-weight: 600;
+            padding-top: 30px;
+            
+           
+        }
+       
+     
+        /*-------------텍스트 창--------------*/
+      
+        #checked_id{
+            margin-left: 550px;
+            margin-top: -50px;
+        }
+       
+        /*-----------버튼---------*/
+        #register1{
+            background-color: #1E376F;
+            color: white;
+            border: 1px solid #1E376F;
+            border-radius: 3px;
+            width: 140px;
+            height: 50px;
+            font-size: 17px;
+            margin-top: 20px;
+            
+            
+        }
+        #cancel1{
+            background-color: white;
+            color: #1E376F;
+            border: 1px solid #1E376F;
+            border-radius: 3px;
+            width: 140px;
+            height: 50px;
+            font-size: 17px;
+            margin-right: 40px;
+            
+        }
+
+        #cancel:hover{
+            background-color: #1E376F;
+            color: white;
+        }
+       
+       .allBtn{
+        	margin-left : 30px;
+        }
+        
+        .spanfont{
+        	font-size: 14px;
+        }
+        
+        #memId{
+        	margin-left: 80px;
+        }
+        
+        #memPwd{
+        	margin-left: 65px;
+        }
+        
+        #memPwd2{
+        	margin-left: 30px;
+        }
+        
+        #memName{
+        	margin-left: 90px;
+        }
+        #nickName{
+        	margin-left: 80px;
+        }
+        #email{
+        	margin-left: 35px;
+        }
+        #phone{
+        	margin-left: 19px;
+        }
+        #iNum{
+        	margin-left: 19px;
+        }
+        #height{
+        	margin-left: 65px;
+        }
+        #weight{
+        	margin-left: 35px;
+        }

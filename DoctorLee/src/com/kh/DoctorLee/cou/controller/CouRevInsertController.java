@@ -13,7 +13,7 @@ import com.kh.DoctorLee.cou.model.vo.CouRev;
 /**
  * Servlet implementation class CouRevInsertController
  */
-@WebServlet("/couRevInsert.cou")
+@WebServlet("/revInsert.cou")
 public class CouRevInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,7 +34,7 @@ public class CouRevInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		// 값 뽑기
-		int couNo = Integer.parseInt(request.getParameter("cno"));
+		int couNo = Integer.parseInt(request.getParameter("couNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int reviewStar = Integer.parseInt(request.getParameter("reviewStar"));
 		String revContent = request.getParameter("revContent");

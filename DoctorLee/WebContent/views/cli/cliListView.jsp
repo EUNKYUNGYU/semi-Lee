@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.cli.model.vo.*" %>
-<%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
-%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,16 +33,16 @@
         <!--하단 내용 영역을 감싸는 div-->
         <div class="content" align="center">
 
-            <form action="<%=contextPath%>/enrollRes.cli" method="post"></form>
+            <form action="enrollRes.cli" method="post"></form>
 
             <!--클리닉 출력 영역 div-->
             <div id="cli-content">
 
-                <% if(loginUser != null && loginUser.getMemId().equals("admin")){ %>
+				<c:if test="${ !empty loginUser && loginUser.memId eq 'admin' }">
                     <div id="button-area" align="right">
-                        <button type="button" onclick="location.href='<%=contextPath%>/couVideoEnroll.cou'">등록하기</button>
+                        <button type="button" onclick="location.href='couVideoEnroll.cou'">등록하기</button>
                     </div>
-                <% } %>
+                </c:if>
 
                 <!--카테고리 내용 출력 영역 div-->
                 <div id="cli-cate-part">
@@ -60,11 +59,11 @@
                 <div id="cli-cate" align="left">
                     <div id="cate-inner" align="center">
                         <ul>
-                        <%for(int i = 0; i < list.size(); i++){ %>
+                        <c:forEach var="l" items="${ list }">
                             <li>
-                                <input type="radio" class="cate" name="cate" id="<%=list.get(i).getCateNo()%>" value="<%= list.get(i).getCliCate() %>"><label for="<%=list.get(i).getCateNo()%>" ><%= list.get(i).getCliCate() %></label>
+                                <input type="radio" class="cate" name="cate" id="${ l.cateNo }" value="${ l.cliCate }"><label for="${ l.cateNo }" >${ l.cliCate }</label>
                             </li>
-                        <%} %>
+                        </c:forEach>
                         </ul>
 
                     </div>
@@ -107,9 +106,9 @@
                                         resultStr += '<li class="content-cli">'
                                             +'<div class="cli-img">' 
                                                 +'<img src="https://i.pinimg.com/736x/47/a6/48/47a64863fece924aaf2cc07fa6cfc6e7.jpg" alt=""> <br>'
-                                                +'<% if(loginUser != null) {%>' 
+                                                +'<c:if test="${ !empty loginUser }">' 
                                                     +'<button class="btn btn-primary">예약하기</button>'
-                                                +'<%}%>'    
+                                                +'</c:if>'    
                                             + '</div>'
         
                                             +'<div class="cli-des" align="left">'
@@ -161,8 +160,8 @@
 
                                     //자세히보기 버튼 클릭 시 상세보기 페이지로 이동
                                     $('.cli-img > button').click(function(){
-                                        location.href='<%=contextPath%>/cliDetail.cli?cno=' + $('.cli-no').text();
-                                        //console.log($('.cli-no').text());
+                                        const cliNo = $(this).parent().siblings().children().eq(1).text();
+                                        location.href='cliDetail.cli?cno=' + cliNo;
                                     })
                                 },
                                 error:function(){
@@ -187,7 +186,7 @@
     </div>
 
     <footer>
-        <%@ include file ="../common/footer.jsp" %>
+        <jsp:include page="../common/footer.jsp"/>
     </footer>
 
 </body>

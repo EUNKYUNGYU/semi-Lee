@@ -104,4 +104,7 @@ SELECT *
                         RNUM BETWEEN 1 AND 15;
 DELETE TB_QUIZE_CHOICE;
 COMMIT;
+
+
+
                         

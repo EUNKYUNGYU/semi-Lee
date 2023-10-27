@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +12,8 @@
 <link rel="stylesheet" href="resources/css/medicine/medicine.css">
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 	
 	<h2 align="center">약품 검색 페이지</h2> <br><hr>
 		
@@ -24,8 +29,8 @@
 		<script>
 			
 		</script>
+		<jsp:include page="../common/footer.jsp"/>
 		
-		<%@ include file="../common/footer.jsp" %>
 
 </body>
 </html>

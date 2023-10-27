@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.message.model.vo.Message,java.util.ArrayList"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <% 
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
 %>
@@ -36,7 +36,7 @@
 			<div id="content">
 				<article>
 					<form method="post" action="<%= contextPath %>/insert.ms">
-					<input type="hidden" name="senderNo" value="<%= loginUser.getMemNo() %>">
+					<input type="hidden" name="senderNo" value="${ loginUser.memNo }">
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
 							<button type="submit" class="btn btn-primary">보내기</a>
@@ -76,7 +76,7 @@
 					
 				</article>
 			<div id="back" align="right">
-				<a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver" id="backButton" class="btn btn-light">돌아가기</a>
+				<a href="<%= contextPath %>/list.ms?memNo=${ loginUser.memNo }&type=receiver" id="backButton" class="btn btn-light">돌아가기</a>
 			</div>
 			</div>
 			

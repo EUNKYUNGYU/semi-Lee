@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+.hos_wrap{margin: auto;}
+.hos_wrap > div{float: left;}
+.box{float: left;}
+
+#hos_info, #hos_rsvt, #hos_review{
+	display: inline-block;
+	width: 30%;
+	margin: 0 10px 30px 20px;
+	}
+
+#hos_info{}
+#hos_info>h2{color: #1E376F; display: inline-block;}
+#hos_info>span{color: #000; display: inline-block; margin-left: 25px; font-weight: bold;}
+#hos_info>p{margin-bottom: 30px;}
+#hos_info h4{font-size: 18px;}
+#hos_info i{font-size: 25px;}
+#hos_info div{margin-bottom: 20px;}
+
+#hos_rsvt{}
+#rsvt_btn{width: 100%; text-align: center;}
+#rsvt_btn>button{width: 45%;}
+
+#hos_review{}
+#hos_review>table{text-align: center; margin-bottom: 20px;}
+
+#star{text-align: center;}
+#star>input[type=radio]{display: none;}
+#star>label{
+	font-size: 3rem;
+	color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+/*
+#star>label:hover{
+	 text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+#star>label:hover::firstchild ~ label{
+     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+#star>input[type=radio]:checked + label{
+     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+*/
+#review_btn>button{width: 100%;}
+#review_box>input{width: 100%; margin-bottom: 20px; height: 35px;}
+
+.yellow {color: yellow;}
+      
+.blue{background: rgba(79, 137, 255, 0.4);}
+
+#guest_rsvt_form{
+	
+}
+#calendarGuest{
+	
+	height: 400px !important;
+}
+

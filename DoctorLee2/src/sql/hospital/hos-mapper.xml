@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+
+<properties>
+	<comment>병원 관련 SQL문</comment>
+
+	<entry key="schToIndex">
+		SELECT
+		       HOS_NO
+		       ,HOS_NAME
+		       ,HOS_ADDRESS
+		 FROM
+		      TB_HOSPITAL
+		WHERE 
+		      STATUS = 'Y'
+		  AND
+		      HOS_NAME LIKE ? OR HOS_NAME = ?
+		ORDER
+		   BY
+		      CREATE_DATE DESC
+	</entry>
+
+	<entry key="hosCount">
+		SELECT
+		       COUNT(*)
+		  FROM
+		  	   TB_HOSPITAL
+	</entry>
+	
+	<entry key="hosDetail">
+		SELECT
+			   HOS_NO
+		       ,HOS_NAME
+		       ,HOS_ADDRESS
+		       ,TREAT_NAME
+		       ,TREAT_DATE
+		       ,TREAT_BEGIN
+		       ,TREAT_END
+		       ,HOS_TEL
+		       ,HOS_INFO
+		  FROM
+		        TB_HOSPITAL
+          JOIN
+                TB_TREAT_DEPARTMENT ON (TREAT_DEP = TREAT_NO)
+	     WHERE
+	           HOS_NO = ?
+	       AND
+	           STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectDoc">
+		SELECT
+		      DOCTOR_NO
+		      ,DOCTOR_NAME
+		      ,TREAT_NAME
+		 FROM
+		      TB_DOCTOR
+		 JOIN
+		      TB_TREAT_DEPARTMENT ON (TREAT_DEP = TREAT_NO)
+		WHERE
+		      HOS_NO = ?
+	
+	</entry>
+	
+	<entry key="selectReview">
+		SELECT
+		      REVIEW_NO
+			  ,NICKNAME 
+		      ,CONTENT
+ 			  ,SCOPE
+			  ,R.CREATE_DATE
+	     FROM
+	          TB_HOS_REVIEW R
+	     LEFT 
+         JOIN
+	          TB_MEMBER ON (REVIEW_WRITER = MEM_NO)
+	    WHERE
+	          REVIEW_HOS = ?
+          AND
+              R.STATUS = 'Y'
+	</entry>
+
+	<entry key="selectHosList">
+		SELECT *
+		  FROM (
+		  		SELECT ROWNUM RNUM, H.*
+		  		  FROM (
+		  		  		SELECT
+		  		  			  HOS_NO
+		  		  			  ,HOS_NAME
+		  		  			  ,HOS_ADDRESS
+								,TREAT_DEP
+								,TREAT_DATE
+								,TREAT_BEGIN
+								,TREAT_END
+								,HOS_TEL
+								,HOS_INFO
+						FROM 
+							 TB_HOSPITAL
+						WHERE
+						     STATUS = 'Y'
+						 ORDER
+						    BY 
+						      CREATE_DATE) H)
+		 WHERE
+		       RNUM BETWEEN 1 AND 100
+	</entry>
+</properties>

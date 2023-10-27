@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.board.model.vo.Board, java.util.ArrayList"%>
-    
-<% 
-	Board b = (Board)request.getAttribute("b");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <!DOCTYPE html>
 <html>
@@ -35,35 +32,39 @@
 			
 			<div id="contentTitleWrap">
 				<div id="contentTitle">
-					<%= b.getBoardName() %>
+					${ b.boardName }
 				</div>
 				<div id="backWrap">
-					<a href="<%= contextPath %>/list.bo?cpage=1&type=<%= b.getBoardType() %>" class="btn btn-light">목록으로</a>
+					<a href="<%= contextPath %>/list.bo?cpage=1&type=${ b.boardType }" class="btn btn-light">목록으로</a>
 				</div>
 			</div>
 			<div id="content">
 				<article>
 					<div id="boardHeader">
-						<div id="title"><%= b.getBoardTitle() %></div>		
+						<div id="title">${ b.boardTitle }</div>		
 					</div>
 					<div id="writerInfoWrap">
 						<div id="writerThumbnail">
-							<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340" alt="회원사진" id="user_photo2" >
+							<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAzMTlfMjA1%2FMDAxNjE2MDgwOTM1MDIx.JZKXWzM8gscL4K0VtyQuYki9jetacIhoppgLJ0PlxEcg.iqtKX-tjRe6nSqfieZ6uYV1QS-4S2LewzhkIAVyic4kg.PNG.wnsghks1017%2Fimage.png&type=a340"
+							alt="회원사진" id="user_photo2" >
                         
 						</div>
 						<div id="writeIdWrap">
 							<div id="writerId">
-								<% if("익명게시판".equals(b.getBoardName())) { %>
-									익명
-								<% } else { %>
-									<a id="writerIdButton"><%= b.getWriter() %></a>
-								<% } %>
+								<c:choose>
+									<c:when test="${ '익명게시판' eq b.boardName }" >
+										익명
+									</c:when>
+									<c:otherwise>
+										<a id="writerIdButton">${ b.writer }</a>
+									</c:otherwise>
+								</c:choose>
 							<div id="writeInfoHidden">
 								<ul id="writeInfoHiddenUl">
-									<li><a href="<%= contextPath %>/list.mbo?memNo=<%= b.getMemNo() %>&cpage=1" class="hiddenButton">게시글 보기</a></li>
-									<% if(loginUser != null) { %>
-										<li><a href="<%= contextPath %>/insertMem.ms?receiverId=<%= b.getMemId() %>&receiverNo=<%= b.getMemNo() %>&senderNo=<%= loginUser.getMemNo() %>" class="hiddenButton">쪽지 보내기</a></li>
-									<% } %>
+									<li><a href="<%= contextPath %>/list.mbo?memNo=${ b.memNo }&cpage=1" class="hiddenButton">게시글 보기</a></li>
+									<c:if test="${ loginUser ne null }">
+										<li><a href="<%= contextPath %>/insertMem.ms?receiverId=${ b.memId }&receiverNo=${ b.memNo }&senderNo=<%= loginUser.getMemNo() %>" class="hiddenButton">쪽지 보내기</a></li>
+									</c:if>
 								</ul>
 							</div>
 							</div>
@@ -71,31 +72,38 @@
 					</div>
 					<div id="boardInfor">	
 						<div id="boardDate">
-							2023.09.05&nbsp;&nbsp;20:53&nbsp;&nbsp;&nbsp;&nbsp;조회 <%= b.getViews() %>
+							2023.09.05&nbsp;&nbsp;20:53&nbsp;&nbsp;&nbsp;&nbsp;조회 ${ b.views }
 						</div>
 						<div id="commentCount">
-							댓글&nbsp;&nbsp;<%= b.getComments() %>
+							댓글&nbsp;&nbsp;${ b.comments }
 						</div>
 					</div>
 					<hr clear="both">
 					<div id="boardContent">
-						<%= b.getBoardContent() %>
+						${ b.boardContent }
 					</div>
 					<div id="boardlikeWrap">
-						<% if(loginUser != null) { %>
-						<% System.out.println(b.getLikeMem()); %>
-							<% if(b.getLikeMem() == 1) { %>
-								<img src="resources/img/fullHeart.png" alt="하트" >
-							<% } else { %>
-								<img src="resources/img/emptyHeart.png" alt="빈하트">
-							<% } %>
-								<a href="<%= contextPath %>/like.bo?memNo=<%= loginUser.getMemNo() %>&boardNo=<%= b.getBoardNo() %>" id="like" class="like">좋아요</a> <%= b.getLikes() %> 
-								&nbsp;&nbsp;<img src="resources/img/comment.png" alt="댓글">&nbsp;댓글 <%= b.getComments() %>
-						<% } else { %>
+						<c:choose>
+						<c:when test="${ loginUser ne null }" >
+							<c:choose>
+								<c:when test="${ b.likeMem eq 1 }">
+									<img src="resources/img/fullHeart.png" alt="하트" >
+									<a href="<%= contextPath %>/like.bo?memNo=${ loginUser.memNo }&boardNo=${ b.boardNo }" id="like" class="like">좋아요</a>&nbsp;${ b.likes } 
+									&nbsp;&nbsp;<img src="resources/img/comment.png" alt="댓글">&nbsp;댓글&nbsp;${ b.comments }
+								</c:when>
+								<c:otherwise>
+									<img src="resources/img/emptyHeart.png" alt="빈하트">
+									<a href="<%= contextPath %>/like.bo?memNo=${ loginUser.memNo }&boardNo=${ b.boardNo }" id="like" class="like">좋아요</a>&nbsp;${ b.likes } 
+									&nbsp;&nbsp;<img src="resources/img/comment.png" alt="댓글">&nbsp;댓글&nbsp;${ b.comments }
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
 							<img src="resources/img/emptyHeart.png" alt="빈하트">
-					 		<a href='#' onclick="alert('로그인 후 이용 가능한 기능입니다.');" id="like" class="like">좋아요</a> <%= b.getLikes() %> 
-					 		&nbsp;&nbsp;<img src="resources/img/comment.png" alt="댓글">&nbsp;댓글 <%= b.getComments() %>
-						<% } %>
+					 		<a href='#' onclick="alert('로그인 후 이용 가능한 기능입니다.');" id="like" class="like">좋아요</a>&nbsp;${ b.likes } 
+					 		&nbsp;&nbsp;<img src="resources/img/comment.png" alt="댓글">&nbsp;댓글&nbsp;${ b.comments }
+						</c:otherwise>
+						</c:choose>
 						
 					</div>	
 					<hr clear="both">
@@ -122,11 +130,14 @@
 						<div id="commentInsertBox">
 							<div id="commentWriter">유저ID</div>
 							<textarea id="commentContentInsert" placeholder="댓글을 남겨보세요"></textarea>
-							<% if(loginUser != null) { %>
+							<c:choose>
+							<c:when test="${ loginUser ne null }">
 								<div id="submitWrap"><a href='#javascript:void(0);' onclick="insertComment()">등록</a></div>
-							<% } else { %>
+							</c:when>
+							<c:otherwise>
 								<div id="submitWrap"><a href='#' onclick="alert('로그인 후 이용 가능한 기능입니다.');">등록</a></div>
-							<% } %>
+							</c:otherwise>							
+							</c:choose>
 						</div>
 					</div>
 				
@@ -139,7 +150,7 @@
 					
 					$.ajax({
 						url  : 'coList.co',
-						data : {boardNo: <%= b.getBoardNo() %>},
+						data : {boardNo: ${ b.boardNo }},
 						success : function(result){
 							console.log(result);
 							
@@ -181,13 +192,13 @@
 						url : 'coInsert.co',
 						type: 'post',
 						data : {
-							boardNo : <%= b.getBoardNo() %>,
+							boardNo : ${ b.boardNo },
 							content : $('#commentContentInsert').val()
 						}, 
 						success : function(result){
 							//console.log(result);
 							if(result > 0){
-								$('commentContentInsert').val('');
+								$('#commentContentInsert').val('');
 								selectCommentList();
 							}
 						},
@@ -202,14 +213,13 @@
 			
 			<div id="page">
 				<div id="writeWrap">
-				
-					<% if(loginUser != null) { %>
-						<a class="btn btn-primary" href="<%= contextPath %>/views/board/boardEnrollForm.jsp" >글 쓰기</a>
-						<% if(loginUser.getNickName().equals(b.getWriter())) { %>
-							<a class="btn btn-light" href="<%= contextPath %>/updateForm.bo?boardNo=<%= b.getBoardNo() %>">수정</a>
-							<a class="btn btn-light" href="<%= contextPath %>/delete.bo?boardNo=<%= b.getBoardNo() %>">삭제</a>
-						<% } %>
-					<% } %>
+					<c:if test="${ loginUser ne null }">
+						<a class="btn btn-primary" href="<%= contextPath %>/enrollForm.bo" >글 쓰기</a>
+						<c:if test="${ loginUser.nickName eq b.writer }" >
+							<a class="btn btn-light" href="<%= contextPath %>/updateForm.bo?boardNo=${ b.boardNo }&memNo=${ loginUser.memNo }">수정</a>
+							<a class="btn btn-light" href="<%= contextPath %>/delete.bo?boardNo=${ b.boardNo }">삭제</a>
+						</c:if>
+					</c:if>
 				&nbsp;
 				</div>
 				<div id="upWrap">

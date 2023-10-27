@@ -35,7 +35,7 @@
 
 				<c:if test="${ !empty loginUser }">
                     <div id="res-btn" align="right">
-                        <button class="btn btn-primary" type="button" id="resBtn">예약하기</button>
+                        <button class="btn btn-primary" type="button" id="resBtn" onclick="location.href='<%=contextPath%>/cliRes.cli?cno=${ c.cliNo}'">예약하기</button>
                     </div>
                 </c:if>
 
@@ -61,6 +61,27 @@
                     
                     <div id="rev-border">
                         <ul id="rev-list">
+                        	<c:forEach var="r" items="${list}">
+                        		<li class="rev-content">
+
+	                                <div class="revScope">
+	                                	<span class="star">⭐</span>
+	                                    <span>${ r.cliScope }</span>
+	                                </div>
+	
+	                                <div class="reContent">
+	                                    <p>${r.revContent}</p>
+	                                </div>
+	
+	                                <div class="revNickName">
+	                                   <p>${ r.nickName }</p>
+	                                </div>
+	
+	                                <div class="revDate">
+	                                  <p>${r.createDate}</p>
+	                                </div>
+                                </li>
+                        	</c:forEach>
                             
                         </ul>
                     </div>
@@ -87,12 +108,14 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
+				<form action="revInsert.cli" method="post">
                 <!-- Modal body -->
                 <div class="modal-body">
 
                     <div id="scope">
                         <h6>별점</h6>
                         <input type="hidden" name="memNo" value="${ loginUser.memNo }">
+                        <input type="hidden" name="cliNo" value="${c.cliNo}">
                         <fieldset>
                             <input type="radio" name="reviewStar" value="5" id="rate1" checked><label
                                 for="rate1">★</label>
@@ -114,93 +137,14 @@
                 </div>
             
       
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                <button id="insertRev" class="btn btn-primary" data-dismiss="modal">등록하기</button>
-                </div>
-
+	                <!-- Modal footer -->
+	                <div class="modal-footer">
+	                <button id="insertRev" type="submit" class="btn btn-primary">등록하기</button>
+	                </div>
+				</form>
             </div>
         </div>
       </div>
-
-
-    <script>
-        $(function(){
-
-            // 예약 버튼 클릭 시 예약하기 페이지로 이동
-            $('#resBtn').click(function(){
-                location.href='<%=contextPath%>/cliRes.cli?cno=${ c.cliNo}';
-                // console.log($(this).parents().children().eq(1).val());
-            })
-
-            // 등록하기 버튼 클릭 시 리뷰 작성
-            $('#insertRev').click(function(){
-                $.ajax({
-                    url:'cliRevInsert.cli',
-                    type:'post',
-                    data:{
-                        cno: ${c.cliNo},
-                        memNo:${ loginUser.memNo},
-                        cliScope: $('input[name=reviewStar]:checked').val(),
-                        revContent: $('#revContent').val()
-                    },
-                    success:function(result){
-                        alert('리뷰 등록 성공');
-                    },
-                    error:function(){
-                        console('리뷰 등록 실패');
-                    }
-                })
-                location.reload();	
-            })
-
-            function selectRevList(){
-                $.ajax({
-                    url: 'ajaxRevList.cli',
-                    data : {
-                        cno: ${c.cliNo}
-                    },
-                    success : function(result){
-
-                        let resultStr = '';
-                        for(let i in result){
-                            resultStr += '<li class="rev-content">'
-
-                                            + '<div class="revScope">'
-                                                + '<span>⭐</span>'
-                                                + '<span>' + result[i].cliScope + '</span>'
-                                            + '</div>'
-
-                                            +'<div class="reContent">'
-                                                + '<p>' + result[i].revContent + '</p>'
-                                            + '</div>'
-
-                                            + '<div class="revNickName">'
-                                                + '<p>' + result[i].nickName + '</p>'
-                                                + '<P>' + result[i].createDate + '</p>'
-                                            + '</div>'
-
-                                            + '<div class="revDate">'
-                                                
-                                            + '</div>'
-
-                                       + '</li>'
-                        }
-                        $('#rev-list').html(resultStr);
-                    },
-                    error : function(){
-                        console.log('리뷰 불러오기 실패');
-                    }
-                })
-            }
-
-            $(function(){
-                selectRevList();
-
-                setInterval(selectRevList, 1000);
-            })
-        })
-    </script>
 
 </body>
 </html>

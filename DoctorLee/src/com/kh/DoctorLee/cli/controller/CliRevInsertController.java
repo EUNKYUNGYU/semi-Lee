@@ -14,7 +14,7 @@ import com.kh.DoctorLee.cli.model.vo.CliRev;
 /**
  * Servlet implementation class CliRevInsertController
  */
-@WebServlet("/cliRev.cli")
+@WebServlet("/revInsert.cli")
 public class CliRevInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +35,7 @@ public class CliRevInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		// 값 뽑기(클리닉 번호, 리뷰작성자 번호, 평점, 리뷰 내용)
-		int cliNo = Integer.parseInt(request.getParameter("cno"));
+		int cliNo = Integer.parseInt(request.getParameter("cliNo"));
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		

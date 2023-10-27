@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	String contextPath = request.getContextPath();
+%>
  
 <!DOCTYPE html>
 <html>
@@ -12,7 +14,8 @@
 
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 	<% //System.out.println(hosList); %>
 	
 	<h2 class="bookmark-main">병원 즐겨찾기 페이지 </h2> <br><hr>
@@ -38,8 +41,8 @@
 	
 	
 	
+	<jsp:include page="../common/footer.jsp"/>
 	
-	<%@ include file="../common/footer.jsp" %>
 	
 
 </body>

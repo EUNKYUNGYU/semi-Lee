@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.DoctorLee.mpBoard.model.vo.MyDiary" %>
 <%@ page import="com.kh.DoctorLee.mpBoard.model.vo.FamDiary" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	ArrayList<MyDiary> list = (ArrayList<MyDiary>)request.getAttribute("list");
-%>
-<%
-	ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
-	Member loginUser = (Member)session.getAttribute("loginUser");
+	//ArrayList<FamDiary> famList = (ArrayList<FamDiary>)request.getAttribute("famList");
+	//Member loginUser = (Member)session.getAttribute("loginUser");
+	//ArrayList<MyDiary> list = (ArrayList<MyDiary>)request.getAttribute("list");
+	String contextPath = request.getContextPath();
 	
 	//System.out.println(list);
 	//System.out.println(famList);
@@ -23,7 +23,8 @@
 <link rel="stylesheet" href="resources/css/myPage/diary.css">
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 	
 	
 	
@@ -33,19 +34,16 @@
    
     <div id="diary">
         <div id="area">
-        
-        	<%@ include file="../common/myPageNavi.jsp" %>
+        	<jsp:include page="../common/myPageNavi.jsp"/>
+        	
 
         </div>
     	
     	
-    	 <% if(loginUser == null) { %>
-   			 <form action="<%= contextPath %>/login.me" id="login-form" method="post">
-    		 	<button type="submit" >로그인하러가기</button>
-   	 		 </form>
-   	 	<% } else { %>
+    	 
    	 	
-   	 	<input type="hidden" name="memNo" value=<%=loginUser.getMemNo() %>>
+   	 	
+   	 	<input type="hidden" name="memNo" value=${sessionScope.loginUser.memNo }>
         <div id="diary1">
             
         	<div id="my_diary">
@@ -57,12 +55,15 @@
                       <th>제목</th>
                       <th>생성 날짜</th>
                     </tr>
-                    <% if(list.isEmpty()){%>
+                    <c:choose>
+                    <c:when test="${empty requestScope.list}">
+                    
                  	<tr>
                  		<td>공지사항이 존재하지 않습니다.</td>
                  	</tr>
+                    </c:when>
+                    <c:otherwise>
                     
-                    <% } else { %>
                       <!-- <tr> 
                       <td>1</td>
                       <td>ㅎㅇ</td>
@@ -104,17 +105,17 @@
                       <td>2023-09-27</td>
                     </tr>
                     -->
-                    <% for(MyDiary md : list){ %>
+                    <c:forEach items="${requestScope.list}" var="mdList">
+                    
                     	<tr>
                     		
-                    		<td><%= md.getDiaryNo()%></td>
-                    		<td><%= md.getDiaryTitle()%></td>
-                    		<td><%= md.getCreateDate()%></td>
+                    		<td>${mdList.diaryNo }</td>
+                    		<td>${mdList.diaryTitle }</td>
+                    		<td>${mdList.createDate }</td>
                     	</tr>
-                    <%} %>
-
-                    <%} %>
-                    
+                   	</c:forEach>
+                    </c:otherwise>
+                    </c:choose>
                   </table>
                   <br>
                   <a href="<%=contextPath%>/myEnroll.di">작성하기</a>
@@ -139,12 +140,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% if(famList.isEmpty()){%>
+                    <c:choose>
+                    <c:when test="${empty requestScope.famList }">
+                    
                     	<tr>
                  			<td>공지사항이 존재하지 않습니다.</td>
                  		</tr>
-                    
-                    <% } else { %>
+                    </c:when>
+                    <c:otherwise>
+                   
                     
                     <!--  
                     <tr>
@@ -187,15 +191,16 @@
                       <td>ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ</td>
                       <td>2023-09-27</td>
                     </tr>-->
-                   <% for(FamDiary fd : famList){ %>
-                    	<tr>
-                    		<td><%= fd.getFamDirNo() %></td>
-                    		<td><%= fd.getFamDirTitle() %></td>
-                    		<td><%= fd.getCreateDate()%></td>
-                    	</tr>
-                    <%} %>
-
-                    <%} %>
+                   		<c:forEach items="${requestScope.famList }" var="fdList">
+		                   
+		                    	<tr>
+		                    		<td>${fdList.famDirNo}</td>
+		                    		<td>${fdList.famDirTitle}</td>
+		                    		<td>${fdList.createDate}</td>
+		                    	</tr>
+                   		</c:forEach>
+                    </c:otherwise>
+                    </c:choose>
                     </tbody>
                     
                   </table>
@@ -229,7 +234,7 @@
         		<input type="hidden" name = "dno" id=dno>
         	</form>
     <%@ include file="../common/footer.jsp" %>
-	<%} %>
+	
 
 </body>
 </html>

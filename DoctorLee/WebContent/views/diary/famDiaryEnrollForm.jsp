@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	String contextPath2 = request.getContextPath();
 
@@ -12,7 +13,8 @@
 <title>가족 다이어리 쓰기  here</title>
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 
     <div class="outer">
         <br>
@@ -54,7 +56,8 @@
         
        
     </div>
-    <%@ include file="../common/footer.jsp"%>
+    <jsp:include page="../common/footer.jsp"/>
+    
 
 </body>
 </html>

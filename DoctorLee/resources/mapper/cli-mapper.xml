@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cliMapper">
+
+	<resultMap type="Category" id="categoryResultSet">
+		<result column="CATE_NO" property="cateNo"/>
+		<result column="CLI_CATE" property="cliCate"/>
+	</resultMap>
+	
+	<resultMap type="Clinic" id="clinicResultSet">
+		<result column="CLI_NO" property="cliNo"/>
+		<result column="HOS_NAME" property="hosNo"/>
+		<result column="CATE_NO" property="cateNo"/>
+		<result column="CLI_NAME" property="cliName"/>
+		<result column="CLI_PRICE" property="cliPrice"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="DES_PATH" property="desPath"/>
+		<result column="CLI_CATE" property="cateName"/>
+		<result column="ROUND(AVG(NVL(CLI_SCOPE,0)),1)" property="scope"/>
+		<result column="ROUND(AVG(CLI_SCOPE),1)" property="scope"/>
+	</resultMap>
+	
+	<resultMap type="CliRes" id="cliResResultSet">
+		<result column="RES_NO" property="resNo"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="CLI_NO" property="cliNo"/>
+		<result column="RES_DATE" property="resDate"/>
+		<result column="RES_TIME" property="resTime"/>
+	</resultMap>
+	
+	<resultMap type="CliResTime" id="cliResTimeResultSet">
+		<result column="TIME_NO" property="timeNo"/>
+		<result column="CLI_NO" property="cliNo"/>
+		<result column="CLI_TIME" property="cliTime"/>
+		<result column="CLI_DATE" property="cliDate"/>
+	</resultMap>
+	
+	<resultMap type="CliRev" id="cliRevResultSet">
+		<result column="REV_NO" property="revNo"/>
+		<result column="CLI_NO" property="cliNo"/>
+		<result column="MEM_NO" property="memNo"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="REV_CONTENT" property="revContent"/>
+		<result column="CC" property="createDate"/>
+		<result column="CLI_SCOPE" property="cliScope"/>
+	</resultMap>
+	
+	<select id="selectCategoryList" resultMap="categoryResultSet">
+		SELECT
+				CATE_NO,
+				CLI_CATE
+		FROM
+				TB_CLI_CATE
+	</select>
+	
+	<select id="selectCliList" parameterType="_int" resultMap="clinicResultSet">
+		SELECT          
+				ROUND(AVG(NVL(CLI_SCOPE,0)),1), 
+                CLI_NO, 
+				HOS_NAME, 
+				CLI_CATE, 
+				CLI_NAME,
+				CLI_PRICE, 
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				DES_PATH
+		   FROM TB_CLI_REV
+	  FULL JOIN TB_CLI USING(CLI_NO)
+		   JOIN TB_HOSPITAL USING(HOS_NO)
+		   JOIN TB_CLI_CATE USING(CATE_NO)
+		  WHERE
+				CATE_NO = #{cateNo}
+	   GROUP BY CLI_NO, 
+				HOS_NAME, 
+				CLI_CATE, 
+				CLI_NAME,
+				CLI_PRICE, 
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				DES_PATH
+	</select>
+	
+	<select id="selectCli" parameterType="_int" resultMap="clinicResultSet">
+		SELECT
+				ROUND(AVG(NVL(CLI_SCOPE,0)),1),
+				CLI_NO,
+				HOS_NAME,
+				CLI_CATE,
+				CLI_NAME,
+				CLI_PRICE,
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				DES_PATH
+		  FROM
+		  		TB_CLI
+		  JOIN
+		  		TB_CLI_CATE USING(CATE_NO)
+		  JOIN
+		  		TB_HOSPITAL USING(HOS_NO)
+		  FULL JOIN
+                TB_CLI_REV USING(CLI_NO)
+		 WHERE
+		 		CLI_NO = #{cliNo}
+		 GROUP
+		   BY   CLI_NO,
+				HOS_NAME,
+				CLI_CATE,
+				CLI_NAME,
+				CLI_PRICE,
+				ORIGIN_NAME, 
+				CHANGE_NAME, 
+				DES_PATH
+		
+	</select>
+	
+	<select id="selectResMem" parameterType="CliRes" resultType="_int">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_CLI_RES
+		WHERE
+				CLI_NO = #{cliNo}
+		  AND
+		  		MEM_NO = #{memNo}
+	</select>
+	
+	<select id="selectRevCount" parameterType="CliRes" resultType="_int">
+		SELECT
+				COUNT(*)
+		FROM
+				TB_CLI_REV
+		WHERE
+				CLI_NO = #{cliNo}
+		AND
+				MEM_NO = #{memNo}
+	</select>
+	
+	<select id="selectCliRevList" parameterType="_int" resultMap="cliRevResultSet">
+		SELECT 
+				REV_NO, 
+				CLI_NO, 
+				NICKNAME, 
+				REV_CONTENT, 
+				CR.CREATE_DATE CC, 
+				CLI_SCOPE
+		  FROM 
+		  		TB_CLI_REV CR
+		  JOIN
+		  		TB_MEMBER
+		  USING
+		  		(MEM_NO)		
+		  WHERE 
+				CLI_NO = #{cliNo}
+		ORDER 
+		   BY   REV_NO DESC
+	</select>
+	
+	<select id="selectResDate" parameterType="_int" resultMap="cliResTimeResultSet">
+		SELECT 
+		        DISTINCT CLI_DATE 
+		  FROM 
+		        TB_CLI_TIME
+		 WHERE
+		        CLI_NO = #{cliNo}
+	</select>
+	
+	<select id="selectCliTimeList" parameterType="CliRes" resultMap="cliResTimeResultSet">
+		SELECT
+				TIME_NO,
+				CLI_NO,
+				CLI_TIME,
+				CLI_DATE
+		  FROM
+		  		TB_CLI_TIME
+		 WHERE
+		 		CLI_NO = #{cliNo}
+		 AND
+		 		CLI_DATE = #{resDate}
+		 AND
+		 		CLI_TIME NOT IN(
+		 						SELECT
+		 								RES_TIME
+		 						  FROM
+		 						  		TB_CLI_RES
+		 						 WHERE
+		 						 		CLI_NO = #{cliNo}
+		 						 AND
+		 						 		RES_DATE = #{resDate}					
+		 						)
+		ORDER 
+		   BY  TIME_NO
+	</select>
+	
+	<insert id="insertCliRes" parameterType="CliRes">
+		INSERT
+		  INTO
+		  		TB_CLI_RES
+		VALUES
+				(
+				SEQ_CLI_RES_NO.NEXTVAL,
+				#{memNo},
+				#{cliNo},
+				#{resDate},
+				#{resTime}
+				) 
+	</insert>
+	
+	<insert id="insertCliRev" parameterType="CliRev">
+		INSERT
+		  INTO
+		  		TB_CLI_REV
+		VALUES
+				(
+				SEQ_CLI_REV_NO.NEXTVAL,
+				#{cliNo},
+				#{memNo},
+				#{revContent},
+				SYSDATE,
+				#{cliScope}
+				)	
+	</insert>
+
+</mapper>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.board.model.vo.Board, java.util.ArrayList"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <% 
 %>
 
@@ -41,9 +41,9 @@
 					<input type="hidden" name="memNo" value="<%= loginUser.getMemNo()%>">
 					<div id="boardCategoryWrap">
 						<select name="category" id="boardCategory">
-							<% if("admin".equals(loginUser.getMemId())) { %>
-							<option value="10">공지사항</option>
-							<% } %>
+							<c:if test="${ 'admin' eq loginUser.memId }">
+								<option value="10">공지사항</option>
+							</c:if>
 							<option value="20">자유게시판</option>
                             <option value="30">정보게시판</option>
                             <option value="40">익명게시판</option>

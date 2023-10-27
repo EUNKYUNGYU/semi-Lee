@@ -1,0 +1,89 @@
+	    div{
+            box-sizing: border-box;
+        }
+
+        #wrap{
+            width: 1800px;
+            height: 1000px;
+            margin: auto;
+        }
+
+        #wrap > div {
+            width: 100%;
+        }
+
+        #header{
+            height: 5%;
+        }
+
+        #content{
+            height: 95%;
+        }
+
+        #content > div{
+            height: 100%;
+            float: left;
+        }
+
+        #content_1{
+            width: 20%;
+            height: 100%;
+        }
+
+        #content_2{
+            width: 80%;
+            height: 100%;
+        }
+
+        th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+                text-align: center;
+                }
+
+              
+        #csTitle{
+            width: 800px;
+            height: 30px;
+            
+        }
+
+        #csContent{
+            width: 800px;
+            height: 500px;
+            text-align: center;
+        }
+
+		.deletebtn{
+            text-decoration: none;
+            border: 1px solid #1E376F;
+            color: #1E376F;
+            float: right;
+            margin-right: 30px;
+            width: 100px;
+            height: 40px;
+            border-radius: 3px;
+            text-align: center;
+            padding-top: 7px;
+		}
+
+        .deletebtn:hover{
+            background-color: #1E376F;
+            color: white;
+            text-decoration: none;
+        }
+       
+        #p11{
+            text-align: center;
+            font-size: 38px;
+            font-weight: bolder;
+        }
+
+        #p21{
+            font-size: 23px;
+            color: #1E376F;
+            font-weight: 600;
+            padding-top: 30px;
+            padding-left: 200px;
+        }

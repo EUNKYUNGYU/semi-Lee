@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -42,21 +42,20 @@
 		</aside>
 		
 		<section id="section">
-			
-			<% if(loginUser != null && memId.equals(loginUser.getMemId())) { %>
-			<div id="contentTitle">
-				나의 게시글
-			</div>
-			<% } %>
+			<c:if test="${(loginUser ne null) and (memId eq loginUser.memId) }">
+				<div id="contentTitle">
+					나의 게시글
+				</div>
+			</c:if>
 			
 			<div id="content">
 				<article>
 					<div id="userWrap">
 						<div id="userThubnail">사진</div>
 						<div id="userInforWrap">
-							<div id="userId"><%= nickname %><span style="color: gray;">(<%= memId %>)</span></div>
+							<div id="userId">${ nickname }<span style="color: gray;">(${ memId })</span></div>
 							<div id="userBoard">
-								<a href="" class="messageList">작성글<%= listCount %>&nbsp;&nbsp;</a>
+								<a href="" class="messageList">작성글${ pi.listCount }&nbsp;&nbsp;</a>
 								<a href="" class="messageList">댓글단 글25&nbsp;&nbsp;</a>
 								<a href="" class="messageList">추천한 글13</a>							
 							</div>
@@ -76,26 +75,35 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					   <% if(list == null) { %>
-					    <tr>
-						  <td colspan="5" style="text-align: center">작성한 게시글이 없습니다</td>
-					    <tr>
-					    <% } else { %>
-						<% for(Board b : list) { %>
-					    <tr>
-					      <td scope="col" width="10%"><%= b.getBoardNo() %></th>
-					      
-					      <% if(loginUser != null){ %>
-					      <td scope="col" width="40%" name="<%= b.getBoardNo() %>&memNo=<%= loginUser.getMemNo() %>"><%= b.getBoardTitle() %></td>
-					      <% } else { %>
-                      	  <td scope="col" width="40%" name="<%= b.getBoardNo() %>&memNo=0"><%= b.getBoardTitle() %></td>
-					      <% } %>
-					      <td scope="col" width="20%"><%= b.getCreateDate() %></th>
-					      <td scope="col" width="10%"><%= b.getViews() %></th>
-					      <td scope="col" width="10%">추천수</th>
-					    </tr>
-					    <% } %>
-						<% } %>
+					  <c:choose>
+						  <c:when test="${ list eq null }">
+							    <tr>
+								  <td colspan="5" style="text-align: center">작성한 게시글이 없습니다</td>
+							    <tr>
+						    </c:when>
+						    <c:otherwise>
+							    <c:forEach var="b" items="${ requestScope.list }">
+								    <tr>
+								    <td scope="col" width="10%">${ b.boardNo }</th>
+									<c:choose>
+										<c:when test="${ loginUser ne null }">				
+											<td scope="col" width="50%" style="text-align: center">
+												<a href="<%=contextPath%>/detail.bo?boardNo=${ b.boardNo }&memNo=${ loginUser.memNo }">${ b.boardTitle }</a>
+											</td>     
+									    </c:when>
+									    <c:otherwise>
+										    <td scope="col" width="50%" style="text-align: center" id="boardTitleTd">
+												<a href="<%=contextPath%>/detail.bo?boardNo=${ b.boardNo }&memNo=0">${ b.boardTitle }</a>
+											</td>
+									    </c:otherwise>
+								    </c:choose>
+								    <td scope="col" width="20%">${ b.createDate }</th>
+								    <td scope="col" width="10%">${ b.views }</th>
+								    <td scope="col" width="10%">추천수</th>
+								    </tr>
+							    </c:forEach>
+							</c:otherwise>
+						</c:choose>
 					  </tbody>
 					</table>
 					
@@ -113,8 +121,7 @@
 					
 					</script>
 					
-					
-					<% if(loginUser != null && memId.equals(loginUser.getMemId())) { %>
+					<c:if test="${ (loginUser ne null) and (memId eq loginUser.memId) }">
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
 							<input type="checkbox" name="allCheck" id="allCheck"><label for="allCheck">&nbsp;&nbsp;전체선택</label>
@@ -123,29 +130,26 @@
 							<a href="#" id="deleteAllButton" type="button" class="btn btn-light">삭제</a>
 						</div>
 					</div>
-					<% } %>
+					</c:if>
 				</article>
 			</div>
 			
 			<div id="page">
-				<%if(currentPage != 1) {%>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.mbo?memNo=<%= memNo %>&cpage=<%= currentPage - 1%>'">&lt;</button>
-		        <% }%>
-		         
-		       
-		        <% for(int i = startPage; i <= endPage; i++){%>
-		         	<% if(currentPage != i) { %>
-		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.mbo?cpage=<%= i %>&memNo=<%= memNo%>'"><%= i %></button>
-		         	
-		         	<% } else { %>
-		         		<button disabled class="btn btn-default"><%= i %></button>
-		         		<% } %>
-		         <% } %>
+				<c:if test="${pi.currentPage ne 1 }">
+		        	<button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.mbo?memNo=${ memNo }&cpage=${ pi.currentPage - 1 }'">&lt;</button>
+		        </c:if>
+		       <c:forEach var="i" begin="${ pi.startPage }" end="${ pi.endPage }">
+		        	<c:choose>
+		        	<c:when test="${ pi.currentPage ne i }">
+		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.mbo?cpage=${ i }&memNo=${ memNo }'">${ i }</button>
+		         	</c:when>
+		         	<c:otherwise>
+		         		<button disabled class="btn btn-default">${ i }</button>
+		         	</c:otherwise>
+		         </c:choose>
+		         </c:forEach>
 		        
-		        <% System.out.println(maxPage); %>
-		        <%if(currentPage != maxPage) { %>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.mbo?cpage=<%= currentPage + 1%>&memNo=<%= memNo%>'">&gt;</button>
-		        <% } %>
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.mbo?cpage=${ pi.currentPage + 1 }&memNo=${ memNo }'">&gt;</button>
 			</div>
 		
 		</section>

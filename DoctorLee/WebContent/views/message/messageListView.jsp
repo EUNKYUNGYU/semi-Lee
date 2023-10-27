@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.message.model.vo.Message,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <% 
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -46,8 +46,8 @@
 			<div id="content">
 				<article>
 					<div id="typeWrap">
-						<a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=receiver" class="messageList">받은 쪽지함&nbsp;&nbsp;</a>
-						<a href="<%= contextPath %>/list.ms?cpage=1&memNo=<%= loginUser.getMemNo() %>&type=sender" class="messageList">보낸 쪽지함</a>
+						<a href="<%= contextPath %>/list.ms?cpage=1&memNo=${ loginUser.memNo }&type=receiver" class="messageList">받은 쪽지함&nbsp;&nbsp;</a>
+						<a href="<%= contextPath %>/list.ms?cpage=1&memNo=${ loginUser.memNo }&type=sender" class="messageList">보낸 쪽지함</a>
 					</div>
 					
 					<form action="#" method="get">
@@ -64,36 +64,47 @@
 					  <thead>
 					    <tr>
 					      <th scope="col"><input type="checkbox" id="allCk"></th>
-					      <% if(type.equals("receiver")) { %>
-					      	<th scope="col">보낸 사람</th>
-					      <% } else { %>
-					      	<th scope="col">받는 사람</th>
-					      <% } %>
+					      <c:choose>
+						      <c:when test="${ 'receiver' eq type }" >
+						      	<th scope="col">보낸 사람</th>
+						      </c:when>
+						      <c:otherwise>
+						      	<th scope="col">받는 사람</th>
+						      </c:otherwise>
+					      </c:choose>
 					      <th scope="col">제목</th>
 					      <th scope="col">날짜</th>
 					    </tr>
 					  </thead>
+					  
 					  <tbody id="messageList">
-					  <% if(list == null) { %>
+					  <c:choose>
+					  <c:when test="${ empty list }">
 					    <tr>
 						  <th colspan="4" style="text-align: center">받은 메세지가 없습니다</th>
 						</tr>
-						    
-					  <% } else { %>
-					  	<% for(Message m : list){ %>
-						<% if(m.getReadStatus().equals("N")){%>
+					 </c:when>
+					 <c:otherwise>
+					
+					  <c:forEach var="m" items="${ requestScope.list }">
+					  	<c:choose>
+					  	<c:when test="${ m.readStatus eq 'N' }">
 							<tr class="notReadStyle">
-						<% } else { %>
+						</c:when>
+						<c:otherwise>
 						     <tr>
-						<% } %>
-						      <th><input type="checkbox" class="checkMsg" value="<%= m.getMessageNo() %>"></th>
-						      <td scope="row"><%= m.getReceiver() %></td>
-						      <td name="<%= m.getMessageNo() %>"><%= m.getMessageTitle()%></td>
-						      <td><%= m.getSendDate() %></td>
+						</c:otherwise>
+						</c:choose>
+						      <th><input type="checkbox" class="checkMsg" value="${ m.messageNo }"></th>
+						      <td scope="row">${ m.receiver }</td>
+						      <td name="${ m.messageNo }">${ m.messageTitle }</td>
+						      <td>${ me.sendDate }</td>
 						    </tr>
 						    </form>
-						  <% } %>
-  					  <% } %>
+					 </c:forEach>
+						    
+					  </c:otherwise>
+					  </c:choose>
 					  </tbody>
 					</table>
 				</article>
@@ -107,7 +118,7 @@
 					
 					// 제목 클릭 했을 시 메세지 상세보기 페이지로 이동
 					$('tr > td').click(function(){
-        				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name') + '&type=<%= type %>';
+        				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name') + '&type=${ type }';
         			});
 	        			
 					// #allCk 체크시 체크 박스 전체 체크, 해제시 전체 해제
@@ -144,24 +155,24 @@
 			</script>
 			
 			<div id="page">
-				<%if(currentPage != 1) {%>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage - 1%>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'">&lt;</button>
-		        <% }%>
+				<c:if test="${ pi.currentPage ne 1 }">
+			        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=${ pi.currentPage - 1 }&memNo=${ loginUser.memNo }&type=${ type }'">&lt;</button>
+			    </c:if>
 		         
-		       
-		        <% for(int i = startPage; i <= endPage; i++){%>
-		         	<% if(currentPage != i) { %>
-		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.ms?cpage=<%= i %>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'"><%= i %></button>
-		         	
-		         	<% } else { %>
-		         		<button disabled class="btn btn-default"><%= i %></button>
-		         		<% } %>
-		         <% } %>
+		       	<c:forEach var="i" begin="${ pi.startPage }" end="${ pi.endPage }">
+		        	<c:choose>
+		        	<c:when test="${ pi.currentPage ne i }">
+		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.ms?cpage=${ i }&memNo=${ loginUser.memNo }&type=${ type }'">${ i }</button>
+		         	</c:when>
+		         	<c:otherwise>
+		         		<button disabled class="btn btn-default">${ i }</button>
+		         	</c:otherwise>
+		         </c:choose>
+				</c:forEach>		         
 		        
-		        <% System.out.println(maxPage); %>
-		        <%if(currentPage != maxPage) { %>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=<%= currentPage + 1%>&memNo=<%= loginUser.getMemNo() %>&type=<%= type%>'">&gt;</button>
-		        <% } %>
+		        <c:if test="${pi.currentPage ne pi.maxPage }">
+		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.ms?cpage=${ pi.currentPage + 1 }&memNo=${ loginUser.memNo }&type=${ type }'">&gt;</button>
+				</c:if>
 			</div>
 		
 		</section>

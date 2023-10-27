@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.message.model.vo.Message,java.util.ArrayList"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <% 
 	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
 	Message m = (Message)request.getAttribute("m");
@@ -44,9 +44,9 @@
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
 							<form action="<%= contextPath %>/delete.ms" method="post">
-								<input type="hidden" name="messageNo" value="<%= messageNo%>">
+								<input type="hidden" name="messageNo" value="${ m.messageNo }">
 								</input>
-								<input type="hidden" name="memberNo" value="<%= loginUser.getMemNo() %>">
+								<input type="hidden" name="memberNo" value="${ loginUser.memNo }">
 								</input>
 								<input type="submit" class="btn btn-light" value="삭제">
 								</input> 
@@ -61,7 +61,7 @@
 							쪽지 제목
 						</div>
 						<div id="messageTitle">
-							<%= m.getMessageTitle() %>
+							${ m.messageTitle }
 						</div>
 					</div>
 					<div id="senderWrap">
@@ -69,7 +69,7 @@
 							보낸 사람 
 						</div>
 						<div id="sender">
-							<%= m.getSender() %>
+							${ m.sender }
 						</div>
 					</div>
 					<div id="sendDateWrap">
@@ -77,18 +77,18 @@
 							받은 시간
 						</div>
 						<div id="sendDate">
-							<%= m.getSendDate() %>
+							${ m.sendDate }
 						</div>
 					</div>
 					<hr>
 					<div id="messageContentWrap">
-						<%= m.getMessageContent() %>
+						${ m.messageContent }
 					</div>
 					<hr>
 				</article>
 			</div>
 			<div id="back" align="right">
-				<a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver" id="backButton" class="btn btn-light">돌아가기</a>
+				<a href="<%= contextPath %>/list.ms?memNo=${ loginUser.memNo }&type=receiver" id="backButton" class="btn btn-light">돌아가기</a>
 			</div>
 		
 		</section>

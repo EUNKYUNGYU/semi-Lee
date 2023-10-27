@@ -31,7 +31,8 @@ public class BoardUpdateForm extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		Board b = new BoardService().selectBoard(boardNo);
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		Board b = new BoardService().selectBoard(boardNo, memNo);
 		
 		if(b != null) { // 게시글 정보 가져오기 성공
 			

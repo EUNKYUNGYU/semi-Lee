@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -41,15 +41,20 @@
 		<section id="section">
 			
 			<div id="contentTitle">
-				<% if("10".equals(type)) { %>
-					공지사항
-				<% } else if("20".equals(type)) { %>
-					자유게시판 
-				<% } else if("30".equals(type)) { %>
-					정보게시판 
-				<% } else if("40".equals(type)) { %>
-					익명게시판
-				<% } %>
+				<c:choose>
+					<c:when test="${ 10 eq type }">
+						공지사항
+					</c:when>
+					<c:when test="${ 20 eq type }">
+						자유게시판 
+					</c:when>
+					<c:when test="${ 30 eq type }">
+						정보게시판 
+					</c:when>
+					<c:otherwise>
+						익명게시판
+					</c:otherwise>
+				</c:choose>
 			</div>
 			
 			<div id="content">
@@ -66,74 +71,84 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					  <% if(list == null) { %>
-					    <tr>
-						  <td colspan="5" style="text-align: center">작성한 게시글이 없습니다</td>
-					    <tr>
-					  <% } else { %>
-						<% for(Board b : list) { %>
-						<tr>
-					      <td scope="row" style="text-align: center"><%= b.getBoardNo() %></td>
-					         <% if(loginUser != null){ %>
-					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>&memNo=<%= loginUser.getMemNo() %>"><%= b.getBoardTitle() %></td>
-					      <% } else { %>
-					      <td scope="row" style="text-align: center" name="<%= b.getBoardNo() %>&memNo=0"><%= b.getBoardTitle() %></td>
-					      <% } %>
-					      <% if("40".equals(type)){ %>
-					      	<td scope="row" width="10%">익명</td>
-					      <% } else { %>
-					      	<td scope="row" width="10%"><%= b.getWriter() %></td>
-					      <% } %>
-					      <td scope="row" width="20%" style="text-align: center"><%= b.getCreateDate() %></td>
-					      <td scope="row" width="10%" style="text-align: center"><%= b.getViews() %></td>
-					      <td scope="row" width="10%" style="text-align: center"><%= b.getLikes() %></td>
-					    </tr>
-					    <% } %>
-						<% } %>
+					  <c:choose>
+						  <c:when test="${ list eq null }">
+							  <tr>
+							  <td colspan="5" style="text-align: center">작성한 게시글이 없습니다</td>
+							  <tr>
+						  </c:when>
+						  <c:otherwise>
+						  	<c:forEach var="b" items="${ requestScope.list }">
+						  	  <tr>
+						      <td scope="row" style="text-align: center">${ b.boardNo }</td>
+						      <c:choose>
+							      <c:when test="${ loginUser ne null }">
+							      	<td scope="row" style="text-align: center">
+							      		<a href="<%=contextPath%>/detail.bo?boardNo=${ b.boardNo }&memNo=${ loginUser.memNo }">${ b.boardTitle }</a>
+							      	</td>
+							      </c:when>
+							      <c:otherwise>
+							      	<td scope="row" style="text-align: center" id="boardTitleTd">
+							      		<a href="<%=contextPath%>/detail.bo?boardNo=${ b.boardNo }&memNo=0">${ b.boardTitle }</a>
+							      	</td>
+							      </c:otherwise>
+						      </c:choose>
+						      <c:choose>
+							      <c:when test="${ 40 eq type }">
+							      	<td scope="row" width="10%">익명</td>
+							      </c:when>
+							      <c:otherwise>
+							      	<td scope="row" width="10%">${ b.writer }</td>
+							      </c:otherwise>
+						      </c:choose>
+						      <td scope="row" width="20%" style="text-align: center">${ b.createDate }</td>
+						      <td scope="row" width="10%" style="text-align: center">${ b.views }</td>
+						      <td scope="row" width="10%" style="text-align: center">${ b.likes }</td>
+						    	</tr>
+						    </c:forEach>
+						</c:otherwise>	
+					  </c:choose>
 					  </tbody>
 					</table>
 					<script>
+						//$(function(){
 						
-						$(function(){
-						
-							$('tr > td').click(function(){
-								location.href = '<%=contextPath%>/detail.bo?boardNo=' + $(this).attr('name');
-							})
+						//	$('tr > td').click(function(){
+						//		location.href = '<%=contextPath%>/detail.bo?boardNo=' + $(this).attr('name');
+						//	})
 							
-						})
-						
-					
+						//})
 					</script>
 					
 					<!-- 로그인 했을 경우에만 글 쓰기 버튼 보이게하기 --> 
-					<% if(loginUser != null) { %>
+					<c:if test="${ loginUser ne null }">
 						<div id="writeWrap">
 						<a id="writeButton" class="btn btn-primary" href="<%= contextPath %>/enrollForm.bo" >글 쓰기</a>
 						</div>
-					<% } %>
+					</c:if>
 				</article>
 			</div>
 			
 			
 			<div id="page">
-				<%if(currentPage != 1) {%>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage - 1%>&type=<%= type%>'">&lt;</button>
-		        <% }%>
-		         
+				<c:if test="${ pi.currentPage ne 1 }">
+		        	<button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=${ pi.currentPage - 1 }&type=${ type }'">&lt;</button>
+		        </c:if> 
 		       
-		        <% for(int i = startPage; i <= endPage; i++){%>
-		         	<% if(currentPage != i) { %>
-		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.bo?cpage=<%= i %>&type=<%= type%>'"><%= i %></button>
-		         	
-		         	<% } else { %>
-		         		<button disabled class="btn btn-default"><%= i %></button>
-		         		<% } %>
-		         <% } %>
+		        <c:forEach var="i" begin="${ pi.startPage }" end="${ pi.endPage }">
+		       		<c:choose>
+			       		<c:when test="${ pi.currentPage ne i }">
+			          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.bo?cpage=${ i }&type=${ type }'">${ i }</button>
+			         	</c:when>
+			         	<c:otherwise>
+			         		<button disabled class="btn btn-default">${ i }</button>
+			         	</c:otherwise>
+		         	</c:choose>
+		        </c:forEach>
 		        
-		        <% System.out.println(maxPage); %>
-		        <%if(currentPage != maxPage) { %>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=<%= currentPage + 1%>&type=<%= type%>'">&gt;</button>
-		        <% } %>
+		        <c:if test="${ pi.currentPage ne pi.maxPage }">
+		        	<button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.bo?cpage=${ pi.currentPate + 1 }&type=${ type }'">&gt;</button>
+		        </c:if>
 			</div>
 		</section>
 		

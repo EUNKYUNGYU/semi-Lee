@@ -1,0 +1,115 @@
+        div{
+            box-sizing: border-box;
+            margin: auto;
+        }
+
+        /*전체를 감싸는 div 속성*/
+        #content{
+            width: 1800px;
+            height: 500px;
+        }
+
+       
+
+        /*세부속성*/
+        #content_1, #content_2, #content_3{
+            width: 100%;
+        }
+
+        #content_1{height: 20%;}
+        #content_2{height: 60%;}
+        #content_3{height: 20%;}
+        
+
+
+        /*--------------------p태그---------------------*/
+        #p11{
+            text-align: center;
+            font-size: 38px;
+            font-weight: bolder;
+            padding-top: 90px;
+        }
+
+       
+        /*-------------가운데 박스--------------*/
+        .positioning{
+            border : 1px solid skyblue;
+        }
+
+        #first{
+            width: 1300px;
+            height: 685px;
+            background-color: #ecf1ff;
+            border-radius: 3px;
+            font-size: 20px;
+            text-align: center;
+            padding-top: 50px;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        #second{
+            width: 1200px;
+            height: 540px;
+            background-color: white;
+            position: absolute;
+            top: 290px;
+            left: 360px;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 17px;
+            padding-top: 80px;
+            
+            
+        }
+
+      
+       
+        /*-----------아이디 박스---------*/
+        
+        #id_1, #pwd_1{
+            width: 300px;
+            height: 55px;
+            z-index: 10;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+
+        #login_form_etc{
+            font-size: 16px;
+            margin-left: 200px;
+            margin-top: 40px;
+        }
+        
+        
+        #loginbtn{
+            background-color: #1E376F;
+            color: white;
+            margin-top: 100px;
+            width: 300px;
+            height: 55px;
+            border-radius: 3px;
+            border: 2px solid #1E376F;
+            font-size: 15px;
+        }
+
+        #id_1 input{
+            border: 2px solid rgb(138, 138, 138);
+            border-radius: 3px;
+        }
+
+        #pwd_1 input{
+            border: 2px solid rgb(138, 138, 138);
+            border-radius: 3px;
+        }
+
+        #id_1 input:focus{
+            border-color: #1E376F;
+            outline: none;
+        }
+        #pwd_1 input:focus{
+            border-color: #1E376F;
+            outline: none;
+        }

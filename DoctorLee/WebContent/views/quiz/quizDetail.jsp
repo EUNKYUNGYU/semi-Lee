@@ -5,7 +5,7 @@
 	import="com.kh.DoctorLee.quiz.model.vo.Quiz, java.util.ArrayList, com.kh.DoctorLee.quiz.model.vo.QuizAnswer"%>
     
 <% 
-	ArrayList<Quiz> list = (ArrayList<Quiz>)request.getAttribute("list");
+ArrayList<Quiz> list = (ArrayList<Quiz>)request.getAttribute("list");
 	QuizAnswer answer = (QuizAnswer)request.getAttribute("answer");
 %>
 
@@ -42,13 +42,13 @@
 			<div id="content">
 				<article>
 					<div id="quizHeader">
-						<div id="title">${ answer }</div>		
+						<div id="title">${ answer.quizTitle }</div>		
 					</div>
 					<div id="quizContent">	
-						정답 : <%= answer.getAnswer() %>번 <br>
+						정답 : ${ answer.answer }번 <br>
 					</div>
 					<div id="quizFooter">
-						<%= answer.getAnswerDetail() %>
+						${ answer.answerDetail }
 					</div>
 				
 				</article>

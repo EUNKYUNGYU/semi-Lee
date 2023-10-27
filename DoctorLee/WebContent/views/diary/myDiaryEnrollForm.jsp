@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.member.model.vo.Member" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 	String contextPath2 = request.getContextPath();
-	Member loginUser = (Member)session.getAttribute("loginUser");
 	
-
 %>
 
 <!DOCTYPE html>
@@ -17,13 +16,14 @@
 <link rel="stylesheet" href="resources/css/myPage/diary.css">
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 
     <div class="outer">
         <br>
         <h2 align="center">내 다이어리 쓰기</h2>
         <form action="<%=contextPath2%>/myInsert.di" id="enroll-form" method="post">
-        <input type="hidden" name="memNo" value=<%=loginUser.getMemNo() %>>
+        <input type="hidden" name="memNo" value="${sessionScope.loginUser.memNo }">
             
             <br><br><br>
             <table align="center">
@@ -64,7 +64,8 @@
         
        
     </div>
-    <%@ include file="../common/footer.jsp"%>
+    <jsp:include page="../common/footer.jsp"/>
+    
    
 
 </body>

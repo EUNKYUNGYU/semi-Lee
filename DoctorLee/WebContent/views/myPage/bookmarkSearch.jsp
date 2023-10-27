@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import= "java.util.ArrayList,com.kh.DoctorLee.hospital.model.vo.Hospital,com.kh.DoctorLee.member.model.vo.Member"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
- 	ArrayList<Hospital> hosList = (ArrayList<Hospital>)request.getAttribute("hosList");
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	String hosName = request.getParameter("hosName");
+ 	
+	String contextPath = request.getContextPath();
  %>
 
 <!DOCTYPE html>
@@ -15,7 +15,8 @@
 <title>검색 후 화면</title>
 </head>
 <body>
-	<%@ include file="../common/navi.jsp" %>
+	<jsp:include page="../common/navi.jsp"/>
+	
 	<%// System.out.println(hosList); %>
 	
 	<h2 align="center">병원 즐겨찾기 페이지 </h2> <br><hr>
@@ -32,21 +33,26 @@
 					<th>검색된 병원 이름</th>
 				</tr>
 				<tbody>
-			<% if(hosList.isEmpty() || hosName.isEmpty() || hosName.equals(" ")){ %>
+			<c:choose>
+			<c:when test="${empty requestScope.hosList || empty requestScope.hosName || requestScope.hosname eq ' ' }">
+			
 				<tr>
 					<td>검색된 목록이 없습니다.</td>
 				</tr>
-			<%}else {%>
-				<% for(Hospital hos : hosList) { %>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${requestScope.hosList}" var="h">
+				
 					<tr>
-						<td align="center" class="searched"><%= hos.getHosName() %></td>
+						<td align="center" class="searched">${h.hosName}</td>
 						
 					</tr>
-			<%}%>
+				</c:forEach>
 		
 		
-			<%}%>
-			<% System.out.println(loginUser.getMemNo()); %>
+			
+			</c:otherwise>
+			</c:choose>
 				</tbody>
 			</table>
 		
@@ -56,7 +62,7 @@
 			$(function(){
 				$('#text-area > tbody > tr').click(function(){
 					const hn = $(this).children().eq(0).text();
-					const mno = <%= loginUser.getMemNo()%>;
+					const mno = ${sessionScope.loginUser.memNo};
 					location.href="<%=contextPath%>/insert.bm?hn=" + hn+"&mno="+mno;
 					
 				})
@@ -66,7 +72,8 @@
 			<input type="hidden" name = "hn" id=hn>
 			<input type="hidden" name = "mno" id=mno>
 		</form>
-		<%@ include file="../common/footer.jsp" %>
+		<jsp:include page="../common/footer.jsp"/>
+		
 		
 		
 </body>

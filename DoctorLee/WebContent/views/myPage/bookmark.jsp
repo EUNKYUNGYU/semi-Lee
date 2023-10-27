@@ -7,6 +7,7 @@
 	//Member loginUser = (Member)session.getAttribute("loginUser");
 	//Hospital hos = (Hospital)request.getAttribute("hos");
 	//ArrayList<Bookmark> list = (ArrayList<Bookmark>)request.getAttribute("list");
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -22,7 +23,8 @@
 	
 		<div id="bookmark">
 			<div id="area">
-				<%@ include file="../common/myPageNavi.jsp" %>
+				<jsp:include page="../common/myPageNavi.jsp"/>
+				
 			 <% //System.out.println(loginUser1);%>
 			</div>
 			<div id="bookmark-main-area">
@@ -53,21 +55,23 @@
 						</tr>
 						
 					</thead>
-					<% for(Bookmark bk : list){ %>
+					<c:forEach items="${requestScope.list}" var="b">
 					<tbody>
 						
 						
 						<tr>
-							<td><input type="radio" value="<%= bk.getHospitalName() %>" name="bookmark"><%= bk.getHospitalName() %></td>
+							
+							<td><input type="radio" value="${b.hospitalName}" name="bookmark">${b.hospitalName }</td>
 							
 						</tr>
 						
 					</tbody>
+					</c:forEach>
 					</c:otherwise>
 					</c:choose>
 				</table>
 					
-				<%} %>
+				
 				<hr>
 				<div id="insertBk">
 					<img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fcdn.crowdpic.net%2Fdetail-thumb%2Fthumb_d_A32B41EB090AC3DCA70DEA8131E49CDB.jpg&type=l340_165" alt="즐겨찾기 이미지" ><br>
@@ -101,7 +105,7 @@
 			<input type="hidden" name = "cn" id=cn>
 			<input type="hidden" name = "mno" id=mno>
 		</form>
-	<%@ include file="../common/footer.jsp" %>
+	<jsp:include page="../common/footer.jsp"/>
 	
 
 </body>

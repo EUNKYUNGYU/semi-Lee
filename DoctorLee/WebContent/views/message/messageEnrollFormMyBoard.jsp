@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.message.model.vo.Message,java.util.ArrayList"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <% 
 	String receiverId = (String)request.getAttribute("receiverId");
 	int receiverNo = (Integer)request.getAttribute("receiverNo");
@@ -39,8 +39,8 @@
 			<div id="content">
 				<article>
 					<form method="post" action="<%= contextPath %>/insertFix.ms">
-					<input type="hidden" name="senderNo" value="<%= loginUser.getMemNo() %>">
-					<input type="hidden" name="receiverNo" value="<%= receiverNo %>">
+					<input type="hidden" name="senderNo" value="${ loginUser.memNo }">
+					<input type="hidden" name="receiverNo" value="${ receiverNo }">
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
 							<button type="submit" class="btn btn-primary">보내기</a>
@@ -59,7 +59,7 @@
 							받는 사람
 						</div>
 						<div id="receiver">
-							<input id="messageReceiver" name="receiverId" type="text" value="<%= receiverId %>" readonly>
+							<input id="messageReceiver" name="receiverId" type="text" value="${ receiverId }" readonly>
 						</div>
 					</div>
 					
@@ -80,7 +80,7 @@
 					
 				</article>
 			<div id="back" align="right">
-				<a href="<%= contextPath %>/list.ms?memNo=<%= loginUser.getMemNo() %>&type=receiver" id="backButton" class="btn btn-light">돌아가기</a>
+				<a href="<%= contextPath %>/list.ms?memNo=${ loginUser.memNo }&type=receiver" id="backButton" class="btn btn-light">돌아가기</a>
 			</div>
 			</div>
 			

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+
+<properties>
+	<comment>예약 관련 SQL문</comment>
+
+	<!-- 회원 -->
+	<entry key="checkRsvtTreat">
+		SELECT 
+		      COUNT(*)
+ 		  FROM 
+ 		      TB_RESERVATION
+ 		 WHERE 
+ 		      RSVT_DATE = ?
+   		   AND 
+   		      RSVT_TIME = ?
+	</entry>
+
+	<entry key="insertRsvt">
+		INSERT 
+		  INTO 
+		       TB_RESERVATION
+		       (
+		       	 RSVT_NO
+				,RSVT_DATE
+				,RSVT_TIME
+				,MEM_INFO
+				,RSVT_HOS
+				,RSVT_MEM
+				,RSVT_DOC
+		       )
+	    VALUES	
+	    	  (
+	    	  SEQ_RSVT_NO.NEXTVAL
+	    	  ,?
+	    	  ,?
+	    	  ,?
+	    	  ,?
+	    	  ,?
+	    	  ,?
+	    	  )	  
+	
+	</entry>
+	
+	<entry key="selectRsvt">
+		SELECT
+		      RSVT_NO
+		      ,RSVT_MEM
+		      ,RSVT_DOC
+		      ,RSVT_HOS
+		      ,RSVT_DATE
+		      ,RSVT_TIME
+		      ,MEM_INFO
+	   	 FROM
+	   	      (SELECT
+                       RSVT_NO
+                      ,RSVT_MEM
+                      ,RSVT_DOC
+                      ,RSVT_HOS
+                      ,RSVT_DATE
+                      ,RSVT_TIME
+                      ,MEM_INFO
+                FROM
+                      TB_RESERVATION
+                WHERE
+                      RSVT_MEM = ?
+              ORDER
+                 BY
+                    RSVT_NO DESC
+                      )
+              WHERE ROWNUM = 1
+	
+	</entry>
+	
+	<!-- 비회원 -->
+	
+	<entry key="checkRsvtTreat_G">
+		SELECT 
+		      COUNT(*)
+ 		  FROM 
+ 		      TB_GUEST_RESERVATION
+ 		 WHERE 
+ 		      GUEST_RSVT_DATE = ?
+   		   AND 
+   		      GUEST_RSVT_TIME = ?
+	</entry>
+
+	<entry key="insertRsvt_G">
+		INSERT 
+		  INTO 
+		       TB_GUEST_RESERVATION
+	    VALUES	
+	    	  (
+	    	  SEQ_GUEST_RSVT_NO.NEXTVAL
+	    	  ,?
+	    	  ,?
+	    	  ,?
+	    	  ,?
+	    	  ,?
+	    	  ,?
+	    	  )	  
+	
+	</entry>
+	
+	<entry key="selectRsvt_G">
+		SELECT
+		      GUEST_RSVT_NO
+		      ,RSVT_GUEST
+		      ,GUEST_RSVT_DOC
+		      ,GUEST_RSVT_HOS
+		      ,GUEST_RSVT_DATE
+		      ,GUEST_RSVT_TIME
+		      ,GUEST_RSVT_INFO
+	   	 FROM
+	   	      (SELECT
+                        GUEST_RSVT_NO
+				      ,RSVT_GUEST
+				      ,GUEST_RSVT_DOC
+				      ,GUEST_RSVT_HOS
+				      ,GUEST_RSVT_DATE
+				      ,GUEST_RSVT_TIME
+				      ,GUEST_RSVT_INFO
+                FROM
+                      TB_GUEST_RESERVATION
+                WHERE
+                      RSVT_GUEST = ?
+              ORDER
+                 BY
+                    GUEST_RSVT_NO DESC
+               )
+         WHERE 
+         		ROWNUM = 1
+	</entry>
+	
+</properties>

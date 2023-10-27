@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.board.model.vo.Board, java.util.ArrayList"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <% 
 	Board b = (Board)request.getAttribute("b");
 
@@ -44,16 +44,16 @@
 						<input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
 					<div id="boardCategoryWrap">
 						<select name="boardType" id="boardCategory">
-							<% if("admin".equals(loginUser.getMemId())) { %>
-							<option value="10">공지사항</option>
-							<% } %>
+							<c:if test="${ 'admin' eq loginUser.memId }">
+								<option value="10">공지사항</option>
+							</c:if>
 							<option value="20">자유게시판</option>
                             <option value="30">정보게시판</option>
                             <option value="40">익명게시판</option>
                         </select>
 					</div>
 					<div id="boardHeader">
-						<input type="text" placeholder="제목을 입력해주세요" name="boardTitle" value="<%= b.getBoardTitle() %>" required>		
+						<input type="text" placeholder="제목을 입력해주세요" name="boardTitle" value="${ b.boardTitle }" required>		
 					</div>
 					<div>
 						<input type="file" name="file">

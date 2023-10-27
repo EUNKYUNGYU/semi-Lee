@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+
+<entry key="selectListCount">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_MESSAGE 
+	 	WHERE 
+	 		STATUS = 'Y'
+ 
+</entry>
+
+<entry key="selectListCountreciever">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_MESSAGE 
+	 	WHERE 
+	 		STATUS = 'Y'
+	 	AND
+	 		RECEIVER = ?
+ 
+</entry>
+
+<entry key="selectListCountsender">
+	 	
+	 	SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_MESSAGE 
+	 	WHERE 
+	 		STATUS = 'Y'
+	 	AND
+	 		SENDER = ?
+ 
+</entry>
+
+
+
+<entry key="selectList">
+
+	 SELECT *
+ 		FROM(
+			SELECT ROWNUM RNUM, A.*
+	  			FROM(
+		  				SELECT 
+        MESSAGE_NO, MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS
+    FROM 
+        TB_MESSAGE 
+    JOIN 
+        TB_MEMBER ON(MEM_NO = SENDER)
+    WHERE 
+        SENDER = ?
+    AND 
+        TB_MESSAGE.STATUS = 'Y'
+        ORDER BY SEND_DATE DESC) A )
+ 		WHERE 
+ 			RNUM BETWEEN ? AND ?;   
+
+</entry>
+
+<entry key="updateReadStatus">
+
+	UPDATE 
+			TB_MESSAGE 
+		SET 
+			READ_STATUS = 'Y' 
+		WHERE 
+			MESSAGE_NO = ?
+
+</entry>
+
+
+<entry key="selectMessage">
+
+SELECT 
+        MESSAGE_TITLE, MEM_ID, SEND_DATE, MESSAGE_CONTENT
+        
+    FROM
+        TB_MESSAGE
+    JOIN 
+        TB_MEMBER ON(MEM_NO = RECEIVER)
+    WHERE 
+        MESSAGE_NO = ? 
+    AND 
+        TB_MESSAGE.STATUS = 'Y'
+
+</entry>
+
+<entry key="searchMember">
+
+    SELECT 
+        	MEM_NO
+        FROM 
+            TB_MEMBER
+        WHERE 
+             MEM_ID = ?
+
+</entry>
+
+<entry key="insertMessage">
+
+	INSERT INTO
+	            TB_MESSAGE 
+	                    (
+	                    MESSAGE_NO
+	                    , SENDER
+	                    , RECEIVER
+	                    , MESSAGE_TITLE
+	                    , MESSAGE_CONTENT
+	                    )
+	            VALUES 
+	                    (
+	                    SEQ_MESSAGE.NEXTVAL
+	                    , ?
+	                    , ?
+	                    , ?
+	                    , ?
+	                    )
+
+</entry>
+
+<entry key="deleteMessage">
+
+	UPDATE 
+			TB_MESSAGE 
+		SET
+			STATUS = 'N'
+		WHERE
+			MESSAGE_NO = ?
+
+</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</properties>
+
+

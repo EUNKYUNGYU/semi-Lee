@@ -4,10 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	Hospital hos = (Hospital)session.getAttribute("hos");
-	
 	int hosTreatBegin = Integer.parseInt(hos.getTreatBegin().replaceAll(":00", ""));
 	int hosTreatEnd = Integer.parseInt(hos.getTreatEnd().replaceAll(":00|:30", ""));
-	
 %>
 <!DOCTYPE html>
 <html>

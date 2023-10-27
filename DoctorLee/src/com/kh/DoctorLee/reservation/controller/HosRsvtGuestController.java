@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.hospital.model.service.HospitalService;
+import com.kh.DoctorLee.hospital.model.service.HospitalServiceImpl;
 import com.kh.DoctorLee.hospital.model.vo.Doctor;
 import com.kh.DoctorLee.hospital.model.vo.Hospital;
 
@@ -35,10 +35,10 @@ public class HosRsvtGuestController extends HttpServlet {
 		int hno = Integer.parseInt(request.getParameter("hno"));
 		
 		//Hospital hos = new HospitalService();
-		// ArrayList<Doctor> docList = new HospitalService();
+		ArrayList<Doctor> docList = new HospitalServiceImpl().selectDoc(hno);
 		
 		//request.setAttribute("hos", hos);
-		//	request.setAttribute("docList", docList);
+		request.setAttribute("docList", docList);
 		//System.out.println(docList);
 		// http://localhost:8765/DoctorLee/hosRsvt.guest?hno=32
 		request.getRequestDispatcher("/views/hospital/guestRsvtPage.jsp").forward(request, response);

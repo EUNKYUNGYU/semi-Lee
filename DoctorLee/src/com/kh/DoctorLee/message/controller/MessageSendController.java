@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.message.model.service.MessageService;
+import com.kh.DoctorLee.message.model.service.MessageServiceImpl;
 import com.kh.DoctorLee.message.model.vo.Message;
 
 /**
@@ -31,14 +31,13 @@ public class MessageSendController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.setCharacterEncoding("UTF-8");
-		
 		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
 		String messageTitle = request.getParameter("messageTitle");
 		String receiverId = request.getParameter("receiverId");
 		String messageContent = request.getParameter("messageContent");
 		
-		int receiverNo = new MessageService().searchMember(receiverId);
+		// sender가 입력한 receiverId로 receiverNo를 찾아줌
+		int receiverNo = new MessageServiceImpl().searchMember(receiverId);
 		if(receiverNo > 0) {
 			
 			Message m = new Message();
@@ -48,7 +47,7 @@ public class MessageSendController extends HttpServlet {
 			m.setReceiverNo(receiverNo);
 			m.setMessageContent(messageContent);
 			
-			int result = new MessageService().insertMessage(m);
+			int result = new MessageServiceImpl().insertMessage(m);
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "메세지를 보냈습니다.");
 				response.sendRedirect(request.getContextPath() + "/list.ms?cpage=1&memNo=" + senderNo + "&type=sender");

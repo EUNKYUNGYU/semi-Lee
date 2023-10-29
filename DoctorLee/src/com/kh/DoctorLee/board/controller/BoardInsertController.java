@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.DoctorLee.board.model.service.BoardService;
+import com.kh.DoctorLee.board.model.service.BoardServiceImpl;
 import com.kh.DoctorLee.board.model.vo.Board;
 
 
@@ -32,19 +32,17 @@ public class BoardInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.setCharacterEncoding("UTF-8");
-		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		String boardTitle = request.getParameter("boardTitle");
 		String boardContent = request.getParameter("boardContent");
 		String category = request.getParameter("category");
 		
 		Board b = new Board();
+		b.setMemNo(memNo);
 		b.setBoardTitle(boardTitle);
 		b.setBoardContent(boardContent);
-		b.setBoardName(category);
-		
-		int result = new BoardService().insertBoard(b, memNo);
+		b.setBoardType(Integer.parseInt(category));
+		int result = new BoardServiceImpl().insertBoard(b);
 		
 		HttpSession session = request.getSession();
 		

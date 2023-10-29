@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.board.model.service.BoardService;
+import com.kh.DoctorLee.board.model.service.BoardServiceImpl;
 import com.kh.DoctorLee.board.model.vo.Board;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
+import com.kh.DoctorLee.common.template.Pagination;
 
 /**
  * Servlet implementation class BoardListController
@@ -34,17 +36,14 @@ public class BoardListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String type = request.getParameter("type");
-		int listCount = new BoardService().selectListCount(type);
+		
+		int listCount = new BoardServiceImpl().selectListCount(type);
 		int currentPage = Integer.parseInt(request.getParameter("cpage"));
 		int pageLimit = 10;
 		int boardLimit = 15;
-		int maxPage = (int)Math.ceil((double)listCount / boardLimit);
-		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-		int endPage= startPage + pageLimit - 1;
-		if(endPage > maxPage ) endPage = maxPage;
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		
-		ArrayList<Board> list = new BoardService().selectList(type, pi);
+		ArrayList<Board> list = new BoardServiceImpl().selectList(type, pi);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);

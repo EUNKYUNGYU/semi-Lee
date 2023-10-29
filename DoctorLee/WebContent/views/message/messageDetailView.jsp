@@ -44,7 +44,7 @@
 					<div id="buttonWrap">
 						<div id="buttonWrap1">
 							<form action="<%= contextPath %>/delete.ms" method="post">
-								<input type="hidden" name="messageNo" value="${ m.messageNo }">
+								<input type="hidden" name="messageNo" value="${ messageNo }">
 								</input>
 								<input type="hidden" name="memberNo" value="${ loginUser.memNo }">
 								</input>

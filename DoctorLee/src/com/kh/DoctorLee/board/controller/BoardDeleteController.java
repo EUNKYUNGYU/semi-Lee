@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.board.model.service.BoardService;
+import com.kh.DoctorLee.board.model.service.BoardServiceImpl;
 
 /**
  * Servlet implementation class BoardDeleteController
@@ -32,7 +32,7 @@ public class BoardDeleteController extends HttpServlet {
 	
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
-		int result = new BoardService().deleteBoard(boardNo);
+		int result = new BoardServiceImpl().deleteBoard(boardNo);
 		
 		if(result > 0) { // 게시글 삭제에 성공 한 경우
 			request.getSession().setAttribute("arlerMsg", "게시글이 삭제되었습니다.");

@@ -12,7 +12,7 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	
-	System.out.println("메세지 리스트뷰에서 type" + type);
+	System.out.println("메세지 리스트뷰에서 type" + type + " list " +list);
 %>
 
 <!DOCTYPE html>
@@ -88,17 +88,24 @@
 					
 					  <c:forEach var="m" items="${ requestScope.list }">
 					  	<c:choose>
-					  	<c:when test="${ m.readStatus eq 'N' }">
-							<tr class="notReadStyle">
-						</c:when>
-						<c:otherwise>
-						     <tr>
-						</c:otherwise>
+						  	<c:when test="${ m.readStatus eq 'N' }">
+								<tr class="notReadStyle">
+							</c:when>
+							<c:otherwise>
+							     <tr>
+							</c:otherwise>
 						</c:choose>
 						      <th><input type="checkbox" class="checkMsg" value="${ m.messageNo }"></th>
-						      <td scope="row">${ m.receiver }</td>
+						      <c:choose>
+							      <c:when test="${ 'receiver' eq type }" >
+						      		<td scope="row">${ m.receiver }</td>
+							      </c:when>
+							      <c:otherwise>
+							      	<td scope="row">${ m.sender }</td>
+							      </c:otherwise>
+					      	</c:choose>
 						      <td name="${ m.messageNo }">${ m.messageTitle }</td>
-						      <td>${ me.sendDate }</td>
+						      <td>${ m.sendDate }</td>
 						    </tr>
 						    </form>
 					 </c:forEach>

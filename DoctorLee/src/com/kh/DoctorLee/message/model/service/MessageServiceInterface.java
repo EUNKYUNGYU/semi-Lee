@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.message.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
 import com.kh.DoctorLee.message.model.vo.Message;
@@ -8,10 +9,10 @@ import com.kh.DoctorLee.message.model.vo.Message;
 public interface MessageServiceInterface {
 
 	// 메세지 리스트 카운트
-	int selectListCount(String type, int memNo);
+	int selectListCount(String memNo, String type);
 	
 	// 메세지 리스트 조회
-	ArrayList<Message> selectList(String type, int memNo, PageInfo pi);
+	ArrayList<Message> selectList(String memNo, String type, PageInfo pi);
 	
 	// 메세지 읽음 상태 업데이트
 	int updateReadStatus(int messageNo);

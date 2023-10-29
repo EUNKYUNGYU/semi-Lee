@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="messageMapper">
+
+	<resultMap id="messageResultSet" type="Message">
+		<result column="MESSAGE_NO" property="messageNo" />
+		<result column="MEM_ID" property="sender" />
+		<result column="SENDER" property="sender" />
+		<result column="RECEIVER" property="receiver" />
+		<result column="SEND_DATE" property="sendDate" />
+		<result column="MESSAGE_TITLE" property="messageTitle" />
+		<result column="MESSAGE_CONTENT" property="messageContent" />
+		<result column="READ_STATUS" property="readStatus" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+	
+	<resultMap id="messageResultSetReceiver" type="Message">
+		<result column="MESSAGE_NO" property="messageNo" />
+		<result column="MEM_ID" property="receiver" />
+		<result column="RECEIVER" property="receiver" />
+		<result column="SEND_DATE" property="sendDate" />
+		<result column="MESSAGE_TITLE" property="messageTitle" />
+		<result column="MESSAGE_CONTENT" property="messageContent" />
+		<result column="READ_STATUS" property="readStatus" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+	
+	<select id="selectListCountReciever" parameterType="String" resultType="_int">
+		 
+		SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_MESSAGE 
+	 	WHERE 
+	 		STATUS = 'Y'
+	 	AND
+	 		RECEIVER = #{ memNo }
+ 
+	
+	</select>
+	
+	<select id="selectListCountSender" parameterType="String" resultType="_int">
+	
+		SELECT 
+	 		COUNT(*) 
+	 	FROM 
+	 		TB_MESSAGE 
+	 	WHERE 
+	 		STATUS = 'Y'
+	 	AND
+	 		SENDER = #{ memNo }
+	
+	</select>
+	
+	<select id="selectListReciever" parameterType="String" resultMap="messageResultSetReceiver">
+	
+	
+	SELECT 
+        	MESSAGE_NO, MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS
+	    FROM 
+	        TB_MESSAGE 
+	    JOIN 
+	        TB_MEMBER ON(MEM_NO = SENDER)
+	    WHERE 
+	        RECEIVER = #{ memNo }
+	    AND 
+	        TB_MESSAGE.STATUS = 'Y'
+	    ORDER BY 
+	    	SEND_DATE DESC
+	
+	</select>
+	
+	<select id="selectListSender" parameterType="String" resultMap="messageResultSet">
+	
+	
+	SELECT 
+        	MESSAGE_NO, MEM_ID, MESSAGE_TITLE, SEND_DATE, READ_STATUS
+	    FROM 
+	        TB_MESSAGE 
+	    JOIN 
+	        TB_MEMBER ON(MEM_NO = SENDER)
+	    WHERE 
+	        SENDER = #{ memNo }
+	    AND 
+	        TB_MESSAGE.STATUS = 'Y'
+	    ORDER BY 
+	    	SEND_DATE DESC
+	
+	</select>
+	
+	<update id="updateReadStatus" parameterType="_int">
+	
+		UPDATE 
+			TB_MESSAGE 
+		SET 
+			READ_STATUS = 'Y' 
+		WHERE 
+			MESSAGE_NO = #{messageNo}
+	
+	</update>
+	
+	<select id="selectMessage" parameterType="_int" resultMap="messageResultSet">
+	
+		SELECT 
+	        	MESSAGE_TITLE
+	        	, MEM_ID
+	        	, SEND_DATE
+	        	, MESSAGE_CONTENT
+		    FROM
+		        TB_MESSAGE
+		    JOIN 
+		        TB_MEMBER ON(MEM_NO = RECEIVER)
+		    WHERE 
+		        MESSAGE_NO = #{messageNo}
+		    AND 
+		        TB_MESSAGE.STATUS = 'Y'
+	
+	</select>
+	
+	<select id="searchMember" parameterType="String" resultType="_int">
+	
+	    SELECT 
+        	MEM_NO
+        FROM 
+            TB_MEMBER
+        WHERE 
+             MEM_ID = #{receiverId}
+	
+	</select>
+	
+	<insert id="insertMessage" parameterType="Message">
+	
+		INSERT INTO
+		            TB_MESSAGE 
+		                    (
+		                    MESSAGE_NO
+		                    , SENDER
+		                    , RECEIVER
+		                    , MESSAGE_TITLE
+		                    , MESSAGE_CONTENT
+		                    )
+		            VALUES 
+		                    (
+		                    SEQ_MESSAGE.NEXTVAL
+		                    , #{senderNo}
+		                    , #{receiverNo}
+		                    , #{messageTitle}
+		                    , #{messageContent}
+		                    )
+	</insert>
+	
+	<delete id="deleteMessage" parameterType="_int">
+	
+		UPDATE 
+			TB_MESSAGE 
+		SET
+			STATUS = 'N'
+		WHERE
+			MESSAGE_NO = #{messageNo}
+	
+	</delete>
+	
+	
+
+</mapper>

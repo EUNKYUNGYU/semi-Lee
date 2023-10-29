@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.board.model.dao.BoardDao;
-import com.kh.DoctorLee.board.model.service.BoardService;
+import com.kh.DoctorLee.board.model.service.BoardServiceImpl;
 import com.kh.DoctorLee.board.model.vo.Board;
 
 /**
@@ -48,7 +47,7 @@ public class BoardUpdateCotroller extends HttpServlet {
 		b.setBoardNo(boardNo);
 		
 		System.out.println("보드 업데이트 컨트롤러 boardType 받아 왔는지" + b);
-		int result = new BoardService().updateBoard(b);
+		int result = new BoardServiceImpl().updateBoard(b);
 		
 		if(result > 0) { // 게시글 업데이트 성공
 			request.setAttribute("alertMsg", "게시글 수정에 성공하였습니다.");

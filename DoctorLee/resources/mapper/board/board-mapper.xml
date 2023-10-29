@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	
+	<resultMap id="boardResultSet" type="Board">
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="BOARD_TYPE" property="boardType" />
+		<result column="NICKNAME" property="writer" />
+		<result column="MEM_NO" property="memNo" />
+		<result column="WRITER" property="writer" />
+		<result column="BOARD_NAME" property="boardName" />
+		<result column="BOARD_TITLE" property="boardTitle" />
+		<result column="BOARD_CONTENT" property="boardContent" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="VIEWS" property="views" />
+		<result column="LIKES" property="likes" />
+		<result column="LIKE_MEM" property="likeMem" />
+		<result column="COMMENTS" property="comments" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+		
+
+	<select id="selectListCount" parameterType="String" resultType="_int">
+	 	
+	 	SELECT 
+	 			COUNT(*) 
+		 	FROM 
+		 		TB_BOARD 
+		 	WHERE 
+		 		STATUS = 'Y'
+		 	AND
+		 		BOARD_TYPE = #{ type }
+ 
+	</select>
+	
+	<select id="selectListCountMyBoard" parameterType="_int" resultType="_int">
+	
+		SELECT 
+	 			COUNT(*) 
+		 	FROM 
+		 		TB_BOARD 
+	        JOIN
+	            TB_MEMBER ON (MEM_NO = WRITER)
+		 	WHERE 
+		 		TB_BOARD.STATUS = 'Y'
+	        AND 
+	            MEM_NO = #{ memNo }
+	         
+	</select>
+
+	<select id="selectList" parameterType="String" resultMap="boardResultSet">
+
+	
+		SELECT    
+		        BOARD_NO
+		        , BOARD_TYPE
+		        , NICKNAME
+		        , BOARD_TITLE
+		        , BOARD_CONTENT
+		        , TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD') CREATE_DATE
+		        , VIEWS
+		        , B.STATUS AS STATUS
+		        , (SELECT COUNT(*) FROM TB_LIKE) AS LIKES
+		  FROM 
+		        TB_BOARD B
+		  JOIN 
+		        TB_MEMBER ON(WRITER = MEM_NO)
+		  JOIN 
+		        TB_BOARD_TYPE USING(BOARD_TYPE)
+		  WHERE
+		        B.STATUS = 'Y'
+		  AND  
+		  		BOARD_TYPE = #{ type }  
+		  ORDER BY 
+			    B.CREATE_DATE DESC
+					
+
+	</select>
+	
+	<select id="selectMyBoardList" parameterType="int">
+	
+	
+		SELECT
+				BOARD_NO
+				, BOARD_TYPE
+				, MEM_ID
+				, NICKNAME
+				, BOARD_TITLE
+				,TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD')CREATE_DATE
+				, VIEWS
+				, B.STATUS
+			FROM
+				TB_BOARD B
+			JOIN
+				TB_MEMBER ON(WRITER = MEM_NO)
+			JOIN
+				TB_BOARD_TYPE USING(BOARD_TYPE)
+			WHERE
+				B.STATUS = 'Y'
+			AND
+				MEM_NO = #{ memNo }
+			ORDER BY
+				B.CREATE_DATE DESC
+
+	</select>
+
+	<insert id="insertBoard" parameterType="Board">
+	
+		INSERT 
+		        INTO 
+		            TB_BOARD 
+		            (
+		            BOARD_NO
+		            , WRITER
+		            , BOARD_TITLE
+		            , BOARD_CONTENT
+		            , BOARD_TYPE
+		            )
+		    VALUES 
+		            (
+		            SEQ_BOARD_NO.NEXTVAL
+		            , #{ memNo }
+		            , #{ boardTitle }
+		            , #{ boardContent }
+		            , #{ boardType }
+		            )
+	</insert>
+	
+	<update id="increseViews" parameterType="_int">
+		UPDATE 
+		        TB_BOARD 
+		    SET 
+		        VIEWS = VIEWS + 1
+		    WHERE 
+		        BOARD_NO = #{ boardNo }
+	</update>
+	
+	<select id="selectBoard" parameterType="Hashmap" resultMap="boardResultSet">
+		SELECT
+		          BOARD_NO
+		         , BOARD_TYPE
+		         , BOARD_NAME
+		         , MEM_NO
+		         , MEM_ID
+		         , NICKNAME
+		         , BOARD_TITLE
+		         , BOARD_CONTENT
+		         , TO_CHAR(B.CREATE_DATE,'YYYY/MM/DD HH24:MI')CREATE_DATE
+		         , VIEWS
+		         , BOARD_CONTENT
+		         , (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = #{ boardNo }) AS LIKES
+		         , (SELECT COUNT(*) FROM TB_COMMENT WHERE BOARD_NO = #{ boardNo }) AS COMMENTS
+		         , B.STATUS
+		         , (SELECT COUNT(*) FROM TB_LIKE WHERE BOARD_NO = #{ boardNo } AND MEM_NO = #{ memNo }) AS LIKE_MEM
+		    FROM
+		         TB_BOARD B 
+		    JOIN
+		          TB_MEMBER ON(WRITER = MEM_NO)
+		    JOIN
+		        TB_BOARD_TYPE USING(BOARD_TYPE)
+		    WHERE
+		          B.STATUS = 'Y'
+		        AND
+        	BOARD_NO = #{ boardNo }
+        	
+	</select>
+
+	<update id="deleteBoard" parameterType="_int">
+	
+		UPDATE 
+				TB_BOARD 
+			SET 
+				STATUS = 'N' 
+			WHERE 
+				BOARD_NO = #{ boardNo }
+	
+	</update>
+	
+	<update id="updateBoard" parameterType="Board">
+		
+		UPDATE 
+		        TB_BOARD 
+		    SET 
+		        BOARD_TYPE = #{ boardType },
+		        BOARD_TITLE = #{ boardTitle },
+		        BOARD_CONTENT = #{ boardContent },
+		        MODIFY_DATE = SYSDATE
+		    WHERE 
+		        BOARD_NO = #{ boardNo }
+		        
+	</update>
+	
+	<select id="selectLike" parameterType="Hashmap" resultType="_int">
+	
+		SELECT 
+				COUNT(*) 
+			FROM 
+				TB_LIKE
+			WHERE 
+				MEM_NO = #{ memNo }
+			AND 
+				BOARD_NO = #{ boardNo }
+	</select>	
+		
+	<insert id="insertLike" parameterType="Hashmap">
+	
+		INSERT 
+			INTO 
+				TB_LIKE 
+				(
+				MEM_NO
+				, BOARD_NO
+				, LIKE_DATE
+				)
+			 VALUES
+			 	(
+			 	#{ memNo }
+			 	, #{ boardNo }
+			 	, SYSDATE
+			 	)
+	
+	
+	</insert>
+	
+	<delete id="deleteLike" parameterType="Hashmap">
+	
+		DELETE 
+			FROM 
+				TB_LIKE 
+			WHERE 
+				MEM_NO = #{ memNo } 
+			AND  
+				BOARD_NO = #{ boardNo }
+	
+	
+	</delete>
+
+
+
+</mapper>

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.message.model.service.MessageService;
+import com.kh.DoctorLee.message.model.service.MessageServiceImpl;
 import com.kh.DoctorLee.message.model.vo.Message;
 
 /**
@@ -31,22 +31,19 @@ public class MessageSendFixController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.setCharacterEncoding("UTF-8");
-		
 		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
 		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
 		String messageTitle = request.getParameter("messageTitle");
 		String messageContent = request.getParameter("messageContent");
 		
-			
 		Message m = new Message();
-			
 		m.setSenderNo(senderNo);
 		m.setMessageTitle(messageTitle);
 		m.setReceiverNo(receiverNo);
 		m.setMessageContent(messageContent);
 			
-		int result = new MessageService().insertMessage(m);
+		int result = new MessageServiceImpl().insertMessage(m);
+		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "메세지를 보냈습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.ms?cpage=1&memNo=" + senderNo + "&type=sender");

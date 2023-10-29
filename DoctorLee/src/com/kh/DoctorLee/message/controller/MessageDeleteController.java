@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.message.model.service.MessageService;
+import com.kh.DoctorLee.message.model.service.MessageServiceImpl;
 
 /**
  * Servlet implementation class MessageDeleteController
@@ -30,12 +30,10 @@ public class MessageDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
 		int messageNo = Integer.parseInt(request.getParameter("messageNo"));
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
-		System.out.println("메세지 삭제 컨트롤러: " + messageNo);
-		int result = new MessageService().deleteMessage(messageNo);
+		int result = new MessageServiceImpl().deleteMessage(messageNo);
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "메세지 삭제에 성공했습니다.");

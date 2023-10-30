@@ -35,11 +35,11 @@ public class BoardDeleteController extends HttpServlet {
 		int result = new BoardServiceImpl().deleteBoard(boardNo);
 		
 		if(result > 0) { // 게시글 삭제에 성공 한 경우
-			request.getSession().setAttribute("arlerMsg", "게시글이 삭제되었습니다.");
+			request.getSession().setAttribute("alertMsg", "게시글이 삭제되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.bo?cpage=1&type=20");
 			
 		} else { // 게시글 삭제에 실패 한 경우
-			request.getSession().setAttribute("arlerMsg", "게시글 삭제에 실패하셨습니다.");
+			request.getSession().setAttribute("alertMsg", "게시글 삭제에 실패하셨습니다.");
 			response.sendRedirect(request.getContextPath() + "/detail.bo?boardNo=" + boardNo);
 			
 		}

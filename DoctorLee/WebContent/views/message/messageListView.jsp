@@ -104,7 +104,7 @@
 							      	<td scope="row">${ m.sender }</td>
 							      </c:otherwise>
 					      	</c:choose>
-						      <td name="${ m.messageNo }">${ m.messageTitle }</td>
+						      <td name="${ m.messageNo }" class="messageTitleTd">${ m.messageTitle }</td>
 						      <td>${ m.sendDate }</td>
 						    </tr>
 						    </form>
@@ -121,10 +121,10 @@
 			<script>
 				$(function(){
 					
-					console.log($('tr > td'));
+					console.log($('tr > td').eq(1));
 					
 					// 제목 클릭 했을 시 메세지 상세보기 페이지로 이동
-					$('tr > td').click(function(){
+					$('.messageTitleTd').click(function(){
         				location.href = '<%=contextPath%>/detail.ms?messageNo=' + $(this).attr('name') + '&type=${ type }';
         			});
 	        			

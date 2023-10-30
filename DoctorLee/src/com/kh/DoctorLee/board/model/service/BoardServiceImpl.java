@@ -49,9 +49,16 @@ public class BoardServiceImpl implements BoardServiceInterface {
 
 	@Override
 	public Board selectBoard(HashMap<String, Integer> map) {
+		
 		SqlSession sqlSession = getSqlSession();
-		Board b = boardDao.selectBoard(sqlSession, map);
-		sqlSession.close();
+		int result = boardDao.increseViews(sqlSession, map);
+		Board b = null;
+		if(result > 0) {
+			b = boardDao.selectBoard(sqlSession, map);
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
 		return b;
 	}
 
@@ -106,6 +113,12 @@ public class BoardServiceImpl implements BoardServiceInterface {
 		sqlSession.commit();
 		sqlSession.close();
 		return result;
+	}
+
+	@Override
+	public int increseViews(HashMap<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

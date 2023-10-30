@@ -44,9 +44,9 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 	
-	public int increseViews(SqlSession sqlSession, int boardNo) {
+	public int increseViews(SqlSession sqlSession, HashMap<String, Integer> map) {
 		
-		return sqlSession.update("boardMapper.increseViews", boardNo);
+		return sqlSession.update("boardMapper.increseViews", map);
 	}
 	
 	

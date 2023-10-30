@@ -23,6 +23,9 @@ public interface BoardServiceInterface {
 	// 게시글 쓰기
 	int insertBoard(Board b);
 	
+	// 게시글 조회수 업데이트
+	int increseViews(HashMap<String, Integer> map);
+	
 	// 게시글 상세보기
 	Board selectBoard(HashMap<String, Integer> map);
 		

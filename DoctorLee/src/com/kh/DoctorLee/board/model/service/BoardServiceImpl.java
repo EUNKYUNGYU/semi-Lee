@@ -5,8 +5,6 @@ import static com.kh.DoctorLee.common.template.Template.getSqlSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.session.SqlSession;
-
 import com.kh.DoctorLee.board.model.dao.BoardDao;
 import com.kh.DoctorLee.board.model.vo.Board;
 import com.kh.DoctorLee.common.model.vo.PageInfo;

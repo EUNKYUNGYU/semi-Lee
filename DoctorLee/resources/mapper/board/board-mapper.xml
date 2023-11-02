@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="BOARD_NO" property="boardNo" />
 		<result column="BOARD_TYPE" property="boardType" />
 		<result column="NICKNAME" property="writer" />
+		<result column="MEM_ID" property="memId" />
 		<result column="MEM_NO" property="memNo" />
 		<result column="WRITER" property="writer" />
 		<result column="BOARD_NAME" property="boardName" />
@@ -20,8 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="COMMENTS" property="comments" />
 		<result column="STATUS" property="status" />
 	</resultMap>
-		
-
+	
 	<select id="selectListCount" parameterType="String" resultType="_int">
 	 	
 	 	SELECT 
@@ -79,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</select>
 	
-	<select id="selectMyBoardList" parameterType="int">
+	<select id="selectMyBoardList" parameterType="int" resultMap="boardResultSet">
 	
 	
 		SELECT

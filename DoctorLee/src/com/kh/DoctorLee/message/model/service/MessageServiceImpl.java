@@ -3,7 +3,6 @@ package com.kh.DoctorLee.message.model.service;
 import static com.kh.DoctorLee.common.template.Template.getSqlSession;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 

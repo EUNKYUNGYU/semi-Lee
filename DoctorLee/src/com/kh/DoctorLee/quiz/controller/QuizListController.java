@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.common.model.vo.PageInfo;
-import com.kh.DoctorLee.quiz.model.service.QuizService;
+import com.kh.DoctorLee.common.template.Pagination;
+import com.kh.DoctorLee.quiz.model.service.QuizServiceImpl;
 import com.kh.DoctorLee.quiz.model.vo.Quiz;
 
 /**
@@ -33,24 +34,14 @@ public class QuizListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		int listCount = new QuizService().selectListCount();
+		int listCount = new QuizServiceImpl().selectListCount();
 		int currentPage = currentPage = Integer.parseInt(request.getParameter("cpage"));
-		System.out.println("QuizListController 에서currentPage  " + currentPage);
 		int pageLimit = 10;
 		int boardLimit = 5;
-		int maxPage = (int)Math.ceil((double)listCount / boardLimit);
-		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-		int endPage= startPage + pageLimit - 1;
-		System.out.println("listCount" + listCount);
-		if(endPage > maxPage ) endPage = maxPage;
 		
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,boardLimit, maxPage, startPage, endPage);
+		PageInfo pi  = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		
-		
-		ArrayList<Quiz> list = new QuizService().selectList(pi);
-		
+		ArrayList<Quiz> list = new QuizServiceImpl().selectList(pi);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);

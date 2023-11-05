@@ -40,7 +40,7 @@ public class BoardDetailController extends HttpServlet {
 		map.put("memNo", memNo);
 		map.put("boardNo", boardNo);
 		Board b = new BoardServiceImpl().selectBoard(map);
-		
+		System.out.println(b);
 		if(b != null) { // 게시글 조회에 성공 했을 경우
 			
 			request.setAttribute("b", b);

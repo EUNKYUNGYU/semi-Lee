@@ -2,17 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.DoctorLee.board.model.vo.Board,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<% 
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	String type = String.valueOf(request.getAttribute("type"));
-	
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-%>
-
 <!DOCTYPE html>
 <html>
 <head>

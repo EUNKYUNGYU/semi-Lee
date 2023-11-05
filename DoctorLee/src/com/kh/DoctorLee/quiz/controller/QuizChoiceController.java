@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.quiz.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.DoctorLee.member.model.vo.Member;
 import com.kh.DoctorLee.quiz.model.service.QuizService;
+import com.kh.DoctorLee.quiz.model.service.QuizServiceImpl;
 
 /**
  * Servlet implementation class QuizChoice
@@ -51,15 +52,16 @@ public class QuizChoiceController extends HttpServlet {
 		int quizNo = Integer.parseInt(request.getParameter("quizNo"));
 		int choice = Integer.parseInt(request.getParameter("choice"));
 
-		System.out.println("quizChoiceController에서 quizNo " + quizNo);
-		System.out.println("quizChoiceController에서 memNo " + memNo);
-		System.out.println("quizChoiceController에서 choice " + choice);
+		HashMap<String, Integer> map = new HashMap();
+		map.put("memNo", memNo);
+		map.put("quizNo", quizNo);
+		map.put("choice", choice);
 
-		int resultExist = new QuizService().quizAnswerExist(memNo, quizNo);
-		System.out.println("quizChoiceController에서 resultExist " + resultExist);
+		int resultExist = new QuizServiceImpl().quizAnswerExist(map);
+		
 		if(resultExist ==  0) { // 답안 제출 한적 없음
 			System.out.println("답 제출 한 적 있는지 " + resultExist);
-			int result = new QuizService().quizChoice(quizNo, memNo, choice);
+			int result = new QuizServiceImpl().quizChoice(map);
 			
 			System.out.println("quizChoiceService의 return값 : " + result);
 			

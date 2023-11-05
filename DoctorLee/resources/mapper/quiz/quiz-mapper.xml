@@ -4,8 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="quizMapper">
 
-
-<select id="selectListCount">
+<select id="selectListCount" resultType="_int">
 	 	
 	 SELECT 
 	 		COUNT(*) 
@@ -15,34 +14,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 
-<select id="selectList">
+<select id="selectList" resultType="Quiz">
 
-	 SELECT *
- 		FROM(
-			SELECT ROWNUM RNUM, A.*
-	  			FROM(
-		  			SELECT 	
-					        QUIZ_NO
-					        , QUIZ_TITLE
-					        , QUIZ_CONTENT
-					        , VOTE
-					        , CREATE_DATE
-					        , TO_CHAR(TRUNC(END_DATE - SYSDATE)) DEADLINE
-					        , CHOICE1
-					        , CHOICE2
-					        , CHOICE3
-					        , CHOICE4
-						FROM
-			        		TB_QUIZ_BOARD 
-			    		ORDER BY
-			        		DEADLINE DESC) A )
- 		WHERE 
- 			RNUM BETWEEN ? AND ?
+
+	SELECT 	
+			QUIZ_NO
+			, QUIZ_TITLE
+			, QUIZ_CONTENT
+			, VOTE
+			, CREATE_DATE
+			, TO_CHAR(TRUNC(END_DATE - SYSDATE)) DEADLINE
+			, CHOICE1
+			, CHOICE2
+			, CHOICE3
+			, CHOICE4
+		FROM
+			TB_QUIZ_BOARD 
+		ORDER BY
+			DEADLINE DESC
 
 </select>
 
 
-<select id="detailQuiz">
+<select id="detailQuiz" parameterType="_int" resultType="QuizAnswer">
 
 	SELECT 
         	ANSWER, ANSWER_DETAIL, QUIZ_TITLE
@@ -51,24 +45,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         JOIN 
         	TB_QUIZ_BOARD USING(QUIZ_NO) 
     	WHERE 
-        	QUIZ_NO = ?
+        	QUIZ_NO = #{quizNo}
         
 </select>
 
 
- <update id="increaseVote">
+<update id="increaseVote" parameterType="_int">
  
 	 UPDATE 
 	 		TB_QUIZ_BOARD
 	 	SET 
 	 		VOTE = VOTE + 1 
 	 	WHERE 
-	 		QUIZ_NO = ?
+	 		QUIZ_NO = #{quizNo}
 	 
  </update>
 
 
-<insert id="quizChoice">
+<insert id="quizChoice" parameterType="Hashmap">
 
 	INSERT 
 			INTO 
@@ -80,51 +74,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 								) 
 						VALUES
 								(
-								?
-								,?
-								,?
+								#{quizNo}
+								,#{memNo}
+								,#{choice}
 								)
 						
 </insert>
 
 
-<select id="quizChoiceIsRight">
+<select id="quizChoiceIsRight" parameterType="Hashmap" resultType="_int">
 
 	SELECT 
-        ANSWER
+        COUNT(*)
     FROM 
         TB_QUIZ_ANSWER
     WHERE 
-        QUIZ_NO = ?   
+        QUIZ_NO = #{quizNo}  
         
     AND    
-        ANSWER = ?
+        ANSWER = #{answer}
 
 </select>
 
 
- <entry id="quizGetPoint">
+ <update id="quizGetPoint" parameterType="_int">
  	
 	UPDATE 
 			TB_MEMBER 
 					SET 
 						POINT = POINT + 500
 					 WHERE 
-					 	MEM_NO = ?
+					 	MEM_NO = #{memNo}
  
- </entry>
+ </update>
  
  
- <select id="quizAnswerExist">
+ <select id="quizAnswerExist" parameterType="Hashmap" resultType="_int">
  
   	SELECT 
  			COUNT(*)
  		FROM 
  			TB_QUIZ_CHOICE 
  		WHERE 
- 			MEM_NO = ?
+ 			MEM_NO = #{memNo}
  		AND
- 			QUIZ_NO = ?
+ 			QUIZ_NO = #{quizNo}
 
  </select>
 

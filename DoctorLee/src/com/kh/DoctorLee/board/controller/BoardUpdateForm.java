@@ -1,13 +1,15 @@
 package com.kh.DoctorLee.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.DoctorLee.board.model.service.BoardService;
+import com.kh.DoctorLee.board.model.service.BoardServiceImpl;
 import com.kh.DoctorLee.board.model.vo.Board;
 
 /**
@@ -32,7 +34,11 @@ public class BoardUpdateForm extends HttpServlet {
 	
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		Board b = new BoardService().selectBoard(boardNo, memNo);
+		
+		HashMap<String, Integer> map = new HashMap();
+		map.put("memNo", memNo);
+		map.put("boardNo", boardNo);
+		Board b = new BoardServiceImpl().selectBoard(map);
 		
 		if(b != null) { // 게시글 정보 가져오기 성공
 			

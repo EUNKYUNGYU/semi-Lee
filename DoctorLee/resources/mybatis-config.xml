@@ -55,6 +55,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<mapper resource="/mapper/board/board-mapper.xml"/>
 		<mapper resource="/mapper/message/message-mapper.xml"/>
+		<mapper resource="/mapper/quiz/quiz-mapper.xml"/>
 		
 		<mapper resource="/mapper/hospital/hospital-mapper.xml"/>
 		<mapper resource="/mapper/hospital/doctor-mapper.xml"/>

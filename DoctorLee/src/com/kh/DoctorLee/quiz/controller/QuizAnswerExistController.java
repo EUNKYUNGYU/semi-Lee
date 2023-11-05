@@ -1,6 +1,7 @@
 package com.kh.DoctorLee.quiz.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.quiz.model.service.QuizService;
+import com.kh.DoctorLee.quiz.model.service.QuizServiceImpl;
 import com.kh.DoctorLee.quiz.model.vo.QuizAnswer;
 
 /**
@@ -37,13 +39,16 @@ public class QuizAnswerExistController extends HttpServlet {
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int qno = Integer.parseInt(request.getParameter("qno"));
 		
+		HashMap<String, Integer> map = new HashMap();
+		map.put("memNo", memNo);
+		map.put("qno", qno);
+		
 		if(due.equals("true")) { // 제출 기한이 남은 경우
 			
-			int result = new QuizService().quizAnswerExist(memNo, qno);
+			int result = new QuizServiceImpl().quizAnswerExist(map);
 			
 			if(result > 0) { // 답안 제출 한적 있음, 정답 화면 보여주기
-				int qno1 = Integer.parseInt(request.getParameter("qno"));
-				QuizAnswer answer = new QuizService().detailQuiz(qno1);
+				QuizAnswer answer = new QuizServiceImpl().detailQuiz(qno);
 				request.setAttribute("answer", answer);
 				request.getRequestDispatcher("views/quiz/quizDetail.jsp").forward(request, response);
 			} else { // 답안 제출 한 적 없음, 답 제출 먼저 하라고 alert창 띄워주기
@@ -52,8 +57,7 @@ public class QuizAnswerExistController extends HttpServlet {
 			}
 			
 		} else { // 제출 기한이 지난 경우 답 제출 한 적 없어도, 정답 화면 보여주기
-			int qno1 = Integer.parseInt(request.getParameter("qno"));
-			QuizAnswer answer = new QuizService().detailQuiz(qno1);
+			QuizAnswer answer = new QuizServiceImpl().detailQuiz(qno);
 			request.setAttribute("answer", answer);
 			request.getRequestDispatcher("views/quiz/quizDetail.jsp").forward(request, response);
 		}

@@ -5,6 +5,8 @@ import static com.kh.DoctorLee.common.template.Template.getSqlSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.kh.DoctorLee.board.model.dao.BoardDao;
 import com.kh.DoctorLee.board.model.vo.Board;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
@@ -12,7 +14,7 @@ import com.kh.DoctorLee.common.model.vo.PageInfo;
 public class BoardServiceImpl implements BoardServiceInterface {
 
 	BoardDao boardDao = new BoardDao();
-	
+		
 	@Override
 	public int selectListCount(String type) {
 		SqlSession sqlSession = getSqlSession();

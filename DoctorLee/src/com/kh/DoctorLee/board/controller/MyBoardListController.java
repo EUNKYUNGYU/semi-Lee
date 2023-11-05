@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.DoctorLee.board.model.service.BoardService;
+import com.kh.DoctorLee.board.model.service.BoardServiceImpl;
 import com.kh.DoctorLee.board.model.vo.Board;
 import com.kh.DoctorLee.common.model.vo.PageInfo;
+import com.kh.DoctorLee.common.template.Pagination;
 
 /**
  * Servlet implementation class MyBoardListController
@@ -35,18 +37,14 @@ public class MyBoardListController extends HttpServlet {
 	
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		int listCount = new BoardService().selectListCountMyBoard(memNo);
+		int listCount = new BoardServiceImpl().selectListCountMyBoard(memNo);
 		int currentPage = Integer.parseInt(request.getParameter("cpage"));
 		int pageLimit = 10;
 		int boardLimit = 15;
-		int maxPage = (int)Math.ceil((double)listCount / boardLimit);
-		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-		int endPage= startPage + pageLimit - 1;
-		if(endPage > maxPage ) endPage = maxPage;
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Board> list = new BoardService().selectMyBoardList(memNo, pi);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		
+		ArrayList<Board> list = new BoardServiceImpl().selectMyBoardList(memNo, pi);
 		
 		request.setAttribute("memId", list.get(0).getMemId());
 		request.setAttribute("nickname", list.get(0).getWriter());
@@ -55,7 +53,6 @@ public class MyBoardListController extends HttpServlet {
 		request.setAttribute("memNo", memNo);
 		
 		request.getRequestDispatcher("views/board/myBoardListView.jsp").forward(request, response);
-		
 		
 	}
 

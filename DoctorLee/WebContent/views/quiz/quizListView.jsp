@@ -2,6 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.kh.DoctorLee.quiz.model.vo.Quiz,java.util.ArrayList, com.kh.DoctorLee.common.model.vo.PageInfo"%>
+    
+<% 
+	ArrayList<Quiz> list = (ArrayList<Quiz>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +45,6 @@
 			<!-- 퀴즈가 없을 경우 -->
 			<c:choose>
 			<c:when test="${ empty list }">
-			<% if(list.isEmpty()) { %>
 				<div id="content">
 					<article>
 						퀴즈가 존재하지 않습니다.
@@ -44,47 +54,41 @@
 			
 			<c:otherwise>	
 			<!-- 퀴즈가 있을 경우 반복문으로 출력 -->
-			<c:forEach var="q" items="${ list }">		
-				
-			<!-- 퀴즈가 있을 경우 반복문으로 출력 -->			
-			<% } else { %>
-			<% for(Quiz q : list) { %>
+			<c:forEach var="q" items="${ requestScope.list}">		
 				<div id="content">
 				
 				<article>
 					<div id="quizHeader">
-						<div id="title"><%= q.getQuizTitle() %></div>
-						<div id="vote"><%= q.getVote() %>명 투표 중</div>
+						<div id="title">${ q.quizTitle }</div>
+						<div id="vote">${ q.vote }명 투표 중</div>
 						
 						<div id="deadline">
 						<!-- 퀴즈의 제출 기한이 지난 경우 -->
 						<c:choose>
 						<c:when test="${ q.deadline lt 0 }">
-						<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
 							기한 종료
-						
+						</c:when>
+						<c:otherwise>
 						<!-- 퀴즈의 제출 기한이 남은 경우, 몇 일 남았는지 보이게 -->
-						<% } else { %>
-							${ q.deadline }
-							<%= q.getDeadline() %>일 남음
-						<% } %>
+							${ q.deadline }일 남음
+						</c:otherwise>
+						</c:choose>
 						</div>
 					</div>
 					
 					<form method="post" action="<%= contextPath %>/choice.qz">
 					<div id="quizContent">
-					<%= q.getQuizContent() %>
+					${ q.quizContent }
 						
 					<br><br>
 					<input type="radio" name="choice" value="1" id="choice1" checked> 
-					<label for="choice1"><%= q.getChoice1() %></label><br> 
+					<label for="choice1">${ q.choice1 }</label><br> 
 					<input type="radio" name="choice" value="2" id="choice2"> 
-					<label for="choice2">${ q.choice2 }</label><br> 
-					<label for="choice2"><%= q.getChoice2() %></label><br> 
+					<label for="choice2">${ q.choice }</label><br> 
 					<input type="radio" name="choice" value="3" id="choice3"> 
-					<label for="choice3"><%= q.getChoice3() %></label><br> 
+					<label for="choice3">${ q.choice3 }</label><br> 
 					<input type="radio" name="choice" value="4" id="choice4"> 
-					<label for="choice4"><%= q.getChoice4() %></label><br> 
+					<label for="choice4">${ q.choice4 }</label><br> 
 					</div>
 					
 					<!-- 퀴즈 정답 제출 / 정답 확인하기 버튼-->		
@@ -92,12 +96,12 @@
 							
 						<div id="quizFooter1">
 						<!-- 1. 로그인을 했을 때만 답 제출 가능 -->
-						<% if(loginUser != null) { %>
+						<c:choose>
+						<c:when test="${ loginUser ne null }">
 							
 							<c:choose>
 							<c:when test="${ q.deadline lt 0 }">
 							<!-- 2. 퀴즈 제출 기한이 아닐 경우 alert('퀴즈 제출 기한이 아닙니다.') -->
-							<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
 								<a class="btn btn-primary" href='javascript:void(0);' onclick="alert('퀴즈 제출 기한이 아닙니다.');">제출</a>
 							
 							<!-- 
@@ -107,16 +111,20 @@
 								- 답안을 낸 적이 있다면 -> 제출 불가능	
 								위의 과정을 choice.qz(QuizChoiceController)에서 수행
 							-->
-							<% } else { %>
+							</c:when>
+							<c:otherwise>
 								<button type="submit" id="quizButton1" class="quizButton1 btn btn-primary">제출
-								<input type="hidden" id="memNo" name="memNo" value="<%= loginUser.getMemNo() %>">
-								<input type="hidden" id="quizNo" name="quizNo" value="<%= q.getQuizNo() %>">
-							<% } %>
+								<input type="hidden" id="memNo" name="memNo" value="${ loginUser.memNo }">
+								<input type="hidden" id="quizNo" name="quizNo" value="${ q.quizNo }">
+							</c:otherwise>
+							</c:choose>
 								
+						</c:when>
+						<c:otherwise>
 						<!-- 1. 로그인 안 했을 경우 제출 버튼 눌렀을 시 alert('로그인 후 이용 가능합니다.') -->
-						<% } else { %>
 								<button type="button" id="quizButton2" class="quizButton2 btn btn-primary" >제출
-					   	<% } %>
+					   	</c:otherwise>
+					   	</c:choose>
 						</div>	
 					</form>
 				   	
@@ -150,35 +158,12 @@
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
-						<% if(loginUser == null) { %>
-								<a href='javascript:void(0);' onclick="alert('로그인 후 이용 가능합니다.');"
-								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
-						
-						<!-- 1. 로그인 했을 경우 
-							- 제출 기한이 지나지 않았다면 answerExist.qz(QuizAnswerExistController)에서 정답을 제출한 적이 있는지 확인 후
-								- 제출 한 적 있다면 : quizDetail.jsp로 포워딩하여 답을 보여줌
-								- 제출 한 적 없다면 : alert('답을 먼저 제출해주십시오')
-							- 제출 기한이 지났을 경우 퀴즈 답을 제출 한적 없더라도 답을 보여줌
-						 -->
-						 
-						<% } else { %>
-							<!-- 2. 제출 기한 지남 -->
-							<% if(Integer.parseInt(q.getDeadline()) < 0) { %>
-								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizNo()%>&memNo=<%= loginUser.getMemNo() %>&due=false"
-								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
-								
-							<!-- 2. 제출 기한이 남은 경우-->
-							<% } else { %>
-								<a href="<%= contextPath %>/answerExist.qz?qno=<%= q.getQuizNo()%>&memNo=<%= loginUser.getMemNo() %>&due=true"
-								class="buttonAnswerCheck">정답 확인하기 &gt;</a>
-							<% } %>
-								
-						<% } %>
 					</div>
 				</div>
 				</article>
-				<% } %>
-			<% } %>
+			</c:forEach>
+			</c:otherwise>
+			</c:choose>
 			</div>
 			
 			<div id="page">
@@ -201,12 +186,10 @@
 			</script>
 			
 			<div id="page">
-				<%if(currentPage != 1) {%>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.qz?cpage=<%= currentPage - 1%>'">&lt;</button>
-		        <% }%>
-		         
+				<c:if test="${ pi.currentPage ne 1 }" >
+		        	<button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.qz?cpage=${ pi.currentPage - 1 }'">&lt;</button>
+				</c:if>	         
 		       
-<<<<<<< HEAD
 		       <c:forEach var="i" begin="${ pi.startPage }" end="${ pi.endPage }" >
 		       <c:choose>
 		       		<c:when test="${ pi.currentPage ne i }"> 
@@ -220,20 +203,6 @@
 		         <c:if test="${ pi.currentPage ne pi.maxPage }" >
 		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.qz?cpage=${ pi.currentPage + 1 }'">&gt;</button>
 				</c:if>
-=======
-		        <% for(int i = startPage; i <= endPage; i++){%>
-		         	<% if(currentPage != i) { %>
-		          		<button class="btn btn-light" onclick="location.href='<%= contextPath%>/list.qz?cpage=<%= i %>'"><%= i %></button>
-		         	
-		         	<% } else { %>
-		         		<button disabled class="btn btn-default"><%= i %></button>
-		         		<% } %>
-		         <% } %>
-		        
-		        <%if(currentPage != maxPage) { %>
-		        <button class="btn btn-light" onclick="location.href='<%=contextPath%>/list.qz?cpage=<%= currentPage + 1%>'">&gt;</button>
-		        <% } %>
->>>>>>> c2f41d0b78a83d0e91e2f027a9d2e5238f57340e
 			</div>
 		</section>
 		

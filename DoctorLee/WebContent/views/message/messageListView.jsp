@@ -34,7 +34,7 @@
 	</header> 
 	<main>
 		<aside id="aside1" class="aside">
-			<%@ include file ="../common/cmNavi.jsp" %>	
+			<%@ include file ="../common/cmNavi.jsp" %>
 		</aside>
 		
 		<section id="section">
